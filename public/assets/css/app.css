@@ -118,6 +118,11 @@ footer img.balaton {
 	background-color: #f8f8f8;
 }
 
+.adsbygoogle-container .adsbygoogle[data-adsbygoogle-status="done"] {
+	height: auto;
+	background-color: transparent;
+}
+
 .adsbygoogle-container .note {
 	text-align: center;
 	color: #444;
