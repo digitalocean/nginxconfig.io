@@ -193,7 +193,7 @@
 					</div>
 					<div class="col-md-6 col-lg-8 files">
 						<div class="row">
-							<div class="file" ng-class="data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
+							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
