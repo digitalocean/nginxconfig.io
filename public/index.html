@@ -64,6 +64,12 @@
 										<span class="info">non-www</span>
 									</label>
 								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
+									<label class="form-check-label" for="index_html">
+										<span class="info">index.html</span>
+									</label>
+								</div>
 							</div>
 						</div>
 						<div class="card">
@@ -80,9 +86,9 @@
 									</select>
 								</div>
 								<div class="form-check" ng-if="data.php !== 'off'">
-									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
-									<label class="form-check-label" for="index_html">
-										<span class="info">index.html</span>
+									<input class="form-check-input" type="checkbox" id="index_php" ng-model="data.index_php">
+									<label class="form-check-label" for="index_php">
+										<span class="info">index.php</span>
 									</label>
 								</div>
 								<div class="form-check" ng-if="data.php !== 'off'">

@@ -10,7 +10,11 @@ server {
 
 	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;<span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
+
+	location / {
+		try_files $uri $uri/ {{ data.index_html ? '/index.html' : '' }}{{ data.index_html && data.php !== 'off' && data.index_php ? ' ' : '' }}{{ data.php !== 'off' && data.index_php ? '/index.php?$query_string' : '' }};
+	}</span>
 	<span ng-if="data.file_structure === 'separated'">
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
@@ -96,7 +100,11 @@ server {
 	server_name {{ !data.non_www ? 'www.' : '' }}{{ data.domain }};<span ng-if="data.php !== 'off'">
 	set $base /var/www/{{ data.domain }};
 	root $base{{ data.document_root }};</span><span ng-if="data.php === 'off'">
-	root /var/www/{{ data.domain }}{{ data.document_root }};</span>
+	root /var/www/{{ data.domain }}{{ data.document_root }};</span><span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
+
+	location / {
+		try_files $uri $uri/ {{ data.index_html ? '/index.html' : '' }}{{ data.index_html && data.php !== 'off' && data.index_php ? ' ' : '' }}{{ data.php !== 'off' && data.index_php ? '/index.php?$query_string' : '' }};
+	}</span>
 	<span ng-if="data.file_structure === 'separated'">
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">

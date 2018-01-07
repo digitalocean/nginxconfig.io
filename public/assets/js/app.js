@@ -16,6 +16,7 @@
 			cdn:				false,
 			non_www:			true,
 			php:				'7.2',
+			index_php:			true,
 			index_html:			false,
 			wordpress:			false,
 

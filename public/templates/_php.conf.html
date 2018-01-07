@@ -1,11 +1,6 @@
 # index
 index {{ data.index_html ? 'index.html ' : '' }}index.php;
 
-# process with {{ data.index_html ? 'index.html, ' : '' }}index.php
-location / {
-	try_files $uri $uri/ {{ data.index_html ? '/index.html ' : '' }}/index.php?$query_string;
-}
-
 # handle .php
 location ~ \.php$ {<span ng-if="data.file_structure === 'separated'">
 	include _php_fastcgi.conf;
