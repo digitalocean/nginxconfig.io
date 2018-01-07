@@ -5,7 +5,7 @@ server {
 
 	server_name {{ !data.non_www ? 'www.' : '' }}{{ data.domain }};
 	set $base /var/www/{{ data.domain }};
-	root $base/public;
+	root $base/{{ data.document_root }};
 
 	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
