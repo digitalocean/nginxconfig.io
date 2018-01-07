@@ -2,11 +2,11 @@
 
 	angular
 	.module('NginxConfigIoApp', [])
-	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $timeout) {
-		/////////////////////
-		// SCOPE VARIABLES //
-		/////////////////////
-		$scope.data = {
+	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
+		///////////////////////
+		// PRIVATE VARIABLES //
+		///////////////////////
+		var data = {
 			domain:				'example.com',
 			path:				'/var/www/example.com',
 			document_root:		'/public',
@@ -40,6 +40,14 @@
 			},
 		};
 
+
+
+		/////////////////////
+		// SCOPE VARIABLES //
+		/////////////////////
+		$scope.data = angular.copy(data);
+		$scope.dataInit = false;
+
 		$scope.extensions = {
 			assets:	'css(\\.map)?|js(\\.map)?',
 			fonts:	'ttf|ttc|otf|eot|woff|woff2',
@@ -68,12 +76,56 @@
 			});
 		};
 
+		$scope.setDataFromHash = function() {
+			var hashData = $location.search();
+
+			for (var key in hashData) {
+				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
+					$scope.data[key] = hashData[key];
+				}
+			}
+		};
+
+		$scope.updateHash = function() {
+			if (!$scope.dataInit) {
+				return;
+			}
+
+			var changedData = {};
+
+			for (var key in $scope.data) {
+				if (!angular.equals($scope.data[key], data[key])) {
+					changedData[key] = $scope.data[key];
+				}
+			}
+
+			if (Object.keys(changedData).length) {
+				$location.search(changedData).replace();
+			} else {
+				$location.search({});
+			}
+		};
+
 
 
 		//////////////////
 		// SCOPE EVENTS //
 		//////////////////
-		$scope.$watch('data', $scope.refreshHighlighting, true);
+		$scope.$watch('data', function() {
+			$scope.refreshHighlighting();
+			$scope.updateHash();
+
+			if (!$scope.dataInit) {
+				$scope.dataInit = true;
+			}
+		}, true);
+
+
+
+		//////////
+		// INIT //
+		//////////
+		$scope.setDataFromHash();
 	});
 
 })();
