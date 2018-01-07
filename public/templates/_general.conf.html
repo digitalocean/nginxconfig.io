@@ -8,31 +8,31 @@ add_header Cache-Control "no-transform" always;
 # . files
 location ~ /\.(?!well-known).* {
 	deny all;
-}<span ng-if="data.expires.css_js !== '' && data.expires.css_js !== data.expires.media">
+}<span ng-if="data.expires.assets !== '' && data.expires.assets !== data.expires.media">
 
-# css/js
-location ~* \.(css|js)$ {
-	expires {{ data.expires.css_js }};<span ng-if="data.access_log !== ''">
+# assets
+location ~* \.(?:{{ extensions.assets }})$ {
+	expires {{ data.expires.assets }};<span ng-if="data.access_log !== ''">
 	access_log off;</span>
 }</span><span ng-if="data.expires.media !== ''">
 
-# {{ data.expires.css_js !== '' && data.expires.css_js === data.expires.media ? 'css/js, ' : '' }}media
-location ~* \.({{ data.expires.css_js !== '' && data.expires.css_js === data.expires.media ? 'css|js|' : '' }}jpe?g|gif|png|heic|ico|cur|mp4|mov|ogg|ogv|webm|htc)$ {
+# {{ data.expires.assets !== '' && data.expires.assets === data.expires.media ? 'assets, ' : '' }}media
+location ~* \.(?:{{ data.expires.assets !== '' && data.expires.assets === data.expires.media ? extensions.assets + '|' : '' }}{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }})$ {
 	expires {{ data.expires.media }};<span ng-if="data.access_log !== ''">
 	access_log off;</span>
-}</span><span ng-if="data.expires.svg !== '' && data.expires.svg !== data.expires.font">
+}</span><span ng-if="data.expires.svg !== '' && data.expires.svg !== data.expires.fonts">
 
 # svg
-location ~* \.svg$ {
+location ~* \.{{ extensions.svg }}$ {
 	add_header Access-Control-Allow-Origin "*";
 	expires {{ data.expires.svg }};<span ng-if="data.access_log !== ''">
 	access_log off;</span>
-}</span><span ng-if="data.expires.font !== ''">
+}</span><span ng-if="data.expires.fonts !== ''">
 
-# {{ data.expires.svg !== '' && data.expires.svg === data.expires.font ? 'svg, ' : '' }}fonts
-location ~* \.({{ data.expires.svg !== '' && data.expires.svg === data.expires.font ? 'svg|' : '' }}ttf|ttc|otf|eot|woff|woff2)$ {
+# {{ data.expires.svg !== '' && data.expires.svg === data.expires.fonts ? 'svg, ' : '' }}fonts
+location ~* \.(?:{{ data.expires.svg !== '' && data.expires.svg === data.expires.fonts ? extensions.svg + '|' : '' }}{{ extensions.fonts }})$ {
 	add_header Access-Control-Allow-Origin "*";
-	expires {{ data.expires.font }};<span ng-if="data.access_log !== ''">
+	expires {{ data.expires.fonts }};<span ng-if="data.access_log !== ''">
 	access_log off;</span>
 }</span>
 <span ng-if="data.gzip">

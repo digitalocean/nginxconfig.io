@@ -3,6 +3,9 @@
 	angular
 	.module('NginxConfigIoApp', [])
 	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $timeout) {
+		/////////////////////
+		// SCOPE VARIABLES //
+		/////////////////////
 		$scope.data = {
 			domain:				'example.com',
 			path:				'/var/www/example.com',
@@ -10,6 +13,7 @@
 			https:				false,
 			http2:				true,
 			email:				'hello@example.com',
+			cdn:				true,
 			non_www:			true,
 			php:				'7.2',
 			index_html:			false,
@@ -28,13 +32,29 @@
 			limit_req:			false,
 
 			expires: {
-				css_js:	'7d',
-				media:	'7d',
+				assets:	'7d',
+				fonts:	'7d',
 				svg:	'7d',
-				font:	'7d',
+				media:	'7d',
+				docs:	'7d',
 			},
 		};
 
+		$scope.extensions = {
+			assets:	'css(\\.map)?|js(\\.map)?',
+			fonts:	'ttf|ttc|otf|eot|woff|woff2',
+			svg:	'svgz?',
+			images:	'jpe?g|png|gif|ico|cur|heic|webp|tiff?',
+			audio:	'mp3|m4a|aac|ogg|midi?|wav',
+			video:	'mp4|mov|webm|mpe?g|avi|ogv|flv|wmv',
+			docs:	'pdf|docx?|xlsx?|pptx?'
+		};
+
+
+
+		/////////////////////
+		// SCOPE FUNCTIONS //
+		/////////////////////
 		$scope.refreshHighlighting = function() {
 			document.querySelectorAll('main .file .code.source').forEach(function(code) {
 				$timeout(function(code) {
@@ -46,9 +66,12 @@
 			});
 		};
 
-		$scope.$watch('data', function(data) {
-			$scope.refreshHighlighting();
-		}, true);
+
+
+		//////////////////
+		// SCOPE EVENTS //
+		//////////////////
+		$scope.$watch('data', $scope.refreshHighlighting, true);
 	});
 
 })();

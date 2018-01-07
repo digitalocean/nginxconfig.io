@@ -4,22 +4,22 @@ location = /wp-includes/js/tinymce/wp-tinymce.php {
 }
 
 # wp-content, wp-includes php files
-location ~* ^/(wp-content|wp-includes)/.*\.php$ {
+location ~* ^/(?:wp-content|wp-includes)/.*\.php$ {
 	deny all;
 }
 
 # wp-content/uploads nasty stuff
-location ~* ^/wp-content/uploads/.*\.(html|htm|shtml|php|js|swf|css)$ {
+location ~* ^/wp-content/uploads/.*\.(?:s?html?|php|js|swf)$ {
 	deny all;
 }
 
 # wp-content/plugins nasty stuff
-location ~* ^/wp-content/plugins/.*\.(?!jpe?g|gif|png|svg|heic|js|css) {
+location ~* ^/wp-content/plugins/.*\.(?!{{ extensions.assets }}|{{ extensions.fonts }}|{{ extensions.svg }}|{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}|{{ extensions.docs }}) {
 	deny all;
 }
 
 # WordPress stuff
-location ~* ^/(xmlrpc\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
+location ~* ^/(?:xmlrpc\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
 	deny all;
 }<span ng-if="data.limit_req">
 
