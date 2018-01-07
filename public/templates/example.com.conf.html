@@ -40,7 +40,14 @@ server {
 
 	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;<span ng-if="data.gzip">
+
+	# gzip
+	gzip on;
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_types {{ gzipTypes }};</span>
 
 	include _ssl.conf;
 
@@ -51,7 +58,7 @@ server {
 	}
 
 	location / {
-		deny all
+		deny all;
 	}
 }</span>
 
@@ -109,7 +116,14 @@ server {
 	server_name cdn.{{ data.domain }};
 	root /var/www/{{ data.domain }}{{ data.document_root }};<span ng-if="data.access_log !== ''">
 
-	access_log off;</span>
+	access_log off;</span><span ng-if="data.gzip">
+
+	# gzip
+	gzip on;
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_types {{ gzipTypes }};</span>
 
 	location ~* \.(?:{{ extensions.assets }}|{{ extensions.fonts }}|{{ extensions.svg }}|{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}|{{ extensions.docs }})$ {
 		add_header Access-Control-Allow-Origin "*";
@@ -118,7 +132,7 @@ server {
 	}
 
 	location / {
-		deny all
+		deny all;
 	}
 }</span>
 

@@ -13,7 +13,7 @@
 			https:				false,
 			http2:				true,
 			email:				'hello@example.com',
-			cdn:				true,
+			cdn:				false,
 			non_www:			true,
 			php:				'7.2',
 			index_html:			false,
@@ -49,6 +49,8 @@
 			video:	'mp4|mov|webm|mpe?g|avi|ogv|flv|wmv',
 			docs:	'pdf|docx?|xlsx?|pptx?'
 		};
+
+		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
 
 
 
