@@ -1,7 +1,7 @@
 (function() {
 
 	angular
-	.module('NginxConfigIoApp', [])
+	.module('NginxConfigIoApp', ['ngclipboard'])
 	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
 		///////////////////////
 		// PRIVATE VARIABLES //

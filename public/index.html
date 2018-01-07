@@ -209,51 +209,75 @@
 						<div class="row">
 							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-nginx" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/sites-enabled/{{ data.domain }}.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-domain" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_ssl.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-ssl" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-letsencrypt" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/_general.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-general" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_php.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-php" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && (data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress))">
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-php_fastcgi" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.wordpress && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_wordpress.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
-								</div><div class="code highlighted"></div>
+								</div><div id="file-wordpress" class="code highlighted"></div>
 							</div>
 						</div>
 					</div>
@@ -275,7 +299,8 @@
 		</main>
 		<footer>
 			<div class="container-fluid">
-				Lovingly made at <img src="https://cdn.nginxconfig.io/assets/img/balaton.svg" alt="Lake Balaton" class="balaton"> <span class="text-muted">(Lake Balaton, Hungary)</span>
+				Lovingly made at <img src="https://cdn.nginxconfig.io/assets/img/balaton.svg" alt="Lake Balaton" class="balaton"><span class="text-muted">(<a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>)</span><br>
+				BTC: <strong>1CeKtgNStn5BGk46gt14kNMhsnJoFGUfkN</strong>
 			</div>
 		</footer>
 
@@ -288,7 +313,9 @@
 			gtag('config', 'UA-3084378-31');
 		</script>
 		<script src="https://cdn.nginxconfig.io/assets/js/highlight.min.js?v=9.12.0"></script>
+		<script src="https://cdn.nginxconfig.io/assets/js/clipboard.min.js?v=1.7.1"></script>
 		<script src="https://cdn.nginxconfig.io/assets/js/angular.min.js?v=1.6.8"></script>
+		<script src="https://cdn.nginxconfig.io/assets/js/ngclipboard.min.js?v=1.1.3"></script>
 		<script src="https://cdn.nginxconfig.io/assets/js/app.js"></script>
 	</body>
 </html>

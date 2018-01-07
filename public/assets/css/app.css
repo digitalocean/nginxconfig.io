@@ -72,6 +72,12 @@ main .file {
 	margin-bottom: 2rem;
 }
 
+main .file .btn-clipboard {
+	font-size: 0;
+	padding: 0.2rem 0.4rem 0.05rem;
+	vertical-align: text-bottom;
+}
+
 main .file .code {
 	padding: 0.5rem;
 	overflow-x: auto;
