@@ -1,0 +1,23 @@
+try_files $uri =404;
+
+# fastcgi
+fastcgi_pass				{{
+	data.php === 'tcp' ? '127.0.0.1:9000' : (
+		data.php === '5.x' ? 'unix:/var/run/php5-fpm.sock' : (
+			'unix:/var/run/php/php' + data.php +'-fpm.sock'
+		)
+	)
+}};
+fastcgi_index				index.php;
+fastcgi_split_path_info		^(.+\.php)(/.+)$;
+fastcgi_param				SCRIPT_FILENAME $document_root$fastcgi_script_name;
+fastcgi_param				PHP_ADMIN_VALUE open_basedir=$base/:/usr/lib/php/:/tmp/;
+fastcgi_intercept_errors	off;
+
+fastcgi_buffer_size				128k;
+fastcgi_buffers					256 16k;
+fastcgi_busy_buffers_size		256k;
+fastcgi_temp_file_write_size	256k;
+
+# default fastcgi_params
+include fastcgi_params;

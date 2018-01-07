@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/highlight-github.min.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="icon" type="image/png" href="assets/img/favicon.png">
+		<title>nginxconfig.io</title>
+	</head>
+	<body ng-app="NginxConfigIoApp">
+		<header>
+			<div class="container-fluid">
+				<img src="assets/img/nginx.svg" alt="nginx" class="nginx">
+				<img src="assets/img/config.svg" alt="config" class="config">
+				config.io
+			</div>
+		</header>
+		<main ng-controller="NginxConfigIoController">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3 col-lg-2 options">
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group">
+									<label class="form-label"><span class="info">Domain</span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.domain">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><span class="info">Path</span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.path">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><span class="info">Document root</span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.document_root">
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
+									<label class="form-check-label" for="https">
+										<span class="info">HTTPS</span>
+									</label>
+								</div>
+								<div class="form-check" ng-if="data.https">
+									<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
+									<label class="form-check-label" for="http2">
+										<span class="info">HTTP2</span>
+									</label>
+								</div>
+								<div class="form-group" ng-if="data.https">
+										<label class="form-label">E-mail</label>
+										<input type="text" class="form-control form-control-sm" ng-model="data.email">
+									</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www">
+									<label class="form-check-label" for="non_www">
+										<span class="info">non-www</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group">
+									<label>PHP</label>
+									<select class="form-control" ng-model="data.php">
+										<option value="off">off</option>
+										<option value="tcp">TCP</option>
+										<option value="5.x">5.x socket</option>
+										<option value="7.0">7.0 socket</option>
+										<option value="7.1">7.1 socket</option>
+										<option value="7.2">7.2 socket</option>
+									</select>
+								</div>
+								<div class="form-check" ng-if="data.php !== 'off'">
+									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
+									<label class="form-check-label" for="index_html">
+										<span class="info">index.html</span>
+									</label>
+								</div>
+								<div class="form-check" ng-if="data.php !== 'off'">
+									<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
+									<label class="form-check-label" for="wordpress">
+										<span class="info">WordPress</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<label class="form-label">File structure</label>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
+									<label class="form-check-label" for="unified">
+										<span class="info">unified</span>
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" id="separated" ng-model="data.file_structure" value="separated">
+									<label class="form-check-label" for="separated">
+										<span class="info">separated</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group">
+									<label><code>worker_processes</code></label>
+									<select class="form-control" ng-model="data.worker_processes">
+										<option value="auto">auto</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="form-label"><code class="info">user</code></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.user">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><code class="info">pid</code></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.pid">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><code class="info">access_log</code></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.access_log">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><code class="info">error_log</code></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.error_log">
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
+									<label class="form-check-label" for="gzip">
+										<span class="info"><code>gzip</code></span>
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
+									<label class="form-check-label" for="server_tokens">
+										<span class="info"><code>server_tokens</code></span>
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
+									<label class="form-check-label" for="log_not_found">
+										<span class="info"><code>log_not_found</code></span>
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
+									<label class="form-check-label" for="limit_req">
+										<span class="info"><code>limit_req</code></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group">
+									<label class="form-label"><span class="info">css/js <code>expires</code></span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires.css_js">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><span class="info">media <code>expires</code></span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires.media">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><span class="info">svg <code>expires</code></span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires.svg">
+								</div>
+								<div class="form-group">
+									<label class="form-label"><span class="info">font <code>expires</code></span></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires.font">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-8 files">
+						<div class="row">
+							<div class="file" ng-class="data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
+								<strong>/etc/nginx/nginx.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
+								<strong>/etc/nginx/sites-enabled/{{ data.domain }}.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.https">
+								<strong>/etc/nginx/_ssl.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.https">
+								<strong>/etc/nginx/_letsencrypt.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
+								<strong>/etc/nginx/_general.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.file_structure === 'separated'">
+								<strong>/etc/nginx/_php.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.php !== 'off' && (data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress))">
+								<strong>/etc/nginx/_php_fastcgi.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.wordpress && data.file_structure === 'separated'">
+								<strong>/etc/nginx/_wordpress.conf</strong>
+								<div class="code source">
+									<pre><code class="nginx" ng-include="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
+								</div><div class="code highlighted"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-2 sidebar">
+						<div class="adsbygoogle-container">
+							<ins class="adsbygoogle"
+									style="display:block"
+									data-ad-client="ca-pub-6543577519725877"
+									data-ad-slot="1857879957"
+									data-ad-format="auto"></ins>
+							<script>
+								(window.adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+							<div class="note">advertisement</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="container-fluid">
+				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"> <span class="text-muted">(Lake Balaton, Hungary)</span>
+			</div>
+		</footer>
+
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3084378-31"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-3084378-31');
+		</script>
+		<script src="assets/js/highlight.min.js?v=9.12.0"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+</html>

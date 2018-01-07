@@ -1,0 +1,125 @@
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: 'Quicksand', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.info {
+	cursor: pointer;
+}
+
+.info:hover {
+	opacity: 1;
+}
+
+header {
+	background-color: #000;
+	box-shadow: 0 5px 10px 10px #000;
+	padding: 0.5rem 0 0;
+	text-align: center;
+	margin-bottom: 2.25rem;
+	color: #fff;
+	font-size: 2.2rem;
+}
+
+header img.nginx {
+	height: 1.6rem;
+	vertical-align: -0.1rem;
+}
+
+header img.config {
+	height: 1.2rem;
+	vertical-align: super;
+	opacity: 0.8;
+	margin-left: -0.5rem;
+	margin-right: -0.25rem;
+}
+
+main {
+	flex: 1 1 auto;
+}
+
+main .options,
+main .sidebar {
+	padding-top: 1.5rem;
+}
+
+main .options .card .card-body {
+	padding: 0.6rem 0.75rem;
+}
+
+main .options .card + .card {
+	margin-top: 1rem;
+}
+
+main .options .card .card-body .form-label {
+	margin-bottom: 0.15rem;
+	margin-left: 0.15rem;
+}
+
+main .options .card .card-body .form-group {
+	margin-bottom: 0.5rem;
+}
+
+main .options .card .card-body .form-group:last-child {
+	margin-bottom: 0;
+}
+
+main .file {
+	margin-bottom: 2rem;
+}
+
+main .file .code {
+	padding: 0.5rem;
+	overflow-x: auto;
+	font-size: 0.75rem;
+	line-height: 1.25;
+	background-color: #f8f8f8;
+}
+
+main .file .code.source {
+	display: none;
+}
+
+main .file .code pre {
+	margin-bottom: 0;
+	font-size: inherit;
+}
+
+main .file .code pre code {
+	-moz-tab-size: 4;
+	tab-size: 4;
+	overflow: visible;
+	overflow-x: visible;
+}
+
+main .file .code pre code ng-include {
+	display: inline-block;
+}
+
+footer {
+	padding: 2rem 0 0.5rem;
+	text-align: center;
+	font-size: 0.8rem;
+}
+
+footer img.balaton {
+	height: 1.6rem;
+	vertical-align: middle;
+}
+
+.adsbygoogle-container .adsbygoogle {
+	display: block;
+	height: 600px;
+	position: relative;
+	background-color: #f8f8f8;
+}
+
+.adsbygoogle-container .note {
+	text-align: center;
+	color: #444;
+	font-size: 0.6rem;
+}

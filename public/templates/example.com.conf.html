@@ -1,0 +1,83 @@
+<span ng-if="data.https"># certbot certonly --non-interactive --text --email {{ data.email }} --agree-tos --force-renew --webroot --webroot-path /var/www/_letsencrypt --domain {{ data.domain }} --domain www.{{ data.domain }}
+server {
+	listen 443 ssl{{ data.http2 ? ' http2' : '' }};
+	listen [::]:443 ssl{{ data.http2 ? ' http2' : '' }};
+
+	server_name {{ !data.non_www ? 'www.' : '' }}{{ data.domain }};
+	set $base /var/www/{{ data.domain }};
+	root $base/public;
+
+	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+	<span ng-if="data.file_structure === 'separated'">
+	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
+	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
+	include _php.conf;</span>
+	include _letsencrypt.conf;
+	include _ssl.conf;</span><span ng-if="data.file_structure === 'unified'">
+	<ng-include src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
+
+	<ng-include src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
+
+	<ng-include src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+
+	<ng-include src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include>
+
+	include _ssl.conf;</span>
+}
+
+# https {{ !data.non_www ? 'domain, ' : '' }}subdomains redirect
+server {
+	listen 443 ssl{{ data.http2 ? ' http2' : '' }};
+	listen [::]:443 ssl{{ data.http2 ? ' http2' : '' }};
+
+	server_name {{ !data.non_www ? data.domain + ' ' : '' }}*.{{ data.domain }};
+
+	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
+
+	include _ssl.conf;
+
+	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
+}
+
+# http redirect
+server {
+	listen [::]:80;
+	listen 80;
+
+	server_name {{ data.domain }} *.{{ data.domain }};
+	<span ng-if="data.file_structure === 'separated'">
+	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
+	<ng-include src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+
+	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
+}</span><span ng-if="!data.https">server {
+	listen [::]:80;
+	listen 80;
+
+	server_name {{ !data.non_www ? 'www.' : '' }}{{ data.domain }};
+	set $base /var/www/{{ data.domain }};
+	root $base/public;
+	<span ng-if="data.file_structure === 'separated'">
+	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
+	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
+	include _php.conf;</span></span><span ng-if="data.file_structure === 'unified'">
+	<ng-include src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
+
+	<ng-include src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
+
+	<ng-include src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span></span>
+}
+
+# {{ !data.non_www ? 'domain, ' : '' }}subdomains redirect
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name {{ !data.non_www ? data.domain + ' ' : '' }}*.{{ data.domain }};
+
+	return 301 http://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
+}</span>
