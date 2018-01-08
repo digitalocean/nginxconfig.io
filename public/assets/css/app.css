@@ -17,20 +17,19 @@ body {
 
 header {
 	background-color: #000;
-	box-shadow: 0 5px 10px 10px #000;
-	padding: 0.5rem 0 0;
+	padding: 0.5rem 0;
 	text-align: center;
-	margin-bottom: 1.5rem;
+	margin-bottom: 0.5rem;
 	color: #fff;
 	font-size: 2.2rem;
 }
 
-header img.nginx {
+header .logo img.nginx {
 	height: 1.6rem;
 	vertical-align: -0.1rem;
 }
 
-header img.config {
+header .logo img.config {
 	height: 1.2rem;
 	vertical-align: super;
 	opacity: 0.8;
@@ -38,14 +37,20 @@ header img.config {
 	margin-right: -0.25rem;
 }
 
-main {
-	flex: 1 1 auto;
-}
-
-main .url .input-group-prepend .input-group-text,
-main .url .input-group-append .input-group-text {
+header .url .input-group-prepend .input-group-text,
+header .url .input-group-append .input-group-text {
 	padding-top: 0.15rem;
 	cursor: pointer;
+	background-color: transparent;
+}
+
+header .url .form-control {
+	background-color: transparent;
+	color: #fff;
+}
+
+main {
+	flex: 1 1 auto;
 }
 
 main .options,

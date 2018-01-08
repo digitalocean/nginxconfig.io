@@ -12,19 +12,17 @@
 		<meta name="description" content="nginx config generator">
 		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, cdn, access_log, error_log">
 	</head>
-	<body ng-app="NginxConfigIoApp">
+	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
-			<div class="container-fluid">
-				<img src="https://cdn.nginxconfig.io/assets/img/nginx.svg" alt="nginx" class="nginx">
-				<img src="https://cdn.nginxconfig.io/assets/img/config.svg" alt="config" class="config">
-				config.io
-			</div>
-		</header>
-		<main ng-controller="NginxConfigIoController">
 			<div class="container">
+				<div class="logo">
+					<img src="https://cdn.nginxconfig.io/assets/img/nginx.svg" alt="nginx" class="nginx">
+					<img src="https://cdn.nginxconfig.io/assets/img/config.svg" alt="config" class="config">
+					config.io
+				</div>
 				<div class="row">
 					<div class="col-sm-10 col-lg-8 col-xl-6 offset-sm-1 offset-lg-2 offset-xl-3">
-						<div class="input-group mb-2 url">
+						<div class="input-group url">
 							<div class="input-group-prepend">
 								<div class="input-group-text" ngclipboard data-clipboard-target="#url"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
 							</div>
@@ -36,6 +34,8 @@
 					</div>
 				</div>
 			</div>
+		</header>
+		<main>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3 col-lg-2 options">
