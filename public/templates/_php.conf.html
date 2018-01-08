@@ -4,6 +4,6 @@ index {{ data.index_html ? 'index.html ' : '' }}index.php;
 # handle .php
 location ~ \.php$ {<span ng-if="data.file_structure === 'separated'">
 	include _php_fastcgi.conf;
-	</span><span ng-if="data.file_structure === 'unified'">
-	<ng-include src="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+	</span><span class="include" ng-if="data.file_structure === 'unified'">
+	<ng-include ng-include-tabs="{{ data.file_structure === 'unified' ? 3 : 1 }}" src="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 }

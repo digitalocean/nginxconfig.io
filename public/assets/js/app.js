@@ -127,6 +127,19 @@
 		// INIT //
 		//////////
 		$scope.setDataFromHash();
+	})
+	.directive('ngIncludeTabs', function () {
+		return {
+			require: 'ngInclude',
+			restrict: 'A',
+			link: {
+				pre: function preLink(scope, iElement, iAttrs, controller) {
+					var tabs = parseInt(iAttrs.ngIncludeTabs || 0);
+					controller.template = controller.template.replace(/^(.*)$/mg, '\t'.repeat(tabs) + '$1').replace(/\s*$/, '');
+					console.log(controller);
+				},
+			},
+		};
 	});
 
 })();

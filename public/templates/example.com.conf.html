@@ -15,19 +15,19 @@ server {
 	location / {
 		try_files $uri $uri/ {{ data.index_html ? '/index.html' : '' }}{{ data.index_html && data.php !== 'off' && data.index_php ? ' ' : '' }}{{ data.php !== 'off' && data.index_php ? '/index.php?$query_string' : '' }};
 	}</span>
-	<span ng-if="data.file_structure === 'separated'">
+<span ng-if="data.file_structure === 'separated'">
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
 	include _php.conf;</span>
 	include _letsencrypt.conf;
-	include _ssl.conf;</span><span ng-if="data.file_structure === 'unified'">
-	<ng-include src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
+	include _ssl.conf;</span><span class="include" ng-if="data.file_structure === 'unified'">
+<ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
 
-	<ng-include src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
+<ng-include ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
 
-	<ng-include src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
-	<ng-include src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include>
+<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.file_structure === 'unified'">
 
 	include _ssl.conf;</span>
 }<span ng-if="data.cdn">
@@ -88,9 +88,9 @@ server {
 	listen [::]:80;
 
 	server_name {{ data.domain }} *.{{ data.domain }};
-	<span ng-if="data.file_structure === 'separated'">
-	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
-	<ng-include src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<span ng-if="data.file_structure === 'separated'">
+	include _letsencrypt.conf;</span><span class="include" ng-if="data.file_structure === 'unified'">
+	<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
 	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
 }</span><span ng-if="!data.https">server {
@@ -105,15 +105,15 @@ server {
 	location / {
 		try_files $uri $uri/ {{ data.index_html ? '/index.html' : '' }}{{ data.index_html && data.php !== 'off' && data.index_php ? ' ' : '' }}{{ data.php !== 'off' && data.index_php ? '/index.php?$query_string' : '' }};
 	}</span>
-	<span ng-if="data.file_structure === 'separated'">
+<span ng-if="data.file_structure === 'separated'">
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
-	include _php.conf;</span></span><span ng-if="data.file_structure === 'unified'">
-	<ng-include src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
+	include _php.conf;</span></span><span class="include" ng-if="data.file_structure === 'unified'">
+<ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include>
 
-	<ng-include src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
+<ng-include ng-if="data.php !== 'off' && data.wordpress" ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include>
 
-	<ng-include src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span></span>
+<ng-include ng-if="data.php !== 'off'" ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 }<span ng-if="data.cdn">
 
 # CDN
