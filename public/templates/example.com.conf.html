@@ -20,7 +20,7 @@ server {
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
 	include _php.conf;</span>
 	include _letsencrypt.conf;
-	include _ssl.conf;</span><span class="include" ng-if="data.file_structure === 'unified'">
+	include _ssl.conf;</span><span ng-if="data.file_structure === 'unified'">
 <ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
 
 <ng-include ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
@@ -89,7 +89,7 @@ server {
 
 	server_name {{ data.domain }} *.{{ data.domain }};
 <span ng-if="data.file_structure === 'separated'">
-	include _letsencrypt.conf;</span><span class="include" ng-if="data.file_structure === 'unified'">
+	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
 	<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
 	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
@@ -108,7 +108,7 @@ server {
 <span ng-if="data.file_structure === 'separated'">
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
-	include _php.conf;</span></span><span class="include" ng-if="data.file_structure === 'unified'">
+	include _php.conf;</span></span><span ng-if="data.file_structure === 'unified'">
 <ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
 
 <ng-include ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">

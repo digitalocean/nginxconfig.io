@@ -135,8 +135,13 @@
 			link: {
 				pre: function preLink(scope, iElement, iAttrs, controller) {
 					var tabs = parseInt(iAttrs.ngIncludeTabs || 0);
-					controller.template = controller.template.replace(/^(.*)$/mg, '\t'.repeat(tabs) + '$1').replace(/\s*$/, '');
-					console.log(controller);
+
+					var startRegex = new RegExp('\t'.repeat(tabs - 1));
+
+					controller.template = controller.template
+						.replace(/^(.*)$/mg, '\t'.repeat(tabs) + '$1')
+						.replace(startRegex, '')
+						.replace(/\s*$/, '');
 				},
 			},
 		};

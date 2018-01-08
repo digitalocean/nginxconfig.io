@@ -102,18 +102,6 @@ main .file .code pre code {
 	overflow-x: visible;
 }
 
-main .file .code pre code span.include {
-	white-space: pre-line;
-}
-
-main .file .code pre code span.include ng-include {
-	white-space: pre;
-}
-
-main .file .code pre code ng-include {
-	display: inline-block;
-}
-
 footer {
 	padding: 2rem 0 0.5rem;
 	text-align: center;
