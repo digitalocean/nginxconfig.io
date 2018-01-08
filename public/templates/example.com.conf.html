@@ -109,11 +109,11 @@ server {
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
 	include _php.conf;</span></span><span class="include" ng-if="data.file_structure === 'unified'">
-<ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include>
+<ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
 
-<ng-include ng-if="data.php !== 'off' && data.wordpress" ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include>
+<ng-include ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
 
-<ng-include ng-if="data.php !== 'off'" ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span></span>
 }<span ng-if="data.cdn">
 
 # CDN
