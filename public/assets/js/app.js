@@ -46,6 +46,7 @@
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
+		$scope.location = $location;
 		$scope.data = angular.copy(data);
 		$scope.dataInit = false;
 
@@ -105,6 +106,10 @@
 			} else {
 				$location.search({});
 			}
+		};
+
+		$scope.reset = function() {
+			$scope.data = angular.copy(data);
 		};
 
 

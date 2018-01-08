@@ -20,7 +20,7 @@ header {
 	box-shadow: 0 5px 10px 10px #000;
 	padding: 0.5rem 0 0;
 	text-align: center;
-	margin-bottom: 2.25rem;
+	margin-bottom: 1.5rem;
 	color: #fff;
 	font-size: 2.2rem;
 }
@@ -40,6 +40,12 @@ header img.config {
 
 main {
 	flex: 1 1 auto;
+}
+
+main .url .input-group-prepend .input-group-text,
+main .url .input-group-append .input-group-text {
+	padding-top: 0.15rem;
+	cursor: pointer;
 }
 
 main .options,

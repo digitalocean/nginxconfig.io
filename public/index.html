@@ -21,6 +21,21 @@
 			</div>
 		</header>
 		<main ng-controller="NginxConfigIoController">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 col-lg-8 col-xl-6 offset-sm-1 offset-lg-2 offset-xl-3">
+						<div class="input-group mb-2 url">
+							<div class="input-group-prepend">
+								<div class="input-group-text" ngclipboard data-clipboard-target="#url"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
+							</div>
+							<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+							<div class="input-group-append">
+								<div class="input-group-text" ng-click="reset()"><img src="https://cdn.nginxconfig.io/assets/img/refresh.svg" alt="Reset"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3 col-lg-2 options">
