@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
 		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/bootstrap.min.css?v=4.0.0-beta.3">
 		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/highlight-github.min.css?v=9.12.0">
-		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/app.css">
+		<link rel="stylesheet" href="assets/css/app.css">
 		<link rel="icon" type="image/png" href="https://cdn.nginxconfig.io/assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="nginx config generator">
@@ -225,7 +225,7 @@
 							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -234,7 +234,7 @@
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/sites-enabled/{{ data.domain }}.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -243,7 +243,7 @@
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_ssl.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -252,7 +252,7 @@
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -261,7 +261,7 @@
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/_general.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -270,7 +270,7 @@
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_php.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -279,7 +279,7 @@
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && (data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress))">
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -288,7 +288,7 @@
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.wordpress && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_wordpress.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard">
+									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
@@ -335,6 +335,6 @@
 		<script src="https://cdn.nginxconfig.io/assets/js/clipboard.min.js?v=1.7.1"></script>
 		<script src="https://cdn.nginxconfig.io/assets/js/angular.min.js?v=1.6.8"></script>
 		<script src="https://cdn.nginxconfig.io/assets/js/ngclipboard.min.js?v=1.1.3"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/app.js"></script>
+		<script src="assets/js/app.js"></script>
 	</body>
 </html>
