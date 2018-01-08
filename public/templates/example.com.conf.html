@@ -90,7 +90,7 @@ server {
 	server_name {{ data.domain }} *.{{ data.domain }};
 <span ng-if="data.file_structure === 'separated'">
 	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
-	<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
 	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
 }</span><span ng-if="!data.https">server {
