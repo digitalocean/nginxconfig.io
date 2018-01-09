@@ -146,3 +146,12 @@ footer .crypto {
 	color: #444;
 	font-size: 0.6rem;
 }
+
+tooltip tip {
+	padding: 4px 12px;
+}
+
+tooltip tip-tip {
+	line-height: 1.1;
+	display: block;
+}

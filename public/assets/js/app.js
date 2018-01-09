@@ -1,7 +1,7 @@
 (function() {
 
 	angular
-	.module('NginxConfigIoApp', ['ngclipboard'])
+	.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
 	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
 		///////////////////////
 		// PRIVATE VARIABLES //
@@ -149,6 +149,12 @@
 		//////////
 		$scope.setDataFromHash();
 	})
+	.config(['tooltipsConfProvider', function (tooltipsConfProvider) {
+		tooltipsConfProvider.configure({
+			side: 'right',
+			size: 'small',
+		});
+	}])
 	.directive('ngIncludeTabs', function () {
 		return {
 			require: 'ngInclude',
