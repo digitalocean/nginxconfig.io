@@ -32,13 +32,10 @@
 			log_not_found:		false,
 			limit_req:			false,
 
-			expires: {
-				assets:	'7d',
-				fonts:	'7d',
-				svg:	'7d',
-				media:	'7d',
-				docs:	'7d',
-			},
+			expires_assets:		'7d',
+			expires_media:		'7d',
+			expires_svg:		'7d',
+			expires_fonts:		'7d',
 		};
 
 
