@@ -24,7 +24,7 @@
 					<div class="col-sm-10 col-lg-8 col-xl-6 offset-sm-1 offset-lg-2 offset-xl-3">
 						<div class="input-group url">
 							<div class="input-group-prepend">
-								<div class="input-group-text" ngclipboard data-clipboard-target="#url"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
+								<div class="input-group-text" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
 							</div>
 							<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
 							<div class="input-group-append">
@@ -203,19 +203,19 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label"><span class="info">assets <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires.assets">
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><span class="info">media <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires.media">
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires_media">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><span class="info">svg <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires.svg">
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><span class="info">fonts <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires.fonts">
+									<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts">
 								</div>
 							</div>
 						</div>
@@ -224,7 +224,7 @@
 						<div class="row">
 							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -233,7 +233,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/sites-enabled/{{ data.domain }}.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -242,7 +242,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_ssl.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl" ngclipboard-success="clipboardSuccess('_ssl.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -251,7 +251,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.https">
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -260,7 +260,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
 								<strong>/etc/nginx/_general.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('_general.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -269,7 +269,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_php.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php" ngclipboard-success="clipboardSuccess('_php.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -278,7 +278,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && (data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress))">
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('_php_fastcgi.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">
@@ -287,7 +287,7 @@
 							</div>
 							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.wordpress && data.file_structure === 'separated'">
 								<strong>/etc/nginx/_wordpress.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress">
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('_wordpress.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<div class="code source">

@@ -81,6 +81,10 @@
 			for (var key in hashData) {
 				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
 					$scope.data[key] = hashData[key];
+					gtag('event', 'data_from_hash', {
+						event_label: key,
+						event_value: hashData[key],
+					});
 				}
 			}
 		};
@@ -91,7 +95,6 @@
 			}
 
 			var changedData = {};
-
 			for (var key in $scope.data) {
 				if (!angular.equals($scope.data[key], data[key])) {
 					changedData[key] = $scope.data[key];
@@ -107,6 +110,13 @@
 
 		$scope.reset = function() {
 			$scope.data = angular.copy(data);
+			gtag('event', 'reset');
+		};
+
+		$scope.clipboardSuccess = function(key) {
+			gtag('event', 'clipboard', {
+				event_label: key,
+			});
 		};
 
 
@@ -114,9 +124,18 @@
 		//////////////////
 		// SCOPE EVENTS //
 		//////////////////
-		$scope.$watch('data', function() {
+		$scope.$watch('data', function(newValue, oldValue) {
 			$scope.refreshHighlighting();
 			$scope.updateHash();
+
+			for (var key in $scope.data) {
+				if (!angular.equals(newValue[key], oldValue[key])) {
+					gtag('event', 'data_changed', {
+						event_label: key,
+						event_value: $scope.data[key],
+					});
+				}
+			}
 
 			if (!$scope.dataInit) {
 				$scope.dataInit = true;
