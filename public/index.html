@@ -250,7 +250,7 @@
 									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-ssl" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.https">
+							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated' && data.https">
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">

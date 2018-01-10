@@ -15,21 +15,20 @@ server {
 	location / {
 		try_files $uri $uri/ {{ data.index_html ? '/index.html' : '' }}{{ data.index_html && data.php !== 'off' && data.index_php ? ' ' : '' }}{{ data.php !== 'off' && data.index_php ? '/index.php?$query_string' : '' }};
 	}</span>
-<span ng-if="data.file_structure === 'separated'">
+
+	include _ssl.conf;<span ng-if="data.file_structure === 'separated'">
+	include _letsencrypt.conf;
 	include _general.conf;<span ng-if="data.php !== 'off' && data.wordpress">
 	include _wordpress.conf;</span><span ng-if="data.php !== 'off'">
-	include _php.conf;</span>
-	include _letsencrypt.conf;
-	include _ssl.conf;</span><span ng-if="data.file_structure === 'unified'">
+	include _php.conf;</span></span><span ng-if="data.file_structure === 'unified'">
+
+<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include>
+
 <ng-include ng-include-tabs="2" src="'templates/_general.conf.html'" onload="refreshHighlighting()"></ng-include><span ng-if="data.php !== 'off' && data.wordpress">
 
 <ng-include ng-include-tabs="2" src="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.php !== 'off'">
 
-<ng-include ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
-
-<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><span ng-if="data.file_structure === 'unified'">
-
-	include _ssl.conf;</span>
+<ng-include ng-include-tabs="2" src="'templates/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span></span>
 }<span ng-if="data.cdn">
 
 # CDN
@@ -53,7 +52,10 @@ server {
 	gzip_comp_level 6;
 	gzip_types {{ gzipTypes }};</span>
 
-	include _ssl.conf;
+	include _ssl.conf;<span ng-if="data.file_structure === 'separated'">
+	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
+
+<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
 	location ~* \.(?:{{ extensions.assets }}|{{ extensions.fonts }}|{{ extensions.svg }}|{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}|{{ extensions.docs }})$ {
 		add_header Access-Control-Allow-Origin "*";
@@ -77,7 +79,10 @@ server {
 	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
 
-	include _ssl.conf;
+	include _ssl.conf;<span ng-if="data.file_structure === 'separated'">
+	include _letsencrypt.conf;</span><span ng-if="data.file_structure === 'unified'">
+
+<ng-include ng-include-tabs="2" src="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
 
 	return 301 https://{{ !data.non_www ? 'www.' : '' }}{{ data.domain }}$request_uri;
 }

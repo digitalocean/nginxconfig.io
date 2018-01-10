@@ -37,5 +37,6 @@ http {
 	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'separated'">
 	include /etc/nginx/sites-enabled/*;</span><span ng-if="data.file_structure === 'unified'">
 
+	# {{ !data.non_www ? 'www.' : '' }}{{ data.domain }}
 <ng-include ng-include-tabs="1" src="'templates/example.com.conf.html'" sonload="refreshHighlighting()"></ng-include></span>
 }
