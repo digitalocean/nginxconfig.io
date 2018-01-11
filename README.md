@@ -29,3 +29,4 @@ Online nginx configuration generator.
 * [highlight.js](https://highlightjs.org) - nginx syntax highlight
 * [clipboard.js](https://clipboardjs.com) - Copy generated config to clipboard
 * [ngclipboard](http://sachinchoolur.github.io/ngclipboard/) - AngularJS directive for clipboard.js
+* [Angular Tooltips](https://720kb.github.io/angular-tooltips/) - helper tooltips
