@@ -81,9 +81,9 @@
 			for (var key in hashData) {
 				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
 					$scope.data[key] = hashData[key];
-					gtag('event', 'data_from_hash', {
-						event_label: key,
-						event_value: hashData[key],
+					gtag('event', key, {
+						event_category: 'data_from_hash',
+						event_label: hashData[key],
 					});
 				}
 			}
@@ -114,8 +114,8 @@
 		};
 
 		$scope.clipboardSuccess = function(key) {
-			gtag('event', 'clipboard', {
-				event_label: key,
+			gtag('event', key, {
+				event_category: 'clipboard',
 			});
 		};
 
@@ -130,9 +130,9 @@
 
 			for (var key in $scope.data) {
 				if (!angular.equals(newValue[key], oldValue[key])) {
-					gtag('event', 'data_changed', {
-						event_label: key,
-						event_value: $scope.data[key],
+					gtag('event', key, {
+						event_category: 'data_changed',
+						event_label: $scope.data[key],
 					});
 				}
 			}
