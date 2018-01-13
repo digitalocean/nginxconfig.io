@@ -1,3 +1,4 @@
+language: bash
 deploy:
   provider: script
   script: .travis-deploy.sh
