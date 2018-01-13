@@ -1,7 +1,7 @@
 #!/bin/bash
 
 eval "$(ssh-agent -s)"
-echo "$DEPLOY_PRIVATE_KEY" > deploy_key
+base64 --decode <<< "$DEPLOY_PRIVATE_KEY" > deploy_key
 chmod 600 deploy_key
 ssh-add deploy_key
 ssh -l root szekeres.me \
