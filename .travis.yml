@@ -1,6 +1,7 @@
 language: bash
 deploy:
   provider: script
-  script: .travis-deploy.sh
+  script: ./.travis-deploy.sh
+  skip_cleanup: true
   on:
     branch: master
