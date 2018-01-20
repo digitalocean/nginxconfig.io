@@ -240,6 +240,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-nginx" class="code highlighted"></div>
@@ -249,6 +250,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-domain" class="code highlighted"></div>
@@ -258,6 +260,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl" ngclipboard-success="clipboardSuccess('_ssl.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_ssl.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-ssl" class="code highlighted"></div>
@@ -267,6 +270,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_letsencrypt.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-letsencrypt" class="code highlighted"></div>
@@ -276,6 +280,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('_general.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_general.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-general" class="code highlighted"></div>
@@ -285,6 +290,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php" ngclipboard-success="clipboardSuccess('_php.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_php.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php" class="code highlighted"></div>
@@ -294,6 +300,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('_php_fastcgi.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_php_fastcgi.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php_fastcgi" class="code highlighted"></div>
@@ -303,6 +310,7 @@
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('_wordpress.conf')">
 									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_wordpress.conf'">Copied!</span>
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>

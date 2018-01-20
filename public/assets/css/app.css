@@ -102,6 +102,12 @@ main .file .btn-clipboard {
 	vertical-align: text-bottom;
 }
 
+main .file .clipboard-success {
+	font-size: 0.8rem;
+	color: #4BB543;
+	font-weight: 700;
+}
+
 main .file .code,
 main .commands {
 	padding: 0.5rem;

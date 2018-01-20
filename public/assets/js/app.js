@@ -59,6 +59,7 @@
 
 		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
 
+		$scope.clipboardCopy = undefined;
 
 
 		/////////////////////
@@ -114,6 +115,14 @@
 		};
 
 		$scope.clipboardSuccess = function(key) {
+			$scope.clipboardCopy = key;
+
+			$timeout(function(_key) {
+				if ($scope.clipboardCopy === _key) {
+					$scope.clipboardCopy = undefined;
+				}
+			}, 1500, true, key);
+
 			gtag('event', key, {
 				event_category: 'clipboard',
 			});
