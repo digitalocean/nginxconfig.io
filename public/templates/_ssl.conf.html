@@ -4,7 +4,6 @@ ssl_session_cache shared:SSL:50m;
 ssl_session_tickets off;
 
 # Diffie-Hellman parameter for DHE ciphersuites
-# openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 4096
 ssl_dhparam /etc/nginx/dhparam.pem;
 
 # intermediate configuration

@@ -1,5 +1,4 @@
-<span ng-if="data.https"># certbot certonly --non-interactive --text --email {{ data.email }} --agree-tos --force-renew --webroot --webroot-path /var/www/_letsencrypt --domain {{ data.domain }} --domain www.{{ data.domain }}{{ data.cdn ? ' --domain cdn.' + data.domain : '' }}
-server {
+<span ng-if="data.https">server {
 	listen 443 ssl{{ data.http2 ? ' http2' : '' }};
 	listen [::]:443 ssl{{ data.http2 ? ' http2' : '' }};
 

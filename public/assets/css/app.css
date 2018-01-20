@@ -1,3 +1,6 @@
+/*
+	BODY
+*/
 body {
 	display: flex;
 	flex-direction: column;
@@ -7,14 +10,20 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.info {
-	cursor: pointer;
+
+
+/*
+	MISC
+*/
+[ng-cloak] {
+	display: none;
 }
 
-.info:hover {
-	opacity: 1;
-}
 
+
+/*
+	HEADER
+*/
 header {
 	background-color: #000;
 	padding: 0.5rem 0;
@@ -49,6 +58,10 @@ header .url .form-control {
 	color: #fff;
 }
 
+
+/*
+	MAIN
+*/
 main {
 	flex: 1 1 auto;
 }
@@ -89,7 +102,8 @@ main .file .btn-clipboard {
 	vertical-align: text-bottom;
 }
 
-main .file .code {
+main .file .code,
+main .commands {
 	padding: 0.5rem;
 	overflow-x: auto;
 	font-size: 0.75rem;
@@ -97,22 +111,35 @@ main .file .code {
 	background-color: #f8f8f8;
 }
 
+main .commands {
+	margin-bottom: 1rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+
 main .file .code.source {
 	display: none;
 }
 
-main .file .code pre {
+main .file .code pre,
+main .commands pre {
 	margin-bottom: 0;
 	font-size: inherit;
 }
 
-main .file .code pre code {
+main .file .code pre code,
+main .commands pre code {
 	-moz-tab-size: 4;
 	tab-size: 4;
 	overflow: visible;
 	overflow-x: visible;
 }
 
+
+
+/*
+	FOOTER
+*/
 footer {
 	padding: 2rem 0 0.5rem;
 	text-align: center;
@@ -129,6 +156,24 @@ footer .crypto {
 	line-height: 1.2;
 }
 
+
+
+/*
+	TOOLTIPs
+*/
+tooltip tip {
+	min-width: 150px;
+}
+
+tooltip tip-tip._small {
+	font-size: 0.9rem;
+}
+
+
+
+/*
+	ADS
+*/
 .adsbygoogle-container .adsbygoogle {
 	display: block;
 	height: 600px;

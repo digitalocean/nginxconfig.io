@@ -222,7 +222,19 @@
 						</div>
 					</div>
 					<div class="col-md-6 col-lg-7 files">
-						<div class="row">
+						<div class="row" ng-cloak>
+							<div ng-if="data.https" class="col-xl-12">
+								<div class="commands">
+									<pre><code class="hljs bash"><span class="hljs-comment"># HTTPS: create Diffie-Hellman keys</span>
+<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">4096</span>
+
+<span class="hljs-comment"># HTTPS: create ACME-challenge common directory</span>
+<span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"
+
+<span class="hljs-comment"># HTTPS: certbot (obtain certificates)</span>
+<span class="hljs-section">certbot certonly</span> <span class="hljs-attribute">--webroot</span> <span class="hljs-attribute">--webroot-path</span> /var/www/_letsencrypt <span class="hljs-attribute">--email</span> {{ data.email }} <span class="hljs-attribute">--domain</span> {{ data.domain }} <span class="hljs-attribute">--domain</span> www.{{ data.domain }}<span ng-if="data.cdn"> <span class="hljs-attribute">--domain</span> cdn.{{ data.domain }}</span> <span class="hljs-attribute">--text</span> <span class="hljs-attribute">--non-interactive</span> <span class="hljs-attribute">--agree-tos</span> <span class="hljs-attribute">--force-renew</span></code></pre>
+								</div>
+							</div>
 							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
@@ -307,7 +319,7 @@
 							<script>
 								(window.adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
-							<div class="note">advertisement</div>
+							<div class="note">⌃ advertisement ⌃</div>
 						</div>
 					</div>
 				</div>
