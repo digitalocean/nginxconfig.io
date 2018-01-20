@@ -11,7 +11,7 @@
 		<link rel="icon" type="image/png" href="https://cdn.nginxconfig.io/assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="nginx config generator">
-		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, cdn, access_log, error_log">
+		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, Phalcon, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
 	</head>
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
@@ -57,7 +57,7 @@
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
 									<label class="form-check-label" for="https">
-										<span tooltips tooltip-template="SSL config (using Let's Encrypt and Mozilla SSL config)">HTTPS</span>
+										<span tooltips tooltip-template="SSL config<br><br><i>using Let's Encrypt and Mozilla SSL config</i>">HTTPS</span>
 									</label>
 								</div>
 								<div class="form-check" ng-if="data.https">
@@ -85,7 +85,7 @@
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
 									<label class="form-check-label" for="index_html">
-										<span tooltips tooltip-template="pass requests to index.html">index.html</span>
+										<span tooltips tooltip-template="pass requests to index.html<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html</span>
 									</label>
 								</div>
 							</div>
@@ -106,7 +106,7 @@
 								<div class="form-check" ng-if="data.php !== 'off'">
 									<input class="form-check-input" type="checkbox" id="index_php" ng-model="data.index_php">
 									<label class="form-check-label" for="index_php">
-										<span tooltips tooltip-template="pass requests to index.php">index.php</span>
+										<span tooltips tooltip-template="pass requests to index.php<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, Phalcon, CakePHP, Slim...</i>">index.php</span>
 									</label>
 								</div>
 								<div class="form-check" ng-if="data.php !== 'off'">
@@ -123,13 +123,13 @@
 								<div class="form-check">
 									<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
 									<label class="form-check-label" for="unified">
-										<span tooltips tooltip-template="combine config to single file (if possible)">unified</span>
+										<span tooltips tooltip-template="combine config to single file<br><br><i>if possible</i>">unified</span>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="radio" id="separated" ng-model="data.file_structure" value="separated">
 									<label class="form-check-label" for="separated">
-										<span tooltips tooltip-template="multiple config files (ideal for multi-domain environment)">separated</span>
+										<span tooltips tooltip-template="multiple config files<br><br><i>ideal for multi-domain environment</i>">separated</span>
 									</label>
 								</div>
 							</div>
