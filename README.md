@@ -8,9 +8,10 @@ Online nginx configuration generator.
 * CDN
 * www / non-www
 * PHP (TCP, 5.x FPM, 7.0 FPM, 7.1 FPM, 7.2 FPM)
-* WordPress security
-* pass requests index.php, index.html
-* unified / separated file structure
+* WordPress security essentials
+* pass requests to index.php *(Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, Phalcon, CakePHP, Slim...)*
+* pass requests to index.html *(Angular, React, Vue.js, Ember.js...)*
+* unified (`nginx.conf`) / separated file structure (ideal for multi-domain environment)
 * security headers
 * `worker_processes`
 * `user`
