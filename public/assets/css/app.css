@@ -33,17 +33,21 @@ header {
 	font-size: 2.2rem;
 }
 
-header .logo img.nginx {
-	height: 1.6rem;
-	vertical-align: -0.1rem;
+header .logo {
+	color: transparent;
+	background-image: url('../img/logo-light.svg');
+	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin: 0.5rem 0;
 }
 
-header .logo img.config {
-	height: 1.2rem;
-	vertical-align: super;
-	opacity: 0.8;
-	margin-left: -0.5rem;
-	margin-right: -0.25rem;
+header .url {
+	opacity: 0.7;
+}
+
+header .url.active {
+	opacity: 1;
 }
 
 header .url .input-group-prepend .input-group-text,
@@ -51,6 +55,14 @@ header .url .input-group-append .input-group-text {
 	padding-top: 0.15rem;
 	cursor: pointer;
 	background-color: transparent;
+}
+
+header .url .input-group-append .input-group-text img {
+	opacity: 0.5;
+}
+
+header .url.active .input-group-append .input-group-text img {
+	opacity: 1;
 }
 
 header .url .form-control {

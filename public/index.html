@@ -10,20 +10,21 @@
 		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/app.css">
 		<link rel="icon" type="image/png" href="https://cdn.nginxconfig.io/assets/img/favicon.png">
 		<title>nginxconfig.io</title>
-		<meta name="description" content="nginx config generator">
+		<meta name="description" content="Online nginx configuration generator">
 		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
+		<meta property="og:title" content="nginxconfig.io">
+		<meta property="og:description" content="Online nginx configuration generator (HTTPS, HTTP2, CDN, PHP [Laravel, Symfony, CodeIgniter…], Frontend [Angular, React, Vue.js], WordPress, security headers, rate limiting, expiration by file types…)">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://nginxconfig.io">
+		<meta property="og:image" content="https://cdn.nginxconfig.io/assets/img/share.png">
 	</head>
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
 			<div class="container">
-				<div class="logo">
-					<img src="https://cdn.nginxconfig.io/assets/img/nginx.svg" alt="nginx" class="nginx">
-					<img src="https://cdn.nginxconfig.io/assets/img/config.svg" alt="config" class="config">
-					config.io
-				</div>
+				<div class="logo">nginxconfig.io</div>
 				<div class="row">
 					<div class="col-sm-10 col-lg-8 col-xl-6 offset-sm-1 offset-lg-2 offset-xl-3">
-						<div class="input-group url">
+						<div class="input-group url" ng-class="{active: isDirty}">
 							<div class="input-group-prepend">
 								<div class="input-group-text" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
 							</div>

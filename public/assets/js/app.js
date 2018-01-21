@@ -46,6 +46,7 @@
 		$scope.location = $location;
 		$scope.data = angular.copy(data);
 		$scope.dataInit = false;
+		$scope.isDirty = false;
 
 		$scope.extensions = {
 			assets:	'css(\\.map)?|js(\\.map)?',
@@ -81,6 +82,7 @@
 
 			for (var key in hashData) {
 				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
+					$scope.isDirty = true;
 					$scope.data[key] = hashData[key];
 					gtag('event', key, {
 						event_category: 'data_from_hash',
@@ -103,8 +105,10 @@
 			}
 
 			if (Object.keys(changedData).length) {
+				$scope.isDirty = true;
 				$location.search(changedData).replace();
 			} else {
+				$scope.isDirty = false;
 				$location.search({});
 			}
 		};
