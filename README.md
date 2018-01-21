@@ -9,8 +9,22 @@ Online nginx configuration generator.
 * www / non-www
 * PHP (TCP, 5.x FPM, 7.0 FPM, 7.1 FPM, 7.2 FPM)
 * WordPress security essentials
-* pass requests to index.php *(Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, Phalcon, CakePHP, Slim...)*
-* pass requests to index.html *(Angular, React, Vue.js, Ember.js...)*
+* pass requests to index.php
+	* *[Laravel](https://laravel.com/docs/master/deployment#nginx)*
+	* *[Lumen](https://lumen.laravel.com/docs/5.1/installation#configuration)*
+	* *[Symfony](https://symfony.com/doc/current/setup/web_server_configuration.html#nginx)*
+	* *[Zend](https://www.nginx.com/resources/wiki/start/topics/recipes/zend/)*
+	* *[CodeIgniter](https://www.nginx.com/resources/wiki/start/topics/recipes/codeigniter/)*
+	* *[Yii](http://www.yiiframework.com/doc/guide/1.1/en/quickstart.apache-nginx-config#nginx)*
+	* *[CakePHP](https://book.cakephp.org/3.0/en/installation.html#nginx)*
+	* *[Slim](https://www.slimframework.com/docs/start/web-servers.html)*
+	* …
+* pass requests to index.html
+	* *[Angular](https://angular.io/guide/deployment#production-servers)*
+	* *[React](https://github.com/react-boilerplate/react-boilerplate/blob/v3.5.0/app/.nginx.conf#L81)*
+	* *[Vue.js](https://stackoverflow.com/questions/47655869/how-to-use-vue-js-with-nginx)*
+	* *[Ember.js](https://discuss.emberjs.com/t/how-to-serve-all-routes-on-a-production-server-exactly/6372)*
+	* …
 * unified (`nginx.conf`) / separated file structure (ideal for multi-domain environment)
 * security headers
 * `worker_processes`
