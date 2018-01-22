@@ -6,7 +6,6 @@ worker_rlimit_nofile 409600;
 events {
 	worker_connections 4096;
 	multi_accept on;
-	use epoll;
 }
 
 http {
