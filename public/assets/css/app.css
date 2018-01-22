@@ -158,6 +158,15 @@ main .commands pre code {
 	overflow-x: visible;
 }
 
+main .sidebar .github-star {
+	width: 132px;
+	height: 30px;
+	display: block;
+	border: 0;
+	overflow: hidden;
+	margin: 0 auto 1rem;
+}
+
 
 
 /*
