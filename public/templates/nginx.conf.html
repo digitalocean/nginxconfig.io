@@ -4,7 +4,6 @@ worker_processes {{ data.worker_processes }};
 worker_rlimit_nofile 409600;
 
 events {
-    worker_processes auto;
 	worker_connections 4096;
 	multi_accept on;
 }
