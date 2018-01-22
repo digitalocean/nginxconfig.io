@@ -57,6 +57,11 @@ header .url .input-group-append .input-group-text {
 	background-color: transparent;
 }
 
+header .url .input-group-prepend .input-group-text img,
+header .url .input-group-append .input-group-text img {
+	margin-top: 4px;
+}
+
 header .url .input-group-append .input-group-text img {
 	opacity: 0.5;
 }

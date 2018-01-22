@@ -1,5 +1,15 @@
 (function() {
 
+	var repeat = function(string, count) {
+		var repeatedString = '';
+
+		for (var i = 0; i < count; i++) {
+			repeatedString += string;
+		}
+
+		return repeatedString;
+	};
+
 	angular
 	.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
 	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
@@ -67,14 +77,18 @@
 		// SCOPE FUNCTIONS //
 		/////////////////////
 		$scope.refreshHighlighting = function() {
-			document.querySelectorAll('main .file .code.source').forEach(function(code) {
-				$timeout(function(code) {
-					code.nextSibling.innerHTML = code.innerHTML;
-					if (code.nextSibling.children.length && code.nextSibling.children[0].children.length) {
-						hljs.highlightBlock(code.nextSibling.children[0].children[0]);
+			var sourceCodes = document.querySelectorAll('main .file .code.source');
+
+			for (var i = 0; i < sourceCodes.length; i++) {
+				var sourceCode = sourceCodes[i];
+
+				$timeout(function(_sourceCode) {
+					_sourceCode.nextSibling.innerHTML = _sourceCode.innerHTML;
+					if (_sourceCode.nextSibling.children.length && _sourceCode.nextSibling.children[0].children.length) {
+						hljs.highlightBlock(_sourceCode.nextSibling.children[0].children[0]);
 					}
-				}, 0, true, code);
-			});
+				}, 0, true, sourceCode);
+			}
 		};
 
 		$scope.setDataFromHash = function() {
@@ -176,10 +190,10 @@
 				pre: function preLink(scope, iElement, iAttrs, controller) {
 					var tabs = parseInt(iAttrs.ngIncludeTabs || 0);
 
-					var startRegex = new RegExp('\t'.repeat(tabs - 1));
+					var startRegex = new RegExp(repeat('\t', tabs - 1));
 
 					controller.template = controller.template
-						.replace(/^(.*)$/mg, '\t'.repeat(tabs) + '$1')
+						.replace(/^(.*)$/mg, repeat('\t', tabs) + '$1')
 						.replace(startRegex, '')
 						.replace(/\s*$/, '');
 				},
