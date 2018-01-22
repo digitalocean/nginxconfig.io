@@ -19,7 +19,7 @@ location ~* ^/wp-content/plugins/.*\.(?!{{ extensions.assets }}|{{ extensions.fo
 }
 
 # WordPress stuff
-location ~* ^/(?:xmlrpc\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
+location ~* ^/(?:xmlrpc\.php|wp-links-opml\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
 	deny all;
 }<span ng-if="data.limit_req">
 
