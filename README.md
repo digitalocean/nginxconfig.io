@@ -32,6 +32,7 @@ Online nginx configuration generator.
 * `pid`
 * `access_log`
 * `error_log`
+* `client_max_body_size`
 * `gzip`
 * `server_tokens`
 * `log_not_found`
