@@ -9,7 +9,10 @@
 
 	ssl_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ data.domain }}/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;<span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ data.domain }}/fullchain.pem;<span ng-if="data.file_structure === 'unified' && data.php !== 'off'">
+
+	# index
+	index {{ data.index_html ? 'index.html ' : '' }}index.php;</span><span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
 
 	# $url{{ data.index_html ? ', index.html' : '' }}{{ data.php !== 'off' && data.index_php ? ', index.php' : '' }}
 	location / {
@@ -105,7 +108,10 @@ server {
 	server_name {{ !data.non_www ? 'www.' : '' }}{{ data.domain }};<span ng-if="data.php !== 'off'">
 	set $base /var/www/{{ data.domain }};
 	root $base{{ data.document_root }};</span><span ng-if="data.php === 'off'">
-	root /var/www/{{ data.domain }}{{ data.document_root }};</span><span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
+	root /var/www/{{ data.domain }}{{ data.document_root }};</span><span ng-if="data.file_structure === 'unified' && data.php !== 'off'">
+
+	# index
+	index {{ data.index_html ? 'index.html ' : '' }}index.php;</span><span ng-if="(data.php !== 'off' && data.index_php) || data.index_html">
 
 	# $url{{ data.index_html ? ', index.html' : '' }}{{ data.php !== 'off' && data.index_php ? ', index.php' : '' }}
 	location / {
