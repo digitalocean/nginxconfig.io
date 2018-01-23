@@ -48,45 +48,51 @@
 									<input type="text" class="form-control form-control-sm" ng-model="data.domain">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="path to project">Path</span></label>
+									<label class="form-label">
+										<span tooltips tooltip-template="Define path to project.">Path</span>
+									</label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.path">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="public path in project">Document root</span></label>
+									<label class="form-label">
+										<span tooltips tooltip-template="Define public path in project path.">Document root</span>
+									</label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.document_root">
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
 									<label class="form-check-label" for="https">
-										<span tooltips tooltip-template="SSL config<br><br><i>using Let's Encrypt and Mozilla SSL config</i>">HTTPS</span>
+										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Let's Encrypt and Mozilla SSL config</i>">HTTPS</span>
 									</label>
 								</div>
 								<div class="form-check" ng-if="data.https">
 									<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
 									<label class="form-check-label" for="http2">
-										HTTP2
+										<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
 									</label>
 								</div>
 								<div class="form-group" ng-if="data.https">
-									<label class="form-label"><span tooltips tooltip-template="used for Let's Encrypt command">E-mail</span></label>
+									<label class="form-label">
+										<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
+									</label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.email">
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
 									<label class="form-check-label" for="cdn">
-										<span tooltips tooltip-template="cookie-free CDN subdomain">CDN</span>
+										<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN</span>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www">
 									<label class="form-check-label" for="non_www">
-										<span tooltips tooltip-template="disable www subdomain">non-www</span>
+										<span tooltips tooltip-template="Serve requests without www subdomain.">non-www</span>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
 									<label class="form-check-label" for="index_html">
-										<span tooltips tooltip-template="pass requests to index.html<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html</span>
+										<span tooltips tooltip-template="Pass unhandled requests to index.html.<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html</span>
 									</label>
 								</div>
 							</div>
@@ -94,9 +100,11 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label>PHP</label>
+									<label class="form-label">
+										<span tooltips tooltip-template="PHP-FPM via TCP or unix socket.">PHP</span>
+									</label>
 									<select class="form-control" ng-model="data.php">
-										<option value="off">off</option>
+										<option value="off">disabled</option>
 										<option value="tcp">TCP</option>
 										<option value="5.x">5.x socket</option>
 										<option value="7.0">7.0 socket</option>
@@ -107,13 +115,13 @@
 								<div class="form-check" ng-if="data.php !== 'off'">
 									<input class="form-check-input" type="checkbox" id="index_php" ng-model="data.index_php">
 									<label class="form-check-label" for="index_php">
-										<span tooltips tooltip-template="pass requests to index.php<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim...</i>">index.php</span>
+										<span tooltips tooltip-template="Pass unhandled requests to index.php.<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim...</i>">index.php</span>
 									</label>
 								</div>
 								<div class="form-check" ng-if="data.php !== 'off'">
 									<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
 									<label class="form-check-label" for="wordpress">
-										<span tooltips tooltip-template="WordPress security rules">WordPress</span>
+										<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress</span>
 									</label>
 								</div>
 							</div>
@@ -124,13 +132,13 @@
 								<div class="form-check">
 									<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
 									<label class="form-check-label" for="unified">
-										<span tooltips tooltip-template="combine config to single file<br><br><i>if possible</i>">unified</span>
+										<span tooltips tooltip-template="Combine configuration to a single file.<br><br><i>(if possible)</i>">unified</span>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="radio" id="separated" ng-model="data.file_structure" value="separated">
 									<label class="form-check-label" for="separated">
-										<span tooltips tooltip-template="multiple config files<br><br><i>ideal for multi-domain environment</i>">separated</span>
+										<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">separated</span>
 									</label>
 								</div>
 							</div>
@@ -138,7 +146,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label><code>worker_processes</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code></label>
 									<select class="form-control" ng-model="data.worker_processes">
 										<option value="auto">auto</option>
 										<option value="1">1</option>
@@ -160,23 +168,23 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label class="form-label"><code>user</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Defines user and group credentials used by worker processes.<br>If group is omitted, a group whose name equals that of user is used.">user</code></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.user">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><code>pid</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Defines a file that will store the process ID of the main process.">pid</code></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.pid">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><code>access_log</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.access_log">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><code>error_log</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.error_log">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><code>client_max_body_size</code></label>
+									<label class="form-label"><code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code></label>
 									<div class="input-group">
 										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size">
 										<div class="input-group-append">
@@ -187,25 +195,25 @@
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
 									<label class="form-check-label" for="gzip">
-										<code>gzip</code>
+										<code tooltips tooltip-template="Gzipping of responses.">gzip</code>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
 									<label class="form-check-label" for="server_tokens">
-										<code>server_tokens</code>
+										<code tooltips tooltip-template="Emitting nginx version on error pages and in the “Server” response header field.">server_tokens</code>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
 									<label class="form-check-label" for="log_not_found">
-										<code>log_not_found</code>
+										<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
 									</label>
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
 									<label class="form-check-label" for="limit_req">
-										<span tooltips tooltip-template="requests throttle"><code>limit_req</code></span>
+										<span tooltips tooltip-template="Used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address."><code>limit_req</code></span>
 									</label>
 								</div>
 							</div>
@@ -213,19 +221,19 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="{{ extensions.assets }}">assets <code>expires</code></span></label>
+									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.assets }}">assets <code>expires</code></span></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media <code>expires</code></span></label>
+									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media <code>expires</code></span></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.expires_media">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="{{ extensions.svg }}">svg <code>expires</code></span></label>
+									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.svg }}">svg <code>expires</code></span></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg">
 								</div>
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="{{ extensions.fonts }}">fonts <code>expires</code></span></label>
+									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.fonts }}">fonts <code>expires</code></span></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts">
 								</div>
 							</div>
