@@ -236,7 +236,7 @@
 							<div ng-if="data.https" class="col-xl-12">
 								<div class="commands">
 									<pre><code class="hljs bash"><span class="hljs-comment"># HTTPS: create Diffie-Hellman keys</span>
-<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">4096</span>
+<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">2048</span>
 
 <span class="hljs-comment"># HTTPS: create ACME-challenge common directory</span>
 <span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"
