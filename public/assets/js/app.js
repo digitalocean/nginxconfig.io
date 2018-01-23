@@ -37,6 +37,7 @@
 			pid:				'/run/nginx.pid',
 			access_log:			'/var/log/nginx/access.log',
 			error_log:			'/var/log/nginx/error.log',
+			client_max_body_size: 16,
 			gzip:				true,
 			server_tokens:		false,
 			log_not_found:		false,

@@ -17,7 +17,7 @@ http {
 	server_tokens off;</span><span ng-if="!data.log_not_found">
 	log_not_found off;</span>
 
-	client_max_body_size 50M;
+	client_max_body_size {{ data.client_max_body_size }}M;
 	client_body_buffer_size 128k;
 
 	# mime

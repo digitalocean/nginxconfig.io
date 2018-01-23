@@ -175,6 +175,15 @@
 									<label class="form-label"><code>error_log</code></label>
 									<input type="text" class="form-control form-control-sm" ng-model="data.error_log">
 								</div>
+								<div class="form-group">
+									<label class="form-label"><code>client_max_body_size</code></label>
+									<div class="input-group">
+										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size">
+										<div class="input-group-append">
+											<div class="input-group-text">MB</div>
+										</div>
+									</div>
+								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
 									<label class="form-check-label" for="gzip">

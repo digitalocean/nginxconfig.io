@@ -121,7 +121,7 @@ main .file .btn-clipboard {
 
 main .file .clipboard-success {
 	font-size: 0.8rem;
-	color: #4BB543;
+	color: #28a745;
 	font-weight: 700;
 }
 
@@ -206,6 +206,10 @@ tooltip tip-tip._small {
 /*
 	ADS
 */
+.adsbygoogle-container {
+	overflow: hidden;
+}
+
 .adsbygoogle-container .adsbygoogle {
 	display: block;
 	height: 600px;
