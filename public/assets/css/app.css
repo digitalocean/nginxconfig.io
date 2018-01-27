@@ -212,9 +212,21 @@ tooltip tip-tip._small {
 
 .adsbygoogle-container .adsbygoogle {
 	display: block;
-	height: 600px;
 	position: relative;
 	background-color: #f8f8f8;
+}
+
+main .options .adsbygoogle-container {
+	margin-top: -1rem;
+	margin-bottom: 1rem;
+}
+
+main .options .adsbygoogle-container .adsbygoogle {
+	height: 100px;
+}
+
+main .sidebar .adsbygoogle-container .adsbygoogle {
+	height: 600px;
 }
 
 .adsbygoogle-container .adsbygoogle[data-adsbygoogle-status="done"] {
