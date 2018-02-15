@@ -1,7 +1,16 @@
 language: bash
+
+addons:
+  ssh_known_hosts: nginxconfig.io
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_c855341ef4be_key -iv $encrypted_c855341ef4be_iv -in .deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
+
 deploy:
-  provider: script
-  script: ./.travis-deploy.sh
-  skip_cleanup: true
   on:
     branch: master
+  provider: script
+  script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git pull origin master'"
