@@ -12,6 +12,11 @@
 
 	angular
 	.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
+	.config(function NginxCongigIoConfig($locationProvider) {
+		$locationProvider
+			.html5Mode(true)
+			.hashPrefix('!');
+	})
 	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
 		///////////////////////
 		// PRIVATE VARIABLES //
