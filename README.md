@@ -3,7 +3,7 @@
 Online nginx configuration generator.
 
 ## Features
-* HTTPS (with [Let's Encrypt](https://letsencrypt.org), [Mozilla SSL Configuration Generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/))
+* HTTPS (with [Let's Encrypt](https://letsencrypt.org) or custom certificate, [Mozilla SSL Configuration Generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/))
 * HTTP2
 * CDN
 * www / non-www
@@ -25,7 +25,7 @@ Online nginx configuration generator.
 	* *[Vue.js](https://stackoverflow.com/questions/47655869/how-to-use-vue-js-with-nginx)*
 	* *[Ember.js](https://discuss.emberjs.com/t/how-to-serve-all-routes-on-a-production-server-exactly/6372)*
 	* …
-* unified (`nginx.conf`) / separated file structure (ideal for multi-domain environment)
+* unified (`nginx.conf`) / modularized file structure (ideal for multi-domain environment)
 * security headers
 * `worker_processes`
 * `user`
@@ -46,3 +46,4 @@ Online nginx configuration generator.
 * [clipboard.js](https://clipboardjs.com) - Copy generated config to clipboard
 * [ngclipboard](http://sachinchoolur.github.io/ngclipboard/) - AngularJS directive for clipboard.js
 * [Angular Tooltips](https://720kb.github.io/angular-tooltips/) - helper tooltips
+* [Masonry](https://masonry.desandro.com) - files grid layout

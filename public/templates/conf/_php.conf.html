@@ -1,0 +1,14 @@
+<!--
+	✔ modularized --><span ng-if="isModularized()"># index
+index {{ isIndexHtml() ? 'index.html ' : '' }}index.php;
+
+</span><!--
+
+--># handle .php
+location ~ \.php$ {<!--
+	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress()">
+	include _php_fastcgi.conf;</span><!--
+
+	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
+<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+}

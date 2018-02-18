@@ -12,30 +12,32 @@ http {
 	charset utf-8;
 	sendfile on;
 	tcp_nopush on;
-	tcp_nodelay on;
-	types_hash_max_size 2048;<span ng-if="!data.server_tokens">
-	server_tokens off;</span><span ng-if="!data.log_not_found">
-	log_not_found off;</span>
+	tcp_nodelay on;<!--
 
+	✘ serverTokens --><span ng-if="!isServerTokens()">
+	server_tokens off;</span><!--
+
+	✘ logNotFound --><span ng-if="!isLogNotFound()">
+	log_not_found off;</span>
+	types_hash_max_size 2048;
 	client_max_body_size {{ data.client_max_body_size }}M;
-	client_body_buffer_size 128k;
 
 	# mime
 	include mime.types;
 	default_type application/octet-stream;
 
-	# logging<span ng-if="data.access_log !== ''">
-	access_log {{ data.access_log }};</span>
+	# logging
+	access_log {{ isAccessLog() ? data.access_log : 'off' }};
 	error_log {{ data.error_log }} warn;<span ng-if="data.limit_req">
 
 	# limits
 	limit_req_log_level warn;
 	limit_req_zone $binary_remote_addr zone=login:10m rate=10r/m;</span>
 
-	# include configs
-	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'separated'">
+	# load configs
+	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'modularized'">
 	include /etc/nginx/sites-enabled/*;</span><span ng-if="data.file_structure === 'unified'">
 
-	# {{ !data.non_www ? 'www.' : '' }}{{ data.domain }}
-<ng-include ng-include-tabs="1" src="'templates/example.com.conf.html'" sonload="refreshHighlighting()"></ng-include></span>
+	# {{ !data.non_www ? 'www.' : '' }}{{ domain() }}
+<ng-include ng-include-tabs="1" src="'templates/conf/example.com.conf.html'" sonload="refreshHighlighting()"></ng-include></span>
 }

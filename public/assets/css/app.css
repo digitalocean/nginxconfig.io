@@ -19,6 +19,12 @@ body {
 	display: none;
 }
 
+.clipboard-success {
+	font-size: 0.8rem;
+	color: #28a745;
+	font-weight: 700;
+}
+
 
 
 /*
@@ -96,16 +102,45 @@ main .options .card + .card {
 	margin-top: 1rem;
 }
 
-main .options .card .card-body .form-label {
+main .options .card .form-label {
 	margin-bottom: 0.15rem;
 	margin-left: 0.15rem;
 }
 
-main .options .card .card-body .form-group {
+main .options .card .form-group {
 	margin-bottom: 0.5rem;
 }
 
-main .options .card .card-body .form-group:last-child {
+main .options .card .form-subgroup {
+	margin-left: 5px;
+	border-left: 2px solid #ced4da;
+	padding-left: 11px;
+}
+
+main .options .card .form-control[type="text"]:placeholder-shown,
+main .options .card .form-control[type="email"]:placeholder-shown {
+	background-color: #f8f8f8;
+}
+
+main .options .card .form-control.domain:placeholder-shown {
+	/*background-color: #f8d7da;*/
+	/*background-color: #dedeff;*/
+	border-color: #3131ff;
+}
+
+main .options .card .form-control.domain::placeholder {
+	color: #000;
+}
+
+main .options .card .form-check-label {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+main .options .card .form-group:last-child {
 	margin-bottom: 0;
 }
 
@@ -119,15 +154,8 @@ main .file .btn-clipboard {
 	vertical-align: text-bottom;
 }
 
-main .file .clipboard-success {
-	font-size: 0.8rem;
-	color: #28a745;
-	font-weight: 700;
-}
-
 main .file .code,
 main .commands {
-	padding: 0.5rem;
 	overflow-x: auto;
 	font-size: 0.75rem;
 	line-height: 1.25;
@@ -136,11 +164,9 @@ main .commands {
 
 main .commands {
 	margin-bottom: 1rem;
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
 }
 
-main .file .code.source {
+main .file .code.source.hidden {
 	display: none;
 }
 
@@ -152,6 +178,8 @@ main .commands pre {
 
 main .file .code pre code,
 main .commands pre code {
+	display: block;
+	padding: 0.6rem;
 	-moz-tab-size: 4;
 	tab-size: 4;
 	overflow: visible;

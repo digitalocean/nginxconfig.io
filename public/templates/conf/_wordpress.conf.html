@@ -21,7 +21,7 @@ location ~* ^/wp-content/plugins/.*\.(?!{{ extensions.assets }}|{{ extensions.fo
 # WordPress stuff
 location ~* ^/(?:xmlrpc\.php|wp-links-opml\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
 	deny all;
-}<span ng-if="data.limit_req">
+}<span ng-if="isLimitReq()">
 
 # wp-login.php throttle
 location = /wp-login.php {

@@ -13,4 +13,4 @@ deploy:
   on:
     branch: master
   provider: script
-  script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git pull origin master'"
+  script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git reset --hard && git pull origin master && sed -i -e \"s/COMMIT_HASH/$BITBUCKET_COMMIT/\" public/index.html'"

@@ -1,0 +1,168 @@
+server {
+	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+
+	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
+
+	✔ PHP --><span ng-if="isPHP()">
+	set $base /var/www/{{ domain() }};
+	root $base{{ data.document_root }};</span><!--
+
+	✘ PHP --><span ng-if="!isPHP()">
+	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
+
+	✔ HTTPS --><span ng-if="isHTTPS()">
+
+	# SSL certificate
+	ssl_certificate {{ sslCertificate() }};
+	ssl_certificate_key {{ sslCertificateKey() }};<!--
+
+	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span>
+
+	# SSL config
+	include _ssl.conf;</span><!--
+
+	✔ unified && ✔ PHP --><span ng-if="isUnified() && isPHP()">
+
+	# index
+	index {{ isIndexHtml() ? 'index.html ' : '' }}index.php;</span><!--
+
+	(✔ PHP && ✔ index.php) || ✔ index.html --><span ng-if="isIndexPhp() || isIndexHtml()">
+
+	# $uri{{ isIndexHtml() ? ', index.html' : '' }}{{ isIndexPhp() ? ', index.php' : '' }}
+	location / {
+		try_files $uri $uri/ {{ isIndexHtml() ? '/index.html' : '' }}{{ isIndexHtml() && isIndexPhp() ? ' ' : '' }}{{ isIndexPhp() ? '/index.php?$query_string' : '' }};
+	}</span><!--
+
+	✔ unified --><span ng-if="isModularized()">
+</span><!--
+
+
+
+	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
+	include _letsencrypt.conf;</span><!--
+
+	✔ modularized --><span ng-if="isModularized()">
+	include _general.conf;</span><!--
+
+	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress()">
+	include _wordpress.conf;</span><!--
+
+	✔ modularized && ✔ PHP --><span ng-if="isModularized() && isPHP()">
+	include _php.conf;</span><!--
+
+
+
+	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ unified --><span ng-if="isUnified()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_general.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ modularized && ✔ PHP --><span ng-if="isUnified() && isPHP()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+}<!--
+
+
+
+✔ CDN --><span ng-if="isCDN()">
+
+# CDN
+server {
+	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+
+	server_name cdn.{{ domain() }};
+	root /var/www/{{ domain() }}{{ data.document_root }};<span ng-if="!isAccessLog()">
+
+	access_log off;</span><!--
+
+	✔ HTTPS --><span ng-if="isHTTPS()">
+
+	# SSL certificate
+	ssl_certificate {{ sslCertificate() }};
+	ssl_certificate_key {{ sslCertificateKey() }};<!--
+
+	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span>
+
+	# SSL config
+	include _ssl.conf;</span><!--
+
+	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
+	include _letsencrypt.conf;</span><!--
+
+	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
+
+<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+
+	# disable access_log
+	access_log off;<!--
+
+	✔ Gzip --><span ng-if="isGzip()">
+
+	# gzip
+	gzip on;
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_types {{ gzipTypes }};</span>
+
+	# allow safe files
+	location ~* \.(?:{{ extensions.assets }}|{{ extensions.fonts }}|{{ extensions.svg }}|{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}|{{ extensions.docs }})$ {
+		add_header Access-Control-Allow-Origin "*";
+		add_header Cache-Control "public";
+		expires 30d;
+	}
+
+	# deny everything else
+	location / {
+		deny all;
+	}
+}</span>
+<!--
+
+
+
+-->
+# {{ isWWW() ? 'non-www, ' : '' }}subdomains redirect
+server {
+	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+
+	server_name {{ isWWW() ? domain() + ' ' : '' }}*.{{ domain() }};<!--
+
+	✔ HTTPS --><span ng-if="isHTTPS()">
+
+	# SSL certificate
+	ssl_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ domain() }}/privkey.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
+
+	# SSL config
+	include _ssl.conf;</span>
+
+	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+}</span><!--
+
+
+
+✔ HTTPS --><span ng-if="isHTTPS()">
+
+# HTTP redirect
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name {{ domain() }} *.{{ domain() }};
+
+	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+}</span>

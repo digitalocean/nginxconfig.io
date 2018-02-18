@@ -5,37 +5,24 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,700">
-		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/bootstrap.min.css?v=4.0.0">
-		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/highlight-github.min.css?v=9.12.0">
-		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/angular-tooltips.min.css?v=1.2.2">
-		<link rel="stylesheet" href="https://cdn.nginxconfig.io/assets/css/app.css">
-		<link rel="icon" type="image/png" href="https://cdn.nginxconfig.io/assets/img/favicon.png">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css?v=4.0.0">
+		<link rel="stylesheet" href="assets/css/highlight-github.min.css?v=9.12.0">
+		<link rel="stylesheet" href="assets/css/angular-tooltips.min.css?v=1.2.2">
+		<link rel="stylesheet" href="assets/css/app.css?v=COMMIT_HASH">
+		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="Online nginx configuration generator">
-		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
+		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
 		<meta property="og:title" content="nginxconfig.io">
 		<meta property="og:description" content="Online nginx configuration generator: HTTPS, HTTP2, CDN, PHP (Laravel, Symfony, CodeIgniter…), Frontend (Angular, React, Vue.js…), WordPress, security headers, rate limiting, expiration by file types…">
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://nginxconfig.io">
-		<meta property="og:image" content="https://cdn.nginxconfig.io/assets/img/share.png">
+		<meta property="og:image" content="https://nginxconfig.io/assets/img/share.png">
 	</head>
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
 			<div class="container">
 				<div class="logo">nginxconfig.io</div>
-				<div class="row">
-					<div class="col-sm-10 col-lg-8 col-xl-6 offset-sm-1 offset-lg-2 offset-xl-3">
-						<div class="input-group url" ng-class="{active: isDirty}">
-							<div class="input-group-prepend">
-								<div class="input-group-text" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="https://cdn.nginxconfig.io/assets/img/clipboard.svg" alt="Copy to clipboard"></div>
-							</div>
-							<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
-							<div class="input-group-append">
-								<div class="input-group-text" ng-click="reset()"><img src="https://cdn.nginxconfig.io/assets/img/refresh.svg" alt="Reset"></div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</header>
 		<main>
@@ -43,6 +30,7 @@
 				<div class="row">
 					<div class="col-md-3 col-lg-2 options">
 						<div class="adsbygoogle-container d-block d-md-none">
+							<div class="note">▾ advertisement ▾</div>
 							<ins class="adsbygoogle"
 									style="display:block"
 									data-ad-client="ca-pub-6543577519725877"
@@ -50,19 +38,18 @@
 							<script>
 								(window.adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
-							<div class="note">⌃ advertisement ⌃</div>
 						</div>
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label">Domain</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.domain">
+									<input type="text" class="form-control form-control-sm domain" ng-model="data.domain" autofocus placeholder="{{ domain() }}">
 								</div>
 								<div class="form-group">
 									<label class="form-label">
 										<span tooltips tooltip-template="Define path to project.">Path</span>
 									</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.path">
+									<input type="text" class="form-control form-control-sm" ng-model="data.path" placeholder="{{ '/var/www/' + domain() }}">
 								</div>
 								<div class="form-group">
 									<label class="form-label">
@@ -71,39 +58,77 @@
 									<input type="text" class="form-control form-control-sm" ng-model="data.document_root">
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
-									<label class="form-check-label" for="https">
-										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Let's Encrypt and Mozilla SSL config</i>">HTTPS</span>
-									</label>
-								</div>
-								<div class="form-check" ng-if="data.https">
-									<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
-									<label class="form-check-label" for="http2">
-										<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
-									</label>
-								</div>
-								<div class="form-group" ng-if="data.https">
-									<label class="form-label">
-										<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
-									</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.email">
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
-									<label class="form-check-label" for="cdn">
-										<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN</span>
-									</label>
-								</div>
-								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www">
 									<label class="form-check-label" for="non_www">
 										<span tooltips tooltip-template="Serve requests without www subdomain.">non-www</span>
 									</label>
 								</div>
+								<div class="form-subgroup" ng-if="isWWW()">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
+										<label class="form-check-label" for="cdn">
+											<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN <small>subdomain</small></span>
+										</label>
+									</div>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
+									<label class="form-check-label" for="https">
+										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
+									</label>
+								</div>
+								<div class="form-subgroup" ng-if="isHTTPS()">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
+										<label class="form-check-label" for="http2">
+											<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
+										</label>
+									</div>
+								</div>
+								<div class="form-subgroup" ng-if="isHTTPS()">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
+										<label class="form-check-label" for="letsencrypt">
+											<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
+										</label>
+									</div>
+									<div class="form-subgroup">
+										<div class="form-group" ng-if="isHTTPS() && isLetsEncrypt()">
+											<label class="form-label small">
+												<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
+											</label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.email" placeholder="{{ 'hello@' + domain() }}">
+										</div>
+									</div>
+								</div>
+								<div class="form-subgroup" ng-if="isHTTPS()">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.cert_type" value="custom">
+										<label class="form-check-label" for="custom_cert">
+											<span tooltips tooltip-template="Custom certificate">Custom certificate</span>
+										</label>
+									</div>
+									<div class="form-subgroup">
+										<div class="form-group" ng-if="isHTTPS() && isCustomCert()">
+											<label class="form-label small">
+												<span tooltips tooltip-template="Path to crt file"><code>ssl_certificate</code></span>
+											</label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
+										</div>
+									</div>
+									<div class="form-subgroup">
+										<div class="form-group" ng-if="isHTTPS() && isCustomCert()">
+											<label class="form-label small">
+												<span tooltips tooltip-template="Path to key file"><code>ssl_certificate_key</code></span>
+											</label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate_key" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
+										</div>
+									</div>
+								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
 									<label class="form-check-label" for="index_html">
-										<span tooltips tooltip-template="Pass unhandled requests to index.html.<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html</span>
+										<span tooltips tooltip-template="Pass unhandled requests to index.html.<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html <small>handler</small></span>
 									</label>
 								</div>
 							</div>
@@ -121,15 +146,16 @@
 										<option value="7.0">7.0 socket</option>
 										<option value="7.1">7.1 socket</option>
 										<option value="7.2">7.2 socket</option>
+										<option value="7.3">7.3 socket</option>
 									</select>
 								</div>
-								<div class="form-check" ng-if="data.php !== 'off'">
+								<div class="form-check" ng-if="isPHP()">
 									<input class="form-check-input" type="checkbox" id="index_php" ng-model="data.index_php">
 									<label class="form-check-label" for="index_php">
-										<span tooltips tooltip-template="Pass unhandled requests to index.php.<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim...</i>">index.php</span>
+										<span tooltips tooltip-template="Pass unhandled requests to index.php.<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim...</i>">index.php <small>handler</small></span>
 									</label>
 								</div>
-								<div class="form-check" ng-if="data.php !== 'off'">
+								<div class="form-check" ng-if="isPHP()">
 									<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
 									<label class="form-check-label" for="wordpress">
 										<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress</span>
@@ -147,9 +173,9 @@
 									</label>
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" type="radio" id="separated" ng-model="data.file_structure" value="separated">
-									<label class="form-check-label" for="separated">
-										<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">separated</span>
+									<input class="form-check-input" type="radio" id="modularized" ng-model="data.file_structure" value="modularized">
+									<label class="form-check-label" for="modularized">
+										<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">modularized</span>
 									</label>
 								</div>
 							</div>
@@ -249,99 +275,107 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6 col-lg-7 files">
-						<div class="row" ng-cloak>
-							<div ng-if="data.https" class="col-xl-12">
-								<div class="commands">
-									<pre><code class="hljs bash"><span class="hljs-comment"># HTTPS: create Diffie-Hellman keys</span>
-<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">2048</span>
-
-<span class="hljs-comment"># HTTPS: create ACME-challenge common directory</span>
-<span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"
-
-<span class="hljs-comment"># HTTPS: certbot (obtain certificates)</span>
-<span class="hljs-section">certbot certonly</span> <span class="hljs-attribute">--webroot</span> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ data.domain }} <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ data.domain }}<span ng-if="data.cdn"> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ data.domain }}</span> <span class="hljs-attribute">--email</span> {{ data.email }} <span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <span class="hljs-attribute">--agree-tos</span> <span class="hljs-attribute">--force-renewal</span></code></pre>
+						<div class="card">
+							<div class="card-body text-center">
+								<div class="form-group">
+									<div class="mb-1">
+										<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+									</div>
+									<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
+									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-sm btn-danger" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
 								</div>
 							</div>
-							<div class="file" ng-class="data.file_structure === 'separated' || data.https || (data.php !== 'off' && data.wordpress) ? 'col-xl-6' : 'col-xl-12'">
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-7 files">
+						<div class="row grid">
+							<div class="grid-sizer col-xl-6"></div>
+							<div ng-if="isHTTPS()" class="grid-item col-xl-12" ng-cloak>
+								<div class="commands">
+									<pre><code class="hljs bash" ng-include="'templates/commands.html'"></code></pre>
+								</div>
+							</div>
+							<div class="file grid-item" ng-class="isModularized() || isHTTPS() || isWordPress() ? 'col-xl-6' : 'col-xl-12'">
 								<strong>/etc/nginx/nginx.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-nginx" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
-								<strong>/etc/nginx/sites-enabled/{{ data.domain }}.conf</strong>
+							<div class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+								<strong>/etc/nginx/sites-enabled/{{ domain() }}.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/example.com.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-domain" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.https">
+							<div class="col-xl-6 grid-item file" ng-if="isHTTPS()" ng-cloak>
 								<strong>/etc/nginx/_ssl.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl" ngclipboard-success="clipboardSuccess('_ssl.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_ssl.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_ssl.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-ssl" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated' && data.https">
+							<div class="col-xl-6 grid-item file" ng-if="isModularized() && isLetsEncrypt()" ng-cloak>
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_letsencrypt.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-letsencrypt" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.file_structure === 'separated'">
+							<div class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
 								<strong>/etc/nginx/_general.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('_general.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_general.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_general.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-general" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.file_structure === 'separated'">
+							<div class="col-xl-6 grid-item file" ng-if="isPHP() && isModularized()" ng-cloak>
 								<strong>/etc/nginx/_php.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php" ngclipboard-success="clipboardSuccess('_php.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_php.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_php.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.php !== 'off' && (data.file_structure === 'separated' || (data.php !== 'off' && data.wordpress))">
+							<div class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('_php_fastcgi.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_php_fastcgi.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php_fastcgi" class="code highlighted"></div>
 							</div>
-							<div class="col-xl-6 file" ng-if="data.php !== 'off' && data.wordpress && data.file_structure === 'separated'">
+							<div class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
 								<strong>/etc/nginx/_wordpress.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('_wordpress.conf')">
-									<img src="https://cdn.nginxconfig.io/assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_wordpress.conf'">Copied!</span>
 								<div class="code source">
-									<pre><code class="nginx" ng-include="'templates/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
+									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>
 							</div>
 						</div>
@@ -349,6 +383,7 @@
 					<div class="col-md-3 sidebar">
 						<iframe class="github-star" src="https://ghbtns.com/github-btn.html?user=valentinxxx&repo=nginxconfig.io&type=star&count=true&size=large"></iframe>
 						<div class="adsbygoogle-container">
+							<div class="note">▾ advertisement ▾</div>
 							<ins class="adsbygoogle"
 									style="display:block"
 									data-ad-client="ca-pub-6543577519725877"
@@ -356,7 +391,6 @@
 							<script>
 								(window.adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
-							<div class="note">⌃ advertisement ⌃</div>
 						</div>
 					</div>
 				</div>
@@ -364,7 +398,7 @@
 		</main>
 		<footer>
 			<div class="container-fluid">
-				Lovingly made at <img src="https://cdn.nginxconfig.io/assets/img/balaton.svg" alt="Lake Balaton" class="balaton"><span class="text-muted">(<a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>)</span>
+				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"><span class="text-muted">(<a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>)</span>
 				<div class="crypto">
 					BTC: <strong>1CeKtgNStn5BGk46gt14kNMhsnJoFGUfkN</strong><br>
 					ETH: <strong>0xe84Bc747dc81329894e610747B99C6bd51437269</strong><br>
@@ -381,11 +415,12 @@
 			gtag('js', new Date());
 			gtag('config', 'UA-3084378-31');
 		</script>
-		<script src="https://cdn.nginxconfig.io/assets/js/highlight.min.js?v=9.12.0"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/clipboard.min.js?v=1.7.1"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/angular.min.js?v=1.6.8"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/ngclipboard.min.js?v=1.1.3"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/angular-tooltips.min.js?v=1.2.2"></script>
-		<script src="https://cdn.nginxconfig.io/assets/js/app.js"></script>
+		<script src="assets/js/highlight.min.js?v=9.12.0"></script>
+		<script src="assets/js/clipboard.min.js?v=1.7.1"></script>
+		<script src="assets/js/angular.min.js?v=1.6.8"></script>
+		<script src="assets/js/ngclipboard.min.js?v=1.1.3"></script>
+		<script src="assets/js/angular-tooltips.min.js?v=1.2.2"></script>
+		<script src="assets/js/masonry.pkgd.min.js?v=4.2.1"></script>
+		<script src="assets/js/app.js?v=COMMIT_HASH"></script>
 	</body>
 </html>
