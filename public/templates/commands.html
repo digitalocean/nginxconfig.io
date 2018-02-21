@@ -1,10 +1,29 @@
-<span class="hljs-comment"># HTTPS: create Diffie-Hellman keys</span>
+<!--
+✔ HTTPS --><span ng-if="isHTTPS()"><!--
+
+--><span class="hljs-comment"># <strong>HTTPS</strong>: create Diffie-Hellman keys</span>
 <span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">2048</span><!--
+
+--></span><!--
+
 
 ✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
 
-<span class="hljs-comment"># HTTPS: create ACME-challenge common directory</span>
+<span class="hljs-comment"># <strong>HTTPS</strong>: create ACME-challenge common directory</span>
 <span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"
 
-<span class="hljs-comment"># HTTPS: certbot (obtain certificates)<br># disable before first run: <strong>ssl_certificate</strong>, <strong>ssl_certificate_key</strong>, <strong>ssl_trusted_certificate</strong></span>
-<span class="hljs-section">certbot certonly</span> <span class="hljs-attribute">--webroot</span> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ domain() }} <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ domain() }}<span ng-if="isCDN()"> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ domain() }}</span> <span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'hello@' + domain() }} <span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <span class="hljs-attribute">--agree-tos</span> <span class="hljs-attribute">--force-renewal</span></span>
+<span class="hljs-comment"># <strong>HTTPS</strong>: certbot (obtain certificates)<br># disable before first run: <strong>ssl_certificate</strong>, <strong>ssl_certificate_key</strong>, <strong>ssl_trusted_certificate</strong></span>
+<span class="hljs-section">certbot certonly</span> <span class="hljs-attribute">--webroot</span> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ domain() }} <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ domain() }}<span ng-if="isCDN()"> <span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ domain() }}</span> <span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'hello@' + domain() }} <span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <span class="hljs-attribute">--agree-tos</span> <span class="hljs-attribute">--force-renewal</span><!--
+
+--></span><!--
+
+
+✔ HTTPS && ✔ WordPress --><span ng-if="isHTTPS() && isWordPress()">
+
+</span><!--
+
+
+✔ WordPress --><span ng-if="isWordPress()"><!--
+
+--><span class="hljs-comment"># <strong>WordPress</strong>: add to <strong>wp-config.php</strong> <small>(<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6389" target="_blank">CVE-2018-6389</a>)</small></span>
+<span class="hljs-section">define(<span class="hljs-string">'CONCATENATE_SCRIPTS'</span>, <span class="hljs-literal">false</span>);</span></span>

@@ -18,6 +18,11 @@ location ~* ^/wp-content/plugins/.*\.(?!{{ extensions.assets }}|{{ extensions.fo
 	deny all;
 }
 
+# disable scripts and styles concat
+location ~* \/wp-admin\/load-(?:scripts|styles)\.php {
+	deny all;
+}
+
 # WordPress stuff
 location ~* ^/(?:xmlrpc\.php|wp-links-opml\.php|wp-config\.php|wp-config-sample\.php|wp-comments-post\.php|readme\.html|license\.txt)$ {
 	deny all;

@@ -293,7 +293,7 @@
 					<div class="col-md-6 col-lg-7 files">
 						<div class="row grid">
 							<div class="grid-sizer col-xl-6"></div>
-							<div ng-if="isHTTPS()" class="grid-item col-xl-12" ng-cloak>
+							<div ng-if="isHTTPS() || isWordPress()" class="grid-item col-xl-12" ng-cloak>
 								<div class="commands">
 									<pre><code class="hljs bash" ng-include="'templates/commands.html'"></code></pre>
 								</div>
