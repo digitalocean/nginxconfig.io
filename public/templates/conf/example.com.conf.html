@@ -138,7 +138,7 @@ server {
 	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
 	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
 
-	server_name {{ isWWW() ? domain() + ' ' : '' }}*.{{ domain() }};<!--
+	server_name {{ isWWW() ? ('.' + domain()) : ('*.' + domain()) }};<!--
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
@@ -162,7 +162,7 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name {{ domain() }} *.{{ domain() }};
+	server_name .{{ domain() }};
 
 	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
 }</span>
