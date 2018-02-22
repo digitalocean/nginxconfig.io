@@ -13,15 +13,13 @@ server {
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
-	# SSL certificate
+	# SSL
+	include _ssl.conf;
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
 	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span>
-
-	# SSL config
-	include _ssl.conf;</span><!--
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
 
 	✔ unified && ✔ PHP --><span ng-if="isUnified() && isPHP()">
 
@@ -40,9 +38,6 @@ server {
 
 
 
-	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
-	include _letsencrypt.conf;</span><!--
-
 	✔ modularized --><span ng-if="isModularized()">
 	include _general.conf;</span><!--
 
@@ -53,10 +48,6 @@ server {
 	include _php.conf;</span><!--
 
 
-
-	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
-
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified --><span ng-if="isUnified()">
 
@@ -87,22 +78,13 @@ server {
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
-	# SSL certificate
+	# SSL
+	include _ssl.conf;
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
 	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span>
-
-	# SSL config
-	include _ssl.conf;</span><!--
-
-	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
-	include _letsencrypt.conf;</span><!--
-
-	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
-
-<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
 
 	# disable access_log
 	access_log off;<!--
@@ -142,13 +124,13 @@ server {
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
-	# SSL certificate
+	# SSL
+	include _ssl.conf;
 	ssl_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/{{ domain() }}/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ domain() }}/privkey.pem;<!--
 
-	# SSL config
-	include _ssl.conf;</span>
+	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
 
 	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
 }</span><!--
@@ -162,7 +144,23 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name .{{ domain() }};
+	server_name .{{ domain() }};<!--
 
-	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
+
+	include _letsencrypt.conf;</span><!--
+
+	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
+
+<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+
+	location / {
+		return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+	}</span><!--
+
+	✘ Let's Encrypt --><span ng-if="!isLetsEncrypt()">
+
+	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;</span>
 }</span>
