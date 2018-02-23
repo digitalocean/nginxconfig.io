@@ -27,6 +27,11 @@ Online nginx configuration generator.
 	* …
 * unified (`nginx.conf`) / modularized file structure (ideal for multi-domain environment)
 * security headers
+	* `X-Frame-Options`
+	* `X-XSS-Protection`
+	* `X-Content-Type-Options`
+	* `Referrer-Policy`
+	* `Content-Security-Policy`
 * `worker_processes`
 * `user`
 * `pid`

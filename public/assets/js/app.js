@@ -58,6 +58,9 @@
 
 			file_structure:		'unified',
 
+			referrer_policy:			'no-referrer-when-downgrade',
+			content_security_policy:	'default-src * \'unsafe-eval\' \'unsafe-inline\'',
+
 			worker_processes:	'auto',
 			user:				'www-data',
 			pid:				'/run/nginx.pid',
@@ -270,8 +273,12 @@
 			return $scope.isPHP() && $scope.data.wordpress;
 		};
 
+		$scope.isCSP = function() {
+			return !!$scope.data.content_security_policy;
+		};
+
 		$scope.isAccessLog = function() {
-			return $scope.data.access_log;
+			return !!$scope.data.access_log;
 		};
 
 		$scope.isGzip = function() {
