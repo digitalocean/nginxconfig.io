@@ -4,7 +4,7 @@ add_header X-XSS-Protection "1; mode=block" always;
 add_header X-Content-Type-Options "nosniff" always;
 add_header Referrer-Policy "{{ data.referrer_policy }}" always;<!--
 
-✔ CSP--><span ng-if="isCSP()">
+✔ CSP --><span ng-if="isCSP()">
 add_header Content-Security-Policy "{{ data.content_security_policy }}" always;</span>
 
 # . files

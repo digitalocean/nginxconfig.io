@@ -51,15 +51,15 @@ server {
 
 	✔ unified --><span ng-if="isUnified()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_general.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ modularized && ✔ PHP --><span ng-if="isUnified() && isPHP()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_php.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_php.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
@@ -152,7 +152,7 @@ server {
 
 	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
 
-<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html'" onload="refreshHighlighting()"></ng-include></span><!--
+<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
 

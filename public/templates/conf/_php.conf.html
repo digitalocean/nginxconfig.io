@@ -10,5 +10,5 @@ location ~ \.php$ {<!--
 	include _php_fastcgi.conf;</span><!--
 
 	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
-<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/_php_fastcgi.conf.html'" onload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }

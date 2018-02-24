@@ -39,5 +39,5 @@ http {
 	include /etc/nginx/sites-enabled/*;</span><span ng-if="data.file_structure === 'unified'">
 
 	# {{ !data.non_www ? 'www.' : '' }}{{ domain() }}
-<ng-include ng-include-tabs="1" src="'templates/conf/example.com.conf.html'" sonload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="1" src="'templates/conf/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>
 }
