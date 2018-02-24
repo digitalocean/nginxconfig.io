@@ -12,17 +12,6 @@
 
 
 
-	var masonry = new Masonry('main .files .grid', {
-		itemSelector: '.grid-item',
-		columnWidth: '.grid-sizer',
-		percentPosition: true,
-		initLayout: false,
-		stagger: 0,
-		transitionDuration: '0.6s'
-	});
-
-
-
 	angular
 	.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
 	.config(function NginxCongigIoConfig($locationProvider) {
@@ -34,6 +23,7 @@
 		///////////////////////
 		// PRIVATE VARIABLES //
 		///////////////////////
+		var masonry;
 		var data = {
 			domain:				'',
 			path:				'',
@@ -216,6 +206,16 @@
 			});
 		};
 
+		$scope.initMasonry = function() {
+			masonry = new Masonry('main .files .grid', {
+				itemSelector: '.grid-item',
+				columnWidth: '.grid-sizer',
+				percentPosition: true,
+				stagger: 0,
+				transitionDuration: '0.6s'
+			});
+		};
+
 
 
 		///////////////////////////
@@ -328,6 +328,7 @@
 		// INIT //
 		//////////
 		$scope.setDataFromHash();
+		$scope.initMasonry();
 	})
 	.config(['tooltipsConfProvider', function (tooltipsConfProvider) {
 		tooltipsConfProvider.configure({
