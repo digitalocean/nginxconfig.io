@@ -40,12 +40,8 @@ header {
 }
 
 header .logo {
-	color: transparent;
-	background-image: url('../img/logo-light.svg');
-	background-position: center center;
-	background-size: contain;
-	background-repeat: no-repeat;
-	margin: 0.5rem 0;
+	height: 3rem;
+	margin: 0.5rem 0 0.3rem;
 }
 
 header .url {
