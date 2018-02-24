@@ -128,6 +128,12 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
+								<div class="form-group">
+									<label class="form-label">
+										<span tooltips tooltip-template="Defines files that will be used as an index."><code>index</code></span>
+									</label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.index" placeholder="index.html{{ isPHP() ? ' index.php' : '' }}">
+								</div>
 								<div class="form-check mb-2">
 									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
 									<label class="form-check-label" for="index_html">

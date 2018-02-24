@@ -40,6 +40,7 @@
 			non_www:			true,
 			cdn:				false,
 
+			index:				'',
 			index_html:			false,
 
 			php:				'7.2',
