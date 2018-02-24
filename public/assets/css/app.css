@@ -1,4 +1,25 @@
 /*
+	FONTS
+*/
+@font-face {
+	font-family: 'Quicksand';
+	src: url('../font/quicksand-regular-webfont.woff2') format('woff2'),
+		url('../font/quicksand-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Quicksand';
+	src: url('../font/quicksand-bold-webfont.woff2') format('woff2'),
+		url('../font/quicksand-bold-webfont.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+
+
+/*
 	BODY
 */
 body {
