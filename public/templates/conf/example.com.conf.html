@@ -5,7 +5,7 @@ server {
 	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
 
 	✔ PHP --><span ng-if="isPHP()">
-	set $base /var/www/{{ domain() }};
+	set $base {{ data.path ? data.path : '/var/www/' + domain() }};
 	root $base{{ data.document_root }};</span><!--
 
 	✘ PHP --><span ng-if="!isPHP()">
