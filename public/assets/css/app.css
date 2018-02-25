@@ -112,7 +112,8 @@ main .sidebar {
 }
 
 main .options .card .card-body {
-	padding: 0.6rem 0.75rem;
+	padding: 0.5rem;
+	font-size: 0.9rem;
 }
 
 main .options .card + .card {
@@ -210,6 +211,15 @@ main .sidebar .github-star {
 	border: 0;
 	overflow: hidden;
 	margin: 0 auto 1rem;
+}
+
+main .files .card.actions .card-body {
+	padding: 0.8rem;
+}
+
+main .files .card.actions .btn img {
+	vertical-align: -2px;
+	margin-right: 0.1rem;
 }
 
 

@@ -294,34 +294,35 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.assets }}">assets <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets">
+									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308."><code>expires</code></span></label>
 								</div>
-								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires_media">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.svg }}">svg <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308.<br><br>{{ extensions.fonts }}">fonts <code>expires</code></span></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts">
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-body text-center">
-								<div class="form-group">
-									<div class="mb-1">
-										<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+								<div class="row no-gutters">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="form-label"><span tooltips tooltip-template="{{ extensions.assets }}">assets</span></label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets">
+										</div>
 									</div>
-									<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
-									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="form-label"><span tooltips tooltip-template="{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media</span></label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_media">
+										</div>
+									</div>
 								</div>
-								<div class="form-group">
-									<button class="btn btn-sm btn-danger" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
+								<div class="row no-gutters">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="form-label"><span tooltips tooltip-template="{{ extensions.svg }}">svg</span></label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="form-label"><span tooltips tooltip-template="{{ extensions.fonts }}">fonts</span></label>
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts">
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -413,6 +414,20 @@
 								<div class="code source">
 									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>
+							</div>
+						</div>
+						<div class="card actions" ng-cloak>
+							<div class="card-body text-center">
+								<div class="mb-1">
+									<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+								</div>
+								<div class="mb-3">
+									<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
+									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
+								</div>
+								<div>
+									<button class="btn btn-sm btn-danger" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
+								</div>
 							</div>
 						</div>
 					</div>

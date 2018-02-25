@@ -212,6 +212,7 @@
 				itemSelector: '.grid-item',
 				columnWidth: '.grid-sizer',
 				percentPosition: true,
+				initLayout: false,
 				stagger: 0,
 				transitionDuration: '0.6s'
 			});
