@@ -52,3 +52,5 @@ Online nginx configuration generator.
 * [ngclipboard](http://sachinchoolur.github.io/ngclipboard/) - AngularJS directive for clipboard.js
 * [Angular Tooltips](https://720kb.github.io/angular-tooltips/) - helper tooltips
 * [Masonry](https://masonry.desandro.com) - files grid layout
+* [JSZip](https://stuk.github.io/jszip) - generating zip package
+* [FileSaver](https://github.com/eligrey/FileSaver.js) - downloading zip file

@@ -341,7 +341,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="nginx.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-nginx" class="code highlighted"></div>
 							</div>
@@ -351,7 +351,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-domain" class="code highlighted"></div>
 							</div>
@@ -361,7 +361,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_ssl.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="_ssl.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_ssl.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-ssl" class="code highlighted"></div>
 							</div>
@@ -371,7 +371,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_letsencrypt.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="_letsencrypt.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-letsencrypt" class="code highlighted"></div>
 							</div>
@@ -381,7 +381,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_general.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="_general.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-general" class="code highlighted"></div>
 							</div>
@@ -391,7 +391,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_php.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source"data-filename="_php.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_php.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php" class="code highlighted"></div>
 							</div>
@@ -401,7 +401,7 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_php_fastcgi.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="_php_fastcgi.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php_fastcgi" class="code highlighted"></div>
 							</div>
@@ -411,19 +411,24 @@
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 								</button>
 								<span class="clipboard-success" ng-if="clipboardCopy === '_wordpress.conf'">Copied!</span>
-								<div class="code source">
+								<div class="code source" data-filename="_wordpress.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>
 							</div>
 						</div>
 						<div class="card actions" ng-cloak>
 							<div class="card-body text-center">
-								<div class="mb-1">
-									<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+								<div class="mb-2">
+									<div class="input-group">
+										<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+										<div class="input-group-append">
+											<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
+										</div>
+									</div>
+									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
 								</div>
 								<div class="mb-3">
-									<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
-									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
+									<button class="btn btn-primary" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button>
 								</div>
 								<div>
 									<button class="btn btn-sm btn-danger" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
@@ -449,7 +454,7 @@
 		</main>
 		<footer>
 			<div class="container-fluid">
-				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"><span class="text-muted">(<a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>)</span>
+				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"> <a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>
 				<div class="crypto">
 					BTC: <strong>1CeKtgNStn5BGk46gt14kNMhsnJoFGUfkN</strong><br>
 					ETH: <strong>0xe84Bc747dc81329894e610747B99C6bd51437269</strong><br>
@@ -472,6 +477,8 @@
 		<script src="assets/js/ngclipboard.min.js?v=1.1.3"></script>
 		<script src="assets/js/angular-tooltips.min.js?v=1.2.2"></script>
 		<script src="assets/js/masonry.pkgd.min.js?v=4.2.1"></script>
+		<script src="assets/js/jszip.min.js?v=3.1.5"></script>
+		<script src="assets/js/filesaver.min.js?v=1.3.4"></script>
 		<script src="assets/js/app.js?v=COMMIT_HASH"></script>
 	</body>
 </html>

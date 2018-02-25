@@ -193,6 +193,26 @@
 			gtag('event', 'reset');
 		};
 
+		$scope.downloadZip = function() {
+			var zip = new JSZip();
+
+			var sourceCodes = document.querySelectorAll('main .file .code.source');
+
+			for (var i = 0; i < sourceCodes.length; i++) {
+				var sourceCode = sourceCodes[i];
+
+				var name	= sourceCode.dataset.filename;
+				var content	= sourceCode.children[0].children[0].innerText;
+
+				zip.file(name, content);
+			}
+
+			zip.generateAsync({ type: 'blob' })
+				.then(function(content) {
+					saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
+				});
+		};
+
 		$scope.clipboardSuccess = function(key) {
 			$scope.clipboardCopy = key;
 

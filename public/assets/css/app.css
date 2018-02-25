@@ -220,6 +220,11 @@ main .files .card.actions .card-body {
 main .files .card.actions .btn img {
 	vertical-align: -2px;
 	margin-right: 0.1rem;
+	height: 1rem;
+}
+
+main .files .card.actions .btn-sm img {
+	height: 0.9rem;
 }
 
 
