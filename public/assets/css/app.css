@@ -130,9 +130,9 @@ main .options .card .form-group {
 }
 
 main .options .card .form-subgroup {
-	margin-left: 5px;
+	margin-left: 0.35rem;
 	border-left: 2px solid #ced4da;
-	padding-left: 11px;
+	padding-left: 0.5rem;
 }
 
 main .options .card .form-control[type="text"]:placeholder-shown,

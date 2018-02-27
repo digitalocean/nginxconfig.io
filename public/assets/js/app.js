@@ -25,6 +25,9 @@
 		///////////////////////
 		var masonry;
 		var data = {
+			ipv4:				'*',
+			ipv6:				'::',
+
 			domain:				'',
 			path:				'',
 			document_root:		'/public',
@@ -245,6 +248,10 @@
 		///////////////////////////
 		$scope.isUnified = function() {
 			return $scope.data.file_structure === 'unified';
+		};
+
+		$scope.isIPv6 = function() {
+			return !!$scope.data.ipv6;
 		};
 
 		$scope.isModularized = function() {

@@ -7,6 +7,7 @@ Online nginx configuration generator.
 * HTTP2
 * CDN
 * www / non-www
+* IPv4, IPv6
 * PHP (TCP, 5.x FPM, 7.0 FPM, 7.1 FPM, 7.2 FPM)
 * WordPress security essentials (*including [CVE-2018-6389](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6389)*)
 * pass requests to index.php

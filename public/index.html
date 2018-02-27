@@ -91,36 +91,46 @@
 											<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
 										</label>
 									</div>
-									<div class="form-subgroup" ng-if="isHTTPS() && isLetsEncrypt()" ng-cloak>
-										<div class="form-group">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
-											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.email" placeholder="{{ 'hello@' + domain() }}">
-										</div>
+									<div class="form-group" ng-if="isHTTPS() && isLetsEncrypt()">
+										<label class="form-label small">
+											<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
+										</label>
+										<input type="text" class="form-control form-control-sm" ng-model="data.email" placeholder="{{ 'hello@' + domain() }}">
 									</div>
-								</div>
-								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
 									<div class="form-check">
 										<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.cert_type" value="custom">
 										<label class="form-check-label" for="custom_cert">
 											<span tooltips tooltip-template="Custom certificate">Custom certificate</span>
 										</label>
 									</div>
-									<div class="form-subgroup" ng-if="isHTTPS() && isCustomCert()" ng-cloak>
-										<div class="form-group">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Path to crt file"><code>ssl_certificate</code></span>
-											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
+									<div class="form-group" ng-if="isHTTPS() && isCustomCert()">
+										<label class="form-label small">
+											<span tooltips tooltip-template="Path to crt file"><code>ssl_certificate</code></span>
+										</label>
+										<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
+									</div>
+									<div class="form-group" ng-if="isHTTPS() && isCustomCert()">
+										<label class="form-label small">
+											<span tooltips tooltip-template="Path to key file"><code>ssl_certificate_key</code></span>
+										</label>
+										<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate_key" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
+									</div>
+								</div>
+								<div class="mt-2">
+									<div class="form-group">
+										<div class="input-group input-group-sm">
+											<div class="input-group-prepend">
+												<div class="input-group-text">IPv4</div>
+											</div>
+											<input type="text" class="form-control form-control-sm" ng-model="data.ipv4">
 										</div>
 									</div>
-									<div class="form-subgroup" ng-if="isHTTPS() && isCustomCert()" ng-cloak>
-										<div class="form-group">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Path to key file"><code>ssl_certificate_key</code></span>
-											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate_key" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
+									<div class="form-group">
+										<div class="input-group input-group-sm">
+											<div class="input-group-prepend">
+												<div class="input-group-text">IPv6</div>
+											</div>
+											<input type="text" class="form-control form-control-sm" ng-model="data.ipv6">
 										</div>
 									</div>
 								</div>
@@ -141,7 +151,7 @@
 									</label>
 								</div>
 								<div class="form-group">
-									<div class="input-group" tooltips tooltip-template="PHP-FPM via TCP or unix socket.">
+									<div class="input-group input-group-sm" tooltips tooltip-template="PHP-FPM via TCP or unix socket.">
 										<div class="input-group-prepend">
 											<div class="input-group-text">PHP</div>
 										</div>
