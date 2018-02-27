@@ -155,7 +155,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">PHP</div>
 										</div>
-										<select class="form-control" ng-model="data.php">
+										<select class="custom-select" ng-model="data.php">
 											<option value="off">disabled</option>
 											<option value="tcp">TCP</option>
 											<option value="5.x">5.x socket</option>
@@ -209,7 +209,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Referrer Policy is a new header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.">Referrer-Policy</code></label>
-									<select class="form-control form-control-sm" ng-model="data.referrer_policy">
+									<select class="custom-select form-control-sm" ng-model="data.referrer_policy">
 										<option value="no-referrer">no-referrer</option>
 										<option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
 										<option value="origin">origin</option>
@@ -230,7 +230,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code></label>
-									<select class="form-control form-control-sm" ng-model="data.worker_processes">
+									<select class="custom-select form-control-sm" ng-model="data.worker_processes">
 										<option value="auto">auto</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
