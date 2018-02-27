@@ -53,7 +53,7 @@
 			file_structure:		'unified',
 
 			referrer_policy:			'no-referrer-when-downgrade',
-			content_security_policy:	'default-src * \'unsafe-eval\' \'unsafe-inline\'',
+			content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
 
 			worker_processes:	'auto',
 			user:				'www-data',
