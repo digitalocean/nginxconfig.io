@@ -1,6 +1,8 @@
 server {
-	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
-	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+
+	✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
 
 	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
 
@@ -9,7 +11,9 @@ server {
 	root $base{{ data.document_root }};</span><!--
 
 	✘ PHP --><span ng-if="!isPHP()">
-	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
+	root /var/www/{{ domain() }}{{ data.document_root }};</span>
+
+	index {{ data.index ? data.index : 'index.html' + (isPHP() ? ' index.php' : '') }};<!--
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
@@ -68,8 +72,10 @@ server {
 
 # CDN
 server {
-	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
-	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+
+	✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
 
 	server_name cdn.{{ domain() }};
 	root /var/www/{{ domain() }}{{ data.document_root }};<span ng-if="!isAccessLog()">
@@ -117,8 +123,10 @@ server {
 -->
 # {{ isWWW() ? 'non-www, ' : '' }}subdomains redirect
 server {
-	listen {{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
-	listen [::]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+
+	✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
 
 	server_name {{ isWWW() ? ('.' + domain()) : ('*.' + domain()) }};<!--
 
@@ -141,8 +149,10 @@ server {
 
 # HTTP redirect
 server {
-	listen 80;
-	listen [::]:80;
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}80;<!--
+
+	✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:80;</span>
 
 	server_name .{{ domain() }};<!--
 
