@@ -214,6 +214,10 @@
 				.then(function(content) {
 					saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
 				});
+
+			gtag('event', $scope.domain(), {
+				event_category: 'download_zip'
+			});
 		};
 
 		$scope.clipboardSuccess = function(key) {
