@@ -148,8 +148,7 @@
 					}
 					_sourceCode.classList.add('hidden');
 
-					masonry.reloadItems();
-					masonry.layout();
+					$scope.doMasonry();
 				}, 0, true, sourceCode);
 			}
 		};
@@ -235,6 +234,15 @@
 			gtag('event', key, {
 				event_category: 'clipboard',
 			});
+		};
+
+		$scope.doMasonry = function() {
+			masonry.reloadItems();
+			masonry.layout();
+
+			$timeout(function() {
+				masonry.layout();
+			}, 600);
 		};
 
 		$scope.initMasonry = function() {
