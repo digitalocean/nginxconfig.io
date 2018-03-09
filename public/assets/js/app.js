@@ -35,6 +35,7 @@
 			https:				false,
 			http2:				true,
 
+			redirect:			true,
 			force_https:		true,
 
 			cert_type:			'letsencrypt',
@@ -290,6 +291,10 @@
 
 		$scope.isWWW = function() {
 			return !$scope.isNonWWW();
+		};
+
+		$scope.isRedirect = function() {
+			return $scope.data.redirect;
 		};
 
 		$scope.isCDN = function() {

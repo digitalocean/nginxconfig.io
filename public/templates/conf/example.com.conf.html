@@ -123,12 +123,12 @@ server {
 	location / {
 		deny all;
 	}
-}</span>
-<!--
+}</span><!--
 
 
 
--->
+✔ redirect --><span ng-if="isRedirect()">
+
 # {{ isWWW() ? 'non-www, ' : '' }}subdomains redirect
 server {
 	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--

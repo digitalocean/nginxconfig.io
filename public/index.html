@@ -62,6 +62,14 @@
 										<span tooltips tooltip-template="Serve requests without www subdomain.">non-www</span>
 									</label>
 								</div>
+								<div class="form-subgroup" ng-cloak>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="redirect" ng-model="data.redirect">
+										<label class="form-check-label" for="redirect">
+											<span tooltips tooltip-template="Redirect {{ isWWW() ? 'non-www version and ' : '' }}all subdomains to domain.">redirect <small>{{ isWWW() ? 'non-www, ' : '' }}subdomains</small></span>
+										</label>
+									</div>
+								</div>
 								<div class="form-subgroup" ng-if="isWWW()" ng-cloak>
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
