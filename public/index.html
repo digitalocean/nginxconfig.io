@@ -100,6 +100,9 @@
 										</label>
 									</div>
 								</div>
+								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
+									Certification type:
+								</div>
 								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
 									<div class="form-check">
 										<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
