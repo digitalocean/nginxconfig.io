@@ -252,11 +252,18 @@ footer img.balaton {
 */
 tooltip tip {
 	min-width: 150px;
+	padding: 4px 12px;
+}
+
+tooltip tip-tip {
+	line-height: 1.1;
+	display: block;
 }
 
 tooltip tip-tip._small {
 	font-size: 0.9rem;
 }
+
 
 
 
@@ -294,13 +301,4 @@ main .sidebar .adsbygoogle-container .adsbygoogle {
 	text-align: center;
 	color: #444;
 	font-size: 0.6rem;
-}
-
-tooltip tip {
-	padding: 4px 12px;
-}
-
-tooltip tip-tip {
-	line-height: 1.1;
-	display: block;
 }
