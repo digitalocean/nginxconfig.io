@@ -35,6 +35,8 @@
 			https:				false,
 			http2:				true,
 
+			force_https:		true,
+
 			cert_type:			'letsencrypt',
 			email:				'',
 			ssl_certificate:	'',
@@ -268,6 +270,10 @@
 
 		$scope.isHTTP2 = function() {
 			return $scope.isHTTPS() && $scope.data.http2;
+		};
+
+		$scope.isForceHTTPS = function() {
+			return $scope.isHTTPS() && $scope.data.force_https;
 		};
 
 		$scope.isLetsEncrypt = function() {

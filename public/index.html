@@ -86,6 +86,14 @@
 								</div>
 								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
 									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="force_https" ng-model="data.force_https">
+										<label class="form-check-label" for="force_https">
+											<span tooltips tooltip-template="Force redirection from HTTP to HTTPS.">force HTTPS</span>
+										</label>
+									</div>
+								</div>
+								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
+									<div class="form-check">
 										<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
 										<label class="form-check-label" for="letsencrypt">
 											<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>

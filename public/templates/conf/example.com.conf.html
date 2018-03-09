@@ -1,8 +1,16 @@
-server {
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+server {<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
+	✘ HTTPS || ✘ forceHTTPS --><span ng-if="!isHTTPS() || !isForceHTTPS()">
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}80;<!--
+
+		✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:80;</span></span><!--
+
+	✔ HTTPS --><span ng-if="isHTTPS()">
+	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}443 ssl{{ isHTTP2() ? ' http2' : '' }};<!--
+
+		✔ IPv6 --><span ng-if="isIPv6()">
+	listen [{{ data.ipv6 }}]:443 ssl{{ isHTTP2() ? ' http2' : '' }};</span></span>
 
 	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
 
@@ -145,7 +153,7 @@ server {
 
 
 
-✔ HTTPS --><span ng-if="isHTTPS()">
+✔ forceHTTPS --><span ng-if="isForceHTTPS()">
 
 # HTTP redirect
 server {
