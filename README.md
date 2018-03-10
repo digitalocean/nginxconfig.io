@@ -55,3 +55,10 @@ Online nginx configuration generator.
 * [Masonry](https://masonry.desandro.com) - files grid layout
 * [JSZip](https://stuk.github.io/jszip) - generating zip package
 * [FileSaver](https://github.com/eligrey/FileSaver.js) - downloading zip file
+
+## Resources
+* [Mozilla SSL Configuration Generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/)
+* [Nginx Optimization: understanding sendfile, tcp_nodelay and tcp_nopush](https://thoughts.t37.net/nginx-optimization-understanding-sendfile-tcp-nodelay-and-tcp-nopush-c55cdd276765)
+* [NGINX Tuning For Best Performance](https://gist.github.com/denji/8359866)
+* [Hardening Your HTTP Security Headers](https://www.keycdn.com/blog/http-security-headers/)
+* [h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx)
