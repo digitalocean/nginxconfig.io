@@ -137,6 +137,12 @@ main .options .card .form-subgroup {
 	padding-left: 0.5rem;
 }
 
+main .options .card .form-subgroup .form-subgroup {
+	margin-left: 0;
+	border-left: 1px solid #d7e0ea;
+	padding-left: 0.4rem;
+}
+
 main .options .card .form-control[type="text"]:placeholder-shown,
 main .options .card .form-control[type="email"]:placeholder-shown {
 	background-color: #f8f8f8;

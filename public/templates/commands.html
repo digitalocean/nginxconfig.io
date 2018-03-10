@@ -7,7 +7,7 @@
 --></span><!--
 
 
-✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 
 <span class="hljs-comment"># <strong>HTTPS</strong>: create ACME-challenge common directory</span>
 <span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"

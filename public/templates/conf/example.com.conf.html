@@ -30,7 +30,7 @@ server {<!--
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
-	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
 
 	✔ unified && ✔ PHP --><span ng-if="isUnified() && isPHP()">
@@ -97,7 +97,7 @@ server {
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
-	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
 
 	# disable access_log
@@ -145,7 +145,7 @@ server {
 	ssl_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ domain() }}/privkey.pem;<!--
 
-	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
 
 	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
@@ -164,21 +164,21 @@ server {
 
 	server_name .{{ domain() }};<!--
 
-	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isLetsEncrypt()">
+	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isCertLetsEncrypt()">
 
 	include _letsencrypt.conf;</span><!--
 
-	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isLetsEncrypt()">
+	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isCertLetsEncrypt()">
 
 <ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
-	✔ Let's Encrypt --><span ng-if="isLetsEncrypt()">
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 
 	location / {
 		return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
 	}</span><!--
 
-	✘ Let's Encrypt --><span ng-if="!isLetsEncrypt()">
+	✘ Let's Encrypt --><span ng-if="!isCertLetsEncrypt()">
 
 	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;</span>
 }</span>

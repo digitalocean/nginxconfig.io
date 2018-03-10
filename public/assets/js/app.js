@@ -112,7 +112,7 @@
 		};
 
 		$scope.sslCertificate = function() {
-			if ($scope.isLetsEncrypt()) {
+			if ($scope.isCertLetsEncrypt()) {
 				return '/etc/letsencrypt/live/' + $scope.domain() + '/fullchain.pem'
 			}
 
@@ -124,7 +124,7 @@
 		};
 
 		$scope.sslCertificateKey = function() {
-			if ($scope.isLetsEncrypt()) {
+			if ($scope.isCertLetsEncrypt()) {
 				return '/etc/letsencrypt/live/' + $scope.domain() + '/privkey.pem'
 			}
 
@@ -285,11 +285,11 @@
 			return $scope.isHTTPS() && $scope.data.force_https;
 		};
 
-		$scope.isLetsEncrypt = function() {
+		$scope.isCertLetsEncrypt = function() {
 			return $scope.isHTTPS() && $scope.data.cert_type === 'letsencrypt';
 		};
 
-		$scope.isCustomCert = function() {
+		$scope.isCertCustom = function() {
 			return $scope.isHTTPS() && $scope.data.cert_type === 'custom';
 		};
 
