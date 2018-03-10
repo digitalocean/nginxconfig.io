@@ -135,6 +135,35 @@
 										</div>
 									</div>
 								</div>
+								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
+									SSL profile:
+									<div class="form-subgroup">
+										<div class="form-check">
+											<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
+											<label class="form-check-label" for="modern">
+												<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8">modern</span>
+											</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
+											<label class="form-check-label" for="intermediate">
+												<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7">intermediate</span>
+											</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
+											<label class="form-check-label" for="old">
+												<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6">old</span>
+											</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
+											<label class="form-check-label" for="hsts">
+												<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
+											</label>
+										</div>
+									</div>
+								</div>
 								<div class="mt-2">
 									<div class="form-group">
 										<div class="input-group input-group-sm">
@@ -359,7 +388,7 @@
 					<div class="col-md-6 col-lg-7 files">
 						<div class="row grid">
 							<div class="grid-sizer col-xl-6"></div>
-							<div ng-if="isHTTPS() || isWordPress()" class="grid-item col-xl-12" ng-cloak>
+							<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern())) || isWordPress()" class="grid-item col-xl-12" ng-cloak>
 								<div class="commands">
 									<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 								</div>
