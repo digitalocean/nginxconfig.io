@@ -142,8 +142,8 @@ server {
 
 	# SSL
 	include _ssl.conf;
-	ssl_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/{{ domain() }}/privkey.pem;<!--
+	ssl_certificate {{ sslCertificate() }};
+	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>

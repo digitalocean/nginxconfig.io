@@ -130,7 +130,7 @@
 
 		$scope.sslCertificate = function() {
 			if ($scope.isCertLetsEncrypt()) {
-				return '/etc/letsencrypt/live/' + $scope.domain() + '/fullchain.pem'
+				return '/etc/letsencrypt/live/' + $scope.domain() + '/fullchain.pem';
 			}
 
 			if ($scope.data.ssl_certificate) {
@@ -142,7 +142,7 @@
 
 		$scope.sslCertificateKey = function() {
 			if ($scope.isCertLetsEncrypt()) {
-				return '/etc/letsencrypt/live/' + $scope.domain() + '/privkey.pem'
+				return '/etc/letsencrypt/live/' + $scope.domain() + '/privkey.pem';
 			}
 
 			if ($scope.data.ssl_certificate_key) {
