@@ -21,7 +21,11 @@ server {<!--
 	✘ PHP --><span ng-if="!isPHP()">
 	root /var/www/{{ domain() }}{{ data.document_root }};</span>
 
-	index {{ data.index ? data.index : 'index.html' + (isPHP() ? ' index.php' : '') }};<!--
+	index {{ data.index ? data.index : 'index.html' + (isPHP() ? ' index.php' : '') }};
+
+	access_log {{ data.domain_log | rtrim:'/' }}/access_log;
+	error_log {{ data.domain_log | rtrim:'/' }}/error_log;<!--
+
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 

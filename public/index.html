@@ -315,6 +315,10 @@
 									<input type="text" class="form-control form-control-sm" ng-model="data.error_log">
 								</div>
 								<div class="form-group">
+									<label class="form-label"><code tooltips tooltip-template="Configures logging path for the current domain.">Domain specific log path</code></label>
+									<input type="text" class="form-control form-control-sm" ng-model="data.domain_log" placeholder="$base/log">
+								</div>
+								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code></label>
 									<div class="input-group">
 										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size">
