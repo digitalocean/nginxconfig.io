@@ -4,7 +4,7 @@
 	"description": "[![nginxconfig.io](public/assets/img/share.png)](https://nginxconfig.io)",
 	"main": "index.js",
 	"scripts": {
-		"dev": "http-server",
+		"dev": "forever start ./node_modules/.bin/http-server && cypress open && forever stop ./node_modules/.bin/http-server",
 		"test": "forever start ./node_modules/.bin/http-server && cypress run --record && forever stop ./node_modules/.bin/http-server"
 	},
 	"repository": {
