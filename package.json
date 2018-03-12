@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "http-server",
-		"test": "forever start ./node_modules/.bin/http-server && cypress run && forever stop ./node_modules/.bin/http-server"
+		"test": "forever start ./node_modules/.bin/http-server && cypress run --record && forever stop ./node_modules/.bin/http-server"
 	},
 	"repository": {
 		"type": "git",
