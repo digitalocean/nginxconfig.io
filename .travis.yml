@@ -14,3 +14,15 @@ deploy:
     branch: master
   provider: script
   script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git reset --hard && git pull origin master && find . -type f -name '*.html' -exec sed -i -e \"s/COMMIT_HASH/$TRAVIS_COMMIT/\" {} \;'"
+
+
+node_js:
+  - 6
+cache:
+  directories:
+    - ~/.npm
+    - node_modules
+install:
+  - npm install
+script:
+  - npm run test
