@@ -1,7 +1,21 @@
-language: bash
+language: node_js
+
+node_js:
+  - "lts/*"
 
 addons:
   ssh_known_hosts: nginxconfig.io
+
+cache:
+  directories:
+    - ~/.npm
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run test
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_c855341ef4be_key -iv $encrypted_c855341ef4be_iv -in .deploy_rsa.enc -out /tmp/deploy_rsa -d
@@ -14,15 +28,3 @@ deploy:
     branch: master
   provider: script
   script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git reset --hard && git pull origin master && find . -type f -name '*.html' -exec sed -i -e \"s/COMMIT_HASH/$TRAVIS_COMMIT/\" {} \;'"
-
-
-node_js:
-  - 6
-cache:
-  directories:
-    - ~/.npm
-    - node_modules
-install:
-  - npm install
-script:
-  - npm run test

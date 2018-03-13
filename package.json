@@ -1,27 +1,26 @@
 {
 	"name": "nginxconfig.io",
 	"version": "1.0.0",
-	"description": "[![nginxconfig.io](public/assets/img/share.png)](https://nginxconfig.io)",
-	"main": "index.js",
-	"scripts": {
-		"dev": "forever start ./node_modules/.bin/http-server && cypress open && forever stop ./node_modules/.bin/http-server",
-		"test": "forever start ./node_modules/.bin/http-server && cypress run --record && forever stop ./node_modules/.bin/http-server"
-	},
+	"homepage": "https://nginxconfig.io",
+	"description": "Online nginx configuration generator",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/valentinxxx/nginxconfig.io.git"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/valentinxxx/nginxconfig.io/issues"
 	},
-	"homepage": "https://github.com/valentinxxx/nginxconfig.io#readme",
+	"keywords": ["nginx", "config", "configuration", "generator"],
+	"author": "Bálint Szekeres <balint@szekeres.me> (https://balint.szekeres.me)",
+	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
 		"cypress": "^2.1.0",
 		"forever": "^0.15.3",
 		"http-server": "^0.11.1"
+	},
+	"scripts": {
+		"dev": "forever start ./node_modules/.bin/http-server && cypress open && forever stop ./node_modules/.bin/http-server",
+		"test": "forever start ./node_modules/.bin/http-server && cypress run --record && forever stop ./node_modules/.bin/http-server"
 	}
 }
