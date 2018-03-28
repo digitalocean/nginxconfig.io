@@ -65,6 +65,7 @@
 			pid:				'/run/nginx.pid',
 			access_log:			'/var/log/nginx/access.log',
 			error_log:			'/var/log/nginx/error.log',
+			domain_log: 		'$base/log',
 			client_max_body_size: 16,
 			gzip:				true,
 			server_tokens:		false,
@@ -438,6 +439,18 @@
 				},
 			},
 		};
+	})
+	.filter('rtrim', function () {
+		return function (input, character) {
+			if (character === undefined) {
+				character = ' ';
+			}
+			if (character === "]") character = "\\]";
+			if (character === "\\") character = "\\\\";
+			return input.replace(new RegExp(
+				"[" + character + "]+$", "g"
+			), "");
+		}
 	});
 
 })();
