@@ -393,7 +393,7 @@
 									<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 								</div>
 							</div>
-							<div class="file grid-item" ng-class="isModularized() || isHTTPS() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
+							<div class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
 								<strong>/etc/nginx/nginx.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -412,16 +412,6 @@
 								<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-domain" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isHTTPS()" ng-cloak>
-								<strong>/etc/nginx/_ssl.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-ssl" ngclipboard-success="clipboardSuccess('_ssl.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_ssl.conf'">Copied!</span>
-								<div class="code source" data-filename="_ssl.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_ssl.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-ssl" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 grid-item file" ng-if="isModularized() && isCertLetsEncrypt()" ng-cloak>
 								<strong>/etc/nginx/_letsencrypt.conf</strong>

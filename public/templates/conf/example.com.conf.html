@@ -26,7 +26,6 @@ server {<!--
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
 	# SSL
-	include _ssl.conf;
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
@@ -93,7 +92,6 @@ server {
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
 	# SSL
-	include _ssl.conf;
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 
@@ -141,7 +139,6 @@ server {
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
 	# SSL
-	include _ssl.conf;
 	ssl_certificate {{ sslCertificate() }};
 	ssl_certificate_key {{ sslCertificateKey() }};<!--
 

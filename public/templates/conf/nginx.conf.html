@@ -22,17 +22,42 @@ http {
 	types_hash_max_size 2048;
 	client_max_body_size {{ data.client_max_body_size }}M;
 
-	# mime
+	# MIME
 	include mime.types;
 	default_type application/octet-stream;
 
 	# logging
 	access_log {{ isAccessLog() ? data.access_log : 'off' }};
-	error_log {{ data.error_log }} warn;<span ng-if="data.limit_req">
+	error_log {{ data.error_log }} warn;<!--
+
+	✔ limitReq --><span ng-if="data.limit_req">
 
 	# limits
 	limit_req_log_level warn;
-	limit_req_zone $binary_remote_addr zone=login:10m rate=10r/m;</span>
+	limit_req_zone $binary_remote_addr zone=login:10m rate=10r/m;</span><!--
+
+	✔ HTTPS --><span ng-if="isHTTPS()">
+
+	# SSL
+	ssl_session_timeout 1d;
+	ssl_session_cache shared:SSL:50m;
+	ssl_session_tickets off;<!--
+
+	✘ SSLProfileModern --><span ng-if="!isSSLProfileModern()">
+
+	# Diffie-Hellman parameter for DHE ciphersuites
+	ssl_dhparam /etc/nginx/dhparam.pem;</span>
+
+	# {{ data.ssl_profile }} configuration
+	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols }};
+	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers }};
+	ssl_prefer_server_ciphers on;
+
+	# OCSP Stapling
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	resolver 8.8.8.8 8.8.4.4 208.67.222.222 208.67.220.220 valid=60s;
+	resolver_timeout 2s;</span>
 
 	# load configs
 	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'modularized'">
