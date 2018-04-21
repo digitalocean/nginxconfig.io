@@ -67,38 +67,6 @@ header .logo {
 	margin: 0.5rem 0 0.3rem;
 }
 
-header .url {
-	opacity: 0.7;
-}
-
-header .url.active {
-	opacity: 1;
-}
-
-header .url .input-group-prepend .input-group-text,
-header .url .input-group-append .input-group-text {
-	padding-top: 0.15rem;
-	cursor: pointer;
-	background-color: transparent;
-}
-
-header .url .input-group-prepend .input-group-text img,
-header .url .input-group-append .input-group-text img {
-	margin-top: 4px;
-}
-
-header .url .input-group-append .input-group-text img {
-	opacity: 0.5;
-}
-
-header .url.active .input-group-append .input-group-text img {
-	opacity: 1;
-}
-
-header .url .form-control {
-	background-color: transparent;
-	color: #fff;
-}
 
 
 /*
@@ -221,17 +189,25 @@ main .sidebar .github-star {
 	margin: 0 auto 1rem;
 }
 
-main .files .card.actions .card-body {
-	padding: 0.8rem;
+main .buttons {
+	text-align: center;
+	margin-top: 1.5rem;
 }
 
-main .files .card.actions .btn img {
+main .buttons .btn-download {
+	margin-bottom: 0.25rem;
+}
+
+
+main .url .btn-url img,
+main .buttons .btn-download img {
 	vertical-align: -2px;
 	margin-right: 0.1rem;
 	height: 1rem;
 }
 
-main .files .card.actions .btn-sm img {
+main .buttons .btn-reset img {
+	vertical-align: -3px;
 	height: 0.9rem;
 }
 

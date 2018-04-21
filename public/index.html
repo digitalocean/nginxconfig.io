@@ -464,24 +464,14 @@
 								</div><div id="file-wordpress" class="code highlighted"></div>
 							</div>
 						</div>
-						<div class="card actions" ng-cloak>
-							<div class="card-body text-center">
-								<div class="mb-2">
-									<div class="input-group">
-										<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
-										<div class="input-group-append">
-											<button class="btn btn-primary" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
-										</div>
-									</div>
-									<div class="clipboard-success" ng-if="clipboardCopy === 'url'">Copied!</div>
-								</div>
-								<div class="mb-3">
-									<button class="btn btn-primary" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button>
-								</div>
-								<div>
-									<button class="btn btn-sm btn-danger" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
+						<div class="url" ng-cloak>
+							<div class="input-group">
+								<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
+								<div class="input-group-append">
+									<button class="btn btn-primary btn-url" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
 								</div>
 							</div>
+							<div class="clipboard-success text-center" ng-if="clipboardCopy === 'url'">Copied!</div>
 						</div>
 					</div>
 					<div class="col-md-3 sidebar">
@@ -495,6 +485,10 @@
 							<script>
 								(window.adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
+						</div>
+						<div class="buttons">
+							<button class="btn btn-primary btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button><br>
+							<button class="btn btn-sm btn-danger btn-reset" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
 						</div>
 					</div>
 				</div>
