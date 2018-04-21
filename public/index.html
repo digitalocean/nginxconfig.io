@@ -186,18 +186,27 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
-								<div class="form-group">
-									<label class="form-label">
-										<span tooltips tooltip-template="Defines files that will be used as an index."><code>index</code></span>
-									</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.index" placeholder="index.html{{ isPHP() ? ' index.php' : '' }}">
+								<label class="form-label">File structure</label>
+								<div class="form-subgroup">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
+										<label class="form-check-label" for="unified">
+											<span tooltips tooltip-template="Combine configuration to a single file.<br><br><i>(if possible)</i>">unified</span>
+										</label>
+									</div>
 								</div>
-								<div class="form-check mb-2">
-									<input class="form-check-input" type="checkbox" id="index_html" ng-model="data.index_html">
-									<label class="form-check-label" for="index_html">
-										<span tooltips tooltip-template="Pass unhandled requests to index.html.<br><br><i>Angular, React, Vue.js, Ember.js</i>...">index.html <small>handler</small></span>
-									</label>
+								<div class="form-subgroup">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" id="modularized" ng-model="data.file_structure" value="modularized">
+										<label class="form-check-label" for="modularized">
+											<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">modularized</span>
+										</label>
+									</div>
 								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
 								<div class="form-group">
 									<div class="input-group input-group-sm" tooltips tooltip-template="PHP-FPM via TCP or unix socket.">
 										<div class="input-group-prepend">
@@ -216,14 +225,6 @@
 								</div>
 								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
 									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="index_php" ng-model="data.index_php">
-										<label class="form-check-label" for="index_php">
-											<span tooltips tooltip-template="Pass unhandled requests to index.php.<br><br><i>Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim...</i>">index.php <small>handler</small></span>
-										</label>
-									</div>
-								</div>
-								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
-									<div class="form-check">
 										<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
 										<label class="form-check-label" for="wordpress">
 											<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress</span>
@@ -234,22 +235,24 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
-								<label class="form-label">File structure</label>
+								<label class="form-label"><code tooltips tooltip-template="Defines the file that will be used as an index, optionally configures fallback of unhandled requests.">index</code></label>
 								<div class="form-subgroup">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
-										<label class="form-check-label" for="unified">
-											<span tooltips tooltip-template="Combine configuration to a single file.<br><br><i>(if possible)</i>">unified</span>
-										</label>
+										<input class="form-check-input" type="radio" id="index.html" ng-model="data.index" value="index.html">
+										<label class="form-check-label" for="index.html">index.html</label>
 									</div>
 								</div>
-								<div class="form-subgroup">
+								<div class="form-subgroup" ng-if="isPHP()">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" id="modularized" ng-model="data.file_structure" value="modularized">
-										<label class="form-check-label" for="modularized">
-											<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">modularized</span>
-										</label>
+										<input class="form-check-input" type="radio" id="index.php" ng-model="data.index" value="index.php">
+										<label class="form-check-label" for="index.php">index.php</label>
 									</div>
+								</div>
+								<div class="form-check mt-2">
+									<input class="form-check-input" type="checkbox" id="fallback" ng-model="data.fallback">
+									<label class="form-check-label" for="fallback">
+										<span tooltips tooltip-template="Fallback of unhandled requests.">fallback <small>({{ isIndexPhp() ? 'index.php' : 'index.html' }})</small></span>
+									</label>
 								</div>
 							</div>
 						</div>

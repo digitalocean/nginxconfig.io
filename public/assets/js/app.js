@@ -48,11 +48,10 @@
 			non_www:			true,
 			cdn:				false,
 
-			index:				'',
-			index_html:			false,
+			index:				'index.php',
+			fallback:			true,
 
 			php:				'7.2',
-			index_php:			true,
 			wordpress:			false,
 
 			file_structure:		'unified',
@@ -343,15 +342,19 @@
 		};
 
 		$scope.isIndexHtml = function() {
-			return $scope.data.index_html;
+			return $scope.data.index === 'index.html';
+		};
+
+		$scope.isIndexPhp = function() {
+			return $scope.isPHP() && $scope.data.index === 'index.php';
+		};
+
+		$scope.isFallback = function() {
+			return $scope.data.fallback && (!$scope.isIndexPhp() || $scope.isPHP);
 		};
 
 		$scope.isPHP = function() {
 			return $scope.data.php !== 'off';
-		};
-
-		$scope.isIndexPhp = function() {
-			return $scope.isPHP() && $scope.data.index_php;
 		};
 
 		$scope.isWordPress = function() {

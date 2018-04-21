@@ -3,13 +3,13 @@ server {<!--
 	✘ HTTPS || ✘ forceHTTPS --><span ng-if="!isHTTPS() || !isForceHTTPS()">
 	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}80;<!--
 
-		✔ IPv6 --><span ng-if="isIPv6()">
+	✔ IPv6 --><span ng-if="isIPv6()">
 	listen [{{ data.ipv6 }}]:80;</span></span><!--
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}443 ssl{{ isHTTP2() ? ' http2' : '' }};<!--
 
-		✔ IPv6 --><span ng-if="isIPv6()">
+	✔ IPv6 --><span ng-if="isIPv6()">
 	listen [{{ data.ipv6 }}]:443 ssl{{ isHTTP2() ? ' http2' : '' }};</span></span>
 
 	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
@@ -19,9 +19,12 @@ server {<!--
 	root $base{{ data.document_root }};</span><!--
 
 	✘ PHP --><span ng-if="!isPHP()">
-	root /var/www/{{ domain() }}{{ data.document_root }};</span>
+	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
 
-	index {{ data.index ? data.index : 'index.html' + (isPHP() ? ' index.php' : '') }};<!--
+	✔ unified && ✔ index.php --><span ng-if="isUnified() && isIndexPhp()">
+
+	# index.php
+	index index.php;</span><!--
 
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
@@ -32,16 +35,11 @@ server {<!--
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
 
-	✔ unified && ✔ PHP --><span ng-if="isUnified() && isPHP()">
+	✔ fallback --><span ng-if="isFallback()">
 
-	# index
-	index {{ isIndexHtml() ? 'index.html ' : '' }}index.php;</span><!--
-
-	(✔ PHP && ✔ index.php) || ✔ index.html --><span ng-if="isIndexPhp() || isIndexHtml()">
-
-	# $uri{{ isIndexHtml() ? ', index.html' : '' }}{{ isIndexPhp() ? ', index.php' : '' }}
+	# $uri{{ isFallback() ? (', ' + data.index) : '' }}
 	location / {
-		try_files $uri $uri/ {{ isIndexHtml() ? '/index.html' : '' }}{{ isIndexHtml() && isIndexPhp() ? ' ' : '' }}{{ isIndexPhp() ? '/index.php?$query_string' : '' }};
+		try_files $uri $uri/ {{ isIndexHtml() ? '/index.html' : '' }}{{ isIndexPhp() ? '/index.php?$query_string' : '' }};
 	}</span><!--
 
 	✔ unified --><span ng-if="isModularized()">
