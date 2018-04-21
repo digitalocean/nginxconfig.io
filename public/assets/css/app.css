@@ -192,13 +192,28 @@ main .commands pre code {
 	overflow-x: visible;
 }
 
+main .sidebar .github-link {
+	text-align: center;
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+main .sidebar .github-link small {
+	font-size: 90%;
+}
+
+main .sidebar .github-link img {
+	height: 1.2rem;
+	vertical-align: -4px;
+}
+
 main .sidebar .github-star {
 	width: 132px;
 	height: 30px;
 	display: block;
 	border: 0;
 	overflow: hidden;
-	margin: 0 auto 1rem;
+	margin: 0 auto 0.25rem;
 }
 
 main .buttons {
