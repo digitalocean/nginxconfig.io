@@ -138,6 +138,18 @@ main .options .card .form-group:last-child {
 	margin-bottom: 0;
 }
 
+main .options .card .row.no-gutters ~ .row.no-gutters {
+	margin-top: 0.5rem;
+}
+
+main .options .card .row.no-gutters .col-md-6:first-child {
+	padding-right: 3px;
+}
+
+main .options .card .row.no-gutters .col-md-6:last-child {
+	padding-left: 3px;
+}
+
 main .file {
 	margin-bottom: 2rem;
 }
