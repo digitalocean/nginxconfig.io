@@ -49,7 +49,9 @@
 			cdn:				false,
 
 			index:				'index.php',
-			fallback:			true,
+			fallback_html:		false,
+			fallback_php:		true,
+			fallback_php_path:	'/api/',
 
 			php:				'7.2',
 			wordpress:			false,
@@ -341,16 +343,20 @@
 			return $scope.isWWW() && $scope.data.cdn;
 		};
 
-		$scope.isIndexHtml = function() {
-			return $scope.data.index === 'index.html';
+		$scope.isIndexHTML = function() {
+			return $scope.data.index === 'index.html' || !$scope.isPHP();
 		};
 
-		$scope.isIndexPhp = function() {
+		$scope.isIndexPHP = function() {
 			return $scope.isPHP() && $scope.data.index === 'index.php';
 		};
 
-		$scope.isFallback = function() {
-			return $scope.data.fallback && (!$scope.isIndexPhp() || $scope.isPHP);
+		$scope.isFallbackHTML = function() {
+			return $scope.data.fallback_html;
+		};
+
+		$scope.isFallbackPHP = function() {
+			return $scope.data.fallback_php && $scope.isPHP();
 		};
 
 		$scope.isPHP = function() {

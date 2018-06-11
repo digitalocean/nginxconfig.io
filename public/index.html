@@ -235,7 +235,7 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
-								<label class="form-label"><code tooltips tooltip-template="Defines the file that will be used as an index, optionally configures fallback of unhandled requests.">index</code></label>
+								<label class="form-label"><code tooltips tooltip-template="Defines the file that will be used as an index.">index</code></label>
 								<div class="form-subgroup">
 									<div class="form-check">
 										<input class="form-check-input" type="radio" id="index.html" ng-model="data.index" value="index.html">
@@ -248,11 +248,22 @@
 										<label class="form-check-label" for="index.php">index.php</label>
 									</div>
 								</div>
-								<div class="form-check mt-2">
-									<input class="form-check-input" type="checkbox" id="fallback" ng-model="data.fallback">
-									<label class="form-check-label" for="fallback">
-										<span tooltips tooltip-template="Fallback of unhandled requests.">fallback <small>({{ isIndexPhp() ? 'index.php' : 'index.html' }})</small></span>
-									</label>
+
+								<label class="form-label mt-3"><span tooltips tooltip-template="Configures fallback routing of unhandled requests.">fallback routing</span></label>
+								<div class="form-subgroup">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.fallback_html">
+										<label class="form-check-label" for="fallback_html">index.html</label>
+									</div>
+									<div class="form-check" ng-if="isPHP()">
+										<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.fallback_php">
+										<label class="form-check-label" for="fallback_php">index.php</label>
+									</div>
+									<div class="form-subgroup" ng-if="isFallbackHTML() && isFallbackPHP()">
+										<div class="form-group pl-1">
+											<input type="text" class="form-control form-control-sm" ng-model="data.fallback_php_path">
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -389,7 +400,7 @@
 					<div class="col-md-6 col-lg-7 files">
 						<div class="row grid">
 							<div class="grid-sizer col-xl-6"></div>
-							<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern())) || isWordPress()" class="grid-item col-xl-12" ng-cloak>
+							<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-12" ng-cloak>
 								<div class="commands">
 									<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 								</div>
@@ -433,16 +444,6 @@
 								<div class="code source" data-filename="_general.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-general" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isPHP() && isModularized()" ng-cloak>
-								<strong>/etc/nginx/_php.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php" ngclipboard-success="clipboardSuccess('_php.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_php.conf'">Copied!</span>
-								<div class="code source"data-filename="_php.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_php.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-php" class="code highlighted"></div>
 							</div>
 							<div class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>

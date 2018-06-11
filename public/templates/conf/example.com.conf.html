@@ -21,7 +21,7 @@ server {<!--
 	✘ PHP --><span ng-if="!isPHP()">
 	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
 
-	✔ unified && ✔ index.php --><span ng-if="isUnified() && isIndexPhp()">
+	✔ index.php --><span ng-if="isIndexPHP()">
 
 	# index.php
 	index index.php;</span><!--
@@ -35,11 +35,30 @@ server {<!--
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
 
-	✔ fallback --><span ng-if="isFallback()">
+	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="isFallbackHTML() || isFallbackPHP()">
 
-	# $uri{{ isFallback() ? (', ' + data.index) : '' }}
+	# {{ isFallbackHTML() ? 'index.html' : ( isFallbackPHP() ? 'index.php' : '' ) }} fallback
 	location / {
-		try_files $uri $uri/ {{ isIndexHtml() ? '/index.html' : '' }}{{ isIndexPhp() ? '/index.php?$query_string' : '' }};
+		try_files $uri $uri/ {{ isFallbackHTML() ? '/index.html' : ( isFallbackPHP() ? '/index.php?$query_string' : '' ) }};
+	}</span><!--
+
+	✔ Fallback HTML && ✔ Fallback PHP --><span ng-if="isFallbackHTML() && isFallbackPHP()">
+
+	# index.php fallback
+	location ~ ^{{ data.fallback_php_path }} {
+		try_files $uri $uri/ /index.php?$query_string;
+	}</span><!--
+
+	✔ PHP --><span ng-if="isPHP()">
+
+	# handle .php
+	location ~ \.php$ {<!--
+
+	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress()">
+		include _php_fastcgi.conf;</span><!--
+
+	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
+	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
 	✔ unified --><span ng-if="isModularized()">
@@ -53,9 +72,6 @@ server {<!--
 	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress()">
 	include _wordpress.conf;</span><!--
 
-	✔ modularized && ✔ PHP --><span ng-if="isModularized() && isPHP()">
-	include _php.conf;</span><!--
-
 
 
 	✔ unified --><span ng-if="isUnified()">
@@ -64,11 +80,7 @@ server {<!--
 
 	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
-
-	✔ modularized && ✔ PHP --><span ng-if="isUnified() && isPHP()">
-
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_php.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
