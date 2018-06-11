@@ -26,6 +26,12 @@
 		</header>
 		<main>
 			<div class="container-fluid">
+				<div class="presets">
+					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/angular.svg" alt="Angular"> <img src="assets/img/react.svg" alt="React"> <img src="assets/img/vuejs.svg" alt="Vue.js"></button>
+					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/php.svg" alt="PHP"> <img src="assets/img/laravel.svg" alt="Laravel"> <img src="assets/img/symfony.svg" alt="Symfony"> <img src="assets/img/codeigniter.svg" alt="CodeIgniter"></button>
+					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
+					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom">WordPress <img src="assets/img/wordpress.svg" alt="WordPress"></button>
+				</div>
 				<div class="row">
 					<div class="col-md-3 col-lg-2 options">
 						<div class="adsbygoogle-container d-block d-md-none">

@@ -111,6 +111,10 @@ main .options .card .form-subgroup .form-subgroup {
 	padding-left: 0.4rem;
 }
 
+main .options .card .form-subgroup .form-check + .form-subgroup {
+	margin-left: 5.5px;
+}
+
 main .options .card .form-control[type="text"]:placeholder-shown,
 main .options .card .form-control[type="email"]:placeholder-shown {
 	background-color: #f8f8f8;
@@ -238,6 +242,19 @@ main .buttons .btn-reset img {
 	height: 0.9rem;
 }
 
+main .presets {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+main .presets .btn img {
+	height: 1.1rem;
+	vertical-align: text-bottom;
+}
+
+main .presets .btn.btn-outline-dark:hover {
+	background-color: #666;
+}
 
 
 /*

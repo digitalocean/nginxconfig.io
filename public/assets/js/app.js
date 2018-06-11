@@ -274,6 +274,32 @@
 			});
 		};
 
+		$scope.setPreset = function(preset) {
+			$scope.data.php				= data.php;
+			$scope.data.wordpress		= data.wordpress;
+			$scope.data.index			= data.index;
+			$scope.data.fallback_html	= data.fallback_html;
+
+			switch(preset) {
+				case 'frontend':
+					$scope.data.php = 'off';
+					$scope.data.index = 'index.html';
+					$scope.data.fallback_html = true;
+					break;
+				case 'spa':
+					$scope.data.index = 'index.html';
+					$scope.data.fallback_html = true;
+					break;
+				case 'wordpress':
+					$scope.data.wordpress = true;
+					break;
+			}
+
+			gtag('event', preset, {
+				event_category: 'preset',
+			});
+		};
+
 
 
 		///////////////////////////
