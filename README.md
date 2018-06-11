@@ -68,3 +68,4 @@ Online nginx configuration generator.
 * [h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx)
 * [Diffie-Hellman DSA-like parameters](https://security.stackexchange.com/questions/95178/diffie-hellman-parameters-still-calculating-after-24-hours/95184#95184)
 * [hstspreload.org](https://hstspreload.org)
+* [Optimal value for nginx worker_connections](https://serverfault.com/questions/787919/optimal-value-for-nginx-worker-connections)

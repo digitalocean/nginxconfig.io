@@ -1,11 +1,11 @@
 user {{ data.user }};
 pid {{ data.pid}};
 worker_processes {{ data.worker_processes }};
-worker_rlimit_nofile 409600;
+worker_rlimit_nofile 65535;
 
 events {
-	worker_connections 4096;
 	multi_accept on;
+	worker_connections 65535;
 }
 
 http {
