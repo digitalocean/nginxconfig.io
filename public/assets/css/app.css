@@ -76,13 +76,16 @@ main {
 	flex: 1 1 auto;
 }
 
-main .options,
-main .sidebar {
+main .options {
 	padding-top: 1.5rem;
 }
 
+main .options .card {
+	background-color: #f8f8f8;
+}
+
 main .options .card .card-body {
-	padding: 0.5rem;
+	padding: 0.25rem 0.5rem 0.5rem;
 	font-size: 0.9rem;
 }
 
@@ -194,6 +197,12 @@ main .commands pre code {
 	tab-size: 4;
 	overflow: visible;
 	overflow-x: visible;
+}
+
+@media (min-width: 992px) {
+	main .sidebar {
+		margin-top: -2.4rem;
+	}
 }
 
 main .sidebar .github-link {
