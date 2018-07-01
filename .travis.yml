@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "lts/*"
+  - "node"
 
 addons:
   ssh_known_hosts: nginxconfig.io
@@ -13,7 +13,7 @@ cache:
     - node_modules
 
 install:
-  - npm install
+  - npm ci
 
 script:
   - npm run test
@@ -23,11 +23,12 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
-  - find public -type f -name "*.html" -exec sed -i -e "s/COMMIT_HASH/$TRAVIS_COMMIT/" {} \;
 
 deploy:
   provider: script
-  script: rsync --checksum --delete --delete-after --force --ignore-errors --links --recursive --exclude="/node_modules/*" --exclude="/cypress/videos/*" ./ www-data@nginxconfig.io:/var/www/nginxconfig.io/
-  skip_cleanup: true
+  script:
+    - npm run build:prod
+    - find public -type f -name "*.html" -exec sed -i -e "s/COMMIT_HASH/$TRAVIS_COMMIT/" {} \;
+    - rsync --checksum --delete --delete-after --force --ignore-errors --links --recursive --stats --verbose --exclude="/node_modules*" --exclude="/cypress/videos*" ./ www-data@nginxconfig.io:/var/www/nginxconfig.io/
   on:
     branch: master

@@ -30,7 +30,7 @@
 		"start-server-and-test": "^1.5.0"
 	},
 	"scripts": {
-		"start": "http-server",
+		"start": "npm run build && http-server",
 		"build": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
 		"build:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
 		"test": "start-server-and-test start http://localhost:8080 cypress:run",
