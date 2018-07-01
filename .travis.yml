@@ -10,7 +10,6 @@ cache:
   directories:
     - ~/.npm
     - ~/.cache
-    - node_modules
 
 install:
   - npm ci
