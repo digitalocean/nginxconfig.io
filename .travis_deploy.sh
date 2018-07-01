@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm ci --production
+rm public/assets/css/app.min.css*
 npm run build:prod
 find public -type f -name "*.html" -exec sed -i -e "s/COMMIT_HASH/$TRAVIS_COMMIT/" {} \;
 rsync \
