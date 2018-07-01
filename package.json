@@ -20,9 +20,11 @@
 	"license": "MIT",
 	"dependencies": {
 		"angular-tooltips": "^1.2.2",
+		"autoprefixer": "^8.6.4",
 		"bootstrap": "^4.1.1",
 		"highlight.js": "^9.12.0",
-		"node-sass": "^4.9.0"
+		"node-sass": "^4.9.0",
+		"postcss-cli": "^5.0.1"
 	},
 	"devDependencies": {
 		"cypress": "^3.0.2",
@@ -31,11 +33,14 @@
 	},
 	"scripts": {
 		"start": "npm run build && http-server",
-		"build": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
-		"build:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
+		"build": "npm run build:scss",
+		"build:prod": "npm run build:scss:prod && npm run autoprefixer",
+		"build:scss": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
+		"build:scss:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
 		"test": "start-server-and-test start http://localhost:8080 cypress:run",
 		"test:debug": "start-server-and-test start http://localhost:8080 cypress:open",
 		"cypress:run": "cypress run",
-		"cypress:open": "cypress open"
+		"cypress:open": "cypress open",
+		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose"
 	}
 }
