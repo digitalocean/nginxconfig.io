@@ -9,6 +9,7 @@ addons:
 cache:
   directories:
     - ~/.npm
+    - ~/.cache
     - node_modules
 
 install:
@@ -22,10 +23,11 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
-  - npm run build:prod
+  - find public -type f -name "*.html" -exec sed -i -e "s/COMMIT_HASH/$TRAVIS_COMMIT/" {} \;
 
 deploy:
   provider: script
-  script: ssh -q -l root nginxconfig.io "sudo -u www-data -H sh -c 'cd /var/www/nginxconfig.io; git reset --hard && git pull origin master && find . -type f -name '*.html' -exec sed -i -e \"s/COMMIT_HASH/$TRAVIS_COMMIT/\" {} \;'"
+  script: rsync --checksum --delete --delete-after --force --ignore-errors --links --recursive --exclude="/node_modules/*" --exclude="/cypress/videos/*" ./ www-data@nginxconfig.io:/var/www/nginxconfig.io/
+  skip_cleanup: true
   on:
     branch: master

@@ -1,2 +1,4 @@
 node_modules
 cypress/videos
+.deploy_rsa
+.deploy_rsa.pub

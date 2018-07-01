@@ -35,7 +35,7 @@
 		"build:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
 		"test": "start-server-and-test start http://localhost:8080 cypress:run",
 		"test:debug": "start-server-and-test start http://localhost:8080 cypress:open",
-		"cypress:run": "cypress run",
+		"cypress:run": "cypress run --record false",
 		"cypress:open": "cypress open"
 	}
 }
