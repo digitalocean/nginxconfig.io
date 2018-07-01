@@ -1,5 +1,6 @@
 #!/bin/bash
 
+npm ci --production
 npm run build:prod
 find public -type f -name "*.html" -exec sed -i -e "s/COMMIT_HASH/$TRAVIS_COMMIT/" {} \;
 rsync \
@@ -12,7 +13,7 @@ rsync \
 	--recursive \
 	--stats \
 	--verbose \
+	--exclude="/.git*" \
 	--exclude="/node_modules*" \
-	--exclude="/cypress/videos*" \
 	./ \
 	www-data@nginxconfig.io:/var/www/nginxconfig.io/
