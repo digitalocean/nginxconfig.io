@@ -2,7 +2,7 @@
 	"name": "nginxconfig.io",
 	"version": "1.0.0",
 	"homepage": "https://nginxconfig.io",
-	"description": "Online nginx configuration generator",
+	"description": "🎛️ nginx config generator generator on steroids.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/valentinxxx/nginxconfig.io.git"
@@ -10,16 +10,28 @@
 	"bugs": {
 		"url": "https://github.com/valentinxxx/nginxconfig.io/issues"
 	},
-	"keywords": ["nginx", "config", "configuration", "generator"],
+	"keywords": [
+		"nginx",
+		"config",
+		"configuration",
+		"generator"
+	],
 	"author": "Bálint Szekeres <balint@szekeres.me> (https://balint.szekeres.me)",
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"angular-tooltips": "^1.2.2",
+		"bootstrap": "^4.1.1",
+		"highlight.js": "^9.12.0",
+		"node-sass": "^4.9.0"
+	},
 	"devDependencies": {
 		"cypress": "^2.1.0",
 		"forever": "^0.15.3",
 		"http-server": "^0.11.1"
 	},
 	"scripts": {
+		"build": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
+		"build:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
 		"dev": "forever start ./node_modules/.bin/http-server && cypress open && forever stop ./node_modules/.bin/http-server",
 		"test": "forever start ./node_modules/.bin/http-server && cypress run --record && forever stop ./node_modules/.bin/http-server"
 	}

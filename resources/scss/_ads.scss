@@ -1,0 +1,23 @@
+.adsbygoogle-container {
+	overflow: hidden;
+
+	.adsbygoogle {
+		display: block;
+		position: relative;
+		background-color: #f8f8f8;
+
+		&[data-adsbygoogle-status="done"] {
+			background-color: transparent;
+		}
+
+		aside.sidebar & {
+			height: 600px;
+		}
+	}
+
+	.note {
+		text-align: center;
+		color: #444;
+		font-size: 0.6rem;
+	}
+}

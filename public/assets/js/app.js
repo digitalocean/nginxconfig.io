@@ -164,7 +164,7 @@
 					if (_sourceCode.nextSibling.children.length && _sourceCode.nextSibling.children[0].children.length) {
 						hljs.highlightBlock(_sourceCode.nextSibling.children[0].children[0]);
 					}
-					_sourceCode.classList.add('hidden');
+					_sourceCode.setAttribute('hidden', '');
 
 					$scope.doMasonry();
 				}, 0, true, sourceCode);
@@ -264,7 +264,7 @@
 		};
 
 		$scope.initMasonry = function() {
-			masonry = new Masonry('main .files .grid', {
+			masonry = new Masonry('main .grid', {
 				itemSelector: '.grid-item',
 				columnWidth: '.grid-sizer',
 				percentPosition: true,

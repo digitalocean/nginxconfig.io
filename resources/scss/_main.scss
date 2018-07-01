@@ -1,0 +1,57 @@
+section.presets {
+	text-align: center;
+	margin-bottom: 0.5rem;
+
+	.btn {
+		&.btn-outline-dark{
+			&:hover {
+				background-color: #666;
+			}
+		}
+
+		img {
+			height: 1.1rem;
+			vertical-align: text-bottom;
+		}
+	}
+}
+
+main {
+	flex: 1 1 auto;
+
+	.commands {
+		margin-bottom: 1rem;
+	}
+
+	.file {
+		margin-bottom: 2rem;
+
+		.btn-clipboard {
+			font-size: 0;
+			padding: 0.2rem 0.4rem 0.05rem;
+			vertical-align: text-bottom;
+		}
+	}
+
+	.commands,
+	.file .code {
+		overflow-x: auto;
+		font-size: 0.75rem;
+		line-height: 1.25;
+		background-color: #f8f8f8;
+
+		pre {
+			margin-bottom: 0;
+			font-size: inherit;
+
+			code {
+				display: block;
+				padding: 0.6rem;
+				-moz-tab-size: 4;
+				tab-size: 4;
+				overflow: visible;
+				overflow-x: visible;
+			}
+		}
+	}
+}

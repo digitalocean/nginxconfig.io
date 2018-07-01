@@ -1,0 +1,142 @@
+aside.options {
+	.card {
+		background-color: #f8f8f8;
+
+		& + .card {
+			margin-top: 1rem;
+		}
+
+		.card-body {
+			padding: 0.25rem 0.5rem 0.5rem;
+			font-size: 0.9rem;
+
+			.form-group {
+				margin-bottom: 0.5rem;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.form-subgroup {
+				margin-left: 0.35rem;
+				border-left: 2px solid #ced4da;
+				padding-left: 0.5rem;
+
+				.form-subgroup {
+					margin-left: 0;
+					border-left: 1px solid #d7e0ea;
+					padding-left: 0.4rem;
+				}
+
+				.form-check + .form-subgroup {
+					margin-left: 5.5px;
+				}
+			}
+
+			.form-label {
+				margin-bottom: 0.15rem;
+				margin-left: 0.15rem;
+			}
+
+			.form-control {
+				&.domain {
+					&::placeholder {
+						color: #000;
+					}
+
+					&:placeholder-shown {
+						border-color: #3131ff;
+					}
+				}
+
+				&[type="text"],
+				&[type="email"] {
+					&:placeholder-shown {
+						background-color: #fefefe;
+					}
+				}
+			}
+
+			.form-check-label {
+				cursor: pointer;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.row {
+				&.no-gutters {
+					& + .no-gutters {
+						margin-top: 0.5rem;
+					}
+
+					.col-md-6 {
+						&:first-child {
+							padding-right: 3px;
+						}
+
+						&:last-child {
+							padding-left: 3px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+aside.sidebar {
+	@include media-breakpoint-up(lg) {
+		margin-top: -2.4rem;
+	}
+
+	.github-link {
+		text-align: center;
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+
+		small {
+			font-size: 90%;
+		}
+
+		img {
+			height: 1.2rem;
+			vertical-align: -4px;
+		}
+	}
+
+	.github-star {
+		width: 132px;
+		height: 30px;
+		display: block;
+		border: 0;
+		overflow: hidden;
+		margin: 0 auto 0.25rem;
+	}
+
+	.buttons {
+		text-align: center;
+		margin-top: 1.5rem;
+
+		.btn {
+			&.btn-download {
+				margin-bottom: 0.25rem;
+
+				img {
+					vertical-align: -2px;
+					margin-right: 0.1rem;
+					height: 1rem;
+				}
+			}
+
+			&.btn-reset {
+				img {
+					vertical-align: -3px;
+					height: 0.9rem;
+				}
+			}
+		}
+	}
+}

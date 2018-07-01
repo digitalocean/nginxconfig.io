@@ -1,0 +1,25 @@
+[ng-cloak] {
+	display: none;
+}
+
+.clipboard-success {
+	font-size: 0.8rem;
+	color: #28a745;
+	font-weight: 700;
+}
+
+tooltip {
+	tip {
+		min-width: 150px;
+		padding: 4px 12px;
+	}
+
+	tip-tip {
+		line-height: 1.1;
+		display: block;
+
+		&._small {
+			font-size: 0.9rem;
+		}
+	}
+}

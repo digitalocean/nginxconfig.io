@@ -4,10 +4,7 @@
 		<base href="/">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css?v=4.0.0">
-		<link rel="stylesheet" href="assets/css/highlight-github.min.css?v=9.12.0">
-		<link rel="stylesheet" href="assets/css/angular-tooltips.min.css?v=1.2.2">
-		<link rel="stylesheet" href="assets/css/app.css?v=COMMIT_HASH">
+		<link rel="stylesheet" href="assets/css/app.min.css?v=COMMIT_HASH">
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="Online nginx configuration generator">
@@ -24,26 +21,16 @@
 				<img src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
 			</div>
 		</header>
-		<main>
-			<div class="container-fluid">
-				<div class="presets">
-					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/angular.svg" alt="Angular"> <img src="assets/img/react.svg" alt="React"> <img src="assets/img/vuejs.svg" alt="Vue.js"></button>
-					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/php.svg" alt="PHP"> <img src="assets/img/laravel.svg" alt="Laravel"> <img src="assets/img/symfony.svg" alt="Symfony"> <img src="assets/img/codeigniter.svg" alt="CodeIgniter"></button>
-					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
-					<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom">WordPress <img src="assets/img/wordpress.svg" alt="WordPress"></button>
-				</div>
-				<div class="row">
-					<div class="col-md-3 col-lg-2 options">
-						<div class="adsbygoogle-container d-block d-md-none">
-							<div class="note">▾ advertisement ▾</div>
-							<ins class="adsbygoogle"
-									style="display:block"
-									data-ad-client="ca-pub-6543577519725877"
-									data-ad-slot="4527334349"></ins>
-							<script>
-								(window.adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
+		<section class="presets">
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/angular.svg" alt="Angular"> <img src="assets/img/react.svg" alt="React"> <img src="assets/img/vuejs.svg" alt="Vue.js"></button>
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/php.svg" alt="PHP"> <img src="assets/img/laravel.svg" alt="Laravel"> <img src="assets/img/symfony.svg" alt="Symfony"> <img src="assets/img/codeigniter.svg" alt="CodeIgniter"></button>
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom">WordPress <img src="assets/img/wordpress.svg" alt="WordPress"></button>
+		</section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3 col-lg-2">
+					<aside class="options">
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
@@ -402,8 +389,10 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6 col-lg-7 files">
+					</aside>
+				</div>
+				<div class="col-md-6 col-lg-7 files">
+					<main>
 						<div class="row grid">
 							<div class="grid-sizer col-xl-6"></div>
 							<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-12" ng-cloak>
@@ -411,7 +400,7 @@
 									<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 								</div>
 							</div>
-							<div class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
+							<section class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
 								<strong>/etc/nginx/nginx.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -420,8 +409,8 @@
 								<div class="code source" data-filename="nginx.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-nginx" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
 								<strong>/etc/nginx/sites-enabled/{{ domain() }}.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -430,8 +419,8 @@
 								<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-domain" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isModularized() && isCertLetsEncrypt()" ng-cloak>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isModularized() && isCertLetsEncrypt()" ng-cloak>
 								<strong>/etc/nginx/_letsencrypt.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -440,8 +429,8 @@
 								<div class="code source" data-filename="_letsencrypt.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-letsencrypt" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
 								<strong>/etc/nginx/_general.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('_general.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -450,8 +439,8 @@
 								<div class="code source" data-filename="_general.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-general" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
 								<strong>/etc/nginx/_php_fastcgi.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('_php_fastcgi.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -460,8 +449,8 @@
 								<div class="code source" data-filename="_php_fastcgi.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-php_fastcgi" class="code highlighted"></div>
-							</div>
-							<div class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
 								<strong>/etc/nginx/_wordpress.conf</strong>
 								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('_wordpress.conf')">
 									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -470,19 +459,12 @@
 								<div class="code source" data-filename="_wordpress.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>
-							</div>
+							</section>
 						</div>
-						<div class="url" ng-cloak>
-							<div class="input-group">
-								<input type="text" id="url" class="form-control form-control-sm" ng-value="location.absUrl()" readonly>
-								<div class="input-group-append">
-									<button class="btn btn-primary btn-url" ngclipboard data-clipboard-target="#url" ngclipboard-success="clipboardSuccess('url')"><img src="assets/img/clipboard.svg" alt="Copy to clipboard"> Copy URL</button>
-								</div>
-							</div>
-							<div class="clipboard-success text-center" ng-if="clipboardCopy === 'url'">Copied!</div>
-						</div>
-					</div>
-					<div class="col-md-3 sidebar">
+					</main>
+				</div>
+				<div class="col-md-3 sidebar">
+					<aside class="sidebar">
 						<iframe class="github-star" src="https://ghbtns.com/github-btn.html?user=valentinxxx&repo=nginxconfig.io&type=star&count=true&size=large"></iframe>
 						<div class="github-link">
 							<img src="assets/img/github.svg" alt="GitHub"> <a href="https://github.com/valentinxxx/nginxconfig.io" target="_blank"><small>valentinxxx /</small> <strong>nginxconfig.io</strong></a>
@@ -501,10 +483,10 @@
 							<button class="btn btn-primary btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button><br>
 							<button class="btn btn-sm btn-danger btn-reset" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
 						</div>
-					</div>
+					</aside>
 				</div>
 			</div>
-		</main>
+		</div>
 		<footer>
 			<div class="container-fluid">
 				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"> <a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>
