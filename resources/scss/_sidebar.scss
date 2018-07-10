@@ -58,6 +58,16 @@ aside.options {
 				}
 			}
 
+			.form-control.input-changed,
+			.form-check.input-changed,
+			select.input-changed {
+				background-color: #fff3cd;
+			}
+
+			.form-check.input-changed {
+				border-radius: 0.2rem;
+			}
+
 			.form-check-label {
 				cursor: pointer;
 				user-select: none;

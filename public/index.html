@@ -35,28 +35,40 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label">Domain</label>
-									<input type="text" class="form-control form-control-sm domain" ng-model="data.domain" autofocus placeholder="{{ domain() }}">
+									<input type="text"
+										class="form-control form-control-sm domain"
+										ng-model="data.domain"
+										ng-class="{ 'input-changed': data.domain !== defaultData.domain }"
+										placeholder="{{ domain() }}"
+										autofocus>
 								</div>
 								<div class="form-group">
 									<label class="form-label">
 										<span tooltips tooltip-template="Define path to project.">Path</span>
 									</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.path" placeholder="{{ '/var/www/' + domain() }}">
+									<input type="text"
+										class="form-control form-control-sm"
+										ng-model="data.path"
+										ng-class="{ 'input-changed': data.path !== defaultData.path }"
+										placeholder="{{ '/var/www/' + domain() }}">
 								</div>
 								<div class="form-group">
 									<label class="form-label">
 										<span tooltips tooltip-template="Define public path in project path.">Document root</span>
 									</label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.document_root">
+									<input type="text"
+										class="form-control form-control-sm"
+										ng-model="data.document_root"
+										ng-class="{ 'input-changed': data.document_root !== defaultData.document_root }">
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.non_www !== defaultData.non_www }">
 									<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www">
 									<label class="form-check-label" for="non_www">
 										<span tooltips tooltip-template="Serve requests without www subdomain.">non-www</span>
 									</label>
 								</div>
 								<div class="form-subgroup" ng-cloak>
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.redirect !== defaultData.redirect }">
 										<input class="form-check-input" type="checkbox" id="redirect" ng-model="data.redirect">
 										<label class="form-check-label" for="redirect">
 											<span tooltips tooltip-template="Redirect {{ isWWW() ? 'non-www version and ' : '' }}all subdomains to domain.">redirect <small>{{ isWWW() ? 'non-www, ' : '' }}subdomains</small></span>
@@ -64,21 +76,21 @@
 									</div>
 								</div>
 								<div class="form-subgroup" ng-if="isWWW()" ng-cloak>
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.cdn !== defaultData.cdn }">
 										<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
 										<label class="form-check-label" for="cdn">
 											<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN <small>subdomain</small></span>
 										</label>
 									</div>
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.https !== defaultData.https }">
 									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
 									<label class="form-check-label" for="https">
 										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>"><strong>HTTPS</strong></span>
 									</label>
 								</div>
 								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.http2 !== defaultData.http2 }">
 										<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
 										<label class="form-check-label" for="http2">
 											<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
@@ -86,7 +98,7 @@
 									</div>
 								</div>
 								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.force_https !== defaultData.force_https }">
 										<input class="form-check-input" type="checkbox" id="force_https" ng-model="data.force_https">
 										<label class="form-check-label" for="force_https">
 											<span tooltips tooltip-template="Force redirection from HTTP to HTTPS.">force HTTPS</span>
@@ -96,7 +108,7 @@
 								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
 									Certification type:
 									<div class="form-subgroup">
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'letsencrypt' }">
 											<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
 											<label class="form-check-label" for="letsencrypt">
 												<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
@@ -106,9 +118,13 @@
 											<label class="form-label small">
 												<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
 											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.email" placeholder="{{ 'hello@' + domain() }}">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.email"
+												ng-class="{ 'input-changed': data.email !== defaultData.email }"
+												placeholder="{{ 'hello@' + domain() }}">
 										</div>
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'custom' }">
 											<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.cert_type" value="custom">
 											<label class="form-check-label" for="custom_cert">
 												<span tooltips tooltip-template="Custom certificate">Custom certificate</span>
@@ -118,38 +134,46 @@
 											<label class="form-label small">
 												<span tooltips tooltip-template="Path to crt file"><code>ssl_certificate</code></span>
 											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.ssl_certificate"
+												ng-class="{ 'input-changed': data.ssl_certificate !== defaultData.ssl_certificate }"
+												placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
 										</div>
 										<div class="form-group" ng-if="isHTTPS() && isCertCustom()">
 											<label class="form-label small">
 												<span tooltips tooltip-template="Path to key file"><code>ssl_certificate_key</code></span>
 											</label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ssl_certificate_key" placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.ssl_certificate_key"
+												ng-class="{ 'input-changed': data.ssl_certificate_key !== defaultData.ssl_certificate_key }"
+												placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
 										</div>
 									</div>
 								</div>
 								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
 									SSL profile:
 									<div class="form-subgroup">
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
 											<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
 											<label class="form-check-label" for="modern">
 												<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8">modern</span>
 											</label>
 										</div>
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
 											<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
 											<label class="form-check-label" for="intermediate">
 												<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7">intermediate</span>
 											</label>
 										</div>
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
 											<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
 											<label class="form-check-label" for="old">
 												<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6">old</span>
 											</label>
 										</div>
-										<div class="form-check">
+										<div class="form-check" ng-class="{ 'input-changed': data.hsts !== defaultData.hsts }">
 											<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
 											<label class="form-check-label" for="hsts">
 												<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
@@ -163,7 +187,10 @@
 											<div class="input-group-prepend">
 												<div class="input-group-text">IPv4</div>
 											</div>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ipv4">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.ipv4"
+												ng-class="{ 'input-changed': data.ipv4 !== defaultData.ipv4 }">
 										</div>
 									</div>
 									<div class="form-group">
@@ -171,7 +198,10 @@
 											<div class="input-group-prepend">
 												<div class="input-group-text">IPv6</div>
 											</div>
-											<input type="text" class="form-control form-control-sm" ng-model="data.ipv6">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.ipv6"
+												ng-class="{ 'input-changed': data.ipv6 !== defaultData.ipv6 }">
 										</div>
 									</div>
 								</div>
@@ -181,7 +211,7 @@
 							<div class="card-body">
 								<label class="form-label">File structure</label>
 								<div class="form-subgroup">
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure && data.file_structure === 'unified' }">
 										<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
 										<label class="form-check-label" for="unified">
 											<span tooltips tooltip-template="Combine configuration to a single file.<br><br><i>(if possible)</i>">unified</span>
@@ -189,7 +219,7 @@
 									</div>
 								</div>
 								<div class="form-subgroup">
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure && data.file_structure === 'modularized' }">
 										<input class="form-check-input" type="radio" id="modularized" ng-model="data.file_structure" value="modularized">
 										<label class="form-check-label" for="modularized">
 											<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">modularized</span>
@@ -205,7 +235,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">PHP</div>
 										</div>
-										<select class="custom-select" ng-model="data.php">
+										<select class="custom-select" ng-model="data.php" ng-class="{ 'input-changed': data.php !== defaultData.php }">
 											<option value="off">disabled</option>
 											<option value="tcp">TCP</option>
 											<option value="5.x">5.x socket</option>
@@ -217,7 +247,7 @@
 									</div>
 								</div>
 								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.wordpress !== defaultData.wordpress }">
 										<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
 										<label class="form-check-label" for="wordpress">
 											<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress</span>
@@ -230,13 +260,13 @@
 							<div class="card-body">
 								<label class="form-label"><code tooltips tooltip-template="Defines the file that will be used as an index.">index</code></label>
 								<div class="form-subgroup">
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.html' }">
 										<input class="form-check-input" type="radio" id="index.html" ng-model="data.index" value="index.html">
 										<label class="form-check-label" for="index.html">index.html</label>
 									</div>
 								</div>
 								<div class="form-subgroup" ng-if="isPHP()">
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.php' }">
 										<input class="form-check-input" type="radio" id="index.php" ng-model="data.index" value="index.php">
 										<label class="form-check-label" for="index.php">index.php</label>
 									</div>
@@ -244,17 +274,17 @@
 
 								<label class="form-label mt-3"><span tooltips tooltip-template="Configures fallback routing of unhandled requests.">fallback routing</span></label>
 								<div class="form-subgroup">
-									<div class="form-check">
+									<div class="form-check" ng-class="{ 'input-changed': data.fallback_html !== defaultData.fallback_html }">
 										<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.fallback_html">
 										<label class="form-check-label" for="fallback_html">index.html</label>
 									</div>
-									<div class="form-check" ng-if="isPHP()">
+									<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.fallback_php !== defaultData.fallback_php }">
 										<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.fallback_php">
 										<label class="form-check-label" for="fallback_php">index.php</label>
 									</div>
 									<div class="form-subgroup" ng-if="isFallbackHTML() && isFallbackPHP()">
 										<div class="form-group pl-1">
-											<input type="text" class="form-control form-control-sm" ng-model="data.fallback_php_path">
+											<input type="text" class="form-control form-control-sm" ng-model="data.fallback_php_path"  ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
 										</div>
 									</div>
 								</div>
@@ -264,7 +294,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Referrer Policy is a new header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.">Referrer-Policy</code></label>
-									<select class="custom-select form-control-sm" ng-model="data.referrer_policy">
+									<select class="custom-select form-control-sm" ng-model="data.referrer_policy" ng-class="{ 'input-changed': data.referrer_policy !== defaultData.referrer_policy }">
 										<option value="no-referrer">no-referrer</option>
 										<option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
 										<option value="origin">origin</option>
@@ -277,7 +307,7 @@
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Content Security Policy is an effective measure to protect your site from XSS attacks. By whitelisting sources of approved content, you can prevent the browser from loading malicious assets.">Content-Security-Policy</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.content_security_policy">
+									<input type="text" class="form-control form-control-sm" ng-model="data.content_security_policy" ng-class="{ 'input-changed': data.content_security_policy !== defaultData.content_security_policy }">
 								</div>
 							</div>
 						</div>
@@ -285,7 +315,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code></label>
-									<select class="custom-select form-control-sm" ng-model="data.worker_processes">
+									<select class="custom-select form-control-sm" ng-model="data.worker_processes" ng-class="{ 'input-changed': data.worker_processes !== defaultData.worker_processes }">
 										<option value="auto">auto</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -307,48 +337,48 @@
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Defines user and group credentials used by worker processes.<br>If group is omitted, a group whose name equals that of user is used.">user</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.user">
+									<input type="text" class="form-control form-control-sm" ng-model="data.user" ng-class="{ 'input-changed': data.user !== defaultData.user }">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Defines a file that will store the process ID of the main process.">pid</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.pid">
+									<input type="text" class="form-control form-control-sm" ng-model="data.pid" ng-class="{ 'input-changed': data.pid !== defaultData.pid }">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.access_log">
+									<input type="text" class="form-control form-control-sm" ng-model="data.access_log" ng-class="{ 'input-changed': data.access_log !== defaultData.access_log }">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.error_log">
+									<input type="text" class="form-control form-control-sm" ng-model="data.error_log" ng-class="{ 'input-changed': data.error_log !== defaultData.error_log }">
 								</div>
 								<div class="form-group">
 									<label class="form-label"><code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code></label>
 									<div class="input-group">
-										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size">
+										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size" ng-class="{ 'input-changed': data.client_max_body_size !== defaultData.client_max_body_size }">
 										<div class="input-group-append">
 											<div class="input-group-text">MB</div>
 										</div>
 									</div>
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.gzip !== defaultData.gzip }">
 									<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
 									<label class="form-check-label" for="gzip">
 										<code tooltips tooltip-template="Gzipping of responses.">gzip</code>
 									</label>
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.server_tokens !== defaultData.server_tokens }">
 									<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
 									<label class="form-check-label" for="server_tokens">
 										<code tooltips tooltip-template="Emitting nginx version on error pages and in the “Server” response header field.">server_tokens</code>
 									</label>
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
 									<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
 									<label class="form-check-label" for="log_not_found">
 										<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
 									</label>
 								</div>
-								<div class="form-check">
+								<div class="form-check" ng-class="{ 'input-changed': data.limit_req !== defaultData.limit_req }">
 									<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
 									<label class="form-check-label" for="limit_req">
 										<span tooltips tooltip-template="Used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address."><code>limit_req</code></span>
@@ -363,13 +393,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="form-label"><span tooltips tooltip-template="{{ extensions.assets }}">assets</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets">
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets" ng-class="{ 'input-changed': data.expires_assets !== defaultData.expires_assets }">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="form-label"><span tooltips tooltip-template="{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_media">
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_media" ng-class="{ 'input-changed': data.expires_media !== defaultData.expires_media }">
 										</div>
 									</div>
 								</div>
@@ -377,13 +407,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="form-label"><span tooltips tooltip-template="{{ extensions.svg }}">svg</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg">
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg" ng-class="{ 'input-changed': data.expires_svg !== defaultData.expires_svg }">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="form-label"><span tooltips tooltip-template="{{ extensions.fonts }}">fonts</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts">
+											<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts" ng-class="{ 'input-changed': data.expires_fonts !== defaultData.expires_fonts }">
 										</div>
 									</div>
 								</div>

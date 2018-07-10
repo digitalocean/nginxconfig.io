@@ -24,7 +24,13 @@
 		// PRIVATE VARIABLES //
 		///////////////////////
 		var masonry;
-		var data = {
+
+
+
+		/////////////////////
+		// SCOPE VARIABLES //
+		/////////////////////
+		$scope.defaultData = {
 			ipv4:				'*',
 			ipv6:				'::',
 
@@ -78,13 +84,8 @@
 			expires_fonts:		'7d',
 		};
 
-
-
-		/////////////////////
-		// SCOPE VARIABLES //
-		/////////////////////
 		$scope.location = $location;
-		$scope.data = angular.copy(data);
+		$scope.data = angular.copy($scope.defaultData);
 		$scope.dataInit = false;
 		$scope.isDirty = false;
 
@@ -197,7 +198,7 @@
 
 			var changedData = {};
 			for (var key in $scope.data) {
-				if (!angular.equals($scope.data[key], data[key])) {
+				if (!angular.equals($scope.data[key], $scope.defaultData[key])) {
 					changedData[key] = $scope.data[key];
 				}
 			}
@@ -212,7 +213,7 @@
 		};
 
 		$scope.reset = function() {
-			$scope.data = angular.copy(data);
+			$scope.data = angular.copy($scope.defaultData);
 			gtag('event', 'reset');
 		};
 
@@ -275,10 +276,10 @@
 		};
 
 		$scope.setPreset = function(preset) {
-			$scope.data.php				= data.php;
-			$scope.data.wordpress		= data.wordpress;
-			$scope.data.index			= data.index;
-			$scope.data.fallback_html	= data.fallback_html;
+			$scope.data.php				= $scope.defaultData.php;
+			$scope.data.wordpress		= $scope.defaultData.wordpress;
+			$scope.data.index			= $scope.defaultData.index;
+			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
 
 			switch(preset) {
 				case 'frontend':
