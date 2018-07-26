@@ -72,6 +72,9 @@ server {<!--
 	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress()">
 	include _wordpress.conf;</span><!--
 
+	✔ modularized && ✔ Drupal --><span ng-if="isModularized() && isDrupal()">
+	include _drupal.conf;</span><!--
+
 
 
 	✔ unified --><span ng-if="isUnified()">
