@@ -1,0 +1,20 @@
+# Drupal: deny private files
+location ~ ^/sites/.*/private/ {
+	deny all;
+}
+
+# Drupal: deny php in files
+location ~ ^/sites/[^/]+/files/.*\.php$ {
+	deny all;
+}
+
+# Drupal: deny php in vendor
+location ~ /vendor/.*\.php$ {
+	deny all;
+}<span ng-if="isLimitReq()">
+
+# Drupal: throttle user functions
+location ~ ^/user/(?:login|register|password) {
+	limit_req zone=login burst=2 nodelay;
+	try_files $uri /index.php?$query_string;
+}</span>

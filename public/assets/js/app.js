@@ -61,6 +61,7 @@
 
 			php:				'7.2',
 			wordpress:			false,
+			drupal:				false,
 
 			file_structure:		'unified',
 
@@ -278,6 +279,7 @@
 		$scope.setPreset = function(preset) {
 			$scope.data.php				= $scope.defaultData.php;
 			$scope.data.wordpress		= $scope.defaultData.wordpress;
+			$scope.data.drupal			= $scope.defaultData.drupal;
 			$scope.data.index			= $scope.defaultData.index;
 			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
 
@@ -293,6 +295,9 @@
 					break;
 				case 'wordpress':
 					$scope.data.wordpress = true;
+					break;
+				case 'drupal':
+					$scope.data.drupal = true;
 					break;
 			}
 
@@ -392,6 +397,10 @@
 
 		$scope.isWordPress = function() {
 			return $scope.isPHP() && $scope.data.wordpress;
+		};
+
+		$scope.isDrupal= function() {
+			return $scope.isPHP() && $scope.data.drupal;
 		};
 
 		$scope.isCSP = function() {

@@ -8,9 +8,9 @@
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="Online nginx configuration generator">
-		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
+		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
 		<meta property="og:title" content="nginxconfig.io">
-		<meta property="og:description" content="Online nginx configuration generator: HTTPS, HTTP2, CDN, PHP (Laravel, Symfony, CodeIgniter…), Frontend (Angular, React, Vue.js…), WordPress, security headers, rate limiting, expiration by file types…">
+		<meta property="og:description" content="Online nginx configuration generator: HTTPS, HTTP2, CDN, PHP (Laravel, Symfony, CodeIgniter…), Frontend (Angular, React, Vue.js…), WordPress, Drupal, security headers, rate limiting, expiration by file types…">
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://nginxconfig.io">
 		<meta property="og:image" content="https://nginxconfig.io/assets/img/share.png">
@@ -25,7 +25,8 @@
 			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/brands/angular.svg" alt="Angular"> <img src="assets/img/brands/react.svg" alt="React"> <img src="assets/img/brands/vuejs.svg" alt="Vue.js"></button>
 			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/brands/php.svg" alt="PHP"> <img src="assets/img/brands/laravel.svg" alt="Laravel"> <img src="assets/img/brands/symfony.svg" alt="Symfony"> <img src="assets/img/brands/codeigniter.svg" alt="CodeIgniter"></button>
 			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom">WordPress <img src="assets/img/brands/wordpress.svg" alt="WordPress"></button>
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><img src="assets/img/brands/wordpress.svg" alt="WordPress"> WordPress</button>
+			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><img src="assets/img/brands/drupal.svg" alt="Drupal"> Drupal</button>
 		</section>
 		<div class="container-fluid">
 			<div class="row">
@@ -252,7 +253,15 @@
 									<div class="form-check" ng-class="{ 'input-changed': data.wordpress !== defaultData.wordpress }">
 										<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
 										<label class="form-check-label" for="wordpress">
-											<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress</span>
+											<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress rules</span>
+										</label>
+									</div>
+								</div>
+								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
+									<div class="form-check" ng-class="{ 'input-changed': data.drupal !== defaultData.drupal }">
+										<input class="form-check-input" type="checkbox" id="drupal" ng-model="data.drupal">
+										<label class="form-check-label" for="drupal">
+											<span tooltips tooltip-template="Drupal security rules and login limiting <i>(if enabled)</i>.">Drupal rules</span>
 										</label>
 									</div>
 								</div>
@@ -267,7 +276,7 @@
 										<label class="form-check-label" for="index.html">index.html</label>
 									</div>
 								</div>
-								<div class="form-subgroup" ng-if="isPHP()">
+								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
 									<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.php' }">
 										<input class="form-check-input" type="radio" id="index.php" ng-model="data.index" value="index.php">
 										<label class="form-check-label" for="index.php">index.php</label>
@@ -280,13 +289,16 @@
 										<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.fallback_html">
 										<label class="form-check-label" for="fallback_html">index.html</label>
 									</div>
-									<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.fallback_php !== defaultData.fallback_php }">
+									<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.fallback_php !== defaultData.fallback_php }" ng-cloak>
 										<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.fallback_php">
 										<label class="form-check-label" for="fallback_php">index.php</label>
 									</div>
-									<div class="form-subgroup" ng-if="isFallbackHTML() && isFallbackPHP()">
+									<div class="form-subgroup" ng-if="isFallbackHTML() && isFallbackPHP()" ng-cloak>
 										<div class="form-group pl-1">
-											<input type="text" class="form-control form-control-sm" ng-model="data.fallback_php_path"  ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.fallback_php_path"
+												ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
 										</div>
 									</div>
 								</div>
@@ -491,6 +503,16 @@
 								<div class="code source" data-filename="_wordpress.conf">
 									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 								</div><div id="file-wordpress" class="code highlighted"></div>
+							</section>
+							<section class="col-xl-6 grid-item file" ng-if="isDrupal() && isModularized()" ng-cloak>
+								<strong>/etc/nginx/_drupal.conf</strong>
+								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('_drupal.conf')">
+									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+								</button>
+								<span class="clipboard-success" ng-if="clipboardCopy === '_drupal.conf'">Copied!</span>
+								<div class="code source" data-filename="_drupal.conf">
+									<pre><code class="nginx" ng-include="'templates/conf/_drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+								</div><div id="file-drupal" class="code highlighted"></div>
 							</section>
 						</div>
 					</main>

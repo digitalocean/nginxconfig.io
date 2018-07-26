@@ -13,7 +13,8 @@ Online nginx configuration generator.
 * redirect subdomains
 * IPv4, IPv6
 * PHP (TCP, 5.x FPM, 7.0 FPM, 7.1 FPM, 7.2 FPM, 7.3 FPM)
-* WordPress security essentials (*including [CVE-2018-6389](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6389)*)
+* WordPress security essentials
+* Drupal security essentials
 * pass requests to index.php
 	* *[Laravel](https://laravel.com/docs/master/deployment#nginx)*
 	* *[Lumen](https://lumen.laravel.com/docs/5.1/installation#configuration)*

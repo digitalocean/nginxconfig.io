@@ -80,7 +80,11 @@ server {<!--
 
 	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
