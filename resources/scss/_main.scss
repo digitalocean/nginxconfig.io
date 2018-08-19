@@ -27,11 +27,23 @@ section.tabs {
 				cursor: pointer;
 				position: relative;
 				transition: all 0.25s;
+				padding-left: 0.9rem;
+				padding-right: 0.9rem;
+
+				@include media-breakpoint-up(xl) {
+					padding-left: 1rem;
+					padding-right: 1rem;
+				}
 
 				&.changed {
 					font-weight: 700;
-					padding-left: 0.6rem;
-					padding-right: 1.4rem;
+					padding-left: 0.5rem;
+					padding-right: 1.3rem;
+
+					@include media-breakpoint-up(xl) {
+						padding-left: 0.6rem;
+						padding-right: 1.4rem;
+					}
 
 					small {
 						display: inline;
