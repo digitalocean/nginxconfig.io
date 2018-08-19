@@ -55,10 +55,10 @@ server {<!--
 	location ~ \.php$ {<!--
 
 	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress()">
-		include _php_fastcgi.conf;</span><!--
+		include nginxconfig.io/php_fastcgi.conf;</span><!--
 
 	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
-	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
 	✔ unified --><span ng-if="isModularized()">
@@ -67,27 +67,27 @@ server {<!--
 
 
 	✔ modularized --><span ng-if="isModularized()">
-	include _general.conf;</span><!--
+	include nginxconfig.io/general.conf;</span><!--
 
 	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress()">
-	include _wordpress.conf;</span><!--
+	include nginxconfig.io/wordpress.conf;</span><!--
 
 	✔ modularized && ✔ Drupal --><span ng-if="isModularized() && isDrupal()">
-	include _drupal.conf;</span><!--
+	include nginxconfig.io/drupal.conf;</span><!--
 
 
 
 	✔ unified --><span ng-if="isUnified()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/_drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
@@ -180,11 +180,11 @@ server {
 
 	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isCertLetsEncrypt()">
 
-	include _letsencrypt.conf;</span><!--
+	include nginxconfig.io/letsencrypt.conf;</span><!--
 
 	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isCertLetsEncrypt()">
 
-<ng-include ng-include-tabs="2" src="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 

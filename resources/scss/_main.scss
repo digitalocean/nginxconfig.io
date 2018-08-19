@@ -1,6 +1,6 @@
 section.presets {
-	text-align: center;
-	margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
 
 	.btn {
 		&.btn-outline-dark{
@@ -12,6 +12,80 @@ section.presets {
 		img {
 			height: 1.1rem;
 			vertical-align: text-bottom;
+		}
+	}
+}
+
+section.tabs {
+	margin-bottom: 1rem;
+
+	.nav-tabs {
+		.nav-item {
+			a {
+				cursor: pointer;
+				position: relative;
+				transition: all 0.25s;
+
+				&.changed {
+					font-weight: 700;
+					padding-left: 0.6rem;
+					padding-right: 1.4rem;
+
+					small {
+						display: inline;
+					}
+				}
+
+				small {
+					position: absolute;
+					top: 50%;
+					right: 0.25rem;
+					transform: translateY(-50%);
+					display: none;
+					color: #999;
+				}
+			}
+		}
+	}
+	.tab-content {
+		padding: 0.5rem 0.75rem;
+		border-left: 1px solid #dee2e6;
+		border-right: 1px solid #dee2e6;
+		border-bottom: 1px solid #dee2e6;
+		border-bottom-right-radius: 0.25rem;
+		border-bottom-left-radius: 0.25rem;
+
+		.form-group {
+			margin-bottom: 0.25rem;
+
+			.form-check {
+				padding-top: 0.2rem;
+
+				.form-check-label {
+					cursor: pointer;
+					user-select: none;
+				}
+			}
+
+			.form-control.input-changed,
+			.form-check.input-changed,
+			select.input-changed {
+				background-color: #fdffd9;
+			}
+
+			.form-check.input-changed {
+				border-radius: 0.2rem;
+			}
+
+			.btn {
+				&.btn-download {
+					img {
+						vertical-align: -2px;
+						margin-right: 0.1rem;
+						width: 1rem;
+					}
+				}
+			}
 		}
 	}
 }
@@ -30,6 +104,7 @@ main {
 			font-size: 0;
 			padding: 0.2rem 0.4rem 0.05rem;
 			vertical-align: text-bottom;
+			float: right;
 		}
 	}
 

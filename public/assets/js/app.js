@@ -19,7 +19,7 @@
 			.html5Mode(true)
 			.hashPrefix('!');
 	})
-	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $location, $timeout) {
+	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $window, $location, $timeout) {
 		///////////////////////
 		// PRIVATE VARIABLES //
 		///////////////////////
@@ -38,7 +38,7 @@
 			path:				'',
 			document_root:		'/public',
 
-			https:				false,
+			https:				true,
 			http2:				true,
 
 			redirect:			true,
@@ -59,11 +59,12 @@
 			fallback_php:		true,
 			fallback_php_path:	'/api/',
 
-			php:				'7.2',
+			php:				true,
+			php_connection:		'7.2',
 			wordpress:			false,
 			drupal:				false,
 
-			file_structure:		'unified',
+			file_structure:		'modularized',
 
 			referrer_policy:			'no-referrer-when-downgrade',
 			content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
@@ -89,6 +90,7 @@
 		$scope.data = angular.copy($scope.defaultData);
 		$scope.dataInit = false;
 		$scope.isDirty = false;
+		$scope.tab = 'site';
 
 		$scope.sslCertificateChanged = false;
 		$scope.sslCertificateKeyChanged = false;
@@ -276,6 +278,10 @@
 			});
 		};
 
+		$scope.setTab = function(tab) {
+			$scope.tab = tab;
+		};
+
 		$scope.setPreset = function(preset) {
 			$scope.data.php				= $scope.defaultData.php;
 			$scope.data.wordpress		= $scope.defaultData.wordpress;
@@ -285,7 +291,7 @@
 
 			switch(preset) {
 				case 'frontend':
-					$scope.data.php = 'off';
+					$scope.data.php = false;
 					$scope.data.index = 'index.html';
 					$scope.data.fallback_html = true;
 					break;
@@ -304,6 +310,10 @@
 			gtag('event', preset, {
 				event_category: 'preset',
 			});
+		};
+
+		$scope.getChangesForTab = function(tab) {
+			return $window.document.querySelectorAll('section.tabs .tab-content .tab-' + tab + ' .input-changed').length;
 		};
 
 
@@ -392,7 +402,7 @@
 		};
 
 		$scope.isPHP = function() {
-			return $scope.data.php !== 'off';
+			return $scope.data.php;
 		};
 
 		$scope.isWordPress = function() {
@@ -437,6 +447,13 @@
 		$scope.$watch('data', function(newValue, oldValue) {
 			$scope.refreshHighlighting();
 			$scope.updateHash();
+
+			if (!$scope.data.php) {
+				$scope.defaultData.index = 'index.html';
+				$scope.data.index = 'index.html';
+			} else {
+				$scope.defaultData.index = 'index.php';
+			}
 
 			for (var key in $scope.data) {
 				if (!angular.equals(newValue[key], oldValue[key])) {

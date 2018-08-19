@@ -2,9 +2,9 @@ try_files $uri =404;
 
 # fastcgi
 fastcgi_pass				{{
-	data.php === 'tcp' ? '127.0.0.1:9000' : (
-		data.php === '5.x' ? 'unix:/var/run/php5-fpm.sock' : (
-			'unix:/var/run/php/php' + data.php +'-fpm.sock'
+	data.php_connection === 'tcp' ? '127.0.0.1:9000' : (
+		data.php_connection === '5.x' ? 'unix:/var/run/php5-fpm.sock' : (
+			'unix:/var/run/php/php' + data.php_connection +'-fpm.sock'
 		)
 	)
 }};

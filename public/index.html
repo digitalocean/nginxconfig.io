@@ -22,170 +22,122 @@
 			</div>
 		</header>
 		<section class="presets">
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/brands/angular.svg" alt="Angular"> <img src="assets/img/brands/react.svg" alt="React"> <img src="assets/img/brands/vuejs.svg" alt="Vue.js"></button>
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/brands/php.svg" alt="PHP"> <img src="assets/img/brands/laravel.svg" alt="Laravel"> <img src="assets/img/brands/symfony.svg" alt="Symfony"> <img src="assets/img/brands/codeigniter.svg" alt="CodeIgniter"></button>
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><img src="assets/img/brands/wordpress.svg" alt="WordPress"> WordPress</button>
-			<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><img src="assets/img/brands/drupal.svg" alt="Drupal"> Drupal</button>
+			<div class="container">
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/brands/angular.svg" alt="Angular"> <img src="assets/img/brands/react.svg" alt="React"> <img src="assets/img/brands/vuejs.svg" alt="Vue.js"></button>
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/brands/php.svg" alt="PHP"> <img src="assets/img/brands/laravel.svg" alt="Laravel"> <img src="assets/img/brands/symfony.svg" alt="Symfony"> <img src="assets/img/brands/codeigniter.svg" alt="CodeIgniter"></button>
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><img src="assets/img/brands/wordpress.svg" alt="WordPress"> WordPress</button>
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><img src="assets/img/brands/drupal.svg" alt="Drupal"> Drupal</button>
+			</div>
 		</section>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-3 col-lg-2">
-					<aside class="options">
-						<div class="card">
-							<div class="card-body">
-								<div class="form-group">
-									<label class="form-label">Domain</label>
-									<input type="text"
-										class="form-control form-control-sm domain"
-										ng-model="data.domain"
-										ng-class="{ 'input-changed': data.domain !== defaultData.domain }"
-										placeholder="{{ domain() }}"
-										autofocus>
+		<section class="tabs">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('site')" ng-class="{ 'active': tab === 'site', 'changed': getChangesForTab('site') }">Site<small ng-cloak>({{ getChangesForTab('site') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('https')" ng-class="{ 'active': tab === 'https', 'changed': getChangesForTab('https') }">HTTPS<small ng-cloak>({{ getChangesForTab('https') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('security')" ng-class="{ 'active': tab === 'security', 'changed': getChangesForTab('security') }">Security<small ng-cloak>({{ getChangesForTab('security') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('php')" ng-class="{ 'active': tab === 'php', 'changed': getChangesForTab('php') }">PHP<small ng-cloak>({{ getChangesForTab('php') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('routing')" ng-class="{ 'active': tab === 'routing', 'changed': getChangesForTab('routing') }">Routing<small ng-cloak>({{ getChangesForTab('routing') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('cache')" ng-class="{ 'active': tab === 'cache', 'changed': getChangesForTab('cache') }">Cache<small ng-cloak>({{ getChangesForTab('cache') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('nginx')" ng-class="{ 'active': tab === 'nginx', 'changed': getChangesForTab('nginx') }">nginx<small ng-cloak>({{ getChangesForTab('nginx') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-muted" ng-click="setTab('tools')" ng-class="{ 'active': tab === 'tools', 'changed': getChangesForTab('tools') }">Tools<small ng-cloak>({{ getChangesForTab('tools') }})</small></a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane tab-site" ng-class="{ 'active': tab === 'site' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Domain</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm domain"
+											ng-model="data.domain"
+											ng-class="{ 'input-changed': data.domain !== defaultData.domain }"
+											placeholder="{{ domain() }}"
+											autofocus>
+									</div>
 								</div>
-								<div class="form-group">
-									<label class="form-label">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
 										<span tooltips tooltip-template="Define path to project.">Path</span>
 									</label>
-									<input type="text"
-										class="form-control form-control-sm"
-										ng-model="data.path"
-										ng-class="{ 'input-changed': data.path !== defaultData.path }"
-										placeholder="{{ '/var/www/' + domain() }}">
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.path"
+											ng-class="{ 'input-changed': data.path !== defaultData.path }"
+											placeholder="{{ '/var/www/' + domain() }}">
+									</div>
 								</div>
-								<div class="form-group">
-									<label class="form-label">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
 										<span tooltips tooltip-template="Define public path in project path.">Document root</span>
 									</label>
-									<input type="text"
-										class="form-control form-control-sm"
-										ng-model="data.document_root"
-										ng-class="{ 'input-changed': data.document_root !== defaultData.document_root }">
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.document_root"
+											ng-class="{ 'input-changed': data.document_root !== defaultData.document_root }">
+									</div>
 								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.non_www !== defaultData.non_www }">
-									<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www">
-									<label class="form-check-label" for="non_www">
-										<span tooltips tooltip-template="Serve requests without www subdomain.">non-www</span>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Serve requests without www subdomain.">www subdomain</span>
 									</label>
-								</div>
-								<div class="form-subgroup" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.redirect !== defaultData.redirect }">
-										<input class="form-check-input" type="checkbox" id="redirect" ng-model="data.redirect">
-										<label class="form-check-label" for="redirect">
-											<span tooltips tooltip-template="Redirect {{ isWWW() ? 'non-www version and ' : '' }}all subdomains to domain.">redirect <small>{{ isWWW() ? 'non-www, ' : '' }}subdomains</small></span>
-										</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.non_www !== defaultData.non_www }">
+											<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.non_www" ng-true-value="false" ng-false-value="true">
+											<label class="form-check-label" for="non_www">
+												enabled <small>({{ isWWW() ? 'www.' : '' }}{{ domain() }})</small>
+											</label>
+										</div>
 									</div>
 								</div>
-								<div class="form-subgroup" ng-if="isWWW()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.cdn !== defaultData.cdn }">
-										<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
-										<label class="form-check-label" for="cdn">
-											<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN <small>subdomain</small></span>
-										</label>
-									</div>
-								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.https !== defaultData.https }">
-									<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
-									<label class="form-check-label" for="https">
-										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>"><strong>HTTPS</strong></span>
+								<div class="form-group row" ng-if="isWWW()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN subdomain</span>
 									</label>
-								</div>
-								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.http2 !== defaultData.http2 }">
-										<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
-										<label class="form-check-label" for="http2">
-											<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
-										</label>
-									</div>
-								</div>
-								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.force_https !== defaultData.force_https }">
-										<input class="form-check-input" type="checkbox" id="force_https" ng-model="data.force_https">
-										<label class="form-check-label" for="force_https">
-											<span tooltips tooltip-template="Force redirection from HTTP to HTTPS.">force HTTPS</span>
-										</label>
-									</div>
-								</div>
-								<div class="form-subgroup" ng-if="isHTTPS()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.hsts !== defaultData.hsts }">
-										<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
-										<label class="form-check-label" for="hsts">
-											<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
-										</label>
-									</div>
-								</div>
-								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
-									<strong>Certification type:</strong>
-									<div class="form-subgroup">
-										<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'letsencrypt' }">
-											<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
-											<label class="form-check-label" for="letsencrypt">
-												<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
-											</label>
-										</div>
-										<div class="form-group" ng-if="isHTTPS() && isCertLetsEncrypt()">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">E-mail</span>
-											</label>
-											<input type="text"
-												class="form-control form-control-sm"
-												ng-model="data.email"
-												ng-class="{ 'input-changed': data.email !== defaultData.email }"
-												placeholder="{{ 'hello@' + domain() }}">
-										</div>
-										<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'custom' }">
-											<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.cert_type" value="custom">
-											<label class="form-check-label" for="custom_cert">
-												<span tooltips tooltip-template="Custom certificate">Custom certificate</span>
-											</label>
-										</div>
-										<div class="form-group" ng-if="isHTTPS() && isCertCustom()">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Path to crt file"><code>ssl_certificate</code></span>
-											</label>
-											<input type="text"
-												class="form-control form-control-sm"
-												ng-model="data.ssl_certificate"
-												ng-class="{ 'input-changed': data.ssl_certificate !== defaultData.ssl_certificate }"
-												placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
-										</div>
-										<div class="form-group" ng-if="isHTTPS() && isCertCustom()">
-											<label class="form-label small">
-												<span tooltips tooltip-template="Path to key file"><code>ssl_certificate_key</code></span>
-											</label>
-											<input type="text"
-												class="form-control form-control-sm"
-												ng-model="data.ssl_certificate_key"
-												ng-class="{ 'input-changed': data.ssl_certificate_key !== defaultData.ssl_certificate_key }"
-												placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
-										</div>
-									</div>
-								</div>
-								<div class="form-subgroup pt-2" ng-if="isHTTPS()" ng-cloak>
-									<strong>SSL profile:</strong>
-									<div class="form-subgroup">
-										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
-											<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
-											<label class="form-check-label" for="modern">
-												<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8">modern</span>
-											</label>
-										</div>
-										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
-											<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
-											<label class="form-check-label" for="intermediate">
-												<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7">intermediate</span>
-											</label>
-										</div>
-										<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
-											<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
-											<label class="form-check-label" for="old">
-												<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6">old</span>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.cdn !== defaultData.cdn }">
+											<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.cdn">
+											<label class="form-check-label" for="cdn">
+												enabled <small>(cdn.{{ domain() }})</small>
 											</label>
 										</div>
 									</div>
 								</div>
-								<div class="mt-2">
-									<div class="form-group">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Redirect {{ isWWW() ? 'non-www version and ' : '' }}all subdomains to domain.">Redirect {{ isNonWWW() ? 'subdomains' : 'domain, subdomains' }}</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.redirect !== defaultData.redirect }">
+											<input class="form-check-input" type="checkbox" id="redirect" ng-model="data.redirect">
+											<label class="form-check-label" for="redirect">
+												enabled <small>(<code>{{ isNonWWW() ? ('*.' + domain() + ' → ' + domain()) : (domain() + ', *.' +  domain() + ' → www.' + domain()) }}</code>)</small>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Listen</label>
+									<div class="col-sm-4">
 										<div class="input-group input-group-sm">
 											<div class="input-group-prepend">
 												<div class="input-group-text">IPv4</div>
@@ -196,7 +148,7 @@
 												ng-class="{ 'input-changed': data.ipv4 !== defaultData.ipv4 }">
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="col-sm-5">
 										<div class="input-group input-group-sm">
 											<div class="input-group-prepend">
 												<div class="input-group-text">IPv6</div>
@@ -209,37 +161,203 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<label class="form-label">File structure</label>
-								<div class="form-subgroup">
-									<div class="form-check" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure && data.file_structure === 'unified' }">
-										<input class="form-check-input" type="radio" id="unified" ng-model="data.file_structure" value="unified">
-										<label class="form-check-label" for="unified">
-											<span tooltips tooltip-template="Combine configuration to a single file.<br><br><i>(if possible)</i>">unified</span>
-										</label>
+							<div class="tab-pane tab-https" ng-class="{ 'active': tab === 'https' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.https !== defaultData.https }">
+											<input class="form-check-input" type="checkbox" id="https" ng-model="data.https">
+											<label class="form-check-label" for="https">enabled</span>
+											</label>
+										</div>
 									</div>
 								</div>
-								<div class="form-subgroup">
-									<div class="form-check" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure && data.file_structure === 'modularized' }">
-										<input class="form-check-input" type="radio" id="modularized" ng-model="data.file_structure" value="modularized">
-										<label class="form-check-label" for="modularized">
-											<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">modularized</span>
-										</label>
+								<div class="form-group row" ng-if="isHTTPS()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.http2 !== defaultData.http2 }">
+											<input class="form-check-input" type="checkbox" id="http2" ng-model="data.http2">
+											<label class="form-check-label" for="http2">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isHTTPS()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Force redirection from HTTP to HTTPS.">Force HTTPS</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.force_https !== defaultData.force_https }">
+											<input class="form-check-input" type="checkbox" id="force_https" ng-model="data.force_https">
+											<label class="form-check-label" for="force_https">
+												enabled <small>(<code>{{ isNonWWW() ? ('http://' + domain() + ' → https://' + domain()) : ('http://www.' + domain() + ' → https://www.' + domain()) }}</code>)</small>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isHTTPS()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.hsts !== defaultData.hsts }">
+											<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
+											<label class="form-check-label" for="hsts">enabled</label>
+										</div>
+									</div>
+								</div>
+								<fieldset class="form-group" ng-if="isHTTPS()">
+									<div class="row">
+										<legend class="col-sm-3 col-form-label col-form-label-sm">SSL profile</legend>
+										<div class="col-sm-9">
+											<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
+												<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
+												<label class="form-check-label" for="modern">
+													<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8">modern</span>
+												</label>
+											</div>
+											<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
+												<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
+												<label class="form-check-label" for="intermediate">
+													<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7">intermediate</span>
+												</label>
+											</div>
+											<div class="form-check" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
+												<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
+												<label class="form-check-label" for="old">
+													<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6">old</span>
+												</label>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<fieldset class="form-group" ng-if="isHTTPS()">
+									<div class="row">
+										<legend class="col-sm-3 col-form-label col-form-label-sm">Certification type</legend>
+										<div class="col-sm-9">
+											<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'letsencrypt' }">
+												<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
+												<label class="form-check-label" for="letsencrypt">
+													<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
+												</label>
+											</div>
+											<div class="form-check" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'custom' }">
+												<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.cert_type" value="custom">
+												<label class="form-check-label" for="custom_cert">Custom certificate</label>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<div class="form-group row" ng-if="isHTTPS() && isCertLetsEncrypt()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">Let's Encrypt e-mail</span>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.email"
+											ng-class="{ 'input-changed': data.email !== defaultData.email }"
+											placeholder="{{ 'info@' + domain() }}">
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isHTTPS() && isCertCustom()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Path to crt file">ssl_certificate</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.ssl_certificate"
+											ng-class="{ 'input-changed': data.ssl_certificate !== defaultData.ssl_certificate }"
+											placeholder="{{ '/etc/nginx/ssl/' + domain() + '.crt' }}">
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isHTTPS() && isCertCustom()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Path to key file">ssl_certificate_key</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.ssl_certificate_key"
+											ng-class="{ 'input-changed': data.ssl_certificate_key !== defaultData.ssl_certificate_key }"
+											placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="form-group">
-									<div class="input-group input-group-sm" tooltips tooltip-template="PHP-FPM via TCP or unix socket.">
-										<div class="input-group-prepend">
-											<div class="input-group-text">PHP</div>
+							<div class="tab-pane tab-security" ng-class="{ 'active': tab === 'security' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Referrer Policy is a new header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.">Referrer-Policy</code>
+									</label>
+									<div class="col-sm-9">
+										<select class="custom-select form-control-sm" ng-model="data.referrer_policy" ng-class="{ 'input-changed': data.referrer_policy !== defaultData.referrer_policy }">
+											<option value="no-referrer">no-referrer</option>
+											<option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
+											<option value="origin">origin</option>
+											<option value="origin-when-cross-origin">origin-when-cross-origin</option>
+											<option value="same-origin">same-origin</option>
+											<option value="strict-origin">strict-origin</option>
+											<option value="strict-origin-when-cross-origin">strict-origin-when-cross-origin</option>
+											<option value="unsafe-url">unsafe-url</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Content Security Policy is an effective measure to protect your site from XSS attacks. By whitelisting sources of approved content, you can prevent the browser from loading malicious assets.">Content-Security-Policy</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.content_security_policy"
+											ng-class="{ 'input-changed': data.content_security_policy !== defaultData.content_security_policy }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Emitting nginx version on error pages and in the “Server” response header field.">server_tokens</code>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.server_tokens !== defaultData.server_tokens }">
+											<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
+											<label class="form-check-label" for="server_tokens">enabled</label>
 										</div>
-										<select class="custom-select" ng-model="data.php" ng-class="{ 'input-changed': data.php !== defaultData.php }">
-											<option value="off">disabled</option>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address.">limit_req</code>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.limit_req !== defaultData.limit_req }">
+											<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
+											<label class="form-check-label" for="limit_req">enabled</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane tab-php" ng-class="{ 'active': tab === 'php' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										PHP
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.php !== defaultData.php }">
+											<input class="form-check-input" type="checkbox" id="php" ng-model="data.php">
+											<label class="form-check-label" for="php">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isPHP()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										PHP connection
+									</label>
+									<div class="col-sm-9">
+										<select class="custom-select form-control-sm" ng-model="data.php_connection" ng-class="{ 'input-changed': data.php_connection !== defaultData.php_connection }">
 											<option value="tcp">TCP</option>
 											<option value="5.x">5.x socket</option>
 											<option value="7.0">7.0 socket</option>
@@ -249,300 +367,362 @@
 										</select>
 									</div>
 								</div>
-								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.wordpress !== defaultData.wordpress }">
-										<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
-										<label class="form-check-label" for="wordpress">
-											<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress rules</span>
-										</label>
+								<div class="form-group row" ng-if="isPHP()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress rules</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.wordpress !== defaultData.wordpress }">
+											<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.wordpress">
+											<label class="form-check-label" for="wordpress">enabled</label>
+										</div>
 									</div>
 								</div>
-								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.drupal !== defaultData.drupal }">
-										<input class="form-check-input" type="checkbox" id="drupal" ng-model="data.drupal">
-										<label class="form-check-label" for="drupal">
+								<div class="form-group row" ng-if="isPHP()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
 											<span tooltips tooltip-template="Drupal security rules and login limiting <i>(if enabled)</i>.">Drupal rules</span>
-										</label>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.drupal !== defaultData.drupal }">
+											<input class="form-check-input" type="checkbox" id="drupal" ng-model="data.drupal">
+											<label class="form-check-label" for="drupal">enabled</label>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<label class="form-label"><code tooltips tooltip-template="Defines the file that will be used as an index.">index</code></label>
-								<div class="form-subgroup">
-									<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.html' }">
-										<input class="form-check-input" type="radio" id="index.html" ng-model="data.index" value="index.html">
-										<label class="form-check-label" for="index.html">index.html</label>
+							<div class="tab-pane tab-routing" ng-class="{ 'active': tab === 'routing' }">
+								<fieldset class="form-group">
+									<div class="row">
+										<legend class="col-sm-3 col-form-label col-form-label-sm">
+											<code tooltips tooltip-template="Defines the file that will be used as an index.">index</code>
+										</legend>
+										<div class="col-sm-9">
+											<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.html' }">
+												<input class="form-check-input" type="radio" id="index.html" ng-model="data.index" value="index.html">
+												<label class="form-check-label" for="index.html">index.html</label>
+											</div>
+											<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.php' }">
+												<input class="form-check-input" type="radio" id="index.php" ng-model="data.index" value="index.php">
+												<label class="form-check-label" for="index.php">index.php</label>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<fieldset class="form-group">
+									<div class="row">
+										<legend class="col-sm-3 col-form-label col-form-label-sm">
+											<span tooltips tooltip-template="Configures fallback routing of unhandled requests.">Fallback routing</span>
+										</legend>
+										<div class="col-sm-9">
+											<div class="form-check" ng-class="{ 'input-changed': data.fallback_html !== defaultData.fallback_html }">
+												<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.fallback_html">
+												<label class="form-check-label" for="fallback_html">index.html</label>
+											</div>
+											<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.fallback_php !== defaultData.fallback_php }" ng-cloak>
+												<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.fallback_php">
+												<label class="form-check-label" for="fallback_php">index.php</label>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<div class="form-group row" ng-if="isFallbackHTML() && isFallbackPHP()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Fallback routing - PHP</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.fallback_php_path"
+											ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
 									</div>
 								</div>
-								<div class="form-subgroup" ng-if="isPHP()" ng-cloak>
-									<div class="form-check" ng-class="{ 'input-changed': data.index !== defaultData.index && data.index === 'index.php' }">
-										<input class="form-check-input" type="radio" id="index.php" ng-model="data.index" value="index.php">
-										<label class="form-check-label" for="index.php">index.php</label>
+							</div>
+							<div class="tab-pane tab-cache" ng-class="{ 'active': tab === 'cache' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="{{ extensions.assets }}">Expiration - assets</span>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.expires_assets"
+											ng-class="{ 'input-changed': data.expires_assets !== defaultData.expires_assets }">
 									</div>
 								</div>
-
-								<label class="form-label mt-3"><span tooltips tooltip-template="Configures fallback routing of unhandled requests.">fallback routing</span></label>
-								<div class="form-subgroup">
-									<div class="form-check" ng-class="{ 'input-changed': data.fallback_html !== defaultData.fallback_html }">
-										<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.fallback_html">
-										<label class="form-check-label" for="fallback_html">index.html</label>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">Expiration - media</span>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.expires_media"
+											ng-class="{ 'input-changed': data.expires_media !== defaultData.expires_media }">
 									</div>
-									<div class="form-check" ng-if="isPHP()" ng-class="{ 'input-changed': data.fallback_php !== defaultData.fallback_php }" ng-cloak>
-										<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.fallback_php">
-										<label class="form-check-label" for="fallback_php">index.php</label>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="{{ extensions.svg }}">Expiration - svg</span>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.expires_svg"
+											ng-class="{ 'input-changed': data.expires_svg !== defaultData.expires_svg }">
 									</div>
-									<div class="form-subgroup" ng-if="isFallbackHTML() && isFallbackPHP()" ng-cloak>
-										<div class="form-group pl-1">
-											<input type="text"
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="{{ extensions.fonts }}">Expiration - fonts</span>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.expires_fonts"
+											ng-class="{ 'input-changed': data.expires_fonts !== defaultData.expires_fonts }">
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane tab-nginx" ng-class="{ 'active': tab === 'nginx' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code>
+									</label>
+									<div class="col-sm-9">
+										<select class="custom-select form-control-sm" ng-model="data.worker_processes" ng-class="{ 'input-changed': data.worker_processes !== defaultData.worker_processes }">
+												<option value="auto">auto</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+												<option value="13">13</option>
+												<option value="14">14</option>
+												<option value="15">15</option>
+												<option value="16">16</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Defines user and group credentials used by worker processes.<br>If group is omitted, a group whose name equals that of user is used.">user</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.user"
+											ng-class="{ 'input-changed': data.user !== defaultData.user }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Defines a file that will store the process ID of the main process.">pid</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.pid"
+											ng-class="{ 'input-changed': data.pid !== defaultData.pid }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.access_log"
+											ng-class="{ 'input-changed': data.access_log !== defaultData.access_log }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.error_log"
+											ng-class="{ 'input-changed': data.error_log !== defaultData.error_log }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code>
+									</label>
+									<div class="col-sm-9">
+										<div class="input-group input-group-sm">
+											<input type="number"
+												min="0"
+												step="1"
 												class="form-control form-control-sm"
-												ng-model="data.fallback_php_path"
-												ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
+												ng-model="data.client_max_body_size"
+												ng-class="{ 'input-changed': data.client_max_body_size !== defaultData.client_max_body_size }">
+											<div class="input-group-append">
+												<div class="input-group-text">MB</div>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Referrer Policy is a new header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.">Referrer-Policy</code></label>
-									<select class="custom-select form-control-sm" ng-model="data.referrer_policy" ng-class="{ 'input-changed': data.referrer_policy !== defaultData.referrer_policy }">
-										<option value="no-referrer">no-referrer</option>
-										<option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
-										<option value="origin">origin</option>
-										<option value="origin-when-cross-origin">origin-when-cross-origin</option>
-										<option value="same-origin">same-origin</option>
-										<option value="strict-origin">strict-origin</option>
-										<option value="strict-origin-when-cross-origin">strict-origin-when-cross-origin</option>
-										<option value="unsafe-url">unsafe-url</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Content Security Policy is an effective measure to protect your site from XSS attacks. By whitelisting sources of approved content, you can prevent the browser from loading malicious assets.">Content-Security-Policy</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.content_security_policy" ng-class="{ 'input-changed': data.content_security_policy !== defaultData.content_security_policy }">
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code></label>
-									<select class="custom-select form-control-sm" ng-model="data.worker_processes" ng-class="{ 'input-changed': data.worker_processes !== defaultData.worker_processes }">
-										<option value="auto">auto</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-										<option value="13">13</option>
-										<option value="14">14</option>
-										<option value="15">15</option>
-										<option value="16">16</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Defines user and group credentials used by worker processes.<br>If group is omitted, a group whose name equals that of user is used.">user</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.user" ng-class="{ 'input-changed': data.user !== defaultData.user }">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Defines a file that will store the process ID of the main process.">pid</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.pid" ng-class="{ 'input-changed': data.pid !== defaultData.pid }">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.access_log" ng-class="{ 'input-changed': data.access_log !== defaultData.access_log }">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code></label>
-									<input type="text" class="form-control form-control-sm" ng-model="data.error_log" ng-class="{ 'input-changed': data.error_log !== defaultData.error_log }">
-								</div>
-								<div class="form-group">
-									<label class="form-label"><code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code></label>
-									<div class="input-group">
-										<input type="number" min="0" step="1" class="form-control form-control-sm" ng-model="data.client_max_body_size" ng-class="{ 'input-changed': data.client_max_body_size !== defaultData.client_max_body_size }">
-										<div class="input-group-append">
-											<div class="input-group-text">MB</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.gzip !== defaultData.gzip }">
-									<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
-									<label class="form-check-label" for="gzip">
-										<code tooltips tooltip-template="Gzipping of responses.">gzip</code>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+											<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
 									</label>
-								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.server_tokens !== defaultData.server_tokens }">
-									<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
-									<label class="form-check-label" for="server_tokens">
-										<code tooltips tooltip-template="Emitting nginx version on error pages and in the “Server” response header field.">server_tokens</code>
-									</label>
-								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
-									<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
-									<label class="form-check-label" for="log_not_found">
-										<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
-									</label>
-								</div>
-								<div class="form-check" ng-class="{ 'input-changed': data.limit_req !== defaultData.limit_req }">
-									<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
-									<label class="form-check-label" for="limit_req">
-										<span tooltips tooltip-template="Used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address."><code>limit_req</code></span>
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-body">
-								<label class="form-label"><span tooltips tooltip-template="Adding or modifying the “Expires” and “Cache-Control” response header fields provided that the response code equals 200, 201, 204, 206, 301, 302, 303, 304, 307, or 308."><code>expires</code></span></label>
-								<div class="row no-gutters">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-label"><span tooltips tooltip-template="{{ extensions.assets }}">assets</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_assets" ng-class="{ 'input-changed': data.expires_assets !== defaultData.expires_assets }">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-label"><span tooltips tooltip-template="{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}">media</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_media" ng-class="{ 'input-changed': data.expires_media !== defaultData.expires_media }">
-										</div>
-									</div>
-								</div>
-								<div class="row no-gutters">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-label"><span tooltips tooltip-template="{{ extensions.svg }}">svg</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_svg" ng-class="{ 'input-changed': data.expires_svg !== defaultData.expires_svg }">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="form-label"><span tooltips tooltip-template="{{ extensions.fonts }}">fonts</span></label>
-											<input type="text" class="form-control form-control-sm" ng-model="data.expires_fonts" ng-class="{ 'input-changed': data.expires_fonts !== defaultData.expires_fonts }">
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
+											<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
+											<label class="form-check-label" for="log_not_found">enabled</label>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</aside>
-				</div>
-				<div class="col-md-6 col-lg-7 files">
-					<main>
-						<div class="row grid">
-							<div class="grid-sizer col-xl-6"></div>
-							<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-12" ng-cloak>
-								<div class="commands">
-									<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
+							<div class="tab-pane tab-tools" ng-class="{ 'active': tab === 'tools' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Download generated config</label>
+									<div class="col-sm-9">
+										<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">Modularized structure</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure }">
+											<input class="form-check-input" type="checkbox" id="file_structure" ng-model="data.file_structure" ng-true-value="'modularized'" ng-false-value="'unified'">
+											<label class="form-check-label" for="file_structure">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Share settings</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											readonly
+											ng-value="location.absUrl()">
+									</div>
+								</div>
+								<div class="form-group row mt-4">
+									<label class="col-sm-3 col-form-label col-form-label-sm">Reset settings</label>
+									<div class="col-sm-9">
+											<button class="btn btn-danger btn-sm btn-reset" ng-click="reset()">Reset</button>
+									</div>
 								</div>
 							</div>
-							<section class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
-								<strong>/etc/nginx/nginx.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
-								<div class="code source" data-filename="nginx.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-nginx" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
-								<strong>/etc/nginx/sites-enabled/{{ domain() }}.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
-								<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-domain" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isModularized() && isCertLetsEncrypt()" ng-cloak>
-								<strong>/etc/nginx/_letsencrypt.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('_letsencrypt.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_letsencrypt.conf'">Copied!</span>
-								<div class="code source" data-filename="_letsencrypt.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-letsencrypt" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
-								<strong>/etc/nginx/_general.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('_general.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_general.conf'">Copied!</span>
-								<div class="code source" data-filename="_general.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-general" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
-								<strong>/etc/nginx/_php_fastcgi.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('_php_fastcgi.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_php_fastcgi.conf'">Copied!</span>
-								<div class="code source" data-filename="_php_fastcgi.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-php_fastcgi" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
-								<strong>/etc/nginx/_wordpress.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('_wordpress.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_wordpress.conf'">Copied!</span>
-								<div class="code source" data-filename="_wordpress.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-wordpress" class="code highlighted"></div>
-							</section>
-							<section class="col-xl-6 grid-item file" ng-if="isDrupal() && isModularized()" ng-cloak>
-								<strong>/etc/nginx/_drupal.conf</strong>
-								<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('_drupal.conf')">
-									<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
-								</button>
-								<span class="clipboard-success" ng-if="clipboardCopy === '_drupal.conf'">Copied!</span>
-								<div class="code source" data-filename="_drupal.conf">
-									<pre><code class="nginx" ng-include="'templates/conf/_drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
-								</div><div id="file-drupal" class="code highlighted"></div>
-							</section>
 						</div>
-					</main>
-				</div>
-				<div class="col-md-3 sidebar">
-					<aside class="sidebar">
-						<iframe class="github-star" src="https://ghbtns.com/github-btn.html?user=valentinxxx&repo=nginxconfig.io&type=star&count=true&size=large"></iframe>
-						<div class="github-link">
-							<img src="assets/img/brands/github.svg" alt="GitHub"> <a href="https://github.com/valentinxxx/nginxconfig.io" target="_blank"><small>valentinxxx /</small> <strong>nginxconfig.io</strong></a>
-						</div>
-						<div class="adsbygoogle-container">
-							<div class="note">▾ advertisement ▾</div>
-							<ins class="adsbygoogle"
-								style="display:block"
-								data-ad-client="ca-pub-6543577519725877"
-								data-ad-slot="2065709573"
-								data-ad-format="auto"
-								data-full-width-responsive="true"></ins>
-							<script>
-								(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
-						</div>
-						<div class="buttons">
-							<button class="btn btn-primary btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Download ZIP</button><br>
-							<button class="btn btn-sm btn-danger btn-reset" ng-click="reset()"><img src="assets/img/refresh.svg" alt="Reset"> Reset</button>
-						</div>
-					</aside>
+					</div>
+					<div class="col-lg-4">
+						<aside class="sidebar">
+							<iframe class="github-star" src="https://ghbtns.com/github-btn.html?user=valentinxxx&repo=nginxconfig.io&type=star&count=true&size=large"></iframe>
+							<div class="github-link">
+								<img src="assets/img/brands/github.svg" alt="GitHub"> <a href="https://github.com/valentinxxx/nginxconfig.io" target="_blank"><small>valentinxxx /</small> <strong>nginxconfig.io</strong></a>
+							</div>
+							<div class="adsbygoogle-container">
+								<div class="note">▾ advertisement ▾</div>
+								<ins class="adsbygoogle"
+									style="display:block"
+									data-ad-client="ca-pub-6543577519725877"
+									data-ad-slot="2065709573"
+									data-ad-format="auto"
+									data-full-width-responsive="true"></ins>
+								<script>
+									(adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
+							</div>
+						</aside>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
+		<main>
+			<div class="container">
+				<div class="row grid">
+					<div class="grid-sizer col-xl-6"></div>
+					<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
+						<div class="commands">
+							<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
+						</div>
+					</div>
+					<section class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
+						<strong>/etc/nginx/nginx.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
+						<div class="code source" data-filename="nginx.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-nginx" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+						<strong>/etc/nginx/sites-enabled/{{ domain() }}.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
+						<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-domain" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isModularized() && isCertLetsEncrypt()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/letsencrypt.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('letsencrypt.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'letsencrypt.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/letsencrypt.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-letsencrypt" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/general.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('general.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'general.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/general.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-general" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isPHP() && (isModularized() || isWordPress())" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/php_fastcgi.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('php_fastcgi.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'php_fastcgi.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-php_fastcgi" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/wordpress.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('wordpress.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'wordpress.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/wordpress.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-wordpress" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isDrupal() && isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/drupal.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('drupal.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'drupal.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/drupal.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-drupal" class="code highlighted"></div>
+					</section>
+				</div>
+			</div>
+		</main>
 		<footer>
 			<div class="container-fluid">
 				Lovingly made at <img src="assets/img/balaton.svg" alt="Lake Balaton" class="balaton"> <a href="https://en.wikipedia.org/wiki/Lake_Balaton" target="_blank">Lake Balaton, Hungary</a>
