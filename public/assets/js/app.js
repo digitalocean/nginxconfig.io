@@ -216,6 +216,7 @@
 		};
 
 		$scope.reset = function() {
+			$scope.defaultData.index = 'index.php';
 			$scope.data = angular.copy($scope.defaultData);
 			gtag('event', 'reset');
 		};
