@@ -84,6 +84,10 @@
 			expires_media:		'7d',
 			expires_svg:		'7d',
 			expires_fonts:		'7d',
+
+			proxy:				false,
+			proxy_path:			'/',
+			proxy_pass:			'http://127.0.0.1:3000',
 		};
 
 		$scope.location = $location;
@@ -287,6 +291,7 @@
 			$scope.data.php				= $scope.defaultData.php;
 			$scope.data.wordpress		= $scope.defaultData.wordpress;
 			$scope.data.drupal			= $scope.defaultData.drupal;
+			$scope.data.proxy			= $scope.defaultData.proxy;
 			$scope.data.index			= $scope.defaultData.index;
 			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
 
@@ -305,6 +310,10 @@
 					break;
 				case 'drupal':
 					$scope.data.drupal = true;
+					break;
+				case 'nodejs':
+					$scope.data.php = false;
+					$scope.data.proxy = true;
 					break;
 			}
 
@@ -436,6 +445,10 @@
 
 		$scope.isLimitReq = function() {
 			return $scope.data.limit_req;
+		};
+
+		$scope.isProxy = function() {
+			return $scope.data.proxy;
 		};
 
 

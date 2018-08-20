@@ -8,9 +8,9 @@
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="Online nginx configuration generator">
-		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js">
+		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js, reverse proxy, Node.js">
 		<meta property="og:title" content="nginxconfig.io">
-		<meta property="og:description" content="Online nginx configuration generator: HTTPS, HTTP2, CDN, PHP (Laravel, Symfony, CodeIgniter…), Frontend (Angular, React, Vue.js…), WordPress, Drupal, security headers, rate limiting, expiration by file types…">
+		<meta property="og:description" content="Online nginx configuration generator: HTTPS, HTTP2, CDN, PHP (Laravel, Symfony, CodeIgniter…), Frontend (Angular, React, Vue.js…), Reverse proxy, Node.js, WordPress, Drupal, security headers, rate limiting, expiration by file types…">
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://nginxconfig.io">
 		<meta property="og:image" content="https://nginxconfig.io/assets/img/share.png">
@@ -25,6 +25,7 @@
 			<div class="container">
 				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/brands/angular.svg" alt="Angular"> <img src="assets/img/brands/react.svg" alt="React"> <img src="assets/img/brands/vuejs.svg" alt="Vue.js"></button>
 				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/brands/php.svg" alt="PHP"> <img src="assets/img/brands/laravel.svg" alt="Laravel"> <img src="assets/img/brands/symfony.svg" alt="Symfony"> <img src="assets/img/brands/codeigniter.svg" alt="CodeIgniter"></button>
+				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('nodejs')" tooltips tooltip-template="• enabled reverse proxy<br>• disabled PHP" tooltip-side="bottom">Node.js <img src="assets/img/brands/nodejs.svg" alt="Node.js"></button>
 				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
 				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><img src="assets/img/brands/wordpress.svg" alt="WordPress"> WordPress</button>
 				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><img src="assets/img/brands/drupal.svg" alt="Drupal"> Drupal</button>
@@ -52,6 +53,9 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('cache')" ng-class="{ 'active': tab === 'cache', 'changed': getChangesForTab('cache') }">Cache<small ng-cloak>({{ getChangesForTab('cache') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('proxy')" ng-class="{ 'active': tab === 'proxy', 'changed': getChangesForTab('proxy') }">Reverse proxy<small ng-cloak>({{ getChangesForTab('proxy') }})</small></a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('nginx')" ng-class="{ 'active': tab === 'nginx', 'changed': getChangesForTab('nginx') }">nginx<small ng-cloak>({{ getChangesForTab('nginx') }})</small></a>
@@ -481,6 +485,41 @@
 									</div>
 								</div>
 							</div>
+							<div class="tab-pane tab-proxy" ng-class="{ 'active': tab === 'proxy' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										Reverse proxy
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.proxy !== defaultData.proxy }">
+											<input class="form-check-input" type="checkbox" id="proxy" ng-model="data.proxy">
+											<label class="form-check-label" for="proxy">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isProxy()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										Path
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.proxy_path"
+											ng-class="{ 'input-changed': data.proxy_path !== defaultData.proxy_path }">
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isProxy()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code>proxy_pass</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.proxy_pass"
+											ng-class="{ 'input-changed': data.proxy_pass !== defaultData.proxy_pass }">
+									</div>
+								</div>
+							</div>
 							<div class="tab-pane tab-nginx" ng-class="{ 'active': tab === 'nginx' }">
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label col-form-label-sm">
@@ -699,6 +738,16 @@
 						<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-php_fastcgi" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isProxy() && isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/proxy.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-proxy" ngclipboard-success="clipboardSuccess('proxy.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'proxy.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/proxy.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-proxy" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isWordPress() && isModularized()" ng-cloak>
 						<strong>/etc/nginx/nginxconfig.io/wordpress.conf</strong>

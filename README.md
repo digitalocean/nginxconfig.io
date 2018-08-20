@@ -13,6 +13,7 @@ Online nginx configuration generator.
 * redirect subdomains
 * IPv4, IPv6
 * PHP (TCP, 5.x FPM, 7.0 FPM, 7.1 FPM, 7.2 FPM, 7.3 FPM)
+* Reverse proxy (e.g. Node.js)
 * WordPress security essentials
 * Drupal security essentials
 * pass requests to index.php

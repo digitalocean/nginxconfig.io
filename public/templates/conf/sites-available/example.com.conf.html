@@ -35,7 +35,7 @@ server {<!--
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
 
-	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="isFallbackHTML() || isFallbackPHP()">
+	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="(isFallbackHTML() || isFallbackPHP()) && (!isProxy() || data.proxy_path !== '/')">
 
 	# {{ isFallbackHTML() ? 'index.html' : ( isFallbackPHP() ? 'index.php' : '' ) }} fallback
 	location / {
@@ -47,6 +47,19 @@ server {<!--
 	# index.php fallback
 	location ~ ^{{ data.fallback_php_path }} {
 		try_files $uri $uri/ /index.php?$query_string;
+	}</span><!--
+
+	✔ Reverse proxy --><span ng-if="isProxy()">
+
+	# reverse proxy
+	location {{ data.proxy_path }} {
+		proxy_pass {{ data.proxy_pass }};<!--
+
+		✔ modularized --><span ng-if="isModularized()">
+		include nginxconfig.io/proxy.conf;</span><!--
+
+		✔ unified --><span ng-if="isUnified()">
+<!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
 	✔ PHP --><span ng-if="isPHP()">

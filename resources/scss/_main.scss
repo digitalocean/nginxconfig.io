@@ -30,15 +30,31 @@ section.tabs {
 				padding-left: 0.9rem;
 				padding-right: 0.9rem;
 
+				@include media-breakpoint-up(md) {
+					font-size: 0.8rem;
+				}
+
+				@include media-breakpoint-up(lg) {
+					padding-left: 0.5rem;
+					padding-right: 0.5rem;
+					font-size: 0.9rem;
+				}
+
 				@include media-breakpoint-up(xl) {
 					padding-left: 1rem;
 					padding-right: 1rem;
+					font-size: 1rem;
 				}
 
 				&.changed {
 					font-weight: 700;
 					padding-left: 0.5rem;
 					padding-right: 1.3rem;
+
+					@include media-breakpoint-up(lg) {
+						padding-left: 0.3rem;
+						padding-right: 1.1rem;
+					}
 
 					@include media-breakpoint-up(xl) {
 						padding-left: 0.6rem;

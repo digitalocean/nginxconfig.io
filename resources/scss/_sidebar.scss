@@ -2,6 +2,10 @@ aside.sidebar {
 	margin-top: 1rem;
 
 	@include media-breakpoint-up(lg) {
+		margin-top: -0.5rem;
+	}
+
+	@include media-breakpoint-up(xl) {
 		margin-top: -2.5rem;
 	}
 
