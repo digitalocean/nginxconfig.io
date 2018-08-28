@@ -19,7 +19,7 @@
 --><span ng-if="isNonWWW() || isRedirect()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ domain() }} </span><!--
 --><span ng-if="isWWW() || isRedirect()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ domain() }} </span><!--
 --><span ng-if="isCDN()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ domain() }} </span><!--
---><span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'hello@' + domain() }} <!--
+--><span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'info@' + domain() }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
