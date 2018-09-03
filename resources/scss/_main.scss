@@ -2,6 +2,10 @@ section.presets {
 	margin-top: 0.5rem;
 	margin-bottom: 1rem;
 
+	@include media-breakpoint-down(md) {
+		text-align: center;
+	}
+
 	.btn {
 		margin-bottom: 0.25rem;
 
@@ -23,56 +27,83 @@ section.tabs {
 
 	.nav-tabs {
 		.nav-item {
+			flex-basis: 50%;
+
+			@include media-breakpoint-down(lg) {
+				a {
+					border-bottom-left-radius: $border-radius;
+					border-bottom-right-radius: $border-radius;
+				}
+
+				&:nth-last-child(-n+2) {
+					a {
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+				}
+			}
+
+			@include media-breakpoint-up(xl) {
+				flex: 1 1 auto;
+			}
+
 			a {
 				cursor: pointer;
 				position: relative;
 				transition: all 0.25s;
-				padding-left: 0.9rem;
-				padding-right: 0.9rem;
-
-				@include media-breakpoint-up(md) {
-					font-size: 0.8rem;
-				}
-
-				@include media-breakpoint-up(lg) {
-					padding-left: 0.5rem;
-					padding-right: 0.5rem;
-					font-size: 0.9rem;
-				}
+				font-size: 0.9rem;
+				white-space: nowrap;
 
 				@include media-breakpoint-up(xl) {
-					padding-left: 1rem;
-					padding-right: 1rem;
+					padding-left: 0;
+					padding-right: 0;
 					font-size: 1rem;
+					text-align: center;
+				}
+
+				&.active {
+					@include media-breakpoint-down(lg) {
+						color: #fff;
+						border-color: #343a40;
+						background-color: #343a40;
+
+						&.text-muted {
+							color: #fff !important;
+						}
+					}
+
+					@include media-breakpoint-up(xl) {
+						border-bottom-color: #fff;
+						background-color: transparent;
+					}
 				}
 
 				&.changed {
 					font-weight: 700;
-					padding-left: 0.5rem;
-					padding-right: 1.3rem;
-
-					@include media-breakpoint-up(lg) {
-						padding-left: 0.3rem;
-						padding-right: 1.1rem;
-					}
 
 					@include media-breakpoint-up(xl) {
-						padding-left: 0.6rem;
-						padding-right: 1.4rem;
+						padding-right: 1rem;
 					}
 
 					small {
 						display: inline;
+
+						@include media-breakpoint-up(xl) {
+							padding-left: 0.1rem;
+						}
 					}
 				}
 
 				small {
 					position: absolute;
 					top: 50%;
-					right: 0.25rem;
 					transform: translateY(-50%);
 					display: none;
 					color: #999;
+
+					@include media-breakpoint-down(lg) {
+						right: 0.25rem;
+					}
 				}
 			}
 		}
