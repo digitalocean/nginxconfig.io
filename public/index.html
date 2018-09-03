@@ -58,6 +58,9 @@
 								<a class="nav-link" ng-click="setTab('proxy')" ng-class="{ 'active': tab === 'proxy', 'changed': getChangesForTab('proxy') }">Reverse proxy<small ng-cloak>({{ getChangesForTab('proxy') }})</small></a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('logging')" ng-class="{ 'active': tab === 'logging', 'changed': getChangesForTab('logging') }">Logging<small ng-cloak>({{ getChangesForTab('logging') }})</small></a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('nginx')" ng-class="{ 'active': tab === 'nginx', 'changed': getChangesForTab('nginx') }">nginx<small ng-cloak>({{ getChangesForTab('nginx') }})</small></a>
 							</li>
 							<li class="nav-item">
@@ -520,6 +523,63 @@
 									</div>
 								</div>
 							</div>
+							<div class="tab-pane tab-logging" ng-class="{ 'active': tab === 'logging' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.access_log"
+											ng-class="{ 'input-changed': data.access_log !== defaultData.access_log }">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code>
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.error_log"
+											ng-class="{ 'input-changed': data.error_log !== defaultData.error_log }">
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isAccessLog()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Domain specific access_log."><code>access_log</code> by domain</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.access_log_domain !== defaultData.access_log_domain }">
+											<input class="form-check-input" type="checkbox" id="access_log_domain" ng-model="data.access_log_domain">
+											<label class="form-check-label" for="access_log_domain">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isErrorLog()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="Domain specific error_log."><code>error_log</code> by domain</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.error_log_domain !== defaultData.error_log_domain }">
+											<input class="form-check-input" type="checkbox" id="error_log_domain" ng-model="data.error_log_domain">
+											<label class="form-check-label" for="error_log_domain">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
+											<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
+											<label class="form-check-label" for="log_not_found">enabled</label>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="tab-pane tab-nginx" ng-class="{ 'active': tab === 'nginx' }">
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label col-form-label-sm">
@@ -571,28 +631,6 @@
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label col-form-label-sm">
-										<code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code>
-									</label>
-									<div class="col-sm-9">
-										<input type="text"
-											class="form-control form-control-sm"
-											ng-model="data.access_log"
-											ng-class="{ 'input-changed': data.access_log !== defaultData.access_log }">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 col-form-label col-form-label-sm">
-										<code tooltips tooltip-template="Configures logging path (with warn level).">error_log</code>
-									</label>
-									<div class="col-sm-9">
-										<input type="text"
-											class="form-control form-control-sm"
-											ng-model="data.error_log"
-											ng-class="{ 'input-changed': data.error_log !== defaultData.error_log }">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 col-form-label col-form-label-sm">
 										<code tooltips tooltip-template="Sets the maximum allowed size of the client request body.">client_max_body_size</code>
 									</label>
 									<div class="col-sm-9">
@@ -606,17 +644,6 @@
 											<div class="input-group-append">
 												<div class="input-group-text">MB</div>
 											</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 col-form-label col-form-label-sm">
-											<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
-									</label>
-									<div class="col-sm-9">
-										<div class="form-check" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
-											<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
-											<label class="form-check-label" for="log_not_found">enabled</label>
 										</div>
 									</div>
 								</div>

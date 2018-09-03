@@ -28,7 +28,7 @@ http {
 
 	# logging
 	access_log {{ isAccessLog() ? data.access_log : 'off' }};
-	error_log {{ data.error_log }} warn;<!--
+	error_log {{ isErrorLog() ? data.error_log : '/dev/null' }};<!--
 
 	✔ limitReq --><span ng-if="data.limit_req">
 

@@ -21,11 +21,6 @@ server {<!--
 	✘ PHP --><span ng-if="!isPHP()">
 	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
 
-	✔ index.php --><span ng-if="isIndexPHP()">
-
-	# index.php
-	index index.php;</span><!--
-
 	✔ HTTPS --><span ng-if="isHTTPS()">
 
 	# SSL
@@ -34,6 +29,19 @@ server {<!--
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
+
+	✔ access log domain || error log domain --><span ng-if="isAccessLogDomain() || isErrorLogDomain()">
+
+	# logging<!--
+	✔ access log domain --><span ng-if="isAccessLogDomain()">
+	access_log {{ accessLogDomainPath() }};</span><!--
+	✔ error log domain --><span ng-if="isErrorLogDomain()">
+	error_log {{ errorLogDomainPath() }};</span></span><!--
+
+	✔ index.php --><span ng-if="isIndexPHP()">
+
+	# index.php
+	index index.php;</span><!--
 
 	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="(isFallbackHTML() || isFallbackPHP()) && (!isProxy() || data.proxy_path !== '/')">
 

@@ -72,8 +72,12 @@
 			worker_processes:	'auto',
 			user:				'www-data',
 			pid:				'/run/nginx.pid',
+
 			access_log:			'/var/log/nginx/access.log',
-			error_log:			'/var/log/nginx/error.log',
+			error_log:			'/var/log/nginx/error.log warn',
+			access_log_domain:	false,
+			error_log_domain:	false,
+
 			client_max_body_size: 16,
 			gzip:				true,
 			server_tokens:		false,
@@ -159,6 +163,14 @@
 			}
 
 			return '/etc/nginx/ssl/' + $scope.domain() + '.key';
+		};
+
+		$scope.accessLogDomainPath = function() {
+			return $scope.data.access_log.replace(/([^/]+)\.log$/, $scope.domain() + '.$1.log');
+		};
+
+		$scope.errorLogDomainPath = function() {
+			return $scope.data.error_log.replace(/([^/]+)\.log (.+)$/, $scope.domain() + '.$1.log $2');
 		};
 
 		$scope.refreshHighlighting = function() {
@@ -429,6 +441,18 @@
 
 		$scope.isAccessLog = function() {
 			return !!$scope.data.access_log;
+		};
+
+		$scope.isErrorLog = function() {
+			return !!$scope.data.error_log;
+		};
+
+		$scope.isAccessLogDomain = function() {
+			return $scope.data.access_log_domain;
+		};
+
+		$scope.isErrorLogDomain = function() {
+			return $scope.data.error_log_domain;
 		};
 
 		$scope.isGzip = function() {
