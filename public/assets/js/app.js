@@ -493,6 +493,9 @@
 				$scope.defaultData.index = 'index.php';
 			}
 
+			$scope.data.domain = $scope.data.domain.replace(/^https?:\/\//, '');
+			$scope.data.domain = $scope.data.domain.replace(/\/.*$/, '');
+
 			if ($scope.data.domain.match(/^www\./)) {
 				$scope.data.domain = $scope.data.domain.replace(/^www./, '');
 				$scope.data.non_www = false;
