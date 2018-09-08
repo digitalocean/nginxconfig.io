@@ -493,6 +493,11 @@
 				$scope.defaultData.index = 'index.php';
 			}
 
+			if ($scope.data.domain.match(/^www\./)) {
+				$scope.data.domain = $scope.data.domain.replace(/^www./, '');
+				$scope.data.non_www = false;
+			}
+
 			for (var key in $scope.data) {
 				if (!angular.equals(newValue[key], oldValue[key])) {
 					gtag('event', key, {
