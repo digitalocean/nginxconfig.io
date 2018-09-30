@@ -13,8 +13,8 @@ location ~* ^/wp-content/uploads/.*\.(?:s?html?|php|js|swf)$ {
 	deny all;
 }
 
-# WordPress: deny wp-content/plugins nasty stuff
-location ~* ^/wp-content/plugins/.*\.(?!{{ extensions.assets }}|{{ extensions.fonts }}|{{ extensions.svg }}|{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }}|{{ extensions.docs }}) {
+# WordPress: deny wp-content/plugins (except earlier rules)
+location ~ ^/wp-content/plugins {
 	deny all;
 }
 
