@@ -2,7 +2,7 @@
 ✔ HTTPS --><span ng-if="isHTTPS() && !isSSLProfileModern()"><!--
 
 --><span class="hljs-comment"># <strong>HTTPS</strong>: create Diffie-Hellman keys</span>
-<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileOld() ? 1024 : 2048 }}</span><!--
+<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileOld() ? 1024 : 4096 }}</span><!--
 
 --><span ng-if="isCertLetsEncrypt()">
 
@@ -23,6 +23,7 @@
 --><span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
---><span class="hljs-attribute">--force-renewal</span><!--
+--><span class="hljs-attribute">--force-renewal</span> <!--
+--><span class="hljs-attribute">--rsa-key-size 4096</span><!--
 
 --></span>
