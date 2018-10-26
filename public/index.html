@@ -294,6 +294,25 @@
 											placeholder="{{ '/etc/nginx/ssl/' + domain() + '.key' }}">
 									</div>
 								</div>
+								<div class="form-group row" ng-if="isHTTPS()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										<span tooltips tooltip-template="DNS resolver for stapling">OCSP DNS resolvers</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.resolver_cloudflare !== defaultData.resolver_cloudflare }">
+											<input class="form-check-input" type="checkbox" id="resolver_cloudflare" ng-model="data.resolver_cloudflare">
+											<label class="form-check-label" for="resolver_cloudflare">Cloudflare Resolver (<code>1.1.1.1, 1.0.0.1</code>)</label>
+										</div>
+										<div class="form-check" ng-class="{ 'input-changed': data.resolver_google !== defaultData.resolver_google }">
+											<input class="form-check-input" type="checkbox" id="resolver_google" ng-model="data.resolver_google">
+											<label class="form-check-label" for="resolver_google">Google Public DNS (<code>8.8.8.8, 8.8.4.4</code>)</label>
+										</div>
+										<div class="form-check" ng-class="{ 'input-changed': data.resolver_opendns !== defaultData.resolver_opendns }">
+											<input class="form-check-input" type="checkbox" id="resolver_opendns" ng-model="data.resolver_opendns">
+											<label class="form-check-label" for="resolver_opendns">OpenDNS (<code>208.67.222.222, 208.67.220.220</code>)</label>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="tab-pane tab-security" ng-class="{ 'active': tab === 'security' }">
 								<div class="form-group row">

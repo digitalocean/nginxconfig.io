@@ -51,6 +51,10 @@
 			ssl_certificate:	'',
 			ssl_certificate_key:'',
 
+			resolver_cloudflare:true,
+			resolver_google:	true,
+			resolver_opendns:	true,
+
 			non_www:			true,
 			cdn:				false,
 
@@ -392,6 +396,18 @@
 
 		$scope.isHSTS = function() {
 			return $scope.isHTTPS() && $scope.data.hsts;
+		};
+
+		$scope.isResolverCloudflare = function() {
+			return $scope.isHTTPS() && $scope.data.resolver_cloudflare;
+		};
+
+		$scope.isResolverGoogle = function() {
+			return $scope.isHTTPS() && $scope.data.resolver_google;
+		};
+
+		$scope.isResolverOpenDNS = function() {
+			return $scope.isHTTPS() && $scope.data.resolver_opendns;
 		};
 
 		$scope.isNonWWW = function() {

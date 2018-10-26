@@ -8,6 +8,10 @@ Online nginx configuration generator.
 * [SSL profiles](https://mozilla.github.io/server-side-tls/ssl-config-generator/)
 * [HSTS](https://hstspreload.org)
 * force HTTPS
+* OCSP DNS resolvers
+	* Cloudflare Resolver
+	* Google Public DNS
+	* OpenDNS
 * CDN
 * www / non-www
 * redirect subdomains

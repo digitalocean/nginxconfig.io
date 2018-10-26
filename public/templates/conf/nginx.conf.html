@@ -55,9 +55,15 @@ http {
 
 	# OCSP Stapling
 	ssl_stapling on;
-	ssl_stapling_verify on;
-	resolver 8.8.8.8 8.8.4.4 208.67.222.222 208.67.220.220 valid=60s;
-	resolver_timeout 2s;</span>
+	ssl_stapling_verify on;<!--
+
+	✔ Resolver: CloudFlare || Google || OpenDNS --><span ng-if="isResolverCloudflare() || isResolverGoogle() || isResolverOpenDNS()">
+	resolver {{
+		(isResolverCloudflare() ? '1.1.1.1 1.0.0.1 ' : '') +
+		(isResolverGoogle() ? '8.8.8.8 8.8.4.4 ' : '') +
+		(isResolverOpenDNS() ? '208.67.222.222 208.67.220.220 ' : '')
+	}}valid=60s;
+	resolver_timeout 2s;</span></span>
 
 	# load configs
 	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'modularized'">
