@@ -202,8 +202,14 @@
 			var hashData = $location.search();
 
 			for (var key in hashData) {
+				// handle false
 				if (hashData[key] === 'false') {
 					hashData[key] = false;
+				}
+
+				// handle true
+				if ((hashData[key] === 'true' || hashData[key] === '') && typeof $scope.data[key] === 'boolean') {
+					hashData[key] = true;
 				}
 
 				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
