@@ -64,7 +64,7 @@
 			fallback_php_path:	'/api/',
 
 			php:				true,
-			php_connection:		'7.2',
+			php_connection:		'/var/run/php/php7.2-fpm.sock',
 			wordpress:			false,
 			drupal:				false,
 

@@ -384,12 +384,14 @@
 									</label>
 									<div class="col-sm-9">
 										<select class="custom-select form-control-sm" ng-model="data.php_connection" ng-class="{ 'input-changed': data.php_connection !== defaultData.php_connection }">
-											<option value="tcp">TCP</option>
-											<option value="5.x">5.x socket</option>
-											<option value="7.0">7.0 socket</option>
-											<option value="7.1">7.1 socket</option>
-											<option value="7.2">7.2 socket</option>
-											<option value="7.3">7.3 socket</option>
+											<option value="127.0.0.1:9000">TCP: 127.0.0.1:9000</option>
+											<option value="/var/run/hhvm/sock">HHVM socket: /var/run/hhvm/sock</option>
+											<option value="/var/run/hhvm/hhvm.sock">HHVM socket: /var/run/hhvm/hhvm.sock</option>
+											<option value="/var/run/php5-fpm.sock">5.x socket: /var/run/php5-fpm.sock</option>
+											<option value="/var/run/php/php7.0-fpm.sock">7.0 socket: /var/run/php/php7.0-fpm.sock</option>
+											<option value="/var/run/php/php7.1-fpm.sock">7.1 socket: /var/run/php/php7.1-fpm.sock</option>
+											<option value="/var/run/php/php7.2-fpm.sock">7.2 socket: /var/run/php/php7.2-fpm.sock</option>
+											<option value="/var/run/php/php7.3-fpm.sock">7.3 socket: /var/run/php/php7.3-fpm.sock</option>
 										</select>
 									</div>
 								</div>

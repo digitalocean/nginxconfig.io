@@ -1,13 +1,7 @@
 try_files $uri =404;
 
 # fastcgi
-fastcgi_pass				{{
-	data.php_connection === 'tcp' ? '127.0.0.1:9000' : (
-		data.php_connection === '5.x' ? 'unix:/var/run/php5-fpm.sock' : (
-			'unix:/var/run/php/php' + data.php_connection +'-fpm.sock'
-		)
-	)
-}};
+fastcgi_pass				{{ data.php_connection[0] === '/' ? 'unix:' : '' }}{{ data.php_connection }};
 fastcgi_index				index.php;
 fastcgi_split_path_info		^(.+\.php)(/.+)$;
 fastcgi_param				SCRIPT_FILENAME $document_root$fastcgi_script_name;
