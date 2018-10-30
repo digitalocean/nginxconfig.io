@@ -1,4 +1,4 @@
-[![nginxconfig.io](public/assets/img/share.png)](https://nginxconfig.io)
+[![nginxconfig.io](public/assets/img/github.png)](https://nginxconfig.io)
 
 Online nginx configuration generator.
 
