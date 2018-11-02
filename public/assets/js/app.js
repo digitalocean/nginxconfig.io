@@ -64,7 +64,8 @@
 			fallback_php_path:	'/api/',
 
 			php:				true,
-			php_connection:		'/var/run/php/php7.2-fpm.sock',
+			php_server:			'/var/run/php/php7.2-fpm.sock',
+			php_server_backup:	'',
 			wordpress:			false,
 			drupal:				false,
 
@@ -450,6 +451,10 @@
 
 		$scope.isPHP = function() {
 			return $scope.data.php;
+		};
+
+		$scope.isPHPBackup = function() {
+			return $scope.isPHP() && !!$scope.data.php_server_backup;
 		};
 
 		$scope.isWordPress = function() {

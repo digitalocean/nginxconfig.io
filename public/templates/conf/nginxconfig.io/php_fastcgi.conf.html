@@ -1,7 +1,7 @@
 try_files $uri =404;
 
 # fastcgi
-fastcgi_pass				{{ data.php_connection[0] === '/' ? 'unix:' : '' }}{{ data.php_connection }};
+fastcgi_pass				{{ !isPHPBackup() ? ((data.php_server[0] === '/' ? 'unix:' : '') + data.php_server) : 'php' }};
 fastcgi_index				index.php;
 fastcgi_split_path_info		^(.+\.php)(/.+)$;
 fastcgi_param				SCRIPT_FILENAME $document_root$fastcgi_script_name;
