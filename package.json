@@ -2,7 +2,7 @@
 	"name": "nginxconfig.io",
 	"version": "1.0.0",
 	"homepage": "https://nginxconfig.io",
-	"description": "🎛️ nginx config generator generator on steroids.",
+	"description": "⚙️ NGINX config generator generator on steroids 💉",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/valentinxxx/nginxconfig.io.git"

@@ -1,6 +1,6 @@
 [![nginxconfig.io](public/assets/img/github.png)](https://nginxconfig.io)
 
-Online nginx configuration generator.
+# NGiИX configuration generator
 
 ## Features
 ### Site
