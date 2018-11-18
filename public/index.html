@@ -437,7 +437,7 @@
 								</div>
 							</div>
 							<div class="tab-pane tab-routing" ng-class="{ 'active': tab === 'routing' }">
-								<fieldset class="form-group">
+								<fieldset class="form-group" ng-if="isPHP()">
 									<div class="row">
 										<legend class="col-sm-3 col-form-label col-form-label-sm">
 											<code tooltips tooltip-template="Defines the file that will be used as an index.">index</code>

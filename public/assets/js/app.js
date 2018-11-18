@@ -327,6 +327,9 @@
 					$scope.data.index = 'index.html';
 					$scope.data.fallback_html = true;
 					break;
+				case 'backend':
+					$scope.data.index = 'index.php';
+					break;
 				case 'spa':
 					$scope.data.index = 'index.html';
 					$scope.data.fallback_html = true;
@@ -518,7 +521,6 @@
 
 			if (!$scope.data.php) {
 				$scope.defaultData.index = 'index.html';
-				$scope.data.index = 'index.html';
 			} else {
 				$scope.defaultData.index = 'index.php';
 			}
