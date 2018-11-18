@@ -47,6 +47,8 @@
 			cert_type:			'letsencrypt',
 			ssl_profile:		'intermediate',
 			hsts:				true,
+			hsts_subdomains:	true,
+			hsts_preload:		true,
 			email:				'',
 			ssl_certificate:	'',
 			ssl_certificate_key:'',
@@ -406,6 +408,14 @@
 
 		$scope.isHSTS = function() {
 			return $scope.isHTTPS() && $scope.data.hsts;
+		};
+
+		$scope.isHSTSSubdomains = function() {
+			return $scope.isHSTS() && $scope.data.hsts_subdomains;
+		};
+
+		$scope.isHSTSPreload = function() {
+			return $scope.isHSTSSubdomains() && $scope.data.hsts_preload;
 		};
 
 		$scope.isResolverCloudflare = function() {

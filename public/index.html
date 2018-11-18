@@ -214,6 +214,14 @@
 											<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
 											<label class="form-check-label" for="hsts">enabled</label>
 										</div>
+										<div class="form-check" ng-if="isHSTS()" ng-class="{ 'input-changed': data.hsts_subdomains !== defaultData.hsts_subdomains }">
+											<input class="form-check-input" type="checkbox" id="hsts_subdomains" ng-model="data.hsts_subdomains">
+											<label class="form-check-label" for="hsts_subdomains"><code>includeSubDomains</code></label>
+										</div>
+										<div class="form-check" ng-if="isHSTSSubdomains()" ng-class="{ 'input-changed': data.hsts_preload !== defaultData.hsts_preload }">
+											<input class="form-check-input" type="checkbox" id="hsts_preload" ng-model="data.hsts_preload">
+											<label class="form-check-label" for="hsts_preload"><code>preload</code></label>
+										</div>
 									</div>
 								</div>
 								<fieldset class="form-group" ng-if="isHTTPS()">
