@@ -14,6 +14,15 @@
 			height: 300px;
 			max-height: 300px;
 		}
+
+		footer & {
+			height: 200px;
+			max-height: 200px;
+		}
+	}
+
+	footer & {
+		margin-bottom: 1rem;
 	}
 
 	.note {
