@@ -231,19 +231,19 @@
 											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
 												<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
 												<label class="form-check-label" for="modern">
-													<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8">modern</span>
+													<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8" tooltip-side="top">modern</span>
 												</label>
 											</div>
 											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
 												<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
 												<label class="form-check-label" for="intermediate">
-													<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7">intermediate</span>
+													<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7" tooltip-side="top">intermediate</span>
 												</label>
 											</div>
 											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
 												<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
 												<label class="form-check-label" for="old">
-													<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6">old</span>
+													<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6" tooltip-side="top">old</span>
 												</label>
 											</div>
 										</div>
@@ -256,7 +256,7 @@
 											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'letsencrypt' }">
 												<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.cert_type" value="letsencrypt">
 												<label class="form-check-label" for="letsencrypt">
-													<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>">Let's Encrypt</span>
+													<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>" tooltip-side="top">Let's Encrypt</span>
 												</label>
 											</div>
 											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.cert_type !== defaultData.cert_type && data.cert_type === 'custom' }">
