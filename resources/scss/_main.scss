@@ -119,6 +119,17 @@ section.tabs {
 		.form-group {
 			margin-bottom: 0.25rem;
 
+			@include media-breakpoint-only(xs) {
+				margin-bottom: 0.5rem;
+			}
+
+			.col-form-label {
+				@include media-breakpoint-only(xs) {
+					font-weight: 700;
+					margin-bottom: -0.25rem;
+				}
+			}
+
 			.form-check {
 				padding-top: 0.2rem;
 

@@ -209,15 +209,19 @@
 									<label class="col-sm-3 col-form-label col-form-label-sm">
 										<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
 									</label>
-									<div class="col-sm-9">
+									<div class="col-sm-3">
 										<div class="form-check" ng-class="{ 'input-changed': data.hsts !== defaultData.hsts }">
 											<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.hsts">
 											<label class="form-check-label" for="hsts">enabled</label>
 										</div>
+									</div>
+									<div class="col-sm-3 small">
 										<div class="form-check" ng-if="isHSTS()" ng-class="{ 'input-changed': data.hsts_subdomains !== defaultData.hsts_subdomains }">
 											<input class="form-check-input" type="checkbox" id="hsts_subdomains" ng-model="data.hsts_subdomains">
 											<label class="form-check-label" for="hsts_subdomains"><code>includeSubDomains</code></label>
 										</div>
+									</div>
+									<div class="col-sm-3 small">
 										<div class="form-check" ng-if="isHSTSSubdomains()" ng-class="{ 'input-changed': data.hsts_preload !== defaultData.hsts_preload }">
 											<input class="form-check-input" type="checkbox" id="hsts_preload" ng-model="data.hsts_preload">
 											<label class="form-check-label" for="hsts_preload"><code>preload</code></label>
@@ -306,7 +310,7 @@
 									<label class="col-sm-3 col-form-label col-form-label-sm">
 										<span tooltips tooltip-template="DNS resolver for stapling">OCSP DNS resolvers</span>
 									</label>
-									<div class="col-sm-9">
+									<div class="col-sm-9 small">
 										<div class="form-check" ng-class="{ 'input-changed': data.resolver_cloudflare !== defaultData.resolver_cloudflare }">
 											<input class="form-check-input" type="checkbox" id="resolver_cloudflare" ng-model="data.resolver_cloudflare">
 											<label class="form-check-label" for="resolver_cloudflare">Cloudflare Resolver (<code>1.1.1.1, 1.0.0.1</code>)</label>
