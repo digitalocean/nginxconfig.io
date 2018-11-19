@@ -184,7 +184,7 @@
 		};
 
 		$scope.refreshHighlighting = function() {
-			var sourceCodes = document.querySelectorAll('main .file .code.source');
+			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
 
 			for (var i = 0; i < sourceCodes.length; i++) {
 				var sourceCode = sourceCodes[i];
@@ -260,7 +260,7 @@
 		$scope.downloadZip = function() {
 			var zip = new JSZip();
 
-			var sourceCodes = document.querySelectorAll('main .file .code.source');
+			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
 
 			for (var i = 0; i < sourceCodes.length; i++) {
 				var sourceCode = sourceCodes[i];
