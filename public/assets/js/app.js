@@ -1,6 +1,91 @@
 (function() {
+	'use strict';
 
-	var repeat = function(string, count) {
+
+
+	angular
+		.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
+		.config(nginxCongigIoConfig)
+		.config(tooltipsConfig)
+		.directive('ngIncludeTabs', ngIncludeTabs)
+		.controller('NginxConfigIoController', NginxConfigIoController);
+
+
+
+	var DEFAULTS = {
+		ipv4:			'*',
+		ipv6:			'::',
+
+		domain:			'',
+		path:			'',
+		document_root:	'/public',
+
+		https:			true,
+		http2:			true,
+
+		redirect:		true,
+		force_https:	true,
+
+		cert_type:				'letsencrypt',
+		ssl_profile:			'intermediate',
+		hsts:					true,
+		hsts_subdomains:		true,
+		hsts_preload:			true,
+		email:					'',
+		ssl_certificate:		'',
+		ssl_certificate_key:	'',
+
+		resolver_cloudflare:	true,
+		resolver_google:		true,
+		resolver_opendns:		true,
+
+		non_www:			true,
+		cdn:				false,
+
+		index:				'index.php',
+		fallback_html:		false,
+		fallback_php:		true,
+		fallback_php_path:	'/api/',
+
+		php:				true,
+		php_server:			'/var/run/php/php7.2-fpm.sock',
+		php_server_backup:	'',
+		wordpress:			false,
+		drupal:				false,
+
+		file_structure:		'modularized',
+
+		referrer_policy:			'no-referrer-when-downgrade',
+		content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
+
+		worker_processes:	'auto',
+		user:				'www-data',
+		pid:				'/run/nginx.pid',
+
+		access_log:			'/var/log/nginx/access.log',
+		error_log:			'/var/log/nginx/error.log warn',
+		access_log_domain:	false,
+		error_log_domain:	false,
+
+		client_max_body_size:	16,
+		gzip:					true,
+		server_tokens:			false,
+		log_not_found:			false,
+		limit_req:				false,
+
+		expires_assets:	'7d',
+		expires_media:	'7d',
+		expires_svg:	'7d',
+		expires_fonts:	'7d',
+
+		proxy:			false,
+		proxy_path:		'/',
+		proxy_pass:		'http://127.0.0.1:3000',
+	};
+
+
+
+	function repeat(string, count) {
 		var repeatedString = '';
 
 		for (var i = 0; i < count; i++) {
@@ -8,18 +93,49 @@
 		}
 
 		return repeatedString;
-	};
+	}
 
 
 
-	angular
-	.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
-	.config(function NginxCongigIoConfig($locationProvider) {
+	function tooltipsConfig(tooltipsConfProvider) {
+		tooltipsConfProvider.configure({
+			side: 'right',
+			size: 'small',
+		});
+	}
+
+
+
+	function nginxCongigIoConfig($locationProvider) {
 		$locationProvider
 			.html5Mode(true)
 			.hashPrefix('!');
-	})
-	.controller('NginxConfigIoController', function NginxConfigIoController($scope, $window, $location, $timeout) {
+	}
+
+
+
+	function ngIncludeTabs() {
+		return {
+			require: 'ngInclude',
+			restrict: 'A',
+			link: {
+				pre: function preLink(scope, iElement, iAttrs, controller) {
+					var tabs = parseInt(iAttrs.ngIncludeTabs || 0);
+
+					var startRegex = new RegExp(repeat('\t', tabs - 1));
+
+					controller.template = controller.template
+						.replace(/^(.*)$/mg, repeat('\t', tabs) + '$1')
+						.replace(startRegex, '')
+						.replace(/\s*$/, '');
+				},
+			},
+		};
+	}
+
+
+
+	function NginxConfigIoController($scope, $window, $location, $timeout) {
 		///////////////////////
 		// PRIVATE VARIABLES //
 		///////////////////////
@@ -30,76 +146,7 @@
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
-		$scope.defaultData = {
-			ipv4:				'*',
-			ipv6:				'::',
-
-			domain:				'',
-			path:				'',
-			document_root:		'/public',
-
-			https:				true,
-			http2:				true,
-
-			redirect:			true,
-			force_https:		true,
-
-			cert_type:			'letsencrypt',
-			ssl_profile:		'intermediate',
-			hsts:				true,
-			hsts_subdomains:	true,
-			hsts_preload:		true,
-			email:				'',
-			ssl_certificate:	'',
-			ssl_certificate_key:'',
-
-			resolver_cloudflare:true,
-			resolver_google:	true,
-			resolver_opendns:	true,
-
-			non_www:			true,
-			cdn:				false,
-
-			index:				'index.php',
-			fallback_html:		false,
-			fallback_php:		true,
-			fallback_php_path:	'/api/',
-
-			php:				true,
-			php_server:			'/var/run/php/php7.2-fpm.sock',
-			php_server_backup:	'',
-			wordpress:			false,
-			drupal:				false,
-
-			file_structure:		'modularized',
-
-			referrer_policy:			'no-referrer-when-downgrade',
-			content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
-
-			worker_processes:	'auto',
-			user:				'www-data',
-			pid:				'/run/nginx.pid',
-
-			access_log:			'/var/log/nginx/access.log',
-			error_log:			'/var/log/nginx/error.log warn',
-			access_log_domain:	false,
-			error_log_domain:	false,
-
-			client_max_body_size: 16,
-			gzip:				true,
-			server_tokens:		false,
-			log_not_found:		false,
-			limit_req:			false,
-
-			expires_assets:		'7d',
-			expires_media:		'7d',
-			expires_svg:		'7d',
-			expires_fonts:		'7d',
-
-			proxy:				false,
-			proxy_path:			'/',
-			proxy_pass:			'http://127.0.0.1:3000',
-		};
+		$scope.defaultData = DEFAULTS;
 
 		$scope.location = $location;
 		$scope.data = angular.copy($scope.defaultData);
@@ -120,7 +167,7 @@
 			docs:	'pdf|' +
 					'docx?|dotx?|docm|dotm|' +
 					'xlsx?|xltx?|xlsm|xltm|' +
-					'pptx?|potx?|pptm|potm|ppsx?'
+					'pptx?|potx?|pptm|potm|ppsx?',
 		};
 
 		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
@@ -271,13 +318,14 @@
 				zip.file(name, content);
 			}
 
-			zip.generateAsync({ type: 'blob' })
-				.then(function(content) {
-					saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
-				});
+			zip.generateAsync({
+				type: 'blob',
+			}).then(function(content) {
+				saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
+			});
 
 			gtag('event', $scope.domain(), {
-				event_category: 'download_zip'
+				event_category: 'download_zip',
 			});
 		};
 
@@ -311,7 +359,7 @@
 				percentPosition: true,
 				initLayout: false,
 				stagger: 0,
-				transitionDuration: '0.6s'
+				transitionDuration: '0.6s',
 			});
 		};
 
@@ -327,29 +375,29 @@
 			$scope.data.index			= $scope.defaultData.index;
 			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
 
-			switch(preset) {
-				case 'frontend':
-					$scope.data.php = false;
-					$scope.data.index = 'index.html';
-					$scope.data.fallback_html = true;
-					break;
-				case 'backend':
-					$scope.data.index = 'index.php';
-					break;
-				case 'spa':
-					$scope.data.index = 'index.html';
-					$scope.data.fallback_html = true;
-					break;
-				case 'wordpress':
-					$scope.data.wordpress = true;
-					break;
-				case 'drupal':
-					$scope.data.drupal = true;
-					break;
-				case 'nodejs':
-					$scope.data.php = false;
-					$scope.data.proxy = true;
-					break;
+			switch (preset) {
+			case 'frontend':
+				$scope.data.php = false;
+				$scope.data.index = 'index.html';
+				$scope.data.fallback_html = true;
+				break;
+			case 'backend':
+				$scope.data.index = 'index.php';
+				break;
+			case 'spa':
+				$scope.data.index = 'index.html';
+				$scope.data.fallback_html = true;
+				break;
+			case 'wordpress':
+				$scope.data.wordpress = true;
+				break;
+			case 'drupal':
+				$scope.data.drupal = true;
+				break;
+			case 'nodejs':
+				$scope.data.php = false;
+				$scope.data.proxy = true;
+				break;
 			}
 
 			gtag('event', preset, {
@@ -568,30 +616,5 @@
 		//////////
 		$scope.setDataFromHash();
 		$scope.initMasonry();
-	})
-	.config(['tooltipsConfProvider', function (tooltipsConfProvider) {
-		tooltipsConfProvider.configure({
-			side: 'right',
-			size: 'small',
-		});
-	}])
-	.directive('ngIncludeTabs', function () {
-		return {
-			require: 'ngInclude',
-			restrict: 'A',
-			link: {
-				pre: function preLink(scope, iElement, iAttrs, controller) {
-					var tabs = parseInt(iAttrs.ngIncludeTabs || 0);
-
-					var startRegex = new RegExp(repeat('\t', tabs - 1));
-
-					controller.template = controller.template
-						.replace(/^(.*)$/mg, repeat('\t', tabs) + '$1')
-						.replace(startRegex, '')
-						.replace(/\s*$/, '');
-				},
-			},
-		};
-	});
-
+	}
 })();

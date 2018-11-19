@@ -1,0 +1,47 @@
+{
+	"extends": "eslint:recommended",
+	"rules": {
+		"array-bracket-spacing": ["error", "never"],
+		"brace-style": "error",
+		"comma-dangle": ["error", "always-multiline"],
+		"comma-style": ["error", "last"],
+		"computed-property-spacing": ["error", "never"],
+		"curly": ["error", "all"],
+		"eqeqeq": ["error", "always"],
+		"func-call-spacing": ["error", "never"],
+		"func-style": ["error", "declaration"],
+		"indent": ["error", "tab"],
+		"key-spacing": ["error", {
+			"afterColon": true,
+			"mode": "minimum",
+		}],
+		"keyword-spacing": ["error", {
+			"before": true,
+			"after": true
+		}],
+		"linebreak-style": ["error", "unix"],
+		"object-curly-newline": ["error", {
+			"minProperties": 1
+		}],
+		"no-mixed-spaces-and-tabs": "error",
+		"no-multi-spaces": "error",
+		"padded-blocks": ["error", "never"],
+		"padding-line-between-statements": ["error",
+			{ "blankLine": "always", "prev": "*", "next": "return" }
+		],
+		"quote-props": ["error", "as-needed"],
+		"quotes": ["error", "single"],
+		"semi-spacing": ["error", {
+			"before": false,
+			"after": true
+		}]
+	},
+	"globals": {
+		"angular": true,
+		"gtag": true,
+		"hljs": true,
+		"JSZip": true,
+		"Masonry": true,
+		"saveAs": true
+	}
+}

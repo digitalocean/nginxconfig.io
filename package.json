@@ -22,6 +22,7 @@
 		"angular-tooltips": "^1.2.2",
 		"autoprefixer": "^8.6.4",
 		"bootstrap": "^4.1.1",
+		"eslint": "^5.9.0",
 		"highlight.js": "^9.12.0",
 		"node-sass": "^4.9.0",
 		"postcss-cli": "^5.0.1"
@@ -42,8 +43,11 @@
 
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
 
-		"test": "start-server-and-test start http://localhost:8080 cypress:run",
-		"test:debug": "start-server-and-test start http://localhost:8080 cypress:open",
+		"lint": "eslint public/assets/js/app.js",
+		"lint:fix": "npm run lint -- --fix",
+
+		"test": "npm run lint && start-server-and-test start http://localhost:8080 cypress:run",
+		"test:debug": "npm run lint && start-server-and-test start http://localhost:8080 cypress:open",
 
 		"cypress:run": "cypress run",
 		"cypress:open": "cypress open"
