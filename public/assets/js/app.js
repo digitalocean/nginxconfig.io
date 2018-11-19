@@ -5,7 +5,7 @@
 
 	angular
 		.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
-		.config(nginxCongigIoConfig)
+		.config(appConfig)
 		.config(tooltipsConfig)
 		.directive('ngIncludeTabs', ngIncludeTabs)
 		.controller('NginxConfigIoController', NginxConfigIoController);
@@ -106,7 +106,7 @@
 
 
 
-	function nginxCongigIoConfig($locationProvider) {
+	function appConfig($locationProvider) {
 		$locationProvider
 			.html5Mode(true)
 			.hashPrefix('!');
