@@ -201,6 +201,10 @@
 			}
 		};
 
+		$scope.getUrl = function() {
+			return $location.absUrl().replace(/#.*$/, '');
+		};
+
 		$scope.setDataFromHash = function() {
 			var hashData = $location.search();
 
