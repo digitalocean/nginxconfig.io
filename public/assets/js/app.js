@@ -97,19 +97,19 @@
 
 
 
+	function appConfig($locationProvider) {
+		$locationProvider
+			.html5Mode(true)
+			.hashPrefix('!');
+	}
+
+
+
 	function tooltipsConfig(tooltipsConfProvider) {
 		tooltipsConfProvider.configure({
 			side: 'right',
 			size: 'small',
 		});
-	}
-
-
-
-	function appConfig($locationProvider) {
-		$locationProvider
-			.html5Mode(true)
-			.hashPrefix('!');
 	}
 
 
@@ -148,14 +148,14 @@
 		/////////////////////
 		$scope.defaultData = DEFAULTS;
 
-		$scope.location = $location;
-		$scope.data = angular.copy($scope.defaultData);
-		$scope.dataInit = false;
-		$scope.isDirty = false;
-		$scope.tab = 'site';
+		$scope.dataInit	= false;
+		$scope.isDirty	= false;
+		$scope.tab		= 'site';
+		$scope.data		= angular.copy($scope.defaultData);
 
-		$scope.sslCertificateChanged = false;
-		$scope.sslCertificateKeyChanged = false;
+		$scope.clipboardCopy = undefined;
+
+		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
 
 		$scope.extensions = {
 			assets:	'css(\\.map)?|js(\\.map)?',
@@ -169,8 +169,6 @@
 					'xlsx?|xltx?|xlsm|xltm|' +
 					'pptx?|potx?|pptm|potm|ppsx?',
 		};
-
-		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
 
 		$scope.sslProfiles = {
 			modern: {
@@ -186,8 +184,6 @@
 				ciphers: 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:DES-CBC3-SHA:HIGH:SEED:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!RSAPSK:!aDH:!aECDH:!EDH-DSS-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA:!SRP',
 			},
 		};
-
-		$scope.clipboardCopy = undefined;
 
 
 
@@ -569,8 +565,6 @@
 		$scope.isProxy = function() {
 			return $scope.data.proxy;
 		};
-
-
 
 
 
