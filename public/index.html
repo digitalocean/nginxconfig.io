@@ -757,7 +757,7 @@
 			<div class="container">
 				<div class="row grid">
 					<div class="grid-sizer col-xl-6"></div>
-					<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
+					<div ng-if="isModularized() || (isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
 						<div class="commands">
 							<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 						</div>

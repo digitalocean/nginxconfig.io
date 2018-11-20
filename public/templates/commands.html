@@ -1,7 +1,14 @@
-<span class="hljs-comment"># <strong>Enable</strong> virtual host</span>
-<span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span>  /etc/nginx/sites-available/{{ domain() }}.conf /etc/nginx/sites-enabled/{{ domain() }}.conf
+<!-- ✔ modularized --><span ng-if="isModularized()"><!--
 
-<!--
+--><span class="hljs-comment"># <strong>Virtual host</strong>: create symbolic link</span>
+<span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span> /etc/nginx/sites-available/{{ domain() }}.conf /etc/nginx/sites-enabled/{{ domain() }}.conf</span><!--
+
+
+✔ modularized || ✔ HTTPS --><span ng-if="isModularized() && ((isHTTPS() && !isSSLProfileModern()) || isCertLetsEncrypt())">
+
+</span><!--
+
+
 ✔ HTTPS --><span ng-if="isHTTPS() && !isSSLProfileModern()"><!--
 
 --><span class="hljs-comment"># <strong>HTTPS</strong>: create Diffie-Hellman keys</span>
