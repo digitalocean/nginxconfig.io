@@ -1,3 +1,6 @@
+<span class="hljs-comment"># <strong>Enable</strong> virtual host</span>
+<span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span>  /etc/nginx/sites-available/{{ domain() }}.conf /etc/nginx/sites-enabled/{{ domain() }}.conf
+
 <!--
 ✔ HTTPS --><span ng-if="isHTTPS() && !isSSLProfileModern()"><!--
 
