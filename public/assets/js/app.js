@@ -312,10 +312,17 @@
 				var content	= sourceCode.children[0].children[0].innerText;
 
 				zip.file(name, content);
+
+				if (name.match(/^sites-available\//)) {
+					zip.file(name.replace(/^sites-available\//, 'sites-enabled/'), '../' + name, {
+						unixPermissions: parseInt('120755', 8),
+					});
+				}
 			}
 
 			zip.generateAsync({
 				type: 'blob',
+				platform: 'UNIX',
 			}).then(function(content) {
 				saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
 			});

@@ -757,7 +757,7 @@
 			<div class="container">
 				<div class="row grid">
 					<div class="grid-sizer col-xl-6"></div>
-					<div ng-if="(isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
+					<div ng-if="isModularized() || (isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
 						<div class="commands">
 							<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 						</div>
@@ -773,12 +773,12 @@
 						</div><div id="file-nginx" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
-						<strong>/etc/nginx/sites-enabled/{{ domain() }}.conf</strong>
+						<strong>/etc/nginx/sites-available/{{ domain() }}.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain" ngclipboard-success="clipboardSuccess('example.com')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
 						<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
-						<div class="code source" data-filename="sites-enabled/{{ domain() }}.conf">
+						<div class="code source" data-filename="sites-available/{{ domain() }}.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-domain" class="code highlighted"></div>
 					</section>
