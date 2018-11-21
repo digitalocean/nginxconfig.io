@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="assets/css/app.min.css?v=COMMIT_HASH">
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
-		<meta name="description" content="NGiИX configuration generator">
+		<meta name="description" content="python configuration generator">
 		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js, reverse proxy, Node.js">
 		<meta property="og:title" content="nginxconfig.io">
 		<meta property="og:description" content="NGiИX configuration generator: HTTPS, HTTP2, CDN, PHP, HHVM, Frontend, Reverse proxy, Node.js, WordPress, Drupal, security headers, rate limiting, expiration by file types…">
@@ -48,7 +48,7 @@
 							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('php')" ng-class="{ 'active': tab === 'php', 'changed': getChangesForTab('php') }">PHP<small ng-cloak>({{ getChangesForTab('php') }})</small></a>
 							</li>
-							<li class="nav-item">
+							<li class="
 								<a class="nav-link" ng-click="setTab('routing')" ng-class="{ 'active': tab === 'routing', 'changed': getChangesForTab('routing') }">Routing<small ng-cloak>({{ getChangesForTab('routing') }})</small></a>
 							</li>
 							<li class="nav-item">
@@ -74,7 +74,7 @@
 									<div class="col-sm-9">
 										<input type="text"
 											class="form-control form-control-sm domain"
-											ng-model="data.domain"
+											ng-
 											ng-class="{ 'input-changed': data.domain !== defaultData.domain }"
 											placeholder="{{ domain() }}"
 											autofocus>
@@ -171,7 +171,7 @@
 							<div class="tab-pane tab-https" ng-class="{ 'active': tab === 'https' }">
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label col-form-label-sm">
-										<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
+										template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
 									</label>
 									<div class="col-sm-9">
 										<div class="form-check" ng-class="{ 'input-changed': data.https !== defaultData.https }">
