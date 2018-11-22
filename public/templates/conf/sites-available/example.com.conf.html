@@ -183,7 +183,7 @@ server {
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
 
-	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+	return 301 http{{ isHTTPS() ? 's' : '' }}://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
 }</span><!--
 
 
