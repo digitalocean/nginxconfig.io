@@ -209,9 +209,9 @@ server {
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
 
-	location / {
-		return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
-	}</span><!--
+	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+	
+	</span><!--
 
 	✘ Let's Encrypt --><span ng-if="!isCertLetsEncrypt()">
 
