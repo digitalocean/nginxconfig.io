@@ -11,6 +11,11 @@ location ~ ^/sites/[^/]+/files/.*\.php$ {
 # Drupal: deny php in vendor
 location ~ /vendor/.*\.php$ {
 	deny all;
+}
+
+# Drupal: handle private files
+location ~ ^(/[a-z\-]+)?/system/files/ {
+	try_files $uri /index.php?$query_string;
 }<span ng-if="isLimitReq()">
 
 # Drupal: throttle user functions
