@@ -1,10 +1,10 @@
-<!-- ✔ modularized --><span ng-if="isModularized()"><!--
+<!-- ✔ symlink --><span ng-if="isSymlink()"><!--
 
 --><span class="hljs-comment"># <strong>Virtual host</strong>: create symbolic link</span>
 <span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span> /etc/nginx/sites-available/{{ domain() }}.conf /etc/nginx/sites-enabled/{{ domain() }}.conf</span><!--
 
 
-✔ modularized || ✔ HTTPS --><span ng-if="isModularized() && ((isHTTPS() && !isSSLProfileModern()) || isCertLetsEncrypt())">
+✔ symlink || ✔ HTTPS --><span ng-if="isSymlink() && ((isHTTPS() && !isSSLProfileModern()) || isCertLetsEncrypt())">
 
 </span><!--
 

@@ -54,6 +54,7 @@
 		drupal:				false,
 
 		file_structure:		'modularized',
+		symlink:			true,
 
 		referrer_policy:			'no-referrer-when-downgrade',
 		content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
@@ -310,6 +311,10 @@
 
 				var name	= sourceCode.dataset.filename;
 				var content	= sourceCode.children[0].children[0].innerText;
+
+				if (!$scope.isSymlink() && name.match(/^sites-available\//)) {
+					name = name.replace(/^sites-available\//, 'sites-enabled/');
+				}
 
 				zip.file(name, content);
 
@@ -571,6 +576,10 @@
 
 		$scope.isProxy = function() {
 			return $scope.data.proxy;
+		};
+
+		$scope.isSymlink = function() {
+			return $scope.isModularized() && $scope.data.symlink;
 		};
 
 
