@@ -53,6 +53,7 @@
 * PHP backup server
 * WordPress security essentials
 * Drupal security essentials
+* Magento security essentials
 
 ### Routing
 * `index`

@@ -52,6 +52,7 @@
 		php_server_backup:	'',
 		wordpress:			false,
 		drupal:				false,
+		magento:			false,
 
 		file_structure:		'modularized',
 		symlink:			true,
@@ -379,6 +380,7 @@
 			$scope.data.php				= $scope.defaultData.php;
 			$scope.data.wordpress		= $scope.defaultData.wordpress;
 			$scope.data.drupal			= $scope.defaultData.drupal;
+			$scope.data.magento			= $scope.defaultData.magento;
 			$scope.data.proxy			= $scope.defaultData.proxy;
 			$scope.data.index			= $scope.defaultData.index;
 			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
@@ -401,6 +403,9 @@
 				break;
 			case 'drupal':
 				$scope.data.drupal = true;
+				break;
+			case 'magento':
+				$scope.data.magento = true;
 				break;
 			case 'nodejs':
 				$scope.data.php = false;
@@ -536,6 +541,10 @@
 
 		$scope.isDrupal= function() {
 			return $scope.isPHP() && $scope.data.drupal;
+		};
+
+		$scope.isMagento = function() {
+			return $scope.isPHP() && $scope.data.magento;
 		};
 
 		$scope.isCSP = function() {

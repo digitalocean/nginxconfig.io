@@ -1,0 +1,82 @@
+# Magento: setup
+location ^~ /setup {
+	root $base;
+
+	# allow index.php
+	location ~ ^/setup/index.php {
+		include nginxconfig.io/php_fastcgi.conf;
+	}
+
+	# deny everything except pub
+	location ~ ^/setup/(?!pub/). {
+		deny all;
+	}
+}
+
+# Magento: update
+location ^~ /update {
+	root $base;
+
+	# allow index.php
+	location ~ ^/update/index.php {
+		include nginxconfig.io/php_fastcgi.conf;
+	}
+
+	# deny everything except pub
+	location ~ ^/update/(?!pub/). {
+		deny all;
+	}
+}
+
+# Magento: media files
+location ^~ /media/ {
+	try_files $uri $uri/ /get.php?$args;
+
+	location ~* \.(?:ico|jpg|jpeg|png|gif|svg|js|css|swf|eot|ttf|otf|woff|woff2)$ {
+		expires +1y;
+		add_header Cache-Control "public";
+		try_files $uri $uri/ /get.php?$args;
+	}
+
+	location ~* \.(?:zip|gz|gzip|bz2|csv|xml)$ {
+		expires off;
+		add_header Cache-Control "no-store";
+		try_files $uri $uri/ /get.php?$args;
+	}
+
+	location ~ ^/media/theme_customization/.*\.xml {
+		deny all;
+	}
+
+	location ~ ^/media/(?:customer|downloadable|import)/ {
+		deny all;
+	}
+}
+
+# Magento: static route
+location @magento_static {
+	rewrite ^/static/(version\d*/)?(.*)$ /static.php?resource=$2 last;
+}
+
+# Magento: static files
+location ^~ /static/ {
+	expires max;
+	try_files $uri $uri/ @magento_static;
+
+	location ~* \.(ico|jpg|jpeg|png|gif|svg|js|css|swf|eot|ttf|otf|woff|woff2)$ {
+		expires +1y;
+		add_header Cache-Control "public";
+		try_files $uri $uri/ @magento_static;
+	}
+
+	location ~* \.(zip|gz|gzip|bz2|csv|xml)$ {
+		expires off;
+		add_header Cache-Control "no-store";
+		try_files $uri $uri/ @magento_static;
+	}
+}
+
+# Magento: deny cron
+location ~ cron\.php {
+	deny all;
+}

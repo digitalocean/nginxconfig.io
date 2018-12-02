@@ -98,6 +98,9 @@ server {<!--
 	✔ modularized && ✔ Drupal --><span ng-if="isModularized() && isDrupal()">
 	include nginxconfig.io/drupal.conf;</span><!--
 
+	✔ modularized && ✔ Magento --><span ng-if="isModularized() && isMagento()">
+	include nginxconfig.io/magento.conf;</span><!--
+
 
 
 	✔ unified --><span ng-if="isUnified()">
@@ -110,7 +113,11 @@ server {<!--
 
 	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+
+	✔ unified && ✔ Magento --><span ng-if="isUnified() && isMagento()">
+
+<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
