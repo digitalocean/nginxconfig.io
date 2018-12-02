@@ -1,0 +1,9 @@
+# default uwsgi_params
+include uwsgi_params;
+
+# uwsgi settings
+uwsgi_pass						{{ !isPythonBackup() ? ((data.python_server[0] === '/' ? 'unix:' : '') + data.python_server) : 'python' }};
+uwsgi_param Host				$host;
+uwsgi_param X-Real-IP			$remote_addr;
+uwsgi_param X-Forwarded-For		$proxy_add_x_forwarded_for;
+uwsgi_param X-Forwarded-Proto	$http_x_forwarded_proto;

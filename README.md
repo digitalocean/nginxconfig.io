@@ -55,6 +55,11 @@
 * Drupal security essentials
 * Magento security essentials
 
+### Python
+* Python
+* Python server
+* Python backup server
+
 ### Routing
 * `index`
 * Fallback routing

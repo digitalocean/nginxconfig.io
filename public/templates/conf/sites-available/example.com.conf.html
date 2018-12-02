@@ -57,6 +57,18 @@ server {<!--
 		try_files $uri $uri/ /index.php?$query_string;
 	}</span><!--
 
+	✔ Python --><span ng-if="isPython()">
+
+	# Python
+	location / {<!--
+
+		✔ modularized --><span ng-if="isModularized()">
+		include nginxconfig.io/python_uwsgi.conf;</span><!--
+
+		✔ unified --><span ng-if="isUnified()">
+<!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+	}</span><!--
+
 	✔ Reverse proxy --><span ng-if="isProxy()">
 
 	# reverse proxy

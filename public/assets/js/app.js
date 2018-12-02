@@ -54,6 +54,10 @@
 		drupal:				false,
 		magento:			false,
 
+		python:					false,
+		python_server:			'/tmp/uwsgi.sock',
+		python_server_backup:	'',
+
 		file_structure:		'modularized',
 		symlink:			true,
 
@@ -547,6 +551,14 @@
 			return $scope.isPHP() && $scope.data.magento;
 		};
 
+		$scope.isPython = function() {
+			return $scope.data.python;
+		};
+
+		$scope.isPythonBackup = function() {
+			return $scope.isPython() && !!$scope.data.python_server_backup;
+		};
+
 		$scope.isCSP = function() {
 			return !!$scope.data.content_security_policy;
 		};
@@ -600,6 +612,14 @@
 			$scope.refreshHighlighting();
 			$scope.updateHash();
 
+			// toggle PHP <-> Python
+			if ($scope.data.php && !oldValue.php) {
+				$scope.data.python = false;
+			} else if ($scope.data.python && !oldValue.python) {
+				$scope.data.php = false;
+			}
+
+			// default index file
 			if (!$scope.data.php) {
 				$scope.defaultData.index = 'index.html';
 			} else {

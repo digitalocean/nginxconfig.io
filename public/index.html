@@ -8,9 +8,9 @@
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<title>nginxconfig.io</title>
 		<meta name="description" content="NGiИX configuration generator">
-		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, magento, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js, reverse proxy, Node.js">
+		<meta name="keywords" content="nginx, config, configurator, /etc/nginx/nginx.conf, nginx performance, nginx tuning, nginx php, nginx, php fpm, wordpress, drupal, magento, python, django, Let's Encrypt, custom certificate, cdn, access_log, error_log, Laravel, Lumen, Symfony, Zend, CodeIgniter, Yii, CakePHP, Slim, Angular, React, Vue.js, Ember.js, reverse proxy, Node.js">
 		<meta property="og:title" content="nginxconfig.io">
-		<meta property="og:description" content="NGiИX configuration generator: HTTPS, HTTP2, CDN, PHP, HHVM, Frontend, Reverse proxy, Node.js, WordPress, Drupal, Magento, security headers, rate limiting, expiration by file types…">
+		<meta property="og:description" content="NGiИX configuration generator: HTTPS, HTTP2, CDN, PHP, HHVM, Frontend, Reverse proxy, Node.js, WordPress, Drupal, Magento, Python, Django, security headers, rate limiting, expiration by file types…">
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://nginxconfig.io">
 		<meta property="og:image" content="https://nginxconfig.io/assets/img/share.png">
@@ -48,6 +48,9 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('php')" ng-class="{ 'active': tab === 'php', 'changed': getChangesForTab('php') }">PHP<small ng-cloak>({{ getChangesForTab('php') }})</small></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" ng-click="setTab('python')" ng-class="{ 'active': tab === 'python', 'changed': getChangesForTab('python') }">Python<small ng-cloak>({{ getChangesForTab('python') }})</small></a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" ng-click="setTab('routing')" ng-class="{ 'active': tab === 'routing', 'changed': getChangesForTab('routing') }">Routing<small ng-cloak>({{ getChangesForTab('routing') }})</small></a>
@@ -455,6 +458,42 @@
 									</div>
 								</div>
 							</div>
+							<div class="tab-pane tab-python" ng-class="{ 'active': tab === 'python' }">
+								<div class="form-group row">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										Python
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.python !== defaultData.python }">
+											<input class="form-check-input" type="checkbox" id="python" ng-model="data.python">
+											<label class="form-check-label" for="python">enabled</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isPython()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										Python server
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.python_server"
+											ng-class="{ 'input-changed': data.python_server !== defaultData.python_server }">
+									</div>
+								</div>
+								<div class="form-group row" ng-if="isPython()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+										Python backup server
+									</label>
+									<div class="col-sm-9">
+										<input type="text"
+											class="form-control form-control-sm"
+											ng-model="data.python_server_backup"
+											ng-class="{ 'input-changed': data.python_server_backup !== defaultData.python_server_backup }"
+											placeholder="disabled">
+									</div>
+								</div>
+							</div>
 							<div class="tab-pane tab-routing" ng-class="{ 'active': tab === 'routing' }">
 								<fieldset class="form-group" ng-if="isPHP()">
 									<div class="row">
@@ -834,6 +873,16 @@
 						<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-php_fastcgi" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isPython() && isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/python_uwsgi.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-python_uwsgi" ngclipboard-success="clipboardSuccess('python_uwsgi.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<span class="clipboard-success" ng-if="clipboardCopy === 'python_uwsgi.conf'">Copied!</span>
+						<div class="code source" data-filename="nginxconfig.io/python_uwsgi.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-python_uwsgi" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isProxy() && isModularized()" ng-cloak>
 						<strong>/etc/nginx/nginxconfig.io/proxy.conf</strong>

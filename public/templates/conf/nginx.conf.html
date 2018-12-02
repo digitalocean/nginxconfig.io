@@ -20,6 +20,13 @@ http {<!--
 		server {{ data.php_server[0] === '/' ? 'unix:' : '' }}{{ data.php_server }};
 		server {{ data.php_server_backup[0] === '/' ? 'unix:' : '' }}{{ data.php_server_backup }} backup;
 	}
+</span><!--
+
+	✔ Python backup --><span ng-if="isPythonBackup()">
+	upstream python {
+		server {{ data.python_server[0] === '/' ? 'unix:' : '' }}{{ data.python_server }};
+		server {{ data.python_server_backup[0] === '/' ? 'unix:' : '' }}{{ data.python_server_backup }} backup;
+	}
 </span>
 	charset utf-8;
 	sendfile on;
