@@ -20,10 +20,17 @@
 
 
 ✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()"><!--
---><span class="hljs-comment"># <strong>HTTPS</strong>: create ACME-challenge common directory</span>
+--><span class="hljs-comment"># <strong>HTTPS - certbot</strong> (before first run): create ACME-challenge common directory</span>
 <span class="hljs-section">sudo</span> <span class="hljs-attribute">-u</span> {{ data.user }} <span class="hljs-section">sh</span> <span class="hljs-attribute">-c</span> "<span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt"
 
-<span class="hljs-comment"># <strong>HTTPS</strong>: certbot (obtain certificates)<br># disable before first run: <strong>listen</strong>, <strong>ssl_certificate</strong>, <strong>ssl_certificate_key</strong>, <strong>ssl_trusted_certificate</strong> in HTTPS server</span>
+<span class="hljs-comment"># <strong>HTTPS - certbot</strong> (before first run): disable SSL directives</span>
+<span class="hljs-section">sed</span> <!--
+--><span class="hljs-attribute">-i</span> <!--
+--><span class="hljs-attribute">-r</span> <!--
+-->'s/listen (.*)443/listen \1443;#/g; s/ssl_(certificate|certificate_key|trusted_certificate) /#;#ssl_\1/g' <!--
+-->/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ domain() }}.conf
+
+<span class="hljs-comment"># <strong>HTTPS - certbot</strong>: obtain certificates</span>
 <span class="hljs-section">certbot certonly</span> <!--
 --><span class="hljs-attribute">--webroot</span> <!--
 --><span ng-if="isNonWWW() || isRedirect()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ domain() }} </span><!--
@@ -33,6 +40,14 @@
 --><span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
---><span class="hljs-attribute">--force-renewal</span><!--
+--><span class="hljs-attribute">--force-renewal</span>
+
+<span class="hljs-comment"># <strong>HTTPS - certbot</strong> (after first run): enable SSL directives</span>
+<span class="hljs-section">sed</span> <!--
+--><span class="hljs-attribute">-i</span> <!--
+--><span class="hljs-attribute">-r</span> <!--
+-->'s/#?;#//g' <!--
+-->/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ domain() }}.conf
+<!--
 
 --></span>
