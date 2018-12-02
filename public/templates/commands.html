@@ -28,7 +28,7 @@
 --><span class="hljs-attribute">-i</span> <!--
 --><span class="hljs-attribute">-r</span> <!--
 -->'s/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g' <!--
--->/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ domain() }}.conf
+-->{{ isModularized() ? ('/etc/nginx/sites-' + (isSymlink() ? 'available' : 'enabled') + '/' + domain() + '.conf') : '/etc/nginx/nginx.conf' }}
 
 <span class="hljs-comment"># <strong>HTTPS - certbot</strong>: obtain certificates</span>
 <span class="hljs-section">certbot certonly</span> <!--
@@ -47,6 +47,6 @@
 --><span class="hljs-attribute">-i</span> <!--
 --><span class="hljs-attribute">-r</span> <!--
 -->'s/#?;#//g' <!--
--->/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ domain() }}.conf<!--
+-->{{ isModularized() ? ('/etc/nginx/sites-' + (isSymlink() ? 'available' : 'enabled') + '/' + domain() + '.conf') : '/etc/nginx/nginx.conf' }}<!--
 
 --></span>
