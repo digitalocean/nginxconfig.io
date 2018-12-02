@@ -73,12 +73,14 @@ server {<!--
 	✔ PHP --><span ng-if="isPHP()">
 
 	# handle .php
-	location ~ \.php$ {<!--
+	location ~ \.php$ {
+		try_files $uri =404;<!--
 
 	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress()">
 		include nginxconfig.io/php_fastcgi.conf;</span><!--
 
 	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
+
 	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 

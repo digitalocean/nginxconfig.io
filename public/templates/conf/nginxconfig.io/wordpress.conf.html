@@ -1,5 +1,6 @@
 # WordPress: allow TinyMCE
 location = /wp-includes/js/tinymce/wp-tinymce.php {
+	try_files $uri =404;
 	include nginxconfig.io/php_fastcgi.conf;
 }
 
@@ -31,5 +32,6 @@ location ~* ^/(?:xmlrpc\.php|wp-links-opml\.php|wp-config\.php|wp-config-sample\
 # WordPress: throttle wp-login.php
 location = /wp-login.php {
 	limit_req zone=login burst=2 nodelay;
+	try_files $uri =404;
 	include nginxconfig.io/php_fastcgi.conf;
 }</span>
