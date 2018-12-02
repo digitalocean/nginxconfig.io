@@ -27,7 +27,7 @@
 		force_https:	true,
 
 		cert_type:				'letsencrypt',
-		ssl_profile:			'intermediate',
+		ssl_profile:			'modern',
 		hsts:					true,
 		hsts_subdomains:		true,
 		hsts_preload:			true,
