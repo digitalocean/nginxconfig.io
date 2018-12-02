@@ -27,7 +27,7 @@
 <span class="hljs-section">sed</span> <!--
 --><span class="hljs-attribute">-i</span> <!--
 --><span class="hljs-attribute">-r</span> <!--
--->'s/listen (.*)443/listen \1443;#/g; s/ssl_(certificate|certificate_key|trusted_certificate) /#;#ssl_\1/g' <!--
+-->'s/listen (.*)443/listen \1443;#/g; s/ssl_(certificate|certificate_key|trusted_certificate) /#;#ssl_\1 /g' <!--
 -->/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ domain() }}.conf
 
 <span class="hljs-comment"># <strong>HTTPS - certbot</strong>: obtain certificates</span>
