@@ -50,6 +50,7 @@
 		php:				true,
 		php_server:			'/var/run/php/php7.2-fpm.sock',
 		php_server_backup:	'',
+		php_legacy_routing:	false,
 		wordpress:			false,
 		drupal:				false,
 		magento:			false,
@@ -529,6 +530,10 @@
 
 		$scope.isFallbackPHP = function() {
 			return $scope.data.fallback_php && $scope.isPHP();
+		};
+
+		$scope.isLegacyPHPRouting = function() {
+			return $scope.isPHP() && $scope.data.php_legacy_routing;
 		};
 
 		$scope.isPHP = function() {

@@ -538,6 +538,17 @@
 											ng-class="{ 'input-changed': data.fallback_php_path !== defaultData.fallback_php_path }">
 									</div>
 								</div>
+								<div class="form-group row" ng-if="isPHP()">
+									<label class="col-sm-3 col-form-label col-form-label-sm">
+											<span tooltips tooltip-template="Handle legacy (non-pretty) (<code>foo.php/bar/baz</code>) routes.">Legacy PHP routing</span>
+									</label>
+									<div class="col-sm-9">
+										<div class="form-check" ng-class="{ 'input-changed': data.php_legacy_routing !== defaultData.php_legacy_routing }">
+											<input class="form-check-input" type="checkbox" id="php_legacy_routing" ng-model="data.php_legacy_routing">
+											<label class="form-check-label" for="php_legacy_routing">enabled</label>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="tab-pane tab-cache" ng-class="{ 'active': tab === 'cache' }">
 								<div class="form-group row">

@@ -1,17 +1,26 @@
+<!--
+✔ Legacy PHP routing --><span ng-if="isLegacyPHPRouting()"><!--
+--># split path
+fastcgi_split_path_info ^(.+\.php)(/.+)$;
+set $_fastcgi_path_info $fastcgi_path_info;
+
+</span><!--
+
+--># 404
+try_files $fastcgi_script_name =404;
+
 # default fastcgi_params
 include fastcgi_params;
 
 # fastcgi settings
-fastcgi_pass					{{ !isPHPBackup() ? ((data.php_server[0] === '/' ? 'unix:' : '') + data.php_server) : 'php' }};
-fastcgi_index					index.php;
-fastcgi_split_path_info			^(.+\.php)(/.+)$;
+fastcgi_pass			{{ !isPHPBackup() ? ((data.php_server[0] === '/' ? 'unix:' : '') + data.php_server) : 'php' }};
+fastcgi_index			index.php;
+fastcgi_buffers			8 16k;
+fastcgi_buffer_size		32k;
 
+# fastcgi params
 fastcgi_param DOCUMENT_ROOT		$realpath_root;
-fastcgi_param SCRIPT_FILENAME	$realpath_root$fastcgi_script_name;
+fastcgi_param SCRIPT_FILENAME	$realpath_root$fastcgi_script_name;<!--
+✔ Legacy PHP routing --><span ng-if="isLegacyPHPRouting()">
+fastcgi_param PATH_INFO			$_fastcgi_path_info;</span>
 fastcgi_param PHP_ADMIN_VALUE	"open_basedir=$base/:/usr/lib/php/:/tmp/";
-
-fastcgi_intercept_errors		off;
-fastcgi_buffer_size				128k;
-fastcgi_buffers					256 16k;
-fastcgi_busy_buffers_size		256k;
-fastcgi_temp_file_write_size	256k;
