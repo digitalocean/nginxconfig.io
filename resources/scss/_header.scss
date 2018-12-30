@@ -10,4 +10,34 @@ header {
 		height: 3rem;
 		margin: 0.5rem 0 0.3rem;
 	}
+
+	.presets {
+		margin-bottom: 0.3rem;
+		line-height: 1.8rem;
+
+		.btn-outline-light {
+			border-color: #999;
+
+			&:hover {
+				background-color: #fff;
+				border-color: #fff;
+
+				svg {
+					path {
+						fill: #000;
+					}
+				}
+			}
+
+			svg {
+				height: 1.1rem;
+				vertical-align: text-bottom;
+
+				path {
+					fill: #ddd;
+					transition: fill 0.15s ease-in-out;
+				}
+			}
+		}
+	}
 }

@@ -17,21 +17,20 @@
 	</head>
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
-			<div class="container">
+			<div class="container-fluid">
 				<img src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
+
+				<div class="presets">
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <span ng-include="'assets/img/brands/angular.svg'"></span> <span ng-include="'assets/img/brands/react.svg'"></span> <span ng-include="'assets/img/brands/vuejs.svg'"></span></button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">PHP <span ng-include="'assets/img/brands/php.svg'"></span> <span ng-include="'assets/img/brands/laravel.svg'"></span> <span ng-include="'assets/img/brands/symfony.svg'"></span> <span ng-include="'assets/img/brands/codeigniter.svg'""></span></button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('nodejs')" tooltips tooltip-template="• enabled reverse proxy" tooltip-side="bottom">Node.js <span ng-include="'assets/img/brands/nodejs.svg'"></span></button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><span ng-include="'assets/img/brands/wordpress.svg'"></span> WordPress</button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><span ng-include="'assets/img/brands/drupal.svg'"></span> Drupal</button>
+					<button type="button" class="btn btn-sm btn-outline-light" ng-click="setPreset('magento')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules" tooltip-side="bottom"><span ng-include="'assets/img/brands/magento.svg'"></span> Magento</button>
+				</div>
 			</div>
 		</header>
-		<section class="presets">
-			<div class="container">
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('frontend')" tooltips tooltip-template="• disabled PHP<br>• index.html fallback routing" tooltip-side="bottom">Frontend <img src="assets/img/brands/angular.svg" alt="Angular"> <img src="assets/img/brands/react.svg" alt="React"> <img src="assets/img/brands/vuejs.svg" alt="Vue.js"></button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('backend')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing" tooltip-side="bottom">Backend <img src="assets/img/brands/php.svg" alt="PHP"> <img src="assets/img/brands/laravel.svg" alt="Laravel"> <img src="assets/img/brands/symfony.svg" alt="Symfony"> <img src="assets/img/brands/codeigniter.svg" alt="CodeIgniter"></button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('nodejs')" tooltips tooltip-template="• enabled reverse proxy<br>• disabled PHP" tooltip-side="bottom">Node.js <img src="assets/img/brands/nodejs.svg" alt="Node.js"></button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('spa')" tooltips tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing" tooltip-side="bottom">Single-page application</button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('wordpress')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules" tooltip-side="bottom"><img src="assets/img/brands/wordpress.svg" alt="WordPress"> WordPress</button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('drupal')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules" tooltip-side="bottom"><img src="assets/img/brands/drupal.svg" alt="Drupal"> Drupal</button>
-				<button type="button" class="btn btn-sm btn-outline-dark" ng-click="setPreset('magento')" tooltips tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules" tooltip-side="bottom"><img src="assets/img/brands/magento.svg" alt="Magento"> Magento</button>
-			</div>
-		</section>
 		<section class="tabs">
 			<div class="container">
 				<div class="row">
