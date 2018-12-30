@@ -386,6 +386,7 @@
 			$scope.data.wordpress		= $scope.defaultData.wordpress;
 			$scope.data.drupal			= $scope.defaultData.drupal;
 			$scope.data.magento			= $scope.defaultData.magento;
+			$scope.data.python			= $scope.defaultData.python;
 			$scope.data.proxy			= $scope.defaultData.proxy;
 			$scope.data.index			= $scope.defaultData.index;
 			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
@@ -413,7 +414,6 @@
 				$scope.data.magento = true;
 				break;
 			case 'nodejs':
-				$scope.data.php = false;
 				$scope.data.proxy = true;
 				break;
 			}
@@ -622,6 +622,17 @@
 				$scope.data.python = false;
 			} else if ($scope.data.python && !oldValue.python) {
 				$scope.data.php = false;
+			}
+
+			// toggle proxy <-> (PHP || Python)
+			if ($scope.data.proxy && !oldValue.proxy) {
+				$scope.data.php = false;
+				$scope.data.python = false;
+			} else if (
+				($scope.data.php && !oldValue.php) ||
+				($scope.data.python && !oldValue.python)
+			) {
+				$scope.data.proxy = false;
 			}
 
 			// default index file
