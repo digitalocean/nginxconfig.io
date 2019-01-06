@@ -30,7 +30,7 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: bash .travis_deploy.sh var/www/beta.nginxconfig.io/
+    script: bash .travis_deploy.sh /var/www/beta.nginxconfig.io/
     skip_cleanup: true
     on:
       branch: beta
