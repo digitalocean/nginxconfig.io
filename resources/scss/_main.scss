@@ -97,7 +97,7 @@ section.tabs {
 
 				@include media-breakpoint-up(xl) {
 					padding-left: 0;
-					padding-right: 0;
+					padding-right: 0.75rem;
 					text-align: center;
 				}
 
@@ -121,10 +121,6 @@ section.tabs {
 				&.changed {
 					font-weight: 700;
 
-					@include media-breakpoint-up(xl) {
-						padding-right: 1rem;
-					}
-
 					small {
 						display: inline;
 
@@ -144,6 +140,10 @@ section.tabs {
 					@include media-breakpoint-down(lg) {
 						right: 0.25rem;
 					}
+				}
+
+				button.close {
+					line-height: 0.8;
 				}
 			}
 		}

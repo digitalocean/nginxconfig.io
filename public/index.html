@@ -106,7 +106,12 @@
 									<a class="nav-link">Sites:</a>
 								</li>
 								<li class="nav-item" ng-repeat="(key, value) in data.sites">
-									<a class="nav-link" ng-click="setSite(key)" ng-class="{ 'active': site === key, 'changed': getSiteChanges(key) !== 0 }" ng-cloak>{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small></a>
+									<a class="nav-link" ng-click="setSite(key)" ng-class="{ 'active': site === key, 'changed': getSiteChanges(key) !== 0 }" ng-cloak>
+										{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
+										<button type="button" class="close" ng-if="key > 0" ng-click="removeSite(key)">
+											<span>&times;</span>
+										</button>
+									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link text-muted small" ng-click="addSite()">﹢ Add site</a>

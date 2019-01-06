@@ -407,6 +407,16 @@
 			$scope.site = $scope.data.sites.length - 1;
 		};
 
+		$scope.removeSite = function(site) {
+			$scope.data.sites.splice(site, 1);
+
+			if ($scope.data.sites[$scope.site] === undefined) {
+				$scope.site--;
+			}
+
+			$timeout(calculateChanges);
+		};
+
 		$scope.setSite = function(site) {
 			$scope.site = site;
 			$timeout(calculateChanges);
