@@ -15,7 +15,7 @@ location ~ /\.(?!well-known) {
 	deny all;
 }<!--
 
-✘ root --><span ng-if="allRoot()">
+✘ root --><span ng-if="allRoot() && (data.expires_assets || data.expires_media || data.expires_svg || data.expires_fonts)">
 
 <!--
 
@@ -63,13 +63,11 @@ location ~* \.(?:{{ data.expires_svg && data.expires_svg === data.expires_fonts 
 	expires {{ data.expires_fonts }};<!--
 	✘ accessLog --><span ng-if="isAccessLog()">
 	access_log off;</span>
-}</span><!--
+}</span></span><!--
 
-✔ expires && ✔ gzip --><span ng-if="(data.expires_assets || data.expires_media || data.expires_svg || data.expires_fonts) && isGzip()">
+✔ gzip --><span ng-if="isGzip()">
 
-</span></span><!--
-
-✔ gzip --><span ng-if="isGzip()"># gzip
+# gzip
 gzip on;
 gzip_vary on;
 gzip_proxied any;
@@ -80,7 +78,9 @@ gzip_types {{ gzipTypes }};</span><!--
 
 </span><!--
 
-✔ brotli --><span ng-if="isBrotli()"># brotli
+✔ brotli --><span ng-if="isBrotli()">
+
+# brotli
 brotli on;
 brotli_comp_level 6;
 brotli_types {{ gzipTypes }};</span>
