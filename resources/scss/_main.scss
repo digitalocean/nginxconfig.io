@@ -57,9 +57,8 @@ section.tabs {
 					}
 
 					&.active {
-						background-color: #f8f8f8;
-
 						@include media-breakpoint-up(xl) {
+							background-color: #f8f8f8;
 							border-bottom-color: #f8f8f8;
 							background-color: #f8f8f8;
 						}
