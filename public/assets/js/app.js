@@ -217,14 +217,21 @@
 			var hashData = $location.search();
 
 			for (var key in hashData) {
+				var originalKey = key;
+
+				// legacy
+				if (typeof $scope.data.sites[0][key] !== 'undefined') {
+					key = '0.' + key;
+				}
+
 				// handle false
-				if (hashData[key] === 'false') {
-					hashData[key] = false;
+				if (hashData[originalKey] === 'false') {
+					hashData[originalKey] = false;
 				}
 
 				// handle true
-				if ((hashData[key] === 'true' || hashData[key] === '') && typeof $scope.data[key] === 'boolean') {
-					hashData[key] = true;
+				if ((hashData[originalKey] === 'true' || hashData[originalKey] === '') && ($scope.data[originalKey] === 'boolean' || $scope.data.sites[0][originalKey] === 'boolean')) {
+					hashData[originalKey] = true;
 				}
 
 				// handle sites
@@ -239,13 +246,13 @@
 
 					if (
 						$scope.data.sites[site][siteKey] !== undefined &&
-						typeof $scope.data.sites[site][siteKey] === typeof hashData[key]
+						typeof $scope.data.sites[site][siteKey] === typeof hashData[originalKey]
 					) {
 						$scope.isDirty = true;
-						$scope.data.sites[site][siteKey] = hashData[key];
+						$scope.data.sites[site][siteKey] = hashData[originalKey];
 						gtag('event', key, {
 							event_category: 'data_from_hash',
-							event_label: hashData[key],
+							event_label: hashData[originalKey],
 						});
 					}
 				} else if (

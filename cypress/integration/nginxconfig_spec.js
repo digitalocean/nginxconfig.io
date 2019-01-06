@@ -12,6 +12,12 @@ describe('nginxconfig.io', function () {
 	});
 
 	it('should use passed params', function () {
+		cy.visit(root + '?0.domain=nginxconfig.io');
+		cy.get('input.domain').should('have.value', 'nginxconfig.io');
+		cy.get('#file-domain').contains('server_name nginxconfig.io;');
+	});
+
+	it('should use legacy passed params', function () {
 		cy.visit(root + '?domain=nginxconfig.io');
 		cy.get('input.domain').should('have.value', 'nginxconfig.io');
 		cy.get('#file-domain').contains('server_name nginxconfig.io;');
