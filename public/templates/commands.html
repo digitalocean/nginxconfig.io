@@ -1,52 +1,65 @@
 <!-- ✔ symlink --><span ng-if="isSymlink()"><!--
 
---><span class="hljs-comment"># <strong>Virtual host</strong>: create symbolic link</span>
-<span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span> /etc/nginx/sites-available/{{ domain() }}.conf /etc/nginx/sites-enabled/{{ domain() }}.conf</span><!--
+--><span class="hljs-comment"># <strong>Virtual host</strong>: create symbolic link{{ getDomains().length > 1 ? 's' : '' }}</span>
+<span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span> <span ng-repeat="(_site, _domain) in getDomains() track by $index">/etc/nginx/sites-available/{{ _domain }}.conf </span>/etc/nginx/sites-enabled</span><!--
 
 
-✔ symlink || ✔ HTTPS --><span ng-if="isSymlink() && ((isHTTPS() && !isSSLProfileModern()) || isCertLetsEncrypt())">
+✔ symlink || ✔ HTTPS --><span ng-if="isSymlink() && (isSSLProfileIntermediate() || isSSLProfileOld() || hasCertLetsEncrypt())">
 
 </span><!--
 
 
-✔ HTTPS --><span ng-if="isHTTPS() && !isSSLProfileModern()"><!--
+✔ SSL profile: intermediate || old --><span ng-if="isSSLProfileIntermediate() || isSSLProfileOld()"><!--
 
 --><span class="hljs-comment"># <strong>HTTPS</strong>: create Diffie-Hellman keys</span>
 <span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileOld() ? 1024 : 2048 }}</span><!--
 
---><span ng-if="isCertLetsEncrypt()">
+--><span ng-if="hasCertLetsEncrypt()">
 
 </span></span><!--
 
 
-✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()"><!--
+✔ Let's Encrypt --><span ng-if="hasCertLetsEncrypt()"><!--
 --><span class="hljs-comment"># <strong>HTTPS - certbot</strong> (before first run): create ACME-challenge common directory</span>
 <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt && <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> /var/www/_letsencrypt
+<!--
 
+
+
+-->
 <span class="hljs-comment"># <strong>HTTPS - certbot</strong> (before first run): disable SSL directives</span>
 <span class="hljs-section">sed</span> <!--
 --><span class="hljs-attribute">-i</span> <!--
 --><span class="hljs-attribute">-r</span> <!--
--->'s/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g' <!--
--->{{ isModularized() ? ('/etc/nginx/sites-' + (isSymlink() ? 'available' : 'enabled') + '/' + domain() + '.conf') : '/etc/nginx/nginx.conf' }}
+-->'s/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g'<span ng-if="isUnified()"><!--
+--> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
+--> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
+<!--
 
-<span class="hljs-comment"># <strong>HTTPS - certbot</strong>: obtain certificates</span>
+
+
+-->
+<span class="hljs-comment"># <strong>HTTPS - certbot</strong>: obtain certificates</span><!--
+--><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)">
 <span class="hljs-section">certbot certonly</span> <!--
 --><span class="hljs-attribute">--webroot</span> <!--
---><span ng-if="isNonWWW() || isRedirect()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ domain() }} </span><!--
---><span ng-if="isWWW() || isRedirect()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ domain() }} </span><!--
---><span ng-if="isCDN()"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ domain() }} </span><!--
---><span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'info@' + domain() }} <!--
+--><span ng-if="isNonWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> {{ _domain }} </span><!--
+--><span ng-if="isWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> www.{{ _domain }} </span><!--
+--><span ng-if="isCDN(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain">-d</span> cdn.{{ _domain }} </span><!--
+--><span class="hljs-attribute">--email</span> {{ data.email ? data.email : 'info@' + _domain }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--webroot-path">-w</span> /var/www/_letsencrypt <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
---><span class="hljs-attribute">--force-renewal</span>
+--><span class="hljs-attribute">--force-renewal</span></span>
+<!--
 
+
+
+-->
 <span class="hljs-comment"># <strong>HTTPS - certbot</strong> (after first run): enable SSL directives</span>
 <span class="hljs-section">sed</span> <!--
 --><span class="hljs-attribute">-i</span> <!--
 --><span class="hljs-attribute">-r</span> <!--
--->'s/#?;#//g' <!--
--->{{ isModularized() ? ('/etc/nginx/sites-' + (isSymlink() ? 'available' : 'enabled') + '/' + domain() + '.conf') : '/etc/nginx/nginx.conf' }}<!--
-
---></span>
+-->'s/#?;#//g'<span ng-if="isUnified()"><!--
+--> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
+--> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span></span>

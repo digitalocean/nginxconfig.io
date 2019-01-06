@@ -13,81 +13,98 @@
 
 
 	var DEFAULTS = {
-		ipv4:			'*',
-		ipv6:			'::',
+		sites: [{
+			// SERVER
+			domain:			'',
+			path:			'',
+			document_root:	'/public',
+			non_www:		true,
+			cdn:			false,
+			redirect:		true,
+			ipv4:			'*',
+			ipv6:			'::',
 
-		domain:			'',
-		path:			'',
-		document_root:	'/public',
+			// HTTPS
+			https:					true,
+			http2:					true,
+			force_https:			true,
+			hsts:					true,
+			hsts_subdomains:		true,
+			hsts_preload:			true,
+			cert_type:				'letsencrypt',
+			email:					'',
+			ssl_certificate:		'',
+			ssl_certificate_key:	'',
 
-		https:			true,
-		http2:			true,
+			// PHP
+			php:		true,
+			wordpress:	false,
+			drupal:		false,
+			magento:	false,
 
-		redirect:		true,
-		force_https:	true,
+			// PYTHON
+			python:		false,
+			django:		false,
 
-		cert_type:				'letsencrypt',
+			// PROXY
+			proxy:			false,
+			proxy_path:		'/',
+			proxy_pass:		'http://127.0.0.1:3000',
+
+			// ROUTING
+			root:				true,
+			index:				'index.php',
+			fallback_html:		false,
+			fallback_php:		true,
+			fallback_php_path:	'/api/',
+			php_legacy_routing:	false,
+
+			// LOGGING
+			access_log_domain:	false,
+			error_log_domain:	false,
+		}],
+
+		// COMMON - HTTPS
 		ssl_profile:			'modern',
-		hsts:					true,
-		hsts_subdomains:		true,
-		hsts_preload:			true,
-		email:					'',
-		ssl_certificate:		'',
-		ssl_certificate_key:	'',
-
 		resolver_cloudflare:	true,
 		resolver_google:		true,
 		resolver_opendns:		true,
 
-		non_www:			true,
-		cdn:				false,
-
-		index:				'index.php',
-		fallback_html:		false,
-		fallback_php:		true,
-		fallback_php_path:	'/api/',
-
-		php:				true,
-		php_server:			'/var/run/php/php7.2-fpm.sock',
-		php_server_backup:	'',
-		php_legacy_routing:	false,
-		wordpress:			false,
-		drupal:				false,
-		magento:			false,
-
-		python:					false,
-		python_server:			'/tmp/uwsgi.sock',
-		python_server_backup:	'',
-
-		file_structure:		'modularized',
-		symlink:			true,
-
+		// COMMON - SECURITY
 		referrer_policy:			'no-referrer-when-downgrade',
 		content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
+		server_tokens:				false,
+		limit_req:					false,
 
-		worker_processes:	'auto',
-		user:				'www-data',
-		pid:				'/run/nginx.pid',
+		// COMMON - PHP
+		php_server:			'/var/run/php/php7.2-fpm.sock',
+		php_server_backup:	'',
 
+		// COMMON - PYTHON
+		python_server:		'/tmp/uwsgi.sock',
+
+		// COMMON - PERFORMANCE
+		gzip:				true,
+		brotli:				false,
+		expires_assets:		'7d',
+		expires_media:		'7d',
+		expires_svg:		'7d',
+		expires_fonts:		'7d',
+
+		// COMMON - LOGGING
 		access_log:			'/var/log/nginx/access.log',
 		error_log:			'/var/log/nginx/error.log warn',
-		access_log_domain:	false,
-		error_log_domain:	false,
+		log_not_found:		false,
 
+		// COMMON - NGINX
+		worker_processes:		'auto',
+		user:					'www-data',
+		pid:					'/run/nginx.pid',
 		client_max_body_size:	16,
-		gzip:					true,
-		server_tokens:			false,
-		log_not_found:			false,
-		limit_req:				false,
 
-		expires_assets:	'7d',
-		expires_media:	'7d',
-		expires_svg:	'7d',
-		expires_fonts:	'7d',
-
-		proxy:			false,
-		proxy_path:		'/',
-		proxy_pass:		'http://127.0.0.1:3000',
+		// COMMON - TOOLS
+		file_structure:		'modularized',
+		symlink:			true,
 	};
 
 
@@ -150,15 +167,182 @@
 
 
 
+		///////////////////////
+		// PRIVATE FUNCTIONS //
+		///////////////////////
+		function getSiteValue(site, key) {
+			if (site === undefined) {
+				site = $scope.site;
+			}
+
+			return $scope.data.sites[site][key];
+		}
+
+		function calculateChanges() {
+			var siteTabs = [
+				'server',
+				'https',
+				'php',
+				'python',
+				'proxy',
+				'routing',
+				'logging',
+			];
+
+			var commonTabs = [
+				'https',
+				'security',
+				'php',
+				'python',
+				'performance',
+				'logging',
+				'nginx',
+				'tools',
+			];
+
+			if ($scope.siteChanges[$scope.site] === undefined) {
+				$scope.siteChanges[$scope.site] = {};
+			}
+
+			for (var i in siteTabs) {
+				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-tab-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
+			}
+
+			for (var j in commonTabs) {
+				$scope.commonChanges[commonTabs[j]] = $window.document.querySelectorAll('section.tabs .tab-content.common-content .tab-' + commonTabs[j] + ' .form-group:not(.disabled) .input-changed').length;
+			}
+		}
+
+		function setDataFromHash() {
+			var hashData = $location.search();
+
+			for (var key in hashData) {
+				// handle false
+				if (hashData[key] === 'false') {
+					hashData[key] = false;
+				}
+
+				// handle true
+				if ((hashData[key] === 'true' || hashData[key] === '') && typeof $scope.data[key] === 'boolean') {
+					hashData[key] = true;
+				}
+
+				// handle sites
+				var sitesMatch = /^(\d+)\.(.+)$/.exec(key);
+				if (sitesMatch) {
+					var site = parseInt(sitesMatch[1]);
+					var siteKey = sitesMatch[2];
+
+					while (site >= $scope.data.sites.length) {
+						$scope.addSite();
+					}
+
+					if (
+						$scope.data.sites[site][siteKey] !== undefined &&
+						typeof $scope.data.sites[site][siteKey] === typeof hashData[key]
+					) {
+						$scope.isDirty = true;
+						$scope.data.sites[site][siteKey] = hashData[key];
+						gtag('event', key, {
+							event_category: 'data_from_hash',
+							event_label: hashData[key],
+						});
+					}
+				} else if (
+					$scope.data[key] !== undefined &&
+					typeof $scope.data[key] === typeof hashData[key]
+				) {
+					$scope.isDirty = true;
+					$scope.data[key] = hashData[key];
+					gtag('event', key, {
+						event_category: 'data_from_hash',
+						event_label: hashData[key],
+					});
+				}
+			}
+
+			$scope.site = 0;
+		}
+
+		function updateHash() {
+			if (!$scope.dataInit) {
+				return;
+			}
+
+			var changedData = {};
+			for (var key in $scope.data) {
+				if (!angular.equals($scope.data[key], $scope.defaultData[key])) {
+					if (key === 'sites') {
+						for (var i in $scope.data[key]) {
+							for (var j in $scope.data[key][i]) {
+								if (
+									j !== '$$hashKey' &&
+									!angular.equals(
+										$scope.data[key][i][j],
+										$scope.defaultData[key][0][j]
+									)
+								) {
+									changedData[i + '.' + j] = $scope.data[key][i][j];
+								}
+							}
+						}
+					} else {
+						changedData[key] = $scope.data[key];
+					}
+				}
+			}
+
+			if (Object.keys(changedData).length) {
+				$scope.isDirty = true;
+				$location.search(changedData).replace();
+			} else {
+				$scope.isDirty = false;
+				$location.search({});
+			}
+		}
+
+		function initMasonry() {
+			masonry = new Masonry('main .grid', {
+				itemSelector: '.grid-item',
+				columnWidth: '.grid-sizer',
+				percentPosition: true,
+				initLayout: false,
+				stagger: 0,
+				transitionDuration: '0.6s',
+			});
+
+			masonry.once('layoutComplete', function() {
+				$scope.masonryInit = true;
+			});
+		}
+
+		function doMasonry() {
+			masonry.reloadItems();
+			masonry.layout();
+
+			$timeout(function() {
+				masonry.layout();
+			}, 600);
+		}
+
+
+
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
 		$scope.defaultData = DEFAULTS;
 
-		$scope.dataInit	= false;
-		$scope.isDirty	= false;
-		$scope.tab		= 'site';
-		$scope.data		= angular.copy($scope.defaultData);
+		$scope.dataInit		= false;
+		$scope.data			= angular.copy($scope.defaultData);
+		$scope.isDirty		= false;
+		$scope.masonryInit	= false;
+
+		$scope.site			= 0;
+		$scope.tab_site		= 'server';
+		$scope.tab_common	= 'https';
+
+		$scope.siteChanges		= {};
+		$scope.commonChanges	= {};
 
 		$scope.clipboardCopy = undefined;
 
@@ -197,113 +381,120 @@
 		/////////////////////
 		// SCOPE FUNCTIONS //
 		/////////////////////
-		$scope.domain = function() {
-			return $scope.data.domain ? $scope.data.domain : 'example.com';
-		};
+		$scope.getDomains = function() {
+			var domains = [];
 
-		$scope.sslCertificate = function() {
-			if ($scope.isCertLetsEncrypt()) {
-				return '/etc/letsencrypt/live/' + $scope.domain() + '/fullchain.pem';
+			for (var i in $scope.data.sites) {
+				domains.push( $scope.getDomain(i) );
 			}
 
-			if ($scope.data.ssl_certificate) {
-				return $scope.data.ssl_certificate;
-			}
-
-			return '/etc/nginx/ssl/' + $scope.domain() + '.crt';
-		};
-
-		$scope.sslCertificateKey = function() {
-			if ($scope.isCertLetsEncrypt()) {
-				return '/etc/letsencrypt/live/' + $scope.domain() + '/privkey.pem';
-			}
-
-			if ($scope.data.ssl_certificate_key) {
-				return $scope.data.ssl_certificate_key;
-			}
-
-			return '/etc/nginx/ssl/' + $scope.domain() + '.key';
-		};
-
-		$scope.accessLogDomainPath = function() {
-			return $scope.data.access_log.replace(/([^/]+)\.log$/, $scope.domain() + '.$1.log');
-		};
-
-		$scope.errorLogDomainPath = function() {
-			return $scope.data.error_log.replace(/([^/]+)\.log (.+)$/, $scope.domain() + '.$1.log $2');
-		};
-
-		$scope.refreshHighlighting = function() {
-			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
-
-			for (var i = 0; i < sourceCodes.length; i++) {
-				var sourceCode = sourceCodes[i];
-
-				$timeout(function(_sourceCode) {
-					_sourceCode.nextSibling.innerHTML = _sourceCode.innerHTML;
-					if (_sourceCode.nextSibling.children.length && _sourceCode.nextSibling.children[0].children.length) {
-						hljs.highlightBlock(_sourceCode.nextSibling.children[0].children[0]);
-					}
-					_sourceCode.setAttribute('hidden', '');
-
-					$scope.doMasonry();
-				}, 0, true, sourceCode);
-			}
+			return domains;
 		};
 
 		$scope.getUrl = function() {
 			return $location.absUrl().replace(/#.*$/, '');
 		};
 
-		$scope.setDataFromHash = function() {
-			var hashData = $location.search();
-
-			for (var key in hashData) {
-				// handle false
-				if (hashData[key] === 'false') {
-					hashData[key] = false;
-				}
-
-				// handle true
-				if ((hashData[key] === 'true' || hashData[key] === '') && typeof $scope.data[key] === 'boolean') {
-					hashData[key] = true;
-				}
-
-				if ($scope.data[key] !== undefined && typeof $scope.data[key] === typeof hashData[key]) {
-					$scope.isDirty = true;
-					$scope.data[key] = hashData[key];
-					gtag('event', key, {
-						event_category: 'data_from_hash',
-						event_label: hashData[key],
-					});
-				}
-			}
+		$scope.addSite = function() {
+			$scope.data.sites.push( angular.copy(DEFAULTS.sites[0]) );
+			$scope.site = $scope.data.sites.length - 1;
 		};
 
-		$scope.updateHash = function() {
-			if (!$scope.dataInit) {
-				return;
+		$scope.setSite = function(site) {
+			$scope.site = site;
+			$timeout(calculateChanges);
+		};
+
+		$scope.setTabSite = function(tab) {
+			$scope.tab_site = tab;
+		};
+
+		$scope.setTabCommon = function(tab) {
+			$scope.tab_common = tab;
+		};
+
+		$scope.setPreset = function(preset) {
+			$scope.data.sites[$scope.site].php				= $scope.defaultData.sites[0].php;
+			$scope.data.sites[$scope.site].wordpress		= $scope.defaultData.sites[0].wordpress;
+			$scope.data.sites[$scope.site].drupal			= $scope.defaultData.sites[0].drupal;
+			$scope.data.sites[$scope.site].magento			= $scope.defaultData.sites[0].magento;
+			$scope.data.sites[$scope.site].python			= $scope.defaultData.sites[0].python;
+			$scope.data.sites[$scope.site].django			= $scope.defaultData.sites[0].django;
+			$scope.data.sites[$scope.site].proxy			= $scope.defaultData.sites[0].proxy;
+			$scope.data.sites[$scope.site].root				= $scope.defaultData.sites[0].root;
+			$scope.data.sites[$scope.site].index			= $scope.defaultData.sites[0].index;
+			$scope.data.sites[$scope.site].fallback_html	= $scope.defaultData.sites[0].fallback_html;
+
+			switch (preset) {
+			case 'frontend':
+				$scope.data.sites[$scope.site].php = false;
+				$scope.data.sites[$scope.site].index = 'index.html';
+				$scope.data.sites[$scope.site].fallback_html = true;
+				break;
+			case 'backend':
+				$scope.data.sites[$scope.site].index = 'index.php';
+				break;
+			case 'spa':
+				$scope.data.sites[$scope.site].index = 'index.html';
+				$scope.data.sites[$scope.site].fallback_html = true;
+				break;
+			case 'wordpress':
+				$scope.data.sites[$scope.site].wordpress = true;
+				break;
+			case 'drupal':
+				$scope.data.sites[$scope.site].drupal = true;
+				break;
+			case 'magento':
+				$scope.data.sites[$scope.site].magento = true;
+				break;
+			case 'nodejs':
+				$scope.data.sites[$scope.site].proxy = true;
+				break;
+			case 'django':
+				$scope.data.sites[$scope.site].php = false;
+				$scope.data.sites[$scope.site].python = true;
+				$scope.data.sites[$scope.site].django = true;
+				$scope.data.sites[$scope.site].root = false;
+				break;
 			}
 
-			var changedData = {};
-			for (var key in $scope.data) {
-				if (!angular.equals($scope.data[key], $scope.defaultData[key])) {
-					changedData[key] = $scope.data[key];
-				}
+			gtag('event', preset, {
+				event_category: 'preset',
+			});
+		};
+
+		$scope.getSiteChanges = function(site) {
+			if ($scope.siteChanges[site] === undefined) {
+				return undefined;
 			}
 
-			if (Object.keys(changedData).length) {
-				$scope.isDirty = true;
-				$location.search(changedData).replace();
-			} else {
-				$scope.isDirty = false;
-				$location.search({});
+			var sum = 0;
+
+			for (var tab in $scope.siteChanges[site]) {
+				sum += $scope.siteChanges[site][tab];
 			}
+
+			return sum;
+		};
+
+		$scope.getSiteTabChanges = function(tab) {
+			if ($scope.siteChanges[$scope.site] === undefined) {
+				return 0;
+			}
+
+			return $scope.siteChanges[$scope.site][tab];
 		};
 
 		$scope.reset = function() {
 			$scope.defaultData.index = 'index.php';
-			$scope.data = angular.copy($scope.defaultData);
+
+			$scope.data		= angular.copy($scope.defaultData);
+			$scope.site		= 0;
+			$scope.isDirty	= false;
+
+			$scope.siteChanges		= {};
+			$scope.commonChanges	= {};
+
 			gtag('event', 'reset');
 		};
 
@@ -335,10 +526,10 @@
 				type: 'blob',
 				platform: 'UNIX',
 			}).then(function(content) {
-				saveAs(content, 'nginxconfig.io-' + $scope.domain() + '.zip');
+				saveAs(content, 'nginxconfig.io-' + $scope.getDomains().join(',') + '.zip');
 			});
 
-			gtag('event', $scope.domain(), {
+			gtag('event', $scope.getDomains().join(','), {
 				event_category: 'download_zip',
 			});
 		};
@@ -357,74 +548,22 @@
 			});
 		};
 
-		$scope.doMasonry = function() {
-			masonry.reloadItems();
-			masonry.layout();
+		$scope.refreshHighlighting = function() {
+			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
 
-			$timeout(function() {
-				masonry.layout();
-			}, 600);
-		};
+			for (var i = 0; i < sourceCodes.length; i++) {
+				var sourceCode = sourceCodes[i];
 
-		$scope.initMasonry = function() {
-			masonry = new Masonry('main .grid', {
-				itemSelector: '.grid-item',
-				columnWidth: '.grid-sizer',
-				percentPosition: true,
-				initLayout: false,
-				stagger: 0,
-				transitionDuration: '0.6s',
-			});
-		};
+				$timeout(function(_sourceCode) {
+					_sourceCode.nextSibling.innerHTML = _sourceCode.innerHTML;
+					if (_sourceCode.nextSibling.children.length && _sourceCode.nextSibling.children[0].children.length) {
+						hljs.highlightBlock(_sourceCode.nextSibling.children[0].children[0]);
+					}
+					_sourceCode.setAttribute('hidden', '');
 
-		$scope.setTab = function(tab) {
-			$scope.tab = tab;
-		};
-
-		$scope.setPreset = function(preset) {
-			$scope.data.php				= $scope.defaultData.php;
-			$scope.data.wordpress		= $scope.defaultData.wordpress;
-			$scope.data.drupal			= $scope.defaultData.drupal;
-			$scope.data.magento			= $scope.defaultData.magento;
-			$scope.data.python			= $scope.defaultData.python;
-			$scope.data.proxy			= $scope.defaultData.proxy;
-			$scope.data.index			= $scope.defaultData.index;
-			$scope.data.fallback_html	= $scope.defaultData.fallback_html;
-
-			switch (preset) {
-			case 'frontend':
-				$scope.data.php = false;
-				$scope.data.index = 'index.html';
-				$scope.data.fallback_html = true;
-				break;
-			case 'backend':
-				$scope.data.index = 'index.php';
-				break;
-			case 'spa':
-				$scope.data.index = 'index.html';
-				$scope.data.fallback_html = true;
-				break;
-			case 'wordpress':
-				$scope.data.wordpress = true;
-				break;
-			case 'drupal':
-				$scope.data.drupal = true;
-				break;
-			case 'magento':
-				$scope.data.magento = true;
-				break;
-			case 'nodejs':
-				$scope.data.proxy = true;
-				break;
+					doMasonry();
+				}, 0, true, sourceCode);
 			}
-
-			gtag('event', preset, {
-				event_category: 'preset',
-			});
-		};
-
-		$scope.getChangesForTab = function(tab) {
-			return $window.document.querySelectorAll('section.tabs .tab-content .tab-' + tab + ' .input-changed').length;
 		};
 
 
@@ -432,142 +571,368 @@
 		///////////////////////////
 		// SCOPE QUERY FUNCTIONS //
 		///////////////////////////
-		$scope.isUnified = function() {
-			return $scope.data.file_structure === 'unified';
+
+		// SERVER
+		$scope.getDomain = function(site) {
+			return getSiteValue(site, 'domain') || 'example.com';
 		};
 
-		$scope.isIPv6 = function() {
-			return !!$scope.data.ipv6;
+		$scope.getPath = function(site) {
+			return getSiteValue(site, 'path') || '/var/www/' + $scope.getDomain(site);
 		};
 
-		$scope.isModularized = function() {
-			return !$scope.isUnified();
+		$scope.isNonWWW = function(site) {
+			return getSiteValue(site, 'non_www');
 		};
 
-		$scope.isHTTPS = function() {
-			return $scope.data.https;
+		$scope.isWWW = function(site) {
+			return !$scope.isNonWWW(site);
 		};
 
-		$scope.isHTTP2 = function() {
-			return $scope.isHTTPS() && $scope.data.http2;
+		$scope.isCDN = function(site) {
+			return $scope.isWWW(site) && getSiteValue(site, 'cdn');
 		};
 
-		$scope.isForceHTTPS = function() {
-			return $scope.isHTTPS() && $scope.data.force_https;
+		$scope.isRedirect = function(site) {
+			return getSiteValue(site, 'redirect');
 		};
 
-		$scope.isCertLetsEncrypt = function() {
-			return $scope.isHTTPS() && $scope.data.cert_type === 'letsencrypt';
+		$scope.isIPv6 = function(site) {
+			return !!getSiteValue(site, 'ipv6');
 		};
 
-		$scope.isCertCustom = function() {
-			return $scope.isHTTPS() && $scope.data.cert_type === 'custom';
+
+
+		// HTTPS
+		$scope.isHTTPS = function(site) {
+			return getSiteValue(site, 'https');
 		};
 
+		$scope.isHTTP2 = function(site) {
+			return $scope.isHTTPS(site) && getSiteValue(site, 'http2');
+		};
+
+		$scope.isForceHTTPS = function(site) {
+			return $scope.isHTTPS(site) && getSiteValue(site, 'force_https');
+		};
+
+		$scope.isHSTS = function(site) {
+			return $scope.isHTTPS(site) && getSiteValue(site, 'hsts');
+		};
+
+		$scope.isHSTSSubdomains = function(site) {
+			return $scope.isHSTS(site) && getSiteValue(site, 'hsts_subdomains');
+		};
+
+		$scope.isHSTSPreload = function(site) {
+			return $scope.isHSTSSubdomains(site) && getSiteValue(site, 'hsts_preload');
+		};
+
+		$scope.isCertLetsEncrypt = function(site) {
+			return $scope.isHTTPS(site) && getSiteValue(site, 'cert_type') === 'letsencrypt';
+		};
+
+		$scope.isCertCustom = function(site) {
+			return $scope.isHTTPS(site) && getSiteValue(site, 'cert_type') === 'custom';
+		};
+
+		$scope.hasHTTPS = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isHTTPS(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasCertLetsEncrypt = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isCertLetsEncrypt(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasCertCustom = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isCertCustom(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.getSslCertificate = function(site) {
+			if ($scope.isCertLetsEncrypt(site)) {
+				return '/etc/letsencrypt/live/' + $scope.getDomain(site) + '/fullchain.pem';
+			}
+
+			return getSiteValue(site, 'ssl_certificate') || '/etc/nginx/ssl/' + $scope.getDomain(site) + '.crt';
+		};
+
+		$scope.getSslCertificateKey = function(site) {
+			if ($scope.isCertLetsEncrypt(site)) {
+				return '/etc/letsencrypt/live/' + $scope.getDomain(site) + '/privkey.pem';
+			}
+
+			return getSiteValue(site, 'ssl_certificate_key') || '/etc/nginx/ssl/' + $scope.getDomain(site) + '.key';
+		};
+
+		$scope.hasCommonHSTS = function() {
+			var commonHSTSSubdomains = undefined;
+			var commonHSTSPreload = undefined;
+
+			for (var site in $scope.data.sites) {
+				if (!$scope.isHSTS(site)) {
+					return false;
+				}
+
+				if (commonHSTSSubdomains === undefined ) {
+					commonHSTSSubdomains = $scope.isHSTSSubdomains(site);
+				} else if ($scope.isHSTSSubdomains(site) !== commonHSTSSubdomains) {
+					return false;
+				}
+
+				if (commonHSTSPreload === undefined ) {
+					commonHSTSPreload = $scope.isHSTSPreload(site);
+				} else if ($scope.isHSTSPreload(site) !== commonHSTSPreload) {
+					return false;
+				}
+			}
+
+			return true;
+		};
+
+
+
+		// PHP
+		$scope.isPHP = function(site) {
+			return getSiteValue(site, 'php');
+		};
+
+		$scope.isWordPress = function(site) {
+			return $scope.isPHP(site) && getSiteValue(site, 'wordpress');
+		};
+
+		$scope.isDrupal = function(site) {
+			return $scope.isPHP(site) && getSiteValue(site, 'drupal');
+		};
+
+		$scope.isMagento = function(site) {
+			return $scope.isPHP(site) && getSiteValue(site, 'magento');
+		};
+
+		$scope.hasPHP = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isPHP(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasWordPress = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isWordPress(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasDrupal = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isDrupal(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasMagento = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isMagento(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.isLegacyPHPRouting = function(site) {
+			return $scope.isPHP(site) && getSiteValue(site, 'php_legacy_routing');
+		};
+
+		$scope.hasLegacyPHPRouting = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isLegacyPHPRouting(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+
+
+		// PYTHON
+		$scope.isPython = function(site) {
+			return getSiteValue(site, 'python');
+		};
+
+		$scope.isDjango = function(site) {
+			return $scope.isPython(site) && getSiteValue(site, 'django');
+		};
+
+		$scope.hasPython = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isPython(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		$scope.hasDjango = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isDjango(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+
+
+		// PROXY
+		$scope.isProxy = function(site) {
+			return getSiteValue(site, 'proxy');
+		};
+
+
+
+		// ROUTING
+		$scope.isRoot = function(site) {
+			return getSiteValue(site, 'root');
+		};
+
+		$scope.allRoot = function() {
+			for (var site in $scope.data.sites) {
+				if (!$scope.isRoot(site)) {
+					return false;
+				}
+			}
+
+			return true;
+		};
+
+		$scope.isIndexHTML = function(site) {
+			return getSiteValue(site, 'index') === 'index.html' || !$scope.isPHP(site);
+		};
+
+		$scope.isIndexPHP = function(site) {
+			return $scope.isPHP(site) && getSiteValue(site, 'index') === 'index.php';
+		};
+
+		$scope.isFallbackHTML = function(site) {
+			return getSiteValue(site, 'fallback_html');
+		};
+
+		$scope.isFallbackPHP = function(site) {
+			return getSiteValue(site, 'fallback_php') && $scope.isPHP(site);
+		};
+
+
+
+		// LOGGING
+		$scope.isAccessLogDomain = function(site) {
+			return getSiteValue(site, 'access_log_domain');
+		};
+
+		$scope.isErrorLogDomain = function(site) {
+			return getSiteValue(site, 'error_log_domain');
+		};
+
+		$scope.getAccessLogDomainPath = function(site) {
+			return $scope.data.access_log.replace(/([^/]+)\.log$/, $scope.getDomain(site) + '.$1.log');
+		};
+
+		$scope.getErrorLogDomainPath = function(site) {
+			return $scope.data.error_log.replace(/([^/]+)\.log (.+)$/, $scope.getDomain(site) + '.$1.log $2');
+		};
+
+
+
+		// COMMON - HTTPS
 		$scope.isSSLProfileModern = function() {
-			return $scope.isHTTPS() && $scope.data.ssl_profile === 'modern';
+			return $scope.hasHTTPS() && $scope.data.ssl_profile === 'modern';
 		};
 
 		$scope.isSSLProfileIntermediate = function() {
-			return $scope.isHTTPS() && $scope.data.ssl_profile === 'intermediate';
+			return $scope.hasHTTPS() && $scope.data.ssl_profile === 'intermediate';
 		};
 
 		$scope.isSSLProfileOld = function() {
-			return $scope.isHTTPS() && $scope.data.ssl_profile === 'old';
-		};
-
-		$scope.isHSTS = function() {
-			return $scope.isHTTPS() && $scope.data.hsts;
-		};
-
-		$scope.isHSTSSubdomains = function() {
-			return $scope.isHSTS() && $scope.data.hsts_subdomains;
-		};
-
-		$scope.isHSTSPreload = function() {
-			return $scope.isHSTSSubdomains() && $scope.data.hsts_preload;
+			return $scope.hasHTTPS() && $scope.data.ssl_profile === 'old';
 		};
 
 		$scope.isResolverCloudflare = function() {
-			return $scope.isHTTPS() && $scope.data.resolver_cloudflare;
+			return $scope.hasHTTPS() && $scope.data.resolver_cloudflare;
 		};
 
 		$scope.isResolverGoogle = function() {
-			return $scope.isHTTPS() && $scope.data.resolver_google;
+			return $scope.hasHTTPS() && $scope.data.resolver_google;
 		};
 
 		$scope.isResolverOpenDNS = function() {
-			return $scope.isHTTPS() && $scope.data.resolver_opendns;
+			return $scope.hasHTTPS() && $scope.data.resolver_opendns;
 		};
 
-		$scope.isNonWWW = function() {
-			return $scope.data.non_www;
-		};
 
-		$scope.isWWW = function() {
-			return !$scope.isNonWWW();
-		};
 
-		$scope.isRedirect = function() {
-			return $scope.data.redirect;
-		};
-
-		$scope.isCDN = function() {
-			return $scope.isWWW() && $scope.data.cdn;
-		};
-
-		$scope.isIndexHTML = function() {
-			return $scope.data.index === 'index.html' || !$scope.isPHP();
-		};
-
-		$scope.isIndexPHP = function() {
-			return $scope.isPHP() && $scope.data.index === 'index.php';
-		};
-
-		$scope.isFallbackHTML = function() {
-			return $scope.data.fallback_html;
-		};
-
-		$scope.isFallbackPHP = function() {
-			return $scope.data.fallback_php && $scope.isPHP();
-		};
-
-		$scope.isLegacyPHPRouting = function() {
-			return $scope.isPHP() && $scope.data.php_legacy_routing;
-		};
-
-		$scope.isPHP = function() {
-			return $scope.data.php;
-		};
-
-		$scope.isPHPBackup = function() {
-			return $scope.isPHP() && !!$scope.data.php_server_backup;
-		};
-
-		$scope.isWordPress = function() {
-			return $scope.isPHP() && $scope.data.wordpress;
-		};
-
-		$scope.isDrupal= function() {
-			return $scope.isPHP() && $scope.data.drupal;
-		};
-
-		$scope.isMagento = function() {
-			return $scope.isPHP() && $scope.data.magento;
-		};
-
-		$scope.isPython = function() {
-			return $scope.data.python;
-		};
-
-		$scope.isPythonBackup = function() {
-			return $scope.isPython() && !!$scope.data.python_server_backup;
-		};
-
+		// COMMON - SECURITY
 		$scope.isCSP = function() {
 			return !!$scope.data.content_security_policy;
 		};
 
+		$scope.isServerTokens = function() {
+			return $scope.data.server_tokens;
+		};
+
+		$scope.isLimitReq = function() {
+			return $scope.data.limit_req;
+		};
+
+
+
+		// COMMON - PHP
+		$scope.isPHPBackup = function() {
+			return $scope.hasPHP() && !!$scope.data.php_server_backup;
+		};
+
+
+
+		// COMMON - PERFORMANCE
+		$scope.isGzip = function() {
+			return $scope.data.gzip;
+		};
+
+		$scope.isBrotli = function() {
+			return $scope.data.brotli;
+		};
+
+
+
+		// COMMON - LOGGING
 		$scope.isAccessLog = function() {
 			return !!$scope.data.access_log;
 		};
@@ -576,32 +941,19 @@
 			return !!$scope.data.error_log;
 		};
 
-		$scope.isAccessLogDomain = function() {
-			return $scope.data.access_log_domain;
-		};
-
-		$scope.isErrorLogDomain = function() {
-			return $scope.data.error_log_domain;
-		};
-
-		$scope.isGzip = function() {
-			return $scope.data.gzip;
-		};
-
-		$scope.isServerTokens = function() {
-			return $scope.data.server_tokens;
-		};
-
 		$scope.isLogNotFound = function() {
 			return $scope.data.log_not_found;
 		};
 
-		$scope.isLimitReq = function() {
-			return $scope.data.limit_req;
+
+
+		// COMMON - TOOLS
+		$scope.isUnified = function() {
+			return $scope.data.file_structure === 'unified';
 		};
 
-		$scope.isProxy = function() {
-			return $scope.data.proxy;
+		$scope.isModularized = function() {
+			return !$scope.isUnified();
 		};
 
 		$scope.isSymlink = function() {
@@ -614,41 +966,59 @@
 		// SCOPE EVENTS //
 		//////////////////
 		$scope.$watch('data', function(newValue, oldValue) {
-			$scope.refreshHighlighting();
-			$scope.updateHash();
+			$timeout($scope.refreshHighlighting);
 
-			// toggle PHP <-> Python
-			if ($scope.data.php && !oldValue.php) {
-				$scope.data.python = false;
-			} else if ($scope.data.python && !oldValue.python) {
-				$scope.data.php = false;
+			for (var site in $scope.data.sites) {
+				// www
+				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^https?:\/\//, '');
+				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/\/.*$/, '');
+
+				if ($scope.data.sites[site].domain.match(/^www\./)) {
+					$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^www./, '');
+					$scope.data.sites[site].non_www = false;
+				}
+
+				// toggle PHP <-> Python
+				if (
+					$scope.data.sites[site].php &&
+					oldValue.sites[site] &&
+					!oldValue.sites[site].php
+				) {
+					$scope.data.sites[site].python = false;
+				} else if (
+					$scope.data.sites[site].python &&
+					oldValue.sites[site] &&
+					!oldValue.sites[site].python
+				) {
+					$scope.data.sites[site].php = false;
+				}
+
+				// toggle proxy <-> (PHP || Python)
+				if (
+					$scope.data.sites[site].proxy &&
+					oldValue.sites[site] &&
+					!oldValue.sites[site].proxy
+				) {
+					$scope.data.sites[site].php = false;
+					$scope.data.sites[site].python = false;
+				} else if (
+					(
+						$scope.data.sites[site].php &&
+						oldValue.sites[site] &&
+						!oldValue.sites[site].php
+					) ||
+					(
+						$scope.data.sites[site].python &&
+						oldValue.sites[site] &&
+						!oldValue.sites[site].python
+					)
+				) {
+					$scope.data.sites[site].proxy = false;
+				}
 			}
 
-			// toggle proxy <-> (PHP || Python)
-			if ($scope.data.proxy && !oldValue.proxy) {
-				$scope.data.php = false;
-				$scope.data.python = false;
-			} else if (
-				($scope.data.php && !oldValue.php) ||
-				($scope.data.python && !oldValue.python)
-			) {
-				$scope.data.proxy = false;
-			}
-
-			// default index file
-			if (!$scope.data.php) {
-				$scope.defaultData.index = 'index.html';
-			} else {
-				$scope.defaultData.index = 'index.php';
-			}
-
-			$scope.data.domain = $scope.data.domain.replace(/^https?:\/\//, '');
-			$scope.data.domain = $scope.data.domain.replace(/\/.*$/, '');
-
-			if ($scope.data.domain.match(/^www\./)) {
-				$scope.data.domain = $scope.data.domain.replace(/^www./, '');
-				$scope.data.non_www = false;
-			}
+			updateHash();
+			$timeout(calculateChanges);
 
 			for (var key in $scope.data) {
 				if (!angular.equals(newValue[key], oldValue[key])) {
@@ -669,7 +1039,7 @@
 		//////////
 		// INIT //
 		//////////
-		$scope.setDataFromHash();
-		$scope.initMasonry();
+		setDataFromHash();
+		initMasonry();
 	}
 })();

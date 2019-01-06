@@ -9,18 +9,76 @@
 section.tabs {
 	margin-bottom: 1rem;
 
+	.sites {
+		margin-bottom: 1rem;
+	}
+
+	.lead {
+		margin-top: 0.5rem;
+	}
+
 	.nav-tabs {
+		.nav-item {
+			&.disabled {
+				pointer-events: none;
+				user-select: none;
+				flex-grow: 0;
+				padding: 0 1rem;
+				font-weight: 700;
+				font-style: italic;
+				color: #666;
+			}
+
+			.nav-link {
+				padding-top: 0.25rem;
+				padding-bottom: 0.25rem;
+			}
+		}
+
+		&.nav-site {
+			.nav-item {
+				.nav-link {
+					&.changed {
+						font-weight: normal;
+					}
+
+					&.active {
+						font-weight: 700;
+					}
+				}
+			}
+		}
+
+		&.nav-site-tab {
+			.nav-item {
+				.nav-link {
+					&:hover {
+						background-color: #f8f8f8;
+					}
+
+					&.active {
+						background-color: #f8f8f8;
+
+						@include media-breakpoint-up(xl) {
+							border-bottom-color: #f8f8f8;
+							background-color: #f8f8f8;
+						}
+					}
+				}
+			}
+		}
+
 		.nav-item {
 			flex-basis: 50%;
 
 			@include media-breakpoint-down(lg) {
-				a {
+				.nav-link {
 					border-bottom-left-radius: $border-radius;
 					border-bottom-right-radius: $border-radius;
 				}
 
 				&:nth-last-child(-n+2) {
-					a {
+					.nav-link {
 						border-bottom-left-radius: 0;
 						border-bottom-right-radius: 0;
 					}
@@ -31,7 +89,7 @@ section.tabs {
 				flex: 1 1 auto;
 			}
 
-			a {
+			.nav-link {
 				cursor: pointer;
 				position: relative;
 				transition: all 0.25s;
@@ -41,7 +99,6 @@ section.tabs {
 				@include media-breakpoint-up(xl) {
 					padding-left: 0;
 					padding-right: 0;
-					font-size: 1rem;
 					text-align: center;
 				}
 
@@ -73,7 +130,7 @@ section.tabs {
 						display: inline;
 
 						@include media-breakpoint-up(xl) {
-							padding-left: 0.1rem;
+							padding-left: 0.2rem;
 						}
 					}
 				}
@@ -100,6 +157,36 @@ section.tabs {
 		border-bottom-right-radius: 0.25rem;
 		border-bottom-left-radius: 0.25rem;
 
+		&.site-content {
+			padding-bottom: 0.75rem;
+		}
+
+		&.site-tab-content {
+			background-color: #f8f8f8;
+
+			.form-group {
+				margin-bottom: 0;
+
+				.form-check {
+					// padding-top: 0.25rem;
+				}
+			}
+		}
+
+		.row + .row:not(.form-group) {
+			margin-top: 0.5rem;
+		}
+
+		.disabled {
+			pointer-events: none;
+			user-select: none;
+			opacity: 0.4;
+
+			.disabled {
+				opacity: 1;
+			}
+		}
+
 		.form-group {
 			margin-bottom: 0.25rem;
 
@@ -107,15 +194,54 @@ section.tabs {
 				margin-bottom: 0.5rem;
 			}
 
-			.col-form-label {
-				@include media-breakpoint-only(xs) {
-					font-weight: 700;
-					margin-bottom: -0.25rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			.form-control-sm {
+				padding-top: 0;
+				padding-bottom: 0;
+				margin-bottom: 1px;
+			}
+
+			select.form-control-sm {
+				height: 24px;
+			}
+
+			.col-form-label-sm {
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+
+			.input-group-sm {
+				.input-group-text {
+					font-size: 0.75rem;
+				}
+			}
+
+			label {
+				margin-bottom: 0;
+
+				&.col-form-label {
+					@include media-breakpoint-only(xs) {
+						font-weight: 700;
+						margin-bottom: -0.25rem;
+					}
 				}
 			}
 
 			.form-check {
-				padding-top: 0.2rem;
+				font-size: 0;
+				padding-bottom: 3px;
+
+				&.form-check-left {
+					padding-left: 0;
+
+					.form-check-input {
+						position: relative;
+						margin-left: 0.25rem;
+					}
+				}
 
 				.form-check-label {
 					cursor: pointer;
@@ -132,16 +258,10 @@ section.tabs {
 			.form-check.input-changed {
 				border-radius: 0.2rem;
 			}
+		}
+	}
+}
 
-			.btn {
-				&.btn-download {
-					img {
-						vertical-align: -2px;
-						margin-right: 0.1rem;
-						width: 1rem;
-					}
-				}
-			}
 section.loader {
 	position: fixed;
 	z-index: 1;
@@ -185,6 +305,16 @@ main {
 		opacity: 1;
 	}
 
+	.btn {
+		&.btn-download {
+			img {
+				vertical-align: -1px;
+				margin-right: 0.1rem;
+				width: 1rem;
+			}
+		}
+	}
+
 	.commands {
 		margin-bottom: 1rem;
 	}
@@ -206,6 +336,7 @@ main {
 		font-size: 0.75rem;
 		line-height: 1.25;
 		background-color: #f8f8f8;
+		border: 1px solid #e8e8e8;
 
 		pre {
 			margin-bottom: 0;

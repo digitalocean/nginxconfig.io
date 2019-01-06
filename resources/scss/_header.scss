@@ -18,6 +18,7 @@ header {
 		.btn-outline-light {
 			border-color: #999;
 
+			&.active,
 			&:hover {
 				background-color: #fff;
 				border-color: #fff;
