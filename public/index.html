@@ -476,7 +476,7 @@
 													</div>
 												</div>
 											</div>
-											<fieldset class="form-group" ng-class="{ disabled: !isPHP() }">
+											<fieldset class="form-group" ng-class="{ disabled: !isRoot() || !isPHP() }">
 												<div class="row">
 													<legend class="col-sm-3 col-form-label col-form-label-sm">
 														<code tooltips tooltip-template="Defines the file that will be used as an index.">index</code>
@@ -493,7 +493,7 @@
 													</div>
 												</div>
 											</fieldset>
-											<fieldset class="form-group">
+											<fieldset class="form-group" ng-class="{ disabled: !isRoot() }">
 												<div class="row">
 													<legend class="col-sm-3 col-form-label col-form-label-sm">
 														<span tooltips tooltip-template="Configures fallback routing of unhandled requests.">Fallback routing</span>

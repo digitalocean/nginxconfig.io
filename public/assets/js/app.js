@@ -854,19 +854,19 @@
 		};
 
 		$scope.isIndexHTML = function(site) {
-			return getSiteValue(site, 'index') === 'index.html' || !$scope.isPHP(site);
+			return $scope.isRoot() && (getSiteValue(site, 'index') === 'index.html' || !$scope.isPHP(site));
 		};
 
 		$scope.isIndexPHP = function(site) {
-			return $scope.isPHP(site) && getSiteValue(site, 'index') === 'index.php';
+			return $scope.isRoot() && getSiteValue(site, 'index') === 'index.php' && $scope.isPHP(site);
 		};
 
 		$scope.isFallbackHTML = function(site) {
-			return getSiteValue(site, 'fallback_html');
+			return $scope.isRoot() && getSiteValue(site, 'fallback_html');
 		};
 
 		$scope.isFallbackPHP = function(site) {
-			return getSiteValue(site, 'fallback_php') && $scope.isPHP(site);
+			return $scope.isRoot() && getSiteValue(site, 'fallback_php') && $scope.isPHP(site);
 		};
 
 
