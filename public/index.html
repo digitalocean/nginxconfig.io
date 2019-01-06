@@ -51,7 +51,7 @@
 					<button
 						type="button"
 						class="btn btn-sm btn-outline-light"
-						ng-class="{ 'active': isProxy() }"
+						ng-class="{ 'active': isProxy() && !isRoot() }"
 						ng-click="setPreset('nodejs')"
 						tooltips
 						tooltip-template="• enabled reverse proxy"

@@ -466,6 +466,7 @@
 				break;
 			case 'nodejs':
 				$scope.data.sites[$scope.site].proxy = true;
+				$scope.data.sites[$scope.site].root = false;
 				break;
 			case 'django':
 				$scope.data.sites[$scope.site].php = false;
