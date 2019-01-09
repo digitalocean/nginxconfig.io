@@ -24,8 +24,13 @@ before_deploy:
   - ssh-add /tmp/deploy_rsa
 
 deploy:
-  provider: script
-  script: bash .travis_deploy.sh
-  skip_cleanup: true
-  on:
-    branch: master
+  - provider: script
+    script: bash .travis_deploy.sh /var/www/nginxconfig.io/
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: bash .travis_deploy.sh /var/www/beta.nginxconfig.io/
+    skip_cleanup: true
+    on:
+      branch: beta

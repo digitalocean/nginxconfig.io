@@ -1,63 +1,70 @@
 server {<!--
 
-	✘ HTTPS || ✘ forceHTTPS --><span ng-if="!isHTTPS() || !isForceHTTPS()">
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}80;<!--
+	✘ HTTPS || ✘ forceHTTPS --><span ng-if="!isHTTPS(_site) || !isForceHTTPS(_site)">
+	listen {{ data.sites[_site].ipv4 !== '*' ? data.sites[_site].ipv4 + ':' : '' }}80;<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:80;</span></span><!--
+	✔ IPv6 --><span ng-if="isIPv6(_site)">
+	listen [{{ data.sites[_site].ipv6 }}]:80;</span></span><!--
 
-	✔ HTTPS --><span ng-if="isHTTPS()">
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}443 ssl{{ isHTTP2() ? ' http2' : '' }};<!--
+	✔ HTTPS --><span ng-if="isHTTPS(_site)">
+	listen {{ data.sites[_site].ipv4 !== '*' ? data.sites[_site].ipv4 + ':' : '' }}443 ssl{{ isHTTP2() ? ' http2' : '' }};<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:443 ssl{{ isHTTP2() ? ' http2' : '' }};</span></span>
+	✔ IPv6 --><span ng-if="isIPv6(_site)">
+	listen [{{ data.sites[_site].ipv6 }}]:443 ssl{{ isHTTP2() ? ' http2' : '' }};</span></span>
 
-	server_name {{ isWWW() ? 'www.' : '' }}{{ domain() }};<!--
+	server_name {{ isWWW() ? 'www.' : '' }}{{ _domain }};<!--
 
-	✔ PHP --><span ng-if="isPHP()">
-	set $base {{ data.path ? data.path : '/var/www/' + domain() }};
-	root $base{{ data.document_root }};</span><!--
+	✔ PHP || ✔ Django --><span ng-if="isPHP(_site) || isDjango(_site)">
+	set $base {{ getPath(_site) }};<!--
 
-	✘ PHP --><span ng-if="!isPHP()">
-	root /var/www/{{ domain() }}{{ data.document_root }};</span><!--
+	✔ root --><span ng-if="isRoot(_site)">
+	root $base{{ data.sites[_site].document_root }};</span></span><!--
 
-	✔ HTTPS --><span ng-if="isHTTPS()">
+	✘ PHP && ✘ Django--><span ng-if="!isPHP(_site) && !isDjango(_site) && isRoot(_site)">
+	root {{ getPath(_site) }}{{ data.sites[_site].document_root }};</span><!--
+
+	✔ HTTPS --><span ng-if="isHTTPS(_site)">
 
 	# SSL
-	ssl_certificate {{ sslCertificate() }};
-	ssl_certificate_key {{ sslCertificateKey() }};<!--
+	ssl_certificate {{ getSslCertificate(_site) }};
+	ssl_certificate_key {{ getSslCertificateKey(_site) }};<!--
 
-	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span><!--
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ _domain }}/fullchain.pem;</span></span><!--
 
-	✔ access log domain || error log domain --><span ng-if="isAccessLogDomain() || isErrorLogDomain()">
+	✔ HSTS --><span ng-if="!hasCommonHSTS() && isHSTS(_site)">
+
+	# HSTS
+	add_header Strict-Transport-Security "max-age=31536000{{ isHSTSSubdomains(_site) ? '; includeSubDomains' : '' }}{{ isHSTSPreload(_site) ? '; preload' : '' }}" always;</span><!--
+
+	✔ access log domain || error log domain --><span ng-if="isAccessLogDomain(_site) || isErrorLogDomain(_site)">
 
 	# logging<!--
-	✔ access log domain --><span ng-if="isAccessLogDomain()">
-	access_log {{ accessLogDomainPath() }};</span><!--
-	✔ error log domain --><span ng-if="isErrorLogDomain()">
-	error_log {{ errorLogDomainPath() }};</span></span><!--
+	✔ access log domain --><span ng-if="isAccessLogDomain(_site)">
+	access_log {{ getAccessLogDomainPath(_site) }};</span><!--
+	✔ error log domain --><span ng-if="isErrorLogDomain(_site)">
+	error_log {{ getErrorLogDomainPath(_site) }};</span></span><!--
 
-	✔ index.php --><span ng-if="isIndexPHP()">
+	✔ index.php --><span ng-if="isIndexPHP(_site)">
 
 	# index.php
 	index index.php;</span><!--
 
-	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="(isFallbackHTML() || isFallbackPHP()) && (!isProxy() || data.proxy_path !== '/')">
+	✔ Fallback HTML || ✔ Fallback PHP --><span ng-if="(isFallbackHTML(_site) || isFallbackPHP(_site)) && (!isProxy(_site) || data.proxy_path !== '/')">
 
-	# {{ isFallbackHTML() ? 'index.html' : ( isFallbackPHP() ? 'index.php' : '' ) }} fallback
+	# {{ isFallbackHTML(_site) ? 'index.html' : ( isFallbackPHP(_site) ? 'index.php' : '' ) }} fallback
 	location / {
-		try_files $uri $uri/ {{ isFallbackHTML() ? '/index.html' : ( isFallbackPHP() ? '/index.php?$query_string' : '' ) }};
+		try_files $uri $uri/ {{ isFallbackHTML(_site) ? '/index.html' : ( isFallbackPHP(_site) ? '/index.php?$query_string' : '' ) }};
 	}</span><!--
 
-	✔ Fallback HTML && ✔ Fallback PHP --><span ng-if="isFallbackHTML() && isFallbackPHP()">
+	✔ Fallback HTML && ✔ Fallback PHP --><span ng-if="isFallbackHTML(_site) && isFallbackPHP(_site)">
 
 	# index.php fallback
-	location ~ ^{{ data.fallback_php_path }} {
+	location ~ ^{{ data.sites[_site].fallback_php_path }} {
 		try_files $uri $uri/ /index.php?$query_string;
 	}</span><!--
 
-	✔ Python --><span ng-if="isPython()">
+	✔ Python --><span ng-if="isPython(_site)">
 
 	# Python
 	location / {<!--
@@ -67,13 +74,25 @@ server {<!--
 
 		✔ unified --><span ng-if="isUnified()">
 <!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
-	}</span><!--
+	}<!--
 
-	✔ Reverse proxy --><span ng-if="isProxy()">
+	✔ Django --><span ng-if="isDjango(_site)">
+
+	# Django media
+	location /media/ {
+		alias $base/media/;
+	}
+
+	# Django static
+	location /static/ {
+		alias $base/static/;
+	}</span></span><!--
+
+	✔ Reverse proxy --><span ng-if="isProxy(_site)">
 
 	# reverse proxy
-	location {{ data.proxy_path }} {
-		proxy_pass {{ data.proxy_pass }};<!--
+	location {{ data.sites[_site].proxy_path }} {
+		proxy_pass {{ data.sites[_site].proxy_pass }};<!--
 
 		✔ modularized --><span ng-if="isModularized()">
 		include nginxconfig.io/proxy.conf;</span><!--
@@ -82,15 +101,15 @@ server {<!--
 <!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
-	✔ PHP --><span ng-if="isPHP()">
+	✔ PHP --><span ng-if="isPHP(_site)">
 
 	# handle .php
-	location ~ {{ isLegacyPHPRouting() ? '[^/]\\.php(/|$)' : '\\.php$' }} {<!--
+	location ~ {{ isLegacyPHPRouting(_site) ? '[^/]\\.php(/|$)' : '\\.php$' }} {<!--
 
-	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress()">
+	✔ modularized || ✔ WordPress --><span ng-if="isModularized() || isWordPress(_site)">
 		include nginxconfig.io/php_fastcgi.conf;</span><!--
 
-	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress()">
+	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress(_site)">
 	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
@@ -102,13 +121,13 @@ server {<!--
 	✔ modularized --><span ng-if="isModularized()">
 	include nginxconfig.io/general.conf;</span><!--
 
-	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress()">
+	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress(_site)">
 	include nginxconfig.io/wordpress.conf;</span><!--
 
-	✔ modularized && ✔ Drupal --><span ng-if="isModularized() && isDrupal()">
+	✔ modularized && ✔ Drupal --><span ng-if="isModularized() && isDrupal(_site)">
 	include nginxconfig.io/drupal.conf;</span><!--
 
-	✔ modularized && ✔ Magento --><span ng-if="isModularized() && isMagento()">
+	✔ modularized && ✔ Magento --><span ng-if="isModularized() && isMagento(_site)">
 	include nginxconfig.io/magento.conf;</span><!--
 
 
@@ -117,43 +136,43 @@ server {<!--
 
 <!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
-	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress()">
+	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress(_site)">
 
 <!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
-	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal()">
+	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal(_site)">
 
 <!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
-	✔ unified && ✔ Magento --><span ng-if="isUnified() && isMagento()">
+	✔ unified && ✔ Magento --><span ng-if="isUnified() && isMagento(_site)">
 
 <!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
 
-✔ CDN --><span ng-if="isCDN()">
+✔ CDN --><span ng-if="isCDN(_site)">
 
 # CDN
 server {
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+	listen {{ data.sites[_site].ipv4 !== '*' ? data.sites[_site].ipv4 + ':' : '' }}{{ isHTTPS(_site) ? '443 ssl' : '80' }}{{ isHTTP2(_site) ? ' http2' : '' }};<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
+	✔ IPv6 --><span ng-if="isIPv6(_site)">
+	listen [{{ data.sites[_site].ipv6 }}]:{{ isHTTPS(_site) ? '443 ssl' : '80' }}{{ isHTTP2(_site) ? ' http2' : '' }};</span>
 
-	server_name cdn.{{ domain() }};
-	root /var/www/{{ domain() }}{{ data.document_root }};<span ng-if="!isAccessLog()">
+	server_name cdn.{{ _domain }};
+	root /var/www/{{ _domain }}{{ data.sites[_site].document_root }};<span ng-if="!isAccessLog()">
 
 	access_log off;</span><!--
 
-	✔ HTTPS --><span ng-if="isHTTPS()">
+	✔ HTTPS --><span ng-if="isHTTPS(_site)">
 
 	# SSL
-	ssl_certificate {{ sslCertificate() }};
-	ssl_certificate_key {{ sslCertificateKey() }};<!--
+	ssl_certificate {{ getSslCertificate(_site) }};
+	ssl_certificate_key {{ getSslCertificateKey(_site) }};<!--
 
-	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ _domain }}/fullchain.pem;</span></span>
 
 	# disable access_log
 	access_log off;<!--
@@ -182,57 +201,57 @@ server {
 
 
 
-✔ redirect --><span ng-if="isRedirect()">
+✔ redirect --><span ng-if="isRedirect(_site)">
 
 # {{ isWWW() ? 'non-www, ' : '' }}subdomains redirect
 server {
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
+	listen {{ data.sites[_site].ipv4 !== '*' ? data.sites[_site].ipv4 + ':' : '' }}{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
+	✔ IPv6 --><span ng-if="isIPv6(_site)">
+	listen [{{ data.sites[_site].ipv6 }}]:{{ isHTTPS() ? '443 ssl' : '80' }}{{ isHTTP2() ? ' http2' : '' }};</span>
 
-	server_name {{ isWWW() ? ('.' + domain()) : ('*.' + domain()) }};<!--
+	server_name {{ isWWW() ? ('.' + _domain) : ('*.' + _domain) }};<!--
 
-	✔ HTTPS --><span ng-if="isHTTPS()">
+	✔ HTTPS --><span ng-if="isHTTPS(_site)">
 
 	# SSL
-	ssl_certificate {{ sslCertificate() }};
-	ssl_certificate_key {{ sslCertificateKey() }};<!--
+	ssl_certificate {{ getSslCertificate(_site) }};
+	ssl_certificate_key {{ getSslCertificateKey(_site) }};<!--
 
-	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ domain() }}/fullchain.pem;</span></span>
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ _domain }}/fullchain.pem;</span></span>
 
-	return 301 http{{ isHTTPS() ? 's' : '' }}://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+	return 301 http{{ isHTTPS() ? 's' : '' }}://{{ isWWW() ? 'www.' : '' }}{{ _domain }}$request_uri;
 }</span><!--
 
 
 
-✔ forceHTTPS --><span ng-if="isForceHTTPS()">
+✔ forceHTTPS --><span ng-if="isForceHTTPS(_site)">
 
 # HTTP redirect
 server {
-	listen {{ data.ipv4 !== '*' ? data.ipv4 + ':' : '' }}80;<!--
+	listen {{ data.sites[_site].ipv4 !== '*' ? data.sites[_site].ipv4 + ':' : '' }}80;<!--
 
-	✔ IPv6 --><span ng-if="isIPv6()">
-	listen [{{ data.ipv6 }}]:80;</span>
+	✔ IPv6 --><span ng-if="isIPv6(_site)">
+	listen [{{ data.sites[_site].ipv6 }}]:80;</span>
 
-	server_name .{{ domain() }};<!--
+	server_name .{{ _domain }};<!--
 
-	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isCertLetsEncrypt()">
+	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isCertLetsEncrypt(_site)">
 
 	include nginxconfig.io/letsencrypt.conf;</span><!--
 
-	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isCertLetsEncrypt()">
+	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isCertLetsEncrypt(_site)">
 
 <ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
-	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt()">
+	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
 
 	location / {
-		return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;
+		return 301 https://{{ isWWW(_site) ? 'www.' : '' }}{{ _domain }}$request_uri;
 	}</span><!--
 
-	✘ Let's Encrypt --><span ng-if="!isCertLetsEncrypt()">
+	✘ Let's Encrypt --><span ng-if="!isCertLetsEncrypt(_site)">
 
-	return 301 https://{{ isWWW() ? 'www.' : '' }}{{ domain() }}$request_uri;</span>
+	return 301 https://{{ isWWW(_site) ? 'www.' : '' }}{{ _domain }}$request_uri;</span>
 }</span>

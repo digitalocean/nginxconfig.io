@@ -16,4 +16,4 @@ rsync \
 	--exclude="/.git*" \
 	--exclude="/node_modules*" \
 	./ \
-	www-data@nginxconfig.io:/var/www/nginxconfig.io/
+	www-data@nginxconfig.io:$1

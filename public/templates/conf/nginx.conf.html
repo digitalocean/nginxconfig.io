@@ -20,13 +20,6 @@ http {<!--
 		server {{ data.php_server[0] === '/' ? 'unix:' : '' }}{{ data.php_server }};
 		server {{ data.php_server_backup[0] === '/' ? 'unix:' : '' }}{{ data.php_server_backup }} backup;
 	}
-</span><!--
-
-	✔ Python backup --><span ng-if="isPythonBackup()">
-	upstream python {
-		server {{ data.python_server[0] === '/' ? 'unix:' : '' }}{{ data.python_server }};
-		server {{ data.python_server_backup[0] === '/' ? 'unix:' : '' }}{{ data.python_server_backup }} backup;
-	}
 </span>
 	charset utf-8;
 	sendfile on;
@@ -55,14 +48,14 @@ http {<!--
 	limit_req_log_level warn;
 	limit_req_zone $binary_remote_addr zone=login:10m rate=10r/m;</span><!--
 
-	✔ HTTPS --><span ng-if="isHTTPS()">
+	✔ HTTPS --><span ng-if="hasHTTPS()">
 
 	# SSL
 	ssl_session_timeout 1d;
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;<!--
 
-	✘ SSLProfileModern --><span ng-if="!isSSLProfileModern()">
+	✘ SSLProfileModern --><span ng-if="isSSLProfileIntermediate() || isSSLProfileOld()">
 
 	# Diffie-Hellman parameter for DHE ciphersuites
 	ssl_dhparam /etc/nginx/dhparam.pem;</span>
@@ -85,9 +78,9 @@ http {<!--
 	resolver_timeout 2s;</span></span>
 
 	# load configs
-	include /etc/nginx/conf.d/*.conf;<span ng-if="data.file_structure === 'modularized'">
-	include /etc/nginx/sites-enabled/*;</span><span ng-if="data.file_structure === 'unified'">
+	include /etc/nginx/conf.d/*.conf;<span ng-if="isModularized()">
+	include /etc/nginx/sites-enabled/*;</span><span ng-if="isUnified()">
 
-	# {{ !data.non_www ? 'www.' : '' }}{{ domain() }}
+	# {{ !data.non_www ? 'www.' : '' }}{{ getDomain() }}
 <ng-include ng-include-tabs="1" src="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>
 }
