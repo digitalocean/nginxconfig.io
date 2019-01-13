@@ -836,6 +836,16 @@
 			return getSiteValue(site, 'proxy');
 		};
 
+		$scope.hasProxy = function() {
+			for (var site in $scope.data.sites) {
+				if ($scope.isProxy(site)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
 
 
 		// ROUTING
