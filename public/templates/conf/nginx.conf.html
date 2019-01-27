@@ -79,8 +79,8 @@ http {<!--
 
 	# load configs
 	include /etc/nginx/conf.d/*.conf;<span ng-if="isModularized()">
-	include /etc/nginx/sites-enabled/*;</span><span ng-if="isUnified()">
+	include /etc/nginx/sites-enabled/*;</span><span ng-if="isUnified()" ng-repeat="(_site, _domain) in getDomains() track by $index">
 
-	# {{ !data.non_www ? 'www.' : '' }}{{ getDomain() }}
+	# {{ isWWW(_site) ? 'www.' : '' }}{{ _domain }}
 <ng-include ng-include-tabs="1" src="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>
 }
