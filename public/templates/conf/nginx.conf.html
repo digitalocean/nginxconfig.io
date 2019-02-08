@@ -8,6 +8,10 @@ pid {{ data.pid}};
 worker_processes {{ data.worker_processes }};
 worker_rlimit_nofile 65535;
 
+# See https://www.nginx.com/blog/thread-pools-boost-performance-9x/
+# threads should be equal to (cpus * 2)
+thread_pool pool threads=8 max_queue=65536;
+
 events {
 	multi_accept on;
 	worker_connections 65535;
@@ -76,6 +80,8 @@ http {<!--
 		(isResolverOpenDNS() ? '208.67.222.222 208.67.220.220 ' : '')
 	}}valid=60s;
 	resolver_timeout 2s;</span></span>
+
+    aio threads=pool;
 
 	# load configs
 	include /etc/nginx/conf.d/*.conf;<span ng-if="isModularized()">
