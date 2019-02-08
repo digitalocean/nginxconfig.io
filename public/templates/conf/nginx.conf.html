@@ -9,7 +9,6 @@ worker_processes {{ data.worker_processes }};
 worker_rlimit_nofile 65535;
 
 # See https://www.nginx.com/blog/thread-pools-boost-performance-9x/
-# threads should be equal to (cpus * 2)
 thread_pool pool threads=8 max_queue=65536;
 
 events {
