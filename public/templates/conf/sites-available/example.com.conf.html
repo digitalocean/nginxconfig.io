@@ -30,7 +30,7 @@ server {<!--
 	ssl_certificate_key {{ getSslCertificateKey(_site) }};<!--
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
-	ssl_trusted_certificate /etc/letsencrypt/live/{{ _domain }}/chain.pem;</span></span><!--
+	ssl_trusted_certificate /etc/letsencrypt/live/{{ _domain }}/fullchain.pem;</span></span><!--
 
 	✔ HSTS --><span ng-if="!hasCommonHSTS() && isHSTS(_site)">
 
