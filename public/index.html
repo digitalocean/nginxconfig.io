@@ -634,6 +634,14 @@
 												<input class="form-check-input" type="checkbox" id="resolver_opendns" ng-model="data.resolver_opendns">
 												<label class="form-check-label col-form-label-sm" for="resolver_opendns" tooltips tooltip-template="<code>208.67.222.222, 208.67.220.220</code>" tooltip-side="top">OpenDNS</label>
 											</div>
+											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.resolver_quad9 !== defaultData.resolver_quad9 }">
+												<input class="form-check-input" type="checkbox" id="resolver_quad9" ng-model="data.resolver_quad9">
+												<label class="form-check-label col-form-label-sm" for="resolver_quad9" tooltips tooltip-template="<code>9.9.9.9, 149.112.112.112</code>" tooltip-side="top">Quad9</label>
+											</div>
+											<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.resolver_verisign !== defaultData.resolver_verisign }">
+												<input class="form-check-input" type="checkbox" id="resolver_verisign" ng-model="data.resolver_verisign">
+												<label class="form-check-label col-form-label-sm" for="resolver_verisign" tooltips tooltip-template="<code>64.6.64.6, 64.6.65.6</code>" tooltip-side="top">Verisign</label>
+											</div>
 										</div>
 									</div>
 								</div>

@@ -52,8 +52,8 @@
 			proxy_pass:		'http://127.0.0.1:3000',
 
 			// ROUTING
-			root:				true,
-			index:				'index.php',
+			root:			true,
+			index:			'index.php',
 			fallback_html:		false,
 			fallback_php:		true,
 			fallback_php_path:	'/api/',
@@ -64,47 +64,57 @@
 			error_log_domain:	false,
 		}],
 
+
 		// COMMON - HTTPS
 		ssl_profile:			'modern',
-		resolver_cloudflare:	true,
+		resolver_cloudflare:		true,
 		resolver_google:		true,
 		resolver_opendns:		true,
+		resolver_quad9:			false,
+		resolver_verisign:		false,
+
 
 		// COMMON - SECURITY
-		referrer_policy:			'no-referrer-when-downgrade',
+		referrer_policy:		'no-referrer-when-downgrade',
 		content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
-		server_tokens:				false,
-		limit_req:					false,
+		server_tokens:			false,
+		limit_req:			false,
+
 
 		// COMMON - PHP
-		php_server:			'/var/run/php/php7.2-fpm.sock',
+		php_server:		'/var/run/php/php7.2-fpm.sock',
 		php_server_backup:	'',
+
 
 		// COMMON - PYTHON
 		python_server:		'/tmp/uwsgi.sock',
 
+
 		// COMMON - PERFORMANCE
-		gzip:				true,
-		brotli:				false,
+		gzip:			true,
+		brotli:			false,
 		expires_assets:		'7d',
 		expires_media:		'7d',
 		expires_svg:		'7d',
 		expires_fonts:		'7d',
 
+
 		// COMMON - LOGGING
-		access_log:			'/var/log/nginx/access.log',
-		error_log:			'/var/log/nginx/error.log warn',
+		access_log:		'/var/log/nginx/access.log',
+		error_log:		'/var/log/nginx/error.log warn',
 		log_not_found:		false,
 
+
 		// COMMON - NGINX
-		worker_processes:		'auto',
-		user:					'www-data',
-		pid:					'/run/nginx.pid',
+		worker_processes:	'auto',
+		user:			'www-data',
+		pid:			'/run/nginx.pid',
 		client_max_body_size:	16,
+
 
 		// COMMON - TOOLS
 		file_structure:		'modularized',
-		symlink:			true,
+		symlink:		true,
 	};
 
 
@@ -925,6 +935,14 @@
 			return $scope.hasHTTPS() && $scope.data.resolver_opendns;
 		};
 
+		$scope.isResolverQuad9 = function() {
+			return $scope.hasHTTPS() && $scope.data.resolver_quad9;
+		};
+
+		$scope.isResolverVerisign = function() {
+			return $scope.hasHTTPS() && $scope.data.resolver_verisign;
+		};
+
 
 
 		// COMMON - SECURITY
@@ -947,8 +965,6 @@
 			return $scope.hasPHP() && !!$scope.data.php_server_backup;
 		};
 
-
-
 		// COMMON - PERFORMANCE
 		$scope.isGzip = function() {
 			return $scope.data.gzip;
@@ -957,8 +973,6 @@
 		$scope.isBrotli = function() {
 			return $scope.data.brotli;
 		};
-
-
 
 		// COMMON - LOGGING
 		$scope.isAccessLog = function() {
