@@ -13,6 +13,20 @@ add_header Strict-Transport-Security "max-age=31536000{{ isHSTSSubdomains() ? ';
 # . files
 location ~ /\.(?!well-known) {
 	deny all;
+}
+
+# favicon.ico
+location = /favicon.ico {
+	log_not_found off;<!--
+	✔ accessLog --><span ng-if="isAccessLog()">
+	access_log off;</span>
+}
+
+# robots.txt
+location = /robots.txt {
+	log_not_found off;<!--
+	✔ accessLog --><span ng-if="isAccessLog()">
+	access_log off;</span>
 }<!--
 
 ✘ root --><span ng-if="allRoot() && (data.expires_assets || data.expires_media || data.expires_svg || data.expires_fonts)">
@@ -23,7 +37,7 @@ location ~ /\.(?!well-known) {
 --><span ng-if="data.expires_assets && data.expires_assets !== data.expires_media"># assets
 location ~* \.(?:{{ extensions.assets }})$ {
 	expires {{ data.expires_assets }};<!--
-	✘ accessLog --><span ng-if="isAccessLog()">
+	✔ accessLog --><span ng-if="isAccessLog()">
 	access_log off;</span>
 }</span><!--
 
@@ -35,7 +49,7 @@ location ~* \.(?:{{ extensions.assets }})$ {
 --><span ng-if="data.expires_media"># {{ data.expires_assets && data.expires_assets === data.expires_media ? 'assets, ' : '' }}media
 location ~* \.(?:{{ data.expires_assets && data.expires_assets === data.expires_media ? extensions.assets + '|' : '' }}{{ extensions.images }}|{{ extensions.audio }}|{{ extensions.video }})$ {
 	expires {{ data.expires_media }};<!--
-	✘ accessLog --><span ng-if="isAccessLog()">
+	✔ accessLog --><span ng-if="isAccessLog()">
 	access_log off;</span>
 }</span><!--
 
@@ -48,7 +62,7 @@ location ~* \.(?:{{ data.expires_assets && data.expires_assets === data.expires_
 location ~* \.{{ extensions.svg }}$ {
 	add_header Access-Control-Allow-Origin "*";
 	expires {{ data.expires_svg }};<!--
-	✘ accessLog --><span ng-if="isAccessLog()">
+	✔ accessLog --><span ng-if="isAccessLog()">
 	access_log off;</span>
 }</span><!--
 
@@ -61,7 +75,7 @@ location ~* \.{{ extensions.svg }}$ {
 location ~* \.(?:{{ data.expires_svg && data.expires_svg === data.expires_fonts ? extensions.svg + '|' : '' }}{{ extensions.fonts }})$ {
 	add_header Access-Control-Allow-Origin "*";
 	expires {{ data.expires_fonts }};<!--
-	✘ accessLog --><span ng-if="isAccessLog()">
+	✔ accessLog --><span ng-if="isAccessLog()">
 	access_log off;</span>
 }</span></span><!--
 
