@@ -12,6 +12,18 @@ tooltip {
 	tip {
 		min-width: 150px;
 		padding: 4px 12px;
+
+		&.ssl {
+			min-width: 300px;
+
+			ul {
+				text-align: left;
+				padding: 4px 0 0 8px;
+				margin: 0;
+				white-space: nowrap;
+				font-size: 0.75rem;
+			}
+		}
 	}
 
 	tip-tip {

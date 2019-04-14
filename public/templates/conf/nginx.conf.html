@@ -55,12 +55,12 @@ http {<!--
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;<!--
 
-	✘ SSLProfileModern --><span ng-if="isSSLProfileIntermediate() || isSSLProfileOld()">
+	✔ SSL DH required --><span ng-if="isSSLDHRequired()">
 
 	# Diffie-Hellman parameter for DHE ciphersuites
 	ssl_dhparam /etc/nginx/dhparam.pem;</span>
 
-	# {{ data.ssl_profile }} configuration
+	# {{ sslProfiles[ data.ssl_profile ].name }} configuration
 	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols }};
 	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers }};
 	ssl_prefer_server_ciphers on;

@@ -4,15 +4,15 @@
 <span class="hljs-section">ln</span> <span class="hljs-attribute">-s</span> <span ng-repeat="(_site, _domain) in getDomains() track by $index">/etc/nginx/sites-available/{{ _domain }}.conf </span>/etc/nginx/sites-enabled</span><!--
 
 
-✔ symlink || ✔ HTTPS --><span ng-if="isSymlink() && (isSSLProfileIntermediate() || isSSLProfileOld() || hasCertLetsEncrypt())">
+✔ symlink || ✔ HTTPS --><span ng-if="isSymlink() && (isSSLDHRequired() || hasCertLetsEncrypt())">
 
 </span><!--
 
 
-✔ SSL profile: intermediate || old --><span ng-if="isSSLProfileIntermediate() || isSSLProfileOld()"><!--
+✔ SSL DH required --><span ng-if="isSSLDHRequired()"><!--
 
 --><span class="hljs-comment"># <strong>HTTPS</strong>: create Diffie-Hellman keys</span>
-<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileOld() ? 1024 : 2048 }}</span><!--
+<span class="hljs-section">openssl dhparam</span> <span class="hljs-attribute">-dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileLegacy() ? 1024 : 2048 }}</span><!--
 
 --><span ng-if="hasCertLetsEncrypt()">
 

@@ -596,22 +596,28 @@
 										<div class="row">
 											<legend class="col-sm-3 col-form-label col-form-label-sm">SSL profile</legend>
 											<div class="col-sm-9">
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
-													<input class="form-check-input" type="radio" id="modern" ng-model="data.ssl_profile" value="modern">
-													<label class="form-check-label col-form-label-sm" for="modern">
-														<span tooltips tooltip-template="Oldest compatible clients: Firefox 27, Chrome 30, IE 11 on Windows 7, Edge, Opera 17, Safari 9, Android 5.0, and Java 8" tooltip-side="top">modern</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'A' }">
+													<input class="form-check-input" type="radio" id="OWASP-A" ng-model="data.ssl_profile" value="A">
+													<label class="form-check-label col-form-label-sm" for="OWASP-A">
+														<span tooltips tooltip-template="<strong>Advanced</strong>, wide browser compatibility, e.g. to most newer browser versions<br><br>Oldest compatible clients:<ul><li>Android 4.4.2</li><li>Chrome 32/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 27/Win 8</li><li>IE11/Win 7 + MS14-066</li><li>Java8b132</li><li>OpenSSL 1.0.1e</li><li>Safari 9/iOS 9.</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP A</span>
 													</label>
 												</div>
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
-													<input class="form-check-input" type="radio" id="intermediate" ng-model="data.ssl_profile" value="intermediate">
-													<label class="form-check-label col-form-label-sm" for="intermediate">
-														<span tooltips tooltip-template="Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7" tooltip-side="top">intermediate</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'B' }">
+													<input class="form-check-input" type="radio" id="OWASP-B" ng-model="data.ssl_profile" value="B">
+													<label class="form-check-label col-form-label-sm" for="OWASP-B">
+														<span tooltips tooltip-template="<strong>Broad</strong> compatibility to browsers, check the compatibility to other protocols before using it, e.g. IMAPS<br><br>Oldest compatible clients: <ul><li>Android 4.4.2</li><li>Chrome 30/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 27/Win 8</li><li>IE11/Win 7</li><li>IE 11/WinPhone 8.1</li><li>Java8b132</li><li>OpenSSL 1.0.1e</li><li>Opera 17/Win 7</li><li>Safari 5/iOS 5.1.1</li><li>Safari 7/OS X 10.9</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP B</span>
 													</label>
 												</div>
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
-													<input class="form-check-input" type="radio" id="old" ng-model="data.ssl_profile" value="old">
-													<label class="form-check-label col-form-label-sm" for="old">
-														<span tooltips tooltip-template="Oldest compatible clients: Windows XP IE6, Java 6" tooltip-side="top">old</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'C' }">
+													<input class="form-check-input" type="radio" id="OWASP-C" ng-model="data.ssl_profile" value="C">
+													<label class="form-check-label col-form-label-sm" for="OWASP-C">
+														<span tooltips tooltip-template="<strong>Widest Compatibility</strong>, compatibility to most legacy browsers, legacy libraries (still patched) and other application protocols besides https, e.g. IMAPS<br><br>Oldest compatible clients: <ul><li>Android 2.3.7/4.0.4</li><li>Chrome 27/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 10.0.12 ESR/Win 7</li><li>Firefox 21/Win 7+Fedora 19</li><li>IE 7/Vista</li><li>IE 10/WinPhone 8.0</li><li>Java 7u25</li><li>OpenSSL 0.9.8y</li><li>Opera 12.15/Win 7</li><li>Safari 5/iOS 5.1.1</li><li>Safari 5.1.9/OS X 10.6.8</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP C</span>
+													</label>
+												</div>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'D' }">
+													<input class="form-check-input" type="radio" id="OWASP-D" ng-model="data.ssl_profile" value="D">
+													<label class="form-check-label col-form-label-sm" for="OWASP-D">
+														<span tooltips tooltip-template="<strong>Legacy</strong>, widest compatibility to real old browsers and legacy libraries and other application protocols like SMTP" tooltip-side="top" tooltip-class="ssl">OWASP D</span>
 													</label>
 												</div>
 											</div>
@@ -985,7 +991,7 @@
 			<div class="container">
 				<div class="row grid">
 					<div class="grid-sizer col-xl-6"></div>
-					<div ng-if="isSymlink() || (isHTTPS() && (isCertLetsEncrypt() || !isSSLProfileModern()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
+					<div ng-if="isSymlink() || (isHTTPS() && (isCertLetsEncrypt() || isSSLDHRequired()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
 						<div class="commands">
 							<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
 						</div>
