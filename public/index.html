@@ -851,7 +851,7 @@
 								<div class="tab-pane tab-nginx" ng-class="{ 'active': tab_common === 'nginx' }">
 									<div class="form-group row">
 										<label class="col-sm-3 col-form-label col-form-label-sm">
-											<code tooltips tooltip-template="Sets the maximum number of simultaneous connections that can be opened by a worker process.">worker_processes</code>
+											<code tooltips tooltip-template="Defines the number of worker processes. ">worker_processes</code>
 										</label>
 										<div class="col-sm-9">
 											<select class="custom-select form-control-sm" ng-model="data.worker_processes" ng-class="{ 'input-changed': data.worker_processes !== defaultData.worker_processes }">
