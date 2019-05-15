@@ -10,6 +10,7 @@ section.tabs {
 	margin-bottom: 1rem;
 
 	.sites {
+		position: relative;
 		margin-bottom: 1rem;
 	}
 
@@ -35,25 +36,13 @@ section.tabs {
 			}
 		}
 
-		&.nav-site {
-			.nav-item {
-				.nav-link {
-					&.changed {
-						font-weight: normal;
-					}
-
-					&.active {
-						font-weight: 700;
-					}
-				}
-			}
-		}
-
 		&.nav-site-tab {
 			.nav-item {
 				.nav-link {
 					&:hover {
-						background-color: #f8f8f8;
+						@include media-breakpoint-up(xl) {
+							background-color: #f8f8f8;
+						}
 					}
 
 					&.active {
@@ -149,7 +138,7 @@ section.tabs {
 		}
 	}
 	.tab-content {
-		padding: 0.5rem 0.75rem;
+		padding: 0.5rem 0.75rem 0.25rem;
 		border-left: 1px solid #dee2e6;
 		border-right: 1px solid #dee2e6;
 		border-bottom: 1px solid #dee2e6;
@@ -157,10 +146,6 @@ section.tabs {
 		border-bottom-left-radius: 0.25rem;
 
 		&.site-content {
-			padding-bottom: 0.75rem;
-		}
-
-		&.site-tab-content {
 			background-color: #f8f8f8;
 
 			.form-group {

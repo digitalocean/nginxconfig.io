@@ -205,7 +205,7 @@
 			}
 
 			for (var i in siteTabs) {
-				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-tab-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
+				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
 			}
 
 			for (var j in commonTabs) {
@@ -1004,6 +1004,7 @@
 				// www
 				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^https?:\/\//, '');
 				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/\/.*$/, '');
+				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(' ', '');
 
 				if ($scope.data.sites[site].domain.match(/^www\./)) {
 					$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^www./, '');

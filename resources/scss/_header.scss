@@ -1,6 +1,6 @@
 header {
 	background-color: #000;
-	padding: 0.5rem 0 0.25rem;
+	padding: 0.5rem 0;
 	text-align: center;
 	margin-bottom: 0.5rem;
 	color: #fff;
@@ -8,37 +8,79 @@ header {
 
 	.logo {
 		height: 3rem;
-		margin: 0.5rem 0 0.3rem;
+		margin-bottom: 0.5rem;
 	}
 
+	.sites {
+		@include media-breakpoint-up(lg) {
+			margin-top: -1rem;
+		}
+	}
+
+	.sites,
 	.presets {
-		margin-bottom: 0.3rem;
-		line-height: 1.8rem;
+		font-size: 0;
+		text-align: center;
 
-		.btn-outline-light {
-			border-color: #999;
+		@include media-breakpoint-up(lg) {
+			text-align: left;
+		}
+	}
 
-			&.active,
-			&:hover {
-				background-color: #fff;
-				border-color: #fff;
+	.title {
+		color: #eee;
+		font-size: 0.9rem;
+		font-style: italic;
+		vertical-align: -5px;
+		margin-right: 4px;
+		text-align: center;
 
-				svg {
-					path {
-						fill: #000;
-					}
-				}
-			}
+		@include media-breakpoint-up(lg) {
+			display: inline-block;
+			width: 60px;
+		}
+	}
+
+	.btn-outline-light {
+		box-shadow: none !important;
+		border-color: #999;
+		margin: 0 3px 4px;
+
+		&.active,
+		&:hover {
+			background-color: #fff;
+			border-color: #fff;
 
 			svg {
-				height: 1.1rem;
-				vertical-align: text-bottom;
-
 				path {
-					fill: #ddd;
-					transition: fill 0.15s ease-in-out;
+					fill: #000;
 				}
 			}
+		}
+
+		svg {
+			height: 1.1rem;
+			vertical-align: text-bottom;
+
+			path {
+				fill: #ddd;
+				transition: fill 0.15s ease-in-out;
+			}
+		}
+
+		small {
+			margin-left: 0.2rem;
+			font-weight: 700;
+			vertical-align: 1px;
+		}
+
+		.close {
+			float: none;
+			vertical-align: -2px;
+			color: #666;
+			line-height: 0;
+			margin-right: -0.3rem;
+			font-size: 1.3rem;
 		}
 	}
 }
