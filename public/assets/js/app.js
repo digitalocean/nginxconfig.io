@@ -353,7 +353,7 @@
 
 		$scope.clipboardCopy = undefined;
 
-		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
+		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml';
 
 		$scope.extensions = {
 			assets:	'css(\\.map)?|js(\\.map)?',
