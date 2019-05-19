@@ -20,18 +20,18 @@
 	"license": "MIT",
 	"dependencies": {
 		"angular-tooltips": "^1.2.2",
-		"autoprefixer": "^8.6.4",
-		"bootstrap": "^4.2.1",
+		"autoprefixer": "^8.6.5",
+		"bootstrap": "^4.3.1",
 		"eslint": "^5.16.0",
-		"highlight.js": "^9.12.0",
+		"highlight.js": "^9.15.6",
 		"js-base64": "^2.5.1",
 		"node-sass": "^4.12.0",
 		"postcss-cli": "^5.0.1"
 	},
 	"devDependencies": {
-		"cypress": "^3.2.0",
+		"cypress": "^3.3.0",
 		"http-server": "^0.11.1",
-		"start-server-and-test": "^1.5.0"
+		"start-server-and-test": "^1.9.0"
 	},
 	"scripts": {
 		"start": "npm run build && http-server",
