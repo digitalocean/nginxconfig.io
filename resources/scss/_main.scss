@@ -1,11 +1,3 @@
-@keyframes sk-bounce {
-	0%, 100% {
-		transform: scale(0.0);
-	} 50% {
-		transform: scale(1.0);
-	}
-}
-
 section.tabs {
 	margin-bottom: 1rem;
 
@@ -267,6 +259,25 @@ main {
 
 	.commands {
 		margin-bottom: 1rem;
+		line-height: 1.35;
+
+		.step {
+			counter-reset: step-command-counter;
+
+			.counter {
+				display: inline-block;
+				margin-top: 0.15rem;
+
+				&::before {
+					counter-increment: step-command-counter;
+					content: counter(step-command-counter);
+				}
+			}
+
+			& > span:first-of-type .counter {
+				margin-top: 0;
+			}
+		}
 	}
 
 	.file {

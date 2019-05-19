@@ -1,0 +1,168 @@
+section.steps {
+	ol {
+		display: flex;
+		flex-direction: row;
+		list-style: none;
+		counter-reset: steps-counter;
+		padding: 60px 0 0;
+
+		&[data-active-step="download"],
+		&[data-active-step="ssl"],
+		&[data-active-step="certbot"],
+		&[data-active-step="live"] {
+			li.download {
+				div {
+					background-color: #000;
+					border-color: #000;
+
+					svg {
+						stroke: #fff;
+					}
+				}
+			}
+		}
+
+		&[data-active-step="ssl"],
+		&[data-active-step="certbot"],
+		&[data-active-step="live"] {
+			li.ssl {
+				div {
+					background-color: #000;
+					border-color: #000;
+
+					svg {
+						stroke: #fff;
+					}
+				}
+			}
+		}
+
+		&[data-active-step="certbot"],
+		&[data-active-step="live"] {
+			li.certbot {
+				div {
+					background-color: #000;
+					border-color: #000;
+
+					svg {
+						stroke: #fff;
+					}
+				}
+			}
+		}
+
+		&[data-active-step="live"] {
+			li.live {
+				div {
+					background-color: #000;
+					border-color: #000;
+
+					svg {
+						stroke: #fff;
+					}
+				}
+			}
+		}
+
+		&[data-active-step="ssl"] {
+			li.download::after,
+			li.ssl::before {
+				background-color: #000;
+			}
+		}
+
+		&[data-active-step="certbot"] {
+			li.download::after,
+			li.ssl::before,
+			li.ssl::after,
+			li.certbot::before {
+				background-color: #000;
+			}
+		}
+
+		&[data-active-step="live"] {
+			li.download::after,
+			li.ssl::before,
+			li.ssl::after,
+			li.certbot::before,
+			li.certbot::after,
+			li.live::before {
+				background-color: #000;
+			}
+		}
+
+		li {
+			display: block;
+			position: relative;
+			flex: 1 1 auto;
+			counter-increment: steps-counter;
+			list-style-type: none;
+			text-align: center;
+			cursor: pointer;
+			font-size: 0.9rem;
+
+			@include media-breakpoint-up(sm) {
+				font-size: inherit;
+			}
+
+			&::before,
+			&::after {
+				content: '';
+				display: block;
+				height: 2px;
+				width: 50%;
+				position: absolute;
+				top: -35px;
+				background-color: #dee2e6;
+				z-index: 0;
+				transition: background-color 0.15s ease-in-out;
+			}
+
+			&::before {
+				right: 50%;
+			}
+
+			&::after {
+				left: 50%;
+			}
+
+			&:first-child::before,
+			&:last-child::after {
+				display: none;
+			}
+
+			.counter::before {
+				content: counter(steps-counter) '. ';
+				font-weight: 700;
+			}
+
+			.circle {
+				position: absolute;
+				z-index: 1;
+				left: 50%;
+				transform: translateX(-50%);
+				top: -50px;
+				width: 40px;
+				height: 40px;
+				border: 1px solid #dee2e6;
+				border-radius: 50%;
+				background-color: #f8f8f8;
+				transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+				@include media-breakpoint-up(sm) {
+					top: -60px;
+					width: 50px;
+					height: 50px;
+				}
+
+				svg {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: 60%;
+				}
+			}
+		}
+	}
+}

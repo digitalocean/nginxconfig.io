@@ -1,3 +1,11 @@
+@keyframes sk-bounce {
+	0%, 100% {
+		transform: scale(0.0);
+	} 50% {
+		transform: scale(1.0);
+	}
+}
+
 header {
 	background-color: #000;
 	padding: 0.5rem 0;

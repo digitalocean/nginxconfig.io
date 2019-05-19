@@ -984,15 +984,53 @@
 				</div>
 			</div>
 		</section>
+		<section class="steps">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-10 offset-xl-1">
+						<ol ng-attr-data-active-step="{{ activeStep }}">
+							<li
+								class="download"
+								ng-mouseenter="setActiveStep('download')">
+								<div class="circle" ng-include="'/assets/img/download-cloud.svg'"></div>
+								<span class="counter"></span>Download
+							</li>
+							<li
+								class="ssl"
+								ng-if="isHTTPS() && (isSSLDHRequired() || isCertLetsEncrypt())"
+								ng-mouseenter="setActiveStep('ssl')">
+								<div class="circle" ng-include="'/assets/img/lock.svg'"></div>
+								<span class="counter"></span>SSL init
+							</li>
+
+							<li
+								class="certbot"
+								ng-if="isHTTPS() && isCertLetsEncrypt()"
+								ng-mouseenter="setActiveStep('certbot')">
+								<div class="circle" ng-include="'/assets/img/terminal.svg'"></div>
+								<span class="counter"></span>Certbot
+							</li>
+
+							<li
+								class="live"
+								ng-mouseenter="setActiveStep('live')">
+								<div class="circle" ng-include="'/assets/img/check-circle.svg'"></div>
+								<span class="counter"></span>Go Live!
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</section>
 		<main ng-class="{ 'active': masonryInit }">
 			<div class="container">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="commands" ng-cloak>
+						<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
+					</div>
+				</div>
 				<div class="row grid">
 					<div class="grid-sizer col-xl-6"></div>
-					<div ng-if="isSymlink() || (isHTTPS() && (isCertLetsEncrypt() || isSSLDHRequired()))" class="grid-item col-xl-10 offset-xl-1" ng-cloak>
-						<div class="commands">
-							<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
-						</div>
-					</div>
 					<div class="grid-item col-xl-12 mb-3 text-center" ng-cloak>
 						<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
 					</div>

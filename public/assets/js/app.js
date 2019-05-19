@@ -353,6 +353,8 @@
 
 		$scope.clipboardCopy = undefined;
 
+		$scope.activeStep = 'download';
+
 		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml';
 
 		$scope.extensions = {
@@ -487,6 +489,10 @@
 			gtag('event', preset, {
 				event_category: 'preset',
 			});
+		};
+
+		$scope.setActiveStep = function(step) {
+			$scope.activeStep = step;
 		};
 
 		$scope.getSiteChanges = function(site) {
