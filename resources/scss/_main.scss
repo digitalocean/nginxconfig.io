@@ -246,40 +246,6 @@ section.tabs {
 	}
 }
 
-section.loader {
-	position: fixed;
-	z-index: 1;
-	bottom: 25%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	pointer-events: none;
-
-	.spinner {
-		width: 50px;
-		height: 50px;
-
-		position: relative;
-		margin: 100px auto;
-
-		.double-bounce1,
-		.double-bounce2 {
-			width: 100%;
-			height: 100%;
-			border-radius: 50%;
-			background-color: #999;
-			opacity: 0.6;
-			position: absolute;
-			top: 0;
-			left: 0;
-			animation: sk-bounce 2.0s infinite ease-in-out;
-		}
-
-		.double-bounce2 {
-			animation-delay: -1.0s;
-		}
-	}
-}
-
 main {
 	flex: 1 1 auto;
 	opacity: 0;

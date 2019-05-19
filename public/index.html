@@ -18,6 +18,12 @@
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController">
 		<header>
 			<div class="container">
+				<div class="loader" ng-if="!masonryInit">
+					<div class="spinner">
+						<div class="double-bounce1"></div>
+						<div class="double-bounce2"></div>
+					</div>
+				</div>
 				<img src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
 
 				<div class="sites">
@@ -968,12 +974,6 @@
 						</aside>
 					</div>
 				</div>
-			</div>
-		</section>
-		<section class="loader" ng-if="!masonryInit">
-			<div class="spinner">
-				<div class="double-bounce1"></div>
-				<div class="double-bounce2"></div>
 			</div>
 		</section>
 		<main ng-class="{ 'active': masonryInit }">
