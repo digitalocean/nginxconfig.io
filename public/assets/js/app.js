@@ -332,6 +332,38 @@
 			}, 600);
 		}
 
+		function generateZip(callback) {
+			var zip = new JSZip();
+
+			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
+
+			for (var i = 0; i < sourceCodes.length; i++) {
+				var sourceCode = sourceCodes[i];
+
+				var name	= sourceCode.dataset.filename;
+				var content	= sourceCode.children[0].children[0].innerText;
+
+				if (!$scope.isSymlink() && name.match(/^sites-available\//)) {
+					name = name.replace(/^sites-available\//, 'sites-enabled/');
+				}
+
+				zip.file(name, content);
+
+				if (name.match(/^sites-available\//)) {
+					zip.file(name.replace(/^sites-available\//, 'sites-enabled/'), '../' + name, {
+						unixPermissions: parseInt('120755', 8),
+					});
+				}
+			}
+
+			zip.generateAsync({
+				type: 'blob',
+				platform: 'UNIX',
+			}).then(function(content) {
+				callback(content);
+			});
+		}
+
 
 
 		/////////////////////
@@ -531,38 +563,29 @@
 		};
 
 		$scope.downloadZip = function() {
-			var zip = new JSZip();
-
-			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
-
-			for (var i = 0; i < sourceCodes.length; i++) {
-				var sourceCode = sourceCodes[i];
-
-				var name	= sourceCode.dataset.filename;
-				var content	= sourceCode.children[0].children[0].innerText;
-
-				if (!$scope.isSymlink() && name.match(/^sites-available\//)) {
-					name = name.replace(/^sites-available\//, 'sites-enabled/');
-				}
-
-				zip.file(name, content);
-
-				if (name.match(/^sites-available\//)) {
-					zip.file(name.replace(/^sites-available\//, 'sites-enabled/'), '../' + name, {
-						unixPermissions: parseInt('120755', 8),
-					});
-				}
-			}
-
-			zip.generateAsync({
-				type: 'blob',
-				platform: 'UNIX',
-			}).then(function(content) {
+			generateZip(function (content) {
 				saveAs(content, 'nginxconfig.io-' + $scope.getDomains().join(',') + '.zip');
 			});
 
 			gtag('event', $scope.getDomains().join(','), {
 				event_category: 'download_zip',
+			});
+		};
+
+
+		$scope.copyAsBase64 = function() {
+			generateZip(function (content) {
+				var reader = new FileReader();
+				reader.readAsDataURL(content);
+				reader.onloadend = function() {
+					var base64 = reader.result.replace(/^data:.+;base64,/, '');
+					$window.document.querySelector('#base64-zip-line').innerHTML = 'echo \'' + base64 + '\' | base64 --decode > /etc/nginx/nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
+					$window.document.querySelector('#btn-base64-zip-line').click();
+				}
+			});
+
+			gtag('event', $scope.getDomains().join(','), {
+				event_category: 'download_base64',
 			});
 		};
 

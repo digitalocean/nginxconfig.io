@@ -42,6 +42,8 @@
 		"hljs": true,
 		"JSZip": true,
 		"Masonry": true,
-		"saveAs": true
+		"saveAs": true,
+		"Base64": true,
+		"FileReader": true
 	}
 }
