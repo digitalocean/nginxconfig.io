@@ -1,15 +1,5 @@
 [![nginxconfig.io](public/assets/img/github.png)](https://nginxconfig.io)
 
-Fork adds a button to copy the generated config to the buffer as base64 string
- 
-![nginxconfig.io](public/assets/img/fork.png)
-
-And you easily create a zip file in the server console without downloading the file, like: 
-```bash
-$ echo 'base64string' | base64 --decode > nginxconfig.io.zip 
-```
-
-
 # NGiИX configuration generator
 
 ## Features
