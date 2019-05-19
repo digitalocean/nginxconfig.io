@@ -291,6 +291,12 @@ main {
 		}
 	}
 
+	#base64-zip-line {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
 	.commands,
 	.file .code {
 		overflow-x: auto;

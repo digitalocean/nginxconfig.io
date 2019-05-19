@@ -385,6 +385,8 @@
 
 		$scope.activeStep = 'download';
 
+		$scope.base64 = '';
+
 		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml';
 
 		$scope.extensions = {
@@ -570,18 +572,19 @@
 			});
 		};
 
-
-		$scope.copyAsBase64 = function() {
+		$scope.prepareBase64 = function() {
 			generateZip(function (content) {
 				var reader = new FileReader();
 				reader.readAsDataURL(content);
 				reader.onloadend = function() {
 					var base64 = reader.result.replace(/^data:.+;base64,/, '');
-					$window.document.querySelector('#base64-zip-line').innerHTML = 'echo \'' + base64 + '\' | base64 --decode > /etc/nginx/nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
-					$window.document.querySelector('#btn-base64-zip-line').click();
+
+					$scope.base64 = 'echo \'' + base64 + '\' | base64 --decode > /etc/nginx/nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
 				}
 			});
+		};
 
+		$scope.copyAsBase64 = function() {
 			gtag('event', $scope.getDomains().join(','), {
 				event_category: 'download_base64',
 			});

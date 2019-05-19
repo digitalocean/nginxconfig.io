@@ -5,7 +5,7 @@
 --><span class="hljs-comment"><span class="counter">.</span> <strong>Download</strong> generated config:</span> <strong><a href="#" ng-click="downloadZip()">nginxconfig.io-{{ getDomains().join(',') }}.zip</a></strong>
    <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>/etc/nginx/</strong> <span class="hljs-comment">directory</span>
    <span class="hljs-comment">- OR -</span>
-   <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-click="copyAsBase64()">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > /etc/nginx/nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
+   <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > /etc/nginx/nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
    <span class="hljs-comment"><strong>Paste</strong> from clipboard and run the command</span>
 <span class="hljs-comment"><span class="counter">.</span> Go to NGINX directory (over SSH):</span>
    <span class="hljs-section">cd</span> /etc/nginx
