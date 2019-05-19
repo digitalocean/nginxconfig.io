@@ -20,7 +20,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"angular-tooltips": "^1.2.2",
-		"autoprefixer": "^8.6.5",
+		"autoprefixer": "^9.5.1",
 		"bootstrap": "^4.3.1",
 		"concat": "^1.0.3",
 		"eslint": "^5.16.0",
@@ -31,7 +31,7 @@
 		"masonry-layout": "^4.2.2",
 		"ngclipboard": "^2.0.0",
 		"node-sass": "^4.12.0",
-		"postcss-cli": "^5.0.1"
+		"postcss-cli": "^6.1.2"
 	},
 	"devDependencies": {
 		"cypress": "^3.3.0",
