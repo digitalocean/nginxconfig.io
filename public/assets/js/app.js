@@ -447,6 +447,10 @@
 		$scope.addSite = function() {
 			$scope.data.sites.push( angular.copy(DEFAULTS.sites[0]) );
 			$scope.site = $scope.data.sites.length - 1;
+
+			gtag('event', $scope.data.sites.length, {
+				event_category: 'add_site',
+			});
 		};
 
 		$scope.removeSite = function(site) {
@@ -1081,12 +1085,31 @@
 			updateHash();
 			$timeout(calculateChanges);
 
-			for (var key in $scope.data) {
+			for (var key in newValue) {
 				if (!angular.equals(newValue[key], oldValue[key])) {
-					gtag('event', key, {
-						event_category: 'data_changed',
-						event_label: $scope.data[key],
-					});
+					if (key === 'sites') {
+						for (var i in newValue.sites) {
+							if (oldValue.sites[i] !== undefined) {
+								for (var j in newValue.sites[i]) {
+									if (
+										j !== '$$hashKey' &&
+										!angular.equals(newValue.sites[i][j], oldValue.sites[i][j])
+									) {
+										gtag('event', j, {
+											event_category: 'data_changed',
+											event_label: newValue.sites[i][j],
+										});
+									}
+								}
+							}
+						}
+					} else {
+						gtag('event', key, {
+							event_category: 'data_changed',
+							event_label: newValue[key],
+						});
+					}
+
 				}
 			}
 
