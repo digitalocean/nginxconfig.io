@@ -44,6 +44,7 @@
 		"Masonry": true,
 		"saveAs": true,
 		"Base64": true,
-		"FileReader": true
+		"FileReader": true,
+		"notie": true
 	}
 }

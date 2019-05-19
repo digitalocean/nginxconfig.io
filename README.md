@@ -123,6 +123,7 @@
 * [Masonry](https://masonry.desandro.com) - files grid layout
 * [JSZip](https://stuk.github.io/jszip) - generating zip package
 * [FileSaver](https://github.com/eligrey/FileSaver.js) - downloading zip file
+* [notie](https://jaredreich.com/notie/) - toast notifications
 
 ## Resources
 * [OWASP TLS Cipher String Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/TLS_Cipher_String_Cheat_Sheet.md)

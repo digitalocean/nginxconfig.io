@@ -383,8 +383,6 @@
 		$scope.siteChanges		= {};
 		$scope.commonChanges	= {};
 
-		$scope.clipboardCopy = undefined;
-
 		$scope.activeStep = 'download';
 
 		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml';
@@ -590,13 +588,11 @@
 		};
 
 		$scope.clipboardSuccess = function(key) {
-			$scope.clipboardCopy = key;
-
-			$timeout(function(_key) {
-				if ($scope.clipboardCopy === _key) {
-					$scope.clipboardCopy = undefined;
-				}
-			}, 1500, true, key);
+			notie.alert({
+				type: 'success',
+				text: 'Copied to clipboard! 🙌',
+				position: 'bottom',
+			});
 
 			gtag('event', key, {
 				event_category: 'clipboard',

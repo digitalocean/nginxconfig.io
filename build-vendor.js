@@ -16,6 +16,7 @@ const jsFiles = [
 	'node_modules/jszip/dist/jszip.min.js',
 	'node_modules/file-saver/dist/FileSaver.min.js',
 	'node_modules/js-base64/base64.min.js',
+	'node_modules/notie/dist/notie.min.js',
 
 	// angular plugins
 	'node_modules/ngclipboard/dist/ngclipboard.min.js',

@@ -1033,7 +1033,7 @@
 					<div class="grid-sizer col-xl-6"></div>
 					<div class="grid-item col-xl-12 mb-3 text-center" ng-cloak>
 						<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
-						<button tooltips tooltip-template="Copied!" tooltip-show-trigger="click" class="btn btn-success btn-sm btn-download btn-base64" ng-click="copyAsBase64()"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
+						<button class="btn btn-success btn-sm btn-download btn-base64" ng-click="copyAsBase64()"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
 					</div>
 					<div id="base64-zip-wrapper" class="custom-control-input">
 						<button class="btn btn-light btn-clipboard" id="btn-base64-zip-line" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">
@@ -1046,7 +1046,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'nginx.conf'">Copied!</span>
 						<div class="code source" data-filename="nginx.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-nginx" class="code highlighted"></div>
@@ -1056,7 +1055,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain-{{ $index }}" ngclipboard-success="clipboardSuccess('example.com')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'example.com'">Copied!</span>
 						<div class="code source" data-filename="sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-domain-{{ $index }}" class="code highlighted"></div>
@@ -1066,7 +1064,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('letsencrypt.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'letsencrypt.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/letsencrypt.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-letsencrypt" class="code highlighted"></div>
@@ -1076,7 +1073,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('general.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'general.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/general.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-general" class="code highlighted"></div>
@@ -1086,7 +1082,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('php_fastcgi.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'php_fastcgi.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-php_fastcgi" class="code highlighted"></div>
@@ -1096,7 +1091,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-python_uwsgi" ngclipboard-success="clipboardSuccess('python_uwsgi.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'python_uwsgi.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/python_uwsgi.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-python_uwsgi" class="code highlighted"></div>
@@ -1106,7 +1100,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-proxy" ngclipboard-success="clipboardSuccess('proxy.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'proxy.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/proxy.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-proxy" class="code highlighted"></div>
@@ -1116,7 +1109,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('wordpress.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'wordpress.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/wordpress.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-wordpress" class="code highlighted"></div>
@@ -1126,7 +1118,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('drupal.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'drupal.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/drupal.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-drupal" class="code highlighted"></div>
@@ -1136,7 +1127,6 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-magento" ngclipboard-success="clipboardSuccess('magento.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<span class="clipboard-success" ng-if="clipboardCopy === 'magento.conf'">Copied!</span>
 						<div class="code source" data-filename="nginxconfig.io/magento.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-magento" class="code highlighted"></div>
