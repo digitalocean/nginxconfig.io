@@ -37,8 +37,9 @@
    <span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g'<span ng-if="isUnified()"><!--
 --> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
 --> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
-<span class="hljs-comment"><span class="counter">.</span> Reload NGINX:</span>
-   <strong>sudo</strong> <span class="hljs-section">systemctl</span> <span class="hljs-attribute">reload</span> nginx.service
+<span class="hljs-comment"><span class="counter">.</span> Configure <strong>Certbot</strong> to reload <strong>NGINX</strong> on success:</span>
+   <span class="hljs-section">echo</span> <span class="hljs-attribute">-e</span> '#!/bin/bash\nnginx -t && systemctl reload nginx.service' | <strong>sudo</strong> <span class="hljs-section">tee</span> /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
+   <strong>sudo</strong> <span class="hljs-section">chmod</span> <span class="hljs-attribute">a+x</span> /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh
 <span class="hljs-comment"><span class="counter">.</span> Obtain certificate{{ getDomains().length > 1 ? 's' : '' }}:</span><!--
 --><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)">
    <span class="hljs-section">certbot</span> <!--
@@ -55,7 +56,9 @@
 <span class="hljs-comment"><span class="counter">.</span> Uncomment SSL related directives in configuration:</span>
    <span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/#?;#//g'<span ng-if="isUnified()"><!--
 --> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
---> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span></span><!--
+--> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
+<span class="hljs-comment"><span class="counter">.</span> Schedule renewing:
+   You're ready, Certbot will renew any certificates that expire in less than 30 days</span></span><!--
 
 
 
@@ -63,5 +66,5 @@
 
 	step: live
 
---><span class="hljs-comment"><span class="counter">.</span> Reload NGINX:</span>
-   <strong>sudo</strong> <span class="hljs-section">systemctl</span> <span class="hljs-attribute">reload</span> nginx.service</span>
+--><span class="hljs-comment"><span class="counter">.</span> Reload <strong>NGINX</strong></span>
+   <strong>sudo</strong> <span class="hljs-section">nginx</span> <span class="hljs-attribute">-t</span> && <strong>sudo</strong> <span class="hljs-section">systemctl</span> <span class="hljs-attribute">reload</span> nginx.service</span>
