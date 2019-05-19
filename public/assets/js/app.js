@@ -1095,7 +1095,7 @@
 										j !== '$$hashKey' &&
 										!angular.equals(newValue.sites[i][j], oldValue.sites[i][j])
 									) {
-										gtag('event', j, {
+										gtag('event', i + '.' + j, {
 											event_category: 'data_changed',
 											event_label: newValue.sites[i][j],
 										});
