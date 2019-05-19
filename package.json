@@ -49,8 +49,8 @@
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
 		"lint": "eslint public/assets/js/app.js",
 		"lint:fix": "npm run lint -- --fix",
-		"test": "npm run lint && start-server-and-test start http://localhost:8080 cypress:run",
-		"test:debug": "npm run lint && start-server-and-test start http://localhost:8080 cypress:open",
+		"test": "npm run lint && npm run build:prod && start-server-and-test start http://localhost:8080 cypress:run",
+		"test:debug": "npm run lint && npm run build && start-server-and-test start http://localhost:8080 cypress:open",
 		"cypress:run": "cypress run",
 		"cypress:open": "cypress open"
 	}
