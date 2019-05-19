@@ -2,12 +2,16 @@
 
 	step: download
 
---><span class="hljs-comment"><span class="counter">.</span> Download generated config:</span> <strong><a href="#" ng-click="downloadZip()">nginxconfig.io-{{ getDomains().join(',') }}.zip</a></strong>
-<span class="hljs-comment"><span class="counter">.</span> Upload to server's <strong>/etc/nginx/</strong> directory</span>
+--><span class="hljs-comment"><span class="counter">.</span> <strong>Download</strong> generated config:</span> <strong><a href="#" ng-click="downloadZip()">nginxconfig.io-{{ getDomains().join(',') }}.zip</a></strong>
+   <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>/etc/nginx/</strong> <span class="hljs-comment">directory</span>
+   <span class="hljs-comment">- OR -</span>
+   <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-click="copyAsBase64()">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > /etc/nginx/nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
+   <span class="hljs-comment"><strong>Paste</strong> from clipboard and run the command</span>
+<span class="hljs-comment"><span class="counter">.</span> Go to NGINX directory (over SSH):</span>
+   <span class="hljs-section">cd</span> /etc/nginx
 <span class="hljs-comment"><span class="counter">.</span> Backup current configuration:</span>
    <span class="hljs-section">tar</span> <span class="hljs-attribute">-czvf</span> nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/
 <span class="hljs-comment"><span class="counter">.</span> Unzip the uploaded archive:</span>
-   <span class="hljs-section">cd</span> /etc/nginx
    <span class="hljs-section">unzip</span> <span class="hljs-attribute">-o</span> nginxconfig.io-{{ getDomains().join(',') }}.zip <span class="hljs-comment">(you probably need to install <strong>unzip</strong>:</span> <span class="hljs-section"></span><strong>sudo</strong> <span class="hljs-section">apt-get</span> <span class="hljs-attribute">install</span> unzip<span class="hljs-comment">)</span></span><!--
 
 
