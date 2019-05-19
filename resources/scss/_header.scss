@@ -1,11 +1,14 @@
 header {
-	position: relative;
 	background-color: #000;
 	padding: 0.5rem 0;
 	text-align: center;
 	margin-bottom: 0.5rem;
 	color: #fff;
 	font-size: 2.2rem;
+
+	.container {
+		position: relative;
+	}
 
 	.loader {
 		position: absolute;
@@ -41,6 +44,50 @@ header {
 	.logo {
 		height: 3rem;
 		margin-bottom: 0.5rem;
+	}
+
+	.github {
+		@include media-breakpoint-up(lg) {
+			position: absolute;
+			right: 0;
+			top: 10px;
+		}
+
+		.github-link {
+			text-align: center;
+			font-size: 1rem;
+			margin-bottom: 0.5rem;
+
+			a {
+				color: #fff;
+			}
+
+			small {
+				font-size: 90%;
+			}
+
+			svg {
+				height: 1.2rem;
+				vertical-align: -4px;
+
+				g {
+					fill: #fff;
+				}
+			}
+		}
+
+		.github-star {
+			width: 144px;
+			height: 30px;
+			display: block;
+			border: 0;
+			overflow: hidden;
+			margin: 0 auto 0.25rem;
+
+			@include media-breakpoint-up(lg) {
+				margin-left: auto;
+			}
+		}
 	}
 
 	.sites {
