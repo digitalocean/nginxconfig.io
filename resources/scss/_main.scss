@@ -1,15 +1,8 @@
-@keyframes sk-bounce {
-	0%, 100% {
-		transform: scale(0.0);
-	} 50% {
-		transform: scale(1.0);
-	}
-}
-
 section.tabs {
 	margin-bottom: 1rem;
 
 	.sites {
+		position: relative;
 		margin-bottom: 1rem;
 	}
 
@@ -35,25 +28,13 @@ section.tabs {
 			}
 		}
 
-		&.nav-site {
-			.nav-item {
-				.nav-link {
-					&.changed {
-						font-weight: normal;
-					}
-
-					&.active {
-						font-weight: 700;
-					}
-				}
-			}
-		}
-
 		&.nav-site-tab {
 			.nav-item {
 				.nav-link {
 					&:hover {
-						background-color: #f8f8f8;
+						@include media-breakpoint-up(xl) {
+							background-color: #f8f8f8;
+						}
 					}
 
 					&.active {
@@ -149,7 +130,7 @@ section.tabs {
 		}
 	}
 	.tab-content {
-		padding: 0.5rem 0.75rem;
+		padding: 0.5rem 0.75rem 0.25rem;
 		border-left: 1px solid #dee2e6;
 		border-right: 1px solid #dee2e6;
 		border-bottom: 1px solid #dee2e6;
@@ -157,10 +138,6 @@ section.tabs {
 		border-bottom-left-radius: 0.25rem;
 
 		&.site-content {
-			padding-bottom: 0.75rem;
-		}
-
-		&.site-tab-content {
 			background-color: #f8f8f8;
 
 			.form-group {
@@ -208,7 +185,7 @@ section.tabs {
 			}
 
 			.col-form-label-sm {
-				padding-top: 0;
+				padding-top: 0.2rem;
 				padding-bottom: 0;
 			}
 
@@ -261,40 +238,6 @@ section.tabs {
 	}
 }
 
-section.loader {
-	position: fixed;
-	z-index: 1;
-	bottom: 25%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	pointer-events: none;
-
-	.spinner {
-		width: 50px;
-		height: 50px;
-
-		position: relative;
-		margin: 100px auto;
-
-		.double-bounce1,
-		.double-bounce2 {
-			width: 100%;
-			height: 100%;
-			border-radius: 50%;
-			background-color: #999;
-			opacity: 0.6;
-			position: absolute;
-			top: 0;
-			left: 0;
-			animation: sk-bounce 2.0s infinite ease-in-out;
-		}
-
-		.double-bounce2 {
-			animation-delay: -1.0s;
-		}
-	}
-}
-
 main {
 	flex: 1 1 auto;
 	opacity: 0;
@@ -317,6 +260,25 @@ main {
 
 	.commands {
 		margin-bottom: 1rem;
+		line-height: 1.35;
+
+		.step {
+			counter-reset: step-command-counter;
+
+			.counter {
+				display: inline-block;
+				margin-top: 0.15rem;
+
+				&::before {
+					counter-increment: step-command-counter;
+					content: counter(step-command-counter);
+				}
+			}
+
+			& > span:first-of-type .counter {
+				margin-top: 0;
+			}
+		}
 	}
 
 	.file {
@@ -344,7 +306,7 @@ main {
 
 			code {
 				display: block;
-				padding: 0.6rem;
+				padding: 8px 8px 12px;
 				-moz-tab-size: 4;
 				tab-size: 4;
 				overflow: visible;

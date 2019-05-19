@@ -1,44 +1,195 @@
+@keyframes sk-bounce {
+	0%, 100% {
+		transform: scale(0.0);
+	} 50% {
+		transform: scale(1.0);
+	}
+}
+
 header {
 	background-color: #000;
-	padding: 0.5rem 0 0.25rem;
+	padding: 0.5rem 0;
 	text-align: center;
 	margin-bottom: 0.5rem;
 	color: #fff;
 	font-size: 2.2rem;
 
-	.logo {
-		height: 3rem;
-		margin: 0.5rem 0 0.3rem;
+	.container {
+		position: relative;
 	}
 
-	.presets {
-		margin-bottom: 0.3rem;
-		line-height: 1.8rem;
+	.loader {
+		position: absolute;
+		top: 5px;
+		left: 50%;
+		pointer-events: none;
+		margin-left: -230px;
 
-		.btn-outline-light {
-			border-color: #999;
+		.spinner {
+			width: 50px;
+			height: 50px;
+			position: relative;
 
-			&.active,
-			&:hover {
-				background-color: #fff;
-				border-color: #fff;
+			.double-bounce1,
+			.double-bounce2 {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: #999;
+				opacity: 0.6;
+				position: absolute;
+				top: 0;
+				left: 0;
+				animation: sk-bounce 2.0s infinite ease-in-out;
+			}
 
-				svg {
-					path {
-						fill: #000;
-					}
-				}
+			.double-bounce2 {
+				animation-delay: -1.0s;
+			}
+		}
+	}
+
+	.logo {
+		height: 3rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.github {
+		@include media-breakpoint-up(lg) {
+			position: absolute;
+			right: 15px;
+			top: 10px;
+		}
+
+		.github-link {
+			text-align: center;
+			font-size: 1rem;
+			margin-bottom: 0.5rem;
+
+			a {
+				color: #fff;
+			}
+
+			small {
+				font-size: 90%;
 			}
 
 			svg {
-				height: 1.1rem;
-				vertical-align: text-bottom;
+				height: 1.2rem;
+				vertical-align: -4px;
 
-				path {
-					fill: #ddd;
-					transition: fill 0.15s ease-in-out;
+				g {
+					fill: #fff;
 				}
 			}
+		}
+
+		.github-star {
+			width: 144px;
+			height: 30px;
+			display: block;
+			border: 0;
+			overflow: hidden;
+			margin: 0 auto 0.25rem;
+
+			@include media-breakpoint-up(lg) {
+				margin-left: auto;
+			}
+		}
+	}
+
+	.sites {
+		@include media-breakpoint-up(lg) {
+			margin-top: -1rem;
+		}
+	}
+
+	.sites,
+	.presets {
+		font-size: 0;
+		text-align: center;
+
+		@include media-breakpoint-up(lg) {
+			text-align: left;
+		}
+	}
+
+	.sites .title,
+	.presets .title {
+		color: #eee;
+		font-size: 0.9rem;
+		line-height: 1.9rem;
+		font-style: italic;
+		vertical-align: top;
+		margin-right: 4px;
+		text-align: center;
+
+		@include media-breakpoint-up(lg) {
+			display: inline-block;
+			width: 60px;
+		}
+	}
+
+	.sites .group,
+	.presets .group {
+		@include media-breakpoint-up(lg) {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	.sites .group {
+		@include media-breakpoint-up(lg) {
+			width: calc(100% - 290px);
+		}
+	}
+
+	.presets .group {
+		@include media-breakpoint-up(lg) {
+			width: calc(100% - 64px);
+		}
+	}
+
+	.btn-outline-light {
+		box-shadow: none !important;
+		border-color: #999;
+		margin: 0 3px 4px;
+
+		&.active,
+		&:hover {
+			background-color: #fff;
+			border-color: #fff;
+
+			svg {
+				path {
+					fill: #000;
+				}
+			}
+		}
+
+		svg {
+			height: 1.1rem;
+			vertical-align: text-bottom;
+
+			path {
+				fill: #ddd;
+				transition: fill 0.15s ease-in-out;
+			}
+		}
+
+		small {
+			margin-left: 0.2rem;
+			font-weight: 700;
+			vertical-align: 1px;
+		}
+
+		.close {
+			float: none;
+			vertical-align: -2px;
+			color: #666;
+			line-height: 0;
+			margin-right: -0.3rem;
+			font-size: 1.3rem;
 		}
 	}
 }

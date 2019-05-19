@@ -22,14 +22,14 @@
 		"angular-tooltips": "^1.2.2",
 		"autoprefixer": "^8.6.4",
 		"bootstrap": "^4.2.1",
-		"eslint": "^5.9.0",
+		"eslint": "^5.16.0",
 		"highlight.js": "^9.12.0",
 		"js-base64": "^2.5.1",
-		"node-sass": "^4.11.0",
+		"node-sass": "^4.12.0",
 		"postcss-cli": "^5.0.1"
 	},
 	"devDependencies": {
-		"cypress": "^3.1.2",
+		"cypress": "^3.2.0",
 		"http-server": "^0.11.1",
 		"start-server-and-test": "^1.5.0"
 	},
@@ -39,6 +39,7 @@
 		"build:prod": "npm run build:scss:prod && npm run autoprefixer",
 		"build:scss": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
 		"build:scss:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
+		"build:scss:watch": "npm run build:scss -- --watch",
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
 		"lint": "eslint public/assets/js/app.js",
 		"lint:fix": "npm run lint -- --fix",

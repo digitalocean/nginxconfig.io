@@ -205,7 +205,7 @@
 			}
 
 			for (var i in siteTabs) {
-				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-tab-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
+				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
 			}
 
 			for (var j in commonTabs) {
@@ -385,7 +385,9 @@
 
 		$scope.clipboardCopy = undefined;
 
-		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml';
+		$scope.activeStep = 'download';
+
+		$scope.gzipTypes = 'text/plain text/css text/xml application/json application/javascript application/rss+xml application/atom+xml image/svg+xml';
 
 		$scope.extensions = {
 			assets:	'css(\\.map)?|js(\\.map)?',
@@ -519,6 +521,10 @@
 			gtag('event', preset, {
 				event_category: 'preset',
 			});
+		};
+
+		$scope.setActiveStep = function(step) {
+			$scope.activeStep = step;
 		};
 
 		$scope.getSiteChanges = function(site) {
@@ -1027,6 +1033,7 @@
 				// www
 				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^https?:\/\//, '');
 				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/\/.*$/, '');
+				$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(' ', '');
 
 				if ($scope.data.sites[site].domain.match(/^www\./)) {
 					$scope.data.sites[site].domain = $scope.data.sites[site].domain.replace(/^www./, '');
