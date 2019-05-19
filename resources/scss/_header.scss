@@ -49,7 +49,7 @@ header {
 	.github {
 		@include media-breakpoint-up(lg) {
 			position: absolute;
-			right: 0;
+			right: 15px;
 			top: 10px;
 		}
 
@@ -106,17 +106,39 @@ header {
 		}
 	}
 
-	.title {
+	.sites .title,
+	.presets .title {
 		color: #eee;
 		font-size: 0.9rem;
+		line-height: 1.9rem;
 		font-style: italic;
-		vertical-align: -5px;
+		vertical-align: top;
 		margin-right: 4px;
 		text-align: center;
 
 		@include media-breakpoint-up(lg) {
 			display: inline-block;
 			width: 60px;
+		}
+	}
+
+	.sites .group,
+	.presets .group {
+		@include media-breakpoint-up(lg) {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	.sites .group {
+		@include media-breakpoint-up(lg) {
+			width: calc(100% - 290px);
+		}
+	}
+
+	.presets .group {
+		@include media-breakpoint-up(lg) {
+			width: calc(100% - 64px);
 		}
 	}
 

@@ -36,87 +36,91 @@
 
 				<div class="sites">
 					<div class="title">Sites:</div>
-					<button class="btn btn-sm btn-outline-light" ng-repeat="(key, value) in data.sites" ng-click="setSite(key)" ng-class="{ 'active': site === key }" ng-cloak>
-						{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
-						<span class="close" ng-if="key > 0" ng-click="removeSite(key)">&times;</span>
-					</button>
-					<button class="btn btn-sm btn-outline-light" ng-click="addSite()">＋ Add site</button>
+					<div class="group">
+						<button class="btn btn-sm btn-outline-light" ng-repeat="(key, value) in data.sites" ng-click="setSite(key)" ng-class="{ 'active': site === key }" ng-cloak>
+							{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
+							<span class="close" ng-if="key > 0" ng-click="removeSite(key)">&times;</span>
+						</button>
+						<button class="btn btn-sm btn-outline-light" ng-click="addSite()">＋ Add site</button>
+					</div>
 				</div>
 
 				<div class="presets">
 					<div class="title">Presets:</div>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('frontend')"
-						ng-class="{ 'active': !isPHP() && !isPython() && !isProxy() && isIndexHTML() && isFallbackHTML() }"
-						tooltips
-						tooltip-template="• disabled PHP<br>• index.html fallback routing"
-						tooltip-side="bottom"
-					>Frontend <span ng-include="'assets/img/brands/angular.svg'"></span> <span ng-include="'assets/img/brands/react.svg'"></span> <span ng-include="'assets/img/brands/vuejs.svg'"></span></button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('backend')"
-						ng-class="{ 'active': isPHP() && isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && !isMagento() }"
-						tooltips
-						tooltip-template="• enabled PHP<br>• index.php fallback routing"
-						tooltip-side="bottom"
-					>PHP <span ng-include="'assets/img/brands/php.svg'"></span> <span ng-include="'assets/img/brands/laravel.svg'"></span> <span ng-include="'assets/img/brands/symfony.svg'"></span> <span ng-include="'assets/img/brands/codeigniter.svg'""></span></button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('django')"
-						ng-class="{ 'active': isPython() && isDjango() && !isRoot() }"
-						tooltips
-						tooltip-template="• enabled Python<br>• Django rules<br>• <code>root</code> disabled"
-						tooltip-side="bottom"
-					>Django <span ng-include="'assets/img/brands/python.svg'"></span><span ng-include="'assets/img/brands/django.svg'"></span></button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-class="{ 'active': isProxy() && !isRoot() }"
-						ng-click="setPreset('nodejs')"
-						tooltips
-						tooltip-template="• enabled reverse proxy"
-						tooltip-side="bottom"
-					>Node.js <span ng-include="'assets/img/brands/nodejs.svg'"></span></button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-class="{ 'active': isPHP() && isIndexHTML() && isFallbackHTML() }"
-						ng-click="setPreset('spa')"
-						tooltips
-						tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing"
-						tooltip-side="bottom"
-					>Single-page application</button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('wordpress')"
-						ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && isWordPress() && !isDrupal() && !isMagento() }"
-						tooltips
-						tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules"
-						tooltip-side="bottom"
-					><span ng-include="'assets/img/brands/wordpress.svg'"></span> WordPress</button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('drupal')"
-						ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && isDrupal() && !isMagento() }"
-						tooltips
-						tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules"
-						tooltip-side="bottom"
-					><span ng-include="'assets/img/brands/drupal.svg'"></span> Drupal</button>
-					<button
-						type="button"
-						class="btn btn-sm btn-outline-light"
-						ng-click="setPreset('magento')"
-						ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && isMagento() }"
-						tooltips
-						tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules"
-						tooltip-side="bottom"
-					><span ng-include="'assets/img/brands/magento.svg'"></span> Magento</button>
+					<div class="group">
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('frontend')"
+							ng-class="{ 'active': !isPHP() && !isPython() && !isProxy() && isIndexHTML() && isFallbackHTML() }"
+							tooltips
+							tooltip-template="• disabled PHP<br>• index.html fallback routing"
+							tooltip-side="bottom"
+						>Frontend <span ng-include="'assets/img/brands/angular.svg'"></span> <span ng-include="'assets/img/brands/react.svg'"></span> <span ng-include="'assets/img/brands/vuejs.svg'"></span></button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('backend')"
+							ng-class="{ 'active': isPHP() && isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && !isMagento() }"
+							tooltips
+							tooltip-template="• enabled PHP<br>• index.php fallback routing"
+							tooltip-side="bottom"
+						>PHP <span ng-include="'assets/img/brands/php.svg'"></span> <span ng-include="'assets/img/brands/laravel.svg'"></span> <span ng-include="'assets/img/brands/symfony.svg'"></span> <span ng-include="'assets/img/brands/codeigniter.svg'""></span></button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('django')"
+							ng-class="{ 'active': isPython() && isDjango() && !isRoot() }"
+							tooltips
+							tooltip-template="• enabled Python<br>• Django rules<br>• <code>root</code> disabled"
+							tooltip-side="bottom"
+						>Django <span ng-include="'assets/img/brands/python.svg'"></span><span ng-include="'assets/img/brands/django.svg'"></span></button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-class="{ 'active': isProxy() && !isRoot() }"
+							ng-click="setPreset('nodejs')"
+							tooltips
+							tooltip-template="• enabled reverse proxy"
+							tooltip-side="bottom"
+						>Node.js <span ng-include="'assets/img/brands/nodejs.svg'"></span></button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-class="{ 'active': isPHP() && isIndexHTML() && isFallbackHTML() }"
+							ng-click="setPreset('spa')"
+							tooltips
+							tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing"
+							tooltip-side="bottom"
+						>Single-page application</button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('wordpress')"
+							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && isWordPress() && !isDrupal() && !isMagento() }"
+							tooltips
+							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules"
+							tooltip-side="bottom"
+						><span ng-include="'assets/img/brands/wordpress.svg'"></span> WordPress</button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('drupal')"
+							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && isDrupal() && !isMagento() }"
+							tooltips
+							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules"
+							tooltip-side="bottom"
+						><span ng-include="'assets/img/brands/drupal.svg'"></span> Drupal</button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-light"
+							ng-click="setPreset('magento')"
+							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && isMagento() }"
+							tooltips
+							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules"
+							tooltip-side="bottom"
+						><span ng-include="'assets/img/brands/magento.svg'"></span> Magento</button>
+					</div>
 				</div>
 			</div>
 		</header>
