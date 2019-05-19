@@ -332,7 +332,7 @@
 			}, 600);
 		}
 
-		function generateZip (callback) {
+		function generateZip(callback) {
 			var zip = new JSZip();
 
 			var sourceCodes = $window.document.querySelectorAll('main .file .code.source');
@@ -573,13 +573,13 @@
 		};
 
 
-		$scope.downloadBase64 = function() {
+		$scope.copyAsBase64 = function() {
 			generateZip(function (content) {
 				var reader = new FileReader();
 				reader.readAsDataURL(content);
 				reader.onloadend = function() {
 					var base64 = reader.result.replace(/^data:.+;base64,/, '');
-					$window.document.querySelector('#base64-zip-line').innerHTML = 'echo \'' + base64 + '\' | base64 --decode > nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
+					$window.document.querySelector('#base64-zip-line').innerHTML = 'echo \'' + base64 + '\' | base64 --decode > /etc/nginx/nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
 					$window.document.querySelector('#btn-base64-zip-line').click();
 				}
 			});

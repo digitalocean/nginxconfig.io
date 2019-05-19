@@ -1033,7 +1033,7 @@
 					<div class="grid-sizer col-xl-6"></div>
 					<div class="grid-item col-xl-12 mb-3 text-center" ng-cloak>
 						<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
-						<button tooltips tooltip-template="Copied!" tooltip-show-trigger="click" class="btn btn-success btn-sm btn-download btn-base64" ng-click="downloadBase64()"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
+						<button tooltips tooltip-template="Copied!" tooltip-show-trigger="click" class="btn btn-success btn-sm btn-download btn-base64" ng-click="copyAsBase64()"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
 					</div>
 					<div id="base64-zip-wrapper" class="custom-control-input">
 						<button class="btn btn-light btn-clipboard" id="btn-base64-zip-line" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">
