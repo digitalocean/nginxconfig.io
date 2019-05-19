@@ -19,6 +19,7 @@
 	"author": "Bálint Szekeres <balint@szekeres.me> (https://balint.szekeres.me)",
 	"license": "MIT",
 	"dependencies": {
+		"angular": "^1.7.8",
 		"angular-tooltips": "^1.2.2",
 		"autoprefixer": "^9.5.1",
 		"bootstrap": "^4.3.1",
