@@ -1109,7 +1109,6 @@
 							event_label: newValue[key],
 						});
 					}
-
 				}
 			}
 
