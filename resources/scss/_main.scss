@@ -291,10 +291,15 @@ main {
 		}
 	}
 
-	#base64-zip-line {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
+	.base64-zip-line-container {
+		position: relative;
+		overflow: hidden;
+
+		#base64-zip-line {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
 	}
 
 	.commands,
