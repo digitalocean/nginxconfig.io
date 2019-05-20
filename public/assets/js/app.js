@@ -601,9 +601,11 @@
 				position: 'bottom',
 			});
 
-			gtag('event', key, {
-				event_category: 'clipboard',
-			});
+			if (key !== 'base64-zip-line') {
+				gtag('event', key, {
+					event_category: 'clipboard',
+				});
+			}
 		};
 
 		$scope.refreshHighlighting = function() {
