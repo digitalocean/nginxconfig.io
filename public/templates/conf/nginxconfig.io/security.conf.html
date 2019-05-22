@@ -1,0 +1,16 @@
+# security headers
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "{{ data.referrer_policy }}" always;<!--
+
+✔ CSP --><span ng-if="isCSP()">
+add_header Content-Security-Policy "{{ data.content_security_policy }}" always;</span><!--
+
+✔ HSTS--><span ng-if="hasCommonHSTS()">
+add_header Strict-Transport-Security "max-age=31536000{{ isHSTSSubdomains() ? '; includeSubDomains' : '' }}{{ isHSTSPreload() ? '; preload' : '' }}" always;</span>
+
+# . files
+location ~ /\.(?!well-known) {
+	deny all;
+}

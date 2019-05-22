@@ -37,6 +37,19 @@ server {<!--
 	# HSTS
 	add_header Strict-Transport-Security "max-age=31536000{{ isHSTSSubdomains(_site) ? '; includeSubDomains' : '' }}{{ isHSTSPreload(_site) ? '; preload' : '' }}" always;</span><!--
 
+	✔ modularized --><span ng-if="isModularized()">
+
+	# security
+	include nginxconfig.io/security.conf;</span><!--
+
+	✔ unified --><span ng-if="isUnified()"><!--
+
+-->
+
+<!--
+
+--><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+
 	✔ access log domain || error log domain --><span ng-if="isAccessLogDomain(_site) || isErrorLogDomain(_site)">
 
 	# logging<!--
@@ -119,6 +132,7 @@ server {<!--
 
 
 	✔ modularized --><span ng-if="isModularized()">
+	# additional config
 	include nginxconfig.io/general.conf;</span><!--
 
 	✔ modularized && ✔ WordPress --><span ng-if="isModularized() && isWordPress(_site)">

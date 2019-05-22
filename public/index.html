@@ -1066,6 +1066,15 @@
 						</div><div id="file-letsencrypt" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+						<strong>/etc/nginx/nginxconfig.io/security.conf</strong>
+						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-security" ngclipboard-success="clipboardSuccess('security.conf')">
+							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+						</button>
+						<div class="code source" data-filename="nginxconfig.io/security.conf">
+							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+						</div><div id="file-security" class="code highlighted"></div>
+					</section>
+					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
 						<strong>/etc/nginx/nginxconfig.io/general.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('general.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
