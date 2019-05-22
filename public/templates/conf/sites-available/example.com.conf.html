@@ -235,7 +235,7 @@ server {
 	✔ IPv6 --><span ng-if="isIPv6(_site)">
 	listen [{{ data.sites[_site].ipv6 }}]:80;</span>
 
-	server_name .{{ _domain }};<!--
+	server_name {{ isRedirect(_site) ? '.' : '' }}{{ _domain }};<!--
 
 	✔ modularized && ✔ Let's Encrypt --><span ng-if="isModularized() && isCertLetsEncrypt(_site)">
 
