@@ -11,13 +11,8 @@ add_header Content-Security-Policy "{{ data.content_security_policy }}" always;<
 add_header Strict-Transport-Security "max-age=31536000{{ isHSTSSubdomains() ? '; includeSubDomains' : '' }}{{ isHSTSPreload() ? '; preload' : '' }}" always;</span>
 
 # . files
-location ^~ /. {
+location ~ /\.(?!well-known) {
 	deny all;
-}
-
-# .well-known
-location ^~ /.well-known/ {
-	allow all;
 }
 
 # favicon.ico
