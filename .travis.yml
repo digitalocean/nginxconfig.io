@@ -5,6 +5,9 @@ node_js:
 
 addons:
   ssh_known_hosts: nginxconfig.io
+  apt:
+    packages:
+      - libgconf-2-4
 
 cache:
   directories:
