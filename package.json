@@ -5,10 +5,10 @@
 	"description": "⚙️ NGINX config generator generator on steroids 💉",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/valentinxxx/nginxconfig.io.git"
+		"url": "git+https://github.com/0xB4LINT/nginxconfig.io.git"
 	},
 	"bugs": {
-		"url": "https://github.com/valentinxxx/nginxconfig.io/issues"
+		"url": "https://github.com/0xB4LINT/nginxconfig.io/issues"
 	},
 	"keywords": [
 		"nginx",
