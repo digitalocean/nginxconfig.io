@@ -58,7 +58,7 @@ http {<!--
 	✔ SSL DH required --><span ng-if="isSSLDHRequired()">
 
 	# Diffie-Hellman parameter for DHE ciphersuites
-	ssl_dhparam /etc/nginx/dhparam.pem;</span>
+	ssl_dhparam {{ data.directory_nginx }}dhparam.pem;</span>
 
 	# {{ sslProfiles[ data.ssl_profile ].name }} configuration
 	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols }};
@@ -78,8 +78,8 @@ http {<!--
 	resolver_timeout 2s;</span></span>
 
 	# load configs
-	include /etc/nginx/conf.d/*.conf;<span ng-if="isModularized()">
-	include /etc/nginx/sites-enabled/*;</span><span ng-if="isUnified()" ng-repeat="(_site, _domain) in getDomains() track by $index">
+	include {{ data.directory_nginx }}conf.d/*.conf;<span ng-if="isModularized()">
+	include {{ data.directory_nginx }}sites-enabled/*;</span><span ng-if="isUnified()" ng-repeat="(_site, _domain) in getDomains() track by $index">
 
 	# {{ isWWW(_site) ? 'www.' : '' }}{{ _domain }}
 <ng-include ng-include-tabs="1" src="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>

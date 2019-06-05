@@ -3,12 +3,12 @@
 	step: download
 
 --><span class="hljs-comment"><span class="counter">.</span> <strong>Download</strong> generated config:</span> <strong><a href="#" ng-click="downloadZip()">nginxconfig.io-{{ getDomains().join(',') }}.zip</a></strong>
-   <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>/etc/nginx/</strong> <span class="hljs-comment">directory</span>
+   <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>{{ data.directory_nginx }}</strong> <span class="hljs-comment">directory</span>
    <span class="hljs-comment">- OR -</span>
-   <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > /etc/nginx/nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
+   <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > {{ data.directory_nginx }}nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
    <span class="hljs-comment"><strong>Paste</strong> from clipboard and run the command</span>
 <span class="hljs-comment"><span class="counter">.</span> Go to NGINX directory (over SSH):</span>
-   <span class="hljs-section">cd</span> /etc/nginx
+   <span class="hljs-section">cd</span> {{ data.directory_nginx }}
 <span class="hljs-comment"><span class="counter">.</span> Backup current configuration:</span>
    <span class="hljs-section">tar</span> <span class="hljs-attribute">-czvf</span> nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/
 <span class="hljs-comment"><span class="counter">.</span> Unzip the uploaded archive:</span>
@@ -23,7 +23,7 @@
 --><!--
 
 ✔ SSL DH required --><span ng-if="isSSLDHRequired()"><span class="hljs-comment"><span class="counter">.</span> Generate Diffie-Hellman keys:</span>
-   <span class="hljs-section">openssl</span> <span class="hljs-attribute">dhparam -dsaparam</span> <span class="hljs-attribute">-out</span> /etc/nginx/dhparam.pem <span class="hljs-number">{{ isSSLProfileLegacy() ? 1024 : 2048 }}</span>
+   <span class="hljs-section">openssl</span> <span class="hljs-attribute">dhparam -dsaparam</span> <span class="hljs-attribute">-out</span> {{ data.directory_nginx }}dhparam.pem <span class="hljs-number">{{ isSSLProfileLegacy() ? 1024 : 2048 }}</span>
 </span><!--
 
 ✔ Let's Encrypt
@@ -39,8 +39,8 @@
 
 --><span class="hljs-comment"><span class="counter">.</span> Comment out SSL related directives in configuration:</span>
    <span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/(listen .*443)/\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g'<span ng-if="isUnified()"><!--
---> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
---> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
+--> {{ data.directory_nginx }}nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
+--> {{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
 <span class="hljs-comment"><span class="counter">.</span> Reload <strong>NGINX</strong>:</span>
    <strong>sudo</strong> <span class="hljs-section">nginx</span> <span class="hljs-attribute">-t</span> && <strong>sudo</strong> <span class="hljs-section">systemctl</span> <span class="hljs-attribute">reload</span> nginx
 <span class="hljs-comment"><span class="counter">.</span> Obtain certificate{{ getDomains().length > 1 ? 's' : '' }}:</span><!--
@@ -58,8 +58,8 @@
 --><span class="hljs-attribute">--force-renewal</span></span>
 <span class="hljs-comment"><span class="counter">.</span> Uncomment SSL related directives in configuration:</span>
    <span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/#?;#//g'<span ng-if="isUnified()"><!--
---> /etc/nginx/nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
---> /etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
+--> {{ data.directory_nginx }}nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
+--> {{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span>
 <span class="hljs-comment"><span class="counter">.</span> Reload <strong>NGINX</strong>:</span>
    <strong>sudo</strong> <span class="hljs-section">nginx</span> <span class="hljs-attribute">-t</span> && <strong>sudo</strong> <span class="hljs-section">systemctl</span> <span class="hljs-attribute">reload</span> nginx
 <span class="hljs-comment"><span class="counter">.</span> Configure <strong>Certbot</strong> to reload <strong>NGINX</strong> after success renew:</span>

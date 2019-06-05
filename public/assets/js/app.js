@@ -101,6 +101,7 @@
 		user:					'www-data',
 		pid:					'/run/nginx.pid',
 		client_max_body_size:	16,
+		directory_nginx:		'/etc/nginx/',
 
 		// COMMON - TOOLS
 		file_structure:		'modularized',

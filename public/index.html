@@ -353,7 +353,7 @@
 												class="form-control form-control-sm"
 												ng-model="data.sites[site].ssl_certificate"
 												ng-class="{ 'input-changed': data.sites[site].ssl_certificate !== defaultData.sites[0].ssl_certificate }"
-												placeholder="{{ '/etc/nginx/ssl/' + getDomain() + '.crt' }}">
+												placeholder="{{ data.directory_nginx + 'ssl/' + getDomain() + '.crt' }}">
 										</div>
 									</div>
 									<div class="form-group row" ng-if="isHTTPS() && isCertCustom()" ng-cloak>
@@ -365,7 +365,7 @@
 												class="form-control form-control-sm"
 												ng-model="data.sites[site].ssl_certificate_key"
 												ng-class="{ 'input-changed': data.sites[site].ssl_certificate_key !== defaultData.sites[0].ssl_certificate_key }"
-												placeholder="{{ '/etc/nginx/ssl/' + getDomain() + '.key' }}">
+												placeholder="{{ data.directory_nginx + 'ssl/' + getDomain() + '.key' }}">
 										</div>
 									</div>
 								</div>
@@ -858,6 +858,17 @@
 								<div class="tab-pane tab-nginx" ng-class="{ 'active': tab_common === 'nginx' }">
 									<div class="form-group row">
 										<label class="col-sm-3 col-form-label col-form-label-sm">
+											NGINX config directory
+										</label>
+										<div class="col-sm-9">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.directory_nginx"
+												ng-class="{ 'input-changed': data.directory_nginx !== defaultData.directory_nginx }">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-3 col-form-label col-form-label-sm">
 											<code tooltips tooltip-template="Defines the number of worker processes. ">worker_processes</code>
 										</label>
 										<div class="col-sm-9">
@@ -1039,7 +1050,7 @@
 						<div id="base64-zip-line">{{ base64 }}</div>
 					</div>
 					<section class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
-						<strong>/etc/nginx/nginx.conf</strong>
+						<strong>{{ data.directory_nginx }}nginx.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1048,7 +1059,7 @@
 						</div><div id="file-nginx" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-repeat="(_site, _domain) in getDomains() track by $index" ng-cloak>
-						<strong>/etc/nginx/sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</strong>
+						<strong>{{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain-{{ $index }}" ngclipboard-success="clipboardSuccess('example.com')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1057,7 +1068,7 @@
 						</div><div id="file-domain-{{ $index }}" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized() && hasCertLetsEncrypt()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/letsencrypt.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/letsencrypt.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('letsencrypt.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1066,7 +1077,7 @@
 						</div><div id="file-letsencrypt" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/security.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/security.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-security" ngclipboard-success="clipboardSuccess('security.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1075,7 +1086,7 @@
 						</div><div id="file-security" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/general.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/general.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('general.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1084,7 +1095,7 @@
 						</div><div id="file-general" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasPHP() && (isModularized() || hasWordPress())" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/php_fastcgi.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/php_fastcgi.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('php_fastcgi.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1093,7 +1104,7 @@
 						</div><div id="file-php_fastcgi" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasPython() && isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/python_uwsgi.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/python_uwsgi.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-python_uwsgi" ngclipboard-success="clipboardSuccess('python_uwsgi.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1102,7 +1113,7 @@
 						</div><div id="file-python_uwsgi" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasProxy() && isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/proxy.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/proxy.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-proxy" ngclipboard-success="clipboardSuccess('proxy.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1111,7 +1122,7 @@
 						</div><div id="file-proxy" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasWordPress() && isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/wordpress.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/wordpress.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('wordpress.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1120,7 +1131,7 @@
 						</div><div id="file-wordpress" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasDrupal() && isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/drupal.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/drupal.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('drupal.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
@@ -1129,7 +1140,7 @@
 						</div><div id="file-drupal" class="code highlighted"></div>
 					</section>
 					<section class="col-xl-6 grid-item file" ng-if="hasMagento() && isModularized()" ng-cloak>
-						<strong>/etc/nginx/nginxconfig.io/magento.conf</strong>
+						<strong>{{ data.directory_nginx }}nginxconfig.io/magento.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-magento" ngclipboard-success="clipboardSuccess('magento.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
