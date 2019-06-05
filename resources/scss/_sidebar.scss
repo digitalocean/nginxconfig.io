@@ -5,6 +5,10 @@ aside.sidebar {
 		margin-top: 0;
 	}
 
+	@include media-breakpoint-up(xl) {
+		margin-top: 15px;
+	}
+
 	.buttons {
 		text-align: center;
 		margin-top: 1.5rem;
