@@ -28,8 +28,8 @@
 
 ✔ Let's Encrypt
 --><span ng-if="hasCertLetsEncrypt()"><span class="hljs-comment"><span class="counter">.</span> Create a common ACME-challenge directory (for Let's Encrypt):</span>
-   <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> /var/www/_letsencrypt
-   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> /var/www/_letsencrypt</span></span><!--
+   <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> {{ data.directory_letsencrypt }}
+   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> {{ data.directory_letsencrypt }}</span></span><!--
 
 
 
@@ -52,7 +52,7 @@
 --><span ng-if="isWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> www.{{ _domain }} </span><!--
 --><span ng-if="isCDN(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> cdn.{{ _domain }} </span><!--
 --><span class="hljs-attribute">--email</span> {{ data.sites[_site].email ? data.sites[_site].email : 'info@' + _domain }} <!--
---><span class="hljs-attribute" tooltips tooltip-template="--webroot-path" tooltip-side="top">-w</span> /var/www/_letsencrypt <!--
+--><span class="hljs-attribute" tooltips tooltip-template="--webroot-path" tooltip-side="top">-w</span> {{ data.directory_letsencrypt }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive" tooltip-side="top">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
 --><span class="hljs-attribute">--force-renewal</span></span>

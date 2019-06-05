@@ -69,6 +69,7 @@
 		resolver_cloudflare:	true,
 		resolver_google:		true,
 		resolver_opendns:		true,
+		directory_letsencrypt:	'/var/www/_letsencrypt/',
 
 		// COMMON - SECURITY
 		referrer_policy:			'no-referrer-when-downgrade',

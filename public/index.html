@@ -649,6 +649,17 @@
 											</div>
 										</div>
 									</div>
+									<div class="form-group row" ng-class="{ disabled: !hasCertLetsEncrypt() }">
+										<label class="col-sm-3 col-form-label col-form-label-sm">
+											Let's Encrypt webroot
+										</label>
+										<div class="col-sm-9">
+											<input type="text"
+												class="form-control form-control-sm"
+												ng-model="data.directory_letsencrypt"
+												ng-class="{ 'input-changed': data.directory_letsencrypt !== defaultData.directory_letsencrypt }">
+										</div>
+									</div>
 								</div>
 								<div class="tab-pane tab-security" ng-class="{ 'active': tab_common === 'security' }">
 									<div class="form-group row">

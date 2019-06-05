@@ -1,4 +1,4 @@
 # ACME-challenge
 location ^~ /.well-known/acme-challenge/ {
-	root /var/www/_letsencrypt;
+	root {{ data.directory_letsencrypt }};
 }
