@@ -427,6 +427,8 @@
 			},
 		};
 
+		$scope.endingSlashRegex = new RegExp('/$');
+
 
 
 		/////////////////////

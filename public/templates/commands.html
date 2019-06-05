@@ -3,12 +3,12 @@
 	step: download
 
 --><span class="hljs-comment"><span class="counter">.</span> <strong>Download</strong> generated config:</span> <strong><a href="#" ng-click="downloadZip()">nginxconfig.io-{{ getDomains().join(',') }}.zip</a></strong>
-   <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>{{ data.directory_nginx }}</strong> <span class="hljs-comment">directory</span>
+   <span class="hljs-comment"><strong>Upload</strong> to server's</span> <strong>{{ data.directory_nginx.replace(endingSlashRegex, '') }}</strong> <span class="hljs-comment">directory</span>
    <span class="hljs-comment">- OR -</span>
    <span class="hljs-comment"><strong>Copy</strong> as Base64 string:</span> <strong><a href="#" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">Copy to clipboard</a></strong> <span class="hljs-comment small">(echo 'BASE64' | base64 --decode > {{ data.directory_nginx }}nginxconfig.io-{{ getDomains().join(',') }}.zip)</span>
    <span class="hljs-comment"><strong>Paste</strong> from clipboard and run the command</span>
 <span class="hljs-comment"><span class="counter">.</span> Go to NGINX directory (over SSH):</span>
-   <span class="hljs-section">cd</span> {{ data.directory_nginx }}
+   <span class="hljs-section">cd</span> {{ data.directory_nginx.replace(endingSlashRegex, '') }}
 <span class="hljs-comment"><span class="counter">.</span> Backup current configuration:</span>
    <span class="hljs-section">tar</span> <span class="hljs-attribute">-czvf</span> nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/
 <span class="hljs-comment"><span class="counter">.</span> Unzip the uploaded archive:</span>
@@ -28,8 +28,8 @@
 
 ✔ Let's Encrypt
 --><span ng-if="hasCertLetsEncrypt()"><span class="hljs-comment"><span class="counter">.</span> Create a common ACME-challenge directory (for Let's Encrypt):</span>
-   <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> {{ data.directory_letsencrypt }}
-   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> {{ data.directory_letsencrypt }}</span></span><!--
+   <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }}
+   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }}</span></span><!--
 
 
 
@@ -52,7 +52,7 @@
 --><span ng-if="isWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> www.{{ _domain }} </span><!--
 --><span ng-if="isCDN(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> cdn.{{ _domain }} </span><!--
 --><span class="hljs-attribute">--email</span> {{ data.sites[_site].email ? data.sites[_site].email : 'info@' + _domain }} <!--
---><span class="hljs-attribute" tooltips tooltip-template="--webroot-path" tooltip-side="top">-w</span> {{ data.directory_letsencrypt }} <!--
+--><span class="hljs-attribute" tooltips tooltip-template="--webroot-path" tooltip-side="top">-w</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive" tooltip-side="top">-n</span> <!--
 --><span class="hljs-attribute">--agree-tos</span> <!--
 --><span class="hljs-attribute">--force-renewal</span></span>

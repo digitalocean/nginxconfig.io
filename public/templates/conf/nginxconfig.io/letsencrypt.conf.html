@@ -1,4 +1,4 @@
 # ACME-challenge
 location ^~ /.well-known/acme-challenge/ {
-	root {{ data.directory_letsencrypt }};
+	root {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }};
 }
