@@ -587,7 +587,7 @@
 				reader.onloadend = function() {
 					var base64 = reader.result.replace(/^data:.+;base64,/, '');
 
-					$scope.base64 = 'echo \'' + base64 + '\' | base64 --decode > /etc/nginx/nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
+					$scope.base64 = 'echo \'' + base64 + '\' | base64 --decode > ' + $scope.data.directory_nginx + 'nginxconfig.io-' + $scope.getDomains().join(',') + '.zip';
 				}
 			});
 		};
@@ -735,7 +735,7 @@
 				return '/etc/letsencrypt/live/' + $scope.getDomain(site) + '/fullchain.pem';
 			}
 
-			return getSiteValue(site, 'ssl_certificate') || '/etc/nginx/ssl/' + $scope.getDomain(site) + '.crt';
+			return getSiteValue(site, 'ssl_certificate') || $scope.data.directory_nginx + 'ssl/' + $scope.getDomain(site) + '.crt';
 		};
 
 		$scope.getSslCertificateKey = function(site) {
@@ -743,7 +743,7 @@
 				return '/etc/letsencrypt/live/' + $scope.getDomain(site) + '/privkey.pem';
 			}
 
-			return getSiteValue(site, 'ssl_certificate_key') || '/etc/nginx/ssl/' + $scope.getDomain(site) + '.key';
+			return getSiteValue(site, 'ssl_certificate_key') || $scope.data.directory_nginx + 'ssl/' + $scope.getDomain(site) + '.key';
 		};
 
 		$scope.hasCommonHSTS = function() {
