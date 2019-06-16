@@ -73,7 +73,7 @@
 
 		// COMMON - SECURITY
 		referrer_policy:			'no-referrer-when-downgrade',
-		content_security_policy:	'default-src * data: \'unsafe-eval\' \'unsafe-inline\'',
+		content_security_policy:	'default-src * data: \'unsafe-inline\'',
 		server_tokens:				false,
 		limit_req:					false,
 
