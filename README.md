@@ -47,7 +47,7 @@ We love NGINX, because:
 * TLS/SSL with SNI
 * **sexy config syntax**
 
-A lot of features with corresponding configuration directives. You can deep dive into the [NGINX documentation]((http://nginx.org/en/docs/)) right now OR you can use this tool to check how NGINX works, observe how your inputs are affecting the output, generate the best config for your specific use-case (and in parallel you can still use the docs).
+A lot of features with corresponding configuration directives. You can deep dive into the [NGINX documentation](http://nginx.org/en/docs/) right now OR you can use this tool to check how NGINX works, observe how your inputs are affecting the output, **generate the best config for your specific use-case** (and in parallel you can still use the docs).
 
 ## 🚀 Usage
 `GOTO` **[`nginxconfig.io`](https://nginxconfig.io)**
