@@ -97,6 +97,8 @@ Contributions are what make the open source community such an amazing place to b
 * [notie](https://jaredreich.com/notie/) - toast notifications
 
 ## 📚 Resources
+* [Mozilla SSL Configuration Generator v5](https://ssl-config.mozilla.org)
+* [Mozilla SSL Configuration Generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/)
 * [OWASP TLS Cipher String Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/TLS_Cipher_String_Cheat_Sheet.md)
 * [Nginx Optimization: understanding sendfile, tcp_nodelay and tcp_nopush](https://thoughts.t37.net/nginx-optimization-understanding-sendfile-tcp-nodelay-and-tcp-nopush-c55cdd276765)
 * [NGINX Tuning For Best Performance](https://gist.github.com/denji/8359866)

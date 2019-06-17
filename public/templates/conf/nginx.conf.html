@@ -52,7 +52,7 @@ http {<!--
 
 	# SSL
 	ssl_session_timeout 1d;
-	ssl_session_cache shared:SSL:50m;
+	ssl_session_cache shared:SSL:10m;
 	ssl_session_tickets off;<!--
 
 	✔ SSL DH required --><span ng-if="isSSLDHRequired()">
@@ -61,9 +61,11 @@ http {<!--
 	ssl_dhparam {{ data.directory_nginx }}dhparam.pem;</span>
 
 	# {{ sslProfiles[ data.ssl_profile ].name }} configuration
-	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols }};
-	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers }};
-	ssl_prefer_server_ciphers on;
+	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols.join(' ') }};
+	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers.join(':') }};<!--
+
+	✔ SSL server preferred order --><span ng-if="sslProfiles[ data.ssl_profile ].server_preferred_order">
+	ssl_prefer_server_ciphers on;</span>
 
 	# OCSP Stapling
 	ssl_stapling on;

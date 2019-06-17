@@ -65,7 +65,7 @@
 		}],
 
 		// COMMON - HTTPS
-		ssl_profile:			'B',
+		ssl_profile:			'intermediate',
 		resolver_cloudflare:	true,
 		resolver_google:		true,
 		resolver_opendns:		true,
@@ -404,26 +404,117 @@
 					'pptx?|potx?|pptm|potm|ppsx?',
 		};
 
+		// https://github.com/mozilla/ssl-config-generator/blob/master/config/server-side-tls-conf-5.0.json
 		$scope.sslProfiles = {
-			A: {
-				name: 'OWASP A (Advanced)',
-				protocols: 'TLSv1.2 TLSv1.3',
-				ciphers: 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256',
+			modern: {
+				name: 'Mozilla Modern',
+				protocols: [
+					'TLSv1.3',
+				],
+				ciphers: [
+					'TLS_AES_256_GCM_SHA384',
+					'TLS_AES_128_GCM_SHA256',
+					'TLS_CHACHA20_POLY1305_SHA256',
+				],
+				server_preferred_order: false,
+				dh_param_size: false,
+				oldest_clients: ['Firefox 63', 'Android 10.0', 'Chrome 70', 'Edge 75', 'Java 11', 'OpenSSL 1.1.1', 'Opera 57', 'Safari 12.1'],
 			},
-			B: {
-				name: 'OWASP B (Broad Compatibility)',
-				protocols: 'TLSv1.2 TLSv1.3',
-				ciphers: 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256',
+			intermediate: {
+				name: 'Mozilla Intermediate',
+				protocols: [
+					'TLSv1.2',
+					'TLSv1.3',
+				],
+				ciphers: [
+					'TLS_AES_256_GCM_SHA384',
+					'TLS_AES_128_GCM_SHA256',
+					'TLS_CHACHA20_POLY1305_SHA256',
+					'ECDHE-ECDSA-AES256-GCM-SHA384',
+					'ECDHE-RSA-AES256-GCM-SHA384',
+					'ECDHE-ECDSA-AES128-GCM-SHA256',
+					'ECDHE-RSA-AES128-GCM-SHA256',
+					'ECDHE-ECDSA-CHACHA20-POLY1305',
+					'ECDHE-RSA-CHACHA20-POLY1305',
+					'DHE-RSA-AES256-GCM-SHA384',
+					'DHE-RSA-AES128-GCM-SHA256',
+				],
+				server_preferred_order: true,
+				dh_param_size: 2048,
+				oldest_clients: ['Firefox 27', 'Android 4.4.2', 'Chrome 31', 'Edge', 'IE 11 on Windows 7', 'Java 8u31', 'OpenSSL 1.0.1', 'Safari 9'],
 			},
-			C: {
-				name: 'OWASP C (Widest Compatibility)',
-				protocols: 'TLSv1 TLSv1.1 TLSv1.2 TLSv1.3',
-				ciphers: 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA',
-			},
-			D: {
-				name: 'OWASP D (Legacy)',
-				protocols: 'TLSv1 TLSv1.1 TLSv1.2 TLSv1.3',
-				ciphers: 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA',
+			old: {
+				name: 'Mozilla Old',
+				protocols: [
+					'TLSv1',
+					'TLSv1.1',
+					'TLSv1.2',
+					'TLSv1.3',
+				],
+				ciphers: [
+					'TLS_AES_256_GCM_SHA384',
+					'TLS_AES_128_GCM_SHA256',
+					'TLS_CHACHA20_POLY1305_SHA256',
+					'ECDHE-ECDSA-CHACHA20-POLY1305',
+					'ECDHE-RSA-CHACHA20-POLY1305',
+					'ECDHE-ECDSA-AES128-GCM-SHA256',
+					'ECDHE-RSA-AES128-GCM-SHA256',
+					'ECDHE-ECDSA-AES256-GCM-SHA384',
+					'ECDHE-RSA-AES256-GCM-SHA384',
+					'DHE-RSA-AES128-GCM-SHA256',
+					'DHE-RSA-AES256-GCM-SHA384',
+					'DHE-DSS-AES128-GCM-SHA256',
+					'DHE-DSS-AES256-GCM-SHA384',
+					'ECDHE-RSA-AES128-SHA256',
+					'ECDHE-ECDSA-AES128-SHA256',
+					'ECDHE-RSA-AES128-SHA',
+					'ECDHE-ECDSA-AES128-SHA',
+					'ECDHE-RSA-AES256-SHA384',
+					'ECDHE-ECDSA-AES256-SHA384',
+					'ECDHE-RSA-AES256-SHA',
+					'ECDHE-ECDSA-AES256-SHA',
+					'DHE-RSA-AES128-SHA256',
+					'DHE-RSA-AES128-SHA',
+					'DHE-DSS-AES128-SHA256',
+					'DHE-RSA-AES256-SHA256',
+					'DHE-DSS-AES256-SHA',
+					'DHE-RSA-AES256-SHA',
+					'ECDHE-RSA-DES-CBC3-SHA',
+					'ECDHE-ECDSA-DES-CBC3-SHA',
+					'EDH-RSA-DES-CBC3-SHA',
+					'AES128-GCM-SHA256',
+					'AES256-GCM-SHA384',
+					'AES128-SHA256',
+					'AES256-SHA256',
+					'AES128-SHA',
+					'AES256-SHA',
+					'DHE-DSS-AES256-SHA256',
+					'DHE-DSS-AES128-SHA',
+					'DES-CBC3-SHA',
+					'DHE-RSA-CHACHA20-POLY1305',
+					'ECDHE-RSA-CAMELLIA256-SHA384',
+					'ECDHE-ECDSA-CAMELLIA256-SHA384',
+					'DHE-RSA-CAMELLIA256-SHA256',
+					'DHE-DSS-CAMELLIA256-SHA256',
+					'DHE-RSA-CAMELLIA256-SHA',
+					'DHE-DSS-CAMELLIA256-SHA',
+					'CAMELLIA256-SHA256',
+					'CAMELLIA256-SHA',
+					'ECDHE-RSA-CAMELLIA128-SHA256',
+					'ECDHE-ECDSA-CAMELLIA128-SHA256',
+					'DHE-RSA-CAMELLIA128-SHA256',
+					'DHE-DSS-CAMELLIA128-SHA256',
+					'DHE-RSA-CAMELLIA128-SHA',
+					'DHE-DSS-CAMELLIA128-SHA',
+					'CAMELLIA128-SHA256',
+					'CAMELLIA128-SHA',
+					'DHE-RSA-SEED-SHA',
+					'DHE-DSS-SEED-SHA',
+					'SEED-SHA',
+				],
+				server_preferred_order: true,
+				dh_param_size: 1024,
+				oldest_clients: ['Firefox 1', 'Chrome 1', 'Opera 5', 'Safari 1', 'IE8 on Windows XP', 'Android 2.3', 'Java 7', 'OpenSSL 0.9.8'],
 			},
 		};
 
@@ -948,11 +1039,7 @@
 
 		// COMMON - HTTPS
 		$scope.isSSLDHRequired = function() {
-			return $scope.hasHTTPS() && $scope.sslProfiles[$scope.data.ssl_profile].ciphers.indexOf(':DHE') !== -1;
-		};
-
-		$scope.isSSLProfileLegacy = function() {
-			return $scope.hasHTTPS() && $scope.data.ssl_profile === 'D';
+			return $scope.hasHTTPS() && $scope.sslProfiles[$scope.data.ssl_profile].dh_param_size;
 		};
 
 		$scope.isResolverCloudflare = function() {

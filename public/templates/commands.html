@@ -23,7 +23,7 @@
 --><!--
 
 ✔ SSL DH required --><span ng-if="isSSLDHRequired()"><span class="hljs-comment"><span class="counter">.</span> Generate Diffie-Hellman keys:</span>
-   <span class="hljs-section">openssl</span> <span class="hljs-attribute">dhparam -dsaparam</span> <span class="hljs-attribute">-out</span> {{ data.directory_nginx }}dhparam.pem <span class="hljs-number">{{ isSSLProfileLegacy() ? 1024 : 2048 }}</span>
+   <span class="hljs-section">openssl</span> <span class="hljs-attribute">dhparam -dsaparam</span> <span class="hljs-attribute">-out</span> {{ data.directory_nginx }}dhparam.pem <span class="hljs-number">{{ sslProfiles[ data.ssl_profile ].dh_param_size }}</span>
 </span><!--
 
 ✔ Let's Encrypt

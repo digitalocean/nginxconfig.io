@@ -605,28 +605,22 @@
 										<div class="row">
 											<legend class="col-sm-3 col-form-label col-form-label-sm">SSL profile</legend>
 											<div class="col-sm-9">
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'A' }">
-													<input class="form-check-input" type="radio" id="OWASP-A" ng-model="data.ssl_profile" value="A">
-													<label class="form-check-label col-form-label-sm" for="OWASP-A">
-														<span tooltips tooltip-template="<strong>Advanced</strong>, wide browser compatibility, e.g. to most newer browser versions<br><br>Oldest compatible clients:<ul><li>Android 4.4.2</li><li>Chrome 32/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 27/Win 8</li><li>IE11/Win 7 + MS14-066</li><li>Java8b132</li><li>OpenSSL 1.0.1e</li><li>Safari 9/iOS 9.</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP A</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
+													<input class="form-check-input" type="radio" id="ssl-modern" ng-model="data.ssl_profile" value="modern">
+													<label class="form-check-label col-form-label-sm" for="ssl-modern">
+														<span tooltips tooltip-template="For services that don't need backward compatibility, the parameters below provide a higher level of security.<br><br>Oldest compatible clients:<ul><li>{{ sslProfiles.modern.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Modern</span>
 													</label>
 												</div>
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'B' }">
-													<input class="form-check-input" type="radio" id="OWASP-B" ng-model="data.ssl_profile" value="B">
-													<label class="form-check-label col-form-label-sm" for="OWASP-B">
-														<span tooltips tooltip-template="<strong>Broad</strong> compatibility to browsers, check the compatibility to other protocols before using it, e.g. IMAPS<br><br>Oldest compatible clients: <ul><li>Android 4.4.2</li><li>Chrome 30/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 27/Win 8</li><li>IE11/Win 7</li><li>IE 11/WinPhone 8.1</li><li>Java8b132</li><li>OpenSSL 1.0.1e</li><li>Opera 17/Win 7</li><li>Safari 5/iOS 5.1.1</li><li>Safari 7/OS X 10.9</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP B</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
+													<input class="form-check-input" type="radio" id="ssl-intermediate" ng-model="data.ssl_profile" value="intermediate">
+													<label class="form-check-label col-form-label-sm" for="ssl-intermediate">
+														<span tooltips tooltip-template="For services that don't need compatibility with legacy clients, but still need to support a wide range of clients, this configuration is recommended.<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.intermediate.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Intermediate</span>
 													</label>
 												</div>
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'C' }">
-													<input class="form-check-input" type="radio" id="OWASP-C" ng-model="data.ssl_profile" value="C">
-													<label class="form-check-label col-form-label-sm" for="OWASP-C">
-														<span tooltips tooltip-template="<strong>Widest Compatibility</strong>, compatibility to most legacy browsers, legacy libraries (still patched) and other application protocols besides https, e.g. IMAPS<br><br>Oldest compatible clients: <ul><li>Android 2.3.7/4.0.4</li><li>Chrome 27/Win 7</li><li>Chrome 34/OS X</li><li>Edge 12/Win 10</li><li>Firefox 10.0.12 ESR/Win 7</li><li>Firefox 21/Win 7+Fedora 19</li><li>IE 7/Vista</li><li>IE 10/WinPhone 8.0</li><li>Java 7u25</li><li>OpenSSL 0.9.8y</li><li>Opera 12.15/Win 7</li><li>Safari 5/iOS 5.1.1</li><li>Safari 5.1.9/OS X 10.6.8</li></ul>" tooltip-side="top" tooltip-class="ssl">OWASP C</span>
-													</label>
-												</div>
-												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'D' }">
-													<input class="form-check-input" type="radio" id="OWASP-D" ng-model="data.ssl_profile" value="D">
-													<label class="form-check-label col-form-label-sm" for="OWASP-D">
-														<span tooltips tooltip-template="<strong>Legacy</strong>, widest compatibility to real old browsers and legacy libraries and other application protocols like SMTP" tooltip-side="top" tooltip-class="ssl">OWASP D</span>
+												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
+													<input class="form-check-input" type="radio" id="ssl-old" ng-model="data.ssl_profile" value="old">
+													<label class="form-check-label col-form-label-sm" for="ssl-old">
+														<span tooltips tooltip-template="This is the old ciphersuite that works with all clients back to Windows XP/IE6. It should be used as a last resort only.<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.old.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Old</span>
 													</label>
 												</div>
 											</div>
@@ -655,7 +649,7 @@
 										<label class="col-sm-3 col-form-label col-form-label-sm">
 											Let's Encrypt webroot
 										</label>
-										<div class="col-sm-9">
+										<div class="col-sm-9 col-xl-7">
 											<input type="text"
 												class="form-control form-control-sm"
 												ng-model="data.directory_letsencrypt"
