@@ -48,7 +48,7 @@
 		"start": "npm run build && concurrently \"npm:*:watch\" \"npm:browsersync\"",
 
 		"build": "concurrently \"npm:build:js:vendor\" \"npm:build:js:app\" \"npm:build:scss\"",
-		"build:prod": "concurrently \"npm:build:js:vendor:prod\" \"npm:build:js:app:prod\" \"npm:build:scss:prod\" && npm run autoprefixer",
+		"build:prod": "concurrently \"npm:build:js:vendor:prod\" \"npm:build:js:app\" \"npm:build:scss:prod\" && npm run autoprefixer",
 
 		"build:js:highlight": "node node_modules/highlight.js/tools/build.js -n bash nginx -t browser --no-compress",
 		"build:js:vendor": "npm run build:js:highlight && node build/script.js vendor public/assets/js/vendor.min.js",
