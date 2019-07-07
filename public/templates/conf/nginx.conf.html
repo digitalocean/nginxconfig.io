@@ -61,8 +61,10 @@ http {<!--
 	ssl_dhparam {{ data.directory_nginx }}dhparam.pem;</span>
 
 	# {{ sslProfiles[ data.ssl_profile ].name }} configuration
-	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols.join(' ') }};
-	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers.join(':') }};<!--
+	ssl_protocols {{ sslProfiles[ data.ssl_profile ].protocols.join(' ') }};<!--
+
+	✔ SSL ciphers length --><span ng-if="sslProfiles[ data.ssl_profile ].ciphers.length">
+	ssl_ciphers {{ sslProfiles[ data.ssl_profile ].ciphers.join(':') }};</span><!--
 
 	✔ SSL server preferred order --><span ng-if="sslProfiles[ data.ssl_profile ].server_preferred_order">
 	ssl_prefer_server_ciphers on;</span>

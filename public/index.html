@@ -601,19 +601,19 @@
 												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
 													<input class="form-check-input" type="radio" id="ssl-modern" ng-model="data.ssl_profile" value="modern">
 													<label class="form-check-label col-form-label-sm" for="ssl-modern">
-														<span tooltips tooltip-template="For services that don't need backward compatibility, the parameters below provide a higher level of security.<br><br>Oldest compatible clients:<ul><li>{{ sslProfiles.modern.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Modern</span>
+														<span tooltips tooltip-template="Services with clients that support TLS 1.3 and don't need backward compatibility<br><br>Oldest compatible clients:<ul><li>{{ sslProfiles.modern.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Modern</span>
 													</label>
 												</div>
 												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
 													<input class="form-check-input" type="radio" id="ssl-intermediate" ng-model="data.ssl_profile" value="intermediate">
 													<label class="form-check-label col-form-label-sm" for="ssl-intermediate">
-														<span tooltips tooltip-template="For services that don't need compatibility with legacy clients, but still need to support a wide range of clients, this configuration is recommended.<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.intermediate.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Intermediate</span>
+														<span tooltips tooltip-template="General-purpose servers with a variety of clients, recommended for almost all systems<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.intermediate.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Intermediate</span>
 													</label>
 												</div>
 												<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
 													<input class="form-check-input" type="radio" id="ssl-old" ng-model="data.ssl_profile" value="old">
 													<label class="form-check-label col-form-label-sm" for="ssl-old">
-														<span tooltips tooltip-template="This is the old ciphersuite that works with all clients back to Windows XP/IE6. It should be used as a last resort only.<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.old.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Old</span>
+														<span tooltips tooltip-template="Compatible with a number of very old clients, and should be used only as a last resort<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.old.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Old</span>
 													</label>
 												</div>
 											</div>
