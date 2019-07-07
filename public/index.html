@@ -29,13 +29,6 @@
 
 				<img src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
 
-				<div class="github">
-					<iframe class="github-star" src="https://ghbtns.com/github-btn.html?user=0xB4LINT&repo=nginxconfig.io&type=star&count=true&size=large"></iframe>
-					<div class="github-link">
-						<ng-include src="'/assets/img/brands/github.svg'"></ng-include> <a href="https://github.com/0xB4LINT/nginxconfig.io" target="_blank"><small>0xB4LINT /</small> <strong>nginxconfig.io</strong></a>
-					</div>
-				</div>
-
 				<div class="sites">
 					<div class="title">Sites:</div>
 					<div class="group">
@@ -129,7 +122,7 @@
 		<section class="tabs">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-9">
 						<div class="sites">
 							<ul class="nav nav-tabs nav-site-tab" role="tablist">
 								<li class="nav-item">
@@ -983,19 +976,22 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 						<aside class="sidebar">
-							<div class="adsbygoogle-container">
-								<div class="note">▾ advertisement ▾</div>
-								<ins class="adsbygoogle"
-									style="display:block"
-									data-ad-client="ca-pub-6543577519725877"
-									data-ad-slot="2065709573"
-									data-ad-format="auto"
-									data-full-width-responsive="true"></ins>
-								<script>
-									(adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
+							<div class="github">
+								<div class="github-cover">
+									<div class="github-link">
+										<a href="https://github.com/0xB4LINT/nginxconfig.io" target="_blank" class="github-logo-link">
+											<ng-include src="'/assets/img/brands/github.svg'"></ng-include>
+										</a>
+										<br>
+										<a href="https://github.com/0xB4LINT/nginxconfig.io" target="_blank"><small>0xB4LINT /</small> <strong>nginxconfig.io</strong></a>
+									</div>
+								</div>
+								<div class="github-buttons">
+									<a class="github-button" href="https://github.com/0xB4LINT/nginxconfig.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 0xB4LINT/nginxconfig.io on GitHub">Star</a>
+									<a class="github-button" href="https://github.com/0xB4LINT/nginxconfig.io/issues" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue 0xB4LINT/nginxconfig.io on GitHub">Issue</a>
+								</div>
 							</div>
 						</aside>
 					</div>
@@ -1160,23 +1156,10 @@
 		</main>
 		<footer>
 			<div class="container-fluid">
-				<div class="adsbygoogle-container">
-					<div class="note">▾ advertisement ▾</div>
-					<ins class="adsbygoogle"
-						style="display:block"
-						data-ad-client="ca-pub-6543577519725877"
-						data-ad-slot="7233306850"
-						data-ad-format="auto"
-						data-full-width-responsive="true"></ins>
-					<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</div>
 				Lovingly made by <a href="https://balint.szekeres.me" target="_blank">Bálint Szekeres</a>
 			</div>
 		</footer>
 
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3084378-31"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
@@ -1186,5 +1169,6 @@
 		</script>
 		<script src="assets/js/vendor.min.js?v=COMMIT_HASH"></script>
 		<script src="assets/js/app.min.js?v=COMMIT_HASH"></script>
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
 	</body>
 </html>

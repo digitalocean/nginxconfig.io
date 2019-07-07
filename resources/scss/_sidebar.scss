@@ -2,32 +2,69 @@ aside.sidebar {
 	margin-top: 1rem;
 
 	@include media-breakpoint-up(lg) {
-		margin-top: 0;
+		margin-top: 30px;
 	}
 
-	@include media-breakpoint-up(xl) {
-		margin-top: 15px;
-	}
+	.github {
+		border: 1px solid #dee2e6;
+		border-radius: 0.25rem;
+		padding: 10px;
 
-	.buttons {
-		text-align: center;
-		margin-top: 1.5rem;
+		.github-cover {
+			margin-bottom: 0.5rem;
 
-		.btn {
-			&.btn-download {
-				margin-bottom: 0.25rem;
+			.github-link {
+				text-align: center;
+				font-size: 1rem;
+				margin-bottom: 0.5rem;
 
-				img {
-					vertical-align: -2px;
-					margin-right: 0.1rem;
-					height: 1rem;
+				a {
+					color: #212529;
+
+					&.github-logo-link {
+						text-decoration: none;
+
+						&:hover svg g {
+							fill: #000;
+						}
+					}
+				}
+
+				small {
+					font-size: 90%;
+				}
+
+				svg {
+					height: 70px;
+					margin-bottom: 0.75rem;
+
+					g {
+						fill: #212529;
+					}
 				}
 			}
+		}
 
-			&.btn-reset {
-				img {
-					vertical-align: -3px;
-					height: 0.9rem;
+		.github-buttons {
+			@extend .clearfix;
+			font-size: 0;
+			text-align: center;
+
+			> span {
+				display: inline-block;
+				margin: 0 0.25rem 0.25rem;
+
+				@include media-breakpoint-up(xl) {
+					display: block;
+					margin: 0;
+
+					&:first-child {
+						float: left;
+					}
+
+					&:last-child {
+						float: right;
+					}
 				}
 			}
 		}
