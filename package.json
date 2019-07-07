@@ -19,41 +19,70 @@
 	"author": "Bálint Szekeres <balint@szekeres.me> (https://balint.szekeres.me)",
 	"license": "MIT",
 	"dependencies": {
-		"angular": "^1.7.8",
 		"angular-tooltips": "^1.2.2",
-		"autoprefixer": "^9.5.1",
+		"angular": "^1.7.8",
 		"bootstrap": "^4.3.1",
-		"concat": "^1.0.3",
-		"eslint": "^5.16.0",
-		"file-saver": "github:eligrey/FileSaver.js#master",
+		"file-saver": "^2.0.2",
 		"highlight.js": "github:highlightjs/highlight.js#cli",
 		"js-base64": "^2.5.1",
-		"jszip": "^3.2.1",
+		"jszip": "^3.2.2",
 		"masonry-layout": "^4.2.2",
 		"ngclipboard": "^2.0.0",
-		"node-sass": "^4.12.0",
-		"notie": "^4.3.1",
-		"postcss-cli": "^6.1.2"
+		"notie": "^4.3.1"
 	},
 	"devDependencies": {
-		"cypress": "^3.3.0",
+		"autoprefixer": "^9.6.1",
+		"browser-sync": "^2.26.7",
+		"concat": "^1.0.3",
+		"concurrently": "^4.1.1",
+		"cypress": "^3.3.2",
+		"del": "^5.0.0",
+		"eslint": "^6.0.1",
+		"gear": "^0.9.7",
+		"gear-lib": "^0.9.2",
 		"http-server": "^0.11.1",
-		"start-server-and-test": "^1.9.0"
+		"node-sass": "^4.12.0",
+		"nodemon": "^1.19.1",
+		"postcss-cli": "^6.1.2",
+		"start-server-and-test": "^1.9.1",
+		"uglify-js": "^3.6.0"
 	},
 	"scripts": {
-		"start": "npm run build && http-server",
-		"build": "npm run build:vendor && npm run build:scss",
-		"build:prod": "npm run build:vendor && npm run build:scss:prod && npm run autoprefixer",
-		"build:vendor": "node build-vendor.js",
-		"build:scss": "node-sass --source-map=public/assets/css/app.min.css.map resources/scss/app.scss public/assets/css/app.min.css",
-		"build:scss:prod": "node-sass --output-style=compressed resources/scss/app.scss public/assets/css/app.min.css",
+		"start": "npm run build && concurrently \"npm:*:watch\" \"npm:browsersync\"",
+
+		"build": "concurrently \"npm:build:js:vendor\" \"npm:build:js:app\" \"npm:build:scss\"",
+		"build:prod": "concurrently \"npm:build:js:vendor:prod\" \"npm:build:js:app:prod\" \"npm:build:scss:prod\" && npm run autoprefixer",
+
+		"build:js:highlight": "node node_modules/highlight.js/tools/build.js -n bash nginx -t browser --no-compress",
+		"build:js:vendor": "npm run build:js:highlight && node build/script.js vendor public/assets/js/vendor.min.js",
+		"build:js:vendor:prod": "npm run build:js:vendor -- --production",
+
+		"build:js:app": "node build/script.js app public/assets/js/app.min.js",
+		"build:js:app:prod": "npm run build:js:app -- --production",
+		"build:js:app:watch": "nodemon -q -C -x 'npm run build:js:app' -w 'resources/js/' -e '*'",
+
+		"build:scss": "node-sass resources/scss/app.scss public/assets/css/app.min.css",
+		"build:scss:prod": "npm run build:scss -- --output-style=compressed",
 		"build:scss:watch": "npm run build:scss -- --watch",
+
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
-		"lint": "eslint public/assets/js/app.js",
+
+		"browsersync": "browser-sync 'public/' --watch",
+
+		"lint": "eslint public/assets/js/app.min.js",
 		"lint:fix": "npm run lint -- --fix",
-		"test": "npm run lint && npm run build:prod && start-server-and-test start http://localhost:8080 cypress:run",
-		"test:debug": "npm run lint && npm run build && start-server-and-test start http://localhost:8080 cypress:open",
+
+		"test": "npm run lint && npm run build && start-server-and-test http-server http://localhost:8080 cypress:run",
+		"test:debug": "npm run lint && npm run build && start-server-and-test http-server http://localhost:8080 cypress:open",
+
 		"cypress:run": "cypress run",
 		"cypress:open": "cypress open"
-	}
+	},
+	"browserslist": [
+		"> 0.5%",
+		"last 2 major versions",
+		"Firefox ESR",
+		"not dead",
+		"IE 11"
+	]
 }

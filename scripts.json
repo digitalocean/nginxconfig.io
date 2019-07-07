@@ -1,0 +1,19 @@
+{
+	"app": [
+		"resources/js/app.js"
+	],
+	"vendor": [
+		"node_modules/angular/angular.js",
+
+		"node_modules/highlight.js/build/highlight.pack.js",
+		"node_modules/masonry-layout/dist/masonry.pkgd.js",
+		"node_modules/clipboard/dist/clipboard.js",
+		"node_modules/jszip/dist/jszip.js",
+		"node_modules/file-saver/dist/FileSaver.js",
+		"node_modules/js-base64/base64.js",
+		"node_modules/notie/dist/notie.js",
+
+		"node_modules/ngclipboard/dist/ngclipboard.js",
+		"node_modules/angular-tooltips/dist/angular-tooltips.js"
+	]
+}

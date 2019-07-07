@@ -1,4 +1,6 @@
-const path = require('path');
+/* eslint-env es6 */
+/* global beforeEach cy describe it */
+
 const root = 'http://localhost:8080';
 
 describe('nginxconfig.io', function () {
