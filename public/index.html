@@ -1070,7 +1070,7 @@
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain-{{ $index }}" ngclipboard-success="clipboardSuccess('example.com')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 						</button>
-						<div class="code source" data-filename="sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf">
+						<div class="code source" data-filename="sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf">
 							<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-domain-{{ $index }}" class="code highlighted"></div>
 					</section>
@@ -1128,7 +1128,7 @@
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-proxy" class="code highlighted"></div>
 					</section>
-					<section class="col-xl-6 grid-item file" ng-if="hasWordPress() && isModularized()" ng-cloak>
+					<section class="col-xl-6 grid-item file" ng-if="hasWordPress() && isModularized()" ng-cloak>
 						<strong>{{ data.directory_nginx }}nginxconfig.io/wordpress.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('wordpress.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -1137,7 +1137,7 @@
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-wordpress" class="code highlighted"></div>
 					</section>
-					<section class="col-xl-6 grid-item file" ng-if="hasDrupal() && isModularized()" ng-cloak>
+					<section class="col-xl-6 grid-item file" ng-if="hasDrupal() && isModularized()" ng-cloak>
 						<strong>{{ data.directory_nginx }}nginxconfig.io/drupal.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('drupal.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
@@ -1146,7 +1146,7 @@
 							<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 						</div><div id="file-drupal" class="code highlighted"></div>
 					</section>
-					<section class="col-xl-6 grid-item file" ng-if="hasMagento() && isModularized()" ng-cloak>
+					<section class="col-xl-6 grid-item file" ng-if="hasMagento() && isModularized()" ng-cloak>
 						<strong>{{ data.directory_nginx }}nginxconfig.io/magento.conf</strong>
 						<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-magento" ngclipboard-success="clipboardSuccess('magento.conf')">
 							<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">

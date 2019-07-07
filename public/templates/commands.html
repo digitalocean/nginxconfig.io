@@ -29,7 +29,7 @@
 ✔ Let's Encrypt
 --><span ng-if="hasCertLetsEncrypt()"><span class="hljs-comment"><span class="counter">.</span> Create a common ACME-challenge directory (for Let's Encrypt):</span>
    <span class="hljs-section">mkdir</span> <span class="hljs-attribute">-p</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }}
-   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }}</span></span><!--
+   <span class="hljs-section">chown</span> <span class="hljs-attribute">{{ data.user }}</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }}</span></span><!--
 
 
 
