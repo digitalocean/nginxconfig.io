@@ -69,11 +69,11 @@ HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolve
 	```sh
 	npm install
 	```
-1. Build assets & run server
+1. Build assets & run server *(with file watchers)*
 	```sh
 	npm start
 	```
-1. Open **[127.0.0.1:8080](http://127.0.0.1:8080)**
+1. Your browser will open **[127.0.0.1:3000](http://127.0.0.1:3000)**
 
 ## 🤝 Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
