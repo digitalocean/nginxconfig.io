@@ -5,10 +5,19 @@
 
 	angular
 		.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
-		.config(appConfig)
-		.config(tooltipsConfig)
+		.config([
+			'$locationProvider',
+			appConfig,
+		])
+		.config([
+			'tooltipsConfProvider',
+			tooltipsConfig,
+		])
 		.directive('ngIncludeTabs', ngIncludeTabs)
-		.controller('NginxConfigIoController', NginxConfigIoController);
+		.controller('NginxConfigIoController', [
+			'$scope', '$window', '$location', '$timeout',
+			NginxConfigIoController,
+		]);
 
 
 
