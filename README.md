@@ -1,13 +1,13 @@
-[![GitHub stars](https://img.shields.io/github/stars/0xB4LINT/nginxconfig.io.svg)](https://github.com/0xB4LINT/nginxconfig.io/stargazers)
-[![GitHub contributors](https://img.shields.io/github/contributors/0xB4LINT/nginxconfig.io.svg?color=blue)](https://github.com/0xB4LINT/nginxconfig.io/graphs/contributors)
-[![MIT License](https://img.shields.io/github/license/0xB4LINT/nginxconfig.io.svg?color=blue)](https://github.com/0xB4LINT/nginxconfig.io/blob/master/LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/stargazers)
+[![GitHub contributors](https://img.shields.io/github/contributors/digitalocean/nginxconfig.io.svg?color=blue)](https://github.com/digitalocean/nginxconfig.io/graphs/contributors)
+[![MIT License](https://img.shields.io/github/license/digitalocean/nginxconfig.io.svg?color=blue)](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE.md)
 <br>
-[![Closed issues](https://img.shields.io/github/issues-closed-raw/0xB4LINT/nginxconfig.io.svg?color=brightgreen)](https://github.com/0xB4LINT/nginxconfig.io/issues?q=is%3Aissue+is%3Aclosed)
-[![Closed PR](https://img.shields.io/github/issues-pr-closed-raw/0xB4LINT/nginxconfig.io.svg?color=brightgreen)](https://github.com/0xB4LINT/nginxconfig.io/pulls?q=is%3Apr+is%3Aclosed)
-[![Open issues](https://img.shields.io/github/issues-raw/0xB4LINT/nginxconfig.io.svg)](https://github.com/0xB4LINT/nginxconfig.io/issues)
-[![Open PR](https://img.shields.io/github/issues-pr-raw/0xB4LINT/nginxconfig.io.svg)](https://github.com/0xB4LINT/nginxconfig.io/pulls)
+[![Closed issues](https://img.shields.io/github/issues-closed-raw/digitalocean/nginxconfig.io.svg?color=brightgreen)](https://github.com/digitalocean/nginxconfig.io/issues?q=is%3Aissue+is%3Aclosed)
+[![Closed PR](https://img.shields.io/github/issues-pr-closed-raw/digitalocean/nginxconfig.io.svg?color=brightgreen)](https://github.com/digitalocean/nginxconfig.io/pulls?q=is%3Apr+is%3Aclosed)
+[![Open issues](https://img.shields.io/github/issues-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/issues)
+[![Open PR](https://img.shields.io/github/issues-pr-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/pulls)
 <br>
-[![Build status](https://img.shields.io/travis/com/0xB4LINT/nginxconfig.io.svg)](https://travis-ci.com/0xB4LINT/nginxconfig.io)
+[![Build status](https://img.shields.io/travis/com/digitalocean/nginxconfig.io.svg)](https://travis-ci.com/digitalocean/nginxconfig.io)
 [![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m779967051-bbb607d7a68973aaf01371fe.svg)](https://stats.uptimerobot.com/BqPYtQ74)
 [![Google PageSpeed Insights](https://img.shields.io/badge/PageSpeed-95--100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fnginxconfig.io&tab=desktop)
 [![Qualys SSL Labs](https://img.shields.io/badge/SSL%20Report-A+-brightgreen.svg)](https://www.ssllabs.com/ssltest/analyze.html?d=nginxconfig.io)
@@ -25,9 +25,9 @@
     <a href="https://nginxconfig.io"><strong>nginxconfig.io »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/0xB4LINT/nginxconfig.io/issues">Report Bug</a>
+    <a href="https://github.com/digitalocean/nginxconfig.io/issues">Report Bug</a>
     ·
-    <a href="https://github.com/0xB4LINT/nginxconfig.io/issues">Request Feature</a>
+    <a href="https://github.com/digitalocean/nginxconfig.io/issues">Request Feature</a>
   </p>
 </p>
 
@@ -63,7 +63,7 @@ HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolve
 ## ▶️ Install locally
 1. Clone the repository
 	```sh
-	git clone https://github.com/0xB4LINT/nginxconfig.io.git
+	git clone https://github.com/digitalocean/nginxconfig.io.git
 	```
 1. Install NPM packages
 	```sh
@@ -112,5 +112,5 @@ Contributions are what make the open source community such an amazing place to b
 Give a ⭐️ if this project helped you!
 
 ## 📝 License
-Copyright © 2019 [Bálint Szekeres &lt;balint@szekeres.me&gt; (https://balint.szekeres.me)](https://github.com/0xB4LINT).<br>
-This project is [MIT](https://github.com/0xB4LINT/nginxconfig.io/blob/master/LICENSE) licensed.
+Copyright © 2019 [DigitalOcean, Inc &lt;contact@digitalocean.com&gt; (https://www.digitalocean.com)](https://www.digitalocean.com).<br>
+This project is [MIT](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE) licensed.
