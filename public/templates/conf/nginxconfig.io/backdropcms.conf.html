@@ -1,0 +1,73 @@
+##########################
+# Standard configuration:
+##########################
+
+# Backdrop CMS: Deny access to all text files.
+location ~ \..*/.*\.(txt|log|htaccess)$ {
+    deny all;
+}
+
+# Backdrop CMS: Deny access to php in the files directory.
+location ~ ^/files/.*\.php$ {
+  deny all;
+}
+
+# Backdrop CMS: Deny access to json in the files directory.
+location ~ ^/files/.*\.json$ {
+  deny all;
+}
+
+# Backdrop CMS: Deny access to settings.php and non-root PHP files.
+location ~ \..*/.*\.php$ {
+  return 403;
+}
+
+# Backdrop CMS: Deny access to .htaccess files.
+location ~ /\.ht {
+    deny all;
+}
+
+# Backdrop CMS: set a high cache lifetime on static assets.
+location ~* ^/(sites/|files/|misc/).*\.(js|css|png|jpg|jpeg|gif|ico)(\?[a-zA-Z0-9]+)?$ {
+  expires max;
+}
+
+# Backdrop CMS: Allow image styles to be handled by the CMS.
+location ^~ /files/styles/ {
+    try_files $uri @rewrite;
+}
+
+location @rewrite {
+  rewrite ^/(.*)$ /index.php?q=$1;
+}
+
+
+############################
+# Multi-Site configuration:
+############################
+
+# Backdrop CMS: Deny private files directory for sub-sites.
+location ~ ^/sites/[^/]+/private/ {
+	deny all;
+}
+
+# Backdrop CMS: Deny php in files directory for sub-sites.
+location ~ ^/sites/[^/]+/files/.*\.php$ {
+	deny all;
+}
+
+# Backdrop CMS: Deny json in files directory for sub-sites.
+location ~ ^/sites/[^/]+/files/.*\.json$ {
+  deny all;
+}
+
+# Backdrop CMS: Allow image styles to be handled by the CMS for sub-sites.
+location ~ ^/sites/[^/]+/files/styles/ {
+    try_files $uri @rewrite;
+}<span ng-if="isLimitReq()">
+
+# Backdrop CMS: throttle user functions.
+location ~ ^/user/(?:login|register|password) {
+	limit_req zone=login burst=2 nodelay;
+	try_files $uri /index.php?$query_string;
+}</span>
