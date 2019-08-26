@@ -1,6 +1,7 @@
 # Drupal: deny private files
-location ~ ^/sites/.*/private/ {
+location ~ ((^|/)\.|^.*\.yml$|^/sites/.*/private/|^/sites/[^/]+/.*settings.*\.php$) {
 	deny all;
+  return 404;
 }
 
 # Drupal: deny php in files
@@ -11,6 +12,14 @@ location ~ ^/sites/[^/]+/files/.*\.php$ {
 # Drupal: deny php in vendor
 location ~ /vendor/.*\.php$ {
 	deny all;
+}
+
+# Allow image styles to be handled by the CMS.
+location ~ ^/sites/[^/]+/files/styles/ {
+    try_files $uri @rewrite;
+}
+location @rewrite {
+  rewrite ^/(.*)$ /index.php?q=$1;
 }
 
 # Drupal: handle private files
