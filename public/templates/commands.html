@@ -48,9 +48,9 @@
    <span class="hljs-section">certbot</span> <!--
 --><span class="hljs-attribute">certonly</span> <!--
 --><span class="hljs-attribute">--webroot</span> <!--
---><span ng-if="isNonWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> {{ _domain }} </span><!--
---><span ng-if="isWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> www.{{ _domain }} </span><!--
---><span ng-if="isCDN(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> cdn.{{ _domain }} </span><!--
+--><span ng-if="isNonWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> {{ _domain.indexOf('-') !== -1 ? '"' + _domain + '"' : _domain }} </span><!--
+--><span ng-if="isWWW(_site) || isRedirect(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> {{ _domain.indexOf('-') !== -1 ? '"' : '' }}www.{{ _domain }}{{ _domain.indexOf('-') !== -1 ? '"' : '' }} </span><!--
+--><span ng-if="isCDN(_site)"><span class="hljs-attribute" tooltips tooltip-template="--domain" tooltip-side="top">-d</span> {{ _domain.indexOf('-') !== -1 ? '"' : '' }}cdn.{{ _domain }}{{ _domain.indexOf('-') !== -1 ? '"' : '' }} </span><!--
 --><span class="hljs-attribute">--email</span> {{ data.sites[_site].email ? data.sites[_site].email : 'info@' + _domain }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--webroot-path" tooltip-side="top">-w</span> {{ data.directory_letsencrypt.replace(endingSlashRegex, '') }} <!--
 --><span class="hljs-attribute" tooltips tooltip-template="--non-interactive" tooltip-side="top">-n</span> <!--
