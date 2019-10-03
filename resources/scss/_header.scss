@@ -11,7 +11,7 @@ header {
 	padding: 0.5rem 0;
 	text-align: center;
 	margin-bottom: 0.5rem;
-	color: #fff;
+	color: #ffff;
 	font-size: 2.2rem;
 
 	.container {
@@ -20,7 +20,7 @@ header {
 
 	.loader {
 		position: absolute;
-		top: 5px;
+		top: 7px;
 		left: 50%;
 		pointer-events: none;
 		margin-left: -230px;
@@ -67,7 +67,7 @@ header {
 			margin-bottom: 0.5rem;
 
 			a {
-				color: #fff;
+				color: #ffff;
 			}
 
 			small {
@@ -87,7 +87,7 @@ header {
 		.github-star {
 			width: 144px;
 			height: 30px;
-			display: block;
+			display: inline-block;
 			border: 0;
 			overflow: hidden;
 			margin: 0 auto 0.25rem;
