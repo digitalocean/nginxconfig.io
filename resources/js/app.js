@@ -380,7 +380,8 @@
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
-		$scope.defaultData = DEFAULTS;
+		$scope.layout		= $window.LAYOUT || 'default';
+		$scope.defaultData	= DEFAULTS;
 
 		$scope.dataInit		= false;
 		$scope.data			= angular.copy($scope.defaultData);

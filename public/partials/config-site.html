@@ -1,0 +1,437 @@
+<ul class="nav nav-tabs nav-site-tab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('server')" ng-class="{ 'active': tab_site === 'server', 'changed': getSiteTabChanges('server') }">Server<small ng-cloak>({{ getSiteTabChanges('server') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('https')" ng-class="{ 'active': tab_site === 'https', 'changed': getSiteTabChanges('https') }">HTTPS<small ng-cloak>({{ getSiteTabChanges('https') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('php')" ng-class="{ 'active': tab_site === 'php', 'changed': getSiteTabChanges('php') }">PHP<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('python')" ng-class="{ 'active': tab_site === 'python', 'changed': getSiteTabChanges('python') }">Python<small ng-cloak>({{ getSiteTabChanges('python') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('proxy')" ng-class="{ 'active': tab_site === 'proxy', 'changed': getSiteTabChanges('proxy') }">Reverse proxy<small ng-cloak>({{ getSiteTabChanges('proxy') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('routing')" ng-class="{ 'active': tab_site === 'routing', 'changed': getSiteTabChanges('routing') }">Routing<small ng-cloak>({{ getSiteTabChanges('routing') }})</small></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" ng-click="setTabSite('logging')" ng-class="{ 'active': tab_site === 'logging', 'changed': getSiteTabChanges('logging') }">Logging<small ng-cloak>({{ getSiteTabChanges('logging') }})</small></a>
+	</li>
+</ul>
+<div class="tab-content site-content">
+	<div class="tab-pane tab-server" ng-class="{ 'active': tab_site === 'server' }">
+		<div class="row mb-2">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="col-form-label-sm"><strong>Domain</strong></label>
+					<input type="text"
+						class="form-control form-control-sm domain"
+						ng-model="data.sites[site].domain"
+						ng-class="{ 'input-changed': data.sites[site].domain !== defaultData.sites[0].domain }"
+						ng-cloak
+						placeholder="{{ getDomain() }}"
+						autofocus>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="col-form-label-sm">
+						<span tooltips tooltip-template="Define path to project.">Path</span>
+					</label>
+					<input type="text"
+						class="form-control form-control-sm"
+						ng-model="data.sites[site].path"
+						ng-class="{ 'input-changed': data.sites[site].path !== defaultData.sites[0].path }"
+						ng-cloak
+						placeholder="{{ '/var/www/' + getDomain() }}">
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="col-form-label-sm">
+						<span tooltips tooltip-template="Define public path in project path.">Document root</span>
+					</label>
+					<input type="text"
+						class="form-control form-control-sm"
+						ng-model="data.sites[site].document_root"
+						ng-class="{ 'input-changed': data.sites[site].document_root !== defaultData.sites[0].document_root }">
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Serve requests without www subdomain.">www subdomain</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].non_www !== defaultData.sites[0].non_www }">
+					<input class="form-check-input" type="checkbox" id="non_www" ng-model="data.sites[site].non_www" ng-true-value="false" ng-false-value="true">
+					<label class="form-check-label col-form-label-sm" for="non_www">
+						enabled <small>({{ isWWW() ? 'www.' : '' }}{{ getDomain() }})</small>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-if="isWWW()">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Cookie-free CDN subdomain.">CDN subdomain</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].cdn !== defaultData.sites[0].cdn }">
+					<input class="form-check-input" type="checkbox" id="cdn" ng-model="data.sites[site].cdn">
+					<label class="form-check-label col-form-label-sm" for="cdn">
+						enabled <small>(cdn.{{ getDomain() }})</small>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Redirect {{ isWWW() ? 'non-www version and ' : '' }}all subdomains to domain.">Redirect {{ isNonWWW() ? 'subdomains' : 'domain, subdomains' }}</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].redirect !== defaultData.sites[0].redirect }">
+					<input class="form-check-input" type="checkbox" id="redirect" ng-model="data.sites[site].redirect">
+					<label class="form-check-label col-form-label-sm" for="redirect">
+						enabled <small>(<code>{{ isNonWWW() ? ('*.' + getDomain() + ' → ' + getDomain()) : (getDomain() + ', *.' +  getDomain() + ' → www.' + getDomain()) }}</code>)</small>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<code>listen</code>
+			</label>
+			<div class="col-sm-4">
+				<div class="input-group input-group-sm">
+					<div class="input-group-prepend">
+						<div class="input-group-text">IPv4</div>
+					</div>
+					<input type="text"
+						class="form-control form-control-sm"
+						ng-model="data.sites[site].ipv4"
+						ng-class="{ 'input-changed': data.sites[site].ipv4 !== defaultData.sites[0].ipv4 }">
+				</div>
+			</div>
+			<div class="col-sm-5">
+				<div class="input-group input-group-sm">
+					<div class="input-group-prepend">
+						<div class="input-group-text">IPv6</div>
+					</div>
+					<input type="text"
+						class="form-control form-control-sm"
+						ng-model="data.sites[site].ipv6"
+						ng-class="{ 'input-changed': data.sites[site].ipv6 !== defaultData.sites[0].ipv6 }">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-https" ng-class="{ 'active': tab_site === 'https' }">
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].https !== defaultData.sites[0].https }">
+					<input class="form-check-input" type="checkbox" id="https" ng-model="data.sites[site].https">
+					<label class="form-check-label col-form-label-sm" for="https">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isHTTPS() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Provides support for HTTP/2.">HTTP/2</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].http2 !== defaultData.sites[0].http2 }">
+					<input class="form-check-input" type="checkbox" id="http2" ng-model="data.sites[site].http2">
+					<label class="form-check-label col-form-label-sm" for="http2">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isHTTPS() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Force redirection from HTTP to HTTPS.">Force HTTPS</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].force_https !== defaultData.sites[0].force_https }">
+					<input class="form-check-input" type="checkbox" id="force_https" ng-model="data.sites[site].force_https">
+					<label class="form-check-label col-form-label-sm" for="force_https">
+						enabled <small ng-cloak>(<code >{{ isNonWWW() ? ('http://' + getDomain() + ' → https://' + getDomain()) : ('http://www.' + getDomain() + ' → https://www.' + getDomain()) }}</code>)</small>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isHTTPS() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="HTTP Strict Transport Security is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking.">HSTS</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].hsts !== defaultData.sites[0].hsts }">
+					<input class="form-check-input" type="checkbox" id="hsts" ng-model="data.sites[site].hsts">
+					<label class="form-check-label col-form-label-sm" for="hsts">enabled</label>
+				</div>
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].hsts_subdomains !== defaultData.sites[0].hsts_subdomains, disabled: !isHSTS() }">
+					<input class="form-check-input" type="checkbox" id="hsts_subdomains" ng-model="data.sites[site].hsts_subdomains">
+					<label class="form-check-label col-form-label-sm" for="hsts_subdomains"><code class="small">includeSubDomains</code></label>
+				</div>
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].hsts_preload !== defaultData.sites[0].hsts_preload, disabled: !isHSTSSubdomains() }">
+					<input class="form-check-input" type="checkbox" id="hsts_preload" ng-model="data.sites[site].hsts_preload">
+					<label class="form-check-label col-form-label-sm" for="hsts_preload"><code class="small">preload</code></label>
+				</div>
+			</div>
+		</div>
+		<fieldset class="form-group" ng-class="{ disabled: !isHTTPS() }">
+			<div class="row">
+				<legend class="col-sm-3 col-form-label col-form-label-sm">Certification type</legend>
+				<div class="col-sm-9">
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].cert_type !== defaultData.sites[0].cert_type && data.sites[site].cert_type === 'letsencrypt' }">
+						<input class="form-check-input" type="radio" id="letsencrypt" ng-model="data.sites[site].cert_type" value="letsencrypt">
+						<label class="form-check-label col-form-label-sm" for="letsencrypt">
+							<span tooltips tooltip-template="Let's Encrypt based SSl.<br><br><i>free, automated, and open Certificate Authority</i>" tooltip-side="top">Let's Encrypt</span>
+						</label>
+					</div>
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].cert_type !== defaultData.sites[0].cert_type && data.sites[site].cert_type === 'custom' }">
+						<input class="form-check-input" type="radio" id="custom_cert" ng-model="data.sites[site].cert_type" value="custom">
+						<label class="form-check-label col-form-label-sm" for="custom_cert">custom certificate</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group row" ng-if="isHTTPS() && isCertLetsEncrypt()">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Let's Encrypt expiration notify e-mail.">Let's Encrypt e-mail</span>
+			</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].email"
+					ng-class="{ 'input-changed': data.sites[site].email !== defaultData.sites[0].email }"
+					ng-cloak
+					placeholder="{{ 'info@' + getDomain() }}">
+			</div>
+		</div>
+		<div class="form-group row" ng-if="isHTTPS() && isCertCustom()" ng-cloak>
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<code tooltips tooltip-template="Path to crt file">ssl_certificate</code>
+			</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].ssl_certificate"
+					ng-class="{ 'input-changed': data.sites[site].ssl_certificate !== defaultData.sites[0].ssl_certificate }"
+					placeholder="{{ data.directory_nginx + 'ssl/' + getDomain() + '.crt' }}">
+			</div>
+		</div>
+		<div class="form-group row" ng-if="isHTTPS() && isCertCustom()" ng-cloak>
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<code tooltips tooltip-template="Path to key file">ssl_certificate_key</code>
+			</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].ssl_certificate_key"
+					ng-class="{ 'input-changed': data.sites[site].ssl_certificate_key !== defaultData.sites[0].ssl_certificate_key }"
+					placeholder="{{ data.directory_nginx + 'ssl/' + getDomain() + '.key' }}">
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-php" ng-class="{ 'active': tab_site === 'php' }">
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				PHP
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].php !== defaultData.sites[0].php }">
+					<input class="form-check-input" type="checkbox" id="php" ng-model="data.sites[site].php">
+					<label class="form-check-label col-form-label-sm" for="php">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isPHP() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="WordPress security rules and login limiting <i>(if enabled)</i>.">WordPress rules</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].wordpress !== defaultData.sites[0].wordpress }">
+					<input class="form-check-input" type="checkbox" id="wordpress" ng-model="data.sites[site].wordpress">
+					<label class="form-check-label col-form-label-sm" for="wordpress">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isPHP() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+					<span tooltips tooltip-template="Drupal security rules and login limiting <i>(if enabled)</i>.">Drupal rules</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].drupal !== defaultData.sites[0].drupal }">
+					<input class="form-check-input" type="checkbox" id="drupal" ng-model="data.sites[site].drupal">
+					<label class="form-check-label col-form-label-sm" for="drupal">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isPHP() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+					<span tooltips tooltip-template="Magento security rules.">Magento rules</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].magento !== defaultData.sites[0].magento }">
+					<input class="form-check-input" type="checkbox" id="magento" ng-model="data.sites[site].magento">
+					<label class="form-check-label col-form-label-sm" for="magento">enabled</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-python" ng-class="{ 'active': tab_site === 'python' }">
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				Python
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].python !== defaultData.sites[0].python }">
+					<input class="form-check-input" type="checkbox" id="python" ng-model="data.sites[site].python">
+					<label class="form-check-label col-form-label-sm" for="python">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isPython() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				Django rules
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].django !== defaultData.sites[0].django }">
+					<input class="form-check-input" type="checkbox" id="django" ng-model="data.sites[site].django">
+					<label class="form-check-label col-form-label-sm" for="django">enabled</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-proxy" ng-class="{ 'active': tab_site === 'proxy' }">
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				Reverse proxy
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].proxy !== defaultData.sites[0].proxy }">
+					<input class="form-check-input" type="checkbox" id="proxy" ng-model="data.sites[site].proxy">
+					<label class="form-check-label col-form-label-sm" for="proxy">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isProxy() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				Path
+			</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].proxy_path"
+					ng-class="{ 'input-changed': data.sites[site].proxy_path !== defaultData.sites[0].proxy_path }">
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isProxy() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<code>proxy_pass</code>
+			</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].proxy_pass"
+					ng-class="{ 'input-changed': data.sites[site].proxy_pass !== defaultData.sites[0].proxy_pass }">
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-routing" ng-class="{ 'active': tab_site === 'routing' }">
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Enable root directive."><code>root</code></span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].root !== defaultData.sites[0].root }">
+					<input class="form-check-input" type="checkbox" id="root" ng-model="data.sites[site].root">
+					<label class="form-check-label col-form-label-sm" for="root">enabled</label>
+				</div>
+			</div>
+		</div>
+		<fieldset class="form-group" ng-class="{ disabled: !isRoot() || !isPHP() }">
+			<div class="row">
+				<legend class="col-sm-3 col-form-label col-form-label-sm">
+					<code tooltips tooltip-template="Defines the file that will be used as an index.">index</code>
+				</legend>
+				<div class="col-sm-9">
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].index !== defaultData.sites[0].index && data.sites[site].index === 'index.html' }">
+						<input class="form-check-input" type="radio" id="index.html" ng-model="data.sites[site].index" value="index.html">
+						<label class="form-check-label col-form-label-sm" for="index.html">index.html</label>
+					</div>
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].index !== defaultData.sites[0].index && data.sites[site].index === 'index.php' }">
+						<input class="form-check-input" type="radio" id="index.php" ng-model="data.sites[site].index" value="index.php">
+						<label class="form-check-label col-form-label-sm" for="index.php">index.php</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group" ng-class="{ disabled: !isRoot() }">
+			<div class="row">
+				<legend class="col-sm-3 col-form-label col-form-label-sm">
+					<span tooltips tooltip-template="Configures fallback routing of unhandled requests.">Fallback routing</span>
+				</legend>
+				<div class="col-sm-9">
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].fallback_html !== defaultData.sites[0].fallback_html }">
+						<input class="form-check-input" type="checkbox" id="fallback_html" ng-model="data.sites[site].fallback_html">
+						<label class="form-check-label col-form-label-sm" for="fallback_html">index.html</label>
+					</div>
+					<div class="form-check" ng-class="{ 'input-changed': data.sites[site].fallback_php !== defaultData.sites[0].fallback_php, disabled: !isPHP() }" ng-cloak>
+						<input class="form-check-input" type="checkbox" id="fallback_php" ng-model="data.sites[site].fallback_php">
+						<label class="form-check-label col-form-label-sm" for="fallback_php">index.php</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group row" ng-if="isFallbackHTML() && isFallbackPHP()">
+			<label class="col-sm-3 col-form-label col-form-label-sm">Fallback routing - PHP</label>
+			<div class="col-sm-9">
+				<input type="text"
+					class="form-control form-control-sm"
+					ng-model="data.sites[site].fallback_php_path"
+					ng-class="{ 'input-changed': data.sites[site].fallback_php_path !== defaultData.sites[0].fallback_php_path }">
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isPHP() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+					<span tooltips tooltip-template="Handle legacy (non-pretty) (<code>foo.php/bar/baz</code>) routes.">Legacy PHP routing</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].php_legacy_routing !== defaultData.sites[0].php_legacy_routing }">
+					<input class="form-check-input" type="checkbox" id="php_legacy_routing" ng-model="data.sites[site].php_legacy_routing">
+					<label class="form-check-label col-form-label-sm" for="php_legacy_routing">enabled</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane tab-logging" ng-class="{ 'active': tab_site === 'logging' }">
+		<div class="form-group row" ng-class="{ disabled: !isAccessLog() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Domain specific access_log."><code>access_log</code> by domain</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].access_log_domain !== defaultData.sites[0].access_log_domain }">
+					<input class="form-check-input" type="checkbox" id="access_log_domain" ng-model="data.sites[site].access_log_domain">
+					<label class="form-check-label col-form-label-sm" for="access_log_domain">enabled</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row" ng-class="{ disabled: !isErrorLog() }">
+			<label class="col-sm-3 col-form-label col-form-label-sm">
+				<span tooltips tooltip-template="Domain specific error_log."><code>error_log</code> by domain</span>
+			</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.sites[site].error_log_domain !== defaultData.sites[0].error_log_domain }">
+					<input class="form-check-input" type="checkbox" id="error_log_domain" ng-model="data.sites[site].error_log_domain">
+					<label class="form-check-label col-form-label-sm" for="error_log_domain">enabled</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
