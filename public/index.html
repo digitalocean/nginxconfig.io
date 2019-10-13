@@ -19,6 +19,20 @@
 	</head>
 	<body ng-app="NginxConfigIoApp" ng-controller="NginxConfigIoController" ng-csp ng-class="['layout-' + layout]">
 		<header>
+			<div ng-if="toggleLayoutVisible()" class="layout-toggle" ng-cloak>
+				<button class="btn btn-sm btn-secondary" ng-click="toggleLayout()">Layout: {{ layout }}</button>
+			</div>
+			<div ng-if="layout === 'do'" ng-cloak>
+				<nav class="do" ng-include="'partials/nav-do.html'"></nav>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 offset-lg-2">
+							<h1>NGINX Config</h1>
+							<h2>The easiest way to configure a performant, secure,<wbr> and stable nginx server.</h2>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="container">
 				<div class="loader" ng-if="!masonryInit">
 					<div class="spinner">
@@ -27,7 +41,7 @@
 					</div>
 				</div>
 
-				<img src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
+				<img ng-if="layout === 'default'" src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
 
 				<div class="sites">
 					<div class="title">Sites:</div>
@@ -40,93 +54,20 @@
 					</div>
 				</div>
 
-				<div class="presets">
+				<div class="presets" ng-if="layout === 'default'">
 					<div class="title">Presets:</div>
-					<div class="group">
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('frontend')"
-							ng-class="{ 'active': !isPHP() && !isPython() && !isProxy() && isIndexHTML() && isFallbackHTML() }"
-							tooltips
-							tooltip-template="• disabled PHP<br>• index.html fallback routing"
-							tooltip-side="bottom"
-						>Frontend <span ng-include="'assets/img/brands/angular.svg'"></span> <span ng-include="'assets/img/brands/react.svg'"></span> <span ng-include="'assets/img/brands/vuejs.svg'"></span></button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('backend')"
-							ng-class="{ 'active': isPHP() && isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && !isMagento() }"
-							tooltips
-							tooltip-template="• enabled PHP<br>• index.php fallback routing"
-							tooltip-side="bottom"
-						>PHP <span ng-include="'assets/img/brands/php.svg'"></span> <span ng-include="'assets/img/brands/laravel.svg'"></span> <span ng-include="'assets/img/brands/symfony.svg'"></span> <span ng-include="'assets/img/brands/codeigniter.svg'""></span></button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('django')"
-							ng-class="{ 'active': isPython() && isDjango() && !isRoot() }"
-							tooltips
-							tooltip-template="• enabled Python<br>• Django rules<br>• <code>root</code> disabled"
-							tooltip-side="bottom"
-						>Django <span ng-include="'assets/img/brands/python.svg'"></span><span ng-include="'assets/img/brands/django.svg'"></span></button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-class="{ 'active': isProxy() && !isRoot() }"
-							ng-click="setPreset('nodejs')"
-							tooltips
-							tooltip-template="• enabled reverse proxy"
-							tooltip-side="bottom"
-						>Node.js <span ng-include="'assets/img/brands/nodejs.svg'"></span></button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-class="{ 'active': isPHP() && isIndexHTML() && isFallbackHTML() }"
-							ng-click="setPreset('spa')"
-							tooltips
-							tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing"
-							tooltip-side="bottom"
-						>Single-page application</button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('wordpress')"
-							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && isWordPress() && !isDrupal() && !isMagento() }"
-							tooltips
-							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules"
-							tooltip-side="bottom"
-						><span ng-include="'assets/img/brands/wordpress.svg'"></span> WordPress</button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('drupal')"
-							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && isDrupal() && !isMagento() }"
-							tooltips
-							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules"
-							tooltip-side="bottom"
-						><span ng-include="'assets/img/brands/drupal.svg'"></span> Drupal</button>
-						<button
-							type="button"
-							class="btn btn-sm btn-outline-light"
-							ng-click="setPreset('magento')"
-							ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && isMagento() }"
-							tooltips
-							tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules"
-							tooltip-side="bottom"
-						><span ng-include="'assets/img/brands/magento.svg'"></span> Magento</button>
-					</div>
+					<div class="group" ng-include="'partials/presets.html'"></div>
 				</div>
 			</div>
 		</header>
 		<section class="tabs">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-9">
+					<div class="col-lg-9" ng-class="{ 'col-lg-12': layout === 'do' }">
 						<div class="sites" ng-include="'partials/config-site.html'"></div>
 						<div class="common" ng-include="'partials/config-global.html'"></div>
 					</div>
-					<div class="col-lg-3">
+					<div ng-if="layout !== 'do'" class="col-lg-3" ng-cloak>
 						<aside class="sidebar">
 							<div class="github">
 								<div class="github-cover">
@@ -286,6 +227,9 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'UA-3084378-31');
+		</script>
+		<script>
+			var LAYOUT = 'do';
 		</script>
 		<script src="assets/js/vendor.min.js?v=COMMIT_HASH"></script>
 		<script src="assets/js/app.min.js?v=COMMIT_HASH"></script>

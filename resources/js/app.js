@@ -701,6 +701,14 @@
 			}
 		};
 
+		$scope.toggleLayoutVisible = function() {
+			return $window.location.hostname !== 'nginxconfig.io';
+		};
+
+		$scope.toggleLayout = function() {
+			$scope.layout = ($scope.layout === 'default' ? 'do' : 'default');
+		};
+
 
 
 		///////////////////////////

@@ -1,0 +1,56 @@
+body.layout-do {
+	header {
+		padding: 0;
+		background-color: #031b4e;
+
+		nav {
+			background-color: #fff;
+			color: #5b6987;
+			text-align: left;
+
+			.announcement {
+				font-size: 0.875rem;
+				padding: 10px 0;
+				border-bottom: 1px solid #e5e8ed;
+
+				.badge {
+					background-color: #00d7d2;
+					border-radius: 3px;
+					color: #fff;
+					padding: 3px 6px;
+					margin-right: 10px;
+				}
+
+				a {
+					color: inherit;
+				}
+			}
+
+			.menu {
+				padding: 10px 0;
+
+				.logo {
+					background-color: #e5e5e5;
+					border-radius: 3px;
+					width: 47px;
+					height: 47px;
+					position: relative;
+					margin-right: 20px;
+
+					svg {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-45%, -50%);
+					}
+				}
+			}
+		}
+	}
+
+	section.tabs {
+		.tab-content {
+			background-color: #fafafa;
+		}
+	}
+}
