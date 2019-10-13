@@ -37,3 +37,8 @@ deploy:
     skip_cleanup: true
     on:
       branch: beta
+  - provider: script
+    script: bash .travis_deploy.sh /var/www/do.nginxconfig.io/
+    skip_cleanup: true
+    on:
+      branch: do
