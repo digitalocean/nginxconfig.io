@@ -1,34 +1,18 @@
-<ul class="nav nav-tabs nav-common" role="tablist">
+<ul ng-if="layout === 'default'" class="nav nav-tabs nav-common" role="tablist">
 	<li class="nav-item disabled">
 		<a class="nav-link">Global:</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('https')" ng-class="{ 'active': tab_common === 'https', 'changed': commonChanges['https'] }">HTTPS<small ng-cloak>({{ commonChanges['https'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('security')" ng-class="{ 'active': tab_common === 'security', 'changed': commonChanges['security'] }">Security<small ng-cloak>({{ commonChanges['security'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('php')" ng-class="{ 'active': tab_common === 'php', 'changed': commonChanges['php'] }">PHP<small ng-cloak>({{ commonChanges['php'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('python')" ng-class="{ 'active': tab_common === 'python', 'changed': commonChanges['python'] }">Python<small ng-cloak>({{ commonChanges['python'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('performance')" ng-class="{ 'active': tab_common === 'performance', 'changed': commonChanges['performance'] }">Performance<small ng-cloak>({{ commonChanges['performance'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('logging')" ng-class="{ 'active': tab_common === 'logging', 'changed': commonChanges['logging'] }">Logging<small ng-cloak>({{ commonChanges['logging'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon('nginx')" ng-class="{ 'active': tab_common === 'nginx', 'changed': commonChanges['nginx'] }">NGINX<small ng-cloak>({{ commonChanges['nginx'] }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link text-muted" ng-click="setTabCommon('tools')" ng-class="{ 'active': tab_common === 'tools', 'changed': commonChanges['tools'] }">Tools<small ng-cloak>({{ commonChanges['tools'] }})</small></a>
+	<li ng-repeat="(key, tab) in tabs_common" class="nav-item">
+		<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': getSiteTabChanges(tab.slug) }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
 	</li>
 </ul>
 <div class="tab-content common-content">
-	<div class="tab-pane tab-https" ng-class="{ 'active': tab_common === 'https' }">
+	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
+		<li ng-repeat="(key, tab) in tabs_common" class="nav-item">
+			<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_common }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
+		</li>
+	</ul>
+	<div class="tab-pane tab-https" ng-class="{ 'active': tabs_common[tab_common].slug === 'https' }">
 		<fieldset class="form-group" ng-class="{ disabled: !hasHTTPS() }">
 			<div class="row">
 				<legend class="col-sm-3 col-form-label col-form-label-sm">SSL profile</legend>
@@ -85,7 +69,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-security" ng-class="{ 'active': tab_common === 'security' }">
+	<div class="tab-pane tab-security" ng-class="{ 'active': tabs_common[tab_common].slug === 'security' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<code tooltips tooltip-template="Referrer Policy is a new header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.">Referrer-Policy</code>
@@ -137,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-php" ng-class="{ 'active': tab_common === 'php' }">
+	<div class="tab-pane tab-php" ng-class="{ 'active': tabs_common[tab_common].slug === 'php' }">
 		<div class="form-group row" ng-class="{ disabled: !hasPHP() }">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				PHP server
@@ -174,7 +158,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-python" ng-class="{ 'active': tab_common === 'python' }">
+	<div class="tab-pane tab-python" ng-class="{ 'active': tabs_common[tab_common].slug === 'python' }">
 		<div class="form-group row" ng-class="{ disabled: !hasPython() }">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				Python server
@@ -187,7 +171,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-performance" ng-class="{ 'active': tab_common === 'performance' }">
+	<div class="tab-pane tab-performance" ng-class="{ 'active': tabs_common[tab_common].slug === 'performance' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				gzip compression
@@ -255,7 +239,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-logging" ng-class="{ 'active': tab_common === 'logging' }">
+	<div class="tab-pane tab-logging" ng-class="{ 'active': tabs_common[tab_common].slug === 'logging' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<code tooltips tooltip-template="Sets the path, format, and configuration for a buffered log write.">access_log</code>
@@ -290,7 +274,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-nginx" ng-class="{ 'active': tab_common === 'nginx' }">
+	<div class="tab-pane tab-nginx" ng-class="{ 'active': tabs_common[tab_common].slug === 'nginx' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				NGINX config directory
@@ -369,7 +353,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-tools" ng-class="{ 'active': tab_common === 'tools' }">
+	<div class="tab-pane tab-tools" ng-class="{ 'active': tabs_common[tab_common].slug === 'tools' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">Modularized structure</span>
@@ -407,5 +391,9 @@
 					<button class="btn btn-danger btn-sm btn-reset" ng-click="reset()">Reset</button>
 			</div>
 		</div>
+	</div>
+	<div class="tab-navigation-buttons" ng-if="layout === 'do'">
+		<button class="btn btn-outline-secondary" ng-click="setTabCommonBack()">Back</button>
+		<button class="btn btn-primary" ng-click="setTabCommonNext()">Next</button>
 	</div>
 </div>

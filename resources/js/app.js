@@ -390,7 +390,7 @@
 
 		$scope.site			= 0;
 		$scope.tab_site		= 0;
-		$scope.tab_common	= 'https';
+		$scope.tab_common	= 0;
 
 		$scope.tabs_site = [
 			{
@@ -420,6 +420,41 @@
 			{
 				name: 'Logging',
 				slug: 'logging',
+			},
+		];
+
+		$scope.tabs_common = [
+			{
+				name: 'HTTPS',
+				slug: 'https',
+			},
+			{
+				name: 'Security',
+				slug: 'security',
+			},
+			{
+				name: 'PHP',
+				slug: 'php',
+			},
+			{
+				name: 'Python',
+				slug: 'python',
+			},
+			{
+				name: 'Performance',
+				slug: 'performance',
+			},
+			{
+				name: 'Logging',
+				slug: 'logging',
+			},
+			{
+				name: 'NGINX',
+				slug: 'nginx',
+			},
+			{
+				name: 'Tools',
+				slug: 'tools',
 			},
 		];
 
@@ -590,9 +625,21 @@
 			}
 		}
 
-		$scope.setTabCommon = function(tab) {
-			$scope.tab_common = tab;
+		$scope.setTabCommon = function(key) {
+			$scope.tab_common = key;
 		};
+
+		$scope.setTabCommonBack = function() {
+			if ($scope.tab_common > 0) {
+				$scope.tab_common--;
+			}
+		};
+
+		$scope.setTabCommonNext = function() {
+			if ($scope.tab_common < $scope.tabs_common.length - 1) {
+				$scope.tab_common++;
+			}
+		}
 
 		$scope.setPreset = function(preset) {
 			$scope.data.sites[$scope.site].php				= $scope.defaultData.sites[0].php;

@@ -158,8 +158,15 @@ body.layout-do {
 
 		.tab-content {
 			background-color: #fafafa;
+			border-color: #e5e5e5;
 			padding-left: 40px;
 			padding-right: 40px;
+
+			&.common-content {
+				border-top: 1px solid #e5e5e5;
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+			}
 
 			.nav-pills {
 				margin: 25px 0;
