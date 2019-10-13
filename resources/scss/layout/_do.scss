@@ -1,4 +1,48 @@
+@font-face {
+	font-family: 'Sailec';
+	src: url('../fonts/Sailec-Regular.woff2') format('woff2'),
+		url('../fonts/Sailec-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Sailec';
+	src: url('../fonts/Sailec-Bold.woff2') format('woff2'),
+		url('../fonts/Sailec-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Sailec';
+	src: url('../fonts/Sailec-Light.woff2') format('woff2'),
+		url('../fonts/Sailec-Light.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Sailec';
+	src: url('../fonts/Sailec-Medium.woff2') format('woff2'),
+		url('../fonts/Sailec-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Sailec';
+	src: url('../fonts/Sailec-LightItalic.woff2') format('woff2'),
+		url('../fonts/Sailec-LightItalic.woff') format('woff');
+	font-weight: 300;
+	font-style: italic;
+}
+
+
+
 body.layout-do {
+	font-family: 'Sailec', sans-serif;
+
 	header {
 		padding: 0;
 		background-color: #031b4e;
@@ -46,11 +90,194 @@ body.layout-do {
 				}
 			}
 		}
+
+		.hero {
+			padding-top: 72px;
+			padding-bottom: 72px;
+
+			h1 {
+				font-size: 36px;
+				line-height: 45px;
+				margin-bottom: 27px;
+			}
+
+			h2 {
+				font-size: 20px;
+				line-height: 200%;
+				font-weight: 300;
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	section.tabs {
+		h5 {
+			font-size: 18px;
+			line-height: 22px;
+			margin-bottom: 39px;
+		}
+
+		.sites {
+			margin-top: 53px;
+		}
+
+		.common {
+			margin-top: 53px;
+		}
+
+		.nav-tabs {
+			.nav-item {
+				flex-grow: 0;
+
+				&:first-child {
+					.nav-link {
+						padding-right: 35px;
+					}
+				}
+
+				.nav-link {
+					padding: 11px 42px 11px 22px;
+					color: #0069ff;
+
+					small {
+						display: inline;
+						top: 52.5%;
+						padding-left: 3px;
+					}
+
+					.close {
+						float: none;
+						position: absolute;
+						right: 6px;
+						top: 55%;
+						transform: translateY(-50%);
+					}
+				}
+			}
+		}
+
 		.tab-content {
 			background-color: #fafafa;
+			padding-left: 40px;
+			padding-right: 40px;
+
+			.nav-pills {
+				margin: 25px 0;
+				background-color: #ffffff;
+				border: 1px solid #dde1e8;
+				border-radius: 5px;
+				overflow: hidden;
+
+				.nav-item {
+					&:first-child {
+						.nav-link {
+
+							border-top-left-radius: 3px;
+							border-bottom-left-radius: 3px;
+						}
+					}
+
+					&:last-child {
+						.nav-link {
+							border-top-right-radius: 3px;
+							border-bottom-right-radius: 3px;
+							border-right: 0;
+						}
+					}
+
+					.nav-link {
+						cursor: pointer;
+						position: relative;
+						border-right: 1px solid #dde1e8;
+						border-radius: 0;
+
+						&.active {
+							background-color: #0069ff;
+
+							&:hover {
+								color: #ffffff;
+							}
+						}
+
+						&.changed {
+							font-weight: 700;
+
+							small {
+								display: inline;
+								color: #ccc;
+								top: 52.5%;
+
+								@include media-breakpoint-up(xl) {
+									padding-left: 0.3rem;
+								}
+							}
+						}
+
+						&.visited {
+							background-color: #dfeeff;
+						}
+
+						small {
+							position: absolute;
+							top: 50%;
+							transform: translateY(-50%);
+							display: none;
+							color: #999;
+
+							@include media-breakpoint-down(lg) {
+								right: 0.25rem;
+							}
+						}
+					}
+				}
+			}
+
+			.form-group {
+				.form-control-sm,
+				.col-form-label-sm {
+					font-size: 1rem;
+					margin-bottom: 8px;
+				}
+			}
+
+			.tab-navigation-buttons {
+				margin: 20px 0 32px;
+				text-align: right;
+			}
+
+			.btn-primary {
+				background-color: #0069ff;
+			}
+
+			.btn-outline-light {
+				box-shadow: none !important;
+				color: #666;
+				border-color: #dde1e8;
+				margin: 0 3px 4px;
+
+				&.active,
+				&:hover {
+					background-color: #fff;
+					border-color: #212529;
+					color: #000;
+
+					svg {
+						path {
+							fill: #000;
+						}
+					}
+				}
+
+				svg {
+					height: 1.1rem;
+					vertical-align: text-bottom;
+
+					path {
+						fill: #999;
+						transition: fill 0.15s ease-in-out;
+					}
+				}
+			}
 		}
 	}
 }

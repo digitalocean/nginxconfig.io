@@ -1,0 +1,12 @@
+<li class="nav-item" ng-repeat="(key, value) in data.sites">
+	<a class="nav-link" ng-click="setSite(key)" ng-class="{ 'active': site === key }" ng-cloak>
+		{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
+		<span class="close" ng-if="key > 0" ng-click="removeSite(key)">&times;</span>
+	</a>
+</li>
+
+<li class="nav-item">
+	<a class="nav-link" ng-click="addSite(key)">
+		＋ Add Site
+	</a>
+</li>

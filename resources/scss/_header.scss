@@ -20,6 +20,11 @@ header {
 		right: 10px;
 		top: 0;
 		z-index: 100;
+		opacity: 0.75;
+
+		.btn {
+			outline: none;
+		}
 	}
 
 	.container {

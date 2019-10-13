@@ -1,28 +1,19 @@
-<ul class="nav nav-tabs nav-site-tab" role="tablist">
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('server')" ng-class="{ 'active': tab_site === 'server', 'changed': getSiteTabChanges('server') }">Server<small ng-cloak>({{ getSiteTabChanges('server') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('https')" ng-class="{ 'active': tab_site === 'https', 'changed': getSiteTabChanges('https') }">HTTPS<small ng-cloak>({{ getSiteTabChanges('https') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('php')" ng-class="{ 'active': tab_site === 'php', 'changed': getSiteTabChanges('php') }">PHP<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('python')" ng-class="{ 'active': tab_site === 'python', 'changed': getSiteTabChanges('python') }">Python<small ng-cloak>({{ getSiteTabChanges('python') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('proxy')" ng-class="{ 'active': tab_site === 'proxy', 'changed': getSiteTabChanges('proxy') }">Reverse proxy<small ng-cloak>({{ getSiteTabChanges('proxy') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('routing')" ng-class="{ 'active': tab_site === 'routing', 'changed': getSiteTabChanges('routing') }">Routing<small ng-cloak>({{ getSiteTabChanges('routing') }})</small></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" ng-click="setTabSite('logging')" ng-class="{ 'active': tab_site === 'logging', 'changed': getSiteTabChanges('logging') }">Logging<small ng-cloak>({{ getSiteTabChanges('logging') }})</small></a>
+<ul ng-if="layout === 'default'" class="nav nav-tabs nav-site-tab" role="tablist">
+	<li ng-repeat="(key, tab) in tabs_site" class="nav-item">
+		<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug) }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges(tab.slug) }})</small></a>
 	</li>
 </ul>
+<ul ng-if="layout === 'do'" class="nav nav-tabs nav-site-tab" ng-include="'partials/sites-do.html'" role="tablist"></ul>
 <div class="tab-content site-content">
-	<div class="tab-pane tab-server" ng-class="{ 'active': tab_site === 'server' }">
+	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
+		<li ng-repeat="(key, tab) in tabs_site" class="nav-item">
+			<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_site }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
+		</li>
+	</ul>
+	<div class="tab-pane tab-presets" ng-class="{ 'active': tabs_site[tab_site].slug === 'presets' }">
+		<div class="text-center" ng-include="'partials/presets.html'"></div>
+	</div>
+	<div class="tab-pane tab-server" ng-class="{ 'active': tabs_site[tab_site].slug === 'server' }">
 		<div class="row mb-2">
 			<div class="col-sm-4">
 				<div class="form-group">
@@ -128,7 +119,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-https" ng-class="{ 'active': tab_site === 'https' }">
+	<div class="tab-pane tab-https" ng-class="{ 'active': tabs_site[tab_site].slug === 'https' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<span tooltips tooltip-template="Provides support for HTTPS.<br><br><i>using Mozilla SSL config</i>">HTTPS</span>
@@ -238,7 +229,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-php" ng-class="{ 'active': tab_site === 'php' }">
+	<div class="tab-pane tab-php" ng-class="{ 'active': tabs_site[tab_site].slug === 'php' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				PHP
@@ -284,7 +275,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-python" ng-class="{ 'active': tab_site === 'python' }">
+	<div class="tab-pane tab-python" ng-class="{ 'active': tabs_site[tab_site].slug === 'python' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				Python
@@ -308,7 +299,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-proxy" ng-class="{ 'active': tab_site === 'proxy' }">
+	<div class="tab-pane tab-proxy" ng-class="{ 'active': tabs_site[tab_site].slug === 'proxy' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				Reverse proxy
@@ -343,7 +334,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-routing" ng-class="{ 'active': tab_site === 'routing' }">
+	<div class="tab-pane tab-routing" ng-class="{ 'active': tabs_site[tab_site].slug === 'routing' }">
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<span tooltips tooltip-template="Enable root directive."><code>root</code></span>
@@ -410,7 +401,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane tab-logging" ng-class="{ 'active': tab_site === 'logging' }">
+	<div class="tab-pane tab-logging" ng-class="{ 'active': tabs_site[tab_site].slug === 'logging' }">
 		<div class="form-group row" ng-class="{ disabled: !isAccessLog() }">
 			<label class="col-sm-3 col-form-label col-form-label-sm">
 				<span tooltips tooltip-template="Domain specific access_log."><code>access_log</code> by domain</span>
@@ -433,5 +424,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="tab-navigation-buttons" ng-if="layout === 'do'">
+		<button class="btn btn-outline-secondary" ng-click="setTabSiteBack()">Back</button>
+		<button class="btn btn-primary" ng-click="setTabSiteNext()">Next</button>
 	</div>
 </div>

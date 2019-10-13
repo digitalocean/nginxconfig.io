@@ -1,0 +1,5 @@
+<button class="btn btn-sm btn-outline-light" ng-repeat="(key, value) in data.sites" ng-click="setSite(key)" ng-class="{ 'active': site === key }" ng-cloak>
+	{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
+	<span class="close" ng-if="key > 0" ng-click="removeSite(key)">&times;</span>
+</button>
+<button class="btn btn-sm btn-outline-light" ng-click="addSite()">＋ Add site</button>

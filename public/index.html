@@ -24,13 +24,9 @@
 			</div>
 			<div ng-if="layout === 'do'" ng-cloak>
 				<nav class="do" ng-include="'partials/nav-do.html'"></nav>
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 offset-lg-2">
-							<h1>NGINX Config</h1>
-							<h2>The easiest way to configure a performant, secure,<wbr> and stable nginx server.</h2>
-						</div>
-					</div>
+				<div class="hero container">
+					<h1>NGINX Config</h1>
+					<h2>The easiest way to configure a performant, secure,<br> and stable NGINX server.</h2>
 				</div>
 			</div>
 			<div class="container">
@@ -43,18 +39,12 @@
 
 				<img ng-if="layout === 'default'" src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
 
-				<div class="sites">
+				<div ng-if="layout === 'default'" class="sites">
 					<div class="title">Sites:</div>
-					<div class="group">
-						<button class="btn btn-sm btn-outline-light" ng-repeat="(key, value) in data.sites" ng-click="setSite(key)" ng-class="{ 'active': site === key }" ng-cloak>
-							{{ getDomain(key) }}<small ng-cloak>({{ getSiteChanges(key) !== undefined ? getSiteChanges(key) : '?' }})</small>
-							<span class="close" ng-if="key > 0" ng-click="removeSite(key)">&times;</span>
-						</button>
-						<button class="btn btn-sm btn-outline-light" ng-click="addSite()">＋ Add site</button>
-					</div>
+					<div class="group" ng-include="'partials/sites.html'"></div>
 				</div>
 
-				<div class="presets" ng-if="layout === 'default'">
+				<div ng-if="layout === 'default'" class="presets">
 					<div class="title">Presets:</div>
 					<div class="group" ng-include="'partials/presets.html'"></div>
 				</div>
@@ -64,8 +54,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-9" ng-class="{ 'col-lg-12': layout === 'do' }">
-						<div class="sites" ng-include="'partials/config-site.html'"></div>
-						<div class="common" ng-include="'partials/config-global.html'"></div>
+						<div class="sites">
+							<h5 ng-if="layout === 'do'">Per-Website Config</h5>
+							<div ng-include="'partials/config-site.html'"></div>
+						</div>
+						<div class="common">
+							<h5 ng-if="layout === 'do'">Global Config</h5>
+							<div ng-include="'partials/config-global.html'"></div>
+						</div>
 					</div>
 					<div ng-if="layout !== 'do'" class="col-lg-3" ng-cloak>
 						<aside class="sidebar">

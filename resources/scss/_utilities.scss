@@ -1,6 +1,10 @@
 [ng-cloak] {
 	display: none;
 }
+.btn:active,
+.btn:focus {
+	box-shadow: none !important;
+}
 
 .clipboard-success {
 	font-size: 0.8rem;

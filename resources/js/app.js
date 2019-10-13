@@ -380,7 +380,7 @@
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
-		$scope.layout		= $window.LAYOUT || 'default';
+		$scope.layout		= 'default';
 		$scope.defaultData	= DEFAULTS;
 
 		$scope.dataInit		= false;
@@ -389,8 +389,39 @@
 		$scope.masonryInit	= false;
 
 		$scope.site			= 0;
-		$scope.tab_site		= 'server';
+		$scope.tab_site		= 0;
 		$scope.tab_common	= 'https';
+
+		$scope.tabs_site = [
+			{
+				name: 'Server',
+				slug: 'server',
+			},
+			{
+				name: 'HTTPS',
+				slug: 'https',
+			},
+			{
+				name: 'PHP',
+				slug: 'php',
+			},
+			{
+				name: 'Python',
+				slug: 'python',
+			},
+			{
+				name: 'Reverse proxy',
+				slug: 'proxy',
+			},
+			{
+				name: 'Routing',
+				slug: 'routing',
+			},
+			{
+				name: 'Logging',
+				slug: 'logging',
+			},
+		];
 
 		$scope.siteChanges		= {};
 		$scope.commonChanges	= {};
@@ -543,9 +574,21 @@
 			$timeout(calculateChanges);
 		};
 
-		$scope.setTabSite = function(tab) {
-			$scope.tab_site = tab;
+		$scope.setTabSite = function(key) {
+			$scope.tab_site = key;
 		};
+
+		$scope.setTabSiteBack = function() {
+			if ($scope.tab_site > 0) {
+				$scope.tab_site--;
+			}
+		};
+
+		$scope.setTabSiteNext = function() {
+			if ($scope.tab_site < $scope.tabs_site.length - 1) {
+				$scope.tab_site++;
+			}
+		}
 
 		$scope.setTabCommon = function(tab) {
 			$scope.tab_common = tab;
@@ -706,7 +749,16 @@
 		};
 
 		$scope.toggleLayout = function() {
-			$scope.layout = ($scope.layout === 'default' ? 'do' : 'default');
+			if ($scope.layout === 'default') {
+				$scope.layout = 'do';
+				$scope.tabs_site.unshift({
+					name: 'Presets',
+					slug: 'presets',
+				});
+			} else {
+				$scope.layout = 'default';
+				$scope.tabs_site.shift();
+			}
 		};
 
 
@@ -1205,5 +1257,9 @@
 		//////////
 		setDataFromHash();
 		initMasonry();
+
+		if ($window.LAYOUT !== $scope.layout) {
+			$scope.toggleLayout();
+		}
 	}
 })();
