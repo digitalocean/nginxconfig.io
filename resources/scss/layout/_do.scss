@@ -73,19 +73,44 @@ body.layout-do {
 			.menu {
 				padding: 10px 0;
 
-				.logo {
-					background-color: #e5e5e5;
-					border-radius: 3px;
-					width: 47px;
-					height: 47px;
-					position: relative;
-					margin-right: 20px;
+				.navbar {
+					padding: 0;
 
-					svg {
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						transform: translate(-45%, -50%);
+					.navbar-brand {
+						display: inline-block;
+						background-color: #e5e5e5;
+						border-radius: 3px;
+						width: 47px;
+						height: 47px;
+						position: relative;
+						margin-right: 20px;
+
+						svg {
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-45%, -50%);
+						}
+					}
+
+					.nav-item {
+						font-size: 14px;
+						line-height: 24px;
+						font-weight: 600;
+						margin-right: 30px;
+
+						&.active {
+							font-size: 24px;
+							font-weight: 700;
+
+							.nav-link {
+								color: #99a1b3;
+							}
+						}
+
+						.nav-link {
+							color: #031b4e;
+						}
 					}
 				}
 			}
