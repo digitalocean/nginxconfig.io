@@ -1,0 +1,22 @@
+main .file .code,
+section.steps .commands {
+	overflow-x: auto;
+	font-size: 0.75rem;
+	line-height: 1.25;
+	background-color: #f8f8f8;
+	border: 1px solid #e8e8e8;
+
+	pre {
+		margin-bottom: 0;
+		font-size: inherit;
+
+		code {
+			display: block;
+			padding: 8px 8px 12px;
+			-moz-tab-size: 4;
+			tab-size: 4;
+			overflow: visible;
+			overflow-x: visible;
+		}
+	}
+}

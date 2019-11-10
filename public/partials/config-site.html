@@ -7,7 +7,7 @@
 <div class="tab-content site-content">
 	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
 		<li ng-repeat="(key, tab) in tabs_site" class="nav-item">
-			<a class="nav-link" ng-mouseenter="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_site }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
+			<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_site }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
 		</li>
 	</ul>
 	<div class="tab-pane tab-presets" ng-class="{ 'active': tabs_site[tab_site].slug === 'presets' }">
@@ -426,7 +426,7 @@
 		</div>
 	</div>
 	<div class="tab-navigation-buttons" ng-if="layout === 'do'">
-		<button class="btn btn-outline-secondary" ng-click="setTabSiteBack()">Back</button>
-		<button class="btn btn-primary" ng-click="setTabSiteNext()">Next</button>
+		<button class="btn btn-outline-secondary" ng-click="setTabSiteBack()" ng-class="{ disabled: tab_site === 0 }">Back</button>
+		<button class="btn btn-primary" ng-click="setTabSiteNext()" ng-class="{ disabled: tab_site === tabs_site.length - 1 }">Next</button>
 	</div>
 </div>

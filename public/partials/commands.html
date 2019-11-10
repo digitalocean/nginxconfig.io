@@ -1,4 +1,4 @@
-<span class="step" ng-if="activeStep === 'download'"><!--
+<span class="step" ng-if="steps[step].slug === 'download'"><!--
 
 	step: download
 
@@ -16,7 +16,7 @@
 
 
 
---><span class="step" ng-if="activeStep === 'ssl'"><!--
+--><span class="step" ng-if="steps[step].slug === 'ssl'"><!--
 
 	step: ssl
 
@@ -33,7 +33,7 @@
 
 
 
---><span class="step" ng-if="activeStep === 'certbot'"><!--
+--><span class="step" ng-if="steps[step].slug === 'certbot'"><!--
 
 	step: certbot
 
@@ -69,7 +69,7 @@
 
 
 
---><span class="step" ng-if="activeStep === 'live'"><!--
+--><span class="step" ng-if="steps[step].slug === 'live'"><!--
 
 	step: live
 

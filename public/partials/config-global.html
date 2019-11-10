@@ -9,7 +9,7 @@
 <div class="tab-content common-content">
 	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
 		<li ng-repeat="(key, tab) in tabs_common" class="nav-item">
-			<a class="nav-link" ng-mouseenter="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': commonChanges[tab.slug], 'visited': key < tab_common }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
+			<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': commonChanges[tab.slug], 'visited': key < tab_common }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
 		</li>
 	</ul>
 	<div class="tab-pane tab-https" ng-class="{ 'active': tabs_common[tab_common].slug === 'https' }">
@@ -399,7 +399,7 @@
 		</div>
 	</div>
 	<div class="tab-navigation-buttons" ng-if="layout === 'do'">
-		<button class="btn btn-outline-secondary" ng-click="setTabCommonBack()">Back</button>
-		<button class="btn btn-primary" ng-click="setTabCommonNext()">Next</button>
+		<button class="btn btn-outline-secondary" ng-click="setTabCommonBack()" ng-class="{ disabled: tab_common === 0 }">Back</button>
+		<button class="btn btn-primary" ng-click="setTabCommonNext()" ng-class="{ disabled: tab_common === tabs_common.length - 1 }">Next</button>
 	</div>
 </div>

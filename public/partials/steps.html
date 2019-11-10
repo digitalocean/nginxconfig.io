@@ -1,30 +1,14 @@
-<ol ng-attr-data-active-step="{{ activeStep }}">
+<ol class="step-icons" ng-attr-data-active-step="{{ steps[step].slug }}">
 	<li
-		class="download"
-		ng-mouseenter="setActiveStep('download')">
-		<div class="circle" ng-include="'/assets/img/download-cloud.svg'"></div>
-		<span class="counter"></span>Download
-	</li>
-	<li
-		class="ssl"
-		ng-if="isHTTPS() && (isSSLDHRequired() || isCertLetsEncrypt())"
-		ng-mouseenter="setActiveStep('ssl')">
-		<div class="circle" ng-include="'/assets/img/lock.svg'"></div>
-		<span class="counter"></span>SSL init
-	</li>
-
-	<li
-		class="certbot"
-		ng-if="isHTTPS() && isCertLetsEncrypt()"
-		ng-mouseenter="setActiveStep('certbot')">
-		<div class="circle" ng-include="'/assets/img/terminal.svg'"></div>
-		<span class="counter"></span>Certbot
-	</li>
-
-	<li
-		class="live"
-		ng-mouseenter="setActiveStep('live')">
-		<div class="circle" ng-include="'/assets/img/check-circle.svg'"></div>
-		<span class="counter"></span>Go Live!
+		ng-repeat="(key, step) in steps"
+		ng-if="step.active()"
+		ng-class="[step.slug]"
+		ng-mouseenter="setActiveStep(key)">
+		<div class="circle" ng-include="'/assets/img/steps/' + step.slug + '.svg'"></div>
+		<span class="counter"></span>{{ step.name }}
 	</li>
 </ol>
+
+<div class="commands" ng-cloak>
+	<pre><code class="hljs bash" ng-include="'partials/commands.html?v=COMMIT_HASH'"></code></pre>
+</div>

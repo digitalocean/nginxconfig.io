@@ -257,29 +257,6 @@ main {
 		}
 	}
 
-	.commands {
-		margin-bottom: 1rem;
-		line-height: 1.35;
-
-		.step {
-			counter-reset: step-command-counter;
-
-			.counter {
-				display: inline-block;
-				margin-top: 0.15rem;
-
-				&::before {
-					counter-increment: step-command-counter;
-					content: counter(step-command-counter);
-				}
-			}
-
-			& > span:first-of-type .counter {
-				margin-top: 0;
-			}
-		}
-	}
-
 	.file {
 		margin-bottom: 2rem;
 
@@ -299,29 +276,6 @@ main {
 			position: absolute;
 			top: -9999px;
 			left: -9999px;
-		}
-	}
-
-	.commands,
-	.file .code {
-		overflow-x: auto;
-		font-size: 0.75rem;
-		line-height: 1.25;
-		background-color: #f8f8f8;
-		border: 1px solid #e8e8e8;
-
-		pre {
-			margin-bottom: 0;
-			font-size: inherit;
-
-			code {
-				display: block;
-				padding: 8px 8px 12px;
-				-moz-tab-size: 4;
-				tab-size: 4;
-				overflow: visible;
-				overflow-x: visible;
-			}
 		}
 	}
 }

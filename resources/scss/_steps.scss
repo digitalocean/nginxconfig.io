@@ -1,5 +1,5 @@
 section.steps {
-	ol {
+	ol.step-icons {
 		display: flex;
 		flex-direction: row;
 		list-style: none;
@@ -162,6 +162,29 @@ section.steps {
 					transform: translate(-50%, -50%);
 					width: 60%;
 				}
+			}
+		}
+	}
+
+	.commands {
+		margin-bottom: 1rem;
+		line-height: 1.35;
+
+		.step {
+			counter-reset: step-command-counter;
+
+			.counter {
+				display: inline-block;
+				margin-top: 0.15rem;
+
+				&::before {
+					counter-increment: step-command-counter;
+					content: counter(step-command-counter);
+				}
+			}
+
+			& > span:first-of-type .counter {
+				margin-top: 0;
 			}
 		}
 	}

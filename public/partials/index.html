@@ -66,7 +66,11 @@
 </section>
 <section class="steps">
 	<div class="container">
-		<div class="row">
+		<div ng-if="layout === 'do'">
+			<h5>Setup and Files</h5>
+			<div class="card" ng-include="'partials/steps-do.html'"></div>
+		</div>
+		<div ng-if="layout === 'default'" class="row">
 			<div class="col-xl-10 offset-xl-1">
 				<div ng-include="'partials/steps.html'"></div>
 			</div>
@@ -75,16 +79,17 @@
 </section>
 <main ng-class="{ 'active': masonryInit }">
 	<div class="container">
-		<div class="col-xl-10 offset-xl-1">
-			<div class="commands" ng-cloak>
-				<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
-			</div>
-		</div>
 		<div class="row grid">
 			<div class="grid-sizer col-xl-6"></div>
-			<div class="grid-item col-xl-12 mb-3 text-center" ng-cloak>
-				<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
-				<button class="btn btn-success btn-sm btn-download btn-base64" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
+			<div class="grid-item col-xl-12 mb-3" ng-cloak>
+				<div ng-if="layout === 'default'" class="text-center">
+					<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
+					<button class="btn btn-success btn-sm btn-download btn-base64" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
+				</div>
+				<div ng-if="layout === 'do'" class="text-center buttons">
+					<button class="btn btn-success btn-download" ng-click="downloadZip()">Download Config</button>
+					<button class="btn btn-primary btn-download btn-base64" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')">Copy Base64</button>
+				</div>
 			</div>
 			<div class="base64-zip-line-container">
 				<div id="base64-zip-line">{{ base64 }}</div>

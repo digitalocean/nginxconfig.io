@@ -370,6 +370,7 @@
 		$scope.site			= 0;
 		$scope.tab_site		= 0;
 		$scope.tab_common	= 0;
+		$scope.step			= 0;
 
 		$scope.tabs_site = [
 			{
@@ -445,25 +446,35 @@
 			{
 				name: 'Download',
 				slug: 'download',
+				active: function() {
+					return true;
+				},
 			},
 			{
 				name: 'SSL init',
 				slug: 'ssl',
+				active: function() {
+					return $scope.isHTTPS() && ($scope.isSSLDHRequired() || $scope.isCertLetsEncrypt());
+				},
 			},
 			{
 				name: 'Cerbot',
 				slug: 'certbot',
+				active: function() {
+					return $scope.isHTTPS() && $scope.isCertLetsEncrypt();
+				},
 			},
 			{
 				name: 'Go Live!',
 				slug: 'live',
+				active: function() {
+					return true;
+				},
 			},
 		];
 
 		$scope.siteChanges		= {};
 		$scope.commonChanges	= {};
-
-		$scope.activeStep = 'download';
 
 		$scope.base64 = '';
 
@@ -711,8 +722,20 @@
 		};
 
 		$scope.setActiveStep = function(step) {
-			$scope.activeStep = step;
+			$scope.step = step;
 		};
+
+		$scope.setStepBack = function() {
+			if ($scope.step > 0) {
+				$scope.step--;
+			}
+		};
+
+		$scope.setStepNext = function() {
+			if ($scope.step < $scope.steps.length - 1) {
+				$scope.step++;
+			}
+		}
 
 		$scope.getSiteChanges = function(site) {
 			if ($scope.siteChanges[site] === undefined) {

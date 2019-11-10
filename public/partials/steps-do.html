@@ -1,0 +1,12 @@
+<ul class="nav nav-pills nav-fill" role="tablist">
+	<li class="nav-item" ng-repeat="(key, _step) in steps" ng-class="[_step.slug, !_step.active() ? 'disabled' : '']">
+		<a class="nav-link" ng-class="{ active: key === step, visited: key < step }" ng-click="setActiveStep(key)">{{ _step.name }}</a>
+	</li>
+</ul>
+
+<div class="commands-do" ng-include="'partials/commands-do.html?v=COMMIT_HASH'" ng-cloak></div>
+
+<div class="tab-navigation-buttons" ng-if="layout === 'do'">
+	<button class="btn btn-outline-secondary" ng-click="setStepBack()" ng-class="{ disabled: step === 0 }">Back</button>
+	<button class="btn btn-primary" ng-click="setStepNext()" ng-class="{ disabled: step === steps.length - 1 }">Next</button>
+</div>
