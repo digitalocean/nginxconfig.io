@@ -380,7 +380,7 @@
 		/////////////////////
 		// SCOPE VARIABLES //
 		/////////////////////
-		$scope.layout		= 'default';
+		$scope.layout		= 'do';
 		$scope.defaultData	= DEFAULTS;
 
 		$scope.dataInit		= false;
@@ -393,6 +393,10 @@
 		$scope.tab_common	= 0;
 
 		$scope.tabs_site = [
+			{
+				name: 'Presets',
+				slug: 'presets',
+			},
 			{
 				name: 'Server',
 				slug: 'server',
@@ -1302,11 +1306,13 @@
 		//////////
 		// INIT //
 		//////////
-		setDataFromHash();
-		initMasonry();
+		$scope.init = function() {
+			setDataFromHash();
+			initMasonry();
 
-		if ($window.LAYOUT !== $scope.layout) {
-			$scope.toggleLayout();
-		}
+			if ($window.LAYOUT && $window.LAYOUT !== $scope.layout) {
+				$scope.toggleLayout();
+			}
+		};
 	}
 })();

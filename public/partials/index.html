@@ -1,0 +1,198 @@
+<header>
+	<div ng-if="toggleLayoutVisible()" class="layout-toggle" ng-cloak>
+		<button class="btn btn-sm btn-secondary" ng-click="toggleLayout()">Layout: {{ layout }}</button>
+	</div>
+	<div ng-if="layout === 'do'" ng-cloak>
+		<div class="hero container">
+			<h1>NGINX Config</h1>
+			<h2>The easiest way to configure a performant, secure,<br> and stable NGINX server.</h2>
+		</div>
+	</div>
+	<div class="container">
+		<div class="loader" ng-if="!masonryInit">
+			<div class="spinner">
+				<div class="double-bounce1"></div>
+				<div class="double-bounce2"></div>
+			</div>
+		</div>
+
+		<img ng-if="layout === 'default'" src="assets/img/logo-light.svg" class="logo" alt="nginxconfig.io">
+
+		<div ng-if="layout === 'default'" class="sites">
+			<div class="title">Sites:</div>
+			<div class="group" ng-include="'partials/sites.html'"></div>
+		</div>
+
+		<div ng-if="layout === 'default'" class="presets">
+			<div class="title">Presets:</div>
+			<div class="group" ng-include="'partials/presets.html'"></div>
+		</div>
+	</div>
+</header>
+<section class="tabs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9" ng-class="{ 'col-lg-12': layout === 'do' }">
+				<div class="sites">
+					<h5 ng-if="layout === 'do'">Per-Website Config</h5>
+					<div ng-include="'partials/config-site.html'"></div>
+				</div>
+				<div class="common">
+					<h5 ng-if="layout === 'do'">Global Config</h5>
+					<div ng-include="'partials/config-global.html'"></div>
+				</div>
+			</div>
+			<div ng-if="layout === 'default'" class="col-lg-3" ng-cloak>
+				<aside class="sidebar">
+					<div class="github">
+						<div class="github-cover">
+							<div class="github-link">
+								<a href="https://github.com/digitalocean/nginxconfig.io" target="_blank" class="github-logo-link">
+									<ng-include src="'/assets/img/brands/github.svg'"></ng-include>
+								</a>
+								<br>
+								<a href="https://github.com/digitalocean/nginxconfig.io" target="_blank"><small>digitalocean /</small> <strong>nginxconfig.io</strong></a>
+							</div>
+						</div>
+						<div class="github-buttons">
+							<a class="github-button" href="https://github.com/digitalocean/nginxconfig.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star digitalocean/nginxconfig.io on GitHub">Star</a>
+							<a class="github-button" href="https://github.com/digitalocean/nginxconfig.io/issues" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue digitalocean/nginxconfig.io on GitHub">Issue</a>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="steps">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-10 offset-xl-1">
+				<div ng-include="'partials/steps.html'"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<main ng-class="{ 'active': masonryInit }">
+	<div class="container">
+		<div class="col-xl-10 offset-xl-1">
+			<div class="commands" ng-cloak>
+				<pre><code class="hljs bash" ng-include="'templates/commands.html?v=COMMIT_HASH'"></code></pre>
+			</div>
+		</div>
+		<div class="row grid">
+			<div class="grid-sizer col-xl-6"></div>
+			<div class="grid-item col-xl-12 mb-3 text-center" ng-cloak>
+				<button class="btn btn-primary btn-sm btn-download" ng-click="downloadZip()"><img src="assets/img/download.svg" alt="Download"> Generated config <small>(.zip)</small></button>
+				<button class="btn btn-success btn-sm btn-download btn-base64" ng-mouseenter="prepareBase64()" ng-click="copyAsBase64()" ngclipboard data-clipboard-target="#base64-zip-line" ngclipboard-success="clipboardSuccess('base64-zip-line')"><img src="assets/img/download.svg" alt="Download"> Copy Base64 <small>(inline)</small></button>
+			</div>
+			<div class="base64-zip-line-container">
+				<div id="base64-zip-line">{{ base64 }}</div>
+			</div>
+			<section class="file grid-item" ng-class="isModularized() || isWordPress() ? 'col-xl-6' : 'col-xl-12'" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginx.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-nginx" ngclipboard-success="clipboardSuccess('nginx.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginx.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-nginx" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-repeat="(_site, _domain) in getDomains() track by $index" ng-cloak>
+				<strong>{{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-domain-{{ $index }}" ngclipboard-success="clipboardSuccess('example.com')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-domain-{{ $index }}" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="isModularized() && hasCertLetsEncrypt()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/letsencrypt.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-letsencrypt" ngclipboard-success="clipboardSuccess('letsencrypt.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/letsencrypt.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-letsencrypt" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/security.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-security" ngclipboard-success="clipboardSuccess('security.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/security.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-security" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/general.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-general" ngclipboard-success="clipboardSuccess('general.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/general.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-general" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasPHP() && (isModularized() || hasWordPress())" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/php_fastcgi.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-php_fastcgi" ngclipboard-success="clipboardSuccess('php_fastcgi.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-php_fastcgi" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasPython() && isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/python_uwsgi.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-python_uwsgi" ngclipboard-success="clipboardSuccess('python_uwsgi.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/python_uwsgi.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-python_uwsgi" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasProxy() && isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/proxy.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-proxy" ngclipboard-success="clipboardSuccess('proxy.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/proxy.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-proxy" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasWordPress() && isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/wordpress.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-wordpress" ngclipboard-success="clipboardSuccess('wordpress.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/wordpress.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-wordpress" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasDrupal() && isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/drupal.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-drupal" ngclipboard-success="clipboardSuccess('drupal.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/drupal.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-drupal" class="code highlighted"></div>
+			</section>
+			<section class="col-xl-6 grid-item file" ng-if="hasMagento() && isModularized()" ng-cloak>
+				<strong>{{ data.directory_nginx }}nginxconfig.io/magento.conf</strong>
+				<button class="btn btn-light btn-clipboard" ngclipboard data-clipboard-target="#file-magento" ngclipboard-success="clipboardSuccess('magento.conf')">
+					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
+				</button>
+				<div class="code source" data-filename="nginxconfig.io/magento.conf">
+					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+				</div><div id="file-magento" class="code highlighted"></div>
+			</section>
+		</div>
+	</div>
+</main>
+<footer>
+	<div class="container-fluid">
+		Lovingly made by <a href="https://balint.szekeres.me" target="_blank">Bálint Szekeres</a>
+	</div>
+</footer>

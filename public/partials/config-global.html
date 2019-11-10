@@ -17,19 +17,19 @@
 			<div class="row">
 				<legend class="col-sm-3 col-form-label col-form-label-sm">SSL profile</legend>
 				<div class="col-sm-9">
-					<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
+					<div class="form-check form-check-radio form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'modern' }">
 						<input class="form-check-input" type="radio" id="ssl-modern" ng-model="data.ssl_profile" value="modern">
 						<label class="form-check-label col-form-label-sm" for="ssl-modern">
 							<span tooltips tooltip-template="Services with clients that support TLS 1.3 and don't need backward compatibility<br><br>Oldest compatible clients:<ul><li>{{ sslProfiles.modern.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Modern</span>
 						</label>
 					</div>
-					<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
+					<div class="form-check form-check-radio form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'intermediate' }">
 						<input class="form-check-input" type="radio" id="ssl-intermediate" ng-model="data.ssl_profile" value="intermediate">
 						<label class="form-check-label col-form-label-sm" for="ssl-intermediate">
 							<span tooltips tooltip-template="General-purpose servers with a variety of clients, recommended for almost all systems<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.intermediate.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Intermediate</span>
 						</label>
 					</div>
-					<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
+					<div class="form-check form-check-radio form-check-inline" ng-class="{ 'input-changed': data.ssl_profile !== defaultData.ssl_profile && data.ssl_profile === 'old' }">
 						<input class="form-check-input" type="radio" id="ssl-old" ng-model="data.ssl_profile" value="old">
 						<label class="form-check-label col-form-label-sm" for="ssl-old">
 							<span tooltips tooltip-template="Compatible with a number of very old clients, and should be used only as a last resort<br><br>Oldest compatible clients: <ul><li>{{ sslProfiles.old.oldest_clients.join('</li><li>') }}</li></ul>" tooltip-side="top" tooltip-class="ssl">Mozilla Old</span>
@@ -43,17 +43,23 @@
 				<span tooltips tooltip-template="DNS resolver for stapling">OCSP DNS resolvers</span>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.resolver_cloudflare !== defaultData.resolver_cloudflare }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.resolver_cloudflare !== defaultData.resolver_cloudflare }">
 					<input class="form-check-input" type="checkbox" id="resolver_cloudflare" ng-model="data.resolver_cloudflare">
-					<label class="form-check-label col-form-label-sm" for="resolver_cloudflare" tooltips tooltip-template="<code>1.1.1.1, 1.0.0.1</code>" tooltip-side="top">Cloudflare Resolver</label>
+					<label class="form-check-label col-form-label-sm" for="resolver_cloudflare">
+						<span tooltips tooltip-template="<code>1.1.1.1, 1.0.0.1</code>" tooltip-side="top">Cloudflare Resolver</span>
+					</label>
 				</div>
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.resolver_google !== defaultData.resolver_google }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.resolver_google !== defaultData.resolver_google }">
 					<input class="form-check-input" type="checkbox" id="resolver_google" ng-model="data.resolver_google">
-					<label class="form-check-label col-form-label-sm" for="resolver_google" tooltips tooltip-template="<code>8.8.8.8, 8.8.4.4</code>" tooltip-side="top">Google Public DNS</label>
+					<label class="form-check-label col-form-label-sm" for="resolver_google">
+						<span tooltips tooltip-template="<code>8.8.8.8, 8.8.4.4</code>" tooltip-side="top">Google Public DNS</span>
+					</label>
 				</div>
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.resolver_opendns !== defaultData.resolver_opendns }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.resolver_opendns !== defaultData.resolver_opendns }">
 					<input class="form-check-input" type="checkbox" id="resolver_opendns" ng-model="data.resolver_opendns">
-					<label class="form-check-label col-form-label-sm" for="resolver_opendns" tooltips tooltip-template="<code>208.67.222.222, 208.67.220.220</code>" tooltip-side="top">OpenDNS</label>
+					<label class="form-check-label col-form-label-sm" for="resolver_opendns">
+						<span tooltips tooltip-template="<code>208.67.222.222, 208.67.220.220</code>" tooltip-side="top">OpenDNS</span>
+					</label>
 				</div>
 			</div>
 		</div>
@@ -103,7 +109,7 @@
 				<code tooltips tooltip-template="Emitting nginx version on error pages and in the “Server” response header field.">server_tokens</code>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.server_tokens !== defaultData.server_tokens }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.server_tokens !== defaultData.server_tokens }">
 					<input class="form-check-input" type="checkbox" id="server_tokens" ng-model="data.server_tokens">
 					<label class="form-check-label col-form-label-sm" for="server_tokens">enabled</label>
 				</div>
@@ -114,7 +120,7 @@
 				<code tooltips tooltip-template="Used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address.">limit_req</code>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.limit_req !== defaultData.limit_req }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.limit_req !== defaultData.limit_req }">
 					<input class="form-check-input" type="checkbox" id="limit_req" ng-model="data.limit_req">
 					<label class="form-check-label col-form-label-sm" for="limit_req">enabled</label>
 				</div>
@@ -177,7 +183,7 @@
 				gzip compression
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.gzip !== defaultData.gzip }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.gzip !== defaultData.gzip }">
 					<input class="form-check-input" type="checkbox" id="gzip" ng-model="data.gzip">
 					<label class="form-check-label col-form-label-sm" for="gzip">enabled</label>
 				</div>
@@ -188,7 +194,7 @@
 				<a href="https://github.com/eustas/ngx_brotli" target="_blank">brotli</a> compression
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.brotli !== defaultData.brotli }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.brotli !== defaultData.brotli }">
 					<input class="form-check-input" type="checkbox" id="brotli" ng-model="data.brotli">
 					<label class="form-check-label col-form-label-sm" for="brotli">enabled</label>
 				</div>
@@ -267,7 +273,7 @@
 				<code tooltips tooltip-template="Logging of errors about not found files into error_log.">log_not_found</code>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.log_not_found !== defaultData.log_not_found }">
 					<input class="form-check-input" type="checkbox" id="log_not_found" ng-model="data.log_not_found">
 					<label class="form-check-label col-form-label-sm" for="log_not_found">enabled</label>
 				</div>
@@ -359,7 +365,7 @@
 				<span tooltips tooltip-template="Multiple configuration files<br><br><i>(ideal for multi-domain environment)</i>">Modularized structure</span>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.file_structure !== defaultData.file_structure }">
 					<input class="form-check-input" type="checkbox" id="file_structure" ng-model="data.file_structure" ng-true-value="'modularized'" ng-false-value="'unified'">
 					<label class="form-check-label col-form-label-sm" for="file_structure">enabled</label>
 				</div>
@@ -370,7 +376,7 @@
 				<span tooltips tooltip-template="Symbolic link from sites-available/{{ getDomain() }}.conf to sites-enabled/{{ getDomain() }}.conf">Symlink vhost</span>
 			</label>
 			<div class="col-sm-9">
-				<div class="form-check form-check-inline" ng-class="{ 'input-changed': data.symlink !== defaultData.symlink }">
+				<div class="form-check form-check-checkbox form-check-inline" ng-class="{ 'input-changed': data.symlink !== defaultData.symlink }">
 					<input class="form-check-input" type="checkbox" id="symlink" ng-model="data.symlink">
 					<label class="form-check-label col-form-label-sm" for="symlink">enabled</label>
 				</div>

@@ -1,0 +1,72 @@
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('frontend')"
+	ng-class="{ 'active': !isPHP() && !isPython() && !isProxy() && isIndexHTML() && isFallbackHTML() }"
+	tooltips
+	tooltip-template="• disabled PHP<br>• index.html fallback routing"
+	tooltip-side="bottom"
+>Frontend</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('backend')"
+	ng-class="{ 'active': isPHP() && isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && !isMagento() }"
+	tooltips
+	tooltip-template="• enabled PHP<br>• index.php fallback routing"
+	tooltip-side="bottom"
+>PHP</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('django')"
+	ng-class="{ 'active': isPython() && isDjango() && !isRoot() }"
+	tooltips
+	tooltip-template="• enabled Python<br>• Django rules<br>• <code>root</code> disabled"
+	tooltip-side="bottom"
+>Django</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-class="{ 'active': isProxy() && !isRoot() }"
+	ng-click="setPreset('nodejs')"
+	tooltips
+	tooltip-template="• enabled reverse proxy"
+	tooltip-side="bottom"
+>Node.js</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-class="{ 'active': isPHP() && isIndexHTML() && isFallbackHTML() }"
+	ng-click="setPreset('spa')"
+	tooltips
+	tooltip-template="• enabled PHP<br>• index.html fallback routing<br>• index.php API routing"
+	tooltip-side="bottom"
+>Single-page application</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('wordpress')"
+	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && isWordPress() && !isDrupal() && !isMagento() }"
+	tooltips
+	tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• WordPress security rules"
+	tooltip-side="bottom"
+>WordPress</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('drupal')"
+	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && isDrupal() && !isMagento() }"
+	tooltips
+	tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Drupal security rules"
+	tooltip-side="bottom"
+>Drupal</button>
+<button
+	type="button"
+	class="btn btn-sm btn-light"
+	ng-click="setPreset('magento')"
+	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && isMagento() }"
+	tooltips
+	tooltip-template="• enabled PHP<br>• index.php fallback routing<br>• Magento security rules"
+	tooltip-side="bottom"
+>Magento</button>
