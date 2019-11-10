@@ -190,37 +190,16 @@
 		}
 
 		function calculateChanges() {
-			var siteTabs = [
-				'server',
-				'https',
-				'php',
-				'python',
-				'proxy',
-				'routing',
-				'logging',
-			];
-
-			var commonTabs = [
-				'https',
-				'security',
-				'php',
-				'python',
-				'performance',
-				'logging',
-				'nginx',
-				'tools',
-			];
-
 			if ($scope.siteChanges[$scope.site] === undefined) {
 				$scope.siteChanges[$scope.site] = {};
 			}
 
-			for (var i in siteTabs) {
-				$scope.siteChanges[$scope.site][siteTabs[i]] = $window.document.querySelectorAll('section.tabs .tab-content.site-content .tab-' + siteTabs[i] + ' .form-group:not(.disabled) .input-changed').length;
+			for (var i in $scope.tabs_site) {
+				$scope.siteChanges[$scope.site][$scope.tabs_site[i].slug] = $window.document.querySelectorAll('section.tabs .tab-content.site-content .tab-' + $scope.tabs_site[i].slug + ' .form-group:not(.disabled) .input-changed').length;
 			}
 
-			for (var j in commonTabs) {
-				$scope.commonChanges[commonTabs[j]] = $window.document.querySelectorAll('section.tabs .tab-content.common-content .tab-' + commonTabs[j] + ' .form-group:not(.disabled) .input-changed').length;
+			for (var j in $scope.tabs_common) {
+				$scope.commonChanges[$scope.tabs_common[j].slug] = $window.document.querySelectorAll('section.tabs .tab-content.common-content .tab-' + $scope.tabs_common[j].slug + ' .form-group:not(.disabled) .input-changed').length;
 			}
 		}
 
@@ -459,6 +438,25 @@
 			{
 				name: 'Tools',
 				slug: 'tools',
+			},
+		];
+
+		$scope.steps = [
+			{
+				name: 'Download',
+				slug: 'download',
+			},
+			{
+				name: 'SSL init',
+				slug: 'ssl',
+			},
+			{
+				name: 'Cerbot',
+				slug: 'certbot',
+			},
+			{
+				name: 'Go Live!',
+				slug: 'live',
 			},
 		];
 

@@ -3,13 +3,13 @@
 		<a class="nav-link">Global:</a>
 	</li>
 	<li ng-repeat="(key, tab) in tabs_common" class="nav-item">
-		<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': getSiteTabChanges(tab.slug) }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
+		<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': commonChanges[tab.slug] }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
 	</li>
 </ul>
 <div class="tab-content common-content">
 	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
 		<li ng-repeat="(key, tab) in tabs_common" class="nav-item">
-			<a class="nav-link" ng-click="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_common }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
+			<a class="nav-link" ng-mouseenter="setTabCommon(key)" ng-class="{ 'active': tab_common === key, 'changed': commonChanges[tab.slug], 'visited': key < tab_common }">{{ tab.name }}<small ng-cloak>({{ commonChanges[tab.slug] }})</small></a>
 		</li>
 	</ul>
 	<div class="tab-pane tab-https" ng-class="{ 'active': tabs_common[tab_common].slug === 'https' }">
