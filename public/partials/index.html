@@ -35,11 +35,11 @@
 			<div class="col-lg-9" ng-class="{ 'col-lg-12': layout === 'do' }">
 				<div class="sites">
 					<h5 ng-if="layout === 'do'">Per-Website Config</h5>
-					<div ng-include="'partials/config-site.html'"></div>
+					<div ng-include="'partials/config-site.html'" ng-keydown="siteKeydown($event)"></div>
 				</div>
 				<div class="common">
 					<h5 ng-if="layout === 'do'">Global Config</h5>
-					<div ng-include="'partials/config-global.html'"></div>
+					<div ng-include="'partials/config-global.html'" ng-keydown="commonKeydown($event)"></div>
 				</div>
 			</div>
 			<div ng-if="layout === 'default'" class="col-lg-3" ng-cloak>

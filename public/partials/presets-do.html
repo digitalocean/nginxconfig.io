@@ -1,6 +1,6 @@
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('frontend')"
 	ng-class="{ 'active': !isPHP() && !isPython() && !isProxy() && isIndexHTML() && isFallbackHTML() }"
 	tooltips
@@ -9,7 +9,7 @@
 >Frontend</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('backend')"
 	ng-class="{ 'active': isPHP() && isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && !isMagento() }"
 	tooltips
@@ -18,7 +18,7 @@
 >PHP</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('django')"
 	ng-class="{ 'active': isPython() && isDjango() && !isRoot() }"
 	tooltips
@@ -27,7 +27,7 @@
 >Django</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-class="{ 'active': isProxy() && !isRoot() }"
 	ng-click="setPreset('nodejs')"
 	tooltips
@@ -36,7 +36,7 @@
 >Node.js</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-class="{ 'active': isPHP() && isIndexHTML() && isFallbackHTML() }"
 	ng-click="setPreset('spa')"
 	tooltips
@@ -45,7 +45,7 @@
 >Single-page application</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('wordpress')"
 	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && isWordPress() && !isDrupal() && !isMagento() }"
 	tooltips
@@ -54,7 +54,7 @@
 >WordPress</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('drupal')"
 	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && isDrupal() && !isMagento() }"
 	tooltips
@@ -63,7 +63,7 @@
 >Drupal</button>
 <button
 	type="button"
-	class="btn btn-sm btn-light"
+	class="btn btn-light"
 	ng-click="setPreset('magento')"
 	ng-class="{ 'active': isIndexPHP() && isFallbackPHP() && !isFallbackHTML() && !isWordPress() && !isDrupal() && isMagento() }"
 	tooltips

@@ -645,6 +645,22 @@
 			}
 		}
 
+		$scope.siteKeydown = function(event) {
+			if (event.which === 37) {
+				$scope.setTabSiteBack();
+			} else if (event.which === 39) {
+				$scope.setTabSiteNext();
+			}
+		}
+
+		$scope.commonKeydown = function(event) {
+			if (event.which === 37) {
+				$scope.setTabCommonBack();
+			} else if (event.which === 39) {
+				$scope.setTabCommonNext();
+			}
+		}
+
 		$scope.setPreset = function(preset) {
 			$scope.data.sites[$scope.site].php				= $scope.defaultData.sites[0].php;
 			$scope.data.sites[$scope.site].wordpress		= $scope.defaultData.sites[0].wordpress;
