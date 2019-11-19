@@ -134,8 +134,7 @@
 
 	function appConfig($locationProvider) {
 		$locationProvider
-			.html5Mode(true)
-			.hashPrefix('!');
+			.hashPrefix('');
 	}
 
 
