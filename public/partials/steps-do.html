@@ -4,7 +4,7 @@
 	</li>
 </ul>
 
-<div class="commands-do" ng-include="'partials/commands-do.html?v=COMMIT_HASH'" ng-cloak></div>
+<div class="commands-do" ng-include="base + 'partials/commands-do.html?v=COMMIT_HASH'" ng-cloak></div>
 
 <div class="tab-navigation-buttons" ng-if="layout === 'do'">
 	<button class="btn btn-outline-secondary" ng-click="setStepBack()" ng-class="{ disabled: step === 0 }">Back</button>

@@ -3,7 +3,7 @@
 		<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug) }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges(tab.slug) }})</small></a>
 	</li>
 </ul>
-<ul ng-if="layout === 'do'" class="nav nav-tabs nav-site-tab" ng-include="'partials/sites-do.html'" role="tablist"></ul>
+<ul ng-if="layout === 'do'" class="nav nav-tabs nav-site-tab" ng-include="base + 'partials/sites-do.html'" role="tablist"></ul>
 <div class="tab-content site-content">
 	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
 		<li ng-repeat="(key, tab) in tabs_site" class="nav-item">
@@ -11,7 +11,7 @@
 		</li>
 	</ul>
 	<div class="tab-pane tab-presets" ng-class="{ 'active': tabs_site[tab_site].slug === 'presets' }">
-		<div class="text-center presets" ng-include="'partials/presets-do.html'"></div>
+		<div class="text-center presets" ng-include="base + 'partials/presets-do.html'"></div>
 	</div>
 	<div class="tab-pane tab-server" ng-class="{ 'active': tabs_site[tab_site].slug === 'server' }">
 		<div class="row mb-2">

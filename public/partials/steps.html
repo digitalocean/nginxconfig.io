@@ -4,11 +4,11 @@
 		ng-if="step.active()"
 		ng-class="[step.slug]"
 		ng-mouseenter="setActiveStep(key)">
-		<div class="circle" ng-include="'/assets/img/steps/' + step.slug + '.svg'"></div>
+		<div class="circle" ng-include="base + '/assets/img/steps/' + step.slug + '.svg'"></div>
 		<span class="counter"></span>{{ step.name }}
 	</li>
 </ol>
 
 <div class="commands" ng-cloak>
-	<pre><code class="hljs bash" ng-include="'partials/commands.html?v=COMMIT_HASH'"></code></pre>
+	<pre><code class="hljs bash" ng-include="base + 'partials/commands.html?v=COMMIT_HASH'"></code></pre>
 </div>

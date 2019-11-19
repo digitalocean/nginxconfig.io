@@ -17,12 +17,12 @@
 
 		<div ng-if="layout === 'default'" class="sites">
 			<div class="title">Sites:</div>
-			<div class="group" ng-include="'partials/sites.html'"></div>
+			<div class="group" ng-include="base + 'partials/sites.html'"></div>
 		</div>
 
 		<div ng-if="layout === 'default'" class="presets">
 			<div class="title">Presets:</div>
-			<div class="group" ng-include="'partials/presets.html'"></div>
+			<div class="group" ng-include="base + 'partials/presets.html'"></div>
 		</div>
 	</div>
 </header>
@@ -32,11 +32,11 @@
 			<div class="col-lg-9" ng-class="{ 'col-lg-12': layout === 'do' }">
 				<div class="sites">
 					<h5 ng-if="layout === 'do'">Per-Website Config</h5>
-					<div ng-include="'partials/config-site.html'" ng-keydown="siteKeydown($event)"></div>
+					<div ng-include="base + 'partials/config-site.html'" ng-keydown="siteKeydown($event)"></div>
 				</div>
 				<div class="common">
 					<h5 ng-if="layout === 'do'">Global Config</h5>
-					<div ng-include="'partials/config-global.html'" ng-keydown="commonKeydown($event)"></div>
+					<div ng-include="base + 'partials/config-global.html'" ng-keydown="commonKeydown($event)"></div>
 				</div>
 			</div>
 			<div ng-if="layout === 'default'" class="col-lg-3" ng-cloak>
@@ -65,11 +65,11 @@
 	<div class="container">
 		<div ng-if="layout === 'do'">
 			<h5>Setup and Files</h5>
-			<div class="card" ng-include="'partials/steps-do.html'"></div>
+			<div class="card" ng-include="base + 'partials/steps-do.html'"></div>
 		</div>
 		<div ng-if="layout === 'default'" class="row">
 			<div class="col-xl-10 offset-xl-1">
-				<div ng-include="'partials/steps.html'"></div>
+				<div ng-include="base + 'partials/steps.html'"></div>
 			</div>
 		</div>
 	</div>
@@ -97,7 +97,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginx.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginx.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-nginx" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-repeat="(_site, _domain) in getDomains() track by $index" ng-cloak>
@@ -106,7 +106,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-domain-{{ $index }}" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="isModularized() && hasCertLetsEncrypt()" ng-cloak>
@@ -115,7 +115,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/letsencrypt.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-letsencrypt" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
@@ -124,7 +124,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/security.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-security" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="isModularized()" ng-cloak>
@@ -133,7 +133,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/general.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-general" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasPHP() && (isModularized() || hasWordPress())" ng-cloak>
@@ -142,7 +142,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/php_fastcgi.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-php_fastcgi" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasPython() && isModularized()" ng-cloak>
@@ -151,7 +151,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/python_uwsgi.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-python_uwsgi" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasProxy() && isModularized()" ng-cloak>
@@ -160,7 +160,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/proxy.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-proxy" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasWordPress() && isModularized()" ng-cloak>
@@ -169,7 +169,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/wordpress.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-wordpress" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasDrupal() && isModularized()" ng-cloak>
@@ -178,7 +178,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/drupal.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-drupal" class="code highlighted"></div>
 			</section>
 			<section class="col-xl-6 grid-item file" ng-if="hasMagento() && isModularized()" ng-cloak>
@@ -187,7 +187,7 @@
 					<img src="assets/img/clipboard-dark.svg" alt="Copy to clipboard">
 				</button>
 				<div class="code source" data-filename="nginxconfig.io/magento.conf">
-					<pre><code class="nginx" ng-include="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
+					<pre><code class="nginx" ng-include="base + 'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></code></pre>
 				</div><div id="file-magento" class="code highlighted"></div>
 			</section>
 		</div>
