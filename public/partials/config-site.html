@@ -7,7 +7,7 @@
 <div class="tab-content site-content">
 	<ul ng-if="layout === 'do'" class="nav nav-pills nav-fill" role="tablist">
 		<li ng-repeat="(key, tab) in tabs_site" class="nav-item">
-			<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_site }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges('php') }})</small></a>
+			<a class="nav-link" ng-click="setTabSite(key)" ng-class="{ 'active': tab_site === key, 'changed': getSiteTabChanges(tab.slug), 'visited': key < tab_site }">{{ tab.name }}<small ng-cloak>({{ getSiteTabChanges(tab.slug) }})</small></a>
 		</li>
 	</ul>
 	<div class="tab-pane tab-presets" ng-class="{ 'active': tabs_site[tab_site].slug === 'presets' }">
