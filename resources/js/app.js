@@ -367,7 +367,7 @@
 		$scope.masonryInit	= false;
 
 		$scope.site			= 0;
-		$scope.tab_site		= 0;
+		$scope.tab_site		= 1;
 		$scope.tab_common	= 0;
 		$scope.step			= 0;
 
@@ -838,9 +838,11 @@
 					name: 'Presets',
 					slug: 'presets',
 				});
+				$scope.tab_site = 1;
 			} else {
 				$scope.layout = 'default';
 				$scope.tabs_site.shift();
+				$scope.tab_site = 0;
 			}
 			doMasonry();
 		};
