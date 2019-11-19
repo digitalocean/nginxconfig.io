@@ -59,7 +59,7 @@
 		"build:scss:prod": "npm run build:scss -- --output-style=compressed",
 		"build:scss:watch": "npm run build:scss -- --watch",
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
-		"browsersync": "browser-sync 'public/' --watch",
+		"browsersync": "browser-sync 'public/' --watch --cors",
 		"lint": "eslint resources/js/app.js",
 		"lint:fix": "npm run lint -- --fix",
 		"test": "npm run lint && npm run build && start-server-and-test http-server http://localhost:8080 cypress:run",
