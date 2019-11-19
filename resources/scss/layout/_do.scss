@@ -191,10 +191,25 @@
 					padding: 11px 42px 11px 22px;
 					color: #0069ff;
 
+					&.active {
+						@include media-breakpoint-down(lg) {
+							color: #fff;
+							border-color: #0069ff;
+							background-color: #0069ff;
+						}
+					}
+
 					small {
 						display: inline;
 						top: 52.5%;
 						padding-left: 3px;
+
+						@include media-breakpoint-down(lg) {
+							position: relative;
+							transform: none;
+							top: 0;
+							padding-left: 8px;
+						}
 					}
 
 					.close {
@@ -267,6 +282,10 @@
 				.col-form-label-sm {
 					font-size: 1rem;
 					margin-bottom: 8px;
+				}
+
+				.input-group .form-control-sm {
+					margin-bottom: 0;
 				}
 
 				select.form-control-sm {
