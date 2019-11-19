@@ -265,6 +265,8 @@
 				return;
 			}
 
+			$scope.updatingHash = true;
+
 			var changedData = {};
 			for (var key in $scope.data) {
 				if (!angular.equals($scope.data[key], $scope.defaultData[key])) {
@@ -295,6 +297,10 @@
 				$scope.isDirty = false;
 				$location.search({});
 			}
+
+			$timeout(function() {
+				$scope.updatingHash = false;
+			});
 		}
 
 		function initMasonry() {
@@ -362,6 +368,7 @@
 		$scope.defaultData	= DEFAULTS;
 
 		$scope.dataInit		= false;
+		$scope.updatingHash	= false;
 		$scope.data			= angular.copy($scope.defaultData);
 		$scope.isDirty		= false;
 		$scope.masonryInit	= false;
@@ -1335,6 +1342,12 @@
 				$scope.dataInit = true;
 			}
 		}, true);
+
+		$scope.$on('$locationChangeSuccess', function(){
+			if (!$scope.updatingHash) {
+				setDataFromHash();
+			}
+		});
 
 
 
