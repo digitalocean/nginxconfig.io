@@ -4,6 +4,7 @@
 	],
 	"vendor": [
 		"node_modules/angular/angular.js",
+		"node_modules/angular-sanitize/angular-sanitize.js",
 
 		"node_modules/highlight.js/build/highlight.pack.js",
 		"node_modules/masonry-layout/dist/masonry.pkgd.js",

@@ -4,7 +4,7 @@
 
 
 	angular
-		.module('NginxConfigIoApp', ['ngclipboard', '720kb.tooltips'])
+		.module('NginxConfigIoApp', ['ngSanitize', 'ngclipboard', '720kb.tooltips'])
 		.config([
 			'$locationProvider',
 			appConfig,
@@ -12,6 +12,10 @@
 		.config([
 			'tooltipsConfProvider',
 			tooltipsConfig,
+		])
+		.config([
+			'$sceDelegateProvider',
+			sceConfig,
 		])
 		.directive('ngIncludeTabs', ngIncludeTabs)
 		.controller('NginxConfigIoController', [
@@ -144,6 +148,16 @@
 			side: 'right',
 			size: 'small',
 		});
+	}
+
+
+
+	function sceConfig($sceDelegateProvider) {
+		$sceDelegateProvider.resourceUrlWhitelist([
+			'self',
+			'https://nginxconfig.io/**',
+			'https://do.nginxconfig.io/**',
+		]);
 	}
 
 

@@ -19,8 +19,9 @@
 	"author": "Bálint Szekeres <balint@szekeres.me> (https://balint.szekeres.me)",
 	"license": "MIT",
 	"dependencies": {
+		"angular": "^1.7.9",
+		"angular-sanitize": "^1.7.8",
 		"angular-tooltips": "^1.2.2",
-		"angular": "^1.7.8",
 		"bootstrap": "^4.3.1",
 		"file-saver": "^2.0.2",
 		"highlight.js": "github:highlightjs/highlight.js#cli",
@@ -31,47 +32,38 @@
 		"notie": "^4.3.1"
 	},
 	"devDependencies": {
-		"autoprefixer": "^9.6.1",
+		"autoprefixer": "^9.7.2",
 		"browser-sync": "^2.26.7",
 		"concat": "^1.0.3",
-		"concurrently": "^4.1.1",
-		"cypress": "^3.3.2",
-		"eslint": "^6.0.1",
+		"concurrently": "^5.0.0",
+		"cypress": "^3.6.1",
+		"eslint": "^6.6.0",
 		"http-server": "^0.11.1",
-		"node-sass": "^4.12.0",
-		"nodemon": "^1.19.1",
-		"postcss-cli": "^6.1.2",
-		"start-server-and-test": "^1.9.1",
-		"uglify-js": "^3.6.0"
+		"node-sass": "^4.13.0",
+		"nodemon": "^1.19.4",
+		"postcss-cli": "^6.1.3",
+		"start-server-and-test": "^1.10.6",
+		"uglify-js": "^3.6.9"
 	},
 	"scripts": {
 		"start": "npm run build && concurrently \"npm:*:watch\" \"npm:browsersync\"",
-
 		"build": "concurrently \"npm:build:js:vendor\" \"npm:build:js:app\" \"npm:build:scss\"",
 		"build:prod": "concurrently \"npm:build:js:vendor:prod\" \"npm:build:js:app:prod\" \"npm:build:scss:prod\" && npm run autoprefixer",
-
 		"build:js:highlight": "node node_modules/highlight.js/tools/build.js -n bash nginx -t browser --no-compress",
 		"build:js:vendor": "npm run build:js:highlight && node build/script.js vendor public/assets/js/vendor.min.js",
 		"build:js:vendor:prod": "npm run build:js:vendor -- --production",
-
 		"build:js:app": "node build/script.js app public/assets/js/app.min.js",
 		"build:js:app:prod": "npm run build:js:app -- --production",
 		"build:js:app:watch": "nodemon -q -C -x 'npm run build:js:app' -w 'resources/js/' -e '*'",
-
 		"build:scss": "node-sass resources/scss/style.scss public/assets/css/app.min.css",
 		"build:scss:prod": "npm run build:scss -- --output-style=compressed",
 		"build:scss:watch": "npm run build:scss -- --watch",
-
 		"autoprefixer": "postcss public/assets/css/app.min.css --use autoprefixer --no-map --replace --verbose",
-
 		"browsersync": "browser-sync 'public/' --watch",
-
 		"lint": "eslint resources/js/app.js",
 		"lint:fix": "npm run lint -- --fix",
-
 		"test": "npm run lint && npm run build && start-server-and-test http-server http://localhost:8080 cypress:run",
 		"test:debug": "npm run lint && npm run build && start-server-and-test http-server http://localhost:8080 cypress:open",
-
 		"cypress:run": "cypress run",
 		"cypress:open": "cypress open"
 	},
