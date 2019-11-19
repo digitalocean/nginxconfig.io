@@ -832,10 +832,6 @@
 			}
 		};
 
-		$scope.toggleLayoutVisible = function() {
-			return $window.location.hostname !== 'nginxconfig.io';
-		};
-
 		$scope.toggleLayout = function() {
 			if ($scope.layout === 'default') {
 				$scope.layout = 'do';

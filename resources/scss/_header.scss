@@ -7,25 +7,12 @@
 }
 
 header {
-	position: relative;
 	background-color: #000;
 	padding: 0.5rem 0;
 	text-align: center;
 	margin-bottom: 0.5rem;
 	color: #fff;
 	font-size: 2.2rem;
-
-	.layout-toggle {
-		position: absolute;
-		right: 10px;
-		top: 0;
-		z-index: 100;
-		opacity: 0.75;
-
-		.btn {
-			outline: none;
-		}
-	}
 
 	.container {
 		position: relative;
