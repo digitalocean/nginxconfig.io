@@ -4,7 +4,7 @@
 		ng-if="step.active()"
 		ng-class="[step.slug]"
 		ng-mouseenter="setActiveStep(key)">
-		<div class="circle" ng-include="base + '/assets/img/steps/' + step.slug + '.svg'"></div>
+		<div class="circle" ng-include="base + 'assets/img/steps/' + step.slug + '.svg'"></div>
 		<span class="counter"></span>{{ step.name }}
 	</li>
 </ol>
