@@ -832,7 +832,7 @@
 			}
 		};
 
-		$scope.toggleLayout = function() {
+		$window.toggleLayout = function() {
 			if ($scope.layout === 'default') {
 				$scope.layout = 'do';
 				$scope.tabs_site.unshift({
@@ -843,6 +843,7 @@
 				$scope.layout = 'default';
 				$scope.tabs_site.shift();
 			}
+			doMasonry();
 		};
 
 
@@ -1344,7 +1345,7 @@
 			initMasonry();
 
 			if ($window.LAYOUT && $window.LAYOUT !== $scope.layout) {
-				$scope.toggleLayout();
+				$window.toggleLayout();
 			}
 		};
 	}
