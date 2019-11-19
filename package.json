@@ -58,7 +58,7 @@
 		"build:js:app:prod": "npm run build:js:app -- --production",
 		"build:js:app:watch": "nodemon -q -C -x 'npm run build:js:app' -w 'resources/js/' -e '*'",
 
-		"build:scss": "node-sass resources/scss/app.scss public/assets/css/app.min.css",
+		"build:scss": "node-sass resources/scss/style.scss public/assets/css/app.min.css",
 		"build:scss:prod": "npm run build:scss -- --output-style=compressed",
 		"build:scss:watch": "npm run build:scss -- --watch",
 
