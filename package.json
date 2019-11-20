@@ -20,7 +20,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"angular-tooltips": "^1.2.2",
-		"angular": "^1.7.8",
+		"angular": "^1.7.9",
 		"bootstrap": "^4.3.1",
 		"file-saver": "^2.0.2",
 		"highlight.js": "github:highlightjs/highlight.js#cli",
