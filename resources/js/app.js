@@ -253,7 +253,7 @@
 					) {
 						$scope.isDirty = true;
 						$scope.data.sites[site][siteKey] = hashData[originalKey];
-						gtag('event', key, {
+						_analytics('event', key, {
 							event_category: 'data_from_hash',
 							event_label: hashData[originalKey],
 						});
@@ -264,7 +264,7 @@
 				) {
 					$scope.isDirty = true;
 					$scope.data[key] = hashData[key];
-					gtag('event', key, {
+					_analytics('event', key, {
 						event_category: 'data_from_hash',
 						event_label: hashData[key],
 					});
@@ -371,6 +371,16 @@
 			}).then(function(content) {
 				callback(content);
 			});
+		}
+
+
+
+		function _analytics() {
+			if (gtag !== undefined) {
+				gtag.apply(null, arguments);
+			} else if (dataLayer !== undefined) {
+				dataLayer.push(arguments);
+			}
 		}
 
 
@@ -622,7 +632,7 @@
 			$scope.data.sites.push( angular.copy(DEFAULTS.sites[0]) );
 			$scope.site = $scope.data.sites.length - 1;
 
-			gtag('event', $scope.data.sites.length, {
+			_analytics('event', $scope.data.sites.length, {
 				event_category: 'add_site',
 			});
 		};
@@ -736,7 +746,7 @@
 				break;
 			}
 
-			gtag('event', preset, {
+			_analytics('event', preset, {
 				event_category: 'preset',
 			});
 		};
@@ -789,7 +799,7 @@
 			$scope.siteChanges		= {};
 			$scope.commonChanges	= {};
 
-			gtag('event', 'reset');
+			_analytics('event', 'reset');
 		};
 
 		$scope.downloadZip = function() {
@@ -797,7 +807,7 @@
 				saveAs(content, 'nginxconfig.io-' + $scope.getDomains().join(',') + '.zip');
 			});
 
-			gtag('event', $scope.getDomains().join(','), {
+			_analytics('event', $scope.getDomains().join(','), {
 				event_category: 'download_zip',
 			});
 		};
@@ -815,7 +825,7 @@
 		};
 
 		$scope.copyAsBase64 = function() {
-			gtag('event', $scope.getDomains().join(','), {
+			_analytics('event', $scope.getDomains().join(','), {
 				event_category: 'download_base64',
 			});
 		};
@@ -828,7 +838,7 @@
 			});
 
 			if (key !== 'base64-zip-line') {
-				gtag('event', key, {
+				_analytics('event', key, {
 					event_category: 'clipboard',
 				});
 			}
@@ -1335,7 +1345,7 @@
 										j !== '$$hashKey' &&
 										!angular.equals(newValue.sites[i][j], oldValue.sites[i][j])
 									) {
-										gtag('event', i + '.' + j, {
+										_analytics('event', i + '.' + j, {
 											event_category: 'data_changed',
 											event_label: newValue.sites[i][j],
 										});
@@ -1344,7 +1354,7 @@
 							}
 						}
 					} else {
-						gtag('event', key, {
+						_analytics('event', key, {
 							event_category: 'data_changed',
 							event_label: newValue[key],
 						});

@@ -39,6 +39,7 @@
 	"globals": {
 		"angular": true,
 		"gtag": true,
+		"dataLayer": true,
 		"hljs": true,
 		"JSZip": true,
 		"Masonry": true,
