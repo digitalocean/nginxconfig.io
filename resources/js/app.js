@@ -488,7 +488,7 @@
 				},
 			},
 			{
-				name: 'Cerbot',
+				name: 'Certbot',
 				slug: 'certbot',
 				active: function() {
 					return $scope.isHTTPS() && $scope.isCertLetsEncrypt();
