@@ -1,7 +1,18 @@
 (function() {
 	'use strict';
 
+	// remove query string
+	window.history.replaceState(
+		{},
+		'',
+		window.location.href.replace(window.location.search, '')
+	);
+})();
 
+
+
+(function() {
+	'use strict';
 
 	angular
 		.module('NginxConfigIoApp', ['ngSanitize', 'ngclipboard', '720kb.tooltips'])
@@ -625,7 +636,7 @@
 		};
 
 		$scope.getUrl = function() {
-			return $location.absUrl().replace(/#.*$/, '');
+			return $location.absUrl();
 		};
 
 		$scope.addSite = function() {

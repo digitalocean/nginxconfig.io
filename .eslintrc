@@ -37,6 +37,7 @@
 		}]
 	},
 	"globals": {
+		"window": true,
 		"angular": true,
 		"gtag": true,
 		"dataLayer": true,
