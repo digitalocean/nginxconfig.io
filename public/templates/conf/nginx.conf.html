@@ -86,5 +86,5 @@ http {<!--
 	include {{ data.directory_nginx }}sites-enabled/*;</span><span ng-if="isUnified()" ng-repeat="(_site, _domain) in getDomains() track by $index">
 
 	# {{ isWWW(_site) ? 'www.' : '' }}{{ _domain }}
-<ng-include ng-include-tabs="1" src="'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>
+<ng-include ng-include-tabs="1" src="base + 'templates/conf/sites-available/example.com.conf.html?v=COMMIT_HASH'" sonload="refreshHighlighting()"></ng-include></span>
 }
