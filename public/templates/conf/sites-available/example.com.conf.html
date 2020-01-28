@@ -48,7 +48,7 @@ server {<!--
 
 <!--
 
---><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+--><ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/security.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ access log domain || error log domain --><span ng-if="isAccessLogDomain(_site) || isErrorLogDomain(_site)">
 
@@ -86,7 +86,7 @@ server {<!--
 		include nginxconfig.io/python_uwsgi.conf;</span><!--
 
 		✔ unified --><span ng-if="isUnified()">
-<!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- -->	<ng-include ng-include-tabs="3" src="base + 'templates/conf/nginxconfig.io/python_uwsgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}<!--
 
 	✔ Django --><span ng-if="isDjango(_site)">
@@ -111,7 +111,7 @@ server {<!--
 		include nginxconfig.io/proxy.conf;</span><!--
 
 		✔ unified --><span ng-if="isUnified()">
-<!-- -->	<ng-include ng-include-tabs="3" src="'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- -->	<ng-include ng-include-tabs="3" src="base + 'templates/conf/nginxconfig.io/proxy.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
 	✔ PHP --><span ng-if="isPHP(_site)">
@@ -123,7 +123,7 @@ server {<!--
 		include nginxconfig.io/php_fastcgi.conf;</span><!--
 
 	✔ unified && ✘ WordPress --><span ng-if="isUnified() && !isWordPress(_site)">
-	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+	<ng-include ng-include-tabs="{{ isUnified() ? 3 : 1 }}" src="base + 'templates/conf/nginxconfig.io/php_fastcgi.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 	}</span><!--
 
 	✔ unified --><span ng-if="isModularized()">
@@ -148,19 +148,19 @@ server {<!--
 
 	✔ unified --><span ng-if="isUnified()">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/general.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ WordPress --><span ng-if="isUnified() && isWordPress(_site)">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/wordpress.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ Drupal --><span ng-if="isUnified() && isDrupal(_site)">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<!-- --><ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/drupal.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ unified && ✔ Magento --><span ng-if="isUnified() && isMagento(_site)">
 
-<!-- --><ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
+<!-- --><ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/magento.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span>
 }<!--
 
 
@@ -257,7 +257,7 @@ server {
 
 	✔ unified && ✔ Let's Encrypt --><span ng-if="isUnified() && isCertLetsEncrypt(_site)">
 
-<ng-include ng-include-tabs="2" src="'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
+<ng-include ng-include-tabs="2" src="base + 'templates/conf/nginxconfig.io/letsencrypt.conf.html?v=COMMIT_HASH'" onload="refreshHighlighting()"></ng-include></span><!--
 
 	✔ Let's Encrypt --><span ng-if="isCertLetsEncrypt(_site)">
 
