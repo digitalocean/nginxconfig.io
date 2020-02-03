@@ -77,7 +77,9 @@
 	</li>
 	<li>
 		Uncomment SSL related directives in configuration:<br>
-		<code><span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/#?;#//g' <span ng-if="isUnified()">{{ data.directory_nginx }}nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)">{{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span></code>
+		<code><span class="hljs-section">sed</span> <span class="hljs-attribute">-i -r</span> 's/#?;#//g'<span ng-if="isUnified()"><!--
+		--> {{ data.directory_nginx }}nginx.conf</span><span ng-if="isModularized()"><span ng-repeat="(_site, _domain) in getDomains() track by $index" ng-if="isCertLetsEncrypt(_site)"><!--
+		--> {{ data.directory_nginx }}sites-{{ isSymlink() ? 'available' : 'enabled' }}/{{ _domain }}.conf</span></span></code>
 	</li>
 	<li>
 		Reload NGINX:<br>
