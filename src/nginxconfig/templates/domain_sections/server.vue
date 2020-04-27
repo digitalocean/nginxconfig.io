@@ -1,71 +1,53 @@
 <template>
-    <div>Hello world server</div>
+    <div>
+        Hello world server
+        <input type="text" v-model="domain" />
+    </div>
 </template>
 
 <script>
-    import Vue from 'vue';
-    import Vuex from 'vuex';
+    import i18n from '../../i18n';
 
-    Vue.use(Vuex);
-
-    // Create the store of values
-    const store = new Vuex.Store({
-        state: {
-            path: {
-                default: '',
-            },
-            documentRoot: {
-                default: '',
-            },
-            wwwSubdomain: {
-                default: false,
-            },
-            cdnSubdomain: {
-                default: false,
-            },
-            redirectSubdomains: {
-                default: true,
-            },
-        },
-        mutations: {
-            setPath(state, value) {
-                state.path.value = value;
-            },
-            setDocumentRoot(state, value) {
-                state.documentRoot.value = value;
-            },
-            setWwwSubdomain(state, value) {
-                state.wwwSubdomain.value = value;
-            },
-            setCdnSubdomain(state, value) {
-                state.cdnSubdomain.value = value;
-            },
-            setRedirectSubdomains(state, value) {
-                state.redirectSubdomains.value = value;
-            },
-        },
-    });
-
-    // Set the values to defaults
-    Object.keys(store.state).forEach(key => {
-        store.state[key].value = store.state[key].value || store.state[key].default;
-    });
+    const defaults = {
+        domain: 'example.com',
+        path: '',
+        documentRoot: '',
+        wwwSubdomain: false,
+        cdnSubdomain: false,
+        redirectSubdomains: true,
+    };
 
     export default {
         name: 'DomainServer',
-        store,
-        computed: {
-            ...Object.keys(store.state).reduce((prev, current) => {
-                prev[current] = {
-                    get () {
-                        return this.$store.state[current].value;
-                    },
-                    set (value) {
-                        this.$store.commit(`set${current.slice(0, 1).toUpperCase()}${current.slice(1)}`, value);
-                    },
-                };
-                return prev;
-            }, {}),
+        props: {
+            data: Object,
+        },
+        data () {
+            return {
+                i18n,
+                defaults,
+                ...defaults,
+            };
+        },
+        created () {
+            if (this.$props.data) {
+                for (const key in this.$props.data) {
+                    if (key in defaults) {
+                        this.$data[key] = this.$props.data[key];
+                    }
+                }
+            }
+        },
+        methods: {
+            exports() {
+                return Object.keys(defaults).reduce((prev, key) => {
+                    prev[key] = this.$data[key];
+                    return prev;
+                }, {});
+            },
+            changes() {
+                return Object.keys(defaults).filter(key => defaults[key] !== this.$data[key]).length;
+            },
         },
     };
 </script>

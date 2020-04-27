@@ -18,14 +18,18 @@ limitations under the License.
     <div>
         <div class="tabs">
             <ul>
-                <li v-for="tab in tabs" :class="tabName === tab ? 'is-active' : undefined">
-                    <a @click="setTab(tab)">{{ tab }}</a>
+                <li v-for="(_, key) in tabs" :class="key === tab ? 'is-active' : undefined">
+                    <a @click="tab = key">{{ key }}{{ sectionChanges(key) }}</a>
                 </li>
             </ul>
         </div>
-        <keep-alive>
-            <component :is="tabComponent" :ref="tabName"></component>
-        </keep-alive>
+        <component v-for="(component, key) in tabs"
+                   :is="component"
+                   :ref="key"
+                   :key="key"
+                   :style="{ display: key === tab ? 'block' : 'none' }"
+        ></component>
+        <a class="button" @click="log">Log export data to console</a>
     </div>
 </template>
 
@@ -36,15 +40,39 @@ limitations under the License.
         name: 'Domain',
         data() {
             return {
-                tabName: Object.keys(Sections)[0],
-                tabComponent: Object.values(Sections)[0],
-                tabs: Object.keys(Sections),
+                tab: Object.keys(Sections)[0],
+                tabs: Sections,
             };
         },
         methods: {
-            setTab(tab) {
-                this.$data.tabName = tab;
-                this.$data.tabComponent = Sections[tab];
+            sectionChanges(key) {
+                if (key in this.$refs && this.$refs[key] && this.$refs[key][0].changes) {
+                    const changes = this.$refs[key][0].changes();
+                    if (changes) {
+                        return ` (${changes.toLocaleString()})`;
+                    }
+                }
+                return '';
+            },
+            changes() {
+                return Object.keys(Sections).reduce((prev, key) => {
+                    if (key in this.$refs && this.$refs[key] && this.$refs[key][0].changes) {
+                        prev += this.$refs[key][0].changes();
+                    }
+                    return prev;
+                }, 0);
+            },
+            exports () {
+                return Object.keys(Sections).reduce((prev, key) => {
+                    prev[key] = {};
+                    if (key in this.$refs && this.$refs[key] && this.$refs[key][0].exports) {
+                        prev[key] = this.$refs[key][0].exports();
+                    }
+                    return prev;
+                }, {});
+            },
+            log () {
+                console.log(this.exports());
             },
         },
     };

@@ -27,7 +27,20 @@ limitations under the License.
         </Header>
 
         <div class="main container">
-            <Domain></Domain>
+            <div class="tabs">
+                <ul>
+                    <li v-for="index in domains" :class="index === active ? 'is-active' : undefined">
+                        <a @click="active = index">{{ domainTitle(index) }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <template v-for="index in domains">
+                <Domain ref="domains"
+                        :key="index"
+                        :style="{ display: index === active ? 'block' : 'none' }"
+                ></Domain>
+            </template>
         </div>
 
         <Footer :text="i18n.templates.app.oss"></Footer>
@@ -35,25 +48,10 @@ limitations under the License.
 </template>
 
 <script>
-    import Vue from 'vue';
-    import Vuex from 'vuex';
     import i18n from '../i18n';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import Domain from './domain';
-
-    Vue.use(Vuex);
-
-    const store = new Vuex.Store({
-        state: {
-            domains: {},
-        },
-        mutations: {
-            setDomain(state, domain, data) {
-                state.domains[domain] = data;
-            },
-        },
-    });
 
     export default {
         name: 'App',
@@ -62,11 +60,20 @@ limitations under the License.
             Header,
             Footer,
         },
-        store,
         data() {
             return {
                 i18n,
+                domains: 1,
+                active: 1,
             };
+        },
+        methods: {
+            domainTitle(index) {
+                if (this.$refs.domains) {
+                    const data = this.$refs.domains[index-1].export();
+                    return data.Server.domain;
+                }
+            },
         },
     };
 </script>
