@@ -1,7 +1,7 @@
 <template>
     <div>
         Hello world server
-        <input type="text" v-model="domain" />
+        <input v-model="domain" type="text" />
     </div>
 </template>
 

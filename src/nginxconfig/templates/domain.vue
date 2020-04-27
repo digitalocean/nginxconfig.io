@@ -23,8 +23,8 @@ limitations under the License.
                 </li>
             </ul>
         </div>
-        <component v-for="(component, key) in tabs"
-                   :is="component"
+        <component :is="component"
+                   v-for="(component, key) in tabs"
                    :ref="key"
                    :key="key"
                    :style="{ display: key === tab ? 'block' : 'none' }"
