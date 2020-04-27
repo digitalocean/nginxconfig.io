@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "quotes": [
+      2,
+      {
+        "style": "double"
+      }
+    ],
+    "pseudo-element": 2,
+    "trailing-semicolon": 2,
+    "final-newline": 2,
+    "leading-zero": 2,
+    "no-trailing-zero": 2,
+    "no-css-comments": 0,
+    "no-vendor-prefixes": 0,
+    "no-transition-all": 0,
+    "property-sort-order": 2,
+    "empty-line-between-blocks": 2,
+    "single-line-per-selector": 2,
+    "no-duplicate-properties": 2,
+    "no-color-literals": 0,
+    "hex-notation": [
+      2,
+      {
+        "style": "lowercase"
+      }
+    ],
+    "hex-length": 2,
+    "force-element-nesting": 0,
+    "force-pseudo-nesting": 0,
+    "nesting-depth": 0,
+    "no-qualifying-elements": 0,
+    "indentation": 1,
+    "no-url-domains": 0,
+    "no-url-protocols": 0,
+    "placeholder-in-extend": 0
+  }
+}
