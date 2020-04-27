@@ -26,21 +26,43 @@ limitations under the License.
             </template>
         </Header>
 
+        <div class="main container">
+            <Domain></Domain>
+        </div>
+
         <Footer :text="i18n.templates.app.oss"></Footer>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue';
+    import Vuex from 'vuex';
     import i18n from '../i18n';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
+    import Domain from './domain';
+
+    Vue.use(Vuex);
+
+    const store = new Vuex.Store({
+        state: {
+            domains: {},
+        },
+        mutations: {
+            setDomain(state, domain, data) {
+                state.domains[domain] = data;
+            },
+        },
+    });
 
     export default {
         name: 'App',
         components: {
+            Domain,
             Header,
             Footer,
         },
+        store,
         data() {
             return {
                 i18n,
