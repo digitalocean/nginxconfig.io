@@ -16,3 +16,51 @@ limitations under the License.
 
 $header: #0071fe;
 @import "~do-bulma/src/style";
+
+.do-bulma {
+  .tabs {
+    ul {
+      li {
+        &.is-before {
+          a {
+            color: mix($dark-grey, $primary);
+
+            &::after {
+              background: rgba($primary, .5);
+            }
+
+            &:hover {
+              color: $dark-blue;
+
+              &::after {
+                background: $dark-blue;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .panel {
+    margin-top: 0;
+    padding: 2rem 0;
+
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .tabs {
+      ul {
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  .buttons-group {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

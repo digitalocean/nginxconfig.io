@@ -15,10 +15,10 @@ limitations under the License.
 -->
 
 <template>
-    <div>
+    <div class="panel">
         <div class="tabs">
             <ul>
-                <li v-for="tab in tabs" :class="active === tab.key ? 'is-active' : undefined">
+                <li v-for="tab in tabs" :class="tabClass(tab.key)">
                     <a @click="active = tab.key">{{ tab.display }}{{ changes(tab.key) }}</a>
                 </li>
             </ul>
@@ -29,6 +29,7 @@ limitations under the License.
                    :key="tab.key"
                    :data="$props.data[tab.key]"
                    :style="{ display: active === tab.key ? 'block' : 'none' }"
+                   class="container"
         ></component>
     </div>
 </template>
@@ -66,6 +67,12 @@ limitations under the License.
             },
             resetValue(tab, key) {
                 this.setValue(tab, key, this.$props.data[tab][key].default);
+            },
+            tabClass(tab) {
+                if (tab === this.$data.active) return 'is-active';
+                const tabs = this.$data.tabs.map(t => t.key);
+                if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
+                return undefined;
             },
         },
     };

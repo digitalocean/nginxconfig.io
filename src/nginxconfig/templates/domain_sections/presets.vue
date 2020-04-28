@@ -1,11 +1,13 @@
 <template>
     <div>
-        <a v-for="(preset, key) in $props.data"
-           :class="`button${preset.computed ? ' is-primary' : ''}`"
-           @click="setPreset(key)"
-        >
-            {{ preset.display }}
-        </a>
+        <div class="buttons-group">
+            <a v-for="(preset, key) in $props.data"
+               :class="`button${preset.computed ? ' is-primary' : ''}`"
+               @click="setPreset(key)"
+            >
+                {{ preset.display }}
+            </a>
+        </div>
     </div>
 </template>
 
@@ -19,41 +21,95 @@
             default: false,
             display: 'Frontend',
             enabled: true,
+            computedCheck (data) {
+                return !data.php.php.computed
+                    && !data.python.python.computed
+                    && !data.reverseProxy.reverseProxy.computed
+                    && data.routing.index.computed === 'index.html'
+                    && data.routing.fallbackHtml.computed;
+            },
         },
         php: {
             default: true,
             display: 'PHP',
             enabled: true,
+            computedCheck (data) {
+                return data.php.php.computed
+                    && data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && !data.php.wordPressRules.computed
+                    && !data.php.drupalRules.computed
+                    && !data.php.magentoRules.computed;
+            },
         },
         django: {
             default: false,
             display: 'Django',
             enabled: true,
+            computedCheck (data) {
+                return data.python.python.computed
+                    && data.python.djangoRules.computed
+                    && !data.routing.root.computed;
+            },
         },
         nodejs: {
             default: false,
             display: 'Node.js',
             enabled: true,
+            computedCheck (data) {
+                return data.reverseProxy.reverseProxy.computed
+                    && !data.routing.root.computed;
+            },
         },
         singlePageApplication: {
             default: false,
             display: 'Single-page application',
             enabled: true,
+            computedCheck (data) {
+                return data.php.php.computed
+                    && data.routing.index.computed === 'index.html'
+                    && data.routing.fallbackHtml.computed;
+            },
         },
         wordPress: {
             default: false,
             display: 'WordPress',
             enabled: true,
+            computedCheck (data) {
+                return data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && data.php.wordPressRules.computed
+                    && !data.php.drupalRules.computed
+                    && !data.php.magentoRules.computed;
+            },
         },
         drupal: {
             default: false,
             display: 'Drupal',
             enabled: true,
+            computedCheck (data) {
+                return data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && !data.php.wordPressRules.computed
+                    && data.php.drupalRules.computed
+                    && !data.php.magentoRules.computed;
+            },
         },
         magento: {
             default: false,
             display: 'Magento',
             enabled: true,
+            computedCheck (data) {
+                return data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && !data.php.wordPressRules.computed
+                    && !data.php.drupalRules.computed
+                    && data.php.magentoRules.computed;
+            },
         },
     };
 
@@ -71,6 +127,18 @@
             };
         },
         computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        watch: {
+            // When any data changes, check if it still matches a preset
+            '$parent.$props.data': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    Object.keys(this.$props.data).forEach(preset => {
+                        this.$props.data[preset].computed = this.$props.data[preset].computedCheck(data);
+                    });
+                },
+                deep: true,
+            },
+        },
         methods: {
             setPreset(key) {
                 // Set that we're using this preset
@@ -88,6 +156,7 @@
                 this.$parent.resetValue('routing', 'root');
                 this.$parent.resetValue('routing', 'index');
                 this.$parent.resetValue('routing', 'fallbackHtml');
+                this.$parent.resetValue('routing', 'fallbackPhp');
 
                 switch (key) {
                 case 'frontend':
@@ -97,7 +166,7 @@
                     break;
 
                 case 'php':
-                    this.$parent.setValue('routing', 'index', 'index.php');
+                    // Defaults should be PHP
                     break;
 
                 case 'django':

@@ -40,5 +40,22 @@
             };
         },
         computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        watch: {
+            // If the Reverse proxy is enabled, PHP will be forced off
+            '$parent.$props.data.reverseProxy.reverseProxy.computed'() { this.checkPhpEnabled(); },
+            php() { this.checkPhpEnabled(); },
+        },
+        methods: {
+            checkPhpEnabled() {
+                const state = this.$parent.$props.data.reverseProxy.reverseProxy.computed;
+                if (state) {
+                    this.$props.data.php.enabled = false;
+                    this.$props.data.php.computed = false;
+                } else {
+                    this.$props.data.php.enabled = true;
+                    this.$props.data.php.computed = this.$props.data.php.value;
+                }
+            },
+        },
     };
 </script>
