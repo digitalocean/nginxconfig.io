@@ -76,7 +76,8 @@ limitations under the License.
                 const data = this.$data.domains[index];
                 const changes = Object.entries(data).reduce((prev, current) => {
                     if (current[0] === 'presets') return prev; // Ignore changes from presets
-                    prev += Object.values(current[1]).filter(d => d.default !== d.computed).length;
+                    prev += Object.values(current[1])
+                        .filter(d => d.enabled && d.default !== d.value).length;
                     return prev;
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;

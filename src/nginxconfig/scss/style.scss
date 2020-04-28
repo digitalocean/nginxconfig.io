@@ -15,9 +15,14 @@ limitations under the License.
 */
 
 $header: #0071fe;
+$highlight: #f2c94c;
 @import "~do-bulma/src/style";
 
 .do-bulma {
+  $pretty--color-dark: $primary;
+  $pretty--color-default: $primary;
+  @import "~pretty-checkbox/src/pretty-checkbox";
+
   .tabs {
     ul {
       li {
@@ -62,5 +67,93 @@ $header: #0071fe;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .field-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -.5rem;
+
+    .field {
+      flex-grow: 1;
+      margin: 0 .5rem;
+      text-align: left;
+    }
+
+    + .field-row,
+    + .field {
+      margin-top: 1rem;
+    }
+  }
+
+  .field {
+    &.is-horizontal {
+      align-items: center;
+    }
+
+    &.is-changed {
+      input {
+        &,
+        &:focus {
+          background: rgba($highlight, .35);
+        }
+      }
+
+      .checkbox {
+        background: rgba($highlight, .35);
+      }
+    }
+
+    label {
+      @include sailec-medium;
+
+      color: $dark-blue;
+      font-size: 1rem;
+    }
+
+    .button {
+      &.is-static {
+        background: $panel;
+        border-color: $border;
+        border-style: solid;
+        border-width: 1px 0 1px 1px;
+        color: $dark-grey;
+        padding: 0 ($margin * 1.5);
+      }
+    }
+  }
+
+  .checkbox {
+    border-radius: $border-radius;
+    padding: .25rem .5rem;
+
+    .pretty {
+      &.p-icon {
+        font-size: 18px;
+        margin: 0;
+
+        .state {
+          .icon {
+            &::before {
+              color: $panel;
+              font-size: 14px;
+            }
+          }
+
+          label {
+            color: $dark-grey;
+            font-size: 14px;
+            padding-left: calc(#{$margin / 2} + 1.5em);
+            text-indent: initial;
+
+            &::before,
+            &::after {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -58,7 +58,8 @@ limitations under the License.
         methods: {
             changes(tab) {
                 if (tab === 'presets') return ''; // Ignore changes from presets
-                const changes = Object.values(this.$props.data[tab]).filter(d => d.default !== d.computed).length;
+                const changes = Object.values(this.$props.data[tab])
+                    .filter(d => d.enabled && d.default !== d.value).length;
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },

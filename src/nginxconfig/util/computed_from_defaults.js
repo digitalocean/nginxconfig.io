@@ -9,6 +9,21 @@ export default (defaults) => {
                 this.$props.data[key].computed = value;
             },
         };
+        prev[key + 'Default'] = {
+            get() {
+                return this.$props.data[key].default;
+            },
+        };
+        prev[key + 'Enabled'] = {
+            get() {
+                return this.$props.data[key].enabled;
+            },
+        };
+        prev[key + 'Changed'] = {
+            get() {
+                return this.$props.data[key].enabled && this.$props.data[key].value !== this.$props.data[key].default;
+            },
+        };
         return prev;
     }, {});
 };
