@@ -18,61 +18,47 @@ limitations under the License.
     <div>
         <div class="tabs">
             <ul>
-                <li v-for="(_, key) in tabs" :class="key === tab ? 'is-active' : undefined">
-                    <a @click="tab = key">{{ key }}{{ sectionChanges(key) }}</a>
+                <li v-for="tab in tabs" :class="active === tab.key ? 'is-active' : undefined">
+                    <a @click="active = tab.key">{{ tab.display }}{{ changes(tab.key) }}</a>
                 </li>
             </ul>
         </div>
-        <component :is="component"
-                   v-for="(component, key) in tabs"
-                   :ref="key"
-                   :key="key"
-                   :style="{ display: key === tab ? 'block' : 'none' }"
+
+        <component :is="tab"
+                   v-for="tab in tabs"
+                   :key="tab.key"
+                   :data="$props.data[tab.key]"
+                   :style="{ display: active === tab.key ? 'block' : 'none' }"
         ></component>
-        <a class="button" @click="log">Log export data to console</a>
     </div>
 </template>
 
 <script>
-    import * as Sections from './domain_sections';
+    import { Python } from './domain_sections';
+
+    const tabs = [ Python ];
+    const delegated = tabs.reduce((prev, tab) => {
+        prev[tab.key] = tab.delegated;
+        return prev;
+    }, {});
 
     export default {
         name: 'Domain',
+        delegated,          // Data the parent will present here
+        props: {
+            data: Object,   // Data delegated back to us from parent
+        },
         data() {
             return {
-                tab: Object.keys(Sections)[0],
-                tabs: Sections,
+                active: tabs[0].key,
+                tabs,
             };
         },
         methods: {
-            sectionChanges(key) {
-                if (key in this.$refs && this.$refs[key] && this.$refs[key][0].changes) {
-                    const changes = this.$refs[key][0].changes();
-                    if (changes) {
-                        return ` (${changes.toLocaleString()})`;
-                    }
-                }
+            changes(tab) {
+                const changes = Object.values(this.$props.data[tab]).filter(d => d.default !== d.computed).length;
+                if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
-            },
-            changes() {
-                return Object.keys(Sections).reduce((prev, key) => {
-                    if (key in this.$refs && this.$refs[key] && this.$refs[key][0].changes) {
-                        prev += this.$refs[key][0].changes();
-                    }
-                    return prev;
-                }, 0);
-            },
-            exports () {
-                return Object.keys(Sections).reduce((prev, key) => {
-                    prev[key] = {};
-                    if (key in this.$refs && this.$refs[key] && this.$refs[key][0].exports) {
-                        prev[key] = this.$refs[key][0].exports();
-                    }
-                    return prev;
-                }, {});
-            },
-            log () {
-                console.log(this.exports());
             },
         },
     };

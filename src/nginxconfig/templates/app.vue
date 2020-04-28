@@ -29,15 +29,15 @@ limitations under the License.
         <div class="main container">
             <div class="tabs">
                 <ul>
-                    <li v-for="index in domains" :class="index === active ? 'is-active' : undefined">
-                        <a @click="active = index">{{ domainTitle(index) }}</a>
+                    <li v-for="(data, index) in domains" :class="index === active ? 'is-active' : undefined">
+                        <a @click="active = index">{{ data.python.test.value }}{{ changes(index) }}</a>
                     </li>
                 </ul>
             </div>
 
-            <template v-for="index in domains">
-                <Domain ref="domains"
-                        :key="index"
+            <template v-for="(data, index) in domains">
+                <Domain :key="index"
+                        :data="data"
                         :style="{ display: index === active ? 'block' : 'none' }"
                 ></Domain>
             </template>
@@ -63,16 +63,21 @@ limitations under the License.
         data() {
             return {
                 i18n,
-                domains: 1,
-                active: 1,
+                domains: [
+                    Domain.delegated,
+                ],
+                active: 0,
             };
         },
         methods: {
-            domainTitle(index) {
-                if (this.$refs.domains) {
-                    const data = this.$refs.domains[index-1].export();
-                    return data.Server.domain;
-                }
+            changes(index) {
+                const data = this.$data.domains[index];
+                const changes = Object.values(data).reduce((prev, current) => {
+                    prev += Object.values(current).filter(d => d.default !== d.computed).length;
+                    return prev;
+                }, 0);
+                if (changes) return ` (${changes.toLocaleString()})`;
+                return '';
             },
         },
     };

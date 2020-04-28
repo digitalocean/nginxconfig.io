@@ -1,46 +1,43 @@
 <template>
-    <div>Hello world python</div>
+    <div>
+        Hello world python
+        <input v-model="test" type="text" />
+    </div>
 </template>
 
 <script>
     import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
 
     const defaults = {
-        python: false,
-        djangoRules: false,
+        python: {
+            default: false,
+            enabled: true,
+        },
+        djangoRules: {
+            default: false,
+            enabled: true,
+        },
+        test: {
+            default: '',
+            enabled: true,
+        },
     };
 
     export default {
-        name: 'DomainPython',
+        name: 'DomainPython',                       // Component name
+        display: 'Python',                          // Display name for tab
+        key: 'python',                              // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         props: {
-            data: Object,
+            data: Object,                           // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
-                defaults,
-                ...defaults,
             };
         },
-        created () {
-            if (this.$props.data) {
-                for (const key in this.$props.data) {
-                    if (key in defaults) {
-                        this.$data[key] = this.$props.data[key];
-                    }
-                }
-            }
-        },
-        methods: {
-            exports() {
-                return Object.keys(defaults).reduce((prev, key) => {
-                    prev[key] = this.$data[key];
-                    return prev;
-                }, {});
-            },
-        },
-        changes() {
-            return Object.keys(defaults).filter(key => defaults[key] !== this.$data[key]).length;
-        },
+        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
     };
 </script>
