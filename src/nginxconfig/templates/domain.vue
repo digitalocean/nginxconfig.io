@@ -61,6 +61,12 @@ limitations under the License.
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },
+            setValue(tab, key, val) {
+                Object.assign(this.$props.data[tab][key], { value: val, computed: val });
+            },
+            resetValue(tab, key) {
+                this.setValue(tab, key, this.$props.data[tab][key].default);
+            },
         },
     };
 </script>

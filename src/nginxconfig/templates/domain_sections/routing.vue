@@ -17,9 +17,12 @@
             options: ['index.html', 'index.php'],
             enabled: true,
         },
-        fallbackRouting: {
-            default: ['index.php'],
-            options: ['index.html', 'index.php'],
+        fallbackHtml: {
+            default: false,
+            enabled: true,
+        },
+        fallbackPhp: {
+            default: true,
             enabled: true,
         },
         legacyPhpRouting: {
