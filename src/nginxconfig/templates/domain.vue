@@ -34,9 +34,9 @@ limitations under the License.
 </template>
 
 <script>
-    import { Python } from './domain_sections';
+    import * as Sections from './domain_sections';
 
-    const tabs = [ Python ];
+    const tabs = Object.values(Sections);
     const delegated = tabs.reduce((prev, tab) => {
         prev[tab.key] = tab.delegated;
         return prev;
@@ -56,6 +56,7 @@ limitations under the License.
         },
         methods: {
             changes(tab) {
+                if (tab === 'presets') return ''; // Ignore changes from presets
                 const changes = Object.values(this.$props.data[tab]).filter(d => d.default !== d.computed).length;
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';

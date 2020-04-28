@@ -30,7 +30,7 @@ limitations under the License.
             <div class="tabs">
                 <ul>
                     <li v-for="(data, index) in domains" :class="index === active ? 'is-active' : undefined">
-                        <a @click="active = index">{{ data.python.test.value }}{{ changes(index) }}</a>
+                        <a @click="active = index">{{ data.server.domain.computed }}{{ changes(index) }}</a>
                     </li>
                 </ul>
             </div>
@@ -48,6 +48,7 @@ limitations under the License.
 </template>
 
 <script>
+    import clone from 'clone';
     import i18n from '../i18n';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
@@ -64,7 +65,8 @@ limitations under the License.
             return {
                 i18n,
                 domains: [
-                    Domain.delegated,
+                    clone(Domain.delegated),
+                    clone(Domain.delegated),
                 ],
                 active: 0,
             };
@@ -72,8 +74,9 @@ limitations under the License.
         methods: {
             changes(index) {
                 const data = this.$data.domains[index];
-                const changes = Object.values(data).reduce((prev, current) => {
-                    prev += Object.values(current).filter(d => d.default !== d.computed).length;
+                const changes = Object.entries(data).reduce((prev, current) => {
+                    if (current[0] === 'presets') return prev; // Ignore changes from presets
+                    prev += Object.values(current[1]).filter(d => d.default !== d.computed).length;
                     return prev;
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;

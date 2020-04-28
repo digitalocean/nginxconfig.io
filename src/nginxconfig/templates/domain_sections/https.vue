@@ -4,51 +4,66 @@
 
 <script>
     import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
 
     const defaults = {
-        https: true,
-        http2: true,
-        forceHttps: true,
-        hsts: true,
-        hstsSubdomains: true,
-        hstsPreload: true,
-        certType: 'letsEncrypt',
-        letsEncryptEmail: '',
-        sslCertificate: '',
-        sslCertificateKey: '',
+        https: {
+            default: true,
+            enabled: true,
+        },
+        http2: {
+            default: true,
+            enabled: true,
+        },
+        forceHttps: {
+            default: true,
+            enabled: true,
+        },
+        hsts: {
+            default: true,
+            enabled: true,
+        },
+        hstsSubdomains: {
+            default: true,
+            enabled: true,
+        },
+        hstsPreload: {
+            default: true,
+            enabled: true,
+        },
+        certType: {
+            default: 'letsEncrypt',
+            options: ['letsEncrypt', 'custom'],
+            enabled: true,
+        },
+        letsEncryptEmail: {
+            default: '',
+            enabled: true,
+        },
+        sslCertificate: {
+            default: '',
+            enabled: false,
+        },
+        sslCertificateKey: {
+            default: '',
+            enabled: false,
+        },
     };
 
     export default {
-        name: 'DomainHTTPS',
+        name: 'DomainHTTPS',                        // Component name
+        display: 'HTTPS',                           // Display name for tab
+        key: 'https',                               // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         props: {
-            data: Object,
+            data: Object,                           // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
-                defaults,
-                ...defaults,
             };
         },
-        created () {
-            if (this.$props.data) {
-                for (const key in this.$props.data) {
-                    if (key in defaults) {
-                        this.$data[key] = this.$props.data[key];
-                    }
-                }
-            }
-        },
-        methods: {
-            exports() {
-                return Object.keys(defaults).reduce((prev, key) => {
-                    prev[key] = this.$data[key];
-                    return prev;
-                }, {});
-            },
-        },
-        changes() {
-            return Object.keys(defaults).filter(key => defaults[key] !== this.$data[key]).length;
-        },
+        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
     };
 </script>

@@ -4,49 +4,57 @@
 
 <script>
     import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
 
     const defaults = {
-        frontend: false,
-        php: true,
-        django: false,
-        nodejs: false,
-        singlePageApplication: false,
-        wordPress: false,
-        drupal: false,
-        magento: false,
+        frontend: {
+            default: false,
+            enabled: true,
+        },
+        php: {
+            default: true,
+            enabled: true,
+        },
+        django: {
+            default: false,
+            enabled: true,
+        },
+        nodejs: {
+            default: false,
+            enabled: true,
+        },
+        singlePageApplication: {
+            default: false,
+            enabled: true,
+        },
+        wordPress: {
+            default: false,
+            enabled: true,
+        },
+        drupal: {
+            default: false,
+            enabled: true,
+        },
+        magento: {
+            default: false,
+            enabled: true,
+        },
     };
 
     export default {
-        name: 'DomainPresets',
+        name: 'DomainPresets',                      // Component name
+        display: 'Presets',                         // Display name for tab
+        key: 'presets',                             // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         props: {
-            data: Object,
+            data: Object,                           // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
-                defaults,
-                ...defaults,
             };
         },
-        created () {
-            if (this.$props.data) {
-                for (const key in this.$props.data) {
-                    if (key in defaults) {
-                        this.$data[key] = this.$props.data[key];
-                    }
-                }
-            }
-        },
-        methods: {
-            exports() {
-                return Object.keys(defaults).reduce((prev, key) => {
-                    prev[key] = this.$data[key];
-                    return prev;
-                }, {});
-            },
-            changes() {
-                return Object.keys(defaults).filter(key => defaults[key] !== this.$data[key]).length;
-            },
-        },
+        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
     };
 </script>

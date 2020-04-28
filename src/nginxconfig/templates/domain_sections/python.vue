@@ -1,7 +1,6 @@
 <template>
     <div>
         Hello world python
-        <input v-model="test" type="text" />
     </div>
 </template>
 
@@ -17,11 +16,7 @@
         },
         djangoRules: {
             default: false,
-            enabled: true,
-        },
-        test: {
-            default: '',
-            enabled: true,
+            enabled: false,
         },
     };
 

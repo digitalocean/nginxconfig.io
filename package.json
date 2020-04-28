@@ -33,6 +33,7 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "babel-polyfill": "^6.26.0",
+    "clone": "^2.1.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",
     "parcel-bundler": "^1.12.4",
