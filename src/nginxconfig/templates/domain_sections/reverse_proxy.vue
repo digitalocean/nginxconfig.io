@@ -97,22 +97,22 @@
     };
 
     export default {
-        name: 'DomainReverseProxy',                 // Component name
-        display: 'Reverse proxy',                   // Display name for tab
-        key: 'reverseProxy',                        // Key for data in parent
-        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
+        name: 'DomainReverseProxy',                                     // Component name
+        display: 'Reverse proxy',                                       // Display name for tab
+        key: 'reverseProxy',                                            // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                     // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                           // Data delegated back to us from parent
+            data: Object,                                               // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'reverseProxy'),   // Getters & setters for the delegated data
         watch: {
             // If the PHP or Python is enabled, the Reverse proxy will be forced off
             '$parent.$props.data': {
