@@ -26,8 +26,8 @@
                 <label class="label">Python</label>
             </div>
             <div class="field-body">
-                <div :class="`field${pythonChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${pythonChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="python" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -44,8 +44,8 @@
                 <label class="label">Django rules</label>
             </div>
             <div class="field-body">
-                <div :class="`field${djangoRulesChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${djangoRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="djangoRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -68,7 +68,7 @@
     const defaults = {
         python: {
             default: false,
-            enabled: true,
+            enabled: false,
         },
         djangoRules: {
             default: false,

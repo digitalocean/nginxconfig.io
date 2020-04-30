@@ -5,8 +5,8 @@
                 <label class="label">PHP</label>
             </div>
             <div class="field-body">
-                <div class="field is-changed">
-                    <div class="control">
+                <div class="field">
+                    <div class="control is-changed">
                         <label class="text">
                             PHP is disabled.
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
@@ -26,8 +26,8 @@
                 <label class="label">PHP</label>
             </div>
             <div class="field-body">
-                <div :class="`field${phpChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${phpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="php" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -44,8 +44,8 @@
                 <label class="label">WordPress rules</label>
             </div>
             <div class="field-body">
-                <div :class="`field${wordPressRulesChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${wordPressRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="wordPressRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -62,8 +62,8 @@
                 <label class="label">Drupal rules</label>
             </div>
             <div class="field-body">
-                <div :class="`field${drupalRulesChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${drupalRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="drupalRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -80,8 +80,8 @@
                 <label class="label">Magento rules</label>
             </div>
             <div class="field-body">
-                <div :class="`field${magentoRulesChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${magentoRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="magentoRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>

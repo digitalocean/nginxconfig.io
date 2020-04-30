@@ -96,6 +96,27 @@ $highlight: #f2c94c;
       }
     }
 
+    .is-changed {
+      input {
+        &,
+        &:focus {
+          background: rgba($highlight, .35);
+        }
+      }
+
+      .checkbox,
+      .radio,
+      .text {
+        background: rgba($highlight, .35);
+      }
+
+      label {
+        &.text {
+          padding: .25rem .5rem;
+        }
+      }
+    }
+
     label {
       @include sailec-medium;
 
@@ -127,27 +148,6 @@ $highlight: #f2c94c;
         &:not(.is-expanded) {
           margin-top: .25rem;
         }
-      }
-    }
-  }
-
-  .is-changed {
-    input {
-      &,
-      &:focus {
-        background: rgba($highlight, .35);
-      }
-    }
-
-    .checkbox,
-    .radio,
-    .text {
-      background: rgba($highlight, .35);
-    }
-
-    label {
-      &.text {
-        padding: .25rem .5rem;
       }
     }
   }

@@ -5,8 +5,8 @@
                 <label class="label">HTTPS</label>
             </div>
             <div class="field-body">
-                <div :class="`field${httpsChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${httpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="https" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -23,8 +23,8 @@
                 <label class="label">HTTP/2</label>
             </div>
             <div class="field-body">
-                <div :class="`field${http2Changed ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${http2Changed ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="http2" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -41,8 +41,8 @@
                 <label class="label">Force HTTPS</label>
             </div>
             <div class="field-body">
-                <div :class="`field${forceHttpsChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${forceHttpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="forceHttps" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -97,8 +97,10 @@
                 <label class="label">Certification type</label>
             </div>
             <div class="field-body">
-                <div :class="`field${certTypeChanged ? ' is-changed' : ''}`">
-                    <div v-for="(name, value) in $props.data.certType.options" class="control">
+                <div class="field">
+                    <div v-for="(name, value) in $props.data.certType.options"
+                         :class="`control${certTypeChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -115,8 +117,8 @@
                 <label class="label">Let's Encrypt email</label>
             </div>
             <div class="field-body">
-                <div :class="`field${letsEncryptEmailChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${letsEncryptEmailChanged ? ' is-changed' : ''}`">
                         <input v-model="letsEncryptEmail"
                                class="input"
                                type="text"
@@ -132,8 +134,8 @@
                 <label class="label">ssl_certificate</label>
             </div>
             <div class="field-body">
-                <div :class="`field${sslCertificateChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${sslCertificateChanged ? ' is-changed' : ''}`">
                         <input v-model="sslCertificate"
                                class="input"
                                type="text"
@@ -149,8 +151,8 @@
                 <label class="label">ssl_certificate_key</label>
             </div>
             <div class="field-body">
-                <div :class="`field${sslCertificateKeyChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${sslCertificateKeyChanged ? ' is-changed' : ''}`">
                         <input v-model="sslCertificateKey"
                                class="input"
                                type="text"

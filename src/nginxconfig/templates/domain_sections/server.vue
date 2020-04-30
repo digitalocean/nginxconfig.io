@@ -1,23 +1,23 @@
 <template>
     <div>
         <div class="field-row">
-            <div :class="`field${domainChanged ? ' is-changed' : ''}`">
+            <div class="field">
                 <label class="label">Domain</label>
-                <div class="control">
+                <div :class="`control${domainChanged ? ' is-changed' : ''}`">
                     <input v-model="domain" class="input" type="text" :placeholder="domainDefault" />
                 </div>
             </div>
 
-            <div :class="`field${pathChanged ? ' is-changed' : ''}`">
+            <div class="field">
                 <label class="label">Path</label>
-                <div class="control">
+                <div :class="`control${pathChanged ? ' is-changed' : ''}`">
                     <input v-model="path" class="input" type="text" :placeholder="`/var/www/${domain}`" />
                 </div>
             </div>
 
-            <div :class="`field${documentRootChanged ? ' is-changed' : ''}`">
+            <div class="field">
                 <label class="label">Document root</label>
-                <div class="control">
+                <div :class="`control${documentRootChanged ? ' is-changed' : ''}`">
                     <input v-model="documentRoot" class="input" type="text" :placeholder="documentRootDefault" />
                 </div>
             </div>
@@ -28,8 +28,8 @@
                 <label class="label">www subdomain</label>
             </div>
             <div class="field-body">
-                <div :class="`field${wwwSubdomainChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${wwwSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="wwwSubdomain" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -46,8 +46,8 @@
                 <label class="label">CDN subdomain</label>
             </div>
             <div class="field-body">
-                <div :class="`field${cdnSubdomainChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${cdnSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cdnSubdomain" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -64,8 +64,8 @@
                 <label class="label">Redirect subdomains</label>
             </div>
             <div class="field-body">
-                <div :class="`field${redirectSubdomainsChanged ? ' is-changed' : ''}`">
-                    <div class="control">
+                <div class="field">
+                    <div :class="`control${redirectSubdomainsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="redirectSubdomains" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
@@ -84,23 +84,23 @@
                 <label class="label">listen</label>
             </div>
             <div class="field-body">
-                <div :class="`field has-addons${listenIpv4Changed ? ' is-changed' : ''}`">
+                <div class="field has-addons">
                     <div class="control">
                         <a class="button is-static">
                             IPv4
                         </a>
                     </div>
-                    <div class="control is-expanded">
+                    <div :class="`control is-expanded${listenIpv4Changed ? ' is-changed' : ''}`">
                         <input v-model="listenIpv4" class="input" type="text" :placeholder="listenIpv4Default" />
                     </div>
                 </div>
-                <div :class="`field has-addons${listenIpv6Changed ? ' is-changed' : ''}`">
+                <div class="field has-addons">
                     <div class="control">
                         <a class="button is-static">
                             IPv6
                         </a>
                     </div>
-                    <div class="control is-expanded">
+                    <div :class="`control is-expanded${listenIpv6Changed ? ' is-changed' : ''}`">
                         <input v-model="listenIpv6" class="input" type="text" :placeholder="listenIpv6Default" />
                     </div>
                 </div>
