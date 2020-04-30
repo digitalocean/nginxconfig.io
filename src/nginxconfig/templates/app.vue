@@ -29,16 +29,22 @@ limitations under the License.
         <div class="main container">
             <div class="tabs">
                 <ul>
-                    <li v-for="(data, index) in domains" :class="index === active ? 'is-active' : undefined">
-                        <a @click="active = index">{{ data.server.domain.computed }}{{ changes(index) }}</a>
+                    <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
+                        <a @click="active = data[1]">
+                            {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
+                            <i class="fas fa-times" @click="remove(data[1])"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a @click="add"><i class="fas fa-plus"></i> Add site</a>
                     </li>
                 </ul>
             </div>
 
-            <template v-for="(data, index) in domains">
-                <Domain :key="index"
-                        :data="data"
-                        :style="{ display: index === active ? 'block' : 'none' }"
+            <template v-for="data in activeDomains">
+                <Domain :key="data[1]"
+                        :data="data[0]"
+                        :style="{ display: data[1] === active ? 'block' : 'none' }"
                 ></Domain>
             </template>
         </div>
@@ -67,10 +73,14 @@ limitations under the License.
                 i18n,
                 domains: [
                     clone(Domain.delegated),
-                    clone(Domain.delegated),
                 ],
                 active: 0,
             };
+        },
+        computed: {
+            activeDomains() {
+                return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
+            },
         },
         methods: {
             changes(index) {
@@ -82,6 +92,14 @@ limitations under the License.
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
+            },
+            add() {
+                this.$data.domains.push(clone(Domain.delegated));
+                this.$data.active = this.$data.domains.length - 1;
+            },
+            remove(index) {
+                this.$set(this.$data.domains, index, null);
+                if (this.$data.active === index) this.$data.active = 0;
             },
         },
     };

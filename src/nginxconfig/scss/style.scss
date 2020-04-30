@@ -49,6 +49,26 @@ $highlight: #f2c94c;
             color: $dark-blue;
           }
         }
+
+        a {
+          i {
+            font-size: .75em;
+
+            &.fa-plus {
+              margin: 0 .35rem 0 0;
+            }
+
+            &.fa-times {
+              margin: 0 0 0 .35rem;
+              transition: color $transition;
+
+              &:hover,
+              &:focus {
+                color: $primary;
+              }
+            }
+          }
+        }
       }
     }
   }
