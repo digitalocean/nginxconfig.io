@@ -31,6 +31,15 @@ limitations under the License.
                    :style="{ display: active === tab.key ? 'block' : 'none' }"
                    class="container"
         ></component>
+
+        <div class="navigation-buttons">
+            <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
+                <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+            </a>
+            <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
+                <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -56,11 +65,28 @@ limitations under the License.
                 tabs,
             };
         },
+        computed: {
+            nextTab() {
+                const tabs = this.$data.tabs.map(t => t.key);
+                const index = tabs.indexOf(this.$data.active) + 1;
+                if (index < tabs.length) return tabs[index];
+                return false;
+            },
+            previousTab() {
+                const tabs = this.$data.tabs.map(t => t.key);
+                const index = tabs.indexOf(this.$data.active) - 1;
+                if (index >= 0) return tabs[index];
+                return false;
+            },
+        },
         methods: {
-            changes(tab) {
-                if (tab === 'presets') return ''; // Ignore changes from presets
-                const changes = Object.keys(this.$props.data[tab])
+            changesCount(tab) {
+                if (tab === 'presets') return 0; // Ignore changes from presets
+                return Object.keys(this.$props.data[tab])
                     .filter(key => isChanged(this.$props.data[tab][key], tab, key)).length;
+            },
+            changes(tab) {
+                const changes = this.changesCount(tab);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },
@@ -71,10 +97,12 @@ limitations under the License.
                 this.setValue(tab, key, this.$props.data[tab][key].default);
             },
             tabClass(tab) {
-                if (tab === this.$data.active) return 'is-active';
+                const classes = [];
+                if (tab === this.$data.active) classes.push('is-active');
+                if (this.changesCount(tab)) classes.push('is-changed');
                 const tabs = this.$data.tabs.map(t => t.key);
-                if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
-                return undefined;
+                if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) classes.push('is-before');
+                return classes.join(' ');
             },
         },
     };
