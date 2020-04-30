@@ -46,9 +46,9 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="forceHttps" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                (http://{{ $parent.$props.data.server.domain.value }}
+                                (http://{{ $parent.$props.data.server.domain.computed }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
-                                https://{{ $parent.$props.data.server.domain.value }})
+                                https://{{ $parent.$props.data.server.domain.computed }})
                             </PrettyCheck>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                         <input v-model="letsEncryptEmail"
                                class="input"
                                type="text"
-                               :placeholder="`info@${$parent.$props.data.server.domain.value}`"
+                               :placeholder="`info@${$parent.$props.data.server.domain.computed}`"
                         />
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                         <input v-model="sslCertificate"
                                class="input"
                                type="text"
-                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.value}.crt`"
+                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.computed}.crt`"
                         />
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         <input v-model="sslCertificateKey"
                                class="input"
                                type="text"
-                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.value}.key`"
+                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.computed}.key`"
                         />
                     </div>
                 </div>

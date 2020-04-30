@@ -33,7 +33,7 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="wwwSubdomain" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                (www.{{ domain }})
+                                (www.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="cdnSubdomain" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                (cdn.{{ domain }})
+                                (cdn.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
                     </div>
@@ -69,9 +69,9 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="redirectSubdomains" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                ({{ wwwSubdomain ? `${domain}, ` : '' }}*.{{ domain }}
+                                ({{ wwwSubdomain ? `${domain}, ` : '' }}*.{{ $props.data.domain.computed }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
-                                {{ wwwSubdomain ? 'www.' : '' }}{{ domain }})
+                                {{ wwwSubdomain ? 'www.' : '' }}{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
                     </div>
@@ -168,6 +168,22 @@
         },
         computed: computedFromDefaults(defaults, 'server'), // Getters & setters for the delegated data
         watch: {
+            '$props.data.domain': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+
+                    // Ignore www. if given
+                    if (data.computed.startsWith('www.')) {
+                        data.computed = data.computed.slice(4);
+                    }
+
+                    // Use default if empty
+                    if (!data.computed.trim()) {
+                        data.computed = data.default;
+                    }
+                },
+                deep: true,
+            },
             // Only allow CDN when WWW is enabled first
             '$props.data.wwwSubdomain': {
                 handler(data) {
