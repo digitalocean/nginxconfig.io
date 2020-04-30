@@ -59,12 +59,12 @@ $highlight: #f2c94c;
             }
 
             &.fa-times {
-              margin: 0 0 0 .35rem;
+              margin: 0 0 0 .5rem;
               transition: color $transition;
 
               &:hover,
               &:focus {
-                color: $primary;
+                color: $danger;
               }
             }
           }
