@@ -27,19 +27,19 @@
     };
 
     export default {
-        name: 'DomainPHP',                          // Component name
-        display: 'PHP',                             // Display name for tab
-        key: 'php',                                 // Key for data in parent
-        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
+        name: 'DomainPHP',                                  // Component name
+        display: 'PHP',                                     // Display name for tab
+        key: 'php',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         props: {
-            data: Object,                           // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'php'), // Getters & setters for the delegated data
         watch: {
             // If the Reverse proxy is enabled, PHP will be forced off
             '$parent.$props.data': {

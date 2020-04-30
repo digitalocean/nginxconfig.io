@@ -90,18 +90,9 @@ $highlight: #f2c94c;
   .field {
     &.is-horizontal {
       align-items: center;
-    }
 
-    &.is-changed {
-      input {
-        &,
-        &:focus {
-          background: rgba($highlight, .35);
-        }
-      }
-
-      .checkbox {
-        background: rgba($highlight, .35);
+      &.is-aligned-top {
+        align-items: flex-start;
       }
     }
 
@@ -122,9 +113,32 @@ $highlight: #f2c94c;
         padding: 0 ($margin * 1.5);
       }
     }
+
+    .control {
+      + .control {
+        &:not(.is-expanded) {
+          margin-top: .25rem;
+        }
+      }
+    }
   }
 
-  .checkbox {
+  .is-changed {
+    input {
+      &,
+      &:focus {
+        background: rgba($highlight, .35);
+      }
+    }
+
+    .checkbox,
+    .radio {
+      background: rgba($highlight, .35);
+    }
+  }
+
+  .checkbox,
+  .radio {
     border-radius: $border-radius;
     padding: .25rem .5rem;
 

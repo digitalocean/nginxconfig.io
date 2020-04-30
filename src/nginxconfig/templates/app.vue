@@ -49,9 +49,10 @@ limitations under the License.
 
 <script>
     import clone from 'clone';
-    import i18n from '../i18n';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
+    import isChanged from '../util/is_changed';
+    import i18n from '../i18n';
     import Domain from './domain';
 
     export default {
@@ -76,8 +77,7 @@ limitations under the License.
                 const data = this.$data.domains[index];
                 const changes = Object.entries(data).reduce((prev, current) => {
                     if (current[0] === 'presets') return prev; // Ignore changes from presets
-                    prev += Object.values(current[1])
-                        .filter(d => d.enabled && d.default !== d.value).length;
+                    prev += Object.keys(current[1]).filter(key => isChanged(current[1][key], current[0], key)).length;
                     return prev;
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;

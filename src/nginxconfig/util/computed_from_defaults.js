@@ -1,4 +1,6 @@
-export default (defaults) => {
+import isChanged from './is_changed';
+
+export default (defaults, cat) => {
     return Object.keys(defaults).reduce((prev, key) => {
         prev[key] = {
             get() {
@@ -21,7 +23,7 @@ export default (defaults) => {
         };
         prev[key + 'Changed'] = {
             get() {
-                return this.$props.data[key].enabled && this.$props.data[key].value !== this.$props.data[key].default;
+                return isChanged(this.$props.data[key], cat, key);
             },
         };
         return prev;

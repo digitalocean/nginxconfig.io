@@ -35,6 +35,7 @@ limitations under the License.
 </template>
 
 <script>
+    import isChanged from '../util/is_changed';
     import * as Sections from './domain_sections';
 
     const tabs = Object.values(Sections);
@@ -58,8 +59,8 @@ limitations under the License.
         methods: {
             changes(tab) {
                 if (tab === 'presets') return ''; // Ignore changes from presets
-                const changes = Object.values(this.$props.data[tab])
-                    .filter(d => d.enabled && d.default !== d.value).length;
+                const changes = Object.keys(this.$props.data[tab])
+                    .filter(key => isChanged(this.$props.data[tab][key], tab, key)).length;
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },

@@ -151,22 +151,22 @@
     };
 
     export default {
-        name: 'DomainServer',                       // Component name
-        display: 'Server',                          // Display name for tab
-        key: 'server',                              // Key for data in parent
-        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
+        name: 'DomainServer',                                   // Component name
+        display: 'Server',                                      // Display name for tab
+        key: 'server',                                          // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                           // Data delegated back to us from parent
+            data: Object,                                       // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'server'), // Getters & setters for the delegated data
         watch: {
             // Only allow CDN when WWW is enabled first
             '$props.data.wwwSubdomain': {
