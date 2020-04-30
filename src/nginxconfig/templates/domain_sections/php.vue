@@ -12,6 +12,9 @@
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
                                 <br />PHP cannot be enabled whilst the reverse proxy is enabled.
                             </template>
+                            <template v-if="$parent.$props.data.python.python.computed">
+                                <br />PHP cannot be enabled whilst Python is enabled.
+                            </template>
                         </label>
                     </div>
                 </div>
@@ -135,12 +138,11 @@
         },
         computed: computedFromDefaults(defaults, 'php'), // Getters & setters for the delegated data
         watch: {
-            // If the Reverse proxy is enabled, PHP will be forced off
+            // If the Reverse proxy or Python is enabled, PHP will be forced off
             '$parent.$props.data': {
                 handler(data) {
                     // This might cause recursion, but seems not to
-                    const state = data.reverseProxy.reverseProxy.computed;
-                    if (state) {
+                    if (data.reverseProxy.reverseProxy.computed || data.python.python.computed) {
                         this.$props.data.php.enabled = false;
                         this.$props.data.php.computed = false;
                     } else {
@@ -150,7 +152,7 @@
                 },
                 deep: true,
             },
-            // Disable everything if php is disabled
+            // Disable everything if PHP is disabled
             '$props.data.php': {
                 handler(data) {
                     const state = data.computed;

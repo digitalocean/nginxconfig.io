@@ -107,7 +107,7 @@ $highlight: #f2c94c;
         color: $dark-grey;
         display: inline-block;
         font-size: 14px;
-        padding: .25rem .5rem;
+        padding: 0 .5rem;
       }
     }
 
@@ -143,6 +143,12 @@ $highlight: #f2c94c;
     .radio,
     .text {
       background: rgba($highlight, .35);
+    }
+
+    label {
+      &.text {
+        padding: .25rem .5rem;
+      }
     }
   }
 
