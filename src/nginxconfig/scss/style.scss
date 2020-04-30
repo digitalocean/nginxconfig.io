@@ -101,6 +101,14 @@ $highlight: #f2c94c;
 
       color: $dark-blue;
       font-size: 1rem;
+
+      &.text {
+        border-radius: $border-radius;
+        color: $dark-grey;
+        display: inline-block;
+        font-size: 14px;
+        padding: .25rem .5rem;
+      }
     }
 
     .button {
@@ -132,7 +140,8 @@ $highlight: #f2c94c;
     }
 
     .checkbox,
-    .radio {
+    .radio,
+    .text {
       background: rgba($highlight, .35);
     }
   }
