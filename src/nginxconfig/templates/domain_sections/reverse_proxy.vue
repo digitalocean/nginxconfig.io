@@ -131,8 +131,7 @@
             // Disable all options if Reverse proxy is disabled
             '$props.data.reverseProxy': {
                 handler(data) {
-                    const state = data.computed;
-                    if (state) {
+                    if (data.computed) {
                         this.$props.data.path.enabled = true;
                         this.$props.data.path.computed = this.$props.data.path.value;
                         this.$props.data.proxyPass.enabled = true;

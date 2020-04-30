@@ -188,8 +188,7 @@
             '$props.data.wwwSubdomain': {
                 handler(data) {
                     // This might cause recursion, but seems not to
-                    const state = data.computed;
-                    if (state) {
+                    if (data.computed) {
                         this.$props.data.cdnSubdomain.enabled = true;
                         this.$props.data.cdnSubdomain.computed = this.$props.data.cdnSubdomain.value;
                     } else {

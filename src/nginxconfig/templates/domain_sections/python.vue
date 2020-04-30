@@ -111,8 +111,7 @@
             // Disable Django if Python is disabled
             '$props.data.python': {
                 handler(data) {
-                    const state = data.computed;
-                    if (state) {
+                    if (data.computed) {
                         this.$props.data.djangoRules.enabled = true;
                         this.$props.data.djangoRules.computed = this.$props.data.djangoRules.value;
                     } else {

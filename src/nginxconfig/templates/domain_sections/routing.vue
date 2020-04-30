@@ -158,8 +158,7 @@
             // Disable all options (expect legacy php) if root is disabled
             '$props.data.root': {
                 handler(data) {
-                    const state = data.computed;
-                    if (state) {
+                    if (data.computed) {
                         this.$props.data.index.enabled = true;
                         this.$props.data.index.computed = this.$props.data.index.value;
                         this.$props.data.fallbackHtml.enabled = true;

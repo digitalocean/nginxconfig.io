@@ -155,8 +155,7 @@
             // Disable everything if PHP is disabled
             '$props.data.php': {
                 handler(data) {
-                    const state = data.computed;
-                    if (state) {
+                    if (data.computed) {
                         this.$props.data.wordPressRules.enabled = true;
                         this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
                         this.$props.data.drupalRules.enabled = true;
