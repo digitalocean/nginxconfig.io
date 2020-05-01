@@ -8,7 +8,7 @@
                 <div class="field">
                     <div class="field">
                         <div v-for="(name, value) in $props.data.sslProfile.options"
-                             :class="`control${sslProfileChanged ? ' is-changed' : ''}`"
+                             :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
                         >
                             <div class="radio">
                                 <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">

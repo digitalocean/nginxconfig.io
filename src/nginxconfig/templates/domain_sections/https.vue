@@ -99,7 +99,7 @@
             <div class="field-body">
                 <div class="field">
                     <div v-for="(name, value) in $props.data.certType.options"
-                         :class="`control${certTypeChanged ? ' is-changed' : ''}`"
+                         :class="`control${certTypeChanged && value === certType ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">

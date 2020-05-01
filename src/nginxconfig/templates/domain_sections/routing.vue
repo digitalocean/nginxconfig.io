@@ -25,7 +25,7 @@
             <div class="field-body">
                 <div class="field">
                     <div v-for="value in $props.data.index.options"
-                         :class="`control${indexChanged ? ' is-changed' : ''}`"
+                         :class="`control${indexChanged && value === index ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
                             <PrettyRadio v-model="index" :value="value" class="p-default p-round p-fill p-icon">
