@@ -1,0 +1,155 @@
+<template>
+    <div>
+        <div v-if="!phpServerEnabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label">
+                <label class="label">PHP server</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <label class="text">
+                            PHP must be enabled on at least one site to configure global PHP settings.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <template v-else>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">PHP server</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${phpServerChanged ? ' is-changed' : ''}`">
+                            <VueSelect v-model="phpServer"
+                                       :options="phpServerOptions"
+                                       :clearable="false"
+                                       :reduce="s => s.value"
+                            ></VueSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">PHP backup server</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
+                            <VueSelect v-model="phpBackupServer"
+                                       :options="phpBackupServerOptions"
+                                       :clearable="false"
+                                       :reduce="s => s.value"
+                            ></VueSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
+
+<script>
+    import VueSelect from 'vue-select';
+    import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
+
+    const serverOptions = {
+        '127.0.0.1:9000': 'TCP: 127.0.0.1:9000',
+        '/var/run/hhvm/sock': 'HHVM socket: /var/run/hhvm/sock',
+        '/var/run/hhvm/hhvm.sock': 'HHVM socket: /var/run/hhvm/hhvm.sock',
+        '/var/run/php5-fpm.sock': '5.x socket: /var/run/php5-fpm.sock',
+        '/var/run/php/php7.0-fpm.sock': '7.0 socket: /var/run/php/php7.0-fpm.sock',
+        '/var/run/php/php7.1-fpm.sock': '7.1 socket: /var/run/php/php7.1-fpm.sock',
+        '/var/run/php/php7.2-fpm.sock': '7.2 socket: /var/run/php/php7.2-fpm.sock',
+        '/var/run/php/php7.3-fpm.sock': '7.3 socket: /var/run/php/php7.3-fpm.sock',
+    };
+
+    const defaults = {
+        phpServer: {
+            default: '/var/run/php/php7.2-fpm.sock',
+            options: serverOptions,
+            enabled: true,
+        },
+        phpBackupServer: {
+            default: '',
+            options: { '': 'Disabled', ...serverOptions },
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'GlobalPHP',                                  // Component name
+        display: 'PHP',                                     // Display name for tab
+        key: 'php',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        components: {
+            VueSelect,
+        },
+        props: {
+            data: Object,                                   // Data delegated back to us from parent
+        },
+        data () {
+            return {
+                i18n,
+            };
+        },
+        computed: {
+            ...computedFromDefaults(defaults, 'php'),  // Getters & setters for the delegated data
+            phpServerOptions() {
+                return Object.entries(this.$props.data.phpServer.options)
+                    .map(([key, value]) => ({ label: value, value: key }));
+            },
+            phpBackupServerOptions() {
+                return Object.entries(this.$props.data.phpBackupServer.options)
+                    .map(([key, value]) => ({ label: value, value: key }));
+            },
+        },
+        watch: {
+            // Check server selection is valid
+            '$props.data.phpServer': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+            // Check backup server selection is valid
+            '$props.data.phpBackupServer': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+            // Enable PHP server settings if any site uses PHP
+            '$parent.$parent.$data.domains': {
+                handler(data) {
+                    for (const domain of data) {
+                        if (domain && domain.php && domain.php.php && domain.php.php.computed) {
+                            this.$props.data.phpServer.enabled = true;
+                            this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
+                            this.$props.data.phpBackupServer.enabled = true;
+                            this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
+                            return;
+                        }
+                    }
+                    this.$props.data.phpServer.enabled = false;
+                    this.$props.data.phpServer.computed = '';
+                    this.$props.data.phpBackupServer.enabled = false;
+                    this.$props.data.phpBackupServer.computed = '';
+                },
+                deep: true,
+            },
+        },
+    };
+</script>

@@ -7,7 +7,10 @@
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${referrerPolicyChanged ? ' is-changed' : ''}`">
-                        <VueSelect v-model="referrerPolicy" :options="$props.data.referrerPolicy.options" :clearable="false"></VueSelect>
+                        <VueSelect v-model="referrerPolicy"
+                                   :options="$props.data.referrerPolicy.options"
+                                   :clearable="false"
+                        ></VueSelect>
                     </div>
                 </div>
             </div>
