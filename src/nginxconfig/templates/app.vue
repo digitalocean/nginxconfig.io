@@ -52,6 +52,8 @@ limitations under the License.
 
             <h2>Global config</h2>
             <Global :data="global"></Global>
+
+            <pre><code>{{ JSON.stringify({ domains: activeDomains, global }, null, 2) }}</code></pre>
         </div>
 
         <Footer :text="i18n.templates.app.oss"></Footer>
