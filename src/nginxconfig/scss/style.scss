@@ -23,6 +23,9 @@ $highlight: #f2c94c;
   $pretty--color-default: $primary;
   @import "~pretty-checkbox/src/pretty-checkbox";
   $vs-state-active-bg: $primary;
+  $vs-border-radius: $border-radius;
+  $vs-border-color: $border;
+  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
   @import "~vue-select/src/scss/vue-select";
 
   .tabs {
@@ -263,7 +266,6 @@ $highlight: #f2c94c;
     }
 
     .vs__dropdown-toggle {
-      border: 1px solid $border;
       box-shadow: none;
       padding: 0 16px;
       transition: border $transition, box-shadow $transition;
