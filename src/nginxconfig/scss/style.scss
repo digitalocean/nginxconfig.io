@@ -22,6 +22,8 @@ $highlight: #f2c94c;
   $pretty--color-dark: $primary;
   $pretty--color-default: $primary;
   @import "~pretty-checkbox/src/pretty-checkbox";
+  $vs-state-active-bg: $primary;
+  @import "~vue-select/src/scss/vue-select";
 
   .tabs {
     ul {
@@ -141,9 +143,11 @@ $highlight: #f2c94c;
 
     .is-changed {
       input {
-        &,
-        &:focus {
-          background: rgba($highlight, .35);
+        &:not(.vs__search) {
+          &,
+          &:focus {
+            background: rgba($highlight, .35);
+          }
         }
       }
 
@@ -156,6 +160,12 @@ $highlight: #f2c94c;
       label {
         &.text {
           padding: .25rem .5rem;
+        }
+      }
+
+      .v-select {
+        .vs__dropdown-toggle {
+          background: rgba($highlight, .35);
         }
       }
     }
@@ -225,6 +235,63 @@ $highlight: #f2c94c;
             }
           }
         }
+      }
+    }
+  }
+
+  .v-select {
+    &.vs--open {
+      > ul {
+        opacity: 1;
+      }
+
+      .vs__dropdown-toggle {
+        border-color: $primary;
+        box-shadow: 0 0 2px rgba($success, .5);
+
+        .vs__selected {
+          top: .75em;
+        }
+      }
+    }
+
+    > ul {
+      display: block !important;
+      margin: 0;
+      opacity: 0;
+      transition: opacity $transition;
+    }
+
+    .vs__dropdown-toggle {
+      border: 1px solid $border;
+      box-shadow: none;
+      padding: 0 16px;
+      transition: border $transition, box-shadow $transition;
+
+      .vs__selected-options {
+        padding: 0;
+
+        .vs__selected {
+          margin: 0;
+          padding: 0;
+          transition: opacity $transition;
+        }
+
+        .vs__search {
+          &,
+          &:focus {
+            background: none;
+            border: 0;
+            box-shadow: none;
+            margin: 0;
+            padding: 0;
+            width: 0;
+          }
+        }
+      }
+
+      .vs__actions {
+        padding: 0;
       }
     }
   }
