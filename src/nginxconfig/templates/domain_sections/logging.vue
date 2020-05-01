@@ -10,7 +10,7 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable for each domain
+                                enable for this domain
                             </PrettyCheck>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <div class="checkbox">
                             <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable for each domain
+                                enable for this domain
                             </PrettyCheck>
                         </div>
                     </div>
