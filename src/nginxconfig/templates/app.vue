@@ -27,6 +27,8 @@ limitations under the License.
         </Header>
 
         <div class="main container">
+            <h2>Per-website config</h2>
+
             <div class="tabs">
                 <ul>
                     <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
@@ -47,6 +49,9 @@ limitations under the License.
                         :style="{ display: data[1] === active ? 'block' : 'none' }"
                 ></Domain>
             </template>
+
+            <h2>Global config</h2>
+            <Global :data="global"></Global>
         </div>
 
         <Footer :text="i18n.templates.app.oss"></Footer>
@@ -60,13 +65,15 @@ limitations under the License.
     import isChanged from '../util/is_changed';
     import i18n from '../i18n';
     import Domain from './domain';
+    import Global from './global';
 
     export default {
         name: 'App',
         components: {
-            Domain,
             Header,
             Footer,
+            Domain,
+            Global,
         },
         data() {
             return {
@@ -74,6 +81,7 @@ limitations under the License.
                 domains: [
                     clone(Domain.delegated),
                 ],
+                global: Global.delegated,
                 active: 0,
             };
         },
