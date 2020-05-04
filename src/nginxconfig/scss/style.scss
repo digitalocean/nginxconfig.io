@@ -191,18 +191,18 @@ $highlight: #f2c94c;
     .button {
       &.is-static {
         background: $panel;
-        border-color: $border;
-        border-style: solid;
-        border-width: 1px 0 1px 1px;
+        border: 1px solid $border;
         color: $dark-grey;
         padding: 0 ($margin * 1.5);
       }
     }
 
     .control {
-      + .control {
-        &:not(.is-expanded) {
-          margin-top: .25rem;
+      &:not(.is-expanded) {
+        + .control {
+          &:not(.is-expanded) {
+            margin-top: .25rem;
+          }
         }
       }
     }
