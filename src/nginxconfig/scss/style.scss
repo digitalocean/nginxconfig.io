@@ -144,6 +144,18 @@ $highlight: #f2c94c;
       }
     }
 
+    &.is-grouped {
+      > .control {
+        &:last-child {
+          margin: .25rem 0 0;
+        }
+
+        &:not(:last-child) {
+          margin: .25rem .75rem 0 0;
+        }
+      }
+    }
+
     .is-changed {
       input {
         &:not(.vs__search) {
@@ -203,6 +215,18 @@ $highlight: #f2c94c;
           &:not(.is-expanded) {
             margin-top: .25rem;
           }
+        }
+      }
+    }
+  }
+
+  .field-body {
+    &.is-vertical {
+      flex-direction: column;
+
+      > .field {
+        &:not(:last-child) {
+          margin-bottom: .75rem;
         }
       }
     }

@@ -53,7 +53,7 @@ limitations under the License.
             <h2>Global config</h2>
             <Global :data="global"></Global>
 
-            <pre><code>{{ JSON.stringify({ domains: activeDomains, global }, null, 2) }}</code></pre>
+            <pre><code>{{ exportData }}</code></pre>
         </div>
 
         <Footer :text="i18n.templates.app.oss"></Footer>
@@ -65,6 +65,7 @@ limitations under the License.
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
+    import exportData from '../util/export_data';
     import i18n from '../i18n';
     import Domain from './domain';
     import Global from './global';
@@ -90,6 +91,9 @@ limitations under the License.
         computed: {
             activeDomains() {
                 return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
+            },
+            exportData() {
+                return JSON.stringify(exportData(this.activeDomains, this.$data.global), null, 2);
             },
         },
         methods: {
