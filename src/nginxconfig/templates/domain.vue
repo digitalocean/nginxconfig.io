@@ -15,47 +15,60 @@ limitations under the License.
 -->
 
 <template>
-    <div class="panel">
-        <div class="tabs">
-            <ul>
-                <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                    <a @click="active = tab.key">{{ tab.display }}{{ changes(tab.key) }}</a>
-                </li>
-            </ul>
+    <div>
+        <div class="panel presets">
+            <Presets :data="$props.data.presets"></Presets>
         </div>
 
-        <component :is="tab"
-                   v-for="tab in tabs"
-                   :key="tab.key"
-                   :data="$props.data[tab.key]"
-                   :style="{ display: active === tab.key ? 'block' : 'none' }"
-                   class="container"
-        ></component>
+        <div class="panel">
+            <div class="tabs">
+                <ul>
+                    <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                        <a @click="active = tab.key">{{ tab.display }}{{ changes(tab.key) }}</a>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="navigation-buttons">
-            <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
-            </a>
-            <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
-            </a>
+            <component :is="tab"
+                       v-for="tab in tabs"
+                       :key="tab.key"
+                       :data="$props.data[tab.key]"
+                       :style="{ display: active === tab.key ? 'block' : 'none' }"
+                       class="container"
+            ></component>
+
+            <div class="navigation-buttons">
+                <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
+                    <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                </a>
+                <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
+                    <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import isChanged from '../util/is_changed';
+    import Presets from './domain_sections/presets';
     import * as Sections from './domain_sections';
 
     const tabs = Object.values(Sections);
-    const delegated = tabs.reduce((prev, tab) => {
-        prev[tab.key] = tab.delegated;
-        return prev;
-    }, {});
+    const delegated = {
+        presets: Presets.delegated,
+        ...tabs.reduce((prev, tab) => {
+            prev[tab.key] = tab.delegated;
+            return prev;
+        }, {}),
+    };
 
     export default {
         name: 'Domain',
-        delegated,          // Data the parent will present here
+        delegated,
+        components: {
+            Presets,
+        },          // Data the parent will present here
         props: {
             data: Object,   // Data delegated back to us from parent
         },
@@ -63,6 +76,7 @@ limitations under the License.
             return {
                 active: tabs[0].key,
                 tabs,
+                hasUserInteraction: false,
             };
         },
         computed: {
@@ -81,7 +95,6 @@ limitations under the License.
         },
         methods: {
             changesCount(tab) {
-                if (tab === 'presets') return 0; // Ignore changes from presets
                 return Object.keys(this.$props.data[tab])
                     .filter(key => isChanged(this.$props.data[tab][key], tab, key)).length;
             },

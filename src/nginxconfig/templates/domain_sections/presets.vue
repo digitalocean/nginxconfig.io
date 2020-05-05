@@ -1,13 +1,34 @@
 <template>
-    <div>
-        <div class="buttons-group">
-            <a v-for="(preset, key) in $props.data"
-               :class="`button${preset.computed ? ' is-primary' : ''}`"
-               @click="setPreset(key)"
-            >
-                {{ preset.display }}
-            </a>
+    <div class="container">
+        <div class="header-group">
+            <h3>Presets</h3>
+            <template v-if="$parent.$data.hasUserInteraction">
+                <a v-if="expanded" class="button is-tiny" @click="expanded = false">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+                <a v-else class="button is-tiny" @click="expanded = true">
+                    <i class="fas fa-angle-down"></i>
+                </a>
+            </template>
         </div>
+
+        <template v-if="!$parent.$data.hasUserInteraction || expanded">
+            <div v-if="$parent.$data.hasUserInteraction" class="message is-warning">
+                <div class="message-body">
+                    It looks like you've customised the configuration for this domain.
+                    Choosing a new preset may reset or change some of the settings that you've customised.
+                </div>
+            </div>
+
+            <div class="buttons-group">
+                <a v-for="(preset, key) in $props.data"
+                   :class="`button${preset.computed ? ' is-primary' : ''}`"
+                   @click="setPreset(key)"
+                >
+                    {{ preset.display }}
+                </a>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -114,19 +135,20 @@
     };
 
     export default {
-        name: 'DomainPresets',                      // Component name
-        display: 'Presets',                         // Display name for tab
-        key: 'presets',                             // Key for data in parent
-        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
+        name: 'DomainPresets',                                      // Component name
+        display: 'Presets',                                         // Display name for tab
+        key: 'presets',                                             // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         props: {
-            data: Object,                           // Data delegated back to us from parent
+            data: Object,                                           // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
+                expanded: false,
             };
         },
-        computed: computedFromDefaults(defaults),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'presets', false), // Getters & setters for the delegated data
         watch: {
             // When any data changes, check if it still matches a preset
             '$parent.$props.data': {

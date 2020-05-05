@@ -82,6 +82,38 @@ $highlight: #f2c94c;
     margin-top: 0;
     padding: 1.5rem 0 2rem;
 
+    &.presets {
+      text-align: left;
+
+      .header-group,
+      .buttons-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .header-group {
+        h3 {
+          margin: 0;
+        }
+
+        .button {
+          &.is-tiny {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .message,
+      .buttons-group {
+        margin: 1rem 0 0;
+      }
+
+      .buttons-group {
+        align-items: center;
+      }
+    }
+
     .container {
       padding: 0 1.5rem;
     }
@@ -91,28 +123,21 @@ $highlight: #f2c94c;
         padding: 0 1rem;
       }
     }
-  }
 
-  .buttons-group {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .navigation-buttons {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      margin: 1.5rem 1.5rem 0;
 
-  .navigation-buttons {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin: 1.5rem 1.5rem 0;
+      .button {
+        margin-left: .5rem;
 
-    .button {
-      margin-left: .5rem;
-
-      i + span,
-      span + i {
-        margin: 0 0 0 .5rem;
+        i + span,
+        span + i {
+          margin: 0 0 0 .5rem;
+        }
       }
     }
   }

@@ -1,4 +1,3 @@
-export { default as Presets } from './presets';
 export { default as Server } from './server';
 export { default as HTTPS } from './https';
 export { default as PHP } from './php';
