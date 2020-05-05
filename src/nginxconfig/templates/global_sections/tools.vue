@@ -46,7 +46,7 @@
                         <input v-model="shareLink"
                                class="input"
                                type="text"
-                               disabled="disabled"
+                               readonly="readonly"
                         />
                     </div>
                 </div>
@@ -108,6 +108,7 @@
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
+    import qs from 'qs';
     import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
@@ -145,8 +146,19 @@
             hasDomain() {
                 return this.$parent.$parent.activeDomains.length > 0;
             },
+            shareQuery() {
+                const data = exportData(this.$parent.$parent.activeDomains, this.$parent.$props.data);
+                return qs.stringify(data, { allowDots: true });
+            },
             shareLink() {
-                return JSON.stringify(exportData(this.$parent.$parent.activeDomains, this.$parent.$props.data));
+                const base = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+                return `${base}${this.shareQuery.length ? '?' : ''}${this.shareQuery}`;
+            },
+        },
+        watch: {
+            // When the share link changes, update the site query
+            shareQuery(query) {
+                window.history.replaceState({}, '', `?${query}`);
             },
         },
         methods: {
