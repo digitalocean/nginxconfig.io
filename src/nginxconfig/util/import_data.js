@@ -3,6 +3,36 @@ import clone from 'clone';
 import Domain from '../templates/domain';
 import isObject from './is_object';
 
+const applyCategories = (categories, target) => {
+    // Work through each potential category
+    for (const category in categories) {
+        // Avoid inheritance
+        if (!Object.prototype.hasOwnProperty.call(categories, category)) continue;
+
+        // Ignore presets
+        if (category === 'presets') continue;
+
+        // Check this is a real category
+        if (!(category in target)) continue;
+
+        // Check this is an object
+        if (!isObject(categories[category])) continue;
+
+        // Work through each potential setting in this category
+        for (const key in categories[category]) {
+            // Avoid inheritance
+            if (!Object.prototype.hasOwnProperty.call(categories[category], key)) continue;
+
+            // Check this is a real key
+            if (!(key in target[category])) continue;
+
+            // Apply the value
+            target[category][key].value = categories[category][key];
+            target[category][key].computed = categories[category][key];
+        }
+    }
+};
+
 export default (query, domains, global, nextTick) => {
     const data = qs.parse(query, {
         ignoreQueryPrefix: true,
@@ -47,33 +77,14 @@ export default (query, domains, global, nextTick) => {
                 domains.push(domainImported);
 
                 // Apply the initial values on the next Vue tick, once the watchers are ready
-                nextTick(() => {
-                    // Work through each potential category
-                    for (const category in domainData) {
-                        // Ignore presets
-                        if (category === 'presets') continue;
-
-                        // Check this is a real category
-                        if (!(category in domainImported)) continue;
-
-                        // Check this is an object
-                        if (!isObject(domainData[category])) continue;
-
-                        // Work through each potential setting in this category
-                        for (const key in domainData[category]) {
-                            // Check this is a real key
-                            if (!(key in domainImported[category])) continue;
-
-                            // Apply the value
-                            domainImported[category][key].value = domainData[category][key];
-                            domainImported[category][key].computed = domainData[category][key];
-                        }
-                    }
-                });
+                nextTick(() => applyCategories(domainData, domainImported));
             }
         }
     }
 
     // Handle global settings
-    // TODO
+    if ('global' in data) {
+        // If this is an object, apply any potential data
+        if (isObject(data.global)) applyCategories(data.global, global);
+    }
 };
