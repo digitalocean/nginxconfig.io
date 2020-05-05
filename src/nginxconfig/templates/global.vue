@@ -28,7 +28,7 @@ limitations under the License.
                    v-for="tab in tabs"
                    :key="tab.key"
                    :data="$props.data[tab.key]"
-                   :style="{ display: active === tab.key ? 'block' : 'none' }"
+                   :style="{ display: active === tab.key ? undefined : 'none' }"
                    class="container"
         ></component>
 

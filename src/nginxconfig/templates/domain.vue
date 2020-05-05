@@ -33,7 +33,7 @@ limitations under the License.
                        v-for="tab in tabs"
                        :key="tab.key"
                        :data="$props.data[tab.key]"
-                       :style="{ display: active === tab.key ? 'block' : 'none' }"
+                       :style="{ display: active === tab.key ? undefined : 'none' }"
                        class="container"
             ></component>
 
@@ -56,6 +56,7 @@ limitations under the License.
 
     const tabs = Object.values(Sections);
     const delegated = {
+        hasUserInteraction: false,
         presets: Presets.delegated,
         ...tabs.reduce((prev, tab) => {
             prev[tab.key] = tab.delegated;
@@ -65,10 +66,10 @@ limitations under the License.
 
     export default {
         name: 'Domain',
-        delegated,
+        delegated,          // Data the parent will present here
         components: {
             Presets,
-        },          // Data the parent will present here
+        },
         props: {
             data: Object,   // Data delegated back to us from parent
         },
@@ -76,7 +77,6 @@ limitations under the License.
             return {
                 active: tabs[0].key,
                 tabs,
-                hasUserInteraction: false,
             };
         },
         computed: {

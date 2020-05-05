@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-group">
             <h3>Presets</h3>
-            <template v-if="$parent.$data.hasUserInteraction">
+            <template v-if="$parent.$props.data.hasUserInteraction">
                 <a v-if="expanded" class="button is-tiny" @click="expanded = false">
                     <i class="fas fa-angle-up"></i>
                 </a>
@@ -12,8 +12,8 @@
             </template>
         </div>
 
-        <template v-if="!$parent.$data.hasUserInteraction || expanded">
-            <div v-if="$parent.$data.hasUserInteraction" class="message is-warning">
+        <template v-if="!$parent.$props.data.hasUserInteraction || expanded">
+            <div v-if="$parent.$props.data.hasUserInteraction" class="message is-warning">
                 <div class="message-body">
                     It looks like you've customised the configuration for this domain.
                     Choosing a new preset may reset or change some of the settings that you've customised.

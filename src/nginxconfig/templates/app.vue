@@ -26,7 +26,7 @@ limitations under the License.
             </template>
         </Header>
 
-        <div class="main container">
+        <div class="main container" :style="{ display: ready ? undefined : 'none' }">
             <h2>Per-website config</h2>
 
             <div class="tabs">
@@ -46,7 +46,7 @@ limitations under the License.
             <template v-for="data in activeDomains">
                 <Domain :key="data[1]"
                         :data="data[0]"
-                        :style="{ display: data[1] === active ? 'block' : 'none' }"
+                        :style="{ display: data[1] === active ? undefined : 'none' }"
                 ></Domain>
             </template>
 
@@ -66,6 +66,8 @@ limitations under the License.
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
     import exportData from '../util/export_data';
+    import importData from '../util/import_data';
+    import isObject from '../util/is_object';
     import i18n from '../i18n';
     import Domain from './domain';
     import Global from './global';
@@ -81,11 +83,10 @@ limitations under the License.
         data() {
             return {
                 i18n,
-                domains: [
-                    clone(Domain.delegated),
-                ],
+                domains: [],
                 global: Global.delegated,
                 active: 0,
+                ready: false,
             };
         },
         computed: {
@@ -96,11 +97,26 @@ limitations under the License.
                 return JSON.stringify(exportData(this.activeDomains, this.$data.global), null, 2);
             },
         },
+        mounted() {
+            // If there is no query param, add one default domain and we're ready
+            if (!window.location.search.length) {
+                this.$data.domains.push(clone(Domain.delegated));
+                this.$data.ready = true;
+                return;
+            }
+
+            // Import any data from the URL query params
+            importData(window.location.search, this.$data.domains, this.$data.global, this.$nextTick);
+
+            // After two ticks (one tick to set watched data), we are ready
+            this.$nextTick(() => this.$nextTick(() => this.$data.ready = true));
+        },
         methods: {
             changes(index) {
                 const data = this.$data.domains[index];
                 const changes = Object.entries(data).reduce((prev, current) => {
                     if (current[0] === 'presets') return prev; // Ignore changes from presets
+                    if (!isObject(current[1])) return prev; // Ignore non-objects (things that aren't tabs)
                     prev += Object.keys(current[1]).filter(key => isChanged(current[1][key], current[0], key)).length;
                     return prev;
                 }, 0);

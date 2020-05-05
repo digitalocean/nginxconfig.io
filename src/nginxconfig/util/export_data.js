@@ -3,6 +3,8 @@ const categoriesExport = (categories) => {
 
     // Work through each category
     for (const category in categories) {
+        // Ignore presets
+        if (category === 'presets') continue;
         const categoryData = {};
 
         // Go over each property in the category
