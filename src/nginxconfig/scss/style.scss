@@ -114,6 +114,26 @@ $highlight: #f2c94c;
       }
     }
 
+    &.setup {
+      ol {
+        color: $dark-blue;
+        margin: 0 1rem;
+        text-align: left;
+
+        li {
+          margin: 0 0 1.5rem;
+
+          p {
+            overflow-wrap: break-word;
+
+            a {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+
     .container {
       padding: 0 1.5rem;
     }
@@ -204,7 +224,7 @@ $highlight: #f2c94c;
       }
 
       .v-select {
-        .vs__dropdown-toggle {
+        .vs__dropdown-toggle { // sass-lint:disable-line class-name-format
           background: rgba($highlight, .35);
         }
       }
@@ -291,6 +311,7 @@ $highlight: #f2c94c;
     }
   }
 
+  // sass-lint:disable class-name-format
   .v-select {
     &.vs--open {
       > ul {
@@ -308,7 +329,7 @@ $highlight: #f2c94c;
     }
 
     > ul {
-      display: block !important;
+      display: block !important; // sass-lint:disable-line no-important
       margin: 0;
       opacity: 0;
       transition: opacity $transition;
@@ -346,6 +367,7 @@ $highlight: #f2c94c;
       }
     }
   }
+  // sass-lint:enable class-name-format
 
   .modal {
     .modal-card {

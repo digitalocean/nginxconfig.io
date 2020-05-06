@@ -53,6 +53,9 @@ limitations under the License.
             <h2>Global config</h2>
             <Global :data="global"></Global>
 
+            <h2>Setup and files</h2>
+            <Setup :data="{ domains, global }"></Setup>
+
             <pre><code>{{ exportData }}</code></pre>
         </div>
 
@@ -71,6 +74,7 @@ limitations under the License.
     import i18n from '../i18n';
     import Domain from './domain';
     import Global from './global';
+    import Setup from './setup';
 
     export default {
         name: 'App',
@@ -79,6 +83,7 @@ limitations under the License.
             Footer,
             Domain,
             Global,
+            Setup,
         },
         data() {
             return {
