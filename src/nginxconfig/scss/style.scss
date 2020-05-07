@@ -113,25 +113,6 @@ $highlight: #f2c94c;
       }
     }
 
-    &.setup {
-      p {
-        color: $dark-blue;
-        overflow-wrap: break-word;
-
-        a {
-          text-decoration: none;
-        }
-      }
-
-      ol {
-        margin: 0 1rem;
-
-        li {
-          margin: 0 0 1.5rem;
-        }
-      }
-    }
-
     .container {
       padding: 0 1.5rem;
     }
@@ -370,6 +351,32 @@ $highlight: #f2c94c;
   .modal {
     .modal-card {
       text-align: left;
+    }
+  }
+
+  .setup {
+    .panel {
+
+      p {
+        color: $dark-blue;
+        overflow-wrap: break-word;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      ol {
+        margin: 0 1rem;
+
+        li {
+          margin: 0 0 1.5rem;
+        }
+      }
+    }
+
+    .buttons {
+      margin: 1rem 0;
     }
   }
 }

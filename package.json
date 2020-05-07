@@ -14,9 +14,11 @@
     "dev:prep": "npm run build:template && npm run dev:static",
     "dev:static": "copyfiles --up 2 ./src/static/{*,**/*} dev",
     "test": "npm run test:eslint && npm run test:scss",
+    "test:fix": "npm run test:eslint:fix && npm run test:scss:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
-    "test:scss": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc"
+    "test:scss": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
+    "test:scss:fix": "sass-lint-auto-fix 'src/**/*.scss'"
   },
   "repository": {
     "type": "git",
@@ -54,6 +56,7 @@
     "posthtml-extend": "^0.3.0",
     "sass": "^1.26.3",
     "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

@@ -3,12 +3,12 @@
         <ol>
             <li>
                 <p>
-                    <b>Download</b> the generated config: <b><a @click="downloadZip">{{ zipName }}</a></b>
+                    <b>Download</b> the generated config: <b><a @click="$parent.downloadZip">{{ $parent.zipName }}</a></b>
                     <br />
-                    and <b>upload</b> it to your server's <code class="slim">{{ nginxDir }}</code> directory.
+                    and <b>upload</b> it to your server's <code class="slim">{{ $parent.nginxDir }}</code> directory.
                 </p>
                 <p>
-                    or, <b><a @click="copyZip">Copy a base64 string of the compressed config</a></b>, paste it in
+                    or, <b><a @click="$parent.copyZip">Copy a base64 string of the compressed config</a></b>, paste it in
                     your server's command line and execute it.
                 </p>
             </li>
@@ -25,7 +25,7 @@
                 <p>
                     Navigate to your NGINX <b>configuration directory</b> on your server:
                     <br />
-                    <code class="slim">cd {{ nginxDir }}</code>
+                    <code class="slim">cd {{ $parent.nginxDir }}</code>
                 </p>
             </li>
 
@@ -41,7 +41,7 @@
                 <p>
                     <b>Unzip</b> the new compressed configuration archive:
                     <br />
-                    <code class="slim">unzip -o {{ zipName }}</code>
+                    <code class="slim">unzip -o {{ $parent.zipName }}</code>
                 </p>
             </li>
         </ol>
@@ -62,24 +62,6 @@
             return {
                 i18n,
             };
-        },
-        computed: {
-            nginxDir() {
-                return this.$props.data.global.nginx.nginxConfigDirectory.computed;
-            },
-            zipName() {
-                const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
-                return `nginxconfig.io-${domains.join(',')}.zip`;
-            },
-        },
-        methods: {
-            downloadZip() {
-                alert('Imagine I\'m a working download');
-            },
-            copyZip() {
-                const command = `echo 'BASE64 HERE' | base64 --decode > ${this.nginxDir}${this.zipName}`;
-                alert(`Imagine I'm a working copy to clipboard\n\n${command}`);
-            },
         },
     };
 </script>

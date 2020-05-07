@@ -15,30 +15,37 @@ limitations under the License.
 -->
 
 <template>
-    <div class="panel setup">
-        <div class="tabs">
-            <ul>
-                <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                    <a @click="active = tab.key">{{ tab.display }}</a>
-                </li>
-            </ul>
+    <div class="setup">
+        <div class="panel">
+            <div class="tabs">
+                <ul>
+                    <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                        <a @click="active = tab.key">{{ tab.display }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <component :is="tab"
+                       v-for="tab in tabs"
+                       :key="tab.key"
+                       :data="$props.data"
+                       :style="{ display: active === tab.key ? undefined : 'none' }"
+                       class="container"
+            ></component>
+
+            <div class="navigation-buttons">
+                <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
+                    <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                </a>
+                <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
+                    <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+                </a>
+            </div>
         </div>
 
-        <component :is="tab"
-                   v-for="tab in tabs"
-                   :key="tab.key"
-                   :data="$props.data"
-                   :style="{ display: active === tab.key ? undefined : 'none' }"
-                   class="container"
-        ></component>
-
-        <div class="navigation-buttons">
-            <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
-            </a>
-            <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
-            </a>
+        <div class="buttons is-centered">
+            <a class="button is-success" @click="downloadZip">Download Config</a>
+            <a class="button is-primary" @click="copyZip">Copy Base64</a>
         </div>
     </div>
 </template>
@@ -72,6 +79,13 @@ limitations under the License.
                 if (index >= 0) return tabs[index];
                 return false;
             },
+            nginxDir() {
+                return this.$props.data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
+            },
+            zipName() {
+                const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
+                return `nginxconfig.io-${domains.join(',')}.zip`;
+            },
         },
         methods: {
             tabClass(tab) {
@@ -79,6 +93,13 @@ limitations under the License.
                 const tabs = this.$data.tabs.map(t => t.key);
                 if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
                 return undefined;
+            },
+            downloadZip() {
+                alert('Imagine I\'m a working download');
+            },
+            copyZip() {
+                const command = `echo 'BASE64 HERE' | base64 --decode > ${this.nginxDir}/${this.zipName}`;
+                alert(`Imagine I'm a working copy to clipboard\n\n${command}`);
             },
         },
     };

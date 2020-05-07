@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div v-if="symlinkVhostEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">Symlink vhost</label>
             </div>
@@ -172,6 +172,19 @@
             // When the share link changes, update the site query
             shareQuery(query) {
                 window.history.replaceState({}, '', `?${query}`);
+            },
+            // Disable symlink if modularized structure is disabled
+            '$props.data.modularizedStructure': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.symlinkVhost.enabled = true;
+                        this.$props.data.symlinkVhost.computed = this.$props.data.symlinkVhost.value;
+                    } else {
+                        this.$props.data.symlinkVhost.enabled = false;
+                        this.$props.data.symlinkVhost.computed = false;
+                    }
+                },
+                deep: true,
             },
         },
         methods: {

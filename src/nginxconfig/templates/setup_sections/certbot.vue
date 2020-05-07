@@ -100,6 +100,8 @@
                 return false;
             },
             sitesAvailable() {
+                if (!this.$props.data.global.tools.modularizedStructure.computed) return `${this.nginxDir}/nginx.conf`;
+
                 const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed ? 'available' : 'enabled';
                 return this.$props.data.domains
                     .filter(domain => domain.https.certType.computed === 'letsEncrypt')
