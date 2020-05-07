@@ -40,9 +40,11 @@
     "do-vue": "git+https://github.com/do-community/do-vue.git",
     "parcel-bundler": "^1.12.4",
     "pretty-checkbox-vue": "^1.1.9",
+    "prismjs": "^1.20.0",
     "qs": "^6.9.4",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.3",
+    "vue-prism-component": "^1.2.0",
     "vue-select": "^3.10.3",
     "vuex": "^3.3.0"
   },

@@ -5,8 +5,7 @@
                 <p>
                     Comment out SSL related directives in the configuration:
                     <br />
-                    <code class="slim">sed -i -r 's/(listen .*443)/\1;#/g;
-                        s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\1/g' {{ sitesAvailable }}</code>
+                    <Prism language="bash" :code="`sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`"></Prism>
                 </p>
             </li>
 
@@ -14,17 +13,15 @@
                 <p>
                     Reload your NGINX server:
                     <br />
-                    <code class="slim">sudo nginx -t && sudo systemctl reload nginx</code>
+                    <Prism language="bash" code="sudo nginx -t && sudo systemctl reload nginx"></Prism>
                 </p>
             </li>
 
             <li>
                 <p>
                     Obtain SSL certificates from Let's Encrypt using Certbot:
-                    <template v-for="cmd in certbotCmds">
-                        <br />
-                        <code class="slim">{{ cmd }}</code>
-                    </template>
+                    <br />
+                    <Prism language="bash" :code="certbotCmds"></Prism>
                 </p>
             </li>
 
@@ -32,7 +29,7 @@
                 <p>
                     Uncomment SSL related directives in the configuration:
                     <br />
-                    <code class="slim">sed -i -r 's/#?;#//g' {{ sitesAvailable }}</code>
+                    <Prism language="bash" :code="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"></Prism>
                 </p>
             </li>
 
@@ -40,7 +37,7 @@
                 <p>
                     Reload your NGINX server:
                     <br />
-                    <code class="slim">sudo nginx -t && sudo systemctl reload nginx</code>
+                    <Prism language="bash" code="sudo nginx -t && sudo systemctl reload nginx"></Prism>
                 </p>
             </li>
 
@@ -48,9 +45,9 @@
                 <p>
                     Configure Certbot to reload NGINX when it successfully renews certificates:
                     <br />
-                    <code class="slim">echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh</code>
+                    <Prism language="bash" code="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></Prism>
                     <br />
-                    <code class="slim">sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh</code>
+                    <Prism language="bash" code="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></Prism>
                 </p>
             </li>
         </ol>
@@ -70,12 +67,17 @@
 </template>
 
 <script>
+    import Prism from 'vue-prism-component';
+    import 'prismjs/components/prism-bash';
     import i18n from '../../i18n';
 
     export default {
         name: 'SetupCertbot',
         display: 'Certbot',
         key: 'certbot',
+        components: {
+            Prism,
+        },
         props: {
             data: Object,
         },
@@ -121,7 +123,7 @@
                             `-w ${this.letsEncryptDir}`,
                             '-n --agree-tos --force-renewal',
                         ].filter(x => x !== null).join(' ')
-                    ));
+                    )).join('\n');
             },
         },
     };

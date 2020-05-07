@@ -17,7 +17,7 @@
                 <p>
                     Check that you have <b>unzip</b> installed, or install it, on your server by running this command:
                     <br />
-                    <code class="slim">(unzip -v >/dev/null 2>&1 && echo 'unzip already installed') || sudo apt-get install unzip</code>
+                    <Prism language="bash" code="(unzip -v >/dev/null 2>&1 && echo 'unzip already installed') || sudo apt-get install unzip"></Prism>
                 </p>
             </li>
 
@@ -25,7 +25,7 @@
                 <p>
                     Navigate to your NGINX <b>configuration directory</b> on your server:
                     <br />
-                    <code class="slim">cd {{ $parent.nginxDir }}</code>
+                    <Prism language="bash" :code="`cd ${$parent.nginxDir}`"></Prism>
                 </p>
             </li>
 
@@ -33,7 +33,7 @@
                 <p>
                     Create a <b>backup</b> of your current NGINX configuration:
                     <br />
-                    <code class="slim">tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/</code>
+                    <Prism language="bash" code="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"></Prism>
                 </p>
             </li>
 
@@ -41,7 +41,7 @@
                 <p>
                     <b>Unzip</b> the new compressed configuration archive:
                     <br />
-                    <code class="slim">unzip -o {{ $parent.zipName }}</code>
+                    <Prism language="bash" :code="`unzip -o ${$parent.nginxDir}`"></Prism>
                 </p>
             </li>
         </ol>
@@ -49,12 +49,17 @@
 </template>
 
 <script>
+    import Prism from 'vue-prism-component';
+    import 'prismjs/components/prism-bash';
     import i18n from '../../i18n';
 
     export default {
         name: 'SetupDownload',
         display: 'Download',
         key: 'download',
+        components: {
+            Prism,
+        },
         props: {
             data: Object,
         },
