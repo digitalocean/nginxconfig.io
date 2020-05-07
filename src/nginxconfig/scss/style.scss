@@ -81,10 +81,9 @@ $highlight: #f2c94c;
   .panel {
     margin-top: 0;
     padding: 1.5rem 0 2rem;
+    text-align: left;
 
     &.presets {
-      text-align: left;
-
       .header-group,
       .buttons-group {
         display: flex;
@@ -115,21 +114,20 @@ $highlight: #f2c94c;
     }
 
     &.setup {
-      ol {
+      p {
         color: $dark-blue;
+        overflow-wrap: break-word;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      ol {
         margin: 0 1rem;
-        text-align: left;
 
         li {
           margin: 0 0 1.5rem;
-
-          p {
-            overflow-wrap: break-word;
-
-            a {
-              text-decoration: none;
-            }
-          }
         }
       }
     }
