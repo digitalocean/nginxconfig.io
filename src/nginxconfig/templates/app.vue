@@ -27,36 +27,43 @@ limitations under the License.
         </Header>
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
-            <h2>Per-website config</h2>
+            <div class="columns">
+                <div class="column is-half is-full-mobile is-full-tablet">
+                    <h2>Per-website config</h2>
 
-            <div class="tabs">
-                <ul>
-                    <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
-                        <a @click="active = data[1]">
-                            {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
-                            <i class="fas fa-times" @click="remove(data[1])"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a @click="add"><i class="fas fa-plus"></i> Add site</a>
-                    </li>
-                </ul>
+                    <div class="tabs">
+                        <ul>
+                            <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
+                                <a @click="active = data[1]">
+                                    {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
+                                    <i class="fas fa-times" @click="remove(data[1])"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a @click="add"><i class="fas fa-plus"></i> Add site</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <template v-for="data in activeDomains">
+                        <Domain :key="data[1]"
+                                :data="data[0]"
+                                :style="{ display: data[1] === active ? undefined : 'none' }"
+                        ></Domain>
+                    </template>
+
+                    <h2>Global config</h2>
+                    <Global :data="global"></Global>
+
+                    <h2>Setup</h2>
+                    <Setup :data="{ domains, global }"></Setup>
+                </div>
+
+                <div class="column is-half is-full-mobile is-full-tablet">
+                    <h2>Config files</h2>
+                    <Prism language="json" :code="exportData"></Prism>
+                </div>
             </div>
-
-            <template v-for="data in activeDomains">
-                <Domain :key="data[1]"
-                        :data="data[0]"
-                        :style="{ display: data[1] === active ? undefined : 'none' }"
-                ></Domain>
-            </template>
-
-            <h2>Global config</h2>
-            <Global :data="global"></Global>
-
-            <h2>Setup and files</h2>
-            <Setup :data="{ domains, global }"></Setup>
-
-            <pre><code>{{ exportData }}</code></pre>
         </div>
 
         <Footer :text="i18n.templates.app.oss"></Footer>
@@ -65,6 +72,8 @@ limitations under the License.
 
 <script>
     import clone from 'clone';
+    import Prism from 'vue-prism-component';
+    import 'prismjs/components/prism-json';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
@@ -79,6 +88,7 @@ limitations under the License.
     export default {
         name: 'App',
         components: {
+            Prism,
             Header,
             Footer,
             Domain,
