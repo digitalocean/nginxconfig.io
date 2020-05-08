@@ -23,12 +23,14 @@ limitations under the License.
             <template v-slot:header>
             </template>
             <template v-slot:buttons>
+                <a v-if="splitColumn" class="button is-primary is-outline" @click="splitColumn = false">Single column mode</a>
+                <a v-else class="button is-primary" @click="splitColumn = true">Split column mode</a>
             </template>
         </Header>
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
-            <div class="columns">
-                <div class="column is-half is-full-mobile is-full-tablet">
+            <div class="columns is-multiline">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Per-website config</h2>
 
                     <div class="tabs">
@@ -59,7 +61,7 @@ limitations under the License.
                     <Setup :data="{ domains, global }"></Setup>
                 </div>
 
-                <div class="column is-half is-full-mobile is-full-tablet">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
                     <Prism language="json" :code="exportData"></Prism>
                 </div>
@@ -102,6 +104,7 @@ limitations under the License.
                 global: Global.delegated,
                 active: 0,
                 ready: false,
+                splitColumn: false,
             };
         },
         computed: {
