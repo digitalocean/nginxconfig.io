@@ -63,7 +63,8 @@ limitations under the License.
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
-                    <Prism language="json" :code="exportData"></Prism>
+                    <!--<Prism language="nginx" :code="exportData"></Prism>-->
+                    <pre><code>{{exportData}}</code></pre>
                 </div>
             </div>
         </div>
@@ -75,14 +76,14 @@ limitations under the License.
 <script>
     import clone from 'clone';
     import Prism from 'vue-prism-component';
-    import 'prismjs/components/prism-json';
+    import 'prismjs/components/prism-nginx';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
-    import exportData from '../util/export_data';
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
     import i18n from '../i18n';
+    import generators from '../generators';
     import Domain from './domain';
     import Global from './global';
     import Setup from './setup';
@@ -112,7 +113,7 @@ limitations under the License.
                 return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
             },
             exportData() {
-                return JSON.stringify(exportData(this.activeDomains, this.$data.global), null, 2);
+                return generators(this.activeDomains, this.$data.global)['nginx.conf'];
             },
         },
         mounted() {
