@@ -46,6 +46,6 @@ const recurse = (entriesOrObject, depth) => {
     }
 
     return retVal.replace(/\n\n\n/g, '\n\n');
-}
+};
 
 export default entriesOrObject => recurse(entriesOrObject, 0);

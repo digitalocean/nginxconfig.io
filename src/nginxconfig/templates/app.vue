@@ -63,9 +63,9 @@ limitations under the License.
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
-                    <template v-for="(conf, name) in confFiles">
-                        <h3>{{ nginxDir }}/{{ name }}</h3>
-                        <Prism language="nginx" :code="conf"></Prism>
+                    <template v-for="(conf, i) in confFiles">
+                        <h3>{{ nginxDir }}/{{ conf[0] }}</h3>
+                        <Prism :key="`${conf[0]}${i}`" language="nginx" :code="conf[1]"></Prism>
                     </template>
                 </div>
             </div>
