@@ -34,12 +34,10 @@
   "homepage": "https://github.com/do-community/nginxconfig-vue#readme",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@webantic/nginx-config-parser": "^1.2.0",
     "babel-polyfill": "^6.26.0",
     "clone": "^2.1.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",
-    "nginx-format": "^0.1.7",
     "parcel-bundler": "^1.12.4",
     "pretty-checkbox-vue": "^1.1.9",
     "prismjs": "^1.20.0",

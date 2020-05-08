@@ -63,8 +63,10 @@ limitations under the License.
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
-                    <!--<Prism language="nginx" :code="exportData"></Prism>-->
-                    <pre><code>{{exportData}}</code></pre>
+                    <template v-for="(conf, name) in confFiles">
+                        <h3>{{ nginxDir }}/{{ name }}</h3>
+                        <Prism language="nginx" :code="conf"></Prism>
+                    </template>
                 </div>
             </div>
         </div>
@@ -112,8 +114,11 @@ limitations under the License.
             activeDomains() {
                 return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
             },
-            exportData() {
-                return generators(this.activeDomains, this.$data.global)['nginx.conf'];
+            nginxDir() {
+                return this.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
+            },
+            confFiles() {
+                return generators(this.$data.domains, this.$data.global);
             },
         },
         mounted() {

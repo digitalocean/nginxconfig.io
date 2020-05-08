@@ -388,10 +388,16 @@ $highlight: #f2c94c;
 
       code {
         &[class*="language-"] {
+          &,
           .token {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 13.6px;
             font-weight: normal;
+            line-height: 1.4em;
+          }
 
-            // Fix Bulma interfering with Prism
+          // Fix Bulma interfering with Prism
+          .token {
             &.number,
             &.tag {
               background: transparent;
