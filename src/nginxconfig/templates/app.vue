@@ -118,7 +118,7 @@ limitations under the License.
                 return this.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
             },
             confFiles() {
-                return generators(this.$data.domains, this.$data.global);
+                return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
         },
         mounted() {
