@@ -1,6 +1,7 @@
 import { getSslCertificate, getSslCertificateKey } from '../util/get_ssl_certificate';
 import commonHsts from '../util/common_hsts';
 import securityConf from './security.conf';
+import { getAccessLogDomainPath, getErrorLogDomainPath } from '../util/get_log_paths';
 
 export default (domain, domains, global) => {
     // Use kv so we can use the same key multiple times
@@ -77,7 +78,40 @@ export default (domain, domains, global) => {
     }
 
     // Access log or error log for domain
-    // TODO: this & beyond
+    if (domain.logging.accessLog.computed || domain.logging.errorLog.computed) {
+        serverConfig.push(['# logging', '']);
+
+        if (domain.logging.accessLog.computed)
+            serverConfig.push(['access_log', getAccessLogDomainPath(domain, global)]);
+
+        if (domain.logging.errorLog.computed)
+            serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
+    }
+
+    // index.php
+    if (domain.routing.index.computed === 'index.php') {
+        serverConfig.push(['# index.php', '']);
+        serverConfig.push(['index', 'index.php']);
+    }
+
+    // Fallback index.html or index.php
+    if ((domain.routing.fallbackHtml.computed || domain.routing.fallbackPhp.computed)
+        && (!domain.reverseProxy.reverseProxy.computed || domain.reverseProxy.path.computed !== '/')) {
+        serverConfig.push([`# index.${domain.routing.fallbackHtml.computed ? 'html' : (domain.routing.fallbackPhp.computed ? 'php' : '' )} fallback`, '']);
+        serverConfig.push(['location /', {
+            try_files: `$uri $uri/ /index.${domain.routing.fallbackHtml.computed ? '.html' : (domain.routing.fallbackPhp.computed ? '.php?$query_string' : '')}`,
+        }]);
+    }
+
+    // Fallback index.html and index.php
+    if (domain.routing.fallbackHtml.computed && domain.routing.fallbackPhp.computed) {
+        serverConfig.push(['# index.php fallback', '']);
+        serverConfig.push([`location ~ ^${domain.routing.fallbackPhpPath.computed}`, {
+            try_files: '$uri $uri/ /index.php?$query_string',
+        }]);
+    }
+
+    // TODO: Python onwards
 
     // Add the server config to the parent config now its built
     config.push(['server', serverConfig]);
