@@ -1,4 +1,4 @@
-import { gzipTypes, extensions } from '../util/types_extensions';
+import { gzipTypes, extensions } from '../../util/types_extensions';
 
 export default (domains, global) => {
     const config = {};

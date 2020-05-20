@@ -1,7 +1,7 @@
-import { getSslCertificate, getSslCertificateKey } from '../util/get_ssl_certificate';
-import { getAccessLogDomainPath, getErrorLogDomainPath } from '../util/get_log_paths';
-import { extensions, gzipTypes } from '../util/types_extensions';
-import commonHsts from '../util/common_hsts';
+import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate';
+import { getAccessLogDomainPath, getErrorLogDomainPath } from '../../util/get_log_paths';
+import { extensions, gzipTypes } from '../../util/types_extensions';
+import commonHsts from '../../util/common_hsts';
 import securityConf from './security.conf';
 import pythonConf from './python_uwsgi.conf';
 import proxyConf from './proxy.conf';

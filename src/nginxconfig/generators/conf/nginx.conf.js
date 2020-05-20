@@ -1,4 +1,4 @@
-import sslProfiles from '../util/ssl_profiles';
+import sslProfiles from '../../util/ssl_profiles';
 
 export default (domains, global) => {
     const config = {};

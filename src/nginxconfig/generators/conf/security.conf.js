@@ -1,4 +1,4 @@
-import commonHsts from '../util/common_hsts';
+import commonHsts from '../../util/common_hsts';
 
 export default (domains, global) => {
     const config = [];

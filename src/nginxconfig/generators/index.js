@@ -1,5 +1,5 @@
 import toConf from './to_conf';
-import nginxConf from './nginx.conf';
+import nginxConf from './conf/nginx.conf';
 
 // Convert the data to nginx conf and do some magic to comments
 const toConfig = entriesOrObject => toConf(entriesOrObject)
