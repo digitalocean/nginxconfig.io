@@ -171,7 +171,7 @@ export default (domain, domains, global) => {
 
         if (global.tools.modularizedStructure.computed) {
             // Modularized
-            locConf.push(['include', 'nginxconfig.io/python_uwsgi.conf']);
+            locConf.push(['include', 'nginxconfig.io/proxy.conf']);
         } else {
             // Unified
             locConf.push(...Object.entries(proxyConf()));
