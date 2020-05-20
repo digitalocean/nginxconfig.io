@@ -1,4 +1,5 @@
 import sslProfiles from '../../util/ssl_profiles';
+import websiteConf from './website.conf';
 
 export default (domains, global) => {
     const config = {};
@@ -105,7 +106,10 @@ export default (domains, global) => {
 
     // Single file configs
     if (!global.tools.modularizedStructure.computed) {
-        // TODO: figure out merging in all the other configs
+        for (const domain of domains) {
+            config.http.push([`# ${domain.server.domain.computed}`, '']);
+            config.http.push(...websiteConf(domain, domains, global));
+        }
     }
 
     // Done!

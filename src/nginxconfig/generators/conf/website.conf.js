@@ -132,7 +132,7 @@ export default (domain, domains, global) => {
         && (!domain.reverseProxy.reverseProxy.computed || domain.reverseProxy.path.computed !== '/')) {
         serverConfig.push([`# index.${domain.routing.fallbackHtml.computed ? 'html' : (domain.routing.fallbackPhp.computed ? 'php' : '')} fallback`, '']);
         serverConfig.push(['location /', {
-            try_files: `$uri $uri/ /index.${domain.routing.fallbackHtml.computed ? '.html' : (domain.routing.fallbackPhp.computed ? '.php?$query_string' : '')}`,
+            try_files: `$uri $uri/ /index.${domain.routing.fallbackHtml.computed ? 'html' : (domain.routing.fallbackPhp.computed ? 'php?$query_string' : '')}`,
         }]);
     }
 
