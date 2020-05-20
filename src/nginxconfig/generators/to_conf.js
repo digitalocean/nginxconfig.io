@@ -75,7 +75,12 @@ const recurse = (entriesOrObject, depth) => {
         });
     }
 
-    return retVal.replace(/\n\n\n/g, '\n\n');
+    return retVal
+        .replace(/\n\n\n/g, '\n\n') // Cleanup triple linebreaks
+        .replace(/^([^\S\r\n]*})(?:\n[^\S\r\n]*)+\n([^\S\r\n]*})/gm, '$1\n$2') // Cleanup extra linebreaks between multiple close blocks
+        .replace(/^([^\S\r\n]*[^#\s].*[^\n])\n([^\S\r\n]*)#/gm, '$1\n\n$2#') // Double linebreak before comment
+        .replace(/^([^\S\r\n]*#.*)(?:\n[^\S\r\n]*)+\n([^\S\r\n]*.*{)/gm, '$1\n$2') // Single linebreak between comment and block
+        .replace(/^([^\S\r\n]*#.*\n[^\S\r\n]*#.*\n)([^\S\r\n]*[^#\s])/gm, '$1\n$2'); // Double linebreak after double comment
 };
 
 export default entriesOrObject => recurse(entriesOrObject, 0);
