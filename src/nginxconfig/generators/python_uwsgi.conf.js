@@ -1,4 +1,4 @@
-export default (domains, global) => {
+export default global => {
     const config = {};
 
     config['# default uwsgi_params'] = '';

@@ -10,6 +10,54 @@ import generalConf from './general.conf';
 import wordPressConf from './wordpress.conf';
 import drupalConf from './drupal.conf';
 import magentoConf from './magento.conf';
+import letsEncryptConf from './letsencrypt.conf';
+
+const sslConfig = (domain, global) => {
+    const config = [];
+    if (domain.https.https.computed) {
+        config.push(['# SSL', '']);
+        config.push(['ssl_certificate', getSslCertificate(domain, global)]);
+        config.push(['ssl_certificate_key', getSslCertificateKey(domain, global)]);
+
+        // Let's encrypt
+        if (domain.https.certType.computed === 'letsEncrypt')
+            config.push(['ssl_trusted_certificate',
+                `/etc/letsencrypt/live/${domain.server.domain.computed}/chain.pem`]);
+    }
+    return config;
+};
+
+const httpsListen = domain => {
+    const config = [];
+
+    // HTTPS
+    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+
+    // v6
+    if (domain.server.listenIpv6.computed)
+        config.push(['listen',
+            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+
+    return config;
+};
+
+const httpListen = domain => {
+    const config = [];
+
+    // Not HTTPS
+    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`]);
+
+    // v6
+    if (domain.server.listenIpv6.computed)
+        config.push(['listen', `[${domain.server.listenIpv6.computed}]:80`]);
+
+    return config;
+};
+
+const listenConfig = domain => {
+    if (domain.https.https.computed) return httpsListen(domain);
+    return httpListen(domain);
+};
 
 export default (domain, domains, global) => {
     // Use kv so we can use the same key multiple times
@@ -17,26 +65,12 @@ export default (domain, domains, global) => {
 
     // Build the server config on its own before adding it to the parent config
     const serverConfig = [];
-    const ipv4Pre = domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`;
 
     // Not HTTPS or not force HTTPS
-    if (!domain.https.https.computed || !domain.https.forceHttps.computed) {
-        serverConfig.push(['listen', `${ipv4Pre}80`]);
-
-        // v6
-        if (domain.server.listenIpv6.computed)
-            serverConfig.push(['listen', `[${domain.server.listenIpv6.computed}]:80`]);
-    }
+    if (!domain.https.https.computed || !domain.https.forceHttps.computed) serverConfig.push(...httpListen(domain));
 
     // HTTPS
-    if (domain.https.https.computed) {
-        serverConfig.push(['listen', `${ipv4Pre}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-
-        // v6
-        if (domain.server.listenIpv6.computed)
-            serverConfig.push(['listen',
-                `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-    }
+    if (domain.https.https.computed) serverConfig.push(...httpsListen(domain));
 
     serverConfig.push(['server_name',
         `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}`]);
@@ -57,16 +91,7 @@ export default (domain, domains, global) => {
         serverConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
 
     // HTTPS
-    if (domain.https.https.computed) {
-        serverConfig.push(['# SSL', '']);
-        serverConfig.push(['ssl_certificate', getSslCertificate(domain, global)]);
-        serverConfig.push(['ssl_certificate_key', getSslCertificateKey(domain, global)]);
-
-        // Let's encrypt
-        if (domain.https.certType.computed === 'letsEncrypt')
-            serverConfig.push(['ssl_trusted_certificate',
-                `/etc/letsencrypt/live/${domain.server.domain.computed}/chain.pem`]);
-    }
+    serverConfig.push(...sslConfig(domain, global));
 
     // HSTS
     if (!commonHsts(domains) && domain.https.hsts.computed) {
@@ -126,7 +151,7 @@ export default (domain, domains, global) => {
             serverConfig.push(['location /', { include: 'nginxconfig.io/python_uwsgi.conf' }]);
         } else {
             // Unified
-            serverConfig.push(['location /', pythonConf(domains, global)]);
+            serverConfig.push(['location /', pythonConf(global)]);
         }
 
         // Django
@@ -183,8 +208,8 @@ export default (domain, domains, global) => {
         // Unified
         serverConfig.push(...Object.entries(generalConf(domains, global)));
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(domains, global)));
-        if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(domains, global)));
+        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
+        if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
     }
 
@@ -196,37 +221,12 @@ export default (domain, domains, global) => {
         // Build the server config on its own before adding it to the parent config
         const cdnConfig = [];
 
-        if (domain.https.https.computed) {
-            // HTTPS
-            cdnConfig.push(['listen', `${ipv4Pre}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-
-            // v6
-            if (domain.server.listenIpv6.computed)
-                cdnConfig.push(['listen',
-                    `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-        } else {
-            // Not HTTPS
-            cdnConfig.push(['listen', `${ipv4Pre}80`]);
-
-            // v6
-            if (domain.server.listenIpv6.computed)
-                cdnConfig.push(['listen', `[${domain.server.listenIpv6.computed}]:80`]);
-        }
-
+        cdnConfig.push(...listenConfig(domain));
         cdnConfig.push(['server_name', `cdn.${domain.server.domain.computed}`]);
         cdnConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
 
         // HTTPS
-        if (domain.https.https.computed) {
-            serverConfig.push(['# SSL', '']);
-            serverConfig.push(['ssl_certificate', getSslCertificate(domain, global)]);
-            serverConfig.push(['ssl_certificate_key', getSslCertificateKey(domain, global)]);
-
-            // Let's encrypt
-            if (domain.https.certType.computed === 'letsEncrypt')
-                serverConfig.push(['ssl_trusted_certificate',
-                    `/etc/letsencrypt/live/${domain.server.domain.computed}/chain.pem`]);
-        }
+        cdnConfig.push(...sslConfig(domain, global));
 
         cdnConfig.push(['# disable access_log', '']);
         cdnConfig.push(['access_log', 'off']);
@@ -259,8 +259,54 @@ export default (domain, domains, global) => {
         config.push(['server', cdnConfig]);
     }
 
-    // TODO: subdomain redirects
-    // TODO: HTTP redirect
+    // Subdomains redirect
+    if (domain.server.redirectSubdomains.computed) {
+        // Build the server config on its own before adding it to the parent config
+        const redirectConfig = [];
+
+        redirectConfig.push(...listenConfig(domain));
+        redirectConfig.push(['server_name', `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
+
+        // HTTPS
+        redirectConfig.push(...sslConfig(domain, global));
+
+        redirectConfig.push(['return', `301 http${domain.https.https.computed ? 's' : ''}://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
+
+        // Add the redirect config to the parent config now its built
+        config.push([`# ${domain.server.wwwSubdomain.computed ? 'non-www, ' : ''}subdomains redirect`, '']);
+        config.push(['server', redirectConfig]);
+    }
+
+    // HTTP redirect
+    if (domain.https.forceHttps.computed) {
+        // Build the server config on its own before adding it to the parent config
+        const redirectConfig = [];
+
+        redirectConfig.push(...httpListen(domain));
+
+        if (domain.https.certType.computed === 'letsEncrypt') {
+            // Let's encrypt
+
+            if (global.tools.modularizedStructure.computed) {
+                // Modularized
+                redirectConfig.push(['include', 'nginxconfig.io/letsencrypt.conf']);
+            } else {
+                // Unified
+                redirectConfig.push(...Object.entries(letsEncryptConf(global)));
+            }
+
+            redirectConfig.push(['location /', {
+                return: `301 https://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`,
+            }]);
+        } else {
+            // Custom cert
+            redirectConfig.push(['return', `301 https://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
+        }
+
+        // Add the redirect config to the parent config now its built
+        config.push(['# HTTP redirect', '']);
+        config.push(['server', redirectConfig]);
+    }
 
     return config;
 };

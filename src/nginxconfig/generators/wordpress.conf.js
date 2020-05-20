@@ -1,4 +1,4 @@
-export default (domains, global) => {
+export default global => {
     const config = {};
 
     config['# WordPress: allow TinyMCE'] = '';
