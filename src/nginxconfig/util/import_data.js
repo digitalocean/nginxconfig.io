@@ -80,6 +80,9 @@ export default (query, domains, global, nextTick) => {
                 nextTick(() => applyCategories(domainData, domainImported));
             }
         }
+    } else {
+        // If no configured domains, add a single default
+        domains.push(clone(Domain.delegated));
     }
 
     // Handle global settings
