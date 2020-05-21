@@ -44,13 +44,17 @@ limitations under the License.
         </div>
 
         <div class="buttons is-centered">
-            <a class="button is-success" @click="downloadZip">Download Config</a>
-            <a class="button is-primary" @click="copyZip">Copy Base64</a>
+            <a class="button is-success" @click="downloadTar">Download Config</a>
+            <a class="button is-primary" @click="copyTar">Copy Base64</a>
         </div>
     </div>
 </template>
 
 <script>
+    import { pack } from 'tar-stream';
+    import getRawBody from 'raw-body';
+    import { gzip } from 'node-gzip';
+    import copy from 'copy-to-clipboard';
     import * as Sections from './setup_sections';
 
     const tabs = Object.values(Sections);
@@ -82,9 +86,9 @@ limitations under the License.
             nginxDir() {
                 return this.$props.data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
             },
-            zipName() {
+            tarName() {
                 const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
-                return `nginxconfig.io-${domains.join(',')}.zip`;
+                return `nginxconfig.io-${domains.join(',')}.tar.gz`;
             },
         },
         methods: {
@@ -94,12 +98,46 @@ limitations under the License.
                 if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
                 return undefined;
             },
-            downloadZip() {
-                alert('Imagine I\'m a working download');
+            async tarContents() {
+                const tar = pack();
+
+                // Add all our config files to the tar
+                for (const conf of this.$props.data.confFiles) {
+                    tar.entry({ name: conf[0] }, conf[1]);
+
+                    // If symlinks are enabled and this is in sites-available, symlink to sites-enabled
+                    if (this.$props.data.global.tools.symlinkVhost.computed && conf[0].startsWith('sites-available'))
+                        tar.entry({
+                            name: conf[0].replace(/^sites-available/, 'sites-enabled'),
+                            type: 'symlink',
+                            linkname: `../${conf[0]}`,
+                        });
+                }
+
+                // Convert the tar to a buffer and gzip it
+                tar.finalize();
+                const raw = await getRawBody(tar);
+                return gzip(raw);
             },
-            copyZip() {
-                const command = `echo 'BASE64 HERE' | base64 --decode > ${this.nginxDir}/${this.zipName}`;
-                alert(`Imagine I'm a working copy to clipboard\n\n${command}`);
+            async downloadTar() {
+                // Get the config files as a compressed tar
+                const contents = await this.tarContents();
+
+                // Convert it to a blob and download
+                const blob = new Blob([ contents ], { type: 'application/tar+gzip' });
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = this.tarName;
+                link.click();
+            },
+            async copyTar() {
+                // Get the config files as a compressed tar
+                const contents = await this.tarContents();
+
+                // Convert it to base64 string
+                const b64 = Buffer.from(contents).toString('base64');
+                const command = `echo '${b64}' | base64 --decode > ${this.nginxDir}/${this.tarName}`;
+                copy(command);
             },
         },
     };

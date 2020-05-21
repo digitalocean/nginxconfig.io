@@ -3,21 +3,13 @@
         <ol>
             <li>
                 <p>
-                    <b>Download</b> the generated config: <b><a @click="$parent.downloadZip">{{ $parent.zipName }}</a></b>
+                    <b>Download</b> the generated config: <b><a @click="$parent.downloadTar">{{ $parent.tarName }}</a></b>
                     <br />
                     and <b>upload</b> it to your server's <code class="slim">{{ $parent.nginxDir }}</code> directory.
                 </p>
                 <p>
-                    or, <b><a @click="$parent.copyZip">Copy a base64 string of the compressed config</a></b>, paste it in
+                    or, <b><a @click="$parent.copyTar">Copy a base64 string of the compressed config</a></b>, paste it in
                     your server's command line and execute it.
-                </p>
-            </li>
-
-            <li>
-                <p>
-                    Check that you have <b>unzip</b> installed, or install it, on your server by running this command:
-                    <br />
-                    <Prism language="bash" code="(unzip -v >/dev/null 2>&1 && echo 'unzip already installed') || sudo apt-get install unzip"></Prism>
                 </p>
             </li>
 
@@ -39,9 +31,9 @@
 
             <li>
                 <p>
-                    <b>Unzip</b> the new compressed configuration archive:
+                    <b>Extract</b> the new compressed configuration archive using tar:
                     <br />
-                    <Prism language="bash" :code="`unzip -o ${$parent.nginxDir}`"></Prism>
+                    <Prism language="bash" :code="`tar -xzvf ${$parent.tarName}`"></Prism>
                 </p>
             </li>
         </ol>

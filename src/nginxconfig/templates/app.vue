@@ -58,7 +58,7 @@ limitations under the License.
                     <Global :data="global"></Global>
 
                     <h2>Setup</h2>
-                    <Setup :data="{ domains, global }"></Setup>
+                    <Setup :data="{ domains, global, confFiles }"></Setup>
                 </div>
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
