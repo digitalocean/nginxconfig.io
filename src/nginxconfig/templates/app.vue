@@ -36,9 +36,11 @@ limitations under the License.
                     <div class="tabs">
                         <ul>
                             <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
-                                <a @click="active = data[1]">
+                                <a class="domain" @click="active = data[1]">
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
-                                    <i class="fas fa-times" @click="remove(data[1])"></i>
+                                </a>
+                                <a class="remove" @click="remove(data[1])">
+                                    <i class="fas fa-times"></i>
                                 </a>
                             </li>
                             <li>
@@ -58,7 +60,7 @@ limitations under the License.
                     <Global :data="global"></Global>
 
                     <h2>Setup</h2>
-                    <Setup :data="{ domains, global, confFiles }"></Setup>
+                    <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
                 </div>
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
@@ -157,7 +159,7 @@ limitations under the License.
             },
             remove(index) {
                 this.$set(this.$data.domains, index, null);
-                if (this.$data.active === index) this.$data.active = 0;
+                if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
             },
         },
     };

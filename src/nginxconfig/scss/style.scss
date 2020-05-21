@@ -24,15 +24,28 @@ $highlight: #f2c94c;
   $pretty--color-dark: $primary;
   $pretty--color-default: $primary;
   @import "~pretty-checkbox/src/pretty-checkbox";
-  $vs-state-active-bg: $primary;
-  $vs-border-radius: $border-radius;
   $vs-border-color: $border;
+  $vs-border-radius: $border-radius;
   $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
+  $vs-state-active-bg: $primary;
   @import "~vue-select/src/scss/vue-select";
 
   .tabs {
     ul {
       li {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        &:hover,
+        &:focus {
+          a {
+            &::after {
+              background: $dark-blue;
+            }
+          }
+        }
+
         &.is-before {
           a {
             color: mix($dark-grey, $primary);
@@ -58,21 +71,44 @@ $highlight: #f2c94c;
         }
 
         a {
+          &.domain {
+            flex-grow: 1;
+            padding-right: .25rem;
+
+            &::after {
+              border-bottom-right-radius: 0;
+              border-top-right-radius: 0;
+            }
+          }
+
+          &.remove {
+            padding-left: .25rem;
+            transition: color $transition;
+
+            &::after {
+              border-bottom-left-radius: 0;
+              border-top-left-radius: 0;
+            }
+
+            &:hover,
+            &:focus {
+              color: $danger;
+
+              &::after {
+                background: $danger;
+              }
+            }
+
+            i {
+              margin: 0;
+            }
+          }
+
           i {
             font-size: .75em;
 
             &.fa-plus {
               margin: 0 .35rem 0 0;
-            }
-
-            &.fa-times {
-              margin: 0 0 0 .5rem;
-              transition: color $transition;
-
-              &:hover,
-              &:focus {
-                color: $danger;
-              }
             }
           }
         }
