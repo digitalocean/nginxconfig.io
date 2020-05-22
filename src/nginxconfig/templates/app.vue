@@ -66,11 +66,11 @@ limitations under the License.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
                     <div class="columns is-multiline">
-                        <div v-for="(conf, i) in confFiles"
-                             :class="`column ${confFiles.length > 1 && !splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`"
+                        <div v-for="conf in confFilesOutput"
+                             :class="`column ${confFilesOutput.length > 1 && !splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`"
                         >
                             <h3>{{ nginxDir }}/{{ conf[0] }}</h3>
-                            <Prism :key="`${conf[0]}${i}`" language="nginx" :code="conf[1]"></Prism>
+                            <pre><code ref="files" class="language-nginx" v-html="conf[1]"></code></pre>
                         </div>
                     </div>
                 </div>
@@ -83,8 +83,10 @@ limitations under the License.
 
 <script>
     import clone from 'clone';
-    import Prism from 'vue-prism-component';
-    import 'prismjs/components/prism-nginx';
+    import { diffLines } from 'diff';
+    import escape from 'escape-html';
+    import deepEqual from 'deep-equal';
+    import Prism from 'prismjs';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
@@ -99,7 +101,6 @@ limitations under the License.
     export default {
         name: 'App',
         components: {
-            Prism,
             Header,
             Footer,
             Domain,
@@ -114,6 +115,9 @@ limitations under the License.
                 active: 0,
                 ready: false,
                 splitColumn: false,
+                confWatcherWaiting: false,
+                confFilesPrevious: [],
+                confFilesOutput: [],
             };
         },
         computed: {
@@ -127,19 +131,22 @@ limitations under the License.
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
         },
+        watch: {
+            confFiles(newConf, oldConf) {
+                if (this.$data.confWatcherWaiting) return;
+
+                // Set that we're waiting for changes to stop
+                this.$data.confWatcherWaiting = true;
+                this.$data.confFilesPrevious = oldConf;
+
+                // Check next tick to see if anything has changed again
+                this.$nextTick(() => this.checkChange(newConf));
+            },
+        },
         mounted() {
-            // If there is no query param, add one default domain and we're ready
-            if (!window.location.search.length) {
-                this.$data.domains.push(clone(Domain.delegated));
-                this.$data.ready = true;
-                return;
-            }
-
-            // Import any data from the URL query params
+            // Import any data from the URL query params, defaulting to one domain
+            // The config file watcher will handle setting the app as ready
             importData(window.location.search, this.$data.domains, this.$data.global, this.$nextTick);
-
-            // After two ticks (one tick to set watched data), we are ready
-            this.$nextTick(() => this.$nextTick(() => this.$data.ready = true));
         },
         methods: {
             changes(index) {
@@ -160,6 +167,88 @@ limitations under the License.
             remove(index) {
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
+            },
+            highlightFiles() {
+                for (const file of this.$refs.files)
+                    Prism.highlightElement(file, true);
+            },
+            checkChange(oldConf) {
+                // If nothing has changed for a tick, we can use the config files
+                if (deepEqual(oldConf, this.confFiles)) {
+                    // If this is the initial data load on app start, don't diff and set ourselves as ready
+                    if (!this.$data.ready) {
+                        this.$data.confFilesOutput = this.confFiles;
+                        this.$nextTick(() => {
+                            this.$data.confWatcherWaiting = false;
+                            this.highlightFiles();
+                            this.$data.ready = true;
+                        });
+                        return;
+                    }
+
+                    // Otherwise, do the diff!
+                    this.updateDiff(this.confFiles, this.$data.confFilesPrevious);
+                    return;
+                }
+
+                // Check next tick to see if anything has changed again
+                this.$nextTick(() => this.checkChange(this.confFiles));
+            },
+            updateDiff(newConf, oldConf) {
+                // Work through each file in the new config
+                const newFiles = [];
+                for (const [newFileName, newFileConf] of newConf) {
+
+                    // If a file with the same name existed before, diff!
+                    // TODO: Handle diffing across file renames (eg. when a user changes a domain name)
+                    const old = oldConf && oldConf.find(c => c[0] === newFileName);
+                    if (old) {
+                        // Get the diff
+                        const diff = diffLines(old[1], newFileConf);
+
+                        // Wrap additions in <mark>, drop removals
+                        const output = diff.map((change, index, array) => {
+                            if (change.removed) return '';
+
+                            const escaped = escape(change.value);
+
+                            // Don't mark as diff if nothing changed
+                            if (!change.added) return escaped;
+
+                            // Don't mark as diff if only whitespace changed
+                            if (index > 0 && array[index - 1].removed) {
+                                if (array[index - 1].value.replace(/\s/g, '') === change.value.replace(/\s/g, '')) {
+                                    return escaped;
+                                }
+                            }
+                            if (index < array.length - 1 && array[index + 1].removed) {
+                                if (array[index + 1].value.replace(/\s/g, '') === change.value.replace(/\s/g, '')) {
+                                    return escaped;
+                                }
+                            }
+
+                            // Mark the diff, without highlighting whitespace
+                            return escaped
+                                .split('\n')
+                                .map(part => part.replace(/^(\s*)(.*)(\s*)$/, '$1<mark>$2</mark>$3'))
+                                .join('\n');
+                        }).join('');
+
+                        // Store
+                        newFiles.push([newFileName, output]);
+                        continue;
+                    }
+
+                    // No diffing, just store the new file
+                    newFiles.push([newFileName, newFileConf]);
+                }
+                this.$data.confFilesOutput = newFiles;
+
+                // Highlight in-browser (using web workers so UI isn't blocked) once these files are rendered
+                this.$nextTick(() => {
+                    this.$data.confWatcherWaiting = false;
+                    this.highlightFiles();
+                });
             },
         },
     };

@@ -38,10 +38,10 @@ export default (query, domains, global, nextTick) => {
         ignoreQueryPrefix: true,
         allowDots: true,
         decoder(value) {
+            value = decodeURIComponent(value);
+
             // If it's a set of digits, parse it as a float
-            if (/^(\d+|\d*\.\d+)$/.test(value)) {
-                return parseFloat(value);
-            }
+            if (/^(\d+|\d*\.\d+)$/.test(value)) return parseFloat(value);
 
             // If it matches a keyword, convert it
             let keywords = {
@@ -50,9 +50,7 @@ export default (query, domains, global, nextTick) => {
                 null: null,
                 undefined: undefined,
             };
-            if (value in keywords) {
-                return keywords[value];
-            }
+            if (value in keywords) return keywords[value];
 
             // Otherwise, leave it as is
             return value;

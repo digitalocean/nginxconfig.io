@@ -5,50 +5,50 @@
                 <p>
                     Comment out SSL related directives in the configuration:
                     <br />
-                    <Prism language="bash" :code="`sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`"></Prism>
                 </p>
+                <pre><code ref="commentOut" class="language-bash"></code></pre>
             </li>
 
             <li>
                 <p>
                     Reload your NGINX server:
                     <br />
-                    <Prism language="bash" code="sudo nginx -t && sudo systemctl reload nginx"></Prism>
                 </p>
+                <pre><code ref="reload" class="language-bash">sudo nginx -t && sudo systemctl reload nginx</code></pre>
             </li>
 
             <li>
                 <p>
                     Obtain SSL certificates from Let's Encrypt using Certbot:
                     <br />
-                    <Prism language="bash" :code="certbotCmds"></Prism>
                 </p>
+                <pre><code ref="certBot" class="language-bash"></code></pre>
             </li>
 
             <li>
                 <p>
                     Uncomment SSL related directives in the configuration:
                     <br />
-                    <Prism language="bash" :code="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"></Prism>
                 </p>
+                <pre><code ref="unComment" class="language-bash"></code></pre>
             </li>
 
             <li>
                 <p>
                     Reload your NGINX server:
                     <br />
-                    <Prism language="bash" code="sudo nginx -t && sudo systemctl reload nginx"></Prism>
                 </p>
+                <pre><code ref="reload2" class="language-bash">sudo nginx -t && sudo systemctl reload nginx</code></pre>
             </li>
 
             <li>
                 <p>
                     Configure Certbot to reload NGINX when it successfully renews certificates:
                     <br />
-                    <Prism language="bash" code="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></Prism>
-                    <br />
-                    <Prism language="bash" code="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></Prism>
                 </p>
+                <pre><code ref="renewal" class="language-bash">echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh</code></pre>
+                <br />
+                <pre><code ref="chmod" class="language-bash">sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh</code></pre>
             </li>
         </ol>
 
@@ -67,17 +67,13 @@
 </template>
 
 <script>
-    import Prism from 'vue-prism-component';
-    import 'prismjs/components/prism-bash';
+    import Prism from 'prismjs';
     import i18n from '../../i18n';
 
     export default {
         name: 'SetupCertbot',
         display: 'Certbot',
         key: 'certbot',
-        components: {
-            Prism,
-        },
         props: {
             data: Object,
         },
@@ -101,17 +97,35 @@
                 }
                 return false;
             },
-            sitesAvailable() {
-                if (!this.$props.data.global.tools.modularizedStructure.computed) return `${this.nginxDir}/nginx.conf`;
-
-                const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed ? 'available' : 'enabled';
-                return this.$props.data.domains
-                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
-                    .map(domain => `${this.nginxDir}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`)
-                    .join(' ');
+        },
+        watch: {
+            '$props.data.domains': {
+                handler() {
+                    this.certbotCmds();
+                    this.sitesAvailable();
+                },
+                deep: true,
             },
+            '$props.data.global.tools': {
+                handler() {
+                    this.sitesAvailable();
+                },
+                deep: true,
+            },
+        },
+        mounted() {
+            this.$nextTick(() => this.certbotCmds());
+            this.$nextTick(() => this.sitesAvailable());
+            this.$nextTick(() => Prism.highlightElement(this.$refs.reload, true));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.reload2, true));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.renewal, true));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.chmod, true));
+        },
+        methods: {
             certbotCmds() {
-                return this.$props.data.domains
+                if (!this.$refs.certBot) return;
+
+                this.$refs.certBot.textContent = this.$props.data.domains
                     .filter(domain => domain.https.certType.computed === 'letsEncrypt')
                     .map(domain => (
                         [
@@ -124,6 +138,26 @@
                             '-n --agree-tos --force-renewal',
                         ].filter(x => x !== null).join(' ')
                     )).join('\n');
+
+                this.$nextTick(() => Prism.highlightElement(this.$refs.certBot, true));
+            },
+            sitesAvailable() {
+                if (!this.$refs.commentOut) return;
+                if (!this.$refs.unComment) return;
+
+                const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed ? 'available' : 'enabled';
+                const sitesAvailable = this.$props.data.global.tools.modularizedStructure.computed
+                    ? this.$props.data.domains
+                        .filter(domain => domain.https.certType.computed === 'letsEncrypt')
+                        .map(domain => `${this.nginxDir}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`)
+                        .join(' ')
+                    : `${this.nginxDir}/nginx.conf`;
+
+                this.$refs.commentOut.textContent = `sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`;
+                this.$refs.unComment.textContent = `sed -i -r 's/#?;#//g' ${sitesAvailable}`;
+
+                this.$nextTick(() => Prism.highlightElement(this.$refs.commentOut, true));
+                this.$nextTick(() => Prism.highlightElement(this.$refs.unComment, true));
             },
         },
     };

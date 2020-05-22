@@ -17,7 +17,8 @@ limitations under the License.
 import 'babel-polyfill';
 
 import Vue from 'vue';
-import App from './templates/app.vue';
+import './util/prism_bundle';
+import App from './templates/app';
 import i18n from './i18n';
 
 document.head.title = i18n.templates.app.title;

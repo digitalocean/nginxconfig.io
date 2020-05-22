@@ -435,10 +435,12 @@ $highlight: #f2c94c;
           // Fix Bulma interfering with Prism
           .token {
             &.number,
-            &.tag {
+            &.tag,
+            &.entity,
+            &.operator,
+            &.url {
               background: transparent;
               border-radius: initial;
-              color: inherit;
               display: initial;
               font-size: inherit;
               margin: initial;
@@ -450,5 +452,17 @@ $highlight: #f2c94c;
         }
       }
     }
+  }
+
+  .code-toolbar {
+    > .toolbar {
+      right: calc(.2em + 16px);
+    }
+  }
+
+  mark {
+    background: rgba($highlight, .45);
+    color: inherit;
+    display: inline-block;
   }
 }
