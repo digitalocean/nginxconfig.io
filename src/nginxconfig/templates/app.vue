@@ -65,12 +65,12 @@ limitations under the License.
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
-                    <div class="columns is-multiline">
+                    <div ref="files" class="columns is-multiline">
                         <div v-for="conf in confFilesOutput"
                              :class="`column ${confFilesOutput.length > 1 && !splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`"
                         >
                             <h3>{{ nginxDir }}/{{ conf[0] }}</h3>
-                            <pre><code ref="files" class="language-nginx" v-html="conf[1]"></code></pre>
+                            <pre><code class="language-nginx" v-html="conf[1]"></code></pre>
                         </div>
                     </div>
                 </div>
@@ -169,8 +169,7 @@ limitations under the License.
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
             },
             highlightFiles() {
-                for (const file of this.$refs.files)
-                    Prism.highlightElement(file, true);
+                Prism.highlightAllUnder(this.$refs.files, true);
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
