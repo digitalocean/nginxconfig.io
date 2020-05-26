@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import 'babel-polyfill';
-
+import './scss/style.scss';
 import Vue from 'vue';
 import './util/prism_bundle';
 import App from './templates/app';

@@ -31,8 +31,6 @@ $highlight: #f2c94c;
   $vs-state-active-bg: $primary;
   @import "~vue-select/src/scss/vue-select";
 
-  @import "~prismjs/plugins/toolbar/prism-toolbar.css";
-
   @import "tabs";
   @import "panel";
   @import "fields";

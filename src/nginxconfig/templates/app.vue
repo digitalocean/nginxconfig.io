@@ -86,11 +86,11 @@ limitations under the License.
 </template>
 
 <script>
-    import crypto from 'crypto';
     import clone from 'clone';
     import { diffLines } from 'diff';
     import escape from 'escape-html';
     import deepEqual from 'deep-equal';
+    import createHash from 'create-hash';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
@@ -175,7 +175,7 @@ limitations under the License.
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
             },
             hash(content) {
-                return crypto.createHash('sha256').update(content).digest('base64');
+                return createHash('sha256').update(content).digest('base64');
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files

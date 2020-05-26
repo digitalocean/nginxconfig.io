@@ -52,7 +52,7 @@ limitations under the License.
 
 <script>
     import { pack } from 'tar-stream';
-    import getRawBody from 'raw-body';
+    import getStream from 'get-stream';
     import { gzip } from 'node-gzip';
     import copy from 'copy-to-clipboard';
     import * as Sections from './setup_sections';
@@ -116,7 +116,7 @@ limitations under the License.
 
                 // Convert the tar to a buffer and gzip it
                 tar.finalize();
-                const raw = await getRawBody(tar);
+                const raw = await getStream.buffer(tar);
                 return gzip(raw);
             },
             async downloadTar() {

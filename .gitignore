@@ -4,6 +4,5 @@ dist/
 dev/
 .idea/
 .vscode/
-build/base.html
-build/svg/
+build/
 .DS_Store
