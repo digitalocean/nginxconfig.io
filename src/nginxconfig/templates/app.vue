@@ -75,8 +75,7 @@ limitations under the License.
                                     :name="`${nginxDir}/${conf[0]}`"
                                     :conf="conf[1]"
                                     :half="confFilesOutput.length > 1 && !splitColumn"
-                        >
-                        </NginxPrism>
+                        ></NginxPrism>
                     </div>
                 </div>
             </div>
@@ -102,7 +101,7 @@ limitations under the License.
     import Domain from './domain';
     import Global from './global';
     import Setup from './setup';
-    import NginxPrism from './nginx_prism';
+    import NginxPrism from './prism/nginx';
 
     export default {
         name: 'App',
