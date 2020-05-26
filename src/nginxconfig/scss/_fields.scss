@@ -1,0 +1,164 @@
+/*
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+.field-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 -.5rem;
+
+  .field {
+    flex-grow: 1;
+    margin: 0 .5rem;
+    text-align: left;
+  }
+
+  + .field-row,
+  + .field {
+    margin-top: 1rem;
+  }
+}
+
+.field {
+  &.is-horizontal {
+    align-items: center;
+
+    &.is-aligned-top {
+      align-items: flex-start;
+    }
+  }
+
+  &.is-grouped {
+    > .control {
+      &:last-child {
+        margin: .25rem 0 0;
+      }
+
+      &:not(:last-child) {
+        margin: .25rem .75rem 0 0;
+      }
+    }
+  }
+
+  .is-changed {
+    input {
+      &:not(.vs__search) {
+        &,
+        &:focus {
+          background: rgba($highlight, .35);
+        }
+      }
+    }
+
+    .checkbox,
+    .radio,
+    .text {
+      background: rgba($highlight, .35);
+    }
+
+    label {
+      &.text {
+        padding: .25rem .5rem;
+      }
+    }
+
+    .v-select {
+      .vs__dropdown-toggle { // sass-lint:disable-line class-name-format
+        background: rgba($highlight, .35);
+      }
+    }
+  }
+
+  label {
+    @include sailec-medium;
+
+    color: $dark-blue;
+    font-size: 1rem;
+
+    &.text {
+      border-radius: $border-radius;
+      color: $dark-grey;
+      display: inline-block;
+      font-size: 14px;
+      padding: 0 .5rem;
+    }
+  }
+
+  .button {
+    &.is-static {
+      background: $panel;
+      border: 1px solid $border;
+      color: $dark-grey;
+      padding: 0 ($margin * 1.5);
+    }
+  }
+
+  .control {
+    &:not(.is-expanded) {
+      + .control {
+        &:not(.is-expanded) {
+          margin-top: .25rem;
+        }
+      }
+    }
+  }
+}
+
+.field-body {
+  &.is-vertical {
+    flex-direction: column;
+
+    > .field {
+      &:not(:last-child) {
+        margin-bottom: .75rem;
+      }
+    }
+  }
+}
+
+.checkbox,
+.radio {
+  border-radius: $border-radius;
+  padding: .25rem .5rem;
+
+  .pretty {
+    &.p-icon {
+      font-size: 18px;
+      margin: 0;
+
+      .state {
+        .icon {
+          &::before {
+            color: $panel;
+            font-size: 14px;
+          }
+        }
+
+        label {
+          color: $dark-grey;
+          font-size: 14px;
+          padding-left: calc(#{$margin / 2} + 1.5em);
+          text-indent: initial;
+
+          &::before,
+          &::after {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
