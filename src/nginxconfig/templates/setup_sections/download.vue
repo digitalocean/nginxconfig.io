@@ -17,7 +17,7 @@
                 <p>
                     Navigate to your NGINX <b>configuration directory</b> on your server:
                     <br />
-                    <Prism language="bash" :code="`cd ${$parent.nginxDir}`"></Prism>
+                    <BashPrism :key="$parent.nginxDir" :cmd="`cd ${$parent.nginxDir}`"></BashPrism>
                 </p>
             </li>
 
@@ -25,7 +25,7 @@
                 <p>
                     Create a <b>backup</b> of your current NGINX configuration:
                     <br />
-                    <Prism language="bash" code="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"></Prism>
+                    <BashPrism cmd="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"></BashPrism>
                 </p>
             </li>
 
@@ -33,7 +33,7 @@
                 <p>
                     <b>Extract</b> the new compressed configuration archive using tar:
                     <br />
-                    <Prism language="bash" :code="`tar -xzvf ${$parent.tarName}`"></Prism>
+                    <BashPrism :key="$parent.tarName" :cmd="`tar -xzvf ${$parent.tarName}`"></BashPrism>
                 </p>
             </li>
         </ol>
@@ -41,16 +41,15 @@
 </template>
 
 <script>
-    import Prism from 'vue-prism-component';
-    import 'prismjs/components/prism-bash';
     import i18n from '../../i18n';
+    import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupDownload',
         display: 'Download',
         key: 'download',
         components: {
-            Prism,
+            BashPrism,
         },
         props: {
             data: Object,

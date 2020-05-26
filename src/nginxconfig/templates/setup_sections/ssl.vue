@@ -5,7 +5,9 @@
                 <p>
                     Generate <b>Diffie-Hellman keys</b> by running this command on your server:
                     <br />
-                    <Prism language="bash" :code="`openssl dhparam -out ${nginxDir}/dhparam.pem ${diffieHellmanValue}`"></Prism>
+                    <BashPrism :key="`${nginxDir}-${diffieHellmanValue}`"
+                               :cmd="`openssl dhparam -out ${nginxDir}/dhparam.pem ${diffieHellmanValue}`"
+                    ></BashPrism>
                 </p>
             </li>
 
@@ -13,9 +15,11 @@
                 <p>
                     Create a common <b>ACME-challenge</b> directory (for <b>Let's Encrypt</b>):
                     <br />
-                    <Prism language="bash" :code="`mkdir -p ${letsEncryptDir}`"></Prism>
+                    <BashPrism :key="letsEncryptDir" :cmd="`mkdir -p ${letsEncryptDir}`"></BashPrism>
                     <br />
-                    <Prism language="bash" :code="`chown ${nginxUser} ${letsEncryptDir}`"></Prism>
+                    <BashPrism :key="`${nginxUser}-${letsEncryptDir}`"
+                               :cmd="`chown ${nginxUser} ${letsEncryptDir}`"
+                    ></BashPrism>
                 </p>
             </li>
         </ol>
@@ -35,16 +39,15 @@
 </template>
 
 <script>
-    import Prism from 'vue-prism-component';
-    import 'prismjs/components/prism-bash';
     import i18n from '../../i18n';
+    import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupSSL',
         display: 'SSL init',
         key: 'ssl',
         components: {
-            Prism,
+            BashPrism,
         },
         props: {
             data: Object,

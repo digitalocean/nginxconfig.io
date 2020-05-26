@@ -16,7 +16,7 @@
                     Reload your NGINX server:
                     <br />
                 </p>
-                <BashPrism :cmd="'sudo nginx -t && sudo systemctl reload nginx'"></BashPrism>
+                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
             </li>
 
             <li>
@@ -40,7 +40,7 @@
                     Reload your NGINX server:
                     <br />
                 </p>
-                <BashPrism :cmd="'sudo nginx -t && sudo systemctl reload nginx'"></BashPrism>
+                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
             </li>
 
             <li>
@@ -48,9 +48,8 @@
                     Configure Certbot to reload NGINX when it successfully renews certificates:
                     <br />
                 </p>
-                <BashPrism :cmd="'echo -e \'#!/bin/bash\\nnginx -t && systemctl reload nginx\' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh'"></BashPrism>
-                <br />
-                <BashPrism :cmd="'sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh'"></BashPrism>
+                <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
+                <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
             </li>
         </ol>
 

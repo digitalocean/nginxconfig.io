@@ -51,7 +51,6 @@
     "tar-stream": "^2.1.2",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.3",
-    "vue-prism-component": "^1.2.0",
     "vue-select": "^3.10.3"
   },
   "devDependencies": {
