@@ -23,8 +23,12 @@ limitations under the License.
             <template v-slot:header>
             </template>
             <template v-slot:buttons>
-                <a v-if="splitColumn" class="button is-primary is-outline" @click="splitColumn = false">Single column mode</a>
-                <a v-else class="button is-primary" @click="splitColumn = true">Split column mode</a>
+                <a v-if="splitColumn" class="button is-primary is-outline" @click="splitColumn = false">
+                    Single column mode
+                </a>
+                <a v-else class="button is-primary" @click="splitColumn = true">
+                    Split column mode
+                </a>
             </template>
         </Header>
 
@@ -66,12 +70,13 @@ limitations under the License.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>Config files</h2>
                     <div ref="files" class="columns is-multiline">
-                        <div v-for="conf in confFilesOutput"
-                             :class="`column ${confFilesOutput.length > 1 && !splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`"
+                        <NginxPrism v-for="conf in confFilesOutput"
+                                    :key="`${conf[0]}-${hash(conf[1])}`"
+                                    :name="`${nginxDir}/${conf[0]}`"
+                                    :conf="conf[1]"
+                                    :half="confFilesOutput.length > 1 && !splitColumn"
                         >
-                            <h3>{{ nginxDir }}/{{ conf[0] }}</h3>
-                            <pre><code class="language-nginx" v-html="conf[1]"></code></pre>
-                        </div>
+                        </NginxPrism>
                     </div>
                 </div>
             </div>
@@ -82,11 +87,11 @@ limitations under the License.
 </template>
 
 <script>
+    import crypto from 'crypto';
     import clone from 'clone';
     import { diffLines } from 'diff';
     import escape from 'escape-html';
     import deepEqual from 'deep-equal';
-    import Prism from 'prismjs';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
@@ -97,6 +102,7 @@ limitations under the License.
     import Domain from './domain';
     import Global from './global';
     import Setup from './setup';
+    import NginxPrism from './nginx_prism';
 
     export default {
         name: 'App',
@@ -106,6 +112,7 @@ limitations under the License.
             Domain,
             Global,
             Setup,
+            NginxPrism,
         },
         data() {
             return {
@@ -168,8 +175,8 @@ limitations under the License.
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
             },
-            highlightFiles() {
-                Prism.highlightAllUnder(this.$refs.files, true);
+            hash(content) {
+                return crypto.createHash('sha256').update(content).digest('base64');
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
@@ -179,7 +186,6 @@ limitations under the License.
                         this.$data.confFilesOutput = this.confFiles;
                         this.$nextTick(() => {
                             this.$data.confWatcherWaiting = false;
-                            this.highlightFiles();
                             this.$data.ready = true;
                         });
                         return;
@@ -197,11 +203,12 @@ limitations under the License.
                 // Work through each file in the new config
                 const newFiles = [];
                 for (const [newFileName, newFileConf] of newConf) {
-
                     // If a file with the same name existed before, diff!
                     // TODO: Handle diffing across file renames (eg. when a user changes a domain name)
                     const old = oldConf && oldConf.find(c => c[0] === newFileName);
-                    if (old) {
+                    if (old && this.hash(old[1]) !== this.hash(newFileConf)) {
+                        console.info(`Diffing ${newFileName}...`);
+
                         // Get the diff
                         const diff = diffLines(old[1], newFileConf);
 
@@ -242,12 +249,7 @@ limitations under the License.
                     newFiles.push([newFileName, newFileConf]);
                 }
                 this.$data.confFilesOutput = newFiles;
-
-                // Highlight in-browser (using web workers so UI isn't blocked) once these files are rendered
-                this.$nextTick(() => {
-                    this.$data.confWatcherWaiting = false;
-                    this.highlightFiles();
-                });
+                this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
         },
     };

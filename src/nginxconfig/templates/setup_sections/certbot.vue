@@ -116,10 +116,10 @@
         mounted() {
             this.$nextTick(() => this.certbotCmds());
             this.$nextTick(() => this.sitesAvailable());
-            this.$nextTick(() => Prism.highlightElement(this.$refs.reload, true));
-            this.$nextTick(() => Prism.highlightElement(this.$refs.reload2, true));
-            this.$nextTick(() => Prism.highlightElement(this.$refs.renewal, true));
-            this.$nextTick(() => Prism.highlightElement(this.$refs.chmod, true));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.reload));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.reload2));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.renewal));
+            this.$nextTick(() => Prism.highlightElement(this.$refs.chmod));
         },
         methods: {
             certbotCmds() {
@@ -139,7 +139,7 @@
                         ].filter(x => x !== null).join(' ')
                     )).join('\n');
 
-                this.$nextTick(() => Prism.highlightElement(this.$refs.certBot, true));
+                this.$nextTick(() => Prism.highlightElement(this.$refs.certBot));
             },
             sitesAvailable() {
                 if (!this.$refs.commentOut) return;
@@ -156,8 +156,8 @@
                 this.$refs.commentOut.textContent = `sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`;
                 this.$refs.unComment.textContent = `sed -i -r 's/#?;#//g' ${sitesAvailable}`;
 
-                this.$nextTick(() => Prism.highlightElement(this.$refs.commentOut, true));
-                this.$nextTick(() => Prism.highlightElement(this.$refs.unComment, true));
+                this.$nextTick(() => Prism.highlightElement(this.$refs.commentOut));
+                this.$nextTick(() => Prism.highlightElement(this.$refs.unComment));
             },
         },
     };
