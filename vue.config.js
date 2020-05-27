@@ -1,5 +1,6 @@
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 module.exports = {
     publicPath: './',
@@ -9,6 +10,7 @@ module.exports = {
     configureWebpack: {
         plugins: [
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
+            process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
         ].filter(x => !!x),
     },
     chainWebpack: config => {
@@ -18,4 +20,4 @@ module.exports = {
             return options;
         });
     },
-}
+};
