@@ -2,6 +2,7 @@ import qs from 'qs';
 import clone from 'clone';
 import Domain from '../templates/domain';
 import isObject from './is_object';
+import backwardsCompatibility from './backwards_compatibility';
 
 const applyCategories = (categories, target) => {
     // Work through each potential category
@@ -56,6 +57,9 @@ export default (query, domains, global, nextTick) => {
             return value;
         },
     });
+
+    // Handle converting nginxconfig.io-angular params to the current version
+    backwardsCompatibility(data);
 
     // Handle domains
     if ('domains' in data) {

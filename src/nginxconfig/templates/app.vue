@@ -151,8 +151,10 @@ limitations under the License.
         },
         mounted() {
             // Import any data from the URL query params, defaulting to one domain
+            // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
-            importData(window.location.search, this.$data.domains, this.$data.global, this.$nextTick);
+            const query = window.location.search || window.location.hash.slice(1);
+            importData(query, this.$data.domains, this.$data.global, this.$nextTick);
         },
         methods: {
             changes(index) {
