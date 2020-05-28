@@ -1,4 +1,6 @@
-const oldBool = val => val === '' ? true : val;
+import isObject from './is_object';
+
+const oldBool = val => val.toString().trim() === '' ? true : val;
 
 const globalMap = {
     ssl_profile:                ['https', 'sslProfile'],
@@ -38,21 +40,65 @@ const globalMap = {
     symlink:                    ['tools', 'symlinkVhost', oldBool],
 };
 
+const domainMap = {
+    domain:                 ['server', 'domain'],
+    path:                   ['server', 'path'],
+    document_root:          ['server', 'documentRoot'],
+    non_www:                ['server', 'wwwSubdomain', val => !oldBool(val)],
+    cdn:                    ['server', 'cdnSubdomain', oldBool],
+    redirect:               ['server', 'redirectSubdomains', oldBool],
+    ipv4:                   ['server', 'listenIpv4'],
+    ipv6:                   ['server', 'listenIpv6'],
+
+    https:                  ['https', 'https', oldBool],
+    http2:                  ['https', 'http2', oldBool],
+    force_https:            ['https', 'forceHttps', oldBool],
+    hsts:                   ['https', 'hsts', oldBool],
+    hsts_subdomains:        ['https', 'hstsSubdomains', oldBool],
+    hsts_preload:           ['https', 'hstsPreload', oldBool],
+    cert_type:              ['https', 'certType', val => val.toLowerCase().trim() === 'custom' ? 'custom' : 'letsEncrypt'],
+    email:                  ['https', 'letsEncryptEmail'],
+    ssl_certificate:        ['https', 'sslCertificate'],
+    ssl_certificate_key:    ['https', 'sslCertificateKey'],
+
+    php:                    ['php', 'php', oldBool],
+    wordpress:              ['php', 'wordPressRules', oldBool],
+    drupal:                 ['php', 'drupalRules', oldBool],
+    magento:                ['php', 'magentoRules', oldBool],
+
+    python:                 ['python', 'python', oldBool],
+    django:                 ['python', 'djangoRules', oldBool],
+
+    proxy:                  ['reverseProxy', 'reverseProxy', oldBool],
+    proxy_path:             ['reverseProxy', 'path'],
+    proxy_pass:             ['reverseProxy', 'proxyPass'],
+
+    root:                   ['routing', 'root', oldBool],
+    index:                  ['routing', 'index'],
+    fallback_html:          ['routing', 'fallbackHtml', oldBool],
+    fallback_php:           ['routing', 'fallbackPhp', oldBool],
+    fallback_php_path:      ['routing', 'fallbackPhpPath'],
+    php_legacy_routing:     ['routing', 'legacyPhpRouting', oldBool],
+
+    access_log_domain:      ['logging', 'accessLog', oldBool],
+    error_log_domain:       ['logging', 'errorLog', oldBool],
+};
+
 // Handle converting the old query format from nginxconfig.io-angular to our new query params
 export default data => {
+    // Hold any mapped global data
+    const mappedGlobal = {};
+
     // Handle converting global settings & storing domains
     for (const key in data) {
         if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
 
         // Map old global settings to their new ones
-        if (key in globalMap) {
+        if (key in globalMap && !isObject(data[key])) {
             const map = globalMap[key];
 
-            data.global = data.global || {};
-            data.global[map[0]] = data.global[map[0]] || {};
-            data.global[map[0]][map[1]] = map.length < 3 ? data[key] : map[2](data[key]);
-
-            delete data[key];
+            mappedGlobal[map[0]] = mappedGlobal[map[0]] || {};
+            mappedGlobal[map[0]][map[1]] = map.length < 3 ? data[key] : map[2](data[key]);
             continue;
         }
 
@@ -64,5 +110,38 @@ export default data => {
         }
     }
 
-    // TODO: Handle converting domain settings
+    // Overwrite mapped global data
+    data.global = {...(data.global || {}), ...mappedGlobal};
+
+    // Handle converting domain settings
+    if ('domains' in data && (Array.isArray(data.domains) || isObject(data.domains))) {
+        // Ensure we're working with an array
+        const values = isObject(data.domains) ? Object.values(data.domains) : data.domains;
+
+        for (let i = 0; i < values.length; i++) {
+            // Check this is an object
+            if (!isObject(values[i])) continue;
+
+            // Hold any mapped data
+            const mappedData = {};
+
+            // Handle converting old domain settings to new ones
+            for (const key in values[i]) {
+                if (!Object.prototype.hasOwnProperty.call(values[i], key)) continue;
+
+                // Map old settings to their new ones
+                if (key in domainMap) {
+                    const map = domainMap[key];
+                    mappedData[map[0]] = mappedData[map[0]] || {};
+                    mappedData[map[0]][map[1]] = map.length < 3 ? values[i][key] : map[2](values[i][key]);
+                }
+            }
+
+            // Overwrite mapped properties
+            values[i] = {...values[i], ...mappedData};
+        }
+
+        // Store the updated domain data
+        data.domains = values;
+    }
 };

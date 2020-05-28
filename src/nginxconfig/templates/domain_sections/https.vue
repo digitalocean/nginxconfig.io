@@ -139,7 +139,7 @@
                         <input v-model="sslCertificate"
                                class="input"
                                type="text"
-                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.computed}.crt`"
+                               :placeholder="`${nginxDir}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
                         />
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         <input v-model="sslCertificateKey"
                                class="input"
                                type="text"
-                               :placeholder="`/etc/nginx/ssl/${$parent.$props.data.server.domain.computed}.key`"
+                               :placeholder="`${nginxDir}/ssl/${$parent.$props.data.server.domain.computed}.key`"
                         />
                     </div>
                 </div>
@@ -236,7 +236,12 @@
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'https'), // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'https'),         // Getters & setters for the delegated data
+            nginxDir() {
+                return this.$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
+            },
+        },
         watch: {
             // Disable everything if https is disabled
             '$props.data.https': {
