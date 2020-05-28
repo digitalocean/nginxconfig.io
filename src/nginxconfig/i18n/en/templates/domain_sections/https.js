@@ -14,7 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import app from './app';
-import domainSections from './domain_sections';
-
-export default { app, domainSections };
+export default {
+    https: 'HTTPS',
+    enableEncryptedSslConnection: 'enable encrypted SSL connections',
+    http2: 'HTTP/2',
+    enableHttp2Connections: 'enable HTTP/2 connections',
+    forceHttps: 'Force HTTPS',
+    hsts: 'HSTS',
+    enableStrictTransportSecurity: 'enable Strict Transport Security',
+    certificationType: 'Certification type',
+    letsEncrypt: 'Let\'s Encrypt',
+    customCertificate: 'Custom certificate',
+    letsEncryptEmail: 'Let\'s Encrypt email',
+};

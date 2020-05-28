@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">HTTPS</label>
+                <label class="label">{{ i18n.templates.domainSections.https.https }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="https" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable encrypted SSL connections
+                                {{ i18n.templates.domainSections.https.enableEncryptedSslConnection }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ limitations under the License.
 
         <div v-if="http2Enabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">HTTP/2</label>
+                <label class="label">{{ i18n.templates.domainSections.https.http2 }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -44,7 +44,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="http2" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable HTTP/2 connections
+                                {{ i18n.templates.domainSections.https.enableHttp2Connections }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ limitations under the License.
 
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Force HTTPS</label>
+                <label class="label">{{ i18n.templates.domainSections.https.forceHttps }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -74,7 +74,7 @@ limitations under the License.
 
         <div v-if="hstsEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">HSTS</label>
+                <label class="label">{{ i18n.templates.domainSections.https.hsts }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -82,7 +82,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="hsts" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable Strict Transport Security
+                                {{ i18n.templates.domainSections.https.enableStrictTransportSecurity }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ limitations under the License.
 
         <div v-if="certTypeEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">Certification type</label>
+                <label class="label">{{ i18n.templates.domainSections.https.certificationType }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -130,7 +130,7 @@ limitations under the License.
 
         <div v-if="letsEncryptEmailEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Let's Encrypt email</label>
+                <label class="label">{{ i18n.templates.domainSections.https.letsEncryptEmail }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -216,8 +216,8 @@ limitations under the License.
         certType: {
             default: 'letsEncrypt',
             options: {
-                letsEncrypt: 'Let\'s Encrypt',
-                custom: 'Custom certificate',
+                letsEncrypt: i18n.templates.domainSections.https.letsEncrypt,
+                custom: i18n.templates.domainSections.https.customCertificate,
             },
             enabled: true,
         },
@@ -237,7 +237,7 @@ limitations under the License.
 
     export default {
         name: 'DomainHTTPS',                                    // Component name
-        display: 'HTTPS',                                       // Display name for tab
+        display: i18n.templates.domainSections.https.https,     // Display name for tab
         key: 'https',                                           // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

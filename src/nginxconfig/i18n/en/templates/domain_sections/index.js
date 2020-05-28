@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import app from './app';
-import domainSections from './domain_sections';
+import https from './https';
 
-export default { app, domainSections };
+export default { https };
