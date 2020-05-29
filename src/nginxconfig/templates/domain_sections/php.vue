@@ -18,18 +18,18 @@ limitations under the License.
     <div>
         <div v-if="!phpEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">PHP</label>
+                <label class="label">{{ i18n.templates.domainSections.php.php }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control is-changed">
                         <label class="text">
-                            PHP is disabled.
+                            {{ i18n.templates.domainSections.php.phpIsDisabled }}
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
-                                <br />PHP cannot be enabled whilst the reverse proxy is enabled.
+                                <br />{{ i18n.templates.domainSections.php.phpCannotBeEnabledWithReverseProxy }}
                             </template>
                             <template v-if="$parent.$props.data.python.python.computed">
-                                <br />PHP cannot be enabled whilst Python is enabled.
+                                <br />{{ i18n.templates.domainSections.php.phpCannotBeEnabledWithPython }}
                             </template>
                         </label>
                     </div>
@@ -47,7 +47,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="php" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable PHP
+                                {{ i18n.templates.domainSections.php.enablePhp }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ limitations under the License.
 
         <div v-if="wordPressRulesEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">WordPress rules</label>
+                <label class="label">{{ i18n.templates.domainSections.php.wordPressRules }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -65,7 +65,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="wordPressRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable WordPress-specific rules
+                                {{ i18n.templates.domainSections.php.enableWordPressRules }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ limitations under the License.
 
         <div v-if="drupalRulesEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Drupal rules</label>
+                <label class="label">{{ i18n.templates.domainSections.php.drupalRules }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -83,7 +83,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="drupalRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable Drupal-specific rules
+                                {{ i18n.templates.domainSections.php.enableDrupalRules }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ limitations under the License.
 
         <div v-if="magentoRulesEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Magento rules</label>
+                <label class="label">{{ i18n.templates.domainSections.php.magentoRules }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -101,7 +101,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="magentoRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable Magento-specific rules
+                                {{ i18n.templates.domainSections.php.enableMagentoRules }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ limitations under the License.
 
     export default {
         name: 'DomainPHP',                                  // Component name
-        display: 'PHP',                                     // Display name for tab
+        display: i18n.templates.domainSections.php.php,     // Display name for tab
         key: 'php',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {

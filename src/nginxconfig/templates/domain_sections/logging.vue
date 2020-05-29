@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">access_log by domain</label>
+                <label class="label">access_log {{ i18n.templates.domainSections.logging.byDomain }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable for this domain
+                                {{ i18n.templates.domainSections.logging.enableForThisDomain }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">error_log by domain</label>
+                <label class="label">error_log {{ i18n.templates.domainSections.logging.byDomain }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -44,7 +44,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable for this domain
+                                {{ i18n.templates.domainSections.logging.enableForThisDomain }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ limitations under the License.
 
     export default {
         name: 'DomainLogging',                                      // Component name
-        display: 'Logging',                                         // Display name for tab
+        display: i18n.templates.domainSections.logging.logging,     // Display name for tab
         key: 'logging',                                             // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         components: {

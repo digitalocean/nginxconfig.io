@@ -15,5 +15,7 @@ limitations under the License.
 */
 
 import https from './https';
+import logging from './logging';
+import php from './php';
 
-export default { https };
+export default { https, logging, php };
