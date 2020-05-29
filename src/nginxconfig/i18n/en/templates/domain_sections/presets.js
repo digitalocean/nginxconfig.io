@@ -14,9 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import https from './https';
-import logging from './logging';
-import php from './php';
-import presets from './presets';
-
-export default { https, logging, php, presets };
+export default {
+    presets: 'Presets',
+    itLooksLikeYouCustomisedTheConfig: 'It looks like you\'ve customised the configuration for this domain. Choosing a new preset may reset or change some of the settings that you\'ve customised.',
+    frontend: 'Frontend',
+    php: 'PHP',
+    django: 'Django',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'Single-page application',
+    wordPress: 'WordPress',
+    drupal: 'Drupal',
+    magento: 'Magento',
+};

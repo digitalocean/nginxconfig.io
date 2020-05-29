@@ -23,7 +23,7 @@ export default {
     wordPressRules: 'WordPress rules',
     enableWordPressRules: 'enable WordPress-specific rules',
     drupalRules: 'Drupal rules',
-    enableDrupalRules: ' enable Drupal-specific rules',
+    enableDrupalRules: 'enable Drupal-specific rules',
     magentoRules: 'Magento rules',
-    enableMagentoRules: ' enable Magento-specific rules',
+    enableMagentoRules: 'enable Magento-specific rules',
 };

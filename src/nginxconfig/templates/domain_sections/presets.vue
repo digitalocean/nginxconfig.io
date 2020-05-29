@@ -17,7 +17,7 @@ limitations under the License.
 <template>
     <div class="container">
         <div class="header-group">
-            <h3>Presets</h3>
+            <h3>{{ i18n.templates.domainSections.presets.presets }}</h3>
             <template v-if="$parent.$props.data.hasUserInteraction">
                 <a v-if="expanded" class="button is-tiny" @click="expanded = false">
                     <i class="fas fa-angle-up"></i>
@@ -31,8 +31,7 @@ limitations under the License.
         <template v-if="!$parent.$props.data.hasUserInteraction || expanded">
             <div v-if="$parent.$props.data.hasUserInteraction" class="message is-warning">
                 <div class="message-body">
-                    It looks like you've customised the configuration for this domain.
-                    Choosing a new preset may reset or change some of the settings that you've customised.
+                    {{ i18n.templates.domainSections.presets.itLooksLikeYouCustomisedTheConfig }}
                 </div>
             </div>
 
@@ -56,7 +55,7 @@ limitations under the License.
     const defaults = {
         frontend: {
             default: false,
-            display: 'Frontend',
+            display: i18n.templates.domainSections.presets.frontend,
             enabled: true,
             computedCheck (data) {
                 return !data.php.php.computed
@@ -68,7 +67,7 @@ limitations under the License.
         },
         php: {
             default: true,
-            display: 'PHP',
+            display: i18n.templates.domainSections.presets.php,
             enabled: true,
             computedCheck (data) {
                 return data.php.php.computed
@@ -82,7 +81,7 @@ limitations under the License.
         },
         django: {
             default: false,
-            display: 'Django',
+            display: i18n.templates.domainSections.presets.django,
             enabled: true,
             computedCheck (data) {
                 return data.python.python.computed
@@ -92,7 +91,7 @@ limitations under the License.
         },
         nodejs: {
             default: false,
-            display: 'Node.js',
+            display: i18n.templates.domainSections.presets.nodeJs,
             enabled: true,
             computedCheck (data) {
                 return data.reverseProxy.reverseProxy.computed
@@ -101,7 +100,7 @@ limitations under the License.
         },
         singlePageApplication: {
             default: false,
-            display: 'Single-page application',
+            display: i18n.templates.domainSections.presets.singePageApplication,
             enabled: true,
             computedCheck (data) {
                 return data.php.php.computed
@@ -111,7 +110,7 @@ limitations under the License.
         },
         wordPress: {
             default: false,
-            display: 'WordPress',
+            display: i18n.templates.domainSections.presets.wordPress,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'
@@ -124,7 +123,7 @@ limitations under the License.
         },
         drupal: {
             default: false,
-            display: 'Drupal',
+            display: i18n.templates.domainSections.presets.drupal,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'
@@ -137,7 +136,7 @@ limitations under the License.
         },
         magento: {
             default: false,
-            display: 'Magento',
+            display: i18n.templates.domainSections.presets.magento,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'
@@ -152,7 +151,7 @@ limitations under the License.
 
     export default {
         name: 'DomainPresets',                                      // Component name
-        display: 'Presets',                                         // Display name for tab
+        display: i18n.templates.domainSections.presets.presets,     // Display name for tab
         key: 'presets',                                             // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         props: {
