@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable
+                                {{ i18n.templates.domainSections.routing.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ limitations under the License.
 
         <div v-if="fallbackHtmlEnabled || fallbackPhpEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">Fallback routing</label>
+                <label class="label">{{ i18n.templates.domainSections.routing.fallbackRouting }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -82,7 +82,7 @@ limitations under the License.
 
         <div v-if="fallbackPhpPathEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Fallback routing PHP path</label>
+                <label class="label">{{ i18n.templates.domainSections.routing.fallbackRoutingPhpPath }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${fallbackPhpPathChanged ? ' is-changed' : ''}`">
@@ -99,7 +99,7 @@ limitations under the License.
 
         <div v-if="legacyPhpRoutingEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Legacy PHP routing</label>
+                <label class="label">{{ i18n.templates.domainSections.routing.legacyPhpRouting }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -107,7 +107,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="legacyPhpRouting" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable legacy routing
+                                {{ i18n.templates.domainSections.routing.enableLegacyRouting }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -154,7 +154,7 @@ limitations under the License.
 
     export default {
         name: 'DomainRouting',                                  // Component name
-        display: 'Routing',                                     // Display name for tab
+        display: i18n.templates.domainSections.routing.routing, // Display name for tab
         key: 'routing',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

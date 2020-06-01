@@ -18,21 +18,21 @@ limitations under the License.
     <div>
         <div class="field-row">
             <div class="field">
-                <label class="label">Domain</label>
+                <label class="label">{{ i18n.templates.domainSections.server.domain }}</label>
                 <div :class="`control${domainChanged ? ' is-changed' : ''}`">
                     <input v-model="domain" class="input" type="text" :placeholder="domainDefault" />
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Path</label>
+                <label class="label">{{ i18n.templates.domainSections.server.path }}</label>
                 <div :class="`control${pathChanged ? ' is-changed' : ''}`">
                     <input v-model="path" class="input" type="text" :placeholder="`/var/www/${domain}`" />
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Document root</label>
+                <label class="label">{{ i18n.templates.domainSections.server.documentRoot }}</label>
                 <div :class="`control${documentRootChanged ? ' is-changed' : ''}`">
                     <input v-model="documentRoot" class="input" type="text" :placeholder="documentRootDefault" />
                 </div>
@@ -41,7 +41,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">www subdomain</label>
+                <label class="label">{{ i18n.templates.domainSections.server.wwwSubdomain }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -59,7 +59,7 @@ limitations under the License.
 
         <div v-if="cdnSubdomainEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">CDN subdomain</label>
+                <label class="label">{{ i18n.templates.domainSections.server.cdnSubdomain }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -77,7 +77,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Redirect subdomains</label>
+                <label class="label">{{ i18n.templates.domainSections.server.redirectSubdomains }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -168,7 +168,7 @@ limitations under the License.
 
     export default {
         name: 'DomainServer',                                   // Component name
-        display: 'Server',                                      // Display name for tab
+        display: i18n.templates.domainSections.server.server,   // Display name for tab
         key: 'server',                                          // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

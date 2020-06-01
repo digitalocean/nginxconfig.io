@@ -14,13 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import https from './https';
-import logging from './logging';
-import php from './php';
-import presets from './presets';
-import python from './python';
-import reverseProxy from './reverse_proxy';
-import routing from './routing';
-import server from './server';
-
-export default { https, logging, php, presets, python, reverseProxy, routing, server };
+export default {
+    enable: 'enable',
+    fallbackRouting: 'Fallback routing',
+    fallbackRoutingPhpPath: 'Fallback routing PHP path',
+    legacyPhpRouting: 'Legacy PHP routing',
+    enableLegacyRouting: 'enable legacy routing',
+    path: 'Path',
+    routing: 'Routing',
+};

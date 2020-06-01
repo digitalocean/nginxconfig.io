@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import https from './https';
-import logging from './logging';
-import php from './php';
-import presets from './presets';
-import python from './python';
-import reverseProxy from './reverse_proxy';
-import routing from './routing';
-import server from './server';
-
-export default { https, logging, php, presets, python, reverseProxy, routing, server };
+export default {
+    domain: 'Domain',
+    path: 'Path',
+    documentRoot: 'Document root',
+    wwwSubdomain: 'www subdomain',
+    cdnSubdomain: 'CDN subdomain',
+    redirectSubdomains: 'Redirect subdomains',
+    routing: 'Routing',
+    server: 'Server',
+};
