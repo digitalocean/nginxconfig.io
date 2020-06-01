@@ -15,6 +15,6 @@ limitations under the License.
 */
 
 export default {
-    enable: 'Python server',
+    enable: 'enable',
     security: 'Security',
 };
