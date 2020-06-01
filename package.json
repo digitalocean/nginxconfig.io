@@ -1,5 +1,5 @@
 {
-  "name": "nginxconfig-vue",
+  "name": "nginxconfig.io",
   "version": "1.0.0",
   "description": "",
   "license": "Apache-2.0",
@@ -22,16 +22,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/do-community/nginxconfig-vue.git"
+    "url": "git+https://github.com/digitalocean/nginxconfig.io.git"
   },
   "keywords": [
     "nginx"
   ],
   "author": "DigitalOcean",
   "bugs": {
-    "url": "https://github.com/do-community/nginxconfig-vue/issues"
+    "url": "https://github.com/digitalocean/nginxconfig.io/issues"
   },
-  "homepage": "https://github.com/do-community/nginxconfig-vue#readme",
+  "homepage": "https://github.com/digitalocean/nginxconfig.io#readme",
   "dependencies": {
     "clone": "^2.1.2",
     "copy-to-clipboard": "^3.3.1",

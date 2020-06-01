@@ -26,8 +26,6 @@ jobs:
         npm ci
         npm test
         npm run build
-      env:
-        DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
     - name: Deploy master to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@2.0.0

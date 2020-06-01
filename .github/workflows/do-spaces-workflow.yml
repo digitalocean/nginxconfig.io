@@ -23,8 +23,6 @@ jobs:
         npm ci
         npm test
         npm run build
-      env:
-        DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
     - name: Deploy commit to DigitalOcean Spaces
       run: aws s3 sync ./dist s3://${{ secrets.SPACES_BUCKET }}/commits/nginxconfig/${{ github.sha }} --endpoint=https://${{ secrets.SPACES_REGION }}.digitaloceanspaces.com --acl public-read --content-encoding utf8
