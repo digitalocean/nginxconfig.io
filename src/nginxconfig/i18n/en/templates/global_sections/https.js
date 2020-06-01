@@ -14,8 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import templates from './templates';
-
-// TODO: centralised shared strings
-
-export default { templates };
+export default {
+    sslProfile: 'SSL Profile',
+    httpsMustBeEnabledOnOneSite: 'HTTPS must be enabled on at least one site to configure global HTTPS settings.',
+    ocspDnsResolvers: 'OCSP DNS Resolvers',
+    cloudflareResolver: 'Cloudflare Resolver',
+    googlePublicDns: 'Google Public DNS',
+    openDns: 'OpenDNS',
+    letsEncryptWebroot: 'Let\'s Encrypt webroot',
+    mozillaModern: 'Mozilla Modern',
+    mozillaIntermediate: 'Mozilla Intermediate',
+    mozillaOld: 'Mozilla Old',
+    https: 'HTTPS',
+};

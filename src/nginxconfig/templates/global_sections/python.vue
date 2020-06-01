@@ -18,13 +18,13 @@ limitations under the License.
     <div>
         <div v-if="!pythonServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">Python server</label>
+                <label class="label">{{ i18n.templates.globalSections.python.pythonServer }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            Python must be enabled on at least one site to configure global Python settings.
+                            {{ i18n.templates.globalSections.python.pythonMustBeEnabledOnOneSite }}
                         </label>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ limitations under the License.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Python server</label>
+                <label class="label">{{ i18n.templates.globalSections.python.pythonServer }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -63,19 +63,19 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalPython',                               // Component name
-        display: 'Python',                                  // Display name for tab
-        key: 'python',                                      // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'GlobalPython',                                   // Component name
+        display: i18n.templates.globalSections.python.python,   // Display name for tab
+        key: 'python',                                          // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object,                                       // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'python'), // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'python'),     // Getters & setters for the delegated data
         watch: {
             // Enable Python server settings if any site uses Python
             '$parent.$parent.$data.domains': {

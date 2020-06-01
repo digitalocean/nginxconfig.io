@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import templates from './templates';
-
-// TODO: centralised shared strings
-
-export default { templates };
+export default {
+    enableFileNotFoundErrorLogging: 'enable file not found error logging in',
+    logging: 'Logging',
+};

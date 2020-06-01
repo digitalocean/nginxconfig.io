@@ -14,8 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import templates from './templates';
+import https from './https';
+import logging from './logging';
+import nginx from './nginx';
+import performance from './performance';
+import php from './php';
+import python from './python';
+import security from './security';
+import tools from './tools';
 
-// TODO: centralised shared strings
-
-export default { templates };
+export default { https, logging, nginx, performance, php, python, security, tools };

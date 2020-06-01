@@ -18,13 +18,13 @@ limitations under the License.
     <div>
         <div v-if="!phpServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">PHP server</label>
+                <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            PHP must be enabled on at least one site to configure global PHP settings.
+                            {{ i18n.templates.globalSections.php.phpMustBeEnabledOnOneSite }}
                         </label>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ limitations under the License.
         <template v-else>
             <div class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">PHP server</label>
+                    <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -51,7 +51,7 @@ limitations under the License.
 
             <div class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">PHP backup server</label>
+                    <label class="label">{{ i18n.templates.globalSections.php.phpBackupServer }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -76,14 +76,14 @@ limitations under the License.
     import computedFromDefaults from '../../util/computed_from_defaults';
 
     const serverOptions = {
-        '127.0.0.1:9000': 'TCP: 127.0.0.1:9000',
-        '/var/run/hhvm/sock': 'HHVM socket: /var/run/hhvm/sock',
-        '/var/run/hhvm/hhvm.sock': 'HHVM socket: /var/run/hhvm/hhvm.sock',
-        '/var/run/php5-fpm.sock': '5.x socket: /var/run/php5-fpm.sock',
-        '/var/run/php/php7.0-fpm.sock': '7.0 socket: /var/run/php/php7.0-fpm.sock',
-        '/var/run/php/php7.1-fpm.sock': '7.1 socket: /var/run/php/php7.1-fpm.sock',
-        '/var/run/php/php7.2-fpm.sock': '7.2 socket: /var/run/php/php7.2-fpm.sock',
-        '/var/run/php/php7.3-fpm.sock': '7.3 socket: /var/run/php/php7.3-fpm.sock',
+        '127.0.0.1:9000': `${i18n.templates.globalSections.php.tcp}: 127.0.0.1:9000`,
+        '/var/run/hhvm/sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/sock`,
+        '/var/run/hhvm/hhvm.sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/hhvm.sock`,
+        '/var/run/php5-fpm.sock': `${i18n.templates.globalSections.php.php5Socket}: /var/run/php5-fpm.sock`,
+        '/var/run/php/php7.1-fpm.sock': `${i18n.templates.globalSections.php.php71Socket}: /var/run/php/php7.1-fpm.sock`,
+        '/var/run/php/php7.2-fpm.sock': `${i18n.templates.globalSections.php.php72Socket}: /var/run/php/php7.2-fpm.sock`,
+        '/var/run/php/php7.0-fpm.sock': `${i18n.templates.globalSections.php.php70Socket}: /var/run/php/php7.0-fpm.sock`,
+        '/var/run/php/php7.3-fpm.sock': `${i18n.templates.globalSections.php.php73Socket}: /var/run/php/php7.3-fpm.sock`,
     };
 
     const defaults = {
@@ -94,14 +94,14 @@ limitations under the License.
         },
         phpBackupServer: {
             default: '',
-            options: { '': 'Disabled', ...serverOptions },
+            options: { '': i18n.templates.globalSections.php.disabled, ...serverOptions },
             enabled: true,
         },
     };
 
     export default {
         name: 'GlobalPHP',                                  // Component name
-        display: 'PHP',                                     // Display name for tab
+        display: i18n.templates.globalSections.php.php,     // Display name for tab
         key: 'php',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {

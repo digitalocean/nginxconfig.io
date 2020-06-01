@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Modularized structure</label>
+                <label class="label">{{ i18n.templates.globalSections.tools.modularizedStructure }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="modularizedStructure" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable modularized config files
+                                {{ i18n.templates.globalSections.tools.enableModularizedConfigFiles }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ limitations under the License.
 
         <div v-if="symlinkVhostEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Symlink vhost</label>
+                <label class="label"></label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -44,7 +44,8 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="symlinkVhost" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable symlinks from sites-available/ to sites-enabled/
+                                {{ i18n.templates.globalSections.tools.enableSymLinksFrom }} sites-available/
+                                {{ i18n.templates.globalSections.tools.to }} sites-enabled/
                             </PrettyCheck>
                         </div>
                     </div>
@@ -54,7 +55,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Share configuration</label>
+                <label class="label">{{ i18n.templates.globalSections.tools.shareConfiguration }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -72,23 +73,23 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Reset configuration</label>
+                <label class="label">{{ i18n.templates.globalSections.tools.resetConfiguration }}</label>
             </div>
             <div class="field-body">
                 <div class="field is-grouped">
                     <div class="control">
                         <a class="button is-danger is-outline is-mini" @click="resetGlobal">
-                            Reset global config
+                            {{ i18n.templates.globalSections.tools.resetGlobalConfig }}
                         </a>
                     </div>
                     <div v-if="hasDomain" class="control">
                         <a class="button is-danger is-outline is-mini" @click="resetDomains">
-                            Reset all domains
+                            {{ i18n.templates.globalSections.tools.resetAllDomains }}
                         </a>
                     </div>
                     <div v-if="hasDomain" class="control">
                         <a class="button is-danger is-outline is-mini" @click="removeDomains">
-                            Remove all domains
+                            {{ i18n.templates.globalSections.tools.removeAllDomains }}
                         </a>
                     </div>
                 </div>
@@ -107,12 +108,12 @@ limitations under the License.
                         <div class="field is-grouped">
                             <div class="control">
                                 <a class="button is-danger is-outline is-mini" @click="resetDomain(domainData[1])">
-                                    Reset domain config
+                                    {{ i18n.templates.globalSections.tools.resetDomainConfig }}
                                 </a>
                             </div>
                             <div class="control">
                                 <a class="button is-danger is-outline is-mini" @click="removeDomain(domainData[1])">
-                                    Remove domain
+                                    {{ i18n.templates.globalSections.tools.removeDomain }}
                                 </a>
                             </div>
                         </div>
@@ -123,8 +124,12 @@ limitations under the License.
 
         <Modal ref="confirmModal" :title="confirmTitle">
             <p>{{ confirmBody }}</p>
-            <a class="button is-danger is-outline" @click="doConfirmAction">Yes, I'm sure</a>
-            <a class="button is-outline" @click="$refs.confirmModal.close()">No, cancel</a>
+            <a class="button is-danger is-outline" @click="doConfirmAction">
+                {{ i18n.templates.globalSections.tools.yesImSure }}
+            </a>
+            <a class="button is-outline" @click="$refs.confirmModal.close()">
+                {{ i18n.templates.globalSections.tools.noCancel }}
+            </a>
         </Modal>
     </div>
 </template>
@@ -150,28 +155,27 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalTools',                            // Component name
-        display: 'Tools',                               // Display name for tab
-        key: 'tools',                                   // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),     // Data the parent will present here
+        name: 'GlobalTools',                                // Component name
+        display: i18n.templates.globalSections.tools.tools, // Display name for tab
+        key: 'tools',                                       // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
             PrettyCheck,
             Modal,
         },
         props: {
-            data: Object,                               // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data() {
             return {
                 i18n,
                 confirmTitle: '',
                 confirmBody: '',
-                confirmAction: () => {
-                },
+                confirmAction: () => {},
             };
         },
         computed: {
-            ...computedFromDefaults(defaults, 'tools'), // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'tools'),     // Getters & setters for the delegated data
             hasDomain() {
                 return this.$parent.$parent.activeDomains.length > 0;
             },

@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">NGINX config directory</label>
+                <label class="label">{{ i18n.templates.globalSections.nginx.nginxConfigDirectory }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -100,7 +100,7 @@ limitations under the License.
                     </div>
                     <div class="control">
                         <a class="button is-static">
-                            MB
+                            {{ i18n.templates.globalSections.nginx.mb }}
                         </a>
                     </div>
                 </div>
@@ -144,7 +144,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalNGINX',                                // Component name
-        display: 'NGINX',                                   // Display name for tab
+        display: i18n.templates.globalSections.nginx.nginx, // Display name for tab
         key: 'nginx',                                       // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {

@@ -60,7 +60,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="logNotFound" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable file not found error logging in error_log
+                                {{ i18n.templates.globalSections.logging.enableFileNotFoundErrorLogging }} error_log
                             </PrettyCheck>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalLogging',                                  // Component name
-        display: 'Logging',                                     // Display name for tab
+        display: i18n.templates.globalSections.logging.logging, // Display name for tab
         key: 'logging',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

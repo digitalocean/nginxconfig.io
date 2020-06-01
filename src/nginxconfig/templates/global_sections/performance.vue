@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Gzip compression</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.gzipCompression }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="gzipCompression" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable gzip compression
+                                {{ i18n.templates.globalSections.performance.enableGzipCompression }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Brotli compression</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.brotliCompression }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -44,7 +44,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="brotliCompression" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable brotli compression
+                                {{ i18n.templates.globalSections.performance.enableBrotliCompression }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Expiration for assets</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.expirationForAssets }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -71,7 +71,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Expiration for media</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.expirationForMedia }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -88,7 +88,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Expiration for SVGs</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.expirationForSvgs }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -105,7 +105,7 @@ limitations under the License.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Expiration for fonts</label>
+                <label class="label">{{ i18n.templates.globalSections.performance.expirationForFonts }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -156,21 +156,21 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalPerformance',                                  // Component name
-        display: 'Performance',                                     // Display name for tab
-        key: 'performance',                                         // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'GlobalPerformance',                                      // Component name
+        display: i18n.templates.globalSections.performance.performance, // Display name for tab
+        key: 'performance',                                             // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                     // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object,                                               // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'performance'),    // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'performance'),        // Getters & setters for the delegated data
     };
 </script>

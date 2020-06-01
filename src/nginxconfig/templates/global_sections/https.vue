@@ -18,13 +18,13 @@ limitations under the License.
     <div>
         <div v-if="!sslProfileEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">SSL profile</label>
+                <label class="label">{{ i18n.templates.globalSections.https.sslProfile }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            HTTPS must be enabled on at least one site to configure global HTTPS settings.
+                            {{ i18n.templates.globalSections.https.httpsMustBeEnabledOnOneSite }}
                         </label>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ limitations under the License.
         <template v-else>
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">SSL profile</label>
+                    <label class="label">{{ i18n.templates.globalSections.https.sslProfile }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -56,7 +56,7 @@ limitations under the License.
 
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">OCSP DNS Resolvers</label>
+                    <label class="label">{{ i18n.templates.globalSections.https.ocspDnsResolvers }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -64,7 +64,7 @@ limitations under the License.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspCloudflare" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    Cloudflare Resolver
+                                    {{ i18n.templates.globalSections.https.cloudflareResolver }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -72,7 +72,7 @@ limitations under the License.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    Google Public DNS
+                                    {{ i18n.templates.globalSections.https.googlePublicDns }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -80,7 +80,7 @@ limitations under the License.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    OpenDNS
+                                    {{ i18n.templates.globalSections.https.openDns }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ limitations under the License.
 
             <div v-if="letsEncryptRootEnabled" class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">Let's Encrypt webroot</label>
+                    <label class="label">{{ i18n.templates.globalSections.https.letsEncryptWebroot }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -119,9 +119,9 @@ limitations under the License.
         sslProfile: {
             default: 'intermediate',
             options: {
-                modern: 'Mozilla Modern',
-                intermediate: 'Mozilla Intermediate',
-                old: 'Mozilla Old',
+                modern: i18n.templates.globalSections.https.mozillaModern,
+                intermediate: i18n.templates.globalSections.https.mozillaIntermediate,
+                old: i18n.templates.globalSections.https.mozillaOld,
             },
             enabled: true,
         },
@@ -145,7 +145,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalHTTPS',                                    // Component name
-        display: 'HTTPS',                                       // Display name for tab
+        display: i18n.templates.globalSections.https.https,     // Display name for tab
         key: 'https',                                           // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

@@ -59,7 +59,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable
+                                {{ i18n.templates.globalSections.security.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable
+                                {{ i18n.templates.globalSections.security.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalSecurity',                                     // Component name
-        display: 'Security',                                        // Display name for tab
+        display: i18n.templates.globalSections.security.security,   // Display name for tab
         key: 'security',                                            // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         components: {
