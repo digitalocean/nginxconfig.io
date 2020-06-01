@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import https from './https';
-import logging from './logging';
-import php from './php';
-import presets from './presets';
-import python from './python';
-import reverseProxy from './reverse_proxy';
-
-export default { https, logging, php, presets, python, reverseProxy };
+export default {
+    reverseProxy: 'Reverse proxy',
+    reverseProxyIsDisabled: 'Reverse proxy is disabled.',
+    reverseProxyCannotBeEnabledWithPhp: 'Reverse proxy cannot be enabled whilst PHP is enabled.',
+    reverseProxyCannotBeEnabledWithPython: 'Reverse proxy cannot be enabled whilst Python is enabled.',
+    enableReverseProxy: 'enable reverse proxy',
+    path: 'Path',
+};

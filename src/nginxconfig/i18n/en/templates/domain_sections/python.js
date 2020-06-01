@@ -14,11 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import https from './https';
-import logging from './logging';
-import php from './php';
-import presets from './presets';
-import python from './python';
-import reverseProxy from './reverse_proxy';
-
-export default { https, logging, php, presets, python, reverseProxy };
+export default {
+    python: 'Python',
+    pythonIsDisabled: 'Python is disabled.',
+    pythonCannotBeEnabledWithReverseProxy: 'Python cannot be enabled whilst the reverse proxy is enabled.',
+    pythonCannotBeEnabledWithPhp: 'Python cannot be enabled whilst PHP is enabled.',
+    enablePython: 'enable Python',
+    djangoRules: 'Django rules',
+    enableDjangoRules: 'enable Django-specific rules',
+};

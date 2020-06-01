@@ -18,18 +18,18 @@ limitations under the License.
     <div>
         <div v-if="!reverseProxyEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">Reverse proxy</label>
+                <label class="label">{{ i18n.templates.domainSections.reverseProxy.reverseProxy }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            Reverse proxy is disabled.
+                            {{ i18n.templates.domainSections.reverseProxy.reverseProxyIsDisabled }}
                             <template v-if="$parent.$props.data.php.php.computed">
-                                <br />Reverse proxy cannot be enabled whilst PHP is enabled.
+                                <br />{{ i18n.templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPhp }}
                             </template>
                             <template v-if="$parent.$props.data.python.python.computed">
-                                <br />Reverse proxy cannot be enabled whilst Python is enabled.
+                                <br />{{ i18n.templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPython }}
                             </template>
                         </label>
                     </div>
@@ -39,7 +39,7 @@ limitations under the License.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Reverse proxy</label>
+                <label class="label">{{ i18n.templates.domainSections.reverseProxy.reverseProxy }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${reverseProxyChanged ? ' is-changed' : ''}`">
@@ -47,7 +47,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="reverseProxy" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable reverse proxy
+                                {{ i18n.templates.domainSections.reverseProxy.enableReverseProxy }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ limitations under the License.
 
         <div v-if="pathEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Path</label>
+                <label class="label">{{ i18n.templates.domainSections.reverseProxy.path }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${pathChanged ? ' is-changed' : ''}`">
@@ -113,22 +113,22 @@ limitations under the License.
     };
 
     export default {
-        name: 'DomainReverseProxy',                                     // Component name
-        display: 'Reverse proxy',                                       // Display name for tab
-        key: 'reverseProxy',                                            // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                     // Data the parent will present here
+        name: 'DomainReverseProxy',                                         // Component name
+        display: i18n.templates.domainSections.reverseProxy.reverseProxy,   // Display name for tab
+        key: 'reverseProxy',                                                // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                         // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                               // Data delegated back to us from parent
+            data: Object,                                                   // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'reverseProxy'),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'reverseProxy'),           // Getters & setters for the delegated data
         watch: {
             // If the PHP or Python is enabled, the Reverse proxy will be forced off
             '$parent.$props.data': {

@@ -18,18 +18,18 @@ limitations under the License.
     <div>
         <div v-if="!pythonEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">Python</label>
+                <label class="label">{{ i18n.templates.domainSections.python.python }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            Python is disabled.
+                            {{ i18n.templates.domainSections.python.pythonIsDisabled }}
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
-                                <br />Python cannot be enabled whilst the reverse proxy is enabled.
+                                <br />{{ i18n.templates.domainSections.python.pythonCannotBeEnabledWithReverseProxy }}
                             </template>
                             <template v-if="$parent.$props.data.php.php.computed">
-                                <br />Python cannot be enabled whilst PHP is enabled.
+                                <br />{{ i18n.templates.domainSections.python.pythonCannotBeEnabledWithPhp }}
                             </template>
                         </label>
                     </div>
@@ -39,7 +39,7 @@ limitations under the License.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Python</label>
+                <label class="label">{{ i18n.templates.domainSections.python.python }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -47,7 +47,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="python" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable Python
+                                {{ i18n.templates.domainSections.python.enablePython }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ limitations under the License.
 
         <div v-if="djangoRulesEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Django rules</label>
+                <label class="label">{{ i18n.templates.domainSections.python.djangoRules }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -65,7 +65,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="djangoRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                enable Django-specific rules
+                                {{ i18n.templates.domainSections.python.enableDjangoRules }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ limitations under the License.
 
     export default {
         name: 'DomainPython',                                   // Component name
-        display: 'Python',                                      // Display name for tab
+        display: i18n.templates.domainSections.python.python,   // Display name for tab
         key: 'python',                                          // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

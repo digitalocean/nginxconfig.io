@@ -100,7 +100,7 @@ limitations under the License.
         },
         singlePageApplication: {
             default: false,
-            display: i18n.templates.domainSections.presets.singePageApplication,
+            display: i18n.templates.domainSections.presets.singlePageApplication,
             enabled: true,
             computedCheck (data) {
                 return data.php.php.computed
