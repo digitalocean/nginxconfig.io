@@ -1,0 +1,297 @@
+<!--
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<template>
+    <div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.globalSections.tools.modularizedStructure }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${modularizedStructureChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="modularizedStructure" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.tools.enableModularizedConfigFiles }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="symlinkVhostEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label"></label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${symlinkVhostChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="symlinkVhost" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.tools.enableSymLinksFrom }} sites-available/
+                                {{ i18n.templates.globalSections.tools.to }} sites-enabled/
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.globalSections.tools.shareConfiguration }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input v-model="shareLink"
+                               class="input"
+                               type="text"
+                               readonly="readonly"
+                               @click="select"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.globalSections.tools.resetConfiguration }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-grouped">
+                    <div class="control">
+                        <a class="button is-danger is-outline is-mini" @click="resetGlobal">
+                            {{ i18n.templates.globalSections.tools.resetGlobalConfig }}
+                        </a>
+                    </div>
+                    <div v-if="hasDomain" class="control">
+                        <a class="button is-danger is-outline is-mini" @click="resetDomains">
+                            {{ i18n.templates.globalSections.tools.resetAllDomains }}
+                        </a>
+                    </div>
+                    <div v-if="hasDomain" class="control">
+                        <a class="button is-danger is-outline is-mini" @click="removeDomains">
+                            {{ i18n.templates.globalSections.tools.removeAllDomains }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+            </div>
+            <div class="field-body is-vertical">
+                <div v-for="domainData in $parent.$parent.activeDomains" class="field is-horizontal">
+                    <div class="field-label">
+                        <label class="label">{{ domainData[0].server.domain.computed }}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <a class="button is-danger is-outline is-mini" @click="resetDomain(domainData[1])">
+                                    {{ i18n.templates.globalSections.tools.resetDomainConfig }}
+                                </a>
+                            </div>
+                            <div class="control">
+                                <a class="button is-danger is-outline is-mini" @click="removeDomain(domainData[1])">
+                                    {{ i18n.templates.globalSections.tools.removeDomain }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <Modal ref="confirmModal" :title="confirmTitle">
+            <p>{{ confirmBody }}</p>
+            <a class="button is-danger is-outline" @click="doConfirmAction">
+                {{ i18n.templates.globalSections.tools.yesImSure }}
+            </a>
+            <a class="button is-outline" @click="$refs.confirmModal.close()">
+                {{ i18n.templates.globalSections.tools.noCancel }}
+            </a>
+        </Modal>
+    </div>
+</template>
+
+<script>
+    import PrettyCheck from 'pretty-checkbox-vue/check';
+    import Modal from 'do-vue/src/templates/modal';
+    import qs from 'qs';
+    import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
+    import exportData from '../../util/export_data';
+
+    const defaults = {
+        modularizedStructure: {
+            default: true,
+            enabled: true,
+        },
+        symlinkVhost: {
+            default: true,
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'GlobalTools',                                // Component name
+        display: i18n.templates.globalSections.tools.tools, // Display name for tab
+        key: 'tools',                                       // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        components: {
+            PrettyCheck,
+            Modal,
+        },
+        props: {
+            data: Object,                                   // Data delegated back to us from parent
+        },
+        data() {
+            return {
+                i18n,
+                confirmTitle: '',
+                confirmBody: '',
+                confirmAction: () => {},
+            };
+        },
+        computed: {
+            ...computedFromDefaults(defaults, 'tools'),     // Getters & setters for the delegated data
+            hasDomain() {
+                return this.$parent.$parent.activeDomains.length > 0;
+            },
+            shareQuery() {
+                const data = exportData(this.$parent.$parent.activeDomains, this.$parent.$props.data);
+                return qs.stringify(data, { allowDots: true });
+            },
+            shareLink() {
+                const base = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+                return `${base}${this.shareQuery.length ? '?' : ''}${this.shareQuery}`;
+            },
+        },
+        watch: {
+            // When the share link changes, update the site query
+            shareQuery(query) {
+                window.history.replaceState({}, '', `?${query}`);
+            },
+            // Disable symlink if modularized structure is disabled
+            '$props.data.modularizedStructure': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.symlinkVhost.enabled = true;
+                        this.$props.data.symlinkVhost.computed = this.$props.data.symlinkVhost.value;
+                    } else {
+                        this.$props.data.symlinkVhost.enabled = false;
+                        this.$props.data.symlinkVhost.computed = false;
+                    }
+                },
+                deep: true,
+            },
+        },
+        methods: {
+            confirm(title, body, callback) {
+                this.$data.confirmTitle = title;
+                this.$data.confirmBody = body;
+                this.$data.confirmAction = callback;
+                this.$refs.confirmModal.open();
+            },
+            doConfirmAction() {
+                this.$refs.confirmModal.close();
+                this.$data.confirmAction();
+            },
+            doResetDomain(domain) {
+                if (!domain) return;
+
+                Object.values(domain).forEach(category => {
+                    Object.values(category).forEach(property => {
+                        property.value = property.default;
+                        property.computed = property.default;
+                    });
+                });
+            },
+            doRemoveDomain(index) {
+                this.$set(this.$parent.$parent.$data.domains, index, null);
+            },
+            resetGlobal() {
+                this.confirm(
+                    'Reset global config',
+                    'Are you sure you want to reset all configuration options in the global config section?',
+                    () => {
+                        Object.values(this.$parent.$props.data).forEach(category => {
+                            Object.values(category).forEach(property => {
+                                property.value = property.default;
+                                property.computed = property.default;
+                            });
+                        });
+                    },
+                );
+            },
+            resetDomain(index) {
+                if (index >= this.$parent.$parent.$data.domains.length) return;
+                const domain = this.$parent.$parent.$data.domains[index];
+                if (!domain) return;
+
+                this.confirm(
+                    'Reset domain config',
+                    `Are you sure you want to reset all configuration options for the ${domain.server.domain.computed} domain?`,
+                    () => this.doResetDomain(domain),
+                );
+            },
+            removeDomain(index) {
+                if (index >= this.$parent.$parent.$data.domains.length) return;
+                const domain = this.$parent.$parent.$data.domains[index];
+                if (!domain) return;
+
+                this.confirm(
+                    'Remove domain',
+                    `Are you sure you want to remove the ${domain.server.domain.computed} domain configuration?`,
+                    () => this.doRemoveDomain(index),
+                );
+            },
+            resetDomains() {
+                this.confirm(
+                    'Reset all domain configs',
+                    'Are you sure you want to reset the configuration of ALL domains?',
+                    () => {
+                        for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
+                            this.doResetDomain(this.$parent.$parent.$data.domains[i]);
+                        }
+                    },
+                );
+            },
+            removeDomains() {
+                this.confirm(
+                    'Remove all domains',
+                    'Are you sure you want to remove ALL domain configurations?',
+                    () => {
+                        for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
+                            this.doRemoveDomain(i);
+                        }
+                    },
+                );
+            },
+            select(event) {
+                event.target.setSelectionRange(0, event.target.value.length);
+            },
+        },
+    };
+</script>

@@ -1,0 +1,36 @@
+name: Test and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
+
+    - name: Use Node.js (.nvmrc)
+      uses: actions/setup-node@v1
+      with:
+        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+
+    - name: npm ci, test, and build
+      run: |
+        npm ci
+        npm test
+        npm run build
+
+    - name: Deploy master to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@2.0.0
+      env:
+        ACCESS_TOKEN: ${{ secrets.DEV_GITHUB_TOKEN }}
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: dist

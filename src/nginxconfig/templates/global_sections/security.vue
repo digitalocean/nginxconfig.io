@@ -1,0 +1,157 @@
+<!--
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<template>
+    <div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">Referrer-Policy</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${referrerPolicyChanged ? ' is-changed' : ''}`">
+                        <VueSelect v-model="referrerPolicy"
+                                   :options="$props.data.referrerPolicy.options"
+                                   :clearable="false"
+                        ></VueSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">Content-Security-Policy</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${contentSecurityPolicyChanged ? ' is-changed' : ''}`">
+                        <input v-model="contentSecurityPolicy"
+                               class="input"
+                               type="text"
+                               :placeholder="$props.data.contentSecurityPolicy.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">server_tokens</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.security.enable }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">limit_req</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.security.enable }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import PrettyCheck from 'pretty-checkbox-vue/check';
+    import VueSelect from 'vue-select';
+    import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
+
+    const defaults = {
+        referrerPolicy: {
+            default: 'no-referrer-when-downgrade',
+            options: [
+                'no-referrer',
+                'no-referrer-when-downgrade',
+                'origin',
+                'origin-when-cross-origin',
+                'same-origin',
+                'strict-origin',
+                'strict-origin-when-cross-origin',
+                'unsafe-url',
+            ],
+            enabled: true,
+        },
+        contentSecurityPolicy: {
+            default: 'default-src \'self\' http: https: data: blob: \'unsafe-inline\'',
+            enabled: true,
+        },
+        serverTokens: {
+            default: false,
+            enabled: true,
+        },
+        limitReq: {
+            default: false,
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'GlobalSecurity',                                     // Component name
+        display: i18n.templates.globalSections.security.security,   // Display name for tab
+        key: 'security',                                            // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        components: {
+            PrettyCheck,
+            VueSelect,
+        },
+        props: {
+            data: Object,                                           // Data delegated back to us from parent
+        },
+        data () {
+            return {
+                i18n,
+            };
+        },
+        computed: computedFromDefaults(defaults, 'security'),   // Getters & setters for the delegated data
+        watch: {
+            // Check referrer policy selection is valid
+            '$props.data.referrerPolicy': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!data.options.includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+        },
+    };
+</script>

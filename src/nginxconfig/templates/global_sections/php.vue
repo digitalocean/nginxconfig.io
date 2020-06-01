@@ -1,0 +1,171 @@
+<!--
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<template>
+    <div>
+        <div v-if="!phpServerEnabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <label class="text">
+                            {{ i18n.templates.globalSections.php.phpMustBeEnabledOnOneSite }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <template v-else>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${phpServerChanged ? ' is-changed' : ''}`">
+                            <VueSelect v-model="phpServer"
+                                       :options="phpServerOptions"
+                                       :clearable="false"
+                                       :reduce="s => s.value"
+                            ></VueSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">{{ i18n.templates.globalSections.php.phpBackupServer }}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
+                            <VueSelect v-model="phpBackupServer"
+                                       :options="phpBackupServerOptions"
+                                       :clearable="false"
+                                       :reduce="s => s.value"
+                            ></VueSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
+
+<script>
+    import VueSelect from 'vue-select';
+    import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
+
+    const serverOptions = {
+        '127.0.0.1:9000': `${i18n.templates.globalSections.php.tcp}: 127.0.0.1:9000`,
+        '/var/run/hhvm/sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/sock`,
+        '/var/run/hhvm/hhvm.sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/hhvm.sock`,
+        '/var/run/php5-fpm.sock': `${i18n.templates.globalSections.php.php5Socket}: /var/run/php5-fpm.sock`,
+        '/var/run/php/php7.1-fpm.sock': `${i18n.templates.globalSections.php.php71Socket}: /var/run/php/php7.1-fpm.sock`,
+        '/var/run/php/php7.2-fpm.sock': `${i18n.templates.globalSections.php.php72Socket}: /var/run/php/php7.2-fpm.sock`,
+        '/var/run/php/php7.0-fpm.sock': `${i18n.templates.globalSections.php.php70Socket}: /var/run/php/php7.0-fpm.sock`,
+        '/var/run/php/php7.3-fpm.sock': `${i18n.templates.globalSections.php.php73Socket}: /var/run/php/php7.3-fpm.sock`,
+    };
+
+    const defaults = {
+        phpServer: {
+            default: '/var/run/php/php7.2-fpm.sock',
+            options: serverOptions,
+            enabled: true,
+        },
+        phpBackupServer: {
+            default: '',
+            options: { '': i18n.templates.globalSections.php.disabled, ...serverOptions },
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'GlobalPHP',                                  // Component name
+        display: i18n.templates.globalSections.php.php,     // Display name for tab
+        key: 'php',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        components: {
+            VueSelect,
+        },
+        props: {
+            data: Object,                                   // Data delegated back to us from parent
+        },
+        data () {
+            return {
+                i18n,
+            };
+        },
+        computed: {
+            ...computedFromDefaults(defaults, 'php'),  // Getters & setters for the delegated data
+            phpServerOptions() {
+                return Object.entries(this.$props.data.phpServer.options)
+                    .map(([key, value]) => ({ label: value, value: key }));
+            },
+            phpBackupServerOptions() {
+                return Object.entries(this.$props.data.phpBackupServer.options)
+                    .map(([key, value]) => ({ label: value, value: key }));
+            },
+        },
+        watch: {
+            // Check server selection is valid
+            '$props.data.phpServer': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+            // Check backup server selection is valid
+            '$props.data.phpBackupServer': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+            // Enable PHP server settings if any site uses PHP
+            '$parent.$parent.$data.domains': {
+                handler(data) {
+                    for (const domain of data) {
+                        if (domain && domain.php && domain.php.php && domain.php.php.computed) {
+                            this.$props.data.phpServer.enabled = true;
+                            this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
+                            this.$props.data.phpBackupServer.enabled = true;
+                            this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
+                            return;
+                        }
+                    }
+                    this.$props.data.phpServer.enabled = false;
+                    this.$props.data.phpServer.computed = '';
+                    this.$props.data.phpBackupServer.enabled = false;
+                    this.$props.data.phpBackupServer.computed = '';
+                },
+                deep: true,
+            },
+        },
+    };
+</script>

@@ -1,0 +1,194 @@
+<!--
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<template>
+    <div>
+        <div v-if="!phpEnabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.php.php }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control is-changed">
+                        <label class="text">
+                            {{ i18n.templates.domainSections.php.phpIsDisabled }}
+                            <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
+                                <br />{{ i18n.templates.domainSections.php.phpCannotBeEnabledWithReverseProxy }}
+                            </template>
+                            <template v-if="$parent.$props.data.python.python.computed">
+                                <br />{{ i18n.templates.domainSections.php.phpCannotBeEnabledWithPython }}
+                            </template>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-else class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">PHP</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${phpChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="php" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.domainSections.php.enablePhp }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="wordPressRulesEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.php.wordPressRules }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${wordPressRulesChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="wordPressRules" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.domainSections.php.enableWordPressRules }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="drupalRulesEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.php.drupalRules }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${drupalRulesChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="drupalRules" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.domainSections.php.enableDrupalRules }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="magentoRulesEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.php.magentoRules }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${magentoRulesChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="magentoRules" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.domainSections.php.enableMagentoRules }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import PrettyCheck from 'pretty-checkbox-vue/check';
+    import i18n from '../../i18n';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
+
+    const defaults = {
+        php: {
+            default: true,
+            enabled: true,
+        },
+        wordPressRules: {
+            default: false,
+            enabled: true,
+        },
+        drupalRules: {
+            default: false,
+            enabled: true,
+        },
+        magentoRules: {
+            default: false,
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'DomainPHP',                                  // Component name
+        display: i18n.templates.domainSections.php.php,     // Display name for tab
+        key: 'php',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        components: {
+            PrettyCheck,
+        },
+        props: {
+            data: Object,                                   // Data delegated back to us from parent
+        },
+        data () {
+            return {
+                i18n,
+            };
+        },
+        computed: computedFromDefaults(defaults, 'php'), // Getters & setters for the delegated data
+        watch: {
+            // If the Reverse proxy or Python is enabled, PHP will be forced off
+            '$parent.$props.data': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.reverseProxy.reverseProxy.computed || data.python.python.computed) {
+                        this.$props.data.php.enabled = false;
+                        this.$props.data.php.computed = false;
+                    } else {
+                        this.$props.data.php.enabled = true;
+                        this.$props.data.php.computed = this.$props.data.php.value;
+                    }
+                },
+                deep: true,
+            },
+            // Disable everything if PHP is disabled
+            '$props.data.php': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.wordPressRules.enabled = true;
+                        this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
+                        this.$props.data.drupalRules.enabled = true;
+                        this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
+                        this.$props.data.magentoRules.enabled = true;
+                        this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
+                    } else {
+                        this.$props.data.wordPressRules.enabled = false;
+                        this.$props.data.wordPressRules.computed = false;
+                        this.$props.data.drupalRules.enabled = false;
+                        this.$props.data.drupalRules.computed = false;
+                        this.$props.data.magentoRules.enabled = false;
+                        this.$props.data.magentoRules.computed = false;
+                    }
+                },
+                deep: true,
+            },
+        },
+    };
+</script>

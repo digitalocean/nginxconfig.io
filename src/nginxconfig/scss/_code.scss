@@ -1,0 +1,63 @@
+/*
+Copyright 2020 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+pre {
+  &[class*="language-"] {
+    padding: .5rem 1rem;
+
+    code {
+      &[class*="language-"] {
+        &,
+        .token {
+          font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+          font-size: 13.6px;
+          font-weight: normal;
+          line-height: 1.4em;
+        }
+
+        // Fix Bulma & DO Prism styles interfering with default Prism
+        .token {
+          &.number,
+          &.tag,
+          &.entity,
+          &.operator,
+          &.url {
+            background: transparent;
+            border-radius: initial;
+            display: initial;
+            font-size: inherit;
+            margin: initial;
+            padding: initial;
+            text-align: initial;
+            vertical-align: initial;
+          }
+        }
+      }
+    }
+  }
+}
+
+.code-toolbar {
+  > .toolbar {
+    right: calc(.2em + 16px);
+  }
+}
+
+mark {
+  background: rgba($highlight, .45);
+  color: inherit;
+  display: inline-block;
+}
