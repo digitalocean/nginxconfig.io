@@ -77,6 +77,10 @@ export default (domains, global) => {
         if (domains.some(d => d.php.magentoRules.computed))
             files.push(['nginxconfig.io/magento.conf', toConf(magentoConf())]);
 
+    } else {
+        // PHP
+        if (domains.some(d => d.php.wordPressRules.computed))
+            files.push(['nginxconfig.io/php_fastcgi.conf', toConf(phpConf(domains, global))]);
     }
 
     return files;
