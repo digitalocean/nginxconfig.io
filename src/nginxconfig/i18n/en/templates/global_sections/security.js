@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `When using ${common.wordPress}, <code class="slim">'unsafe-eval'</code> is often required in the Content Security Policy to allow the admin panel to function correctly.`,
     security: 'Security',
 };
