@@ -14,8 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
     letsGoLive: 'Let\'s go live!',
-    reloadNginxToLoadInYourNewConfiguration: 'Reload NGINX to load in your new configuration:',
+    reloadNginxToLoadInYourNewConfiguration: `Reload ${common.nginx} to load in your new configuration:`,
     goLive: 'Go live!',
 };

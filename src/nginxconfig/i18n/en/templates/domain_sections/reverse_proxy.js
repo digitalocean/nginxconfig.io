@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
     reverseProxy: 'Reverse proxy',
     reverseProxyIsDisabled: 'Reverse proxy is disabled.',
-    reverseProxyCannotBeEnabledWithPhp: 'Reverse proxy cannot be enabled whilst PHP is enabled.',
-    reverseProxyCannotBeEnabledWithPython: 'Reverse proxy cannot be enabled whilst Python is enabled.',
-    enableReverseProxy: 'enable reverse proxy',
+    reverseProxyCannotBeEnabledWithPhp: `Reverse proxy cannot be enabled whilst ${common.php} is enabled.`,
+    reverseProxyCannotBeEnabledWithPython: `Reverse proxy cannot be enabled whilst ${common.python} is enabled.`,
+    enableReverseProxy: `${common.enable} reverse proxy`,
     path: 'Path',
 };

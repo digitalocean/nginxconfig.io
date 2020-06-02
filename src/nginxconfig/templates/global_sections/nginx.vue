@@ -144,7 +144,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalNGINX',                                // Component name
-        display: i18n.templates.globalSections.nginx.nginx, // Display name for tab
+        display: i18n.common.nginx,                         // Display name for tab
         key: 'nginx',                                       // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {

@@ -59,7 +59,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.security.enable }}
+                                {{ i18n.common.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.security.enable }}
+                                {{ i18n.common.enable }}
                             </PrettyCheck>
                         </div>
                     </div>

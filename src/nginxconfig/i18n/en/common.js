@@ -15,6 +15,19 @@ limitations under the License.
 */
 
 export default {
-    back: 'Back',
-    next: 'Next',
+	back: 'Back',
+	next: 'Next',
+	enable: 'enable',
+	php: 'PHP',
+	ssl: 'SSL',
+	nginx: 'NGINX',
+	http: 'HTTP',
+	https: 'HTTPS',
+	letsEncrypt: 'Let\'s Encrypt',
+	python: 'Python',
+	wordPress: 'WordPress',
+	drupal: 'Drupal',
+	magento: 'Magento',
+	django: 'Django',
+	logging: 'Logging',
 };

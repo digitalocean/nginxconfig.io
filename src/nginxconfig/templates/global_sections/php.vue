@@ -100,15 +100,15 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalPHP',                                  // Component name
-        display: i18n.templates.globalSections.php.php,     // Display name for tab
-        key: 'php',                                         // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'GlobalPHP',                              // Component name
+        display: i18n.common.php,                       // Display name for tab
+        key: 'php',                                     // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),     // Data the parent will present here
         components: {
             VueSelect,
         },
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object,                               // Data delegated back to us from parent
         },
         data () {
             return {
@@ -116,7 +116,7 @@ limitations under the License.
             };
         },
         computed: {
-            ...computedFromDefaults(defaults, 'php'),  // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
             phpServerOptions() {
                 return Object.entries(this.$props.data.phpServer.options)
                     .map(([key, value]) => ({ label: value, value: key }));

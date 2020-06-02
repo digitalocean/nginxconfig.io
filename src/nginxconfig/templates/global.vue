@@ -34,16 +34,17 @@ limitations under the License.
 
         <div class="navigation-buttons">
             <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.templates.global.back }}</span>
+                <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.common.back }}</span>
             </a>
             <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                <span>{{ i18n.templates.global.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
+                <span>{{ i18n.common.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
             </a>
         </div>
     </div>
 </template>
 
 <script>
+    import i18n from '../i18n';
     import isChanged from '../util/is_changed';
     import * as Sections from './global_sections';
 
@@ -61,6 +62,7 @@ limitations under the License.
         },
         data() {
             return {
+                i18n,
                 active: tabs[0].key,
                 tabs,
             };

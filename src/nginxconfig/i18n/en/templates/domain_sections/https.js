@@ -14,16 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    https: 'HTTPS',
-    enableEncryptedSslConnection: 'enable encrypted SSL connections',
-    http2: 'HTTP/2',
-    enableHttp2Connections: 'enable HTTP/2 connections',
-    forceHttps: 'Force HTTPS',
+    enableEncryptedSslConnection: `${common.enable} encrypted ${common.ssl} connections`,
+    http2: `${common.http}/2`,
+    enableHttp2Connections: `${common.enable} ${common.http}/2 connections`,
+    forceHttps: `Force ${common.https}`,
     hsts: 'HSTS',
-    enableStrictTransportSecurity: 'enable Strict Transport Security',
+    enableStrictTransportSecurity: `${common.enable} Strict Transport Security`,
     certificationType: 'Certification type',
-    letsEncrypt: 'Let\'s Encrypt',
     customCertificate: 'Custom certificate',
-    letsEncryptEmail: 'Let\'s Encrypt email',
+    letsEncryptEmail: `${common.letsEncrypt} email`,
 };

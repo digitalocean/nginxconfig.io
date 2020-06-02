@@ -144,23 +144,23 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalHTTPS',                                    // Component name
-        display: i18n.templates.globalSections.https.https,     // Display name for tab
-        key: 'https',                                           // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'GlobalHTTPS',                                // Component name
+        display: i18n.common.https,                         // Display name for tab
+        key: 'https',                                       // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'https'), // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
         watch: {
             // Check SSL profile is valid
             '$props.data.sslProfile': {

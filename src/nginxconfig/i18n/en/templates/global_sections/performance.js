@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
     gzipCompression: 'Gzip compression',
-    enableGzipCompression: 'enable gzip compression',
+    enableGzipCompression: `${common.enable} gzip compression`,
     brotliCompression: 'Brotli compression',
-    enableBrotliCompression: 'enable brotli compression',
+    enableBrotliCompression: `${common.enable} brotli compression`,
     expirationForAssets: 'Expiration for assets',
     expirationForMedia: 'Expiration for media',
     expirationForSvgs: 'Expiration for SVGs',

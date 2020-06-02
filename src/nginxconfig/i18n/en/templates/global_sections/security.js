@@ -15,6 +15,5 @@ limitations under the License.
 */
 
 export default {
-    enable: 'enable',
     security: 'Security',
 };

@@ -14,12 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
+const certbot = 'Certbot';
+
 export default {
-    commentOutSslDirectivesInConfiguration: 'Comment out SSL related directives in the configuration:',
-    reloadYourNginxServer: 'Reload your NGINX server:',
-    obtainSslCertificatesFromLetsEncrypt: 'Obtain SSL certificates from Let\'s Encrypt using Certbot:',
-    uncommentSslDirectivesInConfiguration: 'Uncomment SSL related directives in the configuration:',
-    configureCertbotToReloadNginxOnCertificateRenewal: 'Configure Certbot to reload NGINX when it successfully renews certificates:',
-    certbotDoesNotNeedToBeSetupForYourConfiguration: 'Certbot does not need to be set up for your NGINX configuration.',
-    certbot: 'Certbot',
+    commentOutSslDirectivesInConfiguration: `Comment out ${common.ssl} related directives in the configuration:`,
+    reloadYourNginxServer: `Reload your ${common.nginx} server:`,
+    obtainSslCertificatesFromLetsEncrypt: `Obtain ${common.ssl} certificates from ${common.letsEncrypt} using ${certbot}:`,
+    uncommentSslDirectivesInConfiguration: `Uncomment ${common.ssl} related directives in the configuration:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `Configure ${certbot} to reload ${common.nginx} when it successfully renews certificates:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `${certbot} does not need to be set up for your ${common.nginx} configuration.`,
+    certbot,
 };

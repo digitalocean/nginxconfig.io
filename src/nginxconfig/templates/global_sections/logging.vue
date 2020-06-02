@@ -93,7 +93,7 @@ limitations under the License.
 
     export default {
         name: 'GlobalLogging',                                  // Component name
-        display: i18n.templates.globalSections.logging.logging, // Display name for tab
+        display: i18n.common.logging,                           // Display name for tab
         key: 'logging',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {

@@ -72,15 +72,15 @@ limitations under the License.
     };
 
     export default {
-        name: 'DomainLogging',                                      // Component name
-        display: i18n.templates.domainSections.logging.logging,     // Display name for tab
-        key: 'logging',                                             // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'DomainLogging',                                  // Component name
+        display: i18n.common.logging,                           // Display name for tab
+        key: 'logging',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object,                                       // Data delegated back to us from parent
         },
         data () {
             return {

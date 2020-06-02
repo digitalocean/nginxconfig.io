@@ -14,12 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    python: 'Python',
-    pythonIsDisabled: 'Python is disabled.',
-    pythonCannotBeEnabledWithReverseProxy: 'Python cannot be enabled whilst the reverse proxy is enabled.',
-    pythonCannotBeEnabledWithPhp: 'Python cannot be enabled whilst PHP is enabled.',
-    enablePython: 'enable Python',
-    djangoRules: 'Django rules',
-    enableDjangoRules: 'enable Django-specific rules',
+    pythonIsDisabled: `${common.python} is disabled.`,
+    pythonCannotBeEnabledWithReverseProxy: `${common.python} cannot be enabled whilst the reverse proxy is enabled.`,
+    pythonCannotBeEnabledWithPhp: `${common.python} cannot be enabled whilst ${common.php} is enabled.`,
+    enablePython: `${common.enable} ${common.python}`,
+    djangoRules: `${common.django} rules`,
+    enableDjangoRules: `${common.enable} ${common.django}-specific rules`,
 };

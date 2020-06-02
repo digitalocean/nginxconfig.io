@@ -15,8 +15,6 @@ limitations under the License.
 */
 
 export default {
-    back: 'Back',
-    next: 'Next',
     downloadConfig: 'Download Config',
     copyBase64: 'Copy Base64',
 };
