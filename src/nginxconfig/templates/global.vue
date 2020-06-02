@@ -34,10 +34,10 @@ limitations under the License.
 
         <div class="navigation-buttons">
             <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.templates.global.back }}</span>
             </a>
             <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+                <span>{{ i18n.templates.global.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
             </a>
         </div>
     </div>

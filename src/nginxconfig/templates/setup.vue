@@ -35,17 +35,17 @@ limitations under the License.
 
             <div class="navigation-buttons">
                 <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                    <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                    <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.templates.setup.back }}</span>
                 </a>
                 <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                    <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+                    <span>{{ i18n.templates.setup.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
         </div>
 
         <div class="buttons is-centered">
-            <a class="button is-success" @click="downloadTar">Download Config</a>
-            <a class="button is-primary" @click="copyTar">Copy Base64</a>
+            <a class="button is-success" @click="downloadTar">{{ i18n.templates.setup.downloadConfig }}</a>
+            <a class="button is-primary" @click="copyTar">{{ i18n.templates.setup.copyBase64 }}</a>
         </div>
     </div>
 </template>

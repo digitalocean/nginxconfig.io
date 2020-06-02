@@ -14,12 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import app from './app';
-import domain from './domain';
-import global from './global';
-import setup from './setup';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
-
-export default { app, domain, global, setup, domainSections, globalSections, setupSections };
+export default {
+    back: 'Back',
+    next: 'Next',
+};
