@@ -19,19 +19,26 @@ limitations under the License.
         <ol>
             <li>
                 <p>
-                    <b>Download</b> the generated config: <b><a @click="$parent.downloadTar">{{ $parent.tarName }}</a></b>
+                    <span v-html="i18n.templates.setupSections.download.downloadTheGeneratedConfig"></span>
+                    <b>&nbsp;<a @click="$parent.downloadTar">{{ $parent.tarName }}</a></b>
                     <br />
-                    and <b>upload</b> it to your server's <code class="slim">{{ $parent.nginxDir }}</code> directory.
+                    <span v-html="i18n.templates.setupSections.download.andUploadItToYourServers"></span>
+                    <code class="slim">{{ $parent.nginxDir }}</code>
+                    {{ i18n.templates.setupSections.download.directory }}
                 </p>
                 <p>
-                    or, <b><a @click="$parent.copyTar">Copy a base64 string of the compressed config</a></b>, paste it in
-                    your server's command line and execute it.
+                    {{ i18n.templates.setupSections.download.or }}
+                    <b>
+                        <a @click="$parent.copyTar">
+                            {{ i18n.templates.setupSections.download.copyBase64StringOfCompressedConfig }}</a>
+                    </b>
+                    <span v-html="i18n.templates.setupSections.download.pasteItInYourServersCommandLineAndExecute"></span>
                 </p>
             </li>
 
             <li>
                 <p>
-                    Navigate to your NGINX <b>configuration directory</b> on your server:
+                    <span v-html="i18n.templates.setupSections.download.navigateToYourNginxConfigurationDirectoryOnYourServer"></span>
                     <br />
                     <BashPrism :key="$parent.nginxDir" :cmd="`cd ${$parent.nginxDir}`"></BashPrism>
                 </p>
@@ -39,7 +46,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Create a <b>backup</b> of your current NGINX configuration:
+                    <span v-html="i18n.templates.setupSections.download.createABackupOfYourCurrentNginxConfiguration"></span>
                     <br />
                     <BashPrism cmd="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"></BashPrism>
                 </p>
@@ -47,7 +54,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    <b>Extract</b> the new compressed configuration archive using tar:
+                    <span v-html="i18n.templates.setupSections.download.extractTheNewCompressedConfigurationArchiveUsingTar"></span>
                     <br />
                     <BashPrism :key="$parent.tarName" :cmd="`tar -xzvf ${$parent.tarName}`"></BashPrism>
                 </p>
@@ -62,7 +69,7 @@ limitations under the License.
 
     export default {
         name: 'SetupDownload',
-        display: 'Download',
+        display: i18n.templates.setupSections.download.download,
         key: 'download',
         components: {
             BashPrism,

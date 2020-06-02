@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import app from './app';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
+import certbot from './certbot';
+import download from './download';
+import goLive from './go_live';
+import ssl from './ssl';
 
-export default { app, domainSections, globalSections, setupSections };
+export default { certbot, download, goLive, ssl };

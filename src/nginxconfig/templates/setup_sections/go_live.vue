@@ -17,10 +17,10 @@ limitations under the License.
 <template>
     <div>
         <p>
-            <b>Let's go live!</b> 🎉
+            <b>{{ i18n.templates.setupSections.goLive.letsGoLive }}</b> 🎉
         </p>
         <p>
-            Reload NGINX to load in your new configuration:
+            {{ i18n.templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration }}
             <br />
             <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
         </p>
@@ -33,7 +33,7 @@ limitations under the License.
 
     export default {
         name: 'SetupGoLive',
-        display: 'Go live!',
+        display: i18n.templates.setupSections.goLive.goLive,
         key: 'goLive',
         components: {
             BashPrism,

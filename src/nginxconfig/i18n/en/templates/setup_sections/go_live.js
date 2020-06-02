@@ -14,9 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import app from './app';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
-
-export default { app, domainSections, globalSections, setupSections };
+export default {
+    letsGoLive: 'Let\'s go live!',
+    reloadNginxToLoadInYourNewConfiguration: 'Reload NGINX to load in your new configuration:',
+    goLive: 'Go live!',
+};

@@ -19,7 +19,7 @@ limitations under the License.
         <ol v-if="letsEncryptActive">
             <li>
                 <p>
-                    Comment out SSL related directives in the configuration:
+                    {{ i18n.templates.setupSections.certbot.commentOutSslDirectivesInConfiguration }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
@@ -29,7 +29,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Reload your NGINX server:
+                    {{ i18n.templates.setupSections.certbot.reloadYourNginxServer }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
@@ -37,7 +37,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Obtain SSL certificates from Let's Encrypt using Certbot:
+                    {{ i18n.templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt }}
                     <br />
                 </p>
                 <BashPrism :key="certbotCmds" :cmd="certbotCmds"></BashPrism>
@@ -45,7 +45,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Uncomment SSL related directives in the configuration:
+                    {{ i18n.templates.setupSections.certbot.uncommentSslDirectivesInConfiguration }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable" :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"></BashPrism>
@@ -53,7 +53,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Reload your NGINX server:
+                    {{ i18n.templates.setupSections.certbot.reloadYourNginxServer }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
@@ -61,7 +61,7 @@ limitations under the License.
 
             <li>
                 <p>
-                    Configure Certbot to reload NGINX when it successfully renews certificates:
+                    {{ i18n.templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal }}
                     <br />
                 </p>
                 <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
@@ -74,7 +74,7 @@ limitations under the License.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            Certbot does not need to be set up for your NGINX configuration.
+                            {{ i18n.templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration }}
                         </label>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ limitations under the License.
         components: {
             BashPrism,
         },
-        display: 'Certbot',
+        display: i18n.templates.setupSections.certbot.certbot,
         key: 'certbot',
         props: {
             data: Object,
