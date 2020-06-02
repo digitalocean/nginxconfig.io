@@ -107,7 +107,9 @@ export default entriesOrObject => {
         // Single linebreak between comment and block
         .replace(/^([^\S\r\n]*#.*)(?:\n[^\S\r\n]*)+\n([^\S\r\n]*.*{)/gm, '$1\n$2')
         // Double linebreak after double comment
-        .replace(/^([^\S\r\n]*#.*\n[^\S\r\n]*#.*\n)([^\S\r\n]*[^#\s])/gm, '$1\n$2');
+        .replace(/^([^\S\r\n]*#.*\n[^\S\r\n]*#.*\n)([^\S\r\n]*[^#\s])/gm, '$1\n$2')
+        // No newline for empty blocks
+        .replace(/^([^\S\r\n]*.*{)\n[^\S\r\n]*(})/gm, '$1$2');
 
     // Cleanup extra linebreaks between multiple close blocks
     // Use a loop as this has overlapping matches

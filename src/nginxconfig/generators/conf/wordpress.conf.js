@@ -32,6 +32,9 @@ export default global => {
         deny: 'all',
     };
 
+    config['# WordPress: SEO plugin'] = '';
+    config['location ~* ^/wp-content/plugins/wordpress-seo(?:-premium)?/css/main-sitemap\\.xsl$'] = {};
+
     config['# WordPress: deny wp-content/plugins (except earlier rules)'] = '';
     config['location ~ ^/wp-content/plugins'] = {
         deny: 'all',
