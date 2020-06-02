@@ -17,6 +17,8 @@ limitations under the License.
 import common from '../../common';
 
 const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
 
 export default {
     sslProfile: `${common.ssl} Profile`,
@@ -29,4 +31,7 @@ export default {
     mozillaModern: `${mozilla} Modern`,
     mozillaIntermediate: `${mozilla} Intermediate`,
     mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} only`,
+    ipv6Only: `${ipv6} only`,
+    ipv4AndIpv6: `${ipv4} & ${ipv6}`,
 };

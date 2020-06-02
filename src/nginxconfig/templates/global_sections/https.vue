@@ -68,6 +68,19 @@ limitations under the License.
                                 </PrettyCheck>
                             </div>
                         </div>
+                        <div v-if="$props.data.ocspCloudflare.computed" class="control field is-horizontal is-expanded">
+                            <div v-for="(name, value) in $props.data.ocspCloudflareType.options"
+                                 :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ name }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
+                        </div>
+
                         <div :class="`control${ocspGoogleChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
@@ -76,12 +89,37 @@ limitations under the License.
                                 </PrettyCheck>
                             </div>
                         </div>
+                        <div v-if="$props.data.ocspGoogle.computed" class="control field is-horizontal is-expanded">
+                            <div v-for="(name, value) in $props.data.ocspGoogleType.options"
+                                 :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ name }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
+                        </div>
+
                         <div :class="`control${ocspOpenDnsChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
                                     {{ i18n.templates.globalSections.https.openDns }}
                                 </PrettyCheck>
+                            </div>
+                        </div>
+                        <div v-if="$props.data.ocspOpenDns.computed" class="control field is-horizontal is-expanded">
+                            <div v-for="(name, value) in $props.data.ocspOpenDnsType.options"
+                                 :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ name }}
+                                    </PrettyRadio>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,9 +149,26 @@ limitations under the License.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
+    import clone from 'clone';
     import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+
+    const ipType = {
+        default: 'ipv4',
+        options: {
+            ipv4: i18n.templates.globalSections.https.ipv4Only,
+            ipv6: i18n.templates.globalSections.https.ipv6Only,
+            both: i18n.templates.globalSections.https.ipv4AndIpv6,
+        },
+        enabled: true,
+    };
+
+    const validOptionCheck = data => {
+        if (data.enabled)
+            if (!Object.keys(data.options).includes(data.computed))
+                data.computed = data.default;
+    };
 
     const defaults = {
         sslProfile: {
@@ -129,14 +184,17 @@ limitations under the License.
             default: true,
             enabled: true,
         },
+        ocspCloudflareType: clone(ipType),
         ocspGoogle: {
             default: true,
             enabled: true,
         },
+        ocspGoogleType: clone(ipType),
         ocspOpenDns: {
             default: true,
             enabled: true,
         },
+        ocspOpenDnsType: clone(ipType),
         letsEncryptRoot: {
             default: '/var/www/_letsencrypt/',
             enabled: true,
@@ -164,12 +222,20 @@ limitations under the License.
         watch: {
             // Check SSL profile is valid
             '$props.data.sslProfile': {
-                handler(data) {
-                    // This might cause recursion, but seems not to
-                    if (data.enabled)
-                        if (!Object.keys(data.options).includes(data.computed))
-                            data.computed = data.default;
-                },
+                handler: validOptionCheck,
+                deep: true,
+            },
+            // Check IP type is valid
+            '$props.data.ocspCloudflareType': {
+                handler: validOptionCheck,
+                deep: true,
+            },
+            '$props.data.ocspGoogleType': {
+                handler: validOptionCheck,
+                deep: true,
+            },
+            '$props.data.ocspOpenDnsType': {
+                handler: validOptionCheck,
                 deep: true,
             },
             '$parent.$parent.$data.domains': {
