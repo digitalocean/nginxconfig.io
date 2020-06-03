@@ -107,29 +107,39 @@ export default (domains, global) => {
         config.http.push(['ssl_stapling', 'on']);
         config.http.push(['ssl_stapling_verify', 'on']);
 
-        if (global.https.ocspCloudflare.computed
-            || global.https.ocspGoogle.computed
-            || global.https.ocspOpenDns.computed) {
-            const ips = [];
-            if (global.https.ocspCloudflare.computed) {
-                if (['ipv4', 'both'].includes(global.https.ocspCloudflareType.computed))
-                    ips.push('1.1.1.1', '1.0.0.1');
-                if (['ipv6', 'both'].includes(global.https.ocspCloudflareType.computed))
-                    ips.push('[2606:4700:4700::1111]', '[2606:4700:4700::1001]');
-            }
-            if (global.https.ocspGoogle.computed) {
-                if (['ipv4', 'both'].includes(global.https.ocspGoogleType.computed))
-                    ips.push('8.8.8.8', '8.8.4.4');
-                if (['ipv6', 'both'].includes(global.https.ocspGoogleType.computed))
-                    ips.push('[2001:4860:4860::8888]', '[2001:4860:4860::8844]');
-            }
-            if (global.https.ocspOpenDns.computed) {
-                if (['ipv4', 'both'].includes(global.https.ocspOpenDnsType.computed))
-                    ips.push('208.67.222.222', '208.67.220.220');
-                if (['ipv6', 'both'].includes(global.https.ocspOpenDnsType.computed))
-                    ips.push('[2620:119:35::35]', '[2620:119:53::53]');
-            }
+        const ips = [];
+        if (global.https.ocspCloudflare.computed) {
+            if (['ipv4', 'both'].includes(global.https.ocspCloudflareType.computed))
+                ips.push('1.1.1.1', '1.0.0.1');
+            if (['ipv6', 'both'].includes(global.https.ocspCloudflareType.computed))
+                ips.push('[2606:4700:4700::1111]', '[2606:4700:4700::1001]');
+        }
+        if (global.https.ocspGoogle.computed) {
+            if (['ipv4', 'both'].includes(global.https.ocspGoogleType.computed))
+                ips.push('8.8.8.8', '8.8.4.4');
+            if (['ipv6', 'both'].includes(global.https.ocspGoogleType.computed))
+                ips.push('[2001:4860:4860::8888]', '[2001:4860:4860::8844]');
+        }
+        if (global.https.ocspOpenDns.computed) {
+            if (['ipv4', 'both'].includes(global.https.ocspOpenDnsType.computed))
+                ips.push('208.67.222.222', '208.67.220.220');
+            if (['ipv6', 'both'].includes(global.https.ocspOpenDnsType.computed))
+                ips.push('[2620:119:35::35]', '[2620:119:53::53]');
+        }
+        if (global.https.ocspQuad9.computed) {
+            if (['ipv4', 'both'].includes(global.https.ocspQuad9Type.computed))
+                ips.push('9.9.9.9', '149.112.112.112');
+            if (['ipv6', 'both'].includes(global.https.ocspQuad9Type.computed))
+                ips.push('[2620:fe::fe]', '[2620:fe::9]');
+        }
+        if (global.https.ocspVerisign.computed) {
+            if (['ipv4', 'both'].includes(global.https.ocspVerisignType.computed))
+                ips.push('64.6.64.6', '64.6.65.6');
+            if (['ipv6', 'both'].includes(global.https.ocspVerisignType.computed))
+                ips.push('[2620:74:1b::1:1]', '[2620:74:1c::2:2]');
+        }
 
+        if (ips.length) {
             config.http.push(['resolver', `${ips.join(' ')} valid=60s`]);
             config.http.push(['resolver_timeout', '2s']);
         }

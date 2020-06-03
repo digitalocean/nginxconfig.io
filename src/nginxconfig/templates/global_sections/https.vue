@@ -122,6 +122,48 @@ limitations under the License.
                                 </div>
                             </div>
                         </div>
+
+                        <div :class="`control${ocspQuad9Changed ? ' is-changed' : ''}`">
+                            <div class="checkbox">
+                                <PrettyCheck v-model="ocspQuad9" class="p-default p-curve p-fill p-icon">
+                                    <i slot="extra" class="icon fas fa-check"></i>
+                                    {{ i18n.templates.globalSections.https.quad9 }}
+                                </PrettyCheck>
+                            </div>
+                        </div>
+                        <div v-if="$props.data.ocspQuad9.computed" class="control field is-horizontal is-expanded">
+                            <div v-for="(name, value) in $props.data.ocspQuad9Type.options"
+                                 :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ name }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div :class="`control${ocspVerisignChanged ? ' is-changed' : ''}`">
+                            <div class="checkbox">
+                                <PrettyCheck v-model="ocspVerisign" class="p-default p-curve p-fill p-icon">
+                                    <i slot="extra" class="icon fas fa-check"></i>
+                                    {{ i18n.templates.globalSections.https.verisign }}
+                                </PrettyCheck>
+                            </div>
+                        </div>
+                        <div v-if="$props.data.ocspVerisign.computed" class="control field is-horizontal is-expanded">
+                            <div v-for="(name, value) in $props.data.ocspVerisignType.options"
+                                 :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ name }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,6 +237,16 @@ limitations under the License.
             enabled: true,
         },
         ocspOpenDnsType: clone(ipType),
+        ocspQuad9: {
+            default: false,
+            enabled: true,
+        },
+        ocspQuad9Type: clone(ipType),
+        ocspVerisign: {
+            default: false,
+            enabled: true,
+        },
+        ocspVerisignType: clone(ipType),
         letsEncryptRoot: {
             default: '/var/www/_letsencrypt/',
             enabled: true,
@@ -235,6 +287,14 @@ limitations under the License.
                 deep: true,
             },
             '$props.data.ocspOpenDnsType': {
+                handler: validOptionCheck,
+                deep: true,
+            },
+            '$props.data.ocspQuad9Type': {
+                handler: validOptionCheck,
+                deep: true,
+            },
+            '$props.data.ocspVerisignType': {
                 handler: validOptionCheck,
                 deep: true,
             },
