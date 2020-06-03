@@ -1,25 +1,34 @@
 # Drupal: deny private files
-location ~ ^/sites/.*/private/ {
-	deny all;
+location ~ ((^|/)\.|^.*\.yml$|^/sites/.*/private/|^/sites/[^/]+/.*settings.*\.php$) {
+  deny all;
+  return 404;
 }
 
 # Drupal: deny php in files
 location ~ ^/sites/[^/]+/files/.*\.php$ {
-	deny all;
+  deny all;
 }
 
 # Drupal: deny php in vendor
 location ~ /vendor/.*\.php$ {
-	deny all;
+  deny all;
+}
+
+# Allow image styles to be handled by the CMS.
+location ~ ^/sites/[^/]+/files/styles/ {
+  try_files $uri @rewrite;
+}
+location @rewrite {
+  rewrite ^/(.*)$ /index.php?q=$1;
 }
 
 # Drupal: handle private files
 location ~ ^(/[a-z\-]+)?/system/files/ {
-	try_files $uri /index.php?$query_string;
+  try_files $uri /index.php?$query_string;
 }<span ng-if="isLimitReq()">
 
 # Drupal: throttle user functions
 location ~ ^/user/(?:login|register|password) {
-	limit_req zone=login burst=2 nodelay;
-	try_files $uri /index.php?$query_string;
+  limit_req zone=login burst=2 nodelay;
+  try_files $uri /index.php?$query_string;
 }</span>
