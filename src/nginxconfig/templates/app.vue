@@ -70,8 +70,8 @@ limitations under the License.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline">
-                        <NginxPrism v-for="conf in confFilesOutput"
-                                    :key="`${conf[0]}-${hash(conf[1])}`"
+                        <NginxPrism v-for="(conf, i) in confFilesOutput"
+                                    :key="`${conf[0]}-${i}-${hash(conf[1])}`"
                                     :name="`${nginxDir}/${conf[0]}`"
                                     :conf="conf[1]"
                                     :half="confFilesOutput.length > 1 && !splitColumn"
@@ -169,7 +169,18 @@ limitations under the License.
                 return '';
             },
             add() {
-                this.$data.domains.push(clone(Domain.delegated));
+                const data = clone(Domain.delegated);
+
+                // Avoid dupe domains
+                let count = 1;
+                while (this.$data.domains.some(d => d && d.server.domain.computed === data.server.domain.computed)) {
+                    count++;
+                    data.server.domain.computed = data.server.domain.default.replace('.com', `${count}.com`);
+                }
+                data.server.domain.value = data.server.domain.computed;
+
+                // Store
+                this.$data.domains.push(data);
                 this.$data.active = this.$data.domains.length - 1;
             },
             remove(index) {

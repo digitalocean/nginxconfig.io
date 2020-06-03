@@ -182,15 +182,14 @@ limitations under the License.
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'server'), // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'server'),     // Getters & setters for the delegated data
         watch: {
             '$props.data.domain': {
                 handler(data) {
-                    // This might cause recursion, but seems not to
-
-                    // Ignore www. if given
+                    // Ignore www. if given, enable WWW subdomain
                     if (data.computed.startsWith('www.')) {
                         data.computed = data.computed.slice(4);
+                        this.wwwSubdomain = true;
                     }
 
                     // Use default if empty
