@@ -151,7 +151,7 @@ limitations under the License.
         computed: {
             ...computedFromDefaults(defaults, 'security'),          // Getters & setters for the delegated data
             hasWordPress() {
-                return this.$parent.$parent.$data.domains.some(d => d.php.wordPressRules.computed);
+                return this.$parent.$parent.$data.domains.some(d => d && d.php.wordPressRules.computed);
             },
             hasUnsafeEval() {
                 return this.$props.data.contentSecurityPolicy.computed.includes('\'unsafe-eval\'');
