@@ -35,17 +35,17 @@ limitations under the License.
 
             <div class="navigation-buttons">
                 <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                    <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                    <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.common.back }}</span>
                 </a>
                 <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                    <span>Next</span> <i class="fas fa-long-arrow-alt-right"></i>
+                    <span>{{ i18n.common.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
         </div>
 
         <div class="buttons is-centered">
-            <a class="button is-success" @click="downloadTar">Download Config</a>
-            <a class="button is-primary" @click="copyTar">Copy Base64</a>
+            <a class="button is-success" @click="downloadTar">{{ i18n.templates.setup.downloadConfig }}</a>
+            <a class="button is-primary" @click="copyTar">{{ i18n.templates.setup.copyBase64 }}</a>
         </div>
     </div>
 </template>
@@ -55,6 +55,7 @@ limitations under the License.
     import getStream from 'get-stream';
     import { gzip } from 'node-gzip';
     import copy from 'copy-to-clipboard';
+    import i18n from '../i18n';
     import * as Sections from './setup_sections';
 
     const tabs = Object.values(Sections);
@@ -66,6 +67,7 @@ limitations under the License.
         },
         data() {
             return {
+                i18n,
                 active: tabs[0].key,
                 tabs,
             };

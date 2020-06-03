@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    nginxConfigDirectory: 'NGINX config directory',
+    nginxConfigDirectory: `${common.nginx} config directory`,
     mb: 'MB',
-    nginx: 'NGINX',
 };

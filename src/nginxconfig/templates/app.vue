@@ -24,10 +24,10 @@ limitations under the License.
             </template>
             <template v-slot:buttons>
                 <a v-if="splitColumn" class="button is-primary is-outline" @click="splitColumn = false">
-                    Single column mode
+                    {{ i18n.templates.app.singleColumnMode }}
                 </a>
                 <a v-else class="button is-primary" @click="splitColumn = true">
-                    Split column mode
+                    {{ i18n.templates.app.splitColumnMode }}
                 </a>
             </template>
         </Header>
@@ -35,7 +35,7 @@ limitations under the License.
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
             <div class="columns is-multiline">
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
-                    <h2>Per-website config</h2>
+                    <h2>{{ i18n.templates.app.perWebsiteConfig }}</h2>
 
                     <div class="tabs">
                         <ul>
@@ -48,7 +48,7 @@ limitations under the License.
                                 </a>
                             </li>
                             <li>
-                                <a @click="add"><i class="fas fa-plus"></i> Add site</a>
+                                <a @click="add"><i class="fas fa-plus"></i> {{ i18n.templates.app.addSite }}</a>
                             </li>
                         </ul>
                     </div>
@@ -60,15 +60,15 @@ limitations under the License.
                         ></Domain>
                     </template>
 
-                    <h2>Global config</h2>
+                    <h2>{{ i18n.templates.app.globalConfig }}</h2>
                     <Global :data="global"></Global>
 
-                    <h2>Setup</h2>
+                    <h2>{{ i18n.templates.app.setup }}</h2>
                     <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
                 </div>
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
-                    <h2>Config files</h2>
+                    <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline">
                         <NginxPrism v-for="conf in confFilesOutput"
                                     :key="`${conf[0]}-${hash(conf[1])}`"

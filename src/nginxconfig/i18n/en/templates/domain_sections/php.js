@@ -14,16 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    php: 'PHP',
-    phpIsDisabled: 'PHP is disabled.',
-    phpCannotBeEnabledWithReverseProxy: 'PHP cannot be enabled whilst the reverse proxy is enabled.',
-    phpCannotBeEnabledWithPython: 'PHP cannot be enabled whilst Python is enabled.',
-    enablePhp: 'enable PHP',
-    wordPressRules: 'WordPress rules',
-    enableWordPressRules: 'enable WordPress-specific rules',
-    drupalRules: 'Drupal rules',
-    enableDrupalRules: 'enable Drupal-specific rules',
-    magentoRules: 'Magento rules',
-    enableMagentoRules: 'enable Magento-specific rules',
+    phpIsDisabled: `${common.php} is disabled.`,
+    phpCannotBeEnabledWithReverseProxy: `${common.php} cannot be enabled whilst the reverse proxy is enabled.`,
+    phpCannotBeEnabledWithPython: `${common.php} cannot be enabled whilst ${common.python} is enabled.`,
+    enablePhp: `${common.enable} ${common.php}`,
+    wordPressRules: `${common.wordPress} rules`,
+    enableWordPressRules: `${common.enable} ${common.wordPress}-specific rules`,
+    drupalRules: `${common.drupal} rules`,
+    enableDrupalRules: `${common.enable} ${common.drupal}-specific rules`,
+    magentoRules: `${common.magento} rules`,
+    enableMagentoRules: `${common.enable} ${common.magento}-specific rules`,
 };

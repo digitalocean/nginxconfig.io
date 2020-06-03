@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.https }}</label>
+                <label class="label">{{ i18n.common.https }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -216,7 +216,7 @@ limitations under the License.
         certType: {
             default: 'letsEncrypt',
             options: {
-                letsEncrypt: i18n.templates.domainSections.https.letsEncrypt,
+                letsEncrypt: i18n.common.letsEncrypt,
                 custom: i18n.templates.domainSections.https.customCertificate,
             },
             enabled: true,
@@ -236,16 +236,16 @@ limitations under the License.
     };
 
     export default {
-        name: 'DomainHTTPS',                                    // Component name
-        display: i18n.templates.domainSections.https.https,     // Display name for tab
-        key: 'https',                                           // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'DomainHTTPS',                            // Component name
+        display: i18n.common.https,                     // Display name for tab
+        key: 'https',                                   // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),     // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object,                               // Data delegated back to us from parent
         },
         data () {
             return {
@@ -253,7 +253,7 @@ limitations under the License.
             };
         },
         computed: {
-            ...computedFromDefaults(defaults, 'https'),         // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'https'), // Getters & setters for the delegated data
             nginxDir() {
                 return this.$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
             },

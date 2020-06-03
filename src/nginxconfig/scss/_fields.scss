@@ -39,6 +39,10 @@ limitations under the License.
     &.is-aligned-top {
       align-items: flex-start;
     }
+
+    + .control {
+      margin-top: .5rem;
+    }
   }
 
   &.is-grouped {

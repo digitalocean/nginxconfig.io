@@ -14,9 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import common from '../../common';
-
 export default {
-    pythonServer: `${common.python} server`,
-    pythonMustBeEnabledOnOneSite: `${common.python} must be enabled on at least one site to configure global ${common.python} settings.`,
+    downloadConfig: 'Download Config',
+    copyBase64: 'Copy Base64',
 };

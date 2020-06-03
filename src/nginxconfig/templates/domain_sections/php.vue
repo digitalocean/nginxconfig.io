@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div v-if="!phpEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.php.php }}</label>
+                <label class="label">{{ i18n.common.php }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -39,7 +39,7 @@ limitations under the License.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">PHP</label>
+                <label class="label">{{ i18n.common.php }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -138,7 +138,7 @@ limitations under the License.
 
     export default {
         name: 'DomainPHP',                                  // Component name
-        display: i18n.templates.domainSections.php.php,     // Display name for tab
+        display: i18n.common.php,                           // Display name for tab
         key: 'php',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -152,7 +152,7 @@ limitations under the License.
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'php'), // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'php'),    // Getters & setters for the delegated data
         watch: {
             // If the Reverse proxy or Python is enabled, PHP will be forced off
             '$parent.$props.data': {

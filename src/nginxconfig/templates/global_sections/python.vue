@@ -63,19 +63,19 @@ limitations under the License.
     };
 
     export default {
-        name: 'GlobalPython',                                   // Component name
-        display: i18n.templates.globalSections.python.python,   // Display name for tab
-        key: 'python',                                          // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'GlobalPython',                               // Component name
+        display: i18n.common.python,                        // Display name for tab
+        key: 'python',                                      // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'python'),     // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'python'), // Getters & setters for the delegated data
         watch: {
             // Enable Python server settings if any site uses Python
             '$parent.$parent.$data.domains': {

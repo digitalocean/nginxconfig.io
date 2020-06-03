@@ -14,12 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    enable: 'enable',
     fallbackRouting: 'Fallback routing',
-    fallbackRoutingPhpPath: 'Fallback routing PHP path',
-    legacyPhpRouting: 'Legacy PHP routing',
-    enableLegacyRouting: 'enable legacy routing',
+    fallbackRoutingPhpPath: `Fallback routing ${common.php} path`,
+    legacyPhpRouting: `Legacy ${common.php} routing`,
+    enableLegacyRouting: `${common.enable} legacy routing`,
     path: 'Path',
     routing: 'Routing',
 };

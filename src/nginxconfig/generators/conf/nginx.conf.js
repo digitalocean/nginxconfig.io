@@ -111,9 +111,24 @@ export default (domains, global) => {
             || global.https.ocspGoogle.computed
             || global.https.ocspOpenDns.computed) {
             const ips = [];
-            if (global.https.ocspCloudflare.computed) ips.push('1.1.1.1', '1.0.0.1');
-            if (global.https.ocspGoogle.computed) ips.push('8.8.8.8', '8.8.4.4');
-            if (global.https.ocspOpenDns.computed) ips.push('208.67.222.222', '208.67.220.220');
+            if (global.https.ocspCloudflare.computed) {
+                if (['ipv4', 'both'].includes(global.https.ocspCloudflareType.computed))
+                    ips.push('1.1.1.1', '1.0.0.1');
+                if (['ipv6', 'both'].includes(global.https.ocspCloudflareType.computed))
+                    ips.push('[2606:4700:4700::1111]', '[2606:4700:4700::1001]');
+            }
+            if (global.https.ocspGoogle.computed) {
+                if (['ipv4', 'both'].includes(global.https.ocspGoogleType.computed))
+                    ips.push('8.8.8.8', '8.8.4.4');
+                if (['ipv6', 'both'].includes(global.https.ocspGoogleType.computed))
+                    ips.push('[2001:4860:4860::8888]', '[2001:4860:4860::8844]');
+            }
+            if (global.https.ocspOpenDns.computed) {
+                if (['ipv4', 'both'].includes(global.https.ocspOpenDnsType.computed))
+                    ips.push('208.67.222.222', '208.67.220.220');
+                if (['ipv6', 'both'].includes(global.https.ocspOpenDnsType.computed))
+                    ips.push('[2620:119:35::35]', '[2620:119:53::53]');
+            }
 
             config.http.push(['resolver', `${ips.join(' ')} valid=60s`]);
             config.http.push(['resolver_timeout', '2s']);

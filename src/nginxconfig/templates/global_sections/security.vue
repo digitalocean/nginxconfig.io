@@ -32,7 +32,7 @@ limitations under the License.
             </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div :class="`field is-horizontal${hasWordPress && !hasUnsafeEval ? ' is-aligned-top' : ''}`">
             <div class="field-label">
                 <label class="label">Content-Security-Policy</label>
             </div>
@@ -45,6 +45,14 @@ limitations under the License.
                                :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
+                    <template v-if="hasWordPress && !hasUnsafeEval">
+                        <br />
+                        <div class="message is-warning">
+                            <div class="message-body"
+                                 v-html="i18n.templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality"
+                            ></div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -59,7 +67,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.security.enable }}
+                                {{ i18n.common.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -77,7 +85,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.security.enable }}
+                                {{ i18n.common.enable }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -140,7 +148,15 @@ limitations under the License.
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'security'),   // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'security'),          // Getters & setters for the delegated data
+            hasWordPress() {
+                return this.$parent.$parent.$data.domains.some(d => d.php.wordPressRules.computed);
+            },
+            hasUnsafeEval() {
+                return this.$props.data.contentSecurityPolicy.computed.includes('\'unsafe-eval\'');
+            },
+        },
         watch: {
             // Check referrer policy selection is valid
             '$props.data.referrerPolicy': {

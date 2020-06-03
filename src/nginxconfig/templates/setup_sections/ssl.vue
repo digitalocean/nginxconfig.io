@@ -19,7 +19,7 @@ limitations under the License.
         <ol v-if="diffieHellmanValue || letsEncryptActive">
             <li v-if="diffieHellmanValue">
                 <p>
-                    Generate <b>Diffie-Hellman keys</b> by running this command on your server:
+                    <span v-html="i18n.templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer"></span>
                     <br />
                     <BashPrism :key="`${nginxDir}-${diffieHellmanValue}`"
                                :cmd="`openssl dhparam -out ${nginxDir}/dhparam.pem ${diffieHellmanValue}`"
@@ -29,10 +29,9 @@ limitations under the License.
 
             <li v-if="letsEncryptActive">
                 <p>
-                    Create a common <b>ACME-challenge</b> directory (for <b>Let's Encrypt</b>):
+                    <span v-html="i18n.templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt"></span>
                     <br />
                     <BashPrism :key="letsEncryptDir" :cmd="`mkdir -p ${letsEncryptDir}`"></BashPrism>
-                    <br />
                     <BashPrism :key="`${nginxUser}-${letsEncryptDir}`"
                                :cmd="`chown ${nginxUser} ${letsEncryptDir}`"
                     ></BashPrism>
@@ -45,7 +44,7 @@ limitations under the License.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            No additional steps are needed to set up SSL for your NGINX configuration.
+                            {{ i18n.templates.setupSections.ssl.noAdditionalStepsAreNeededToSetUpSslForNginx }}
                         </label>
                     </div>
                 </div>
@@ -60,7 +59,7 @@ limitations under the License.
 
     export default {
         name: 'SetupSSL',
-        display: 'SSL init',
+        display: i18n.templates.setupSections.ssl.sslInit,
         key: 'ssl',
         components: {
             BashPrism,

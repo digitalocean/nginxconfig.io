@@ -14,16 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    sslProfile: 'SSL Profile',
-    httpsMustBeEnabledOnOneSite: 'HTTPS must be enabled on at least one site to configure global HTTPS settings.',
+    sslProfile: `${common.ssl} Profile`,
+    httpsMustBeEnabledOnOneSite: `${common.https} must be enabled on at least one site to configure global ${common.https} settings.`,
     ocspDnsResolvers: 'OCSP DNS Resolvers',
     cloudflareResolver: 'Cloudflare Resolver',
     googlePublicDns: 'Google Public DNS',
     openDns: 'OpenDNS',
-    letsEncryptWebroot: 'Let\'s Encrypt webroot',
-    mozillaModern: 'Mozilla Modern',
-    mozillaIntermediate: 'Mozilla Intermediate',
-    mozillaOld: 'Mozilla Old',
-    https: 'HTTPS',
+    letsEncryptWebroot: `${common.letsEncrypt} webroot`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} only`,
+    ipv6Only: `${ipv6} only`,
+    ipv4AndIpv6: `${ipv4} & ${ipv6}`,
 };

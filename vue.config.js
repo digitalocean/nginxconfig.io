@@ -22,7 +22,7 @@ module.exports = {
     publicPath: './',
     outputDir: 'dist',
     filenameHashing: false,
-    productionSourceMap: false,
+    //productionSourceMap: false,
     configureWebpack: {
         plugins: [
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),

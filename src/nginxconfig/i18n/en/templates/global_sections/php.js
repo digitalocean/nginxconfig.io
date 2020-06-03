@@ -14,10 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
-    phpServer: 'PHP server',
-    phpMustBeEnabledOnOneSite: 'PHP must be enabled on at least one site to configure global PHP settings.',
-    phpBackupServer: 'PHP backup server',
+    phpServer: `${common.php} server`,
+    phpMustBeEnabledOnOneSite: `${common.php} must be enabled on at least one site to configure global ${common.php} settings.`,
+    phpBackupServer: `${common.php} backup server`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM socket',
     php5Socket: '5.x socket',
@@ -26,5 +28,4 @@ export default {
     php72Socket: '7.2 socket',
     php73Socket: '7.3 socket',
     disabled: 'Disabled',
-    php: 'PHP',
 };

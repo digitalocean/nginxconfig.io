@@ -14,8 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../common';
+
 export default {
-    title: 'NGINXConfig',
-    description: 'The easiest way to configure a performant, secure, and stable NGINX server.',
-    oss: 'This tool is {link|open-source on GitHub|https://github.com/do-community/nginxconfig-vue} under the {link|Apache-2.0|https://github.com/do-community/nginxconfig-vue/blob/master/LICENSE} license! We welcome feedback and contributions.',
+    title: `${common.nginx}Config`,
+    description: `The easiest way to configure a performant, secure, and stable ${common.nginx} server.`,
+    singleColumnMode: 'Single column mode',
+    splitColumnMode: 'Split column mode',
+    perWebsiteConfig: 'Per-website config',
+    addSite: 'Add site',
+    globalConfig: 'Global config',
+    setup: 'Setup',
+    configFiles: 'Config files',
+    oss: 'This tool is {link|open-source on GitHub|https://github.com/digitalocean/nginxconfig.io} under the {link|Apache-2.0|https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE} license! We welcome feedback and contributions.',
 };

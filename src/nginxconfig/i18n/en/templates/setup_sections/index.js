@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import common from '../../common';
+import certbot from './certbot';
+import download from './download';
+import goLive from './go_live';
+import ssl from './ssl';
 
-export default {
-    pythonServer: `${common.python} server`,
-    pythonMustBeEnabledOnOneSite: `${common.python} must be enabled on at least one site to configure global ${common.python} settings.`,
-};
+export default { certbot, download, goLive, ssl };

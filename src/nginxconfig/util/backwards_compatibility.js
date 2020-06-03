@@ -144,6 +144,7 @@ export default data => {
             // Handle converting old domain settings to new ones
             for (const key in values[i]) {
                 if (!Object.prototype.hasOwnProperty.call(values[i], key)) continue;
+                if (isObject(values[i][key])) continue;
 
                 // Map old settings to their new ones
                 if (key in domainMap) {

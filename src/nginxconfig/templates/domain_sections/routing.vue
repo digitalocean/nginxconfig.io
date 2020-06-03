@@ -26,7 +26,7 @@ limitations under the License.
                         <div class="checkbox">
                             <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.routing.enable }}
+                                {{ i18n.common.enable }}
                             </PrettyCheck>
                         </div>
                     </div>

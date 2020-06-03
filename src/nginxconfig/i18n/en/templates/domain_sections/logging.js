@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
     byDomain: 'by domain',
-    enableForThisDomain: 'enable for this domain',
-    logging: 'Logging',
+    enableForThisDomain: `${common.enable} for this domain`,
 };

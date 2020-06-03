@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import common from '../../common';
+
 export default {
     modularizedStructure: 'Modularized structure',
-    enableModularizedConfigFiles: 'enable modularized config files',
+    enableModularizedConfigFiles: `${common.enable} modularized config files`,
     symlinkVhost: 'Symlink vhost',
-    enableSymLinksFrom: 'enable symlinks from',
+    enableSymLinksFrom: `${common.enable} symlinks from`,
     to: 'to',
     shareConfiguration: 'Share configuration',
     resetConfiguration: 'Reset configuration',

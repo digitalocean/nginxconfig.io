@@ -67,7 +67,7 @@ limitations under the License.
         },
         php: {
             default: true,
-            display: i18n.templates.domainSections.presets.php,
+            display: i18n.common.php,
             enabled: true,
             computedCheck (data) {
                 return data.php.php.computed
@@ -81,7 +81,7 @@ limitations under the License.
         },
         django: {
             default: false,
-            display: i18n.templates.domainSections.presets.django,
+            display: i18n.common.django,
             enabled: true,
             computedCheck (data) {
                 return data.python.python.computed
@@ -110,7 +110,7 @@ limitations under the License.
         },
         wordPress: {
             default: false,
-            display: i18n.templates.domainSections.presets.wordPress,
+            display: i18n.common.wordPress,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'
@@ -123,7 +123,7 @@ limitations under the License.
         },
         drupal: {
             default: false,
-            display: i18n.templates.domainSections.presets.drupal,
+            display: i18n.common.drupal,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'
@@ -136,7 +136,7 @@ limitations under the License.
         },
         magento: {
             default: false,
-            display: i18n.templates.domainSections.presets.magento,
+            display: i18n.common.magento,
             enabled: true,
             computedCheck (data) {
                 return data.routing.index.computed === 'index.php'

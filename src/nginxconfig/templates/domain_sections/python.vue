@@ -18,7 +18,7 @@ limitations under the License.
     <div>
         <div v-if="!pythonEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.python.python }}</label>
+                <label class="label">{{ i18n.common.python }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -39,7 +39,7 @@ limitations under the License.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.python.python }}</label>
+                <label class="label">{{ i18n.common.python }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -93,15 +93,15 @@ limitations under the License.
     };
 
     export default {
-        name: 'DomainPython',                                   // Component name
-        display: i18n.templates.domainSections.python.python,   // Display name for tab
-        key: 'python',                                          // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'DomainPython',                               // Component name
+        display: i18n.common.python,                        // Display name for tab
+        key: 'python',                                      // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data () {
             return {

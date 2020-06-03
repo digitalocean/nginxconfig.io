@@ -202,7 +202,7 @@ export default (domain, domains, global) => {
         serverConfig.push(['# handle .php', '']);
 
         const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
-        if (global.tools.modularizedStructure.computed) {
+        if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
             serverConfig.push([loc, { include: 'nginxconfig.io/php_fastcgi.conf' }]);
         } else {
