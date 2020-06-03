@@ -138,7 +138,7 @@ limitations under the License.
                         <input v-model="letsEncryptEmail"
                                class="input"
                                type="text"
-                               :placeholder="`info@${$parent.$props.data.server.domain.computed}`"
+                               :placeholder="$props.data.letsEncryptEmail.computed"
                         />
                     </div>
                 </div>
@@ -223,6 +223,7 @@ limitations under the License.
         },
         letsEncryptEmail: {
             default: '',
+            computed: 'info@example.com', // No default value, but a default computed
             enabled: true,
         },
         sslCertificate: {
@@ -342,6 +343,23 @@ limitations under the License.
                             this.$props.data.letsEncryptEmail.enabled = false;
                             this.$props.data.letsEncryptEmail.computed = '';
                         }
+                    }
+                },
+                deep: true,
+            },
+            // Ensure there is a default email for Let's Encrypt
+            '$props.data.letsEncryptEmail': {
+                handler(data) {
+                    if (!data.computed.trim()) {
+                        data.computed = `info@${this.$parent.$props.data.server.domain.computed}`;
+                    }
+                },
+                deep: true,
+            },
+            '$parent.$props.data.server.domain': {
+                handler(data) {
+                    if (!this.$props.data.letsEncryptEmail.value.trim()) {
+                        this.$props.data.letsEncryptEmail.computed = `info@${data.computed}`;
                     }
                 },
                 deep: true,
