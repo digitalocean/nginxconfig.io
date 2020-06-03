@@ -121,8 +121,8 @@ export default data => {
         // If not a global setting and if this is an integer
         // Then, this is probably an old domain, so we'll try to convert it as such
         if (!isNaN(parseInt(key))) {
-            data.domains = data.domains || [];
-            data.domains.push(data[key]);
+            data.domains = isObject(data.domains) ? data.domains : {};
+            data.domains[key] = data[key];
         }
     }
 
@@ -130,35 +130,35 @@ export default data => {
     data.global = {...(data.global || {}), ...mappedGlobal};
 
     // Handle converting domain settings
-    if ('domains' in data && (Array.isArray(data.domains) || isObject(data.domains))) {
-        // Ensure we're working with an array
-        const values = isObject(data.domains) ? Object.values(data.domains) : data.domains;
+    if ('domains' in data && isObject(data.domains)) {
+        for (const key in data.domains) {
+            // Don't include inherited props
+            if (!Object.prototype.hasOwnProperty.call(data.domains, key)) continue;
 
-        for (let i = 0; i < values.length; i++) {
             // Check this is an object
-            if (!isObject(values[i])) continue;
+            if (!isObject(data.domains[key])) continue;
 
             // Hold any mapped data
             const mappedData = {};
 
             // Handle converting old domain settings to new ones
-            for (const key in values[i]) {
-                if (!Object.prototype.hasOwnProperty.call(values[i], key)) continue;
-                if (isObject(values[i][key])) continue;
+            for (const key2 in data.domains[key]) {
+                // Don't include inherited props
+                if (!Object.prototype.hasOwnProperty.call(data.domains[key], key2)) continue;
+
+                // Don't convert objects
+                if (isObject(data.domains[key][key2])) continue;
 
                 // Map old settings to their new ones
-                if (key in domainMap) {
-                    const map = domainMap[key];
+                if (key2 in domainMap) {
+                    const map = domainMap[key2];
                     mappedData[map[0]] = mappedData[map[0]] || {};
-                    mappedData[map[0]][map[1]] = map.length < 3 ? values[i][key] : map[2](values[i][key]);
+                    mappedData[map[0]][map[1]] = map.length < 3 ? data.domains[key][key2] : map[2](data.domains[key][key2]);
                 }
             }
 
             // Overwrite mapped properties
-            values[i] = {...values[i], ...mappedData};
+            data.domains[key] = {...data.domains[key], ...mappedData};
         }
-
-        // Store the updated domain data
-        data.domains = values;
     }
 };

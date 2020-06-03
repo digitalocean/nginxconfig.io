@@ -54,6 +54,7 @@ export default (query, domains, global, nextTick) => {
     const data = qs.parse(query, {
         ignoreQueryPrefix: true,
         allowDots: true,
+        parseArrays: false,
         decoder(value) {
             value = decodeURIComponent(value);
 
@@ -78,25 +79,23 @@ export default (query, domains, global, nextTick) => {
     backwardsCompatibility(data);
 
     // Handle domains
-    if ('domains' in data) {
-        // Check its an array or object
-        if (Array.isArray(data.domains) || isObject(data.domains)) {
-            // Ensure we're working with an array
-            const values = isObject(data.domains) ? Object.values(data.domains) : data.domains;
-
-            // Work through each potential domain
-            for (const domainData of values) {
-                // Check this is an object
-                if (!isObject(domainData)) continue;
-
-                // Create a new domain (assume it has had custom user settings)
-                const domainImported = clone(Domain.delegated);
-                domainImported.hasUserInteraction = true;
-                domains.push(domainImported);
-
-                // Apply the initial values on the next Vue tick, once the watchers are ready
-                nextTick(() => applyCategories(domainData, domainImported));
+    if ('domains' in data && isObject(data.domains)) {
+        // Work through all valid integer keys in the object
+        const keys = Object.keys(data.domains).map(x => parseInt(x)).filter(x => !isNaN(x));
+        for (let i = 0; i < Math.max(...keys) + 1; i++) {
+            // If the key doesn't exist or this isn't a valid object, assume it was an untouched example domain
+            if (!keys.includes(i) || !isObject(data.domains[i])) {
+                domains.push(clone(Domain.delegated));
+                continue;
             }
+
+            // Create a new domain (assume it has had custom user settings)
+            const domainImported = clone(Domain.delegated);
+            domainImported.hasUserInteraction = true;
+            domains.push(domainImported);
+
+            // Apply the initial values on the next Vue tick, once the watchers are ready
+            nextTick(() => applyCategories(data.domains[i], domainImported));
         }
     } else {
         // If no configured domains, add a single default

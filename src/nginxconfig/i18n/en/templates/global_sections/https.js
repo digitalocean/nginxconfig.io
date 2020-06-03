@@ -27,6 +27,8 @@ export default {
     cloudflareResolver: 'Cloudflare Resolver',
     googlePublicDns: 'Google Public DNS',
     openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
     letsEncryptWebroot: `${common.letsEncrypt} webroot`,
     mozillaModern: `${mozilla} Modern`,
     mozillaIntermediate: `${mozilla} Intermediate`,
