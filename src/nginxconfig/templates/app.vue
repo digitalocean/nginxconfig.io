@@ -80,11 +80,11 @@ THE SOFTWARE.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline">
-                        <NginxPrism v-for="(conf, i) in confFilesOutput"
-                                    :key="`${conf[0]}-${i}-${hash(conf[1])}`"
-                                    :name="`${nginxDir}/${conf[0]}`"
-                                    :conf="conf[1]"
-                                    :half="confFilesOutput.length > 1 && !splitColumn"
+                        <NginxPrism v-for="(confContents, confName) in confFilesOutput"
+                                    :key="`${confName}-${hash(confContents)}`"
+                                    :name="`${nginxDir}/${confName}`"
+                                    :conf="confContents"
+                                    :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
                         ></NginxPrism>
                     </div>
                 </div>
@@ -132,8 +132,8 @@ THE SOFTWARE.
                 ready: false,
                 splitColumn: false,
                 confWatcherWaiting: false,
-                confFilesPrevious: [],
-                confFilesOutput: [],
+                confFilesPrevious: {},
+                confFilesOutput: {},
             };
         },
         computed: {
@@ -222,17 +222,21 @@ THE SOFTWARE.
                 this.$nextTick(() => this.checkChange(this.confFiles));
             },
             updateDiff(newConf, oldConf) {
+                const newFiles = {};
+
                 // Work through each file in the new config
-                const newFiles = [];
-                for (const [newFileName, newFileConf] of newConf) {
+                for (const newFileName in newConf) {
+                    if (!Object.prototype.hasOwnProperty.call(newConf, newFileName)) continue;
+                    const newFileConf = newConf[newFileName];
+
                     // If a file with the same name existed before, diff!
                     // TODO: Handle diffing across file renames (eg. when a user changes a domain name)
-                    const old = oldConf && oldConf.find(c => c[0] === newFileName);
-                    if (old && this.hash(old[1]) !== this.hash(newFileConf)) {
+                    const old = oldConf && oldConf[newFileName];
+                    if (old && this.hash(old) !== this.hash(newFileConf)) {
                         console.info(`Diffing ${newFileName}...`);
 
                         // Get the diff
-                        const diff = diffLines(old[1], newFileConf);
+                        const diff = diffLines(old, newFileConf);
 
                         // Wrap additions in <mark>, drop removals
                         const output = diff.map((change, index, array) => {
@@ -263,13 +267,15 @@ THE SOFTWARE.
                         }).join('');
 
                         // Store
-                        newFiles.push([newFileName, output]);
+                        newFiles[newFileName] = output;
                         continue;
                     }
 
                     // No diffing, just store the new file
-                    newFiles.push([newFileName, newFileConf]);
+                    newFiles[newFileName] = newFileConf;
                 }
+
+                // Store
                 this.$data.confFilesOutput = newFiles;
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },

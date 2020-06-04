@@ -114,15 +114,16 @@ THE SOFTWARE.
                 const tar = pack();
 
                 // Add all our config files to the tar
-                for (const conf of this.$props.data.confFiles) {
-                    tar.entry({ name: conf[0] }, conf[1]);
+                for (const fileName in this.$props.data.confFiles) {
+                    if (!Object.prototype.hasOwnProperty.call(this.$props.data.confFiles, fileName)) continue;
+                    tar.entry({ name: fileName }, this.$props.data.confFiles[fileName]);
 
                     // If symlinks are enabled and this is in sites-available, symlink to sites-enabled
-                    if (this.$props.data.global.tools.symlinkVhost.computed && conf[0].startsWith('sites-available'))
+                    if (this.$props.data.global.tools.symlinkVhost.computed && fileName.startsWith('sites-available'))
                         tar.entry({
-                            name: conf[0].replace(/^sites-available/, 'sites-enabled'),
+                            name: fileName.replace(/^sites-available/, 'sites-enabled'),
                             type: 'symlink',
-                            linkname: `../${conf[0]}`,
+                            linkname: `../${fileName}`,
                         });
                 }
 
