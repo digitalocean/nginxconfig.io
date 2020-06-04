@@ -1,8 +1,13 @@
 {
   "name": "nginxconfig.io",
   "version": "1.0.0",
-  "description": "",
-  "license": "Apache-2.0",
+  "description": "NGINX config generator on steroids",
+  "private": true,
+  "license": "MIT",
+  "engines" : {
+    "node" : "12.16.2"
+  },
+  "main": "src/nginxconfig/mount.js",
   "scripts": {
     "build": "npm run build:clean && npm run build:template && npm run build:static && npm run build:tool",
     "build:clean": "do-vue clean",
