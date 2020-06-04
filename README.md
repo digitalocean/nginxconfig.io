@@ -64,21 +64,39 @@ routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, D
 * GitHub: [@0xB4LINT](https://github.com/0xB4LINT)
 * LinkedIn: [@0xB4LINT](https://www.linkedin.com/in/0xB4LINT/)
 
-## ▶️ Install locally
+## ▶️ Development
 
 1. Clone the repository
-	```sh
-	git clone https://github.com/digitalocean/nginxconfig.io.git
-	```
+    ```sh
+    git clone https://github.com/digitalocean/nginxconfig.io.git
+    ```
+ 
 2. Install NPM packages
-	```sh
-	npm ci
-	```
+    ```sh
+    npm ci
+    ```
+
 3. Run the development server *(with file watchers)*
-	```sh
-	npm run dev
-	```
+    ```sh
+    npm run dev
+    ```
+
 4. Open the development site **[localhost:8080](http://localhost:8080)**
+
+5. Lint your code *(eslint & sass-lint)*
+    ```sh
+    npm test
+    ```
+
+6. Analyze production bundle size & composition
+    ```sh
+    npm run analyze
+    ```
+
+7. Build for production *(to the `dist` directory)*
+    ```sh
+    npm run build
+    ```
 
 ## 🤝 Contributing
 
