@@ -36,5 +36,5 @@ export default {
     globalConfig: 'Global config',
     setup: 'Setup',
     configFiles: 'Config files',
-    oss: 'This tool is {link|open-source on GitHub|https://github.com/digitalocean/nginxconfig.io} under the {link|Apache-2.0|https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE} license! We welcome feedback and contributions.',
+    oss: 'This tool is {link|open-source on GitHub|https://github.com/digitalocean/nginxconfig.io} under the {link|MIT|https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE} license! We welcome feedback and contributions.',
 };
