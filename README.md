@@ -75,6 +75,28 @@ HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolve
 	```
 1. Your browser will open **[127.0.0.1:3000](http://127.0.0.1:3000)**
 
+## ▶️ Install as a container
+
+1. Clone the repository
+	```sh
+	git clone https://github.com/digitalocean/nginxconfig.io.git
+	```
+2. Change into the directory
+   ```sh
+   cd nginxconfig.io
+   ```
+3. Build the container (don't miss the period at the end of the command)
+   ```sh
+   docker build --tag nginxconfig-io .
+   ```
+4. Run the image
+   ```sh
+   # Run once and remove container when stopped
+   docker run --rm -d nginxconfig-io
+   # Use port 8000 and have the container persist on reboots (docker service needs to be enabled also)
+   docker run -d --name nginxconfig-io -p 8000:80/tcp --restart unless-stopped nginxconfig-io
+   ```
+
 ## 🤝 Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
