@@ -1,6 +1,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/stargazers)
 [![GitHub contributors](https://img.shields.io/github/contributors/digitalocean/nginxconfig.io.svg?color=blue)](https://github.com/digitalocean/nginxconfig.io/graphs/contributors)
-[![License](https://img.shields.io/github/license/digitalocean/nginxconfig.io.svg?color=blue)](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE.md)
+[![MIT License](https://img.shields.io/github/license/digitalocean/nginxconfig.io.svg?color=blue)](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE)
 <br />
 [![Closed issues](https://img.shields.io/github/issues-closed-raw/digitalocean/nginxconfig.io.svg?color=brightgreen)](https://github.com/digitalocean/nginxconfig.io/issues?q=is%3Aissue+is%3Aclosed)
 [![Closed PR](https://img.shields.io/github/issues-pr-closed-raw/digitalocean/nginxconfig.io.svg?color=brightgreen)](https://github.com/digitalocean/nginxconfig.io/pulls?q=is%3Apr+is%3Aclosed)
@@ -16,9 +16,9 @@
     <a href="https://nginxconfig.io"><strong>nginxconfig.io »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/digitalocean/nginxconfig.io/issues">Report Bug</a>
+    <a href="https://github.com/digitalocean/nginxconfig.io/issues/new?template=report-a-bug.md">Report a bug</a>
     ·
-    <a href="https://github.com/digitalocean/nginxconfig.io/issues">Request Feature</a>
+    <a href="https://github.com/digitalocean/nginxconfig.io/issues/new?template=request-a-feature.md">Request a feature</a>
 </p>
 
 <br />
@@ -87,7 +87,7 @@ Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
@@ -118,4 +118,4 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [DigitalOcean, Inc &lt;contact@digitalocean.com&gt; (https://www.digitalocean.com)](https://www.digitalocean.com).
 <br />
-This project is licensed under the [Apache 2.0](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE) license.
+This project is licensed under the [MIT](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE) license.
