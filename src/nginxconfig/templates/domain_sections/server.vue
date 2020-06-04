@@ -159,6 +159,7 @@ THE SOFTWARE.
         },
         path: {
             default: '',
+            computed: '/var/www/example.com', // No default value, but a default computed
             enabled: true,
         },
         documentRoot: {
@@ -223,6 +224,11 @@ THE SOFTWARE.
                     if (!data.computed.trim()) {
                         data.computed = data.default;
                     }
+
+                    // Ensure there is a default path
+                    if (!this.$props.data.path.value.trim()) {
+                        this.$props.data.path.computed = `/var/www/${data.computed}`;
+                    }
                 },
                 deep: true,
             },
@@ -236,6 +242,15 @@ THE SOFTWARE.
                     } else {
                         this.$props.data.cdnSubdomain.enabled = false;
                         this.$props.data.cdnSubdomain.computed = false;
+                    }
+                },
+                deep: true,
+            },
+            // Ensure there is a default path
+            '$props.data.path': {
+                handler(data) {
+                    if (!data.computed.trim()) {
+                        data.computed = `/var/www/${this.$props.data.domain.computed}`;
                     }
                 },
                 deep: true,
