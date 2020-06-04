@@ -49,6 +49,17 @@ THE SOFTWARE.
             </div>
         </div>
 
+        <template v-if="duplicateDomain">
+            <br />
+            <div class="message is-warning">
+                <div class="message-body">
+                    {{ i18n.templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed }}
+                    <code class="slim">{{ $props.data.domain.computed }}</code>.
+                    {{ i18n.templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration }}
+                </div>
+            </div>
+        </template>
+
         <div class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ i18n.templates.domainSections.server.wwwSubdomain }}</label>
@@ -192,7 +203,13 @@ THE SOFTWARE.
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'server'),     // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'server'),        // Getters & setters for the delegated data
+            duplicateDomain() {
+                return this.$parent.$parent.$data.domains
+                    .filter(d => d && d.server.domain.computed === this.$props.data.domain.computed).length > 1;
+            },
+        },
         watch: {
             '$props.data.domain': {
                 handler(data) {
