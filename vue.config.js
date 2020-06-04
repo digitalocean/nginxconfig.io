@@ -25,6 +25,7 @@ THE SOFTWARE.
 */
 
 const path = require('path');
+const { LimitChunkCountPlugin } = require('webpack').optimize;
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
@@ -32,9 +33,12 @@ module.exports = {
     publicPath: './',
     outputDir: 'dist',
     filenameHashing: false,
-    //productionSourceMap: false,
+    productionSourceMap: false,
     configureWebpack: {
         plugins: [
+            new LimitChunkCountPlugin({
+                maxChunks: 1,
+            }),
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
             process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
         ].filter(x => !!x),

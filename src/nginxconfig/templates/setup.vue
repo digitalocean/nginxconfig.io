@@ -61,9 +61,8 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import { pack } from 'tar-stream';
-    import getStream from 'get-stream';
-    import { gzip } from 'node-gzip';
+    import tar from 'tarts';
+    import { gzip } from 'pako';
     import copy from 'copy-to-clipboard';
     import i18n from '../i18n';
     import * as Sections from './setup_sections';
@@ -111,26 +110,24 @@ THE SOFTWARE.
                 return undefined;
             },
             async tarContents() {
-                const tar = pack();
+                const data = [];
 
                 // Add all our config files to the tar
                 for (const fileName in this.$props.data.confFiles) {
                     if (!Object.prototype.hasOwnProperty.call(this.$props.data.confFiles, fileName)) continue;
-                    tar.entry({ name: fileName }, this.$props.data.confFiles[fileName]);
+                    data.push({ name: fileName, content: this.$props.data.confFiles[fileName] });
 
                     // If symlinks are enabled and this is in sites-available, symlink to sites-enabled
                     if (this.$props.data.global.tools.symlinkVhost.computed && fileName.startsWith('sites-available'))
-                        tar.entry({
+                        data.push({
                             name: fileName.replace(/^sites-available/, 'sites-enabled'),
-                            type: 'symlink',
+                            typeflag: '2',
                             linkname: `../${fileName}`,
+                            content: '',
                         });
                 }
 
-                // Convert the tar to a buffer and gzip it
-                tar.finalize();
-                const raw = await getStream.buffer(tar);
-                return gzip(raw);
+                return gzip(tar(data));
             },
             async downloadTar() {
                 // Get the config files as a compressed tar
