@@ -147,11 +147,10 @@ THE SOFTWARE.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import Modal from 'do-vue/src/templates/modal';
-    import qs from 'qs';
     import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import exportData from '../../util/export_data';
+    import shareQuery from '../../util/share_query';
 
     const defaults = {
         modularizedStructure: {
@@ -190,18 +189,17 @@ THE SOFTWARE.
                 return this.$parent.$parent.activeDomains.length > 0;
             },
             shareQuery() {
-                const data = exportData(this.$parent.$parent.activeDomains, this.$parent.$props.data);
-                return qs.stringify(data, { allowDots: true });
+                return shareQuery(this.$parent.$parent.activeDomains, this.$parent.$props.data);
             },
             shareLink() {
                 const base = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
-                return `${base}${this.shareQuery.length ? '?' : ''}${this.shareQuery}`;
+                return `${base}${this.shareQuery}`;
             },
         },
         watch: {
             // When the share link changes, update the site query
             shareQuery(query) {
-                window.history.replaceState({}, '', `?${query}`);
+                window.history.replaceState({}, '', query);
             },
             // Disable symlink if modularized structure is disabled
             '$props.data.modularizedStructure': {
