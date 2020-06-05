@@ -62,7 +62,7 @@ THE SOFTWARE.
 
 <script>
     import tar from 'tarts';
-    import { gzip } from 'pako';
+    import { zip as gzip } from 'gzip-js';
     import ClipboardJS from 'clipboard';
     import i18n from '../i18n';
     import * as Sections from './setup_sections';
@@ -130,14 +130,14 @@ THE SOFTWARE.
                         });
                 }
 
-                return gzip(tar(data));
+                return gzip(tar(data), { level: 9 });
             },
             downloadTar() {
                 // Get the config files as a compressed tar
                 const contents = this.tarContents();
 
                 // Convert it to a blob and download
-                const blob = new Blob([ contents ], { type: 'application/tar+gzip' });
+                const blob = new Blob([ Uint8Array.from(contents) ], { type: 'application/tar+gzip' });
                 const link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
                 link.download = this.tarName;
