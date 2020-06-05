@@ -40,7 +40,6 @@
   "dependencies": {
     "clipboard": "^2.0.6",
     "clone": "^2.1.2",
-    "deep-equal": "^2.0.3",
     "diff": "^4.0.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",

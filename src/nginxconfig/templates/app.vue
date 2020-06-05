@@ -99,7 +99,6 @@ THE SOFTWARE.
     import clone from 'clone';
     import { diffLines } from 'diff';
     import escape from 'escape-html';
-    import deepEqual from 'deep-equal';
     import sha2_256 from 'simple-js-sha2-256';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
@@ -199,7 +198,7 @@ THE SOFTWARE.
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
-                if (deepEqual(oldConf, this.confFiles)) {
+                if (oldConf === this.confFiles) {
                     // If this is the initial data load on app start, don't diff and set ourselves as ready
                     if (!this.$data.ready) {
                         this.$data.confFilesOutput = this.confFiles;
