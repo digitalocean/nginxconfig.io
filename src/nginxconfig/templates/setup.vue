@@ -148,7 +148,7 @@ THE SOFTWARE.
                 const contents = this.tarContents();
 
                 // Convert it to base64 string
-                const b64 = Buffer.from(contents).toString('base64');
+                const b64 = btoa(String.fromCharCode(...contents));
                 return `echo '${b64}' | base64 --decode > ${this.nginxDir}/${this.tarName}`;
             },
             setupCopy() {

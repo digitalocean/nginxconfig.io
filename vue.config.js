@@ -32,13 +32,12 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 module.exports = {
     publicPath: './',
     outputDir: 'dist',
-    filenameHashing: false,
+    filenameHashing: false, // Don't hash the output, so we can embed on the DigitalOcean Community
     productionSourceMap: false,
     configureWebpack: {
+        node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
-            new LimitChunkCountPlugin({
-                maxChunks: 1,
-            }),
+            new LimitChunkCountPlugin({ maxChunks: 1 }), // Generate a single CSS & JS file for easy embedding
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
             process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
         ].filter(x => !!x),
