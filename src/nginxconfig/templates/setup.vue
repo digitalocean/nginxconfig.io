@@ -55,7 +55,7 @@ THE SOFTWARE.
 
         <div class="buttons is-centered">
             <a class="button is-success" @click="downloadTar">{{ i18n.templates.setup.downloadConfig }}</a>
-            <a class="button is-primary" @click="copyTar">{{ i18n.templates.setup.copyBase64 }}</a>
+            <a ref="copyTar" class="button is-primary">{{ i18n.templates.setup.copyBase64 }}</a>
         </div>
     </div>
 </template>
@@ -63,7 +63,7 @@ THE SOFTWARE.
 <script>
     import tar from 'tarts';
     import { gzip } from 'pako';
-    import copy from 'copy-to-clipboard';
+    import ClipboardJS from 'clipboard';
     import i18n from '../i18n';
     import * as Sections from './setup_sections';
 
@@ -102,6 +102,9 @@ THE SOFTWARE.
                 return `nginxconfig.io-${domains.join(',')}.tar.gz`;
             },
         },
+        mounted() {
+            this.setupCopy();
+        },
         methods: {
             tabClass(tab) {
                 if (tab === this.$data.active) return 'is-active';
@@ -109,7 +112,7 @@ THE SOFTWARE.
                 if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
                 return undefined;
             },
-            async tarContents() {
+            tarContents() {
                 const data = [];
 
                 // Add all our config files to the tar
@@ -129,9 +132,9 @@ THE SOFTWARE.
 
                 return gzip(tar(data));
             },
-            async downloadTar() {
+            downloadTar() {
                 // Get the config files as a compressed tar
-                const contents = await this.tarContents();
+                const contents = this.tarContents();
 
                 // Convert it to a blob and download
                 const blob = new Blob([ contents ], { type: 'application/tar+gzip' });
@@ -140,14 +143,37 @@ THE SOFTWARE.
                 link.download = this.tarName;
                 link.click();
             },
-            async copyTar() {
+            copyTar() {
                 // Get the config files as a compressed tar
-                const contents = await this.tarContents();
+                const contents = this.tarContents();
 
                 // Convert it to base64 string
                 const b64 = Buffer.from(contents).toString('base64');
-                const command = `echo '${b64}' | base64 --decode > ${this.nginxDir}/${this.tarName}`;
-                copy(command);
+                return `echo '${b64}' | base64 --decode > ${this.nginxDir}/${this.tarName}`;
+            },
+            setupCopy() {
+                const originalText = this.$refs.copyTar.textContent;
+
+                const resetText = () => {
+                    setTimeout(() => {
+                        this.$refs.copyTar.textContent = originalText;
+                    }, 5000);
+                };
+
+                const clipboard = new ClipboardJS(this.$refs.copyTar, {
+                    text: this.copyTar,
+                });
+
+                clipboard.on('success', e => {
+                    this.$refs.copyTar.textContent = 'Copied';
+                    e.clearSelection();
+                    resetText();
+                });
+
+                clipboard.on('error', () => {
+                    this.$refs.copyTar.textContent = 'Press Ctrl + C to copy';
+                    resetText();
+                });
             },
         },
     };

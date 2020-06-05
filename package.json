@@ -38,9 +38,8 @@
   },
   "homepage": "https://github.com/digitalocean/nginxconfig.io#readme",
   "dependencies": {
+    "clipboard": "^2.0.6",
     "clone": "^2.1.2",
-    "copy-to-clipboard": "^3.3.1",
-    "create-hash": "^1.2.0",
     "deep-equal": "^2.0.3",
     "diff": "^4.0.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
@@ -50,6 +49,7 @@
     "pretty-checkbox-vue": "^1.1.9",
     "prismjs": "^1.20.0",
     "qs": "^6.9.4",
+    "simple-js-sha2-256": "^1.0.7",
     "tarts": "^1.0.0",
     "vue": "^2.6.11",
     "vue-select": "^3.10.3"
@@ -60,7 +60,7 @@
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^5.2.3",
-    "sass": "^1.26.7",
+    "sass": "^1.26.8",
     "sass-lint": "^1.13.1",
     "sass-lint-auto-fix": "^0.21.0",
     "sass-loader": "^8.0.2",

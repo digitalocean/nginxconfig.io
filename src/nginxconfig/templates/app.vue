@@ -81,7 +81,7 @@ THE SOFTWARE.
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline">
                         <NginxPrism v-for="(confContents, confName) in confFilesOutput"
-                                    :key="`${confName}-${hash(confContents)}`"
+                                    :key="`${confName}-${sha2_256(confContents)}`"
                                     :name="`${nginxDir}/${confName}`"
                                     :conf="confContents"
                                     :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
@@ -100,7 +100,7 @@ THE SOFTWARE.
     import { diffLines } from 'diff';
     import escape from 'escape-html';
     import deepEqual from 'deep-equal';
-    import createHash from 'create-hash';
+    import sha2_256 from 'simple-js-sha2-256';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import isChanged from '../util/is_changed';
@@ -197,9 +197,6 @@ THE SOFTWARE.
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
             },
-            hash(content) {
-                return createHash('sha256').update(content).digest('base64');
-            },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
                 if (deepEqual(oldConf, this.confFiles)) {
@@ -232,7 +229,7 @@ THE SOFTWARE.
                     // If a file with the same name existed before, diff!
                     // TODO: Handle diffing across file renames (eg. when a user changes a domain name)
                     const old = oldConf && oldConf[newFileName];
-                    if (old && this.hash(old) !== this.hash(newFileConf)) {
+                    if (old && old !== newFileConf) {
                         console.info(`Diffing ${newFileName}...`);
 
                         // Get the diff
@@ -279,6 +276,7 @@ THE SOFTWARE.
                 this.$data.confFilesOutput = newFiles;
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
+            sha2_256,
         },
     };
 </script>
