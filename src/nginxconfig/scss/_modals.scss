@@ -27,5 +27,11 @@ THE SOFTWARE.
 .modal {
   .modal-card {
     text-align: left;
+
+    .button {
+      + .button {
+        margin: 0 0 0 .5rem;
+      }
+    }
   }
 }
