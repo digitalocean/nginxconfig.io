@@ -94,6 +94,7 @@ THE SOFTWARE.
         '/var/run/php/php7.2-fpm.sock': `${i18n.templates.globalSections.php.php72Socket}: /var/run/php/php7.2-fpm.sock`,
         '/var/run/php/php7.0-fpm.sock': `${i18n.templates.globalSections.php.php70Socket}: /var/run/php/php7.0-fpm.sock`,
         '/var/run/php/php7.3-fpm.sock': `${i18n.templates.globalSections.php.php73Socket}: /var/run/php/php7.3-fpm.sock`,
+        '/var/run/php/php7.4-fpm.sock': `${i18n.templates.globalSections.php.php74Socket}: /var/run/php/php7.4-fpm.sock`,
     };
 
     const defaults = {
