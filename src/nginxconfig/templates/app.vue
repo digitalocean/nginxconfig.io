@@ -97,11 +97,10 @@ THE SOFTWARE.
 
 <script>
     import clone from 'clone';
-    import { diffLines } from 'diff';
-    import escape from 'escape-html';
     import sha2_256 from 'simple-js-sha2-256';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
+    import diff from '../util/diff';
     import isChanged from '../util/is_changed';
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
@@ -218,61 +217,8 @@ THE SOFTWARE.
                 this.$nextTick(() => this.checkChange(this.confFiles));
             },
             updateDiff(newConf, oldConf) {
-                const newFiles = {};
-
-                // Work through each file in the new config
-                for (const newFileName in newConf) {
-                    if (!Object.prototype.hasOwnProperty.call(newConf, newFileName)) continue;
-                    const newFileConf = newConf[newFileName];
-
-                    // If a file with the same name existed before, diff!
-                    // TODO: Handle diffing across file renames (eg. when a user changes a domain name)
-                    const old = oldConf && oldConf[newFileName];
-                    if (old && old !== newFileConf) {
-                        console.info(`Diffing ${newFileName}...`);
-
-                        // Get the diff
-                        const diff = diffLines(old, newFileConf);
-
-                        // Wrap additions in <mark>, drop removals
-                        const output = diff.map((change, index, array) => {
-                            if (change.removed) return '';
-
-                            const escaped = escape(change.value);
-
-                            // Don't mark as diff if nothing changed
-                            if (!change.added) return escaped;
-
-                            // Don't mark as diff if only whitespace changed
-                            if (index > 0 && array[index - 1].removed) {
-                                if (array[index - 1].value.replace(/\s/g, '') === change.value.replace(/\s/g, '')) {
-                                    return escaped;
-                                }
-                            }
-                            if (index < array.length - 1 && array[index + 1].removed) {
-                                if (array[index + 1].value.replace(/\s/g, '') === change.value.replace(/\s/g, '')) {
-                                    return escaped;
-                                }
-                            }
-
-                            // Mark the diff, without highlighting whitespace
-                            return escaped
-                                .split('\n')
-                                .map(part => part.replace(/^(\s*)(.*)(\s*)$/, '$1<mark>$2</mark>$3'))
-                                .join('\n');
-                        }).join('');
-
-                        // Store
-                        newFiles[newFileName] = output;
-                        continue;
-                    }
-
-                    // No diffing, just store the new file
-                    newFiles[newFileName] = newFileConf;
-                }
-
-                // Store
-                this.$data.confFilesOutput = newFiles;
+                // Calculate the diff & highlight after render
+                this.$data.confFilesOutput = diff(newConf, oldConf);
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
             sha2_256,

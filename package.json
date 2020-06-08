@@ -49,6 +49,7 @@
     "prismjs": "^1.20.0",
     "qs": "^6.9.4",
     "simple-js-sha2-256": "^1.0.7",
+    "string-similarity": "^4.0.1",
     "tarts": "^1.0.0",
     "vue": "^2.6.11",
     "vue-select": "^3.10.3"
