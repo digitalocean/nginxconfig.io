@@ -37,5 +37,6 @@ export default {
     php71Socket: '7.1 socket',
     php72Socket: '7.2 socket',
     php73Socket: '7.3 socket',
+    php74Socket: '7.4 socket',
     disabled: 'Disabled',
 };
