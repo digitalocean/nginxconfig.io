@@ -26,16 +26,11 @@ THE SOFTWARE.
 
 <template>
     <div class="container">
-        <div class="header-group">
+        <div class="header-group" :style="{ cursor: interacted ? 'pointer' : undefined }" @click="toggleCollapse">
             <h3>{{ i18n.templates.domainSections.presets.presets }}</h3>
-            <template v-if="$parent.$props.data.hasUserInteraction">
-                <a v-if="expanded" class="button is-tiny" @click="expanded = false">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-                <a v-else class="button is-tiny" @click="expanded = true">
-                    <i class="fas fa-angle-down"></i>
-                </a>
-            </template>
+            <a v-if="interacted" class="button is-tiny">
+                <i :class="`fas fa-angle-${expanded ? 'up' : 'down'}`"></i>
+            </a>
         </div>
 
         <template v-if="!$parent.$props.data.hasUserInteraction || expanded">
@@ -67,7 +62,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.templates.domainSections.presets.frontend,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return !data.php.php.computed
                     && !data.python.python.computed
                     && !data.reverseProxy.reverseProxy.computed
@@ -79,7 +74,7 @@ THE SOFTWARE.
             default: true,
             display: i18n.common.php,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.php.php.computed
                     && data.routing.index.computed === 'index.php'
                     && data.routing.fallbackPhp.computed
@@ -93,7 +88,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.common.django,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.python.python.computed
                     && data.python.djangoRules.computed
                     && !data.routing.root.computed;
@@ -103,7 +98,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.templates.domainSections.presets.nodeJs,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.reverseProxy.reverseProxy.computed
                     && !data.routing.root.computed;
             },
@@ -112,7 +107,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.templates.domainSections.presets.singlePageApplication,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.php.php.computed
                     && data.routing.index.computed === 'index.html'
                     && data.routing.fallbackHtml.computed;
@@ -122,7 +117,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.common.wordPress,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.routing.index.computed === 'index.php'
                     && data.routing.fallbackPhp.computed
                     && !data.routing.fallbackHtml.computed
@@ -135,7 +130,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.common.drupal,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.routing.index.computed === 'index.php'
                     && data.routing.fallbackPhp.computed
                     && !data.routing.fallbackHtml.computed
@@ -148,7 +143,7 @@ THE SOFTWARE.
             default: false,
             display: i18n.common.magento,
             enabled: true,
-            computedCheck (data) {
+            computedCheck(data) {
                 return data.routing.index.computed === 'index.php'
                     && data.routing.fallbackPhp.computed
                     && !data.routing.fallbackHtml.computed
@@ -167,13 +162,18 @@ THE SOFTWARE.
         props: {
             data: Object,                                           // Data delegated back to us from parent
         },
-        data () {
+        data() {
             return {
                 i18n,
                 expanded: false,
             };
         },
-        computed: computedFromDefaults(defaults, 'presets', false), // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'presets', false),    // Getters & setters for the delegated data
+            interacted() {
+                return this.$parent.$props.data.hasUserInteraction;
+            },
+        },
         watch: {
             // When any data changes, check if it still matches a preset
             '$parent.$props.data': {
@@ -244,6 +244,11 @@ THE SOFTWARE.
                 case 'magento':
                     this.$parent.setValue('php', 'magentoRules', true);
                     break;
+                }
+            },
+            toggleCollapse() {
+                if (this.interacted) {
+                    this.expanded = !this.expanded;
                 }
             },
         },
