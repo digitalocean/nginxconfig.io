@@ -199,7 +199,7 @@ THE SOFTWARE.
         watch: {
             // When the share link changes, update the site query
             shareQuery(query) {
-                window.history.replaceState({}, '', query);
+                window.history.replaceState({}, '', query || window.location.pathname);
             },
             // Disable symlink if modularized structure is disabled
             '$props.data.modularizedStructure': {
