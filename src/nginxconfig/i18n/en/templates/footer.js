@@ -24,11 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import app from './app';
-import setup from './setup';
-import footer from './footer';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
-
-export default { app, setup, footer, domainSections, globalSections, setupSections };
+export default {
+    backToTop: 'Back To Top',
+    thisToolIs: 'This tool is',
+    openSourceOnGitHub: 'open-source on GitHub',
+    underThe: 'under the',
+    mit: 'MIT',
+    license: 'license!',
+    weWelcomeFeedbackAndContributions: 'We welcome feedback and contributions.',
+    originallyCreatedBy: 'Originally created by',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'maintained by',
+    digitalOcean: 'DigitalOcean',
+};

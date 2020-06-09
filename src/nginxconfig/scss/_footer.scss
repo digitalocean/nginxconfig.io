@@ -24,11 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import app from './app';
-import setup from './setup';
-import footer from './footer';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
+.footer {
+  .container {
+    p {
+      &:not(:first-child) {
+        + p {
+          margin-top: 0;
+        }
+      }
 
-export default { app, setup, footer, domainSections, globalSections, setupSections };
+      i {
+        &[class^="fa"] {
+          margin: 0 0 0 .25rem;
+        }
+      }
+    }
+  }
+}

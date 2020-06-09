@@ -91,7 +91,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <Footer :text="i18n.templates.app.oss"></Footer>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -100,7 +100,6 @@ THE SOFTWARE.
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
     import Header from 'do-vue/src/templates/header';
-    import Footer from 'do-vue/src/templates/footer';
     import diff from '../util/diff';
     import isChanged from '../util/is_changed';
     import importData from '../util/import_data';
@@ -111,6 +110,7 @@ THE SOFTWARE.
     import Global from './global';
     import Setup from './setup';
     import NginxPrism from './prism/nginx';
+    import Footer from './footer';
 
     export default {
         name: 'App',
