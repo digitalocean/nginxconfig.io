@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 <template>
     <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
-        <h3>{{ name }}</h3>
+        <h3 v-html="name"></h3>
         <pre><code class="language-nginx" v-html="conf"></code></pre>
     </div>
 </template>

@@ -80,10 +80,10 @@ THE SOFTWARE.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline">
-                        <NginxPrism v-for="(confContents, confName) in confFilesOutput"
-                                    :key="`${confName}-${sha2_256(confContents)}`"
-                                    :name="`${nginxDir}/${confName}`"
-                                    :conf="confContents"
+                        <NginxPrism v-for="confContents in confFilesOutput"
+                                    :key="confContents[2]"
+                                    :name="confContents[0]"
+                                    :conf="confContents[1]"
                                     :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
                         ></NginxPrism>
                     </div>
@@ -98,6 +98,7 @@ THE SOFTWARE.
 <script>
     import clone from 'clone';
     import sha2_256 from 'simple-js-sha2-256';
+    import escape from 'escape-html';
     import Header from 'do-vue/src/templates/header';
     import Footer from 'do-vue/src/templates/footer';
     import diff from '../util/diff';
@@ -198,17 +199,14 @@ THE SOFTWARE.
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
                 if (oldConf === this.confFiles) {
-                    // If this is the initial data load on app start, don't diff and set ourselves as ready
+                    // If this is the initial data load on app start, run the diff logic
+                    // but with previous as this so that we don't highlight any changes
                     if (!this.$data.ready) {
-                        this.$data.confFilesOutput = this.confFiles;
-                        this.$nextTick(() => {
-                            this.$data.confWatcherWaiting = false;
-                            this.$data.ready = true;
-                        });
-                        return;
+                        this.$data.confFilesPrevious = this.confFiles;
+                        this.$nextTick(() => { this.$data.ready = true; });
                     }
 
-                    // Otherwise, do the diff!
+                    // Do the diff!
                     this.updateDiff(this.confFiles, this.$data.confFilesPrevious);
                     return;
                 }
@@ -218,10 +216,16 @@ THE SOFTWARE.
             },
             updateDiff(newConf, oldConf) {
                 // Calculate the diff & highlight after render
-                this.$data.confFilesOutput = diff(newConf, oldConf);
+                this.$data.confFilesOutput = Object.values(diff(newConf, oldConf)).map(conf => {
+                    const name = `${escape(this.nginxDir)}/${conf[0]}`;
+                    return [
+                        name,
+                        conf[1],
+                        `${sha2_256(name)}-${sha2_256(conf[1])}`,
+                    ];
+                });
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
-            sha2_256,
         },
     };
 </script>

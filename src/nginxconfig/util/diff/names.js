@@ -24,45 +24,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { diffChars } from 'diff';
 import escape from 'escape-html';
-import renames from './renames';
-import confLines from './conf_lines';
-import names from './names';
 
-export default (newConf, oldConf) => {
-    // Consider renames
-    const renameMap = renames(newConf, oldConf);
+export default (newConfName, oldConfName) => {
+    // Get the diff
+    const diff = diffChars(oldConfName, newConfName);
 
-    // Store the diff config files
-    const newFiles = {};
+    // Wrap additions in <mark>, drop removals
+    return diff.map(change => {
+        if (change.removed) return '';
 
-    // Work through each file in the new config
-    for (const name in newConf) {
-        if (!Object.prototype.hasOwnProperty.call(newConf, name)) continue;
+        const escaped = escape(change.value);
 
-        let newFileName = escape(name);
-        let newFileConf = escape(newConf[name]);
+        // Don't mark as diff if nothing changed
+        if (!change.added) return escaped;
 
-        // If this file was in the old config (same name or renamed & similar)
-        // Calculate the diff of the configs
-        const old = oldConf && oldConf[renameMap[name]];
-        if (old && old !== newConf[name]) {
-            console.info(`Diffing ${name}...`);
-            newFileConf = confLines(newConf[name], old);
-        }
-
-        // If the file was renamed we should diff that too
-        if (name in renameMap && renameMap[name] !== name) {
-            newFileName = names(name, renameMap[name]);
-        }
-
-        // Store!
-        newFiles[name] = [
-            newFileName,
-            newFileConf,
-        ];
-    }
-
-    // Done
-    return newFiles;
+        // Mark the diff, without highlighting whitespace
+        return escaped.replace(/^(\s*)(.*)(\s*)$/, '$1<mark>$2</mark>$3');
+    }).join('');
 };
