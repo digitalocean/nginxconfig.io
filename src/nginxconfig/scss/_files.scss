@@ -24,74 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-.panel {
-  margin-top: 0;
-  max-width: calc(100% - 1rem);
-  padding: 1.5rem 0 2rem;
-  text-align: left;
-  width: calc(100% - 1rem);
-
-  // The presets panel has a custom header with a dropdown indicator
-  &.presets {
-    .header-group,
-    .buttons-group {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .header-group {
-      h3 {
-        margin: 0;
-      }
-
-      .button {
-        &.is-tiny {
-          font-size: 20px;
-        }
-      }
-    }
-
-    .message,
-    .buttons-group {
-      margin: 1rem 0 0;
-    }
-
-    .buttons-group {
-      align-items: center;
-
-      .button {
-        margin: 0 .25rem .5rem;
-      }
-    }
-  }
-
-  .container {
-    padding: 0 1.5rem;
-  }
-
-  .tabs {
-    ul {
-      padding: 0 1rem;
-    }
-  }
-
-  // Custom navigation buttons bottom right of the panels
-  .navigation-buttons {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin: 1.5rem 1.5rem 0;
-
-    .button {
-      margin-left: .5rem;
-
-      i + span,
-      span + i {
-        margin: 0 0 0 .5rem;
-      }
-    }
+.files {
+  h3 {
+    overflow-wrap: break-word;
   }
 }

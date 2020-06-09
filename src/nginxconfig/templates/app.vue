@@ -33,10 +33,10 @@ THE SOFTWARE.
             <template v-slot:header>
             </template>
             <template v-slot:buttons>
-                <a v-if="splitColumn" class="button is-primary is-outline" @click="splitColumn = false">
+                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumn = false">
                     {{ i18n.templates.app.singleColumnMode }}
                 </a>
-                <a v-else class="button is-primary" @click="splitColumn = true">
+                <a v-else class="button is-primary is-hidden-touch" @click="splitColumn = true">
                     {{ i18n.templates.app.splitColumnMode }}
                 </a>
             </template>
@@ -44,7 +44,7 @@ THE SOFTWARE.
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
             <div class="columns is-multiline">
-                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
                     <h2>{{ i18n.templates.app.perWebsiteConfig }}</h2>
 
                     <div class="tabs">
@@ -77,9 +77,9 @@ THE SOFTWARE.
                     <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
                 </div>
 
-                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
-                    <div ref="files" class="columns is-multiline">
+                    <div ref="files" class="columns is-multiline files">
                         <NginxPrism v-for="confContents in confFilesOutput"
                                     :key="confContents[2]"
                                     :name="confContents[0]"
