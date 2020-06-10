@@ -227,12 +227,18 @@ export default (domain, domains, global) => {
         serverConfig.push(['# additional config', '']);
         serverConfig.push(['include', 'nginxconfig.io/general.conf']);
 
+        if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
+            serverConfig.push(['include', 'nginxconfig.io/letsencrypt.conf']);
+
         if (domain.php.wordPressRules.computed) serverConfig.push(['include', 'nginxconfig.io/wordpress.conf']);
         if (domain.php.drupalRules.computed) serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
         if (domain.php.magentoRules.computed) serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
     } else {
         // Unified
         serverConfig.push(...Object.entries(generalConf(domains, global)));
+
+        if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
+            serverConfig.push(...Object.entries(letsEncryptConf(global)));
 
         if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
