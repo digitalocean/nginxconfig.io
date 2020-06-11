@@ -33,7 +33,7 @@ THE SOFTWARE.
                     <b>&nbsp;<a @click="$parent.downloadTar">{{ $parent.tarName }}</a></b>
                     <br />
                     <span v-html="i18n.templates.setupSections.download.andUploadItToYourServers"></span>
-                    <code class="slim">{{ $parent.nginxDir }}</code>
+                    <code class="slim">{{ $props.data.global.nginx.nginxConfigDirectory.computed }}</code>
                     {{ i18n.templates.setupSections.download.directory }}
                 </p>
                 <p>
@@ -50,7 +50,9 @@ THE SOFTWARE.
                 <p>
                     <span v-html="i18n.templates.setupSections.download.navigateToYourNginxConfigurationDirectoryOnYourServer"></span>
                     <br />
-                    <BashPrism :key="$parent.nginxDir" :cmd="`cd ${$parent.nginxDir}`"></BashPrism>
+                    <BashPrism :key="$props.data.global.nginx.nginxConfigDirectory.computed"
+                               :cmd="`cd ${$props.data.global.nginx.nginxConfigDirectory.computed}`"
+                    ></BashPrism>
                 </p>
             </li>
 

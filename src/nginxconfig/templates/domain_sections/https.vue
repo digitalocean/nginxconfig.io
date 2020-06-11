@@ -165,7 +165,7 @@ THE SOFTWARE.
                         <input v-model="sslCertificate"
                                class="input"
                                type="text"
-                               :placeholder="`${nginxDir}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
+                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
                         />
                     </div>
                 </div>
@@ -182,7 +182,7 @@ THE SOFTWARE.
                         <input v-model="sslCertificateKey"
                                class="input"
                                type="text"
-                               :placeholder="`${nginxDir}/ssl/${$parent.$props.data.server.domain.computed}.key`"
+                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.key`"
                         />
                     </div>
                 </div>
@@ -247,28 +247,23 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainHTTPS',                            // Component name
-        display: i18n.common.https,                     // Display name for tab
-        key: 'https',                                   // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),     // Data the parent will present here
+        name: 'DomainHTTPS',                                // Component name
+        display: i18n.common.https,                         // Display name for tab
+        key: 'https',                                       // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                               // Data delegated back to us from parent
+            data: Object,                                   // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: {
-            ...computedFromDefaults(defaults, 'https'), // Getters & setters for the delegated data
-            nginxDir() {
-                return this.$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
-            },
-        },
+        computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
         watch: {
             // Disable everything if https is disabled
             '$props.data.https': {

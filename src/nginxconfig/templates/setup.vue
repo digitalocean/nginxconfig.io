@@ -94,9 +94,6 @@ THE SOFTWARE.
                 if (index >= 0) return tabs[index];
                 return false;
             },
-            nginxDir() {
-                return this.$props.data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
-            },
             tarName() {
                 const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
                 return `nginxconfig.io-${domains.join(',')}.tar.gz`;
@@ -149,7 +146,7 @@ THE SOFTWARE.
 
                 // Convert it to base64 string
                 const b64 = btoa(String.fromCharCode(...contents));
-                return `echo '${b64}' | base64 --decode > ${this.nginxDir}/${this.tarName}`;
+                return `echo '${b64}' | base64 --decode > ${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName}`;
             },
             setupCopy() {
                 const originalText = this.$refs.copyTar.textContent;

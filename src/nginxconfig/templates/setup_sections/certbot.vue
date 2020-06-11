@@ -113,9 +113,6 @@ THE SOFTWARE.
             };
         },
         computed: {
-            nginxDir() {
-                return this.$props.data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
-            },
             letsEncryptDir() {
                 return this.$props.data.global.https.letsEncryptRoot.computed.replace(/\/+$/, '');
             },
@@ -128,12 +125,13 @@ THE SOFTWARE.
                 return false;
             },
             sitesAvailable() {
-                if (!this.$props.data.global.tools.modularizedStructure.computed) return `${this.nginxDir}/nginx.conf`;
+                if (!this.$props.data.global.tools.modularizedStructure.computed)
+                    return `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/nginx.conf`;
 
                 const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed ? 'available' : 'enabled';
                 return this.$props.data.domains
                     .filter(domain => domain.https.certType.computed === 'letsEncrypt')
-                    .map(domain => `${this.nginxDir}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`)
+                    .map(domain => `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`)
                     .join(' ');
             },
             certbotCmds() {

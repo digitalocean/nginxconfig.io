@@ -139,9 +139,6 @@ THE SOFTWARE.
             activeDomains() {
                 return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
             },
-            nginxDir() {
-                return this.$data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
-            },
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
@@ -217,7 +214,7 @@ THE SOFTWARE.
             updateDiff(newConf, oldConf) {
                 // Calculate the diff & highlight after render
                 this.$data.confFilesOutput = Object.values(diff(newConf, oldConf)).map(conf => {
-                    const name = `${escape(this.nginxDir)}/${conf[0]}`;
+                    const name = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${conf[0]}`;
                     return [
                         name,
                         conf[1],

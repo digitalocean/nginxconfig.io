@@ -128,6 +128,7 @@ THE SOFTWARE.
     const defaults = {
         nginxConfigDirectory: {
             default: '/etc/nginx/',
+            computed: '/etc/nginx', // We use a watcher to trim trailing slashes
             enabled: true,
         },
         workerProcesses: {
@@ -170,6 +171,16 @@ THE SOFTWARE.
         },
         computed: computedFromDefaults(defaults, 'nginx'),  // Getters & setters for the delegated data
         watch: {
+            // Clean nginx directory of trailing slashes
+            '$props.data.nginxConfigDirectory': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (data.computed.endsWith('/'))
+                            data.computed = data.computed.replace(/\/+$/, '');
+                },
+                deep: true,
+            },
             // Check worker processes selection is valid
             '$props.data.workerProcesses': {
                 handler(data) {

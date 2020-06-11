@@ -31,8 +31,8 @@ THE SOFTWARE.
                 <p>
                     <span v-html="i18n.templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer"></span>
                     <br />
-                    <BashPrism :key="`${nginxDir}-${diffieHellmanValue}`"
-                               :cmd="`openssl dhparam -out ${nginxDir}/dhparam.pem ${diffieHellmanValue}`"
+                    <BashPrism :key="`${$props.data.global.nginx.nginxConfigDirectory.computed}-${diffieHellmanValue}`"
+                               :cmd="`openssl dhparam -out ${$props.data.global.nginx.nginxConfigDirectory.computed}/dhparam.pem ${diffieHellmanValue}`"
                     ></BashPrism>
                 </p>
             </li>
@@ -83,9 +83,6 @@ THE SOFTWARE.
             };
         },
         computed: {
-            nginxDir() {
-                return this.$props.data.global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '');
-            },
             letsEncryptDir() {
                 return this.$props.data.global.https.letsEncryptRoot.computed.replace(/\/+$/, '');
             },
