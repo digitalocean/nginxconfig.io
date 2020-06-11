@@ -28,7 +28,7 @@ THE SOFTWARE.
     <div>
         <div v-if="!reverseProxyEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.reverseProxy.reverseProxy }}</label>
+                <label class="label">{{ i18n.common.reverseProxy }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -49,7 +49,7 @@ THE SOFTWARE.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.reverseProxy.reverseProxy }}</label>
+                <label class="label">{{ i18n.common.reverseProxy }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${reverseProxyChanged ? ' is-changed' : ''}`">
@@ -123,22 +123,22 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainReverseProxy',                                         // Component name
-        display: i18n.templates.domainSections.reverseProxy.reverseProxy,   // Display name for tab
-        key: 'reverseProxy',                                                // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                         // Data the parent will present here
+        name: 'DomainReverseProxy',                                 // Component name
+        display: i18n.common.reverseProxy,                          // Display name for tab
+        key: 'reverseProxy',                                        // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                                   // Data delegated back to us from parent
+            data: Object,                                           // Data delegated back to us from parent
         },
         data () {
             return {
                 i18n,
             };
         },
-        computed: computedFromDefaults(defaults, 'reverseProxy'),           // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'reverseProxy'),   // Getters & setters for the delegated data
         watch: {
             // If the PHP or Python is enabled, the Reverse proxy will be forced off
             '$parent.$props.data': {

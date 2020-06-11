@@ -24,12 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as HTTPS } from './https';
-export { default as Security } from './security';
-export { default as PHP } from './php';
-export { default as Python } from './python';
-export { default as ReverseProxy } from './reverse_proxy';
-export { default as Performance } from './performance';
-export { default as Logging } from './logging';
-export { default as NGINX } from './nginx';
-export { default as Tools } from './tools';
+import common from '../../common';
+
+export default {
+    reverseProxyMustBeEnabledOnOneSite: `${common.reverseProxy} must be enabled on at least one site to configure global ${common.reverseProxyLower} settings.`,
+    seconds: 'seconds',
+};

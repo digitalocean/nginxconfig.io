@@ -27,10 +27,9 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    reverseProxy: 'Reverse proxy',
-    reverseProxyIsDisabled: 'Reverse proxy is disabled.',
-    reverseProxyCannotBeEnabledWithPhp: `Reverse proxy cannot be enabled whilst ${common.php} is enabled.`,
-    reverseProxyCannotBeEnabledWithPython: `Reverse proxy cannot be enabled whilst ${common.python} is enabled.`,
-    enableReverseProxy: `${common.enable} reverse proxy`,
+    reverseProxyIsDisabled: `${common.reverseProxy} is disabled.`,
+    reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy} cannot be enabled whilst ${common.php} is enabled.`,
+    reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy} cannot be enabled whilst ${common.python} is enabled.`,
+    enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
     path: 'Path',
 };

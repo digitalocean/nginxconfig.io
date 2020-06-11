@@ -40,4 +40,6 @@ export default {
 	magento: 'Magento',
 	django: 'Django',
 	logging: 'Logging',
+    reverseProxy: 'Reverse proxy',
+    reverseProxyLower: 'reverse proxy',
 };

@@ -200,7 +200,7 @@ export default (domain, domains, global) => {
             locConf.push(['include', 'nginxconfig.io/proxy.conf']);
         } else {
             // Unified
-            locConf.push(...Object.entries(proxyConf()));
+            locConf.push(...Object.entries(proxyConf(global)));
         }
 
         serverConfig.push(['# reverse proxy', '']);

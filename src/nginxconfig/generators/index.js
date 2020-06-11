@@ -70,7 +70,7 @@ export default (domains, global) => {
 
         // Reverse proxy
         if (domains.some(d => d.reverseProxy.reverseProxy.computed))
-            files['nginxconfig.io/proxy.conf'] = toConf(proxyConf());
+            files['nginxconfig.io/proxy.conf'] = toConf(proxyConf(global));
 
         // WordPress
         if (domains.some(d => d.php.wordPressRules.computed))

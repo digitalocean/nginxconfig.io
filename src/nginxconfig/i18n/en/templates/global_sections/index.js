@@ -30,7 +30,8 @@ import nginx from './nginx';
 import performance from './performance';
 import php from './php';
 import python from './python';
+import reverseProxy from './reverse_proxy';
 import security from './security';
 import tools from './tools';
 
-export default { https, logging, nginx, performance, php, python, security, tools };
+export default { https, logging, nginx, performance, php, python, reverseProxy, security, tools };

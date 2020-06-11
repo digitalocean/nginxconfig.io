@@ -24,12 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
+export default global => {
     const config = {};
 
     config.proxy_http_version = '1.1';
     config.proxy_cache_bypass = '$http_upgrade';
 
+    config['# Proxy headers'] = '';
     config['proxy_set_header Upgrade'] = '$http_upgrade';
     config['proxy_set_header Connection'] = '"upgrade"';
     config['proxy_set_header Host'] = '$host';
@@ -38,6 +39,11 @@ export default () => {
     config['proxy_set_header X-Forwarded-Proto'] = '$scheme';
     config['proxy_set_header X-Forwarded-Host'] = '$host';
     config['proxy_set_header X-Forwarded-Port'] = '$server_port';
+
+    config['# Proxy timeouts'] = '';
+    config['proxy_connect_timeout'] = global.reverseProxy.proxyConnectTimeout.computed;
+    config['proxy_send_timeout'] = global.reverseProxy.proxySendTimeout.computed;
+    config['proxy_read_timeout'] = global.reverseProxy.proxyReadTimeout.computed;
 
     // Done!
     return config;
