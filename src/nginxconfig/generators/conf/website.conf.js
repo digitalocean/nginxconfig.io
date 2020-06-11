@@ -207,20 +207,6 @@ export default (domain, domains, global) => {
         serverConfig.push([`location ${domain.reverseProxy.path.computed}`, locConf]);
     }
 
-    // PHP
-    if (domain.php.php.computed) {
-        serverConfig.push(['# handle .php', '']);
-
-        const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
-        if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
-            // Modularized
-            serverConfig.push([loc, { include: 'nginxconfig.io/php_fastcgi.conf' }]);
-        } else {
-            // Unified
-            serverConfig.push([loc, phpConf(domains, global)]);
-        }
-    }
-
     // Additional config
     if (global.tools.modularizedStructure.computed) {
         // Modularized
@@ -243,6 +229,20 @@ export default (domain, domains, global) => {
         if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
+    }
+
+    // PHP
+    if (domain.php.php.computed) {
+        serverConfig.push(['# handle .php', '']);
+
+        const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
+        if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
+            // Modularized
+            serverConfig.push([loc, { include: 'nginxconfig.io/php_fastcgi.conf' }]);
+        } else {
+            // Unified
+            serverConfig.push([loc, phpConf(domains, global)]);
+        }
     }
 
     // Add the server config to the parent config now its built
