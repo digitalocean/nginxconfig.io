@@ -33,7 +33,7 @@ export default global => {
     };
 
     config['# WordPress: deny wp-content, wp-includes php files'] = '';
-    config['~* ^/(?:wp-content|wp-includes)/.*\\.php$'] = {
+    config['location ~* ^/(?:wp-content|wp-includes)/.*\\.php$'] = {
         deny: 'all',
     };
 
