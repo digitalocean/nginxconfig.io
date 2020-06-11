@@ -224,6 +224,7 @@ THE SOFTWARE.
                     break;
 
                 case 'nodejs':
+                    this.$parent.setValue('php', 'php', false);
                     this.$parent.setValue('reverseProxy', 'reverseProxy', true);
                     this.$parent.setValue('routing', 'root', false);
                     break;
