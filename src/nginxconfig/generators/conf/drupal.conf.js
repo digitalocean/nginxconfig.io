@@ -34,7 +34,7 @@ export default global => {
         deny: 'all',
     };
 
-    config['# Allow image styles to be handled by the CMS.'] = '';
+    config['# Drupal: allow image styles to be handled by the CMS'] = '';
     config['location ~ ^/sites/[^/]+/files/styles/'] = {
         try_files: '$uri @rewrite',
     };
