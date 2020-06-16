@@ -28,8 +28,9 @@ export default global => {
     const config = {};
 
     config['# Drupal: deny private files'] = '';
-    config['location ~ ^/sites/.*/private/'] = {
+    config['location ~ ((^|/)\.|^.*\.yml$|^/sites/.*/private/|^/sites/[^/]+/[^/]*settings.*\.php$)'] = {
         deny: 'all',
+        return: '404',
     };
 
     config['# Drupal: deny php in files'] = '';
@@ -40,6 +41,11 @@ export default global => {
     config['# Drupal: deny php in vendor'] = '';
     config['location ~ /vendor/.*\\.php$'] = {
         deny: 'all',
+    };
+
+    config['# Drupal: allow image styles to be handled by the CMS'] = '';
+    config['location ~ ^/sites/[^/]+/files/styles/'] = {
+        try_files: '$uri /index.php?q=$uri&$args',
     };
 
     config['# Drupal: handle private files'] = '';
