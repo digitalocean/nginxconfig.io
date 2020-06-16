@@ -35,7 +35,7 @@ export default global => {
 
     config['# Drupal: allow image styles to be handled by the CMS'] = '';
     config['location ~ ^/sites/[^/]+/files/styles/'] = {
-        try_files: '$uri /index.php?q=$uri&$args;',
+        try_files: '$uri /index.php?q=$uri&$args',
     };
 
     config['# Drupal: handle private files'] = '';
