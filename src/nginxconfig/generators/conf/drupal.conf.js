@@ -28,7 +28,7 @@ export default global => {
     const config = {};
 
     config['# Drupal: deny private files'] = '';
-    config['location ~ ((^|/)\.|^.*\.yml$|^/sites/.*/private/|^/sites/[^/]+/[^/]*settings.*\.php$)'] = {
+    config['location ~ ((^|/)\\.|^.*\\.yml$|^/sites/.*/private/|^/sites/[^/]+/[^/]*settings.*\\.php$)'] = {
         deny: 'all',
         return: '404',
     };
