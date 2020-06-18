@@ -146,7 +146,7 @@ THE SOFTWARE.
 
                 // Convert it to base64 string
                 const b64 = btoa(String.fromCharCode(...contents));
-                return `echo '${b64}' | base64 --decode > ${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName}`;
+                return `echo '${b64}' | base64 --decode | tee ${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName} > /dev/null`;
             },
             setupCopy() {
                 const originalText = this.$refs.copyTar.textContent;
