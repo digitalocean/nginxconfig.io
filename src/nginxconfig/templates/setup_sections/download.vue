@@ -39,7 +39,7 @@ THE SOFTWARE.
                 <p>
                     {{ i18n.templates.setupSections.download.or }}
                     <b>
-                        <a @click="$parent.copyTar">
+                        <a ref="copyTar">
                             {{ i18n.templates.setupSections.download.copyBase64StringOfCompressedConfig }}</a>
                     </b>
                     <span v-html="i18n.templates.setupSections.download.pasteItInYourServersCommandLineAndExecute"></span>
@@ -93,6 +93,9 @@ THE SOFTWARE.
             return {
                 i18n,
             };
+        },
+        mounted() {
+            this.$parent.setupCopy(this.$refs.copyTar);
         },
     };
 </script>

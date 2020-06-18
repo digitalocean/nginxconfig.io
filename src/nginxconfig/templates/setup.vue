@@ -100,7 +100,7 @@ THE SOFTWARE.
             },
         },
         mounted() {
-            this.setupCopy();
+            this.setupCopy(this.$refs.copyTar);
         },
         methods: {
             tabClass(tab) {
@@ -148,27 +148,27 @@ THE SOFTWARE.
                 const b64 = btoa(String.fromCharCode(...contents));
                 return `echo '${b64}' | base64 --decode | tee ${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName} > /dev/null`;
             },
-            setupCopy() {
-                const originalText = this.$refs.copyTar.textContent;
+            setupCopy(elm) {
+                const originalText = elm.textContent;
 
                 const resetText = () => {
                     setTimeout(() => {
-                        this.$refs.copyTar.textContent = originalText;
+                        elm.textContent = originalText;
                     }, 5000);
                 };
 
-                const clipboard = new ClipboardJS(this.$refs.copyTar, {
+                const clipboard = new ClipboardJS(elm, {
                     text: this.copyTar,
                 });
 
                 clipboard.on('success', e => {
-                    this.$refs.copyTar.textContent = 'Copied';
+                    elm.textContent = 'Copied';
                     e.clearSelection();
                     resetText();
                 });
 
                 clipboard.on('error', () => {
-                    this.$refs.copyTar.textContent = 'Press Ctrl + C to copy';
+                    elm.textContent = 'Press Ctrl + C to copy';
                     resetText();
                 });
             },
