@@ -40,6 +40,7 @@ export default {
     quad9: 'Quad9',
     verisign: 'Verisign',
     letsEncryptWebroot: `${common.letsEncrypt} webroot`,
+    letsEncryptCertRoot: `${common.letsEncrypt} certificate directory`,
     mozillaModern: `${mozilla} Modern`,
     mozillaIntermediate: `${mozilla} Intermediate`,
     mozillaOld: `${mozilla} Old`,

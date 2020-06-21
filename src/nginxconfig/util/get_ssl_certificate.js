@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 export const getSslCertificate = (domain, global) => {
     if (domain.https.certType.computed === 'letsEncrypt')
-        `/etc/letsencrypt/live/${domain.server.domain.computed}/fullchain.pem`;
+        return `${global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '')}/${domain.server.domain.computed}/fullchain.pem`;
 
     if (domain.https.sslCertificate.computed)
         return domain.https.sslCertificate.computed;
@@ -36,7 +36,7 @@ export const getSslCertificate = (domain, global) => {
 
 export const getSslCertificateKey = (domain, global) => {
     if (domain.https.certType.computed === 'letsEncrypt')
-        `/etc/letsencrypt/live/${domain.server.domain.computed}/privkey.pem`;
+        return `${global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '')}/${domain.server.domain.computed}/privkey.pem`;
 
     if (domain.https.sslCertificateKey.computed)
         return domain.https.sslCertificateKey.computed;

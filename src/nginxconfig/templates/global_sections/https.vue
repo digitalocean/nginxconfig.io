@@ -194,6 +194,23 @@ THE SOFTWARE.
                     </div>
                 </div>
             </div>
+
+            <div v-if="letsEncryptCertRootEnabled" class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">{{ i18n.templates.globalSections.https.letsEncryptCertRoot }}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${letsEncryptCertRootChanged ? ' is-changed' : ''}`">
+                            <input v-model="letsEncryptCertRoot"
+                                   class="input"
+                                   type="text"
+                                   :placeholder="$props.data.letsEncryptCertRoot.default"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </template>
     </div>
 </template>
@@ -259,6 +276,10 @@ THE SOFTWARE.
         ocspVerisignType: clone(ipType),
         letsEncryptRoot: {
             default: '/var/www/_letsencrypt/',
+            enabled: true,
+        },
+        letsEncryptCertRoot: {
+            default: '/etc/letsencrypt/live/',
             enabled: true,
         },
     };

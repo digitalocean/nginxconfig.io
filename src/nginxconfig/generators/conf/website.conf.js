@@ -48,7 +48,7 @@ const sslConfig = (domain, global) => {
         // Let's encrypt
         if (domain.https.certType.computed === 'letsEncrypt')
             config.push(['ssl_trusted_certificate',
-                `/etc/letsencrypt/live/${domain.server.domain.computed}/chain.pem`]);
+                `${global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '')}/${domain.server.domain.computed}/chain.pem`]);
     }
     return config;
 };
