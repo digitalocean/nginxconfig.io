@@ -41,7 +41,7 @@ export default (domains, global) => {
     config.include = 'fastcgi_params';
 
     config['# fastcgi settings'] = '';
-    config.fastcgi_pass = domains.some(d => d.php.php.computed) && global.php.phpBackupServer
+    config.fastcgi_pass = domains.some(d => d.php.php.computed) && global.php.phpBackupServer.computed !== ''
         ? 'php'
         : ((global.php.phpServer.computed[0] === '/' ? 'unix:' : '') + global.php.phpServer.computed);
     config.fastcgi_index = 'index.php';
