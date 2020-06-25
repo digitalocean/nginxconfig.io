@@ -61,8 +61,7 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import tar from 'tarts';
-    import { zip as gzip } from 'gzip-js';
+    import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
     import i18n from '../i18n';
     import * as Sections from './setup_sections';
@@ -110,43 +109,26 @@ THE SOFTWARE.
                 return undefined;
             },
             tarContents() {
-                const data = [];
+                const data = {};
 
                 // Add all our config files to the tar
                 for (const fileName in this.$props.data.confFiles) {
                     if (!Object.prototype.hasOwnProperty.call(this.$props.data.confFiles, fileName)) continue;
-                    data.push({ name: fileName, content: this.$props.data.confFiles[fileName] });
+                    data[fileName] = { contents: this.$props.data.confFiles[fileName] };
 
                     // If symlinks are enabled and this is in sites-available, symlink to sites-enabled
                     if (this.$props.data.global.tools.symlinkVhost.computed && fileName.startsWith('sites-available'))
-                        data.push({
-                            name: fileName.replace(/^sites-available/, 'sites-enabled'),
-                            typeflag: '2',
-                            linkname: `../${fileName}`,
-                            content: '',
-                        });
+                        data[fileName.replace(/^sites-available/, 'sites-enabled')] = { target: `../${fileName}` };
                 }
 
-                return gzip(tar(data), { level: 9 });
+                return new Tar(data).gz();
             },
             downloadTar() {
-                // Get the config files as a compressed tar
-                const contents = this.tarContents();
-
-                // Convert it to a blob and download
-                const blob = new Blob([ Uint8Array.from(contents) ], { type: 'application/tar+gzip' });
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = this.tarName;
-                link.click();
+                this.tarContents().download(this.tarName);
             },
             copyTar() {
-                // Get the config files as a compressed tar
-                const contents = this.tarContents();
-
-                // Convert it to base64 string
-                const b64 = btoa(String.fromCharCode(...contents));
-                return `echo '${b64}' | base64 --decode | tee ${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName} > /dev/null`;
+                const path = `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName}`;
+                return this.tarContents().base64(path);
             },
             setupCopy(elm) {
                 const originalText = elm.textContent;
