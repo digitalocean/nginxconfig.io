@@ -100,7 +100,7 @@ THE SOFTWARE.
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
     import Header from 'do-vue/src/templates/header';
-    import diff from '../util/diff';
+    import diff from 'files-diff';
     import isChanged from '../util/is_changed';
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
@@ -213,12 +213,18 @@ THE SOFTWARE.
             },
             updateDiff(newConf, oldConf) {
                 // Calculate the diff & highlight after render
-                this.$data.confFilesOutput = Object.values(diff(newConf, oldConf)).map(conf => {
-                    const name = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${conf[0]}`;
+                const diffConf = diff(newConf, oldConf, {
+                    highlightFunction: value => `<mark>${value}</mark>`,
+                });
+                this.$data.confFilesOutput = Object.values(diffConf).map(({ name, content }) => {
+                    const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
+                    const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
+                    const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
+
                     return [
-                        name,
-                        conf[1],
-                        `${sha2_256(name)}-${sha2_256(conf[1])}`,
+                        confName,
+                        diffContent,
+                        `${sha2_256(confName)}-${sha2_256(diffContent)}`,
                     ];
                 });
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
