@@ -101,7 +101,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsSubdomains" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                includeSubDomains
+                                {{ i18n.templates.domainSections.https.enableIncludeSubDomains }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsPreload" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                preload
+                                {{ i18n.templates.domainSections.https.enablePreload }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -220,7 +220,7 @@ THE SOFTWARE.
             enabled: true,
         },
         hstsPreload: {
-            default: true,
+            default: false,
             enabled: true,
         },
         certType: {
