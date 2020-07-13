@@ -33,10 +33,10 @@ THE SOFTWARE.
             <template v-slot:header>
             </template>
             <template v-slot:buttons>
-                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumn = false">
+                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ i18n.templates.app.singleColumnMode }}
                 </a>
-                <a v-else class="button is-primary is-hidden-touch" @click="splitColumn = true">
+                <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
                     {{ i18n.templates.app.splitColumnMode }}
                 </a>
             </template>
@@ -161,6 +161,9 @@ THE SOFTWARE.
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
             importData(query, this.$data.domains, this.$data.global, this.$nextTick);
+
+            // Send an initial GA event for column mode
+            this.splitColumnEvent(false);
         },
         methods: {
             changes(index) {
@@ -228,6 +231,25 @@ THE SOFTWARE.
                     ];
                 });
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
+            },
+            splitColumnToggle() {
+                this.$data.splitColumn = !this.$data.splitColumn;
+                this.splitColumnEvent(true);
+            },
+            splitColumnEvent(interact) {
+                if (window.ga) {
+                    const tracker = window.ga.getAll()[0];
+                    if (tracker) {
+                        tracker.send({
+                            hitType: 'event',
+                            eventCategory: 'Button',
+                            eventAction: 'toggle',
+                            eventLabel: 'Split Column',
+                            eventValue: Number(this.$data.splitColumn),
+                            nonInteraction: !interact,
+                        });
+                    }
+                }
             },
         },
     };
