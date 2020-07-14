@@ -225,21 +225,36 @@ THE SOFTWARE.
                 this.$nextTick(() => this.checkChange(this.confFiles));
             },
             updateDiff(newConf, oldConf) {
-                // Calculate the diff & highlight after render
-                const diffConf = diff(newConf, oldConf, {
-                    highlightFunction: value => `<mark>${value}</mark>`,
-                });
-                this.$data.confFilesOutput = diffConf ? Object.values(diffConf).map(({ name, content }) => {
-                    const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
-                    const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
-                    const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
+                try {
+                    // Calculate the diff & highlight after render
+                    const diffConf = diff(newConf, oldConf, {
+                        highlightFunction: value => `<mark>${value}</mark>`,
+                    });
+                    this.$data.confFilesOutput = Object.values(diffConf).map(({ name, content }) => {
+                        const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
+                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
+                        const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
 
-                    return [
-                        confName,
-                        diffContent,
-                        `${sha2_256(confName)}-${sha2_256(diffContent)}`,
-                    ];
-                }) : [];
+                        return [
+                            confName,
+                            diffContent,
+                            `${sha2_256(confName)}-${sha2_256(diffContent)}`,
+                        ];
+                    });
+                } catch (e) {
+                    // If diff generation goes wrong, don't show any diff
+                    console.error(e);
+                    this.$data.confFilesOutput = Object.entries(newConf).map(([ name, content ]) => {
+                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${name}`;
+                        return [
+                            confName,
+                            content,
+                            `${sha2_256(confName)}-${sha2_256(content)}`,
+                        ];
+                    });
+                }
+
+                // Once rendered, begin looking for changes again
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
             splitColumnToggle() {
