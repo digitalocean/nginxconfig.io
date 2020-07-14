@@ -64,6 +64,7 @@ THE SOFTWARE.
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
     import i18n from '../i18n';
+    import analytics from '../util/analytics';
     import * as Sections from './setup_sections';
 
     const tabs = Object.values(Sections);
@@ -124,9 +125,11 @@ THE SOFTWARE.
                 return new Tar(data).gz();
             },
             downloadTar() {
+                analytics('download_tar', 'Download', this.tarName);
                 this.tarContents().download(this.tarName);
             },
             copyTar() {
+                analytics('download_base64', 'Download', this.tarName);
                 const path = `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName}`;
                 return this.tarContents().base64(path);
             },

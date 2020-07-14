@@ -101,11 +101,15 @@ THE SOFTWARE.
     import escape from 'escape-html';
     import Header from 'do-vue/src/templates/header';
     import diff from 'files-diff';
+
     import isChanged from '../util/is_changed';
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
+    import analytics from '../util/analytics';
+
     import i18n from '../i18n';
     import generators from '../generators';
+
     import Domain from './domain';
     import Global from './global';
     import Setup from './setup';
@@ -163,7 +167,7 @@ THE SOFTWARE.
             importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Send an initial GA event for column mode
-            this.splitColumnEvent(false);
+            this.splitColumnEvent();
         },
         methods: {
             changes(index) {
@@ -191,10 +195,16 @@ THE SOFTWARE.
                 // Store
                 this.$data.domains.push(data);
                 this.$data.active = this.$data.domains.length - 1;
+
+                // GA
+                analytics('add_site', 'Sites', undefined, this.activeDomains.length);
             },
             remove(index) {
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
+
+                // GA
+                analytics('remove_site', 'Sites', undefined, this.activeDomains.length);
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
@@ -219,7 +229,7 @@ THE SOFTWARE.
                 const diffConf = diff(newConf, oldConf, {
                     highlightFunction: value => `<mark>${value}</mark>`,
                 });
-                this.$data.confFilesOutput = Object.values(diffConf).map(({ name, content }) => {
+                this.$data.confFilesOutput = diffConf ? Object.values(diffConf).map(({ name, content }) => {
                     const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
                     const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
                     const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
@@ -229,27 +239,15 @@ THE SOFTWARE.
                         diffContent,
                         `${sha2_256(confName)}-${sha2_256(diffContent)}`,
                     ];
-                });
+                }) : [];
                 this.$nextTick(() => this.$data.confWatcherWaiting = false);
             },
             splitColumnToggle() {
                 this.$data.splitColumn = !this.$data.splitColumn;
-                this.splitColumnEvent(true);
+                this.splitColumnEvent();
             },
-            splitColumnEvent(interact) {
-                if (window.ga) {
-                    const tracker = window.ga.getAll()[0];
-                    if (tracker) {
-                        tracker.send({
-                            hitType: 'event',
-                            eventCategory: 'Button',
-                            eventAction: 'toggle',
-                            eventLabel: 'Split Column',
-                            eventValue: Number(this.$data.splitColumn),
-                            nonInteraction: !interact,
-                        });
-                    }
-                }
+            splitColumnEvent() {
+                analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn));
             },
         },
     };

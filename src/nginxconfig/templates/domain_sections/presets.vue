@@ -56,6 +56,8 @@ THE SOFTWARE.
     import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import analytics from '../../util/analytics';
+    import camelToSnake from '../../util/camel_to_snake';
 
     const defaults = {
         frontend: {
@@ -190,6 +192,7 @@ THE SOFTWARE.
             setPreset(key) {
                 // Set that we're using this preset
                 Object.keys(this.$props.data).forEach(preset => this[preset] = preset === key);
+                analytics(`apply_${camelToSnake(key)}`, 'Presets');
 
                 // Restore some specific defaults first
                 this.$parent.resetValue('server', 'domain');
