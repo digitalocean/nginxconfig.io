@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// sass-lint:disable class-name-format
+// sass-lint:disable-block class-name-format
 .v-select {
   &.vs--open {
     > ul {
@@ -80,4 +80,3 @@ THE SOFTWARE.
     }
   }
 }
-// sass-lint:enable class-name-format

@@ -149,12 +149,18 @@ THE SOFTWARE.
   padding: .25rem .5rem;
 
   .pretty {
+    line-height: 1.25;
+    white-space: initial;
+
     &.p-icon {
       font-size: 18px;
       margin: 0;
 
       .state {
         .icon {
+          top: 50%;
+          transform: translateY(-50%);
+
           &::before {
             color: $panel;
             font-size: 14px;
@@ -170,6 +176,8 @@ THE SOFTWARE.
           &::before,
           &::after {
             font-size: 18px;
+            top: 50%;
+            transform: translateY(-50%);
           }
         }
       }
