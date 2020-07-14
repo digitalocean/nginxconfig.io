@@ -151,6 +151,7 @@ THE SOFTWARE.
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import shareQuery from '../../util/share_query';
+    import analytics from '../../util/analytics';
 
     const defaults = {
         modularizedStructure: {
@@ -244,6 +245,7 @@ THE SOFTWARE.
                     'Reset global config',
                     'Are you sure you want to reset all configuration options in the global config section?',
                     () => {
+                        analytics('reset_global', 'Reset');
                         Object.values(this.$parent.$props.data).forEach(category => {
                             Object.values(category).forEach(property => {
                                 property.value = property.default;
@@ -261,7 +263,10 @@ THE SOFTWARE.
                 this.confirm(
                     'Reset domain config',
                     `Are you sure you want to reset all configuration options for the ${domain.server.domain.computed} domain?`,
-                    () => this.doResetDomain(domain),
+                    () => {
+                        analytics('reset_domain', 'Reset', domain.server.domain.computed);
+                        this.doResetDomain(domain);
+                    },
                 );
             },
             removeDomain(index) {
@@ -272,7 +277,16 @@ THE SOFTWARE.
                 this.confirm(
                     'Remove domain',
                     `Are you sure you want to remove the ${domain.server.domain.computed} domain configuration?`,
-                    () => this.doRemoveDomain(index),
+                    () => {
+                        analytics(
+                            'remove_domain',
+                            'Remove',
+                            domain.server.domain.computed,
+                            this.$parent.$parent.activeDomains.length - 1,
+                        );
+
+                        this.doRemoveDomain(index);
+                    },
                 );
             },
             resetDomains() {
@@ -280,6 +294,13 @@ THE SOFTWARE.
                     'Reset all domain configs',
                     'Are you sure you want to reset the configuration of ALL domains?',
                     () => {
+                        analytics(
+                            'reset_all',
+                            'Reset',
+                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed).join(','),
+                            this.$parent.$parent.activeDomains.length,
+                        );
+
                         for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
                             this.doResetDomain(this.$parent.$parent.$data.domains[i]);
                         }
@@ -291,6 +312,13 @@ THE SOFTWARE.
                     'Remove all domains',
                     'Are you sure you want to remove ALL domain configurations?',
                     () => {
+                        analytics(
+                            'remove_all',
+                            'Remove',
+                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed).join(','),
+                            this.$parent.$parent.activeDomains.length,
+                        );
+
                         for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
                             this.doRemoveDomain(i);
                         }

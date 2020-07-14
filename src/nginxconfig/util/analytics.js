@@ -25,30 +25,27 @@ THE SOFTWARE.
 */
 
 export default (action, category, label, value) => {
-    console.log({
-        eventCategory: category,
-        eventAction: action,
-        eventLabel: label,
-        eventValue: value,
-    });
+    try {
+        // gtag.js
+        if (window.gtag) {
+            return window.gtag('event', action, {
+                event_category: category,
+                event_label: label,
+                value,
+            });
+        }
 
-    // gtag.js
-    if (window.gtag) {
-        return window.gtag('event', action, {
-            event_category: category,
-            event_label: label,
-            value,
-        });
-    }
-
-    // analytics.js
-    if (window.ga) {
-        return window.ga('send', {
-            hitType: 'event',
-            eventCategory: category,
-            eventAction: action,
-            eventLabel: label,
-            eventValue: value,
-        });
+        // analytics.js
+        if (window.ga) {
+            return window.ga('send', {
+                hitType: 'event',
+                eventCategory: category,
+                eventAction: action,
+                eventLabel: label,
+                eventValue: value,
+            });
+        }
+    } catch (_) {
+        // If analytics fail, don't block anything else
     }
 };
