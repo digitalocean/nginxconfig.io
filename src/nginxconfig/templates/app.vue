@@ -167,7 +167,7 @@ THE SOFTWARE.
             importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Send an initial GA event for column mode
-            this.splitColumnEvent();
+            this.splitColumnEvent(true);
         },
         methods: {
             changes(index) {
@@ -261,8 +261,8 @@ THE SOFTWARE.
                 this.$data.splitColumn = !this.$data.splitColumn;
                 this.splitColumnEvent();
             },
-            splitColumnEvent() {
-                analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn));
+            splitColumnEvent(nonInteraction = false) {
+                analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn), nonInteraction);
             },
         },
     };

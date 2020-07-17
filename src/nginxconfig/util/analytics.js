@@ -24,16 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default (action, category, label, value) => {
+export default (action, category, label, value, nonInteraction = false) => {
     try {
         // gtag.js
-        if (window.gtag) {
-            return window.gtag('event', action, {
-                event_category: category,
-                event_label: label,
-                value,
-            });
-        }
+        // if (window.gtag) {
+        //     return window.gtag('event', action, {
+        //         event_category: category,
+        //         event_label: label,
+        //         value,
+        //     });
+        // }
 
         // analytics.js
         if (window.ga) {
@@ -43,6 +43,7 @@ export default (action, category, label, value) => {
                 eventAction: action,
                 eventLabel: label,
                 eventValue: value,
+                nonInteraction,
             });
         }
     } catch (_) {
