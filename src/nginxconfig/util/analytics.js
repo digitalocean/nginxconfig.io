@@ -26,18 +26,9 @@ THE SOFTWARE.
 
 export default (action, category, label, value, nonInteraction = false) => {
     try {
-        // gtag.js
-        // if (window.gtag) {
-        //     return window.gtag('event', action, {
-        //         event_category: category,
-        //         event_label: label,
-        //         value,
-        //     });
-        // }
-
-        // analytics.js
-        if (window.ga) {
-            return window.ga('send', {
+        const tracker = window.ga.getAll()[0];
+        if (tracker) {
+            tracker.send({
                 hitType: 'event',
                 eventCategory: category,
                 eventAction: action,
@@ -49,4 +40,33 @@ export default (action, category, label, value, nonInteraction = false) => {
     } catch (_) {
         // If analytics fail, don't block anything else
     }
+
+    /*try {
+        // gtag.js
+        if (window.gtag) {
+            window.gtag('event', action, {
+                event_category: category,
+                event_label: label,
+                value,
+            });
+        }
+    } catch (_) {
+        // If analytics fail, don't block anything else
+    }*/
+
+    /*try {
+        // analytics.js
+        if (window.ga) {
+            window.ga('send', {
+                hitType: 'event',
+                eventCategory: category,
+                eventAction: action,
+                eventLabel: label,
+                eventValue: value,
+                nonInteraction,
+            });
+        }
+    } catch (_) {
+        // If analytics fail, don't block anything else
+    }*/
 };
