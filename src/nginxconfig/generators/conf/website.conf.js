@@ -315,6 +315,8 @@ export default (domain, domains, global) => {
         const redirectConfig = [];
 
         redirectConfig.push(...httpListen(domain));
+        redirectConfig.push(['server_name',
+            `${domain.server.redirectSubdomains.computed ? '.' : ''}${domain.server.domain.computed}`]);
 
         if (domain.https.certType.computed === 'letsEncrypt') {
             // Let's encrypt
