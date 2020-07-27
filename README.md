@@ -13,7 +13,7 @@
 <p align="center">
     The only tool you'll ever need to configure your NGINX server.
     <br />
-    <a href="do.co/nginxconfig"><strong>do.co/nginxconfig »</strong></a>
+    <a href="https://do.co/nginxconfig"><strong>do.co/nginxconfig »</strong></a>
     <br />
     <br />
     <a href="https://github.com/digitalocean/nginxconfig.io/issues/new?template=report-a-bug.md">Report a bug</a>
