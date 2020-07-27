@@ -7,7 +7,7 @@
 [![Open issues](https://img.shields.io/github/issues-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/issues)
 [![Open PR](https://img.shields.io/github/issues-pr-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/pulls)
 
-[![nginxconfig](src/static/github.png)](https://do.co/nginxconfig)
+[![nginxconfig](src/static/banner.png)](https://do.co/nginxconfig)
 
 <h3 align="center">⚙️ NGINX configuration generator on steroids 💉</h3>
 <p align="center">
