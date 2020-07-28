@@ -7,13 +7,13 @@
 [![Open issues](https://img.shields.io/github/issues-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/issues)
 [![Open PR](https://img.shields.io/github/issues-pr-raw/digitalocean/nginxconfig.io.svg)](https://github.com/digitalocean/nginxconfig.io/pulls)
 
-[![nginxconfig.io](src/static/github.png)](https://nginxconfig.io)
+[![nginxconfig](src/static/banner.png)](https://do.co/nginxconfig)
 
 <h3 align="center">⚙️ NGINX configuration generator on steroids 💉</h3>
 <p align="center">
     The only tool you'll ever need to configure your NGINX server.
     <br />
-    <a href="https://nginxconfig.io"><strong>nginxconfig.io »</strong></a>
+    <a href="https://do.co/nginxconfig"><strong>do.co/nginxconfig »</strong></a>
     <br />
     <br />
     <a href="https://github.com/digitalocean/nginxconfig.io/issues/new?template=report-a-bug.md">Report a bug</a>
@@ -23,7 +23,7 @@
 
 <br />
 
-# ✨ [nginxconfig.io](https://nginxconfig.io)
+# ✨ [NGINX Config](do.co/nginxconfig)
 
 NGINX is so much more than just a webserver. You already knew that, probably.
 
@@ -44,7 +44,7 @@ use-case** (and in parallel you can still use the docs).
 
 ## 🚀 Usage
 
-`GOTO` **[`nginxconfig.io`](https://nginxconfig.io)**
+`GOTO` **[`do.co/nginxconfig`](do.co/nginxconfig)**
 
 **Features:**
 HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolvers, caching, gzip, brotli, fallback
