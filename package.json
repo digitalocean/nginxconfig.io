@@ -47,7 +47,7 @@
     "files-diff": "0.0.3",
     "memory-tar-create": "0.0.2",
     "pretty-checkbox-vue": "^1.1.9",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "qs": "^6.9.4",
     "simple-js-sha2-256": "^1.0.7",
     "string-similarity": "^4.0.1",
