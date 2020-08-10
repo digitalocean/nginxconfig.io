@@ -44,7 +44,7 @@ use-case** (and in parallel you can still use the docs).
 
 ## 🚀 Usage
 
-`GOTO` **[`do.co/nginxconfig`](do.co/nginxconfig)**
+`GOTO` **[`do.co/nginxconfig`](https://do.co/nginxconfig)**
 
 **Features:**
 HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolvers, caching, gzip, brotli, fallback
