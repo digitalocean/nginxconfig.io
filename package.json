@@ -51,20 +51,20 @@
     "qs": "^6.9.4",
     "simple-js-sha2-256": "^1.0.7",
     "string-similarity": "^4.0.2",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-select": "^3.10.8"
   },
   "devDependencies": {
-    "@vue/cli-service": "^4.5.3",
+    "@vue/cli-service": "^4.5.4",
     "copyfiles": "^2.3.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.10",
     "sass-lint": "^1.13.1",
-    "sass-lint-auto-fix": "^0.21.0",
-    "sass-loader": "^9.0.3",
-    "vue-template-compiler": "^2.6.11",
+    "sass-lint-auto-fix": "^0.21.2",
+    "sass-loader": "^10.0.2",
+    "vue-template-compiler": "^2.6.12",
     "webpack-bundle-analyzer": "^3.8.0"
   }
 }
