@@ -33,3 +33,4 @@ export { default as Performance } from './performance';
 export { default as Logging } from './logging';
 export { default as NGINX } from './nginx';
 export { default as Tools } from './tools';
+export { default as Docker } from './docker';

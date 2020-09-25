@@ -48,7 +48,7 @@ const longestKey = items => {
     return longest;
 };
 
-const recurse = (entriesOrObject, depth) => {
+const recurse = (entriesOrObject, depth, endLine = ';') => {
     // Support an object or kv array entries
     // Convert to entries if given an object
     const entries = isObject(entriesOrObject) ? Object.entries(entriesOrObject) : entriesOrObject;
@@ -97,12 +97,18 @@ const recurse = (entriesOrObject, depth) => {
         // Work through each item in the array
         val.forEach(subVal => {
             const val = subVal.toString();
-            retVal += indent + (item[0] + keyValIndent + val).trim() + (item[0].startsWith('#') ? '' : ';') + '\n';
+            retVal += indent + (item[0] + keyValIndent + val).trim() + (item[0].startsWith('#') ? '' : endLine) + '\n';
         });
     }
 
     return retVal;
 };
+
+export function dockerToConf(entriesOrObject) {
+    let conf = recurse(entriesOrObject, 0, '');
+
+    return conf.trim();
+}
 
 export default entriesOrObject => {
     // Generate the conf
