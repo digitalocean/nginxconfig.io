@@ -1,4 +1,4 @@
-name: Test and Deploy to DigitalOcean Spaces
+name: Test and deploy to DigitalOcean Spaces
 
 on: push
 
@@ -18,11 +18,11 @@ jobs:
       with:
         node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-    - name: npm ci, test, and build
-      run: |
-        npm ci
-        npm test
-        npm run build
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build tool
+      run: npm run build
 
     - name: Deploy commit to DigitalOcean Spaces
       run: aws s3 sync ./dist s3://${{ secrets.SPACES_BUCKET }}/commits/nginxconfig/${{ github.sha }} --endpoint=https://${{ secrets.SPACES_REGION }}.digitaloceanspaces.com --acl public-read --content-encoding utf8
