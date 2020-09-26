@@ -18,12 +18,12 @@
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "analyze": "npm run build:tool -- --analyze",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
-    "test": "npm run test:eslint && npm run test:scss",
-    "test:fix": "npm run test:eslint:fix && npm run test:scss:fix",
+    "test": "npm run test:eslint && npm run test:sass-lint",
+    "test:fix": "npm run test:eslint:fix && npm run test:sass-lint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
-    "test:scss": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
-    "test:scss:fix": "sass-lint-auto-fix 'src/**/*.scss'"
+    "test:sass-lint": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
+    "test:sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss'"
   },
   "repository": {
     "type": "git",
