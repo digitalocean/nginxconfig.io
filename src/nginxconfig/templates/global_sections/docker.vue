@@ -76,22 +76,5 @@ THE SOFTWARE.
             };
         },
         computed: computedFromDefaults(defaults, 'docker'), // Getters & setters for the delegated data
-        watch: {
-            // Enable Docker server settings if any site uses Docker
-            '$parent.$parent.$data.domains': {
-                handler(data) {
-                    for (const domain of data) {
-                        if (domain && domain.docker && domain.docker.docker && domain.docker.docker.computed) {
-                            this.$props.data.dockerfile.enabled = true;
-                            this.$props.data.dockerfile.computed = this.$props.data.dockerfile.value;
-                            return;
-                        }
-                    }
-                    this.$props.data.dockerfile.enabled = false;
-                    this.$props.data.dockerfile.computed = '';
-                },
-                deep: true,
-            },
-        },
     };
 </script>
