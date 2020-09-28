@@ -25,12 +25,6 @@ THE SOFTWARE.
 */
 
 export default () => {
-    const config = {};
-
-    config['FROM nginx:latest'] = '';
-
-    config['COPY . /etc/nginx/'] = '';
-
-    // Done!
-    return config;
+    return 'FROM nginx:latest\nCOPY . /etc/nginx/';
 };
+

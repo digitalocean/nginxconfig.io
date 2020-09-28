@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import toConf, {dockerToConf} from './to_conf';
+import toConf from './to_conf';
 import nginxConf from './conf/nginx.conf';
 import websiteConf from './conf/website.conf';
 import letsEncryptConf from './conf/letsencrypt.conf';
@@ -36,7 +36,7 @@ import proxyConf from './conf/proxy.conf';
 import wordPressConf from './conf/wordpress.conf';
 import drupalConf from './conf/drupal.conf';
 import magentoConf from './conf/magento.conf';
-import dockerConf from './conf/docker.conf';
+import dockerConf from './ext/docker';
 
 export default (domains, global) => {
     const files = {};
@@ -45,8 +45,8 @@ export default (domains, global) => {
     files['nginx.conf'] = toConf(nginxConf(domains, global));
 
     // Dockerfile
-    if (global.docker.dockerServer.computed)
-        files['Dockerfile'] = dockerToConf(dockerConf());
+    if (global.docker.dockerfile.computed)
+        files['Dockerfile'] = dockerConf();
 
     // Modularised configs
     if (global.tools.modularizedStructure.computed) {

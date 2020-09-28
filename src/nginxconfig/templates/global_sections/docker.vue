@@ -28,15 +28,15 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.docker.dockerServer }}</label>
+                <label class="label">{{ i18n.common.docker }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${dockerServerChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${dockerfileChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="dockerServer" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="dockerfile" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.docker.dockerServer }}
+                                {{ i18n.templates.globalSections.docker.dockerfile }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ THE SOFTWARE.
     import PrettyCheck from 'pretty-checkbox-vue/check';
 
     const defaults = {
-        dockerServer: {
+        dockerfile: {
             default: false,
             enabled: false,
         },
@@ -82,13 +82,13 @@ THE SOFTWARE.
                 handler(data) {
                     for (const domain of data) {
                         if (domain && domain.docker && domain.docker.docker && domain.docker.docker.computed) {
-                            this.$props.data.dockerServer.enabled = true;
-                            this.$props.data.dockerServer.computed = this.$props.data.dockerServer.value;
+                            this.$props.data.dockerfile.enabled = true;
+                            this.$props.data.dockerfile.computed = this.$props.data.dockerfile.value;
                             return;
                         }
                     }
-                    this.$props.data.dockerServer.enabled = false;
-                    this.$props.data.dockerServer.computed = '';
+                    this.$props.data.dockerfile.enabled = false;
+                    this.$props.data.dockerfile.computed = '';
                 },
                 deep: true,
             },

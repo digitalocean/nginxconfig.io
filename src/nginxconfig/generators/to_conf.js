@@ -104,12 +104,6 @@ const recurse = (entriesOrObject, depth, endLine = ';') => {
     return retVal;
 };
 
-export function dockerToConf(entriesOrObject) {
-    let conf = recurse(entriesOrObject, 0, '');
-
-    return conf.trim();
-}
-
 export default entriesOrObject => {
     // Generate the conf
     let conf = recurse(entriesOrObject, 0);

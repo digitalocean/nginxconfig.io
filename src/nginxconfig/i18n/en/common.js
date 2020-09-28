@@ -35,7 +35,7 @@ export default {
 	https: 'HTTPS',
 	letsEncrypt: 'Let\'s Encrypt',
 	python: 'Python',
-	docker: 'Docker',
+	docker: 'Dockerfile',
 	wordPress: 'WordPress',
 	drupal: 'Drupal',
 	magento: 'Magento',
