@@ -97,7 +97,7 @@ const recurse = (entriesOrObject, depth) => {
         // Work through each item in the array
         val.forEach(subVal => {
             const val = subVal.toString();
-            retVal += indent + (item[0] + keyValIndent + val).trim() + (item[0].startsWith('#') ? '' : endLine) + '\n';
+            retVal += indent + (item[0] + keyValIndent + val).trim() + (item[0].startsWith('#') ? '' : ';') + '\n';
         });
     }
 
