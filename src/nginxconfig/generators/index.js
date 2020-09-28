@@ -85,7 +85,7 @@ export default (domains, global) => {
         if (domains.some(d => d.php.drupalRules.computed))
             files['nginxconfig.io/drupal.conf'] = toConf(drupalConf(global));
 
-        // Drupal
+        // Magento
         if (domains.some(d => d.php.magentoRules.computed))
             files['nginxconfig.io/magento.conf'] = toConf(magentoConf());
 
