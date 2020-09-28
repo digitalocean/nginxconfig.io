@@ -27,5 +27,5 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    dockerfile: `Include ${common.docker} to run nginx with Docker`,
+    dockerfile: `Include Dockerfile to run nginx with ${common.docker}`,
 };
