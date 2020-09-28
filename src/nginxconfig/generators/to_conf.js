@@ -48,7 +48,7 @@ const longestKey = items => {
     return longest;
 };
 
-const recurse = (entriesOrObject, depth, endLine = ';') => {
+const recurse = (entriesOrObject, depth) => {
     // Support an object or kv array entries
     // Convert to entries if given an object
     const entries = isObject(entriesOrObject) ? Object.entries(entriesOrObject) : entriesOrObject;
