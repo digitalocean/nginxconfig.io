@@ -38,7 +38,9 @@ export default (domains, global) => {
 
     // Basic nginx conf
     config.user = global.nginx.user.computed;
-    config.pid = global.nginx.pid.computed;
+    // Does not set pid if it is not set
+    if(global.nginx.pid.computed)
+        config.pid = global.nginx.pid.computed;
     config.worker_processes = global.nginx.workerProcesses.computed;
     config.worker_rlimit_nofile = 65535;
     config.events = {
