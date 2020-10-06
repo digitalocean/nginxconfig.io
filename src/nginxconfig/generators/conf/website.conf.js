@@ -136,6 +136,18 @@ export default (domain, domains, global) => {
         serverConfig.push(...securityConf(domains, global));
     }
 
+    // Restrict Methods
+    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed)) {
+        const allowedKeys = Object.keys(domain.restrict)
+                                .filter(k => !domain.restrict[k].computed)
+                                .map(e => e.replace('Method', '').toUpperCase());
+
+        serverConfig.push(['# restrict Methods', '']);
+        serverConfig.push(['location /', {
+            limit_except: `${allowedKeys.join(' ')} { deny all; }`,
+        }]);
+    }
+
     // Access log or error log for domain
     if (domain.logging.accessLog.computed || domain.logging.errorLog.computed) {
         serverConfig.push(['# logging', '']);

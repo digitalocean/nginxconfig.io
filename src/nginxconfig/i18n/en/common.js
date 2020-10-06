@@ -42,4 +42,5 @@ export default {
 	logging: 'Logging',
     reverseProxy: 'Reverse proxy',
     reverseProxyLower: 'reverse proxy',
+    restrict: 'Restrict',
 };
