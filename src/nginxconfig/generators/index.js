@@ -36,12 +36,17 @@ import proxyConf from './conf/proxy.conf';
 import wordPressConf from './conf/wordpress.conf';
 import drupalConf from './conf/drupal.conf';
 import magentoConf from './conf/magento.conf';
+import dockerConf from './ext/docker';
 
 export default (domains, global) => {
     const files = {};
 
     // Base nginx config
     files['nginx.conf'] = toConf(nginxConf(domains, global));
+
+    // Dockerfile
+    if (global.docker.dockerfile.computed)
+        files['Dockerfile'] = dockerConf();
 
     // Modularised configs
     if (global.tools.modularizedStructure.computed) {

@@ -33,5 +33,6 @@ import python from './python';
 import reverseProxy from './reverse_proxy';
 import security from './security';
 import tools from './tools';
+import docker from './docker';
 
-export default { https, logging, nginx, performance, php, python, reverseProxy, security, tools };
+export default { https, logging, nginx, performance, php, python, reverseProxy, security, tools, docker };

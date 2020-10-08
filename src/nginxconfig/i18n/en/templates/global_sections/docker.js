@@ -24,23 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-	back: 'Back',
-	next: 'Next',
-	enable: 'enable',
-	php: 'PHP',
-	ssl: 'SSL',
-	nginx: 'NGINX',
-	http: 'HTTP',
-	https: 'HTTPS',
-	letsEncrypt: 'Let\'s Encrypt',
-	python: 'Python',
-	docker: 'Docker',
-	wordPress: 'WordPress',
-	drupal: 'Drupal',
-	magento: 'Magento',
-	django: 'Django',
-	logging: 'Logging',
-    reverseProxy: 'Reverse proxy',
-    reverseProxyLower: 'reverse proxy',
+    dockerfile: `Include Dockerfile to run nginx with ${common.docker}`,
 };
