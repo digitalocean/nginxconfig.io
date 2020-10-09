@@ -28,4 +28,5 @@ import common from '../../common';
 
 export default {
     dockerfile: `Include Dockerfile to run nginx with ${common.docker}`,
+    dockerCompose: 'Include docker-compose to run nginx with docker-compose',
 };
