@@ -142,9 +142,9 @@ export default (domain, domains, global) => {
                                 .filter(k => !domain.restrict[k].computed)
                                 .map(e => e.replace('Method', '').toUpperCase());
 
-        serverConfig.push(['# restrict Methods', '']);
-        serverConfig.push(['location /', {
-            limit_except: `${allowedKeys.join(' ')} { deny all; }`,
+        serverConfig.push(['# restrict methods', '']);
+        serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
+            'return': '444',
         }]);
     }
 
