@@ -25,6 +25,7 @@ THE SOFTWARE.
 */
 
 import toConf from './to_conf';
+import toYaml from './to_yaml';
 import nginxConf from './conf/nginx.conf';
 import websiteConf from './conf/website.conf';
 import letsEncryptConf from './conf/letsencrypt.conf';
@@ -36,6 +37,7 @@ import proxyConf from './conf/proxy.conf';
 import wordPressConf from './conf/wordpress.conf';
 import drupalConf from './conf/drupal.conf';
 import magentoConf from './conf/magento.conf';
+import dockerComposeYaml from './yaml/dockerCompose.yaml';
 import dockerConf from './ext/docker';
 
 export default (domains, global) => {
@@ -47,6 +49,9 @@ export default (domains, global) => {
     // Dockerfile
     if (global.docker.dockerfile.computed)
         files['Dockerfile'] = dockerConf();
+
+    if (global.docker.dockerCompose.computed)
+        files['docker-compose.yaml'] = toYaml(dockerComposeYaml());
 
     // Modularised configs
     if (global.tools.modularizedStructure.computed) {

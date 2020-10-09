@@ -43,6 +43,23 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+        <div v-if="dockerfile" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.common.dockerCompose }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${dockerComposeChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="dockerCompose" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.docker.dockerCompose }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -54,6 +71,10 @@ THE SOFTWARE.
 
     const defaults = {
         dockerfile: {
+            default: false,
+            enabled: false,
+        },
+        dockerCompose: {
             default: false,
             enabled: false,
         },
@@ -76,5 +97,20 @@ THE SOFTWARE.
             };
         },
         computed: computedFromDefaults(defaults, 'docker'), // Getters & setters for the delegated data
+        watch:{
+            // Disable docker-compose if dockerfile is disabled
+            '$props.data.dockerfile': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.dockerCompose.enabled = true;
+                        this.$props.data.dockerCompose.computed = this.$props.data.dockerCompose.value;
+                    } else {
+                        this.$props.data.dockerCompose.enabled = false;
+                        this.$props.data.dockerCompose.computed = false;
+                    }
+                },
+                deep: true,
+            },
+        },
     };
 </script>
