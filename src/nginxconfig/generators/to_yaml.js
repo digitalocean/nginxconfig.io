@@ -26,6 +26,6 @@ THE SOFTWARE.
 
 const yaml = require('js-yaml');
 
-export default dockerComposeYaml => {
-    return yaml.safeDump(dockerComposeYaml);
+export default yamlConf => {
+    return yaml.safeDump(yamlConf);
 };
