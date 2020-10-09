@@ -72,7 +72,7 @@ THE SOFTWARE.
     const defaults = {
         dockerfile: {
             default: false,
-            enabled: false,
+            enabled: true,
         },
         dockerCompose: {
             default: false,
@@ -97,7 +97,7 @@ THE SOFTWARE.
             };
         },
         computed: computedFromDefaults(defaults, 'docker'), // Getters & setters for the delegated data
-        watch:{
+        watch: {
             // Disable docker-compose if dockerfile is disabled
             '$props.data.dockerfile': {
                 handler(data) {
