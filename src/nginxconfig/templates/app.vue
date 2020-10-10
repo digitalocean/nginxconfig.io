@@ -80,12 +80,15 @@ THE SOFTWARE.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
                     <h2>{{ i18n.templates.app.configFiles }}</h2>
                     <div ref="files" class="columns is-multiline files">
-                        <NginxPrism v-for="confContents in confFilesOutput"
-                                    :key="confContents[2]"
-                                    :name="confContents[0]"
-                                    :conf="confContents[1]"
-                                    :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
-                        ></NginxPrism>
+                        <template v-for="confContents in confFilesOutput">
+                            <component
+                                :is="getPrismComponent(confContents[0])"
+                                :key="confContents[2]"
+                                :name="confContents[0]"
+                                :conf="confContents[1]"
+                                :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
+                            ></component>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -113,8 +116,9 @@ THE SOFTWARE.
     import Domain from './domain';
     import Global from './global';
     import Setup from './setup';
-    import NginxPrism from './prism/nginx';
     import Footer from './footer';
+
+    import NginxPrism from './prism/nginx';
 
     export default {
         name: 'App',
@@ -125,6 +129,8 @@ THE SOFTWARE.
             Global,
             Setup,
             NginxPrism,
+            'YamlPrism': () => import('./prism/yaml'),
+            'DockerPrism': () => import('./prism/docker'),
         },
         data() {
             return {
@@ -263,6 +269,17 @@ THE SOFTWARE.
             },
             splitColumnEvent(nonInteraction = false) {
                 analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn), nonInteraction);
+            },
+            getPrismComponent(confName)
+            {
+                switch (confName) {
+                case '/etc/nginx/Dockerfile':
+                    return 'DockerPrism';
+                case '/etc/nginx/docker-compose.yaml':
+                    return 'YamlPrism';
+                default:
+                    return 'NginxPrism';
+                }
             },
         },
     };

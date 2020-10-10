@@ -1,4 +1,4 @@
-/*
+<!--
 Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,30 +22,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+-->
 
-const path = require('path');
-const { LimitChunkCountPlugin } = require('webpack').optimize;
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+<template>
+    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
+        <h3 v-html="name"></h3>
+        <pre><code class="language-yaml" v-html="conf"></code></pre>
+    </div>
+</template>
 
-module.exports = {
-    publicPath: './',
-    outputDir: 'dist',
-    filenameHashing: false, // Don't hash the output, so we can embed on the DigitalOcean Community
-    productionSourceMap: false,
-    configureWebpack: {
-        node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
-        plugins: [
-            process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
-            process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
-        ].filter(x => !!x),
-    },
-    chainWebpack: config => {
-        // Use a custom HTML template
-        config.plugin('html').tap(options => {
-            options[0].template = path.join(__dirname, 'build', 'index.html');
-            return options;
-        });
-    },
-};
+<script>
+    import Prism from 'prismjs';
+    import 'prismjs/components/prism-yaml';
+
+    export default {
+        name: 'YamlPrism',
+        props: {
+            name: String,
+            conf: String,
+            half: Boolean,
+        },
+        mounted() {
+            console.info(`Highlighting ${this.$props.name}...`);
+            Prism.highlightAllUnder(this.$el);
+        },
+    };
+</script>
