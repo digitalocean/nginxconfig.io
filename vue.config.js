@@ -25,7 +25,6 @@ THE SOFTWARE.
 */
 
 const path = require('path');
-const { LimitChunkCountPlugin } = require('webpack').optimize;
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
