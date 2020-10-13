@@ -86,8 +86,7 @@ const listenConfig = domain => {
 };
 
 
-function httpRedirectConfig(domain, global, domainName, redirectDomain)
-{
+const httpRedirectConfig = (domain, global, domainName, redirectDomain) => {
     // Build the server config on its own before adding it to the parent config
     const config = [];
 
