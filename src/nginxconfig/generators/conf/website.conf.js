@@ -113,7 +113,7 @@ const httpRedirectConfig = (domain, global, domainName, redirectDomain) => {
     }
 
     return config;
-}
+};
 
 export default (domain, domains, global) => {
     // Use kv so we can use the same key multiple times
