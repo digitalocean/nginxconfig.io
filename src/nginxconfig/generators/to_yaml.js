@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const yaml = require('js-yaml');
+const yaml = require('json-to-pretty-yaml');
 
 export default yamlConf => {
-    return yaml.safeDump(yamlConf);
+    return yaml.stringify(yamlConf);
 };
