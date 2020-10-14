@@ -27,12 +27,12 @@ THE SOFTWARE.
 <template>
     <div class="all do-bulma">
         <Header :title="i18n.templates.app.title">
-            <template v-slot:description>
+            <template #description>
                 {{ i18n.templates.app.description }}
             </template>
-            <template v-slot:header>
+            <template #header>
             </template>
-            <template v-slot:buttons>
+            <template #buttons>
                 <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ i18n.templates.app.singleColumnMode }}
                 </a>
@@ -270,8 +270,7 @@ THE SOFTWARE.
             splitColumnEvent(nonInteraction = false) {
                 analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn), nonInteraction);
             },
-            getPrismComponent(confName)
-            {
+            getPrismComponent(confName) {
                 switch (confName) {
                 case '/etc/nginx/Dockerfile':
                     return 'DockerPrism';
