@@ -99,11 +99,11 @@ THE SOFTWARE.
 
     export default {
         name: 'SetupCertbot',
+        display: i18n.templates.setupSections.certbot.certbot,
+        key: 'certbot',
         components: {
             BashPrism,
         },
-        display: i18n.templates.setupSections.certbot.certbot,
-        key: 'certbot',
         props: {
             data: Object,
         },
