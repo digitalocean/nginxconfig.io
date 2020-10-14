@@ -137,14 +137,14 @@ export default (domain, domains, global) => {
     }
 
     // Restrict Methods
-    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed)) {
+    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
         const allowedKeys = Object.keys(domain.restrict)
-                                .filter(k => !domain.restrict[k].computed)
+                                .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
                                 .map(e => e.replace('Method', '').toUpperCase());
 
         serverConfig.push(['# restrict methods', '']);
         serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
-            'return': '444',
+            'return': `'${domain.restrict.responseCode.computed}'`,
         }]);
     }
 

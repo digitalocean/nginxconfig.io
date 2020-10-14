@@ -185,6 +185,24 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+        <div v-if="hasAtLeastOneEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.restrict.responseCode }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${responseCodeChanged ? ' is-changed' : ''}`">
+                        <input v-model.number="responseCode"
+                               :class="['input', validResponseCode ? '' : 'is-danger']"
+                               type="number"
+                               min="100"
+                               step="1"
+                               :placeholder="$props.data.responseCode.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -231,6 +249,10 @@ THE SOFTWARE.
             default: false,
             enabled: true,
         },
+        responseCode: {
+            default: 405,
+            enabled: true,
+        },
     };
 
     export default {
@@ -247,10 +269,26 @@ THE SOFTWARE.
         data () {
             return {
                 i18n,
+                validResponseCode: true,
             };
         },
         computed: {
             ...computedFromDefaults(defaults, 'restrict'),    // Getters & setters for the delegated data
+            hasAtLeastOneEnabled() {
+                return (Object.keys(this.$props.data).filter(k => this.$props.data[k].computed && k !== 'responseCode')).length > 0;
+            },
+        },
+        watch: {
+            '$props.data.responseCode': {
+                handler(data) {
+                    if (data.computed && /^[1-5][0-9][0-9]$/.test(data.computed)) {
+                        this.validResponseCode = true;
+                    } else {
+                        this.validResponseCode = false;
+                    }
+                },
+                deep: true,
+            },
         },
     };
 </script>
