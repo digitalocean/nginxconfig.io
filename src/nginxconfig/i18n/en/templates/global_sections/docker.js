@@ -24,11 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as Server } from './server';
-export { default as HTTPS } from './https';
-export { default as PHP } from './php';
-export { default as Python } from './python';
-export { default as ReverseProxy } from './reverse_proxy';
-export { default as Routing } from './routing';
-export { default as Logging } from './logging';
-export { default as Restrict } from './restrict';
+import common from '../../common';
+
+export default {
+    dockerfile: `Include Dockerfile to run nginx with ${common.docker}`,
+    dockerCompose: 'Include docker-compose to run nginx with docker-compose',
+};

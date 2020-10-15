@@ -24,11 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as Server } from './server';
-export { default as HTTPS } from './https';
-export { default as PHP } from './php';
-export { default as Python } from './python';
-export { default as ReverseProxy } from './reverse_proxy';
-export { default as Routing } from './routing';
-export { default as Logging } from './logging';
-export { default as Restrict } from './restrict';
+export default {
+    disableForThisDomain: 'disable for this domain',
+    responseCode: 'Response code',
+};

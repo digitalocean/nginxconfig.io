@@ -25,7 +25,6 @@ THE SOFTWARE.
 */
 
 const path = require('path');
-const { LimitChunkCountPlugin } = require('webpack').optimize;
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
@@ -37,7 +36,6 @@ module.exports = {
     configureWebpack: {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
-            new LimitChunkCountPlugin({ maxChunks: 1 }), // Generate a single CSS & JS file for easy embedding
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
             process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
         ].filter(x => !!x),

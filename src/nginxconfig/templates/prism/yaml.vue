@@ -1,4 +1,4 @@
-/*
+<!--
 Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,13 +22,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+-->
 
-export { default as Server } from './server';
-export { default as HTTPS } from './https';
-export { default as PHP } from './php';
-export { default as Python } from './python';
-export { default as ReverseProxy } from './reverse_proxy';
-export { default as Routing } from './routing';
-export { default as Logging } from './logging';
-export { default as Restrict } from './restrict';
+<template>
+    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
+        <h3 v-html="name"></h3>
+        <pre><code class="language-yaml" v-html="conf"></code></pre>
+    </div>
+</template>
+
+<script>
+    import Prism from 'prismjs';
+    import 'prismjs/components/prism-yaml';
+
+    export default {
+        name: 'YamlPrism',
+        props: {
+            name: String,
+            conf: String,
+            half: Boolean,
+        },
+        mounted() {
+            console.info(`Highlighting ${this.$props.name}...`);
+            Prism.highlightAllUnder(this.$el);
+        },
+    };
+</script>

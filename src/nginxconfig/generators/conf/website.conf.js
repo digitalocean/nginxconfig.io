@@ -85,6 +85,36 @@ const listenConfig = domain => {
     return httpListen(domain);
 };
 
+
+const httpRedirectConfig = (domain, global, domainName, redirectDomain) => {
+    // Build the server config on its own before adding it to the parent config
+    const config = [];
+
+    config.push(...httpListen(domain));
+    config.push(['server_name', domainName]);
+
+    if (domain.https.certType.computed === 'letsEncrypt') {
+        // Let's encrypt
+
+        if (global.tools.modularizedStructure.computed) {
+            // Modularized
+            config.push(['include', 'nginxconfig.io/letsencrypt.conf']);
+        } else {
+            // Unified
+            config.push(...Object.entries(letsEncryptConf(global)));
+        }
+
+        config.push(['location /', {
+            return: `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`,
+        }]);
+    } else {
+        // Custom cert
+        config.push(['return', `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`]);
+    }
+
+    return config;
+};
+
 export default (domain, domains, global) => {
     // Use kv so we can use the same key multiple times
     const config = [];
@@ -134,6 +164,18 @@ export default (domain, domains, global) => {
     } else {
         // Unified
         serverConfig.push(...securityConf(domains, global));
+    }
+
+    // Restrict Methods
+    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
+        const allowedKeys = Object.keys(domain.restrict)
+                                .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
+                                .map(e => e.replace('Method', '').toUpperCase());
+
+        serverConfig.push(['# restrict methods', '']);
+        serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
+            'return': `'${domain.restrict.responseCode.computed}'`,
+        }]);
     }
 
     // Access log or error log for domain
@@ -311,35 +353,20 @@ export default (domain, domains, global) => {
 
     // HTTP redirect
     if (domain.https.forceHttps.computed) {
-        // Build the server config on its own before adding it to the parent config
-        const redirectConfig = [];
-
-        redirectConfig.push(...httpListen(domain));
-        redirectConfig.push(['server_name',
-            `${domain.server.redirectSubdomains.computed ? '.' : ''}${domain.server.domain.computed}`]);
-
-        if (domain.https.certType.computed === 'letsEncrypt') {
-            // Let's encrypt
-
-            if (global.tools.modularizedStructure.computed) {
-                // Modularized
-                redirectConfig.push(['include', 'nginxconfig.io/letsencrypt.conf']);
-            } else {
-                // Unified
-                redirectConfig.push(...Object.entries(letsEncryptConf(global)));
-            }
-
-            redirectConfig.push(['location /', {
-                return: `301 https://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`,
-            }]);
-        } else {
-            // Custom cert
-            redirectConfig.push(['return', `301 https://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
-        }
-
         // Add the redirect config to the parent config now its built
         config.push(['# HTTP redirect', '']);
-        config.push(['server', redirectConfig]);
+        if (domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
+            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed, `www.${domain.server.domain.computed}`)]);
+            config.push(['server', httpRedirectConfig(domain, global, `www.${domain.server.domain.computed}`)]);
+        } else if (!domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
+            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed)]);
+        }
+        if (domain.server.cdnSubdomain.computed) {
+            config.push(['server', httpRedirectConfig(domain, global, `cdn.${domain.server.domain.computed}`)]);
+        }
+        if (domain.server.redirectSubdomains.computed) {
+            config.push(['server', httpRedirectConfig(domain, global, `.${domain.server.domain.computed}`, `${domain.server.wwwSubdomain.computed ? 'www.' : '' }${domain.server.domain.computed}`)]);
+        }
     }
 
     // Security.txt
