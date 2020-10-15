@@ -123,7 +123,7 @@ THE SOFTWARE.
 
         <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Security.txt path</label>
+                <label class="label">security.txt path</label>
             </div>
             <div class="field-body">
                 <div class="field">
