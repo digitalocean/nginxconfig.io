@@ -346,6 +346,8 @@ export default (domain, domains, global) => {
         if (domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
             config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed, `www.${domain.server.domain.computed}`)]);
             config.push(['server', httpRedirectConfig(domain, global, `www.${domain.server.domain.computed}`)]);
+        } else if (!domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
+            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed)]);
         }
         if (domain.server.cdnSubdomain.computed) {
             config.push(['server', httpRedirectConfig(domain, global, `cdn.${domain.server.domain.computed}`)]);
