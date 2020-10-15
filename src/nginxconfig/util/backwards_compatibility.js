@@ -36,6 +36,11 @@ const globalMap = {
     directory_letsencrypt:      ['https', 'letsEncryptRoot'],
 
     referrer_policy:            ['security', 'referrerPolicy'],
+    security_txt:               ['security', 'securityTxt', oldBool],
+    security_txt_contact:       ['security', 'securityTxtContact'],
+    security_txt_languages:     ['security', 'securityTxtPreferredLanguages'],
+    security_txt_path:          ['security', 'securityTxtPreferredLanguages'],
+    security_txt_encryption:    ['security', 'securityTxtEncryption'],
     content_security_policy:    ['security', 'contentSecurityPolicy'],
     server_tokens:              ['security', 'serverTokens', oldBool],
     limit_req:                  ['security', 'limitReq', oldBool],
