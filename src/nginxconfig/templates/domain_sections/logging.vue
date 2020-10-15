@@ -43,6 +43,65 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+        <div v-if="accessLogEnabled" :class="`control${accessLogChanged ? ' is-changed' : ''}`">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.logging.cloudflare }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.cfIpCountry }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.cfConnectingIp }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.xForwardedFor }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.xForwardedProto }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.trueClientIp }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.cfRay }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.cfVisitor }}
+                        </PrettyCheck>
+                    </div>
+                    <div class="checkbox">
+                        <PrettyCheck v-model="accessLog" class="p-curve p-fill p-icon">
+                            <i slot="extra" class="icon fas fa-check"></i>
+                            {{ i18n.templates.domainSections.logging.cdnLoop }}
+                        </PrettyCheck>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
         <div class="field is-horizontal">
             <div class="field-label">
@@ -98,5 +157,21 @@ THE SOFTWARE.
             };
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
+        watch: {
+            // Disable Cloudflare headers if access_log by domain is disabled
+            '$props.data': {
+                handler() {
+                    // hstsSubdomains
+                    if (this.$props.data.accessLog.computed) {
+                        this.$props.data.cloudflare.enabled = true;
+                        this.$props.data.cloudflare.computed = this.$props.data.hstsSubdomains.value;
+                    } else {
+                        this.$props.data.cloudflare.enabled = false;
+                        this.$props.data.cloudflare.computed = false;
+                    }
+                },
+                deep: true,
+            },
+        },
     };
 </script>
