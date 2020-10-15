@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     'browser': true,
-    'node': true,
+    'node': true
   },
   extends: [
     'eslint:recommended',
@@ -13,7 +13,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'linebreak-style': ['error', 'unix', 'windows'],
+    'linebreak-style': ['error', 'unix'],
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'comma-dangle': ['error', 'always-multiline'],
