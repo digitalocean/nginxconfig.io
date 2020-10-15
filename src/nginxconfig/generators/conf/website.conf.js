@@ -342,5 +342,28 @@ export default (domain, domains, global) => {
         config.push(['server', redirectConfig]);
     }
 
+    if(global.security.securityTxt.computed){
+        config.push(['# security.txt', '']);
+        config.push(['location /security.txt', {
+            return: `301 http://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}/.well-known/security.txt`,
+        }]);
+        const securityTxtDetail = [];
+        if(global.security.securityTxtContact.value) {
+            securityTxtDetail.push(['Contact', `${global.security.securityTxtContact.value}`]);
+        }
+
+        if(global.security.securityTxtPreferredLanguages.value) {
+            securityTxtDetail.push(['Preferred-Languages', `${global.security.securityTxtPreferredLanguages.value}`]);
+        }
+
+        if(global.security.securityTxtEncryption.value) {
+            securityTxtDetail.push(['Encryption', `${global.security.securityTxtEncryption.value}`]);
+        }
+        
+        config.push(['location = /.well-known/security.txt', {
+            alias: `${global.security.securityTxtPath.value}`,
+        }]);
+    }
+
     return config;
 };
