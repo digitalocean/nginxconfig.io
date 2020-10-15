@@ -29,13 +29,13 @@ import common from '../../common';
 export default {
     byDomain: 'by domain',
     enableForThisDomain: `${common.enable} for this domain`,
-    cloudflare: 'Cloudflare Headers',
-    cfIpCountry: 'CF-IPCountry',
+    cloudflare: 'Cloudflare',
+    cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',
     xForwardedFor: 'X-Forwarded-For',
     xForwardedProto: 'X-Forwarded-Proto',
     trueClientIp: 'True-Client-IP',
-    cfRay: 'CF-Ray',
+    cfIpCountry: 'CF-IPCountry',
     cfVisitor: 'CF-Visitor',
     cdnLoop: 'CDN-Loop',
 };

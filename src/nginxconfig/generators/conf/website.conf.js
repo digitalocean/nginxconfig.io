@@ -175,6 +175,24 @@ export default (domain, domains, global) => {
 
         if (domain.logging.errorLog.computed)
             serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
+
+        // Cloudflare
+        if (domain.logging.accessLog.computed && domain.logging.cloudflare.computed) {
+            serverConfig.push(['# Log Format', '']);
+            serverConfig.push(['log_format', `cf_custom '$remote_addr - $remote_user [$time_local] '
+            '"$request" $status $body_bytes_sent '
+            '"$http_referer" "$http_user_agent" '
+            ${domain.logging.cfRay.computed ? "'$http_cf_ray '" : ''}
+            ${domain.logging.cfConnectingIp.computed ? "'$http_cf_connecting_ip '" : ''}
+            ${domain.logging.xForwardedFor.computed ? "'$http_x_forwarded_for '" : ''}
+            ${domain.logging.xForwardedProto.computed ? "'$http_x_forwarded_proto '" : ''}
+            ${domain.logging.trueClientIp.computed ? "'$http_true_client_ip '" : ''}
+            ${domain.logging.cfIpCountry.computed ? "'$http_cf_ipcountry '" : ''}
+            ${domain.logging.cfVisitor.computed ? "'$http_cf_visitor '" : ''}
+            ${domain.logging.cdnLoop.computed ? "'$http_cdn_loop '" : ''}
+            `]);
+        }
+        
     }
 
     // index.php
