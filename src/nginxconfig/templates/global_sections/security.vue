@@ -137,54 +137,6 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
-        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">Contact</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
-                        <input v-model="securityTxtContact"
-                               class="input"
-                               type="text"
-                               :placeholder="`security@example.com`"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">Encryption</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
-                        <input v-model="securityTxtEncryption"
-                               class="input"
-                               type="text"
-                               :placeholder="`https://example.com/pgp-key.txt`"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">Preferred-Languages</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
-                        <input v-model="securityTxtPreferredLanguages"
-                               class="input"
-                               type="text"
-                               :placeholder="`en, es, ru`"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -227,17 +179,6 @@ THE SOFTWARE.
         },
         securityTxtPath: {
             default: '~/security.txt',
-            enabled: true,
-        },
-        securityTxtContact: {
-            default: 'security@example.com',
-            enabled: true,
-        },
-        securityTxtPreferredLanguages: {
-            default: 'en',
-            enabled: true,
-        },
-        securityTxtEncryption: {
             enabled: true,
         },
     };
