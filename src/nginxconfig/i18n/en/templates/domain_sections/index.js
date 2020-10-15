@@ -32,5 +32,6 @@ import python from './python';
 import reverseProxy from './reverse_proxy';
 import routing from './routing';
 import server from './server';
+import restrict from './restrict';
 
-export default { https, logging, php, presets, python, reverseProxy, routing, server };
+export default { https, logging, php, presets, python, reverseProxy, routing, server, restrict };

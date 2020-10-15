@@ -166,6 +166,18 @@ export default (domain, domains, global) => {
         serverConfig.push(...securityConf(domains, global));
     }
 
+    // Restrict Methods
+    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
+        const allowedKeys = Object.keys(domain.restrict)
+                                .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
+                                .map(e => e.replace('Method', '').toUpperCase());
+
+        serverConfig.push(['# restrict methods', '']);
+        serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
+            'return': `'${domain.restrict.responseCode.computed}'`,
+        }]);
+    }
+
     // Access log or error log for domain
     if (domain.logging.accessLog.computed || domain.logging.errorLog.computed) {
         serverConfig.push(['# logging', '']);
