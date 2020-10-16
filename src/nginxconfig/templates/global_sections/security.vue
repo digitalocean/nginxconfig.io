@@ -131,7 +131,7 @@ THE SOFTWARE.
                         <input v-model="securityTxtPath"
                                class="input"
                                type="text"
-                               :placeholder="`en, es, ru`"
+                               :placeholder="$props.data.securityTxtPath.default"
                         />
                     </div>
                 </div>
@@ -146,6 +146,7 @@ THE SOFTWARE.
     import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+
     const defaults = {
         referrerPolicy: {
             default: 'no-referrer-when-downgrade',

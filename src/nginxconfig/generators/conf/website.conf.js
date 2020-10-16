@@ -370,7 +370,7 @@ export default (domain, domains, global) => {
     }
 
     // Security.txt
-    if(global.security.securityTxt.computed){
+    if (global.security.securityTxt.computed) {
         config.push(['# security.txt', '']);
         config.push(['location /security.txt', {
             return: `301 http://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}/.well-known/security.txt`,
