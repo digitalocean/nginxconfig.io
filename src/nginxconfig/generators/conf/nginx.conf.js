@@ -73,8 +73,25 @@ export default (domains, global) => {
     config.http.push(['include', 'mime.types']);
     config.http.push(['default_type', 'application/octet-stream']);
 
+    // Cloudflare
+    if (global.logging.cloudflare.computed) {
+        config.http.push(['# Log Format', '']);
+        config.http.push(['log_format', `cloudflare '$remote_addr - $remote_user [$time_local] '
+        '"$request" $status $body_bytes_sent '
+        '"$http_referer" "$http_user_agent" '
+        ${global.logging.cfRay.computed ? "'$http_cf_ray '" : ''}
+        ${global.logging.cfConnectingIp.computed ? "'$http_cf_connecting_ip '" : ''}
+        ${global.logging.xForwardedFor.computed ? "'$http_x_forwarded_for '" : ''}
+        ${global.logging.xForwardedProto.computed ? "'$http_x_forwarded_proto '" : ''}
+        ${global.logging.trueClientIp.computed ? "'$http_true_client_ip '" : ''}
+        ${global.logging.cfIpCountry.computed ? "'$http_cf_ipcountry '" : ''}
+        ${global.logging.cfVisitor.computed ? "'$http_cf_visitor '" : ''}
+        ${global.logging.cdnLoop.computed ? "'$http_cdn_loop '" : ''}
+        `]);
+    }
+
     config.http.push(['# Logging', '']);
-    config.http.push(['access_log', global.logging.accessLog.computed.trim() || 'off']);
+    config.http.push(['access_log', global.logging.accessLog.computed.trim() + `${global.logging.cloudflare.computed ? ' cloudflare' : ''}` || 'off']);
     config.http.push(['error_log', global.logging.errorLog.computed.trim() || '/dev/null']);
 
     if (global.security.limitReq.computed) {
