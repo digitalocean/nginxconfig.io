@@ -50,11 +50,6 @@ export default global => {
         deny: 'all',
     };
 
-    config['# WordPress: deny scripts and styles concat'] = '';
-    config['location ~* \\/wp-admin\\/load-(?:scripts|styles)\\.php'] = {
-        deny: 'all',
-    };
-
     config['# WordPress: deny general stuff'] = '';
     config['location ~* ^/(?:xmlrpc\\.php|wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|wp-comments-post\\.php|readme\\.html|license\\.txt)$'] = {
         deny: 'all',
