@@ -369,18 +369,5 @@ export default (domain, domains, global) => {
         }
     }
 
-    // Security.txt
-    if (global.security.securityTxt.computed) {
-        config.push(['# security.txt', '']);
-        config.push(['location /security.txt', {
-            return: '301 /.well-known/security.txt',
-        }]);
-        
-        // Custom security.txt path
-        config.push(['location = /.well-known/security.txt', {
-            alias: `${global.security.securityTxtPath.value}`,
-        }]);
-    }
-
     return config;
 };
