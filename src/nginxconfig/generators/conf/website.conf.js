@@ -373,7 +373,7 @@ export default (domain, domains, global) => {
     if (global.security.securityTxt.computed) {
         config.push(['# security.txt', '']);
         config.push(['location /security.txt', {
-            return: `301 http://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}/.well-known/security.txt`,
+            return: '301 /.well-known/security.txt',
         }]);
         
         // Custom security.txt path
