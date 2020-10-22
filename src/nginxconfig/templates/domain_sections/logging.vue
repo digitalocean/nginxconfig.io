@@ -43,6 +43,7 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
         <div class="field is-horizontal">
             <div class="field-label">
                 <label class="label">error_log {{ i18n.templates.domainSections.logging.byDomain }}</label>

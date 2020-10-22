@@ -92,70 +92,68 @@ THE SOFTWARE.
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cfRayEnabled">
-                        <div v-if="cfConnectingIpEnabled" :class="`control${cfRayChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="cfRay" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.cfRay }}
-                                </PrettyCheck>
-                            </div>
+                    <div v-if="cfRayEnabled" :class="`control${cfRayChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="cfRay" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.cfRay }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="cfConnectingIpEnabled" :class="`control${cfConnectingIpChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="cfConnectingIp" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.cfConnectingIp }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="cfConnectingIpEnabled" :class="`control${cfConnectingIpChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="cfConnectingIp" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.cfConnectingIp }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="xForwardedForEnabled" :class="`control${xForwardedForChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="xForwardedFor" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.xForwardedFor }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="xForwardedForEnabled" :class="`control${xForwardedForChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="xForwardedFor" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.xForwardedFor }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="xForwardedProtoEnabled" :class="`control${xForwardedProtoChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="xForwardedProto" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.xForwardedProto }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="xForwardedProtoEnabled" :class="`control${xForwardedProtoChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="xForwardedProto" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.xForwardedProto }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="trueClientIpEnabled" :class="`control${trueClientIpChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="trueClientIp" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.trueClientIp }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="trueClientIpEnabled" :class="`control${trueClientIpChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="trueClientIp" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.trueClientIp }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="cfIpCountryEnabled" :class="`control${cfIpCountryChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="cfIpCountry" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.cfIpCountry }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="cfIpCountryEnabled" :class="`control${cfIpCountryChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="cfIpCountry" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.cfIpCountry }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="cfVisitorEnabled" :class="`control${cfVisitorChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="cfVisitor" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.cfVisitor }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="cfVisitorEnabled" :class="`control${cfVisitorChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="cfVisitor" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.cfVisitor }}
+                            </PrettyCheck>
                         </div>
-                        <div v-if="cdnLoopEnabled" :class="`control${cdnLoopChanged ? ' is-changed' : ''}`">
-                            <div class="checkbox">
-                                <PrettyCheck v-model="cdnLoop" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.logging.cdnLoop }}
-                                </PrettyCheck>
-                            </div>
+                    </div>
+                    <div v-if="cdnLoopEnabled" :class="`control${cdnLoopChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="cdnLoop" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.globalSections.logging.cdnLoop }}
+                            </PrettyCheck>
                         </div>
                     </div>
                 </div>
