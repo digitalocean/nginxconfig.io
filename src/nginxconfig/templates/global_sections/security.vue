@@ -102,6 +102,41 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">security.txt</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${securityTxt ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.common.enable }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">security.txt path</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
+                        <input v-model="securityTxtPath"
+                               class="input"
+                               type="text"
+                               :placeholder="$props.data.securityTxtPath.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -137,6 +172,14 @@ THE SOFTWARE.
         },
         limitReq: {
             default: false,
+            enabled: true,
+        },
+        securityTxt: {
+            default: false,
+            enabled: true,
+        },
+        securityTxtPath: {
+            default: '~/security.txt',
             enabled: true,
         },
     };
