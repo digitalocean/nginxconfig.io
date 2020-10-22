@@ -91,7 +91,7 @@ export default (domains, global) => {
     }
 
     config.http.push(['# Logging', '']);
-    config.http.push(['access_log', global.logging.accessLog.computed.trim() + `${global.logging.cloudflare.computed ? ' cloudflare' : ''}` || 'off']);
+    config.http.push(['access_log', (global.logging.accessLog.computed.trim() + (global.logging.cloudflare.computed ? ' cloudflare' : '')) || 'off']);
     config.http.push(['error_log', global.logging.errorLog.computed.trim() || '/dev/null']);
 
     if (global.security.limitReq.computed) {
