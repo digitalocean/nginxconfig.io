@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default global => {
+export default () => {
     const config = {};
 
     config['# Joomla: deny running scripts inside writable directories'] = '';

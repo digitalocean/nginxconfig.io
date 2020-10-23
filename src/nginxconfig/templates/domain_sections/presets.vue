@@ -267,7 +267,6 @@ THE SOFTWARE.
                 case 'magento':
                     this.$parent.setValue('php', 'magentoRules', true);
                     break;
-                }
 
                 case 'joomla':
                     this.$parent.setValue('php', 'joomlaRules', true);
