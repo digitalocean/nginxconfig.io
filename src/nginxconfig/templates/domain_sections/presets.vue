@@ -83,7 +83,7 @@ THE SOFTWARE.
                     && !data.routing.fallbackHtml.computed
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed;
+                    && !data.php.magentoRules.computed
                     && !data.php.joomlaRules.computed;
             },
         },
