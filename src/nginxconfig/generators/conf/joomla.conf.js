@@ -24,26 +24,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-	back: 'Back',
-	next: 'Next',
-	enable: 'enable',
-	php: 'PHP',
-	ssl: 'SSL',
-	nginx: 'NGINX',
-	http: 'HTTP',
-	https: 'HTTPS',
-	letsEncrypt: 'Let\'s Encrypt',
-	python: 'Python',
-	docker: 'Docker',
-	dockerCompose: 'Docker Compose',
-	wordPress: 'WordPress',
-	drupal: 'Drupal',
-	magento: 'Magento',
-	joomla: 'Joomla',
-	django: 'Django',
-	logging: 'Logging',
-    reverseProxy: 'Reverse proxy',
-    reverseProxyLower: 'reverse proxy',
-    restrict: 'Restrict',
+export default global => {
+    const config = {};
+
+    config['# Joomla: deny running scripts inside writable directories'] = '';
+    config['location ~* /(images|cache|media|logs|tmp)/.*\.(php|pl|py|jsp|asp|sh|cgi)$'] = {
+        return: '403',
+        error_page: '403 /403_error.html',
+    };
+
+    config['# Joomla: caching of files'] = '';
+    config['location ~* \.(ico|pdf|flv)$'] = {
+        expires: '1y',
+    };
+
+    config['# Joomla: caching of files'] = '';
+    config['location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt)$'] = {
+        expires: '14d',
+    };
+
+
+    // Done!
+    return config;
 };

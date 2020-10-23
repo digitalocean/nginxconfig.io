@@ -48,7 +48,7 @@ use-case** (and in parallel you can still use the docs).
 
 **Features:**
 HTTPS, HTTP/2, IPv6, certbot, HSTS, security headers, SSL profiles, OCSP resolvers, caching, gzip, brotli, fallback
-routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, Drupal, Magento), Node.js support, Python
+routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, Drupal, Magento, Joomla), Node.js support, Python
 (Django) server, etc.
 
 ## 👨‍💻 Author

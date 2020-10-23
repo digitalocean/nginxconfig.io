@@ -37,6 +37,7 @@ import proxyConf from './conf/proxy.conf';
 import wordPressConf from './conf/wordpress.conf';
 import drupalConf from './conf/drupal.conf';
 import magentoConf from './conf/magento.conf';
+import joomlaConf from './conf/joomla.conf';
 import dockerComposeYaml from './yaml/dockerCompose.yaml';
 import dockerConf from './ext/docker';
 
@@ -93,6 +94,10 @@ export default (domains, global) => {
         // Magento
         if (domains.some(d => d.php.magentoRules.computed))
             files['nginxconfig.io/magento.conf'] = toConf(magentoConf());
+
+        // Joomla
+        if (domains.some(d => d.php.joomlaRules.computed))
+            files['nginxconfig.io/joomla.conf'] = toConf(joomlaConf());
 
     } else {
         // PHP

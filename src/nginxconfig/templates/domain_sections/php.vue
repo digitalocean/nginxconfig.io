@@ -118,6 +118,24 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div v-if="joomlaRulesEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ i18n.templates.domainSections.php.joomlaRules }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${joomlaRulesChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="joomlaRules" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ i18n.templates.domainSections.php.enableJoomlaRules }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -141,6 +159,10 @@ THE SOFTWARE.
             enabled: true,
         },
         magentoRules: {
+            default: false,
+            enabled: true,
+        },
+        joomlaRules: {
             default: false,
             enabled: true,
         },
@@ -188,6 +210,8 @@ THE SOFTWARE.
                         this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
                         this.$props.data.magentoRules.enabled = true;
                         this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
+                        this.$props.data.joomlaRules.enabled = true;
+                        this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
                     } else {
                         this.$props.data.wordPressRules.enabled = false;
                         this.$props.data.wordPressRules.computed = false;
@@ -195,6 +219,8 @@ THE SOFTWARE.
                         this.$props.data.drupalRules.computed = false;
                         this.$props.data.magentoRules.enabled = false;
                         this.$props.data.magentoRules.computed = false;
+                        this.$props.data.joomlaRules.enabled = false;
+                        this.$props.data.joomlaRules.computed = false;
                     }
                 },
                 deep: true,
