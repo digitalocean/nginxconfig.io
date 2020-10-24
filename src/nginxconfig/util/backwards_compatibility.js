@@ -91,7 +91,6 @@ const domainMap = {
     wordpress:              ['php', 'wordPressRules', oldBool],
     drupal:                 ['php', 'drupalRules', oldBool],
     magento:                ['php', 'magentoRules', oldBool],
-    joomla:                 ['php', 'joomlaRules', oldBool],
 
     python:                 ['python', 'python', oldBool],
     django:                 ['python', 'djangoRules', oldBool],

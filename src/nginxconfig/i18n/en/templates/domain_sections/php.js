@@ -38,5 +38,5 @@ export default {
     magentoRules: `${common.magento} rules`,
     enableMagentoRules: `${common.enable} ${common.magento}-specific rules`,
     joomlaRules: `${common.joomla} rules`,
-    enablejoomlaRules: `${common.enable} ${common.joomla}-specific rules`,
+    enableJoomlaRules: `${common.enable} ${common.joomla}-specific rules`,
 };
