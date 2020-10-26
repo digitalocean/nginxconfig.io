@@ -73,21 +73,50 @@ export default (domains, global) => {
     config.http.push(['include', 'mime.types']);
     config.http.push(['default_type', 'application/octet-stream']);
 
-    // Cloudflare
+    // Define default log format as an array
+    let logging = ['$remote_addr', '-', '$remote_user', '[$time_local]',
+    '"$request"', '$status', '$body_bytes_sent',
+    '"$http_referer"', '"$http_user_agent"'];
+
+    // Append Cloudflare request headers to the default log format
     if (global.logging.cloudflare.computed) {
         config.http.push(['# Log Format', '']);
-        config.http.push(['log_format', `cloudflare '$remote_addr - $remote_user [$time_local] '
-        '"$request" $status $body_bytes_sent '
-        '"$http_referer" "$http_user_agent" '
-        ${global.logging.cfRay.computed ? '\'$http_cf_ray \'' : ''}
-        ${global.logging.cfConnectingIp.computed ? '\'$http_cf_connecting_ip \'' : ''}
-        ${global.logging.xForwardedFor.computed ? '\'$http_x_forwarded_for \'' : ''}
-        ${global.logging.xForwardedProto.computed ? '\'$http_x_forwarded_proto \'' : ''}
-        ${global.logging.trueClientIp.computed ? '\'$http_true_client_ip \'' : ''}
-        ${global.logging.cfIpCountry.computed ? '\'$http_cf_ipcountry \'' : ''}
-        ${global.logging.cfVisitor.computed ? '\'$http_cf_visitor \'' : ''}
-        ${global.logging.cdnLoop.computed ? '\'$http_cdn_loop \'' : ''}
-        `]);
+
+        if (global.logging.cfRay.computed) {
+            logging.push('$http_cf_ray');
+        }
+
+        if (global.logging.cfConnectingIp.computed) {
+            logging.push('$http_cf_connecting_ip');
+        }
+
+        if (global.logging.xForwardedFor.computed) {
+            logging.push('$http_x_forwarded_for');
+        }
+
+        if (global.logging.xForwardedProto.computed) {
+            logging.push('$http_x_forwarded_proto');
+        }
+
+        if (global.logging.trueClientIp.computed) {
+            logging.push('$http_true_client_ip');
+        }
+
+        if (global.logging.cfIpCountry.computed) {
+            logging.push('$http_cf_ipcountry');
+        }
+
+        if (global.logging.cfVisitor.computed) {
+            logging.push('$http_cf_visitor');
+        }
+
+        if (global.logging.cdnLoop.computed) {
+            logging.push('$http_cdn_loop');
+        }
+
+        if (logging.length) {
+            config.http.push(['log_format', `cloudflare '${logging.join(' ')}'`]);
+        }
     }
 
     config.http.push(['# Logging', '']);
