@@ -36,6 +36,7 @@ import generalConf from './general.conf';
 import wordPressConf from './wordpress.conf';
 import drupalConf from './drupal.conf';
 import magentoConf from './magento.conf';
+import joomlaConf from './joomla.conf';
 import letsEncryptConf from './letsencrypt.conf';
 
 const sslConfig = (domain, global) => {
@@ -261,6 +262,7 @@ export default (domain, domains, global) => {
         if (domain.php.wordPressRules.computed) serverConfig.push(['include', 'nginxconfig.io/wordpress.conf']);
         if (domain.php.drupalRules.computed) serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
         if (domain.php.magentoRules.computed) serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
+        if (domain.php.joomlaRules.computed) serverConfig.push(['include', 'nginxconfig.io/joomla.conf']);
     } else {
         // Unified
         serverConfig.push(...Object.entries(generalConf(domains, global)));
@@ -271,6 +273,7 @@ export default (domain, domains, global) => {
         if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
+        if (domain.php.joomlaRules.computed) serverConfig.push(...Object.entries(joomlaConf()));
     }
 
     // PHP

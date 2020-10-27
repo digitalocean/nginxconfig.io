@@ -37,4 +37,6 @@ export default {
     enableDrupalRules: `${common.enable} ${common.drupal}-specific rules`,
     magentoRules: `${common.magento} rules`,
     enableMagentoRules: `${common.enable} ${common.magento}-specific rules`,
+    joomlaRules: `${common.joomla} rules`,
+    enableJoomlaRules: `${common.enable} ${common.joomla}-specific rules`,
 };

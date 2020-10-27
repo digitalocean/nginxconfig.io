@@ -83,7 +83,8 @@ THE SOFTWARE.
                     && !data.routing.fallbackHtml.computed
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed;
+                    && !data.php.magentoRules.computed
+                    && !data.php.joomlaRules.computed;
             },
         },
         django: {
@@ -125,7 +126,8 @@ THE SOFTWARE.
                     && !data.routing.fallbackHtml.computed
                     && data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed;
+                    && !data.php.magentoRules.computed
+                    && !data.php.joomlaRules.computed;
             },
         },
         drupal: {
@@ -138,7 +140,8 @@ THE SOFTWARE.
                     && !data.routing.fallbackHtml.computed
                     && !data.php.wordPressRules.computed
                     && data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed;
+                    && !data.php.magentoRules.computed
+                    && !data.php.joomlaRules.computed;
             },
         },
         magento: {
@@ -151,7 +154,22 @@ THE SOFTWARE.
                     && !data.routing.fallbackHtml.computed
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
-                    && data.php.magentoRules.computed;
+                    && data.php.magentoRules.computed
+                    && !data.php.joomlaRules.computed;
+            },
+        },
+        joomla: {
+            default: false,
+            display: i18n.common.joomla,
+            enabled: true,
+            computedCheck(data) {
+                return data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && !data.php.wordPressRules.computed
+                    && !data.php.drupalRules.computed
+                    && !data.php.magentoRules.computed
+                    && data.php.joomlaRules.computed;
             },
         },
     };
@@ -200,6 +218,7 @@ THE SOFTWARE.
                 this.$parent.resetValue('php', 'wordPressRules');
                 this.$parent.resetValue('php', 'drupalRules');
                 this.$parent.resetValue('php', 'magentoRules');
+                this.$parent.resetValue('php', 'joomlaRules');
                 this.$parent.resetValue('python', 'python');
                 this.$parent.resetValue('python', 'djangoRules');
                 this.$parent.resetValue('reverseProxy', 'reverseProxy');
@@ -247,6 +266,10 @@ THE SOFTWARE.
 
                 case 'magento':
                     this.$parent.setValue('php', 'magentoRules', true);
+                    break;
+
+                case 'joomla':
+                    this.$parent.setValue('php', 'joomlaRules', true);
                     break;
                 }
             },
