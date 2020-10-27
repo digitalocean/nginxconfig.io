@@ -106,8 +106,7 @@ export default (domains, global) => {
         if (global.logging.cdnLoop.computed)
             logging.push('$http_cdn_loop');
 
-        if (logging.length)
-            config.http.push(['log_format', `cloudflare '${logging.join(' ')}'`]);
+        config.http.push(['log_format', `cloudflare '${logging.join(' ')}'`]);
     }
 
     config.http.push(['# Logging', '']);
