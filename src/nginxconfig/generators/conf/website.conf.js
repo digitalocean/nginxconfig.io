@@ -184,7 +184,7 @@ export default (domain, domains, global) => {
         serverConfig.push(['# logging', '']);
 
         if (domain.logging.accessLog.computed)
-            serverConfig.push(['access_log', getAccessLogDomainPath(domain, global)]);
+            serverConfig.push(['access_log', getAccessLogDomainPath(domain, global) + (global.logging.cloudflare.computed ? ' cloudflare' : '')]);
 
         if (domain.logging.errorLog.computed)
             serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
