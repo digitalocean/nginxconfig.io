@@ -30,7 +30,7 @@ THE SOFTWARE.
             <div class="tabs">
                 <ul>
                     <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                        <a @click="active = tab.key">{{ tab.display }}</a>
+                        <a @click="active = tab.key">{{ $t(tab.display) }}</a>
                     </li>
                 </ul>
             </div>
@@ -45,17 +45,17 @@ THE SOFTWARE.
 
             <div class="navigation-buttons">
                 <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
-                    <i class="fas fa-long-arrow-alt-left"></i> <span>{{ i18n.common.back }}</span>
+                    <i class="fas fa-long-arrow-alt-left"></i> <span>{{ $t('common.back') }}</span>
                 </a>
                 <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
-                    <span>{{ i18n.common.next }}</span> <i class="fas fa-long-arrow-alt-right"></i>
+                    <span>{{ $t('common.next') }}</span> <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
         </div>
 
         <div class="buttons is-centered">
-            <a class="button is-success" @click="downloadTar">{{ i18n.templates.setup.downloadConfig }}</a>
-            <a ref="copyTar" class="button is-primary">{{ i18n.templates.setup.copyBase64 }}</a>
+            <a class="button is-success" @click="downloadTar">{{ $t('templates.setup.downloadConfig') }}</a>
+            <a ref="copyTar" class="button is-primary">{{ $t('templates.setup.copyBase64') }}</a>
         </div>
     </div>
 </template>
@@ -63,7 +63,6 @@ THE SOFTWARE.
 <script>
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
-    import i18n from '../i18n';
     import analytics from '../util/analytics';
     import * as Sections from './setup_sections';
 
@@ -76,7 +75,6 @@ THE SOFTWARE.
         },
         data() {
             return {
-                i18n,
                 active: tabs[0].key,
                 tabs,
             };

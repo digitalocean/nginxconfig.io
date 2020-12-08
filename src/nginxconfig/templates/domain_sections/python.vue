@@ -28,18 +28,18 @@ THE SOFTWARE.
     <div>
         <div v-if="!pythonEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.common.python }}</label>
+                <label class="label">{{ $t('common.python') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.domainSections.python.pythonIsDisabled }}
+                            {{ $t('templates.domainSections.python.pythonIsDisabled') }}
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
-                                <br />{{ i18n.templates.domainSections.python.pythonCannotBeEnabledWithReverseProxy }}
+                                <br />{{ $t('templates.domainSections.python.pythonCannotBeEnabledWithReverseProxy') }}
                             </template>
                             <template v-if="$parent.$props.data.php.php.computed">
-                                <br />{{ i18n.templates.domainSections.python.pythonCannotBeEnabledWithPhp }}
+                                <br />{{ $t('templates.domainSections.python.pythonCannotBeEnabledWithPhp') }}
                             </template>
                         </label>
                     </div>
@@ -49,7 +49,7 @@ THE SOFTWARE.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.common.python }}</label>
+                <label class="label">{{ $t('common.python') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -57,7 +57,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="python" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.python.enablePython }}
+                                {{ $t('templates.domainSections.python.enablePython') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ THE SOFTWARE.
 
         <div v-if="djangoRulesEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.python.djangoRules }}</label>
+                <label class="label">{{ $t('templates.domainSections.python.djangoRules') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -75,7 +75,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="djangoRules" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.python.enableDjangoRules }}
+                                {{ $t('templates.domainSections.python.enableDjangoRules') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -87,7 +87,6 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -104,7 +103,7 @@ THE SOFTWARE.
 
     export default {
         name: 'DomainPython',                               // Component name
-        display: i18n.common.python,                        // Display name for tab
+        display: 'common.python',                           // Display name for tab (i18n key)
         key: 'python',                                      // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -112,11 +111,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'python'), // Getters & setters for the delegated data
         watch: {

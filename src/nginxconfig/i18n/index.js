@@ -24,9 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import en from './en';
-
-const lang = 'en';
-const packs = { en };
-
-export default packs[lang];
+export { default as en } from './en';

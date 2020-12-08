@@ -28,7 +28,7 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.common.https }}</label>
+                <label class="label">{{ $t('common.https') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -36,7 +36,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="https" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.https.enableEncryptedSslConnection }}
+                                {{ $t('templates.domainSections.https.enableEncryptedSslConnection') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ THE SOFTWARE.
 
         <div v-if="http2Enabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.http2 }}</label>
+                <label class="label">{{ $t('templates.domainSections.https.http2') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -54,7 +54,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="http2" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.https.enableHttp2Connections }}
+                                {{ $t('templates.domainSections.https.enableHttp2Connections') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ THE SOFTWARE.
 
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.forceHttps }}</label>
+                <label class="label">{{ $t('templates.domainSections.https.forceHttps') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -84,7 +84,7 @@ THE SOFTWARE.
 
         <div v-if="hstsEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.hsts }}</label>
+                <label class="label">{{ $t('templates.domainSections.https.hsts') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -92,7 +92,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="hsts" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.https.enableStrictTransportSecurity }}
+                                {{ $t('templates.domainSections.https.enableStrictTransportSecurity') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsSubdomains" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.https.enableIncludeSubDomains }}
+                                {{ $t('templates.domainSections.https.enableIncludeSubDomains') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsPreload" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.https.enablePreload }}
+                                {{ $t('templates.domainSections.https.enablePreload') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -120,7 +120,7 @@ THE SOFTWARE.
 
         <div v-if="certTypeEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.certificationType }}</label>
+                <label class="label">{{ $t('templates.domainSections.https.certificationType') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -130,7 +130,7 @@ THE SOFTWARE.
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ name }}
+                                {{ $t(name) }}
                             </PrettyRadio>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ THE SOFTWARE.
 
         <div v-if="letsEncryptEmailEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.https.letsEncryptEmail }}</label>
+                <label class="label">{{ $t('templates.domainSections.https.letsEncryptEmail') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -194,7 +194,6 @@ THE SOFTWARE.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -226,8 +225,8 @@ THE SOFTWARE.
         certType: {
             default: 'letsEncrypt',
             options: {
-                letsEncrypt: i18n.common.letsEncrypt,
-                custom: i18n.templates.domainSections.https.customCertificate,
+                letsEncrypt: 'common.letsEncrypt', // i18n key
+                custom: 'templates.domainSections.https.customCertificate', // i18n key
             },
             enabled: true,
         },
@@ -248,7 +247,7 @@ THE SOFTWARE.
 
     export default {
         name: 'DomainHTTPS',                                // Component name
-        display: i18n.common.https,                         // Display name for tab
+        display: 'common.https',                            // Display name for tab (i18n key)
         key: 'https',                                       // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -257,11 +256,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
         watch: {

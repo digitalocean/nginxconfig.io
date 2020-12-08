@@ -36,7 +36,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.common.enable }}
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -66,7 +66,7 @@ THE SOFTWARE.
 
         <div v-if="fallbackHtmlEnabled || fallbackPhpEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.routing.fallbackRouting }}</label>
+                <label class="label">{{ $t('templates.domainSections.routing.fallbackRouting') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -92,7 +92,7 @@ THE SOFTWARE.
 
         <div v-if="fallbackPhpPathEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.routing.fallbackRoutingPhpPath }}</label>
+                <label class="label">{{ $t('templates.domainSections.routing.fallbackRoutingPhpPath') }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${fallbackPhpPathChanged ? ' is-changed' : ''}`">
@@ -109,7 +109,7 @@ THE SOFTWARE.
 
         <div v-if="legacyPhpRoutingEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.routing.legacyPhpRouting }}</label>
+                <label class="label">{{ $t('templates.domainSections.routing.legacyPhpRouting') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -117,7 +117,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="legacyPhpRouting" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.routing.enableLegacyRouting }}
+                                {{ $t('templates.domainSections.routing.enableLegacyRouting') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -130,7 +130,6 @@ THE SOFTWARE.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -164,7 +163,7 @@ THE SOFTWARE.
 
     export default {
         name: 'DomainRouting',                                  // Component name
-        display: i18n.templates.domainSections.routing.routing, // Display name for tab
+        display: 'templates.domainSections.routing.routing',    // Display name for tab (i18n key)
         key: 'routing',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
@@ -174,12 +173,7 @@ THE SOFTWARE.
         props: {
             data: Object,                                       // Data delegated back to us from parent
         },
-        data () {
-            return {
-                i18n,
-            };
-        },
-        computed: computedFromDefaults(defaults, 'routing'), // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'routing'),    // Getters & setters for the delegated data
         watch: {
             // Disable all options (expect legacy php) if root is disabled
             '$props.data.root': {

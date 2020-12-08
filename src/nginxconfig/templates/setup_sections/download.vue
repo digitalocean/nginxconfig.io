@@ -29,26 +29,26 @@ THE SOFTWARE.
         <ol>
             <li>
                 <p>
-                    <span v-html="i18n.templates.setupSections.download.downloadTheGeneratedConfig"></span>
+                    <span v-html="$t('templates.setupSections.download.downloadTheGeneratedConfig')"></span>
                     <b>&nbsp;<a @click="$parent.downloadTar">{{ $parent.tarName }}</a></b>
                     <br />
-                    <span v-html="i18n.templates.setupSections.download.andUploadItToYourServers"></span>
+                    <span v-html="$t('templates.setupSections.download.andUploadItToYourServers')"></span>
                     <code class="slim">{{ $props.data.global.nginx.nginxConfigDirectory.computed }}</code>
-                    {{ i18n.templates.setupSections.download.directory }}
+                    {{ $t('templates.setupSections.download.directory') }}
                 </p>
                 <p>
-                    {{ i18n.templates.setupSections.download.or }}
+                    {{ $t('templates.setupSections.download.or') }}
                     <b>
                         <a ref="copyTar">
-                            {{ i18n.templates.setupSections.download.copyBase64StringOfCompressedConfig }}</a>
+                            {{ $t('templates.setupSections.download.copyBase64StringOfCompressedConfig') }}</a>
                     </b>
-                    <span v-html="i18n.templates.setupSections.download.pasteItInYourServersCommandLineAndExecute"></span>
+                    <span v-html="$t('templates.setupSections.download.pasteItInYourServersCommandLineAndExecute')"></span>
                 </p>
             </li>
 
             <li>
                 <p>
-                    <span v-html="i18n.templates.setupSections.download.navigateToYourNginxConfigurationDirectoryOnYourServer"></span>
+                    <span v-html="$t('templates.setupSections.download.navigateToYourNginxConfigurationDirectoryOnYourServer')"></span>
                     <br />
                     <BashPrism :key="$props.data.global.nginx.nginxConfigDirectory.computed"
                                :cmd="`cd ${$props.data.global.nginx.nginxConfigDirectory.computed}`"
@@ -58,7 +58,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    <span v-html="i18n.templates.setupSections.download.createABackupOfYourCurrentNginxConfiguration"></span>
+                    <span v-html="$t('templates.setupSections.download.createABackupOfYourCurrentNginxConfiguration')"></span>
                     <br />
                     <BashPrism cmd="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"></BashPrism>
                 </p>
@@ -66,7 +66,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    <span v-html="i18n.templates.setupSections.download.extractTheNewCompressedConfigurationArchiveUsingTar"></span>
+                    <span v-html="$t('templates.setupSections.download.extractTheNewCompressedConfigurationArchiveUsingTar')"></span>
                     <br />
                     <BashPrism :key="$parent.tarName" :cmd="`tar -xzvf ${$parent.tarName}`"></BashPrism>
                 </p>
@@ -76,23 +76,17 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupDownload',
-        display: i18n.templates.setupSections.download.download,
+        display: 'templates.setupSections.download.download', // i18n key
         key: 'download',
         components: {
             BashPrism,
         },
         props: {
             data: Object,
-        },
-        data() {
-            return {
-                i18n,
-            };
         },
         mounted() {
             this.$parent.setupCopy(this.$refs.copyTar);

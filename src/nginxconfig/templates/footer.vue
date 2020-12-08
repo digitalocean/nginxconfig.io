@@ -28,27 +28,27 @@ THE SOFTWARE.
     <div class="footer">
         <div class="container">
             <p>
-                <a href="#top" class="button is-primary is-small">{{ i18n.templates.footer.backToTop }}</a>
+                <a href="#top" class="button is-primary is-small">{{ $t('templates.footer.backToTop') }}</a>
             </p>
             <p>
-                {{ i18n.templates.footer.thisToolIs }}
-                <ExternalLink :text="i18n.templates.footer.openSourceOnGitHub"
+                {{ $t('templates.footer.thisToolIs') }}
+                <ExternalLink :text="$t('templates.footer.openSourceOnGitHub')"
                               link="https://github.com/digitalocean/nginxconfig.io"
                 ></ExternalLink>
-                {{ i18n.templates.footer.underThe }}
-                <ExternalLink :text="i18n.templates.footer.mit"
+                {{ $t('templates.footer.underThe') }}
+                <ExternalLink :text="$t('templates.footer.mit')"
                               link="https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE"
                 ></ExternalLink>
-                {{ i18n.templates.footer.license }}
-                {{ i18n.templates.footer.weWelcomeFeedbackAndContributions }}
+                {{ $t('templates.footer.license') }}
+                {{ $t('templates.footer.weWelcomeFeedbackAndContributions') }}
             </p>
             <p>
-                {{ i18n.templates.footer.originallyCreatedBy }}
-                <ExternalLink :text="i18n.templates.footer.balintSzekeres"
+                {{ $t('templates.footer.originallyCreatedBy') }}
+                <ExternalLink :text="$t('templates.footer.balintSzekeres')"
                               link="https://b4lint.hu/"
                 ></ExternalLink>,
-                {{ i18n.templates.footer.maintainedBy }}
-                <ExternalLink :text="i18n.templates.footer.digitalOcean"
+                {{ $t('templates.footer.maintainedBy') }}
+                <ExternalLink :text="$t('templates.footer.digitalOcean')"
                               link="https://github.com/digitalocean/nginxconfig.io"
                 ></ExternalLink>.
             </p>
@@ -57,18 +57,12 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../i18n';
     import ExternalLink from 'do-vue/src/templates/external_link';
 
     export default {
         name: 'Footer',
         components: {
             ExternalLink,
-        },
-        data() {
-            return {
-                i18n,
-            };
         },
     };
 </script>

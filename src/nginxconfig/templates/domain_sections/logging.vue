@@ -28,7 +28,7 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">access_log {{ i18n.templates.domainSections.logging.byDomain }}</label>
+                <label class="label">access_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -36,7 +36,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.logging.enableForThisDomain }}
+                                {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">error_log {{ i18n.templates.domainSections.logging.byDomain }}</label>
+                <label class="label">error_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -54,7 +54,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.domainSections.logging.enableForThisDomain }}
+                                {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -66,7 +66,6 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -83,7 +82,7 @@ THE SOFTWARE.
 
     export default {
         name: 'DomainLogging',                                  // Component name
-        display: i18n.common.logging,                           // Display name for tab
+        display: 'common.logging',                              // Display name for tab (i18n key)
         key: 'logging',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
@@ -91,11 +90,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                       // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
     };

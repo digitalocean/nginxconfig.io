@@ -27,10 +27,10 @@ THE SOFTWARE.
 <template>
     <div>
         <p>
-            <b>{{ i18n.templates.setupSections.goLive.letsGoLive }}</b> 🎉
+            <b>{{ $t('templates.setupSections.goLive.letsGoLive') }}</b> 🎉
         </p>
         <p>
-            {{ i18n.templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration }}
+            {{ $t('templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration') }}
             <br />
             <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
         </p>
@@ -38,23 +38,17 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupGoLive',
-        display: i18n.templates.setupSections.goLive.goLive,
+        display: 'templates.setupSections.goLive.goLive', // i18n key
         key: 'goLive',
         components: {
             BashPrism,
         },
         props: {
             data: Object,
-        },
-        data() {
-            return {
-                i18n,
-            };
         },
     };
 </script>
