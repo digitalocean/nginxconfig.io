@@ -24,31 +24,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-@import url("https://assets.digitalocean.com/prism/prism.css");
+.header {
+  padding: ($margin * 2) $margin ($margin * 1.5);
 
-$header: #0071fe;
-$highlight: #f2c94c;
-@import "~do-bulma/src/style";
+  @media (min-width: $breakpoint) {
+    padding: ($margin * 3.75) 0 ($margin * .5);
+  }
 
-.do-bulma {
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
-  @import "~pretty-checkbox/src/pretty-checkbox";
+  .container {
+    form {
+      .input-container {
+        margin: 0;
+      }
 
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-  @import "~vue-select/src/scss/vue-select";
-
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
+      .buttons {
+        > * {
+          margin: 0 0 1rem;
+        }
+      }
+    }
+  }
 }
