@@ -33,6 +33,18 @@ THE SOFTWARE.
             <template #header>
             </template>
             <template #buttons>
+                <VueSelect v-model="lang"
+                           :options="langOptions"
+                           :clearable="false"
+                           :reduce="s => s.value"
+                >
+                    <template #selected-option="{ label }">
+                        <span class="has-icon">
+                            <i class="icon fas fa-language"></i>
+                            <span>{{ label }}</span>
+                        </span>
+                    </template>
+                </VueSelect>
                 <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ i18n.templates.app.singleColumnMode }}
                 </a>
@@ -102,6 +114,7 @@ THE SOFTWARE.
     import clone from 'clone';
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
+    import VueSelect from 'vue-select';
     import Header from 'do-vue/src/templates/header';
     import diff from 'files-diff';
 
@@ -124,6 +137,7 @@ THE SOFTWARE.
         name: 'App',
         components: {
             Header,
+            VueSelect,
             Footer,
             Domain,
             Global,
@@ -136,7 +150,21 @@ THE SOFTWARE.
             return {
                 i18n,
                 domains: [],
-                global: Global.delegated,
+                global: {
+                    ...Global.delegated,
+                    app: {
+                        lang: {
+                            default: 'en',
+                            value: 'en',
+                            computed: 'en',
+                            enabled: true,
+                        },
+                    },
+                },
+                langOptions: [
+                    { label: 'English', value: 'en' },
+                    { label: 'Chinese', value: 'zh' },
+                ],
                 active: 0,
                 ready: false,
                 splitColumn: false,
@@ -151,6 +179,15 @@ THE SOFTWARE.
             },
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
+            },
+            lang: {
+                get() {
+                    return this.$data.global.app.lang.value;
+                },
+                set (value) {
+                    this.$data.global.app.lang.value = value;
+                    this.$data.global.app.lang.computed = value;
+                },
             },
         },
         watch: {
