@@ -242,8 +242,8 @@ THE SOFTWARE.
             },
             resetGlobal() {
                 this.confirm(
-                    'Reset global config',
-                    'Are you sure you want to reset all configuration options in the global config section?',
+                    i18n.templates.globalSections.tools.resetGlobalConfig,
+                    i18n.templates.globalSections.tools.resetGlobalConfigBody,
                     () => {
                         analytics('reset_global', 'Reset');
                         Object.values(this.$parent.$props.data).forEach(category => {
@@ -261,8 +261,10 @@ THE SOFTWARE.
                 if (!domain) return;
 
                 this.confirm(
-                    'Reset domain config',
-                    `Are you sure you want to reset all configuration options for the ${domain.server.domain.computed} domain?`,
+                    i18n.templates.globalSections.tools.resetDomainConfig ,
+                    `${i18n.templates.globalSections.tools.AreYouSureYouWantToResetAllConfigurationOptionsFotThe}
+                    ${domain.server.domain.computed}
+                    ${i18n.templates.globalSections.tools.domain}`,
                     () => {
                         analytics('reset_domain', 'Reset', domain.server.domain.computed);
                         this.doResetDomain(domain);
@@ -275,8 +277,10 @@ THE SOFTWARE.
                 if (!domain) return;
 
                 this.confirm(
-                    'Remove domain',
-                    `Are you sure you want to remove the ${domain.server.domain.computed} domain configuration?`,
+                    i18n.templates.globalSections.tools.removeDomain,
+                    `${i18n.templates.globalSections.tools.AreYouSureYouWantToRemoveThe}
+                    ${domain.server.domain.computed}
+                    ${i18n.templates.globalSections.tools.domainConfiguration}`,
                     () => {
                         analytics(
                             'remove_domain',
@@ -291,8 +295,8 @@ THE SOFTWARE.
             },
             resetDomains() {
                 this.confirm(
-                    'Reset all domain configs',
-                    'Are you sure you want to reset the configuration of ALL domains?',
+                    i18n.templates.globalSections.tools.removeAllDomainsConfig,
+                    i18n.templates.globalSections.tools.removeAllDomainsConfigBody,
                     () => {
                         analytics(
                             'reset_all',
@@ -309,8 +313,8 @@ THE SOFTWARE.
             },
             removeDomains() {
                 this.confirm(
-                    'Remove all domains',
-                    'Are you sure you want to remove ALL domain configurations?',
+                    i18n.templates.globalSections.tools.removeAllDomains,
+                    i18n.templates.globalSections.tools.removeAllDomainsBody,
                     () => {
                         analytics(
                             'remove_all',
