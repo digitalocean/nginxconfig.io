@@ -46,8 +46,8 @@ export default {
     resetGlobalConfigBody: 'Are you sure you want to reset all configuration options in the global config section?',
     removeAllDomainsConfigBody: 'Are you sure you want to reset the configuration of ALL domains?',
     removeAllDomainsBody: 'Are you sure you want to remove ALL domain configurations?',
-    AreYouSureYouWantToResetAllConfigurationOptionsFotThe:'Are you sure you want to reset all configuration options for the',
-    domain:'domain?',
-    AreYouSureYouWantToRemoveThe:'Are you sure you want to remove the ',
-    domainConfiguration:'domain configuration?',
+    areYouSureYouWantToResetAllConfigurationOptionsFotThe: 'Are you sure you want to reset all configuration options for the',
+    domain: 'domain?',
+    areYouSureYouWantToRemoveThe: 'Are you sure you want to remove the ',
+    domainConfiguration: 'domain configuration?',
 };

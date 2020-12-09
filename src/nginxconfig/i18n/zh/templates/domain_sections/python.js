@@ -32,5 +32,5 @@ export default {
     pythonCannotBeEnabledWithPhp: `${common.python}在启用${common.php}时无法启用。`,
     enablePython: `${common.enable} ${common.python}`,
     djangoRules: `${common.django} 规则`,
-    enableDjangoRules: `${common.enable} ${common.django}-specific 规则`,
+    enableDjangoRules: `${common.enable} ${common.django}专属规则`,
 };

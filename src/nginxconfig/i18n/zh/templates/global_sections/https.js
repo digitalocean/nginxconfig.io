@@ -31,7 +31,7 @@ const ipv4 = 'IPv4';
 const ipv6 = 'IPv6';
 
 export default {
-    sslProfile: `${common.ssl}配置文件`,
+    sslProfile: `${common.ssl}配置`,
     httpsMustBeEnabledOnOneSite: `必须在至少一个站点上启用${common.https}才能配置全局${common.https}设置。`,
     ocspDnsResolvers: 'OCSP DNS解析器',
     cloudflareResolver: 'Cloudflare解析器',

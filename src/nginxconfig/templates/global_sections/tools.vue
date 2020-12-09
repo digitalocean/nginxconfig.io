@@ -262,7 +262,7 @@ THE SOFTWARE.
 
                 this.confirm(
                     i18n.templates.globalSections.tools.resetDomainConfig ,
-                    `${i18n.templates.globalSections.tools.AreYouSureYouWantToResetAllConfigurationOptionsFotThe}
+                    `${i18n.templates.globalSections.tools.areYouSureYouWantToResetAllConfigurationOptionsFotThe}
                     ${domain.server.domain.computed}
                     ${i18n.templates.globalSections.tools.domain}`,
                     () => {
@@ -278,7 +278,7 @@ THE SOFTWARE.
 
                 this.confirm(
                     i18n.templates.globalSections.tools.removeDomain,
-                    `${i18n.templates.globalSections.tools.AreYouSureYouWantToRemoveThe}
+                    `${i18n.templates.globalSections.tools.areYouSureYouWantToRemoveThe}
                     ${domain.server.domain.computed}
                     ${i18n.templates.globalSections.tools.domainConfiguration}`,
                     () => {
