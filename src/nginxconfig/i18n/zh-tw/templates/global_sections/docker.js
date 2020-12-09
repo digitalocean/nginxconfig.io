@@ -27,13 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    gzipCompression: 'Gzip 压缩',
-    enableGzipCompression: `${common.enable}Gzip压缩`,
-    brotliCompression: 'Brotli 压缩',
-    enableBrotliCompression: `${common.enable}brotli压缩`,
-    expirationForAssets: '资源有效期',
-    expirationForMedia: '媒体资源有效期',
-    expirationForSvgs: 'SVGs有效期',
-    expirationForFonts: '字体有效期',
-    performance: '压缩',
+    dockerfile: `生成Dockerfile運行${common.nginx}與${common.docker}`,
+    dockerCompose: '生成docker-compose.yaml來運行nginx docker-compose',
 };

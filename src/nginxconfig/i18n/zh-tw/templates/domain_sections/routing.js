@@ -27,10 +27,10 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    fallbackRouting: '后备路由',
-    fallbackRoutingPhpPath: `后背路由${common.php}路径`,
-    legacyPhpRouting: `传统${common.php}路由`,
-    enableLegacyRouting: `${common.enable}传统路由`,
-    path: '路径',
+    fallbackRouting: '後備路由',
+    fallbackRoutingPhpPath: `後備路由${common.php}路徑`,
+    legacyPhpRouting: `傳統${common.php}路由`,
+    enableLegacyRouting: `${common.enable}傳統路由`,
+    path: '路徑',
     routing: '路由',
 };
