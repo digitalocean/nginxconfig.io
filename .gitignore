@@ -6,3 +6,4 @@ dev/
 .vscode/
 build/
 .DS_Store
+/package-lock.json

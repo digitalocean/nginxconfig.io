@@ -153,7 +153,7 @@ THE SOFTWARE.
                     ...Global.delegated,
                     app: {
                         lang: {
-                            default: 'en',
+                            default: '',
                             value: 'en',
                             computed: 'en',
                             enabled: true,
@@ -220,6 +220,20 @@ THE SOFTWARE.
             // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
+            // Adaptive system language,The system language is not read after the language is set
+            if (!query.includes('global.app.lang') && typeof navigator !== undefined){
+                if (typeof navigator.language === 'string'){
+                    let lang = navigator.language.match(/(\w+)/g).map(function(value){
+                        return value.toUpperCase();
+                    });
+                    lang[0] = lang[0].toLowerCase();
+                    lang = lang.join('');
+                    if (lang in i18nPacks){
+                        this.$data.global.app.lang.value = lang;
+                        this.$data.global.app.lang.computed = lang;
+                    }
+                }
+            }
             importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Send an initial GA event for column mode
