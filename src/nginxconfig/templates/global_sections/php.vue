@@ -127,11 +127,11 @@ THE SOFTWARE.
             ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
             phpServerOptions() {
                 return Object.entries(this.$props.data.phpServer.options)
-                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}}` : ''}`, value: key }));
+                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
             },
             phpBackupServerOptions() {
                 return Object.entries(this.$props.data.phpBackupServer.options)
-                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}}` : ''}`, value: key }));
+                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
             },
         },
         watch: {
