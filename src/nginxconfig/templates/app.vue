@@ -153,7 +153,6 @@ THE SOFTWARE.
                     ...Global.delegated,
                     app: {
                         lang: {
-                            default: '',
                             value: 'en',
                             computed: 'en',
                             enabled: true,
@@ -207,7 +206,7 @@ THE SOFTWARE.
             '$data.global.app.lang': {
                 handler(data) {
                     // Ensure valid pack
-                    if (!(data.value in i18nPacks)) data.computed = data.default;
+                    if (!(data.value in i18nPacks)) data.computed = 'en';
 
                     // Update the locale
                     this.$i18n.locale = data.computed;
