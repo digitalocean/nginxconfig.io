@@ -60,7 +60,7 @@ const applyCategories = (categories, target) => {
     }
 };
 
-export default (query, domains, global, nextTick) => {
+export default (query, domains, global, nextTick) => new Promise(resolve => {
     const data = qs.parse(query, {
         ignoreQueryPrefix: true,
         allowDots: true,
@@ -117,4 +117,7 @@ export default (query, domains, global, nextTick) => {
         // If this is an object, apply any potential data
         if (isObject(data.global)) applyCategories(data.global, global);
     }
-};
+
+    // Resolve after everything has updated
+    nextTick(() => nextTick(() => resolve(data)));
+});

@@ -24,23 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import './scss/style.scss';
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
-import './util/prism_bundle';
-import App from './templates/app';
-import * as i18nPacks from './i18n';
-import i18nDefault from './i18n/default';
-
-Vue.use(VueI18n);
-
-const i18n = new VueI18n({
-    locale: i18nDefault,
-    fallbackLocale: i18nDefault,
-    messages: i18nPacks,
-});
-
-new Vue({
-    i18n,
-    render: h => h(App),
-}).$mount('#app');
+export default 'en';

@@ -122,8 +122,10 @@ THE SOFTWARE.
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
+    import browserLanguage from '../util/browser_language';
 
     import * as i18nPacks from '../i18n';
+    import i18nDefault from '../i18n/default';
     import generators from '../generators';
 
     import Domain from './domain';
@@ -153,8 +155,9 @@ THE SOFTWARE.
                     ...Global.delegated,
                     app: {
                         lang: {
-                            value: 'en',
-                            computed: 'en',
+                            default: i18nDefault,
+                            value: i18nDefault,
+                            computed: i18nDefault,
                             enabled: true,
                         },
                     },
@@ -206,7 +209,7 @@ THE SOFTWARE.
             '$data.global.app.lang': {
                 handler(data) {
                     // Ensure valid pack
-                    if (!(data.value in i18nPacks)) data.computed = 'en';
+                    if (!(data.value in i18nPacks)) data.computed = data.default;
 
                     // Update the locale
                     this.$i18n.locale = data.computed;
@@ -214,38 +217,18 @@ THE SOFTWARE.
                 deep: true,
             },
         },
-        mounted() {
+        async mounted() {
             // Import any data from the URL query params, defaulting to one domain
             // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
-            // Set language based on browser preferences
-            if (!query.includes('global.app.lang') && typeof window === 'object' && typeof window.navigator === 'object'){
-                const rawLangs = new Set();
+            const imported = await importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
-                // Get the user language
-                if (Array.isArray(window.navigator.languages))
-                    window.navigator.languages.forEach(lang => rawLangs.add(lang));
-                if (typeof window.navigator.language === 'string')
-                    rawLangs.add(window.navigator.language);
-                if (Intl && 'DateTimeFormat' in Intl)
-                    rawLangs.add(Intl.DateTimeFormat().resolvedOptions().locale);
-
-                const toPack = lang => lang.split('-')[0].toLowerCase() + lang.split('-').slice(1).map(x => x.toUpperCase()).join('-');
-
-                // Get the support language
-                const i18nPackLangs = Object.keys(i18nPacks);
-
-                // Try to get an exact region match, or fallback to language match
-                const exactMatch = [...rawLangs.values()].find(x => i18nPackLangs.includes(toPack(x)));
-                const langMatch = [...rawLangs.values()].find(x => i18nPackLangs.includes(x.split('-')[0].toLowerCase())).split('-')[0].toLowerCase();
-
-                if (exactMatch || langMatch) {
-                    this.$data.global.app.lang.value = toPack(exactMatch) || langMatch.split('-')[0].toLowerCase();
-                    this.$data.global.app.lang.computed = toPack(exactMatch) || langMatch.split('-')[0].toLowerCase();
-                }
+            // Apply browser language if not specified in query
+            if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
+                const language = browserLanguage();
+                if (language) this.lang = language;
             }
-            importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Send an initial GA event for column mode
             this.splitColumnEvent(true);
