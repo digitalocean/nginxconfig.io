@@ -220,18 +220,36 @@ THE SOFTWARE.
             // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
-            // Adaptive system language,The system language is not read after the language is set
-            if (!query.includes('global.app.lang') && typeof navigator !== undefined){
-                if (typeof navigator.language === 'string'){
-                    let lang = navigator.language.match(/(\w+)/g).map(function(value){
-                        return value.toUpperCase();
-                    });
-                    lang[0] = lang[0].toLowerCase();
-                    lang = lang.join('');
-                    if (lang in i18nPacks){
-                        this.$data.global.app.lang.value = lang;
-                        this.$data.global.app.lang.computed = lang;
-                    }
+            // Set language based on browser preferences
+            if (!query.includes('global.app.lang') && typeof window === 'object' && typeof window.navigator === 'object'){
+                const rawLangs = new Set();
+
+                // Get the user language
+                if (Array.isArray(window.navigator.languages))
+                    window.navigator.languages.forEach(lang => rawLangs.add(lang));
+                if (typeof window.navigator.language === 'string')
+                    rawLangs.add(window.navigator.language);
+                if (Intl && 'DateTimeFormat' in Intl)
+                    rawLangs.add(Intl.DateTimeFormat().resolvedOptions().locale);
+
+                const toPack = lang => lang.split('-')[0].toLowerCase() + lang.split('-').slice(1).map(x => x.toUpperCase()).join('-');
+
+                // Get the support language
+                const i18nPackLangs = Object.keys(i18nPacks).reduce((acc, data) => {
+                    if (!Array.isArray(acc)) acc = [];
+                    const lang = data;
+                    if (!(lang in acc)) acc.push(lang);
+                    return acc;
+                }, {});
+
+
+                // Try to get an exact region match, or fallback to language match
+                const exactMatch = [...rawLangs.values()].find(x => i18nPackLangs.includes(toPack(x)));
+                const langMatch = [...rawLangs.values()].find(x => i18nPackLangs.includes(x.split('-')[0].toLowerCase())).split('-')[0].toLowerCase();
+
+                if (exactMatch || langMatch) {
+                    this.$data.global.app.lang.value = toPack(exactMatch) || langMatch.split('-')[0].toLowerCase();
+                    this.$data.global.app.lang.computed = toPack(exactMatch) || langMatch.split('-')[0].toLowerCase();
                 }
             }
             importData(query, this.$data.domains, this.$data.global, this.$nextTick);
