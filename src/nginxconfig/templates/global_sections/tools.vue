@@ -262,7 +262,7 @@ THE SOFTWARE.
 
                 this.confirm(
                     i18n.templates.globalSections.tools.resetDomainConfig ,
-                    `${i18n.templates.globalSections.tools.areYouSureYouWantToResetAllConfigurationOptionsFotThe}
+                    `${i18n.templates.globalSections.tools.areYouSureYouWantToResetAllConfigurationOptionsForThe}
                     ${domain.server.domain.computed}
                     ${i18n.templates.globalSections.tools.domain}`,
                     () => {
@@ -295,8 +295,8 @@ THE SOFTWARE.
             },
             resetDomains() {
                 this.confirm(
-                    i18n.templates.globalSections.tools.removeAllDomainsConfig,
-                    i18n.templates.globalSections.tools.removeAllDomainsConfigBody,
+                    i18n.templates.globalSections.tools.resetAllDomainsConfig,
+                    i18n.templates.globalSections.tools.resetAllDomainsConfigBody,
                     () => {
                         analytics(
                             'reset_all',
