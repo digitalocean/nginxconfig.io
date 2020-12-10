@@ -24,16 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
-    return {
-        version: '3.3',
-        services: {
-            nginx: {
-                build: {
-                    context: '.',
-                    dockerfile: 'Dockerfile',
-                },
-            },
-        },
-    };
-};
+import common from './common';
+import templates from './templates';
+
+export default { common, templates };

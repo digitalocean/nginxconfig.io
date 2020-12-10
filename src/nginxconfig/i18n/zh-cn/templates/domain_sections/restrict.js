@@ -24,16 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
-    return {
-        version: '3.3',
-        services: {
-            nginx: {
-                build: {
-                    context: '.',
-                    dockerfile: 'Dockerfile',
-                },
-            },
-        },
-    };
+export default {
+    disableForThisDomain: '在此站点上禁用',
+    responseCode: '响应代码',
 };

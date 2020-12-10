@@ -24,16 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
-    return {
-        version: '3.3',
-        services: {
-            nginx: {
-                build: {
-                    context: '.',
-                    dockerfile: 'Dockerfile',
-                },
-            },
-        },
-    };
+export default {
+    domain: '站点',
+    path: '路径',
+    documentRoot: '运行目录',
+    oneOrMoreOtherDomainsAreAlsoNamed: '发现了重复的域名',
+    thisWillCauseIssuesWithConfigGeneration: '这将导致生成配置出现问题。',
+    wwwSubdomain: 'www 子域名',
+    cdnSubdomain: 'CDN 子域名',
+    redirectSubdomains: '子域名重定向',
+    routing: '路由设置',
+    server: '服务',
 };

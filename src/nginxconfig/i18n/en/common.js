@@ -46,4 +46,5 @@ export default {
     reverseProxy: 'Reverse proxy',
     reverseProxyLower: 'reverse proxy',
     restrict: 'Restrict',
+    listen: 'listen',
 };

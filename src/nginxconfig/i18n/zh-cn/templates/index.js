@@ -24,16 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
-    return {
-        version: '3.3',
-        services: {
-            nginx: {
-                build: {
-                    context: '.',
-                    dockerfile: 'Dockerfile',
-                },
-            },
-        },
-    };
-};
+import app from './app';
+import setup from './setup';
+import footer from './footer';
+import domainSections from './domain_sections';
+import globalSections from './global_sections';
+import setupSections from './setup_sections';
+
+export default { app, setup, footer, domainSections, globalSections, setupSections };

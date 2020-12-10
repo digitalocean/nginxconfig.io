@@ -24,16 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default () => {
-    return {
-        version: '3.3',
-        services: {
-            nginx: {
-                build: {
-                    context: '.',
-                    dockerfile: 'Dockerfile',
-                },
-            },
-        },
-    };
-};
+import certbot from './certbot';
+import download from './download';
+import goLive from './go_live';
+import ssl from './ssl';
+
+export default { certbot, download, goLive, ssl };

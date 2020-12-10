@@ -26,28 +26,25 @@ THE SOFTWARE.
 
 import common from '../../common';
 
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    modularizedStructure: 'Modularized structure',
-    enableModularizedConfigFiles: `${common.enable} modularized config files`,
-    symlinkVhost: 'Symlink vhost',
-    enableSymLinksFrom: `${common.enable} symlinks from`,
-    to: 'to',
-    shareConfiguration: 'Share configuration',
-    resetConfiguration: 'Reset configuration',
-    resetGlobalConfig: 'Reset global config',
-    resetAllDomains: 'Reset all domains',
-    removeAllDomains: 'Remove all domains',
-    resetAllDomainsConfig: 'Reset all domain configs',
-    resetDomainConfig: 'Reset domain config',
-    removeDomain: 'Remove domain',
-    yesImSure: 'Yes, I\'m sure',
-    noCancel: 'No, cancel',
-    tools: 'Tools',
-    resetGlobalConfigBody: 'Are you sure you want to reset all configuration options in the global config section?',
-    resetAllDomainsConfigBody: 'Are you sure you want to reset the configuration of ALL domains?',
-    removeAllDomainsBody: 'Are you sure you want to remove ALL domain configurations?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: 'Are you sure you want to reset all configuration options for the',
-    domain: 'domain?',
-    areYouSureYouWantToRemoveThe: 'Are you sure you want to remove the ',
-    domainConfiguration: 'domain configuration?',
+    sslProfile: `${common.ssl}配置`,
+    httpsMustBeEnabledOnOneSite: `必须在至少一个站点上启用${common.https}才能配置全局${common.https}设置。`,
+    ocspDnsResolvers: 'OCSP DNS解析器',
+    cloudflareResolver: 'Cloudflare解析器',
+    googlePublicDns: '谷歌公共DNS',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `${common.letsEncrypt} Web根目录`,
+    letsEncryptCertRoot: `${common.letsEncrypt}证书目录`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4}`,
+    ipv6Only: `${ipv6}`,
+    ipv4AndIpv6: `${ipv4} & ${ipv6}`,
 };

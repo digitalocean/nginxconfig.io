@@ -118,7 +118,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">listen</label>
+                <label class="label">{{ i18n.common.listen }}</label>
             </div>
             <div class="field-body">
                 <div class="field has-addons">

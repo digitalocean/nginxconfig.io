@@ -26,28 +26,14 @@ THE SOFTWARE.
 
 import common from '../../common';
 
+const certbot = 'Certbot';
+
 export default {
-    modularizedStructure: 'Modularized structure',
-    enableModularizedConfigFiles: `${common.enable} modularized config files`,
-    symlinkVhost: 'Symlink vhost',
-    enableSymLinksFrom: `${common.enable} symlinks from`,
-    to: 'to',
-    shareConfiguration: 'Share configuration',
-    resetConfiguration: 'Reset configuration',
-    resetGlobalConfig: 'Reset global config',
-    resetAllDomains: 'Reset all domains',
-    removeAllDomains: 'Remove all domains',
-    resetAllDomainsConfig: 'Reset all domain configs',
-    resetDomainConfig: 'Reset domain config',
-    removeDomain: 'Remove domain',
-    yesImSure: 'Yes, I\'m sure',
-    noCancel: 'No, cancel',
-    tools: 'Tools',
-    resetGlobalConfigBody: 'Are you sure you want to reset all configuration options in the global config section?',
-    resetAllDomainsConfigBody: 'Are you sure you want to reset the configuration of ALL domains?',
-    removeAllDomainsBody: 'Are you sure you want to remove ALL domain configurations?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: 'Are you sure you want to reset all configuration options for the',
-    domain: 'domain?',
-    areYouSureYouWantToRemoveThe: 'Are you sure you want to remove the ',
-    domainConfiguration: 'domain configuration?',
+    commentOutSslDirectivesInConfiguration: `注釋掉配寘中的${common.ssl}相關指令:`,
+    reloadYourNginxServer: `重新加載你的${common.nginx}服務器:`,
+    obtainSslCertificatesFromLetsEncrypt: `使用${certbot}從${common.letsEncrypt}獲得${common.ssl}證書:`,
+    uncommentSslDirectivesInConfiguration: `在配寘中取消注釋${common.ssl}相關指令:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `配寘${certbot}，當${common.nginx}成功更新證書時重新加載:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `${certbot}不需要為您的${common.nginx}配寘進行設定。 `,
+    certbot,
 };
