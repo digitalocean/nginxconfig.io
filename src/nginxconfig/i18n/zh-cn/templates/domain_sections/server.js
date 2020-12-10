@@ -33,6 +33,6 @@ export default {
     wwwSubdomain: 'www 子域名',
     cdnSubdomain: 'CDN 子域名',
     redirectSubdomains: '子域名重定向',
-    routing: 'Routing',
-    server: 'Server',
+    routing: '路由设置',
+    server: '服务',
 };

@@ -32,5 +32,5 @@ export default {
     legacyPhpRouting: `傳統${common.php}路由`,
     enableLegacyRouting: `${common.enable}傳統路由`,
     path: '路徑',
-    routing: '路由',
+    routing: '路由設定',
 };

@@ -42,9 +42,9 @@ export default {
     magento: 'Magento',
     joomla: 'Joomla',
     django: 'Django',
-    logging: 'Logging',
+    logging: '日誌記錄',
     reverseProxy: '反向代理',
     reverseProxyLower: '反向代理',
     restrict: '限制',
-    listen : '監聽',
+    listen: '監聽',
 };

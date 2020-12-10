@@ -27,7 +27,7 @@ THE SOFTWARE.
 export default () => {
     return {
         version: '3.3',
-        services:{
+        services: {
             nginx: {
                 build: {
                     context: '.',
