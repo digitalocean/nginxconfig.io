@@ -29,9 +29,9 @@ import common from '../common';
 export default {
     title: `${common.nginx} 配置`,
     description: `配置高性能、安全、稳定的${common.nginx}服务器的最简单方法。`,
-    en: '英语', // TODO: translate
-    zhCN: '简体中文', // TODO: translate
-    zhTW: '繁体中文', // TODO: translate
+    en: '英语',
+    zhCN: '简体中文',
+    zhTW: '繁体中文',
     singleColumnMode: '垂直模式',
     splitColumnMode: '水平模式',
     perWebsiteConfig: '站点配置',
