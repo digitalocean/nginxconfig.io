@@ -235,13 +235,7 @@ THE SOFTWARE.
                 const toPack = lang => lang.split('-')[0].toLowerCase() + lang.split('-').slice(1).map(x => x.toUpperCase()).join('-');
 
                 // Get the support language
-                const i18nPackLangs = Object.keys(i18nPacks).reduce((acc, data) => {
-                    if (!Array.isArray(acc)) acc = [];
-                    const lang = data;
-                    if (!(lang in acc)) acc.push(lang);
-                    return acc;
-                }, {});
-
+                const i18nPackLangs = Object.keys(i18nPacks);
 
                 // Try to get an exact region match, or fallback to language match
                 const exactMatch = [...rawLangs.values()].find(x => i18nPackLangs.includes(toPack(x)));
