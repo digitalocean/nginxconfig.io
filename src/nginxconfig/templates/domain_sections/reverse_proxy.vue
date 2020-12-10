@@ -67,7 +67,7 @@ THE SOFTWARE.
 
         <div v-if="pathEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.reverseProxy.path') }}</label>
+                <label class="label">{{ $t('common.path') }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${pathChanged ? ' is-changed' : ''}`">

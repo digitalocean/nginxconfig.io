@@ -185,7 +185,12 @@ THE SOFTWARE.
                 },
             },
             i18nPacks() {
-                return Object.keys(i18nPacks).map(pack => ({ label: this.$t(`templates.app.${pack}`), value: pack }));
+                return Object.keys(i18nPacks).map(pack => ({
+                    label: this.$t(`templates.app.${pack}`) + (pack === this.$i18n.locale
+                        ? ''
+                        : ` - ${this.$t(`templates.app.${pack}`, pack)}`),
+                    value: pack,
+                }));
             },
         },
         watch: {

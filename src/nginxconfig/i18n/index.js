@@ -25,3 +25,5 @@ THE SOFTWARE.
 */
 
 export { default as en } from './en';
+export { default as zhCN } from './zh-cn';
+export { default as zhTW } from './zh-tw';

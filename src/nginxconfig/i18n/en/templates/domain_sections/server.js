@@ -26,13 +26,12 @@ THE SOFTWARE.
 
 export default {
     domain: 'Domain',
-    path: 'Path',
     documentRoot: 'Document root',
     oneOrMoreOtherDomainsAreAlsoNamed: 'One or more other domains are also named',
     thisWillCauseIssuesWithConfigGeneration: 'This will cause issues with config generation.',
     wwwSubdomain: 'www subdomain',
     cdnSubdomain: 'CDN subdomain',
     redirectSubdomains: 'Redirect subdomains',
-    routing: 'Routing',
     server: 'Server',
+    listen: 'listen',
 };

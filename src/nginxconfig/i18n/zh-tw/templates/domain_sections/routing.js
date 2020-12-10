@@ -31,6 +31,5 @@ export default {
     fallbackRoutingPhpPath: `後備路由${common.php}路徑`,
     legacyPhpRouting: `傳統${common.php}路由`,
     enableLegacyRouting: `${common.enable}傳統路由`,
-    path: '路徑',
     routing: '路由設定',
 };

@@ -35,7 +35,7 @@ THE SOFTWARE.
             </div>
 
             <div class="field">
-                <label class="label">{{ $t('templates.domainSections.server.path') }}</label>
+                <label class="label">{{ $t('common.path') }}</label>
                 <div :class="`control${pathChanged ? ' is-changed' : ''}`">
                     <input v-model="path" class="input" type="text" :placeholder="`/var/www/${domain}`" />
                 </div>
@@ -118,7 +118,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.common.listen }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.listen') }}</label>
             </div>
             <div class="field-body">
                 <div class="field has-addons">
