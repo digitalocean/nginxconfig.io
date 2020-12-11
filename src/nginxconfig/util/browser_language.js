@@ -38,12 +38,13 @@ export default () => {
         if (typeof window.navigator.language === 'string')
             userLocales.add(window.navigator.language);
         if (Intl && 'DateTimeFormat' in Intl)
-            userLocales.add(Intl.DateTimeFormat().resolvedOptions().locale);
+            if (Intl.DateTimeFormat().resolvedOptions().locale !== 'und')
+                userLocales.add(Intl.DateTimeFormat().resolvedOptions().locale);
 
         // Try to find an exact region/language match
         const i18nPackLocales = Object.keys(i18nPacks);
         const exactMatch = [...userLocales.values()].find(locale => i18nPackLocales.includes(toPack(locale)));
-        if (exactMatch) return exactMatch;
+        if (exactMatch) return toPack(exactMatch);
 
         // Build a map of languages to pack
         const i18nPackLanguages = i18nPackLocales.reduce((map, pack) => {
@@ -53,7 +54,11 @@ export default () => {
         }, {});
 
         // Try to match a user language to a pack language
-        const langMatch = [...userLocales.values()].find(x => i18nPackLanguages.includes(x.split('-')[0].toLowerCase()));
-        if (langMatch) return i18nPackLanguages[langMatch];
+        if (i18nPackLanguages){
+            const langMatch = [...userLocales.values()].find(x => Object.keys(i18nPackLanguages).includes(x.split('-')[0].toLowerCase()));
+            if (langMatch) return i18nPackLanguages[langMatch.split('-')[0].toLowerCase()];
+        }
+
+        return false;
     }
 };
