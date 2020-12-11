@@ -28,13 +28,13 @@ THE SOFTWARE.
     <div>
         <div v-if="!phpServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
+                <label class="label">{{ $t('templates.globalSections.php.phpServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.globalSections.php.phpMustBeEnabledOnOneSite }}
+                            {{ $t('templates.globalSections.php.phpMustBeEnabledOnOneSite') }}
                         </label>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ THE SOFTWARE.
         <template v-else>
             <div class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.php.phpServer }}</label>
+                    <label class="label">{{ $t('templates.globalSections.php.phpServer') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -61,12 +61,13 @@ THE SOFTWARE.
 
             <div class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.php.phpBackupServer }}</label>
+                    <label class="label">{{ $t('templates.globalSections.php.phpBackupServer') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
-                            <VueSelect v-model="phpBackupServer"
+                            <VueSelect ref="phpBackupServerSelect"
+                                       v-model="phpBackupServer"
                                        :options="phpBackupServerOptions"
                                        :clearable="false"
                                        :reduce="s => s.value"
@@ -81,22 +82,22 @@ THE SOFTWARE.
 
 <script>
     import VueSelect from 'vue-select';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
+    // Value -> i18n key
     const serverOptions = {
-        '127.0.0.1:9000': `${i18n.templates.globalSections.php.tcp}: 127.0.0.1:9000`,
-        '/var/run/hhvm/sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/sock`,
-        '/var/run/hhvm/hhvm.sock': `${i18n.templates.globalSections.php.hhvmSocket}: /var/run/hhvm/hhvm.sock`,
-        '/var/run/php5-fpm.sock': `${i18n.templates.globalSections.php.php5Socket}: /var/run/php5-fpm.sock`,
-        '/var/run/php/php7.1-fpm.sock': `${i18n.templates.globalSections.php.php71Socket}: /var/run/php/php7.1-fpm.sock`,
-        '/var/run/php/php7.2-fpm.sock': `${i18n.templates.globalSections.php.php72Socket}: /var/run/php/php7.2-fpm.sock`,
-        '/var/run/php/php7.0-fpm.sock': `${i18n.templates.globalSections.php.php70Socket}: /var/run/php/php7.0-fpm.sock`,
-        '/var/run/php/php7.3-fpm.sock': `${i18n.templates.globalSections.php.php73Socket}: /var/run/php/php7.3-fpm.sock`,
-        '/var/run/php/php7.4-fpm.sock': `${i18n.templates.globalSections.php.php74Socket}: /var/run/php/php7.4-fpm.sock`,
-        '/var/run/php/php8.0-fpm.sock': `${i18n.templates.globalSections.php.php80Socket}: /var/run/php/php8.0-fpm.sock`,
-        '/var/run/php/php-fpm.sock': `${i18n.templates.globalSections.php.phpSocket}: /var/run/php/php-fpm.sock`,
+        '127.0.0.1:9000': 'templates.globalSections.php.tcp',
+        '/var/run/hhvm/sock': 'templates.globalSections.php.hhvmSocket',
+        '/var/run/hhvm/hhvm.sock': 'templates.globalSections.php.hhvmSocket',
+        '/var/run/php5-fpm.sock': 'templates.globalSections.php.php5Socket',
+        '/var/run/php/php7.1-fpm.sock': 'templates.globalSections.php.php71Socket',
+        '/var/run/php/php7.2-fpm.sock': 'templates.globalSections.php.php72Socket',
+        '/var/run/php/php7.0-fpm.sock': 'templates.globalSections.php.php70Socket',
+        '/var/run/php/php7.3-fpm.sock': 'templates.globalSections.php.php73Socket',
+        '/var/run/php/php7.4-fpm.sock': 'templates.globalSections.php.php74Socket',
+        '/var/run/php/php8.0-fpm.sock': 'templates.globalSections.php.php80Socket',
+        '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
     };
 
     const defaults = {
@@ -107,14 +108,14 @@ THE SOFTWARE.
         },
         phpBackupServer: {
             default: '',
-            options: { '': i18n.templates.globalSections.php.disabled, ...serverOptions },
+            options: { '': 'templates.globalSections.php.disabled', ...serverOptions },
             enabled: true,
         },
     };
 
     export default {
         name: 'GlobalPHP',                              // Component name
-        display: i18n.common.php,                       // Display name for tab
+        display: 'common.php',                          // Display name for tab (i18n key)
         key: 'php',                                     // Key for data in parent
         delegated: delegatedFromDefaults(defaults),     // Data the parent will present here
         components: {
@@ -123,20 +124,15 @@ THE SOFTWARE.
         props: {
             data: Object,                               // Data delegated back to us from parent
         },
-        data () {
-            return {
-                i18n,
-            };
-        },
         computed: {
             ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
             phpServerOptions() {
                 return Object.entries(this.$props.data.phpServer.options)
-                    .map(([key, value]) => ({ label: value, value: key }));
+                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
             },
             phpBackupServerOptions() {
                 return Object.entries(this.$props.data.phpBackupServer.options)
-                    .map(([key, value]) => ({ label: value, value: key }));
+                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
             },
         },
         watch: {
@@ -178,6 +174,12 @@ THE SOFTWARE.
                     this.$props.data.phpBackupServer.computed = '';
                 },
                 deep: true,
+            },
+            // Ensure 'Disabled' gets translated in VueSelect on language switch
+            '$i18n.locale'() {
+                const updated = this.phpBackupServerOptions
+                    .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
+                if (updated) this.$refs.phpBackupServerSelect.$data._value = updated;
             },
         },
     };

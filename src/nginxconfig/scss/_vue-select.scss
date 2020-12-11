@@ -36,7 +36,14 @@ THE SOFTWARE.
       box-shadow: 0 0 2px rgba($success, .5);
 
       .vs__selected {
+        height: $height;
+        position: unset;
         top: .75em;
+      }
+
+      .vs__search {
+        position: absolute;
+        width: 100%;
       }
     }
   }
@@ -60,6 +67,17 @@ THE SOFTWARE.
         margin: 0;
         padding: 0;
         transition: opacity $transition;
+
+        .has-icon {
+          align-items: center;
+          display: flex;
+
+          .icon {
+            color: $dark-grey;
+            font-size: 1.25rem;
+            margin: 0 .5rem 0 0;
+          }
+        }
       }
 
       .vs__search {
@@ -76,7 +94,13 @@ THE SOFTWARE.
     }
 
     .vs__actions {
-      padding: 0;
+      padding: 0 0 0 .25rem;
+    }
+  }
+
+  .vs__dropdown-menu {
+    .vs__dropdown-option {
+      white-space: normal;
     }
   }
 }

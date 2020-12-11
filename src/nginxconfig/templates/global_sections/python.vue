@@ -28,13 +28,13 @@ THE SOFTWARE.
     <div>
         <div v-if="!pythonServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.python.pythonServer }}</label>
+                <label class="label">{{ $t('templates.globalSections.python.pythonServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.globalSections.python.pythonMustBeEnabledOnOneSite }}
+                            {{ $t('templates.globalSections.python.pythonMustBeEnabledOnOneSite') }}
                         </label>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ THE SOFTWARE.
 
         <div v-else class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.python.pythonServer }}</label>
+                <label class="label">{{ $t('templates.globalSections.python.pythonServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -61,7 +61,6 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -74,16 +73,11 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalPython',                               // Component name
-        display: i18n.common.python,                        // Display name for tab
+        display: 'common.python',                           // Display name for tab (i18n key)
         key: 'python',                                      // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         props: {
             data: Object,                                   // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'python'), // Getters & setters for the delegated data
         watch: {

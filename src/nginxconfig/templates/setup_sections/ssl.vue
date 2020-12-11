@@ -29,7 +29,7 @@ THE SOFTWARE.
         <ol v-if="diffieHellmanValue || letsEncryptActive">
             <li v-if="diffieHellmanValue">
                 <p>
-                    <span v-html="i18n.templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer"></span>
+                    <span v-html="$t('templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer')"></span>
                     <br />
                     <BashPrism :key="`${$props.data.global.nginx.nginxConfigDirectory.computed}-${diffieHellmanValue}`"
                                :cmd="`openssl dhparam -out ${$props.data.global.nginx.nginxConfigDirectory.computed}/dhparam.pem ${diffieHellmanValue}`"
@@ -39,7 +39,7 @@ THE SOFTWARE.
 
             <li v-if="letsEncryptActive">
                 <p>
-                    <span v-html="i18n.templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt"></span>
+                    <span v-html="$t('templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt')"></span>
                     <br />
                     <BashPrism :key="letsEncryptDir" :cmd="`mkdir -p ${letsEncryptDir}`"></BashPrism>
                     <BashPrism :key="`${nginxUser}-${letsEncryptDir}`"
@@ -54,7 +54,7 @@ THE SOFTWARE.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.setupSections.ssl.noAdditionalStepsAreNeededToSetUpSslForNginx }}
+                            {{ $t('templates.setupSections.ssl.noAdditionalStepsAreNeededToSetUpSslForNginx') }}
                         </label>
                     </div>
                 </div>
@@ -64,23 +64,17 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupSSL',
-        display: i18n.templates.setupSections.ssl.sslInit,
+        display: 'templates.setupSections.ssl.sslInit', // i18n key
         key: 'ssl',
         components: {
             BashPrism,
         },
         props: {
             data: Object,
-        },
-        data() {
-            return {
-                i18n,
-            };
         },
         computed: {
             letsEncryptDir() {

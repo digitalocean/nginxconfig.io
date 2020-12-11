@@ -46,5 +46,5 @@ export default {
     reverseProxy: '反向代理',
     reverseProxyLower: '反向代理',
     restrict: '限制',
-    listen: '监听',
+    path: '路径',
 };

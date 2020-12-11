@@ -28,7 +28,7 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.nginx.nginxConfigDirectory }}</label>
+                <label class="label">{{ $t('templates.globalSections.nginx.nginxConfigDirectory') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -110,7 +110,7 @@ THE SOFTWARE.
                     </div>
                     <div class="control">
                         <a class="button is-static">
-                            {{ i18n.templates.globalSections.nginx.mb }}
+                            {{ $t('templates.globalSections.nginx.mb') }}
                         </a>
                     </div>
                 </div>
@@ -121,7 +121,6 @@ THE SOFTWARE.
 
 <script>
     import VueSelect from 'vue-select';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -155,7 +154,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalNGINX',                                // Component name
-        display: i18n.common.nginx,                         // Display name for tab
+        display: 'common.nginx',                            // Display name for tab (i18n key)
         key: 'nginx',                                       // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -163,11 +162,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'nginx'),  // Getters & setters for the delegated data
         watch: {

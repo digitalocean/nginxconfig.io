@@ -53,6 +53,7 @@
     "simple-js-sha2-256": "^1.0.7",
     "string-similarity": "^4.0.2",
     "vue": "^2.6.12",
+    "vue-i18n": "^8.22.2",
     "vue-select": "^3.10.8"
   },
   "devDependencies": {

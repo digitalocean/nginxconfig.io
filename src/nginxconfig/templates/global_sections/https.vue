@@ -28,13 +28,13 @@ THE SOFTWARE.
     <div>
         <div v-if="!sslProfileEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.https.sslProfile }}</label>
+                <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.globalSections.https.httpsMustBeEnabledOnOneSite }}
+                            {{ $t('templates.globalSections.https.httpsMustBeEnabledOnOneSite') }}
                         </label>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ THE SOFTWARE.
         <template v-else>
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.https.sslProfile }}</label>
+                    <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -55,7 +55,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ THE SOFTWARE.
 
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.https.ocspDnsResolvers }}</label>
+                    <label class="label">{{ $t('templates.globalSections.https.ocspDnsResolvers') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -74,7 +74,7 @@ THE SOFTWARE.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspCloudflare" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.https.cloudflareResolver }}
+                                    {{ $t('templates.globalSections.https.cloudflareResolver') }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@ THE SOFTWARE.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.https.googlePublicDns }}
+                                    {{ $t('templates.globalSections.https.googlePublicDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ THE SOFTWARE.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.https.openDns }}
+                                    {{ $t('templates.globalSections.https.openDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -127,7 +127,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ THE SOFTWARE.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspQuad9" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.https.quad9 }}
+                                    {{ $t('templates.globalSections.https.quad9') }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -148,7 +148,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@ THE SOFTWARE.
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspVerisign" class="p-default p-curve p-fill p-icon">
                                     <i slot="extra" class="icon fas fa-check"></i>
-                                    {{ i18n.templates.globalSections.https.verisign }}
+                                    {{ $t('templates.globalSections.https.verisign') }}
                                 </PrettyCheck>
                             </div>
                         </div>
@@ -169,7 +169,7 @@ THE SOFTWARE.
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
                                         <i slot="extra" class="icon fas fa-check"></i>
-                                        {{ name }}
+                                        {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@ THE SOFTWARE.
 
             <div v-if="letsEncryptRootEnabled" class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.https.letsEncryptWebroot }}</label>
+                    <label class="label">{{ $t('templates.globalSections.https.letsEncryptWebroot') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -197,7 +197,7 @@ THE SOFTWARE.
 
             <div v-if="letsEncryptCertRootEnabled" class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">{{ i18n.templates.globalSections.https.letsEncryptCertRoot }}</label>
+                    <label class="label">{{ $t('templates.globalSections.https.letsEncryptCertRoot') }}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -219,16 +219,15 @@ THE SOFTWARE.
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
     import clone from 'clone';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
     const ipType = {
         default: 'ipv4',
         options: {
-            ipv4: i18n.templates.globalSections.https.ipv4Only,
-            ipv6: i18n.templates.globalSections.https.ipv6Only,
-            both: i18n.templates.globalSections.https.ipv4AndIpv6,
+            ipv4: 'templates.globalSections.https.ipv4Only', // i18n key
+            ipv6: 'templates.globalSections.https.ipv6Only', // i18n key
+            both: 'templates.globalSections.https.ipv4AndIpv6', // i18n key
         },
         enabled: true,
     };
@@ -243,9 +242,9 @@ THE SOFTWARE.
         sslProfile: {
             default: 'intermediate',
             options: {
-                modern: i18n.templates.globalSections.https.mozillaModern,
-                intermediate: i18n.templates.globalSections.https.mozillaIntermediate,
-                old: i18n.templates.globalSections.https.mozillaOld,
+                modern: 'templates.globalSections.https.mozillaModern', // i18n key
+                intermediate: 'templates.globalSections.https.mozillaIntermediate', // i18n key
+                old: 'templates.globalSections.https.mozillaOld', // i18n key
             },
             enabled: true,
         },
@@ -286,7 +285,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalHTTPS',                                // Component name
-        display: i18n.common.https,                         // Display name for tab
+        display: 'common.https',                            // Display name for tab (i18n key)
         key: 'https',                                       // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -295,11 +294,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
         watch: {

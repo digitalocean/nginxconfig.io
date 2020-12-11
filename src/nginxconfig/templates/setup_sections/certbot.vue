@@ -29,7 +29,7 @@ THE SOFTWARE.
         <ol v-if="letsEncryptActive">
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.commentOutSslDirectivesInConfiguration }}
+                    {{ $t('templates.setupSections.certbot.commentOutSslDirectivesInConfiguration') }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
@@ -39,7 +39,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.reloadYourNginxServer }}
+                    {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
@@ -47,7 +47,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt }}
+                    {{ $t('templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt') }}
                     <br />
                 </p>
                 <BashPrism :key="certbotCmds" :cmd="certbotCmds"></BashPrism>
@@ -55,7 +55,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.uncommentSslDirectivesInConfiguration }}
+                    {{ $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration') }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable" :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"></BashPrism>
@@ -63,7 +63,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.reloadYourNginxServer }}
+                    {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
@@ -71,7 +71,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ i18n.templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal }}
+                    {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
                     <br />
                 </p>
                 <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
@@ -84,7 +84,7 @@ THE SOFTWARE.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration }}
+                            {{ $t('templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration') }}
                         </label>
                     </div>
                 </div>
@@ -94,23 +94,17 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import BashPrism from '../prism/bash';
 
     export default {
         name: 'SetupCertbot',
-        display: i18n.templates.setupSections.certbot.certbot,
+        display: 'templates.setupSections.certbot.certbot', // i18n key
         key: 'certbot',
         components: {
             BashPrism,
         },
         props: {
             data: Object,
-        },
-        data() {
-            return {
-                i18n,
-            };
         },
         computed: {
             letsEncryptDir() {

@@ -59,7 +59,7 @@ THE SOFTWARE.
                         <br />
                         <div class="message is-warning">
                             <div class="message-body"
-                                 v-html="i18n.templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality"
+                                 v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
                             ></div>
                         </div>
                     </template>
@@ -77,7 +77,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.common.enable }}
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.common.enable }}
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.common.enable }}
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -143,7 +143,6 @@ THE SOFTWARE.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import VueSelect from 'vue-select';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -186,7 +185,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalSecurity',                                     // Component name
-        display: i18n.templates.globalSections.security.security,   // Display name for tab
+        display: 'templates.globalSections.security.security',      // Display name for tab (i18n key)
         key: 'security',                                            // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         components: {
@@ -195,11 +194,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                           // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: {
             ...computedFromDefaults(defaults, 'security'),          // Getters & setters for the delegated data

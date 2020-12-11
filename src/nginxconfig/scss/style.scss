@@ -41,6 +41,7 @@ $highlight: #f2c94c;
   $vs-state-active-bg: $primary;
   @import "~vue-select/src/scss/vue-select";
 
+  @import "header";
   @import "tabs";
   @import "panel";
   @import "fields";

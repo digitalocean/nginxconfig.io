@@ -28,21 +28,21 @@ THE SOFTWARE.
     <div>
         <div class="field-row">
             <div class="field">
-                <label class="label">{{ i18n.templates.domainSections.server.domain }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.domain') }}</label>
                 <div :class="`control${domainChanged ? ' is-changed' : ''}`">
                     <input v-model="domain" class="input" type="text" :placeholder="domainDefault" />
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">{{ i18n.templates.domainSections.server.path }}</label>
+                <label class="label">{{ $t('common.path') }}</label>
                 <div :class="`control${pathChanged ? ' is-changed' : ''}`">
                     <input v-model="path" class="input" type="text" :placeholder="`/var/www/${domain}`" />
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">{{ i18n.templates.domainSections.server.documentRoot }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.documentRoot') }}</label>
                 <div :class="`control${documentRootChanged ? ' is-changed' : ''}`">
                     <input v-model="documentRoot" class="input" type="text" :placeholder="documentRootDefault" />
                 </div>
@@ -53,16 +53,16 @@ THE SOFTWARE.
             <br />
             <div class="message is-warning">
                 <div class="message-body">
-                    {{ i18n.templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed }}
+                    {{ $t('templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed') }}
                     <code class="slim">{{ $props.data.domain.computed }}</code>.
-                    {{ i18n.templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration }}
+                    {{ $t('templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration') }}
                 </div>
             </div>
         </template>
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.server.wwwSubdomain }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.wwwSubdomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -80,7 +80,7 @@ THE SOFTWARE.
 
         <div v-if="cdnSubdomainEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.server.cdnSubdomain }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.cdnSubdomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -98,7 +98,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.domainSections.server.redirectSubdomains }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.redirectSubdomains') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -118,7 +118,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.common.listen }}</label>
+                <label class="label">{{ $t('templates.domainSections.server.listen') }}</label>
             </div>
             <div class="field-body">
                 <div class="field has-addons">
@@ -148,7 +148,6 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -190,7 +189,7 @@ THE SOFTWARE.
 
     export default {
         name: 'DomainServer',                                   // Component name
-        display: i18n.templates.domainSections.server.server,   // Display name for tab
+        display: 'templates.domainSections.server.server',      // Display name for tab (i18n key)
         key: 'server',                                          // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
@@ -198,11 +197,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                       // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: {
             ...computedFromDefaults(defaults, 'server'),        // Getters & setters for the delegated data

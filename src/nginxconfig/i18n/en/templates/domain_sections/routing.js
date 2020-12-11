@@ -31,6 +31,5 @@ export default {
     fallbackRoutingPhpPath: `Fallback routing ${common.php} path`,
     legacyPhpRouting: `Legacy ${common.php} routing`,
     enableLegacyRouting: `${common.enable} legacy routing`,
-    path: 'Path',
     routing: 'Routing',
 };

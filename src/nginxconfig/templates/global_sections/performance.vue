@@ -28,7 +28,7 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.gzipCompression }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.gzipCompression') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -36,7 +36,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="gzipCompression" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.performance.enableGzipCompression }}
+                                {{ $t('templates.globalSections.performance.enableGzipCompression') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.brotliCompression }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.brotliCompression') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -54,7 +54,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="brotliCompression" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.performance.enableBrotliCompression }}
+                                {{ $t('templates.globalSections.performance.enableBrotliCompression') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.expirationForAssets }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.expirationForAssets') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -81,7 +81,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.expirationForMedia }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.expirationForMedia') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -98,7 +98,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.expirationForSvgs }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.expirationForSvgs') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -115,7 +115,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.performance.expirationForFonts }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.expirationForFonts') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -134,7 +134,6 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -167,7 +166,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalPerformance',                                      // Component name
-        display: i18n.templates.globalSections.performance.performance, // Display name for tab
+        display: 'templates.globalSections.performance.performance',    // Display name for tab (i18n key)
         key: 'performance',                                             // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                     // Data the parent will present here
         components: {
@@ -175,11 +174,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                               // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'performance'),        // Getters & setters for the delegated data
     };

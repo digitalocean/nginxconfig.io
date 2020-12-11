@@ -26,18 +26,30 @@ THE SOFTWARE.
 
 <template>
     <div class="all do-bulma">
-        <Header :title="i18n.templates.app.title">
+        <Header :title="$t('templates.app.title')">
             <template #description>
-                {{ i18n.templates.app.description }}
+                {{ $t('templates.app.description') }}
             </template>
             <template #header>
             </template>
             <template #buttons>
+                <VueSelect v-model="lang"
+                           :options="i18nPacks"
+                           :clearable="false"
+                           :reduce="s => s.value"
+                >
+                    <template #selected-option="{ label }">
+                        <span class="has-icon">
+                            <i class="icon fas fa-language"></i>
+                            <span>{{ label }}</span>
+                        </span>
+                    </template>
+                </VueSelect>
                 <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
-                    {{ i18n.templates.app.singleColumnMode }}
+                    {{ $t('templates.app.singleColumnMode') }}
                 </a>
                 <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
-                    {{ i18n.templates.app.splitColumnMode }}
+                    {{ $t('templates.app.splitColumnMode') }}
                 </a>
             </template>
         </Header>
@@ -45,7 +57,7 @@ THE SOFTWARE.
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
             <div class="columns is-multiline">
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
-                    <h2>{{ i18n.templates.app.perWebsiteConfig }}</h2>
+                    <h2>{{ $t('templates.app.perWebsiteConfig') }}</h2>
 
                     <div class="tabs">
                         <ul>
@@ -58,7 +70,7 @@ THE SOFTWARE.
                                 </a>
                             </li>
                             <li>
-                                <a @click="add"><i class="fas fa-plus"></i> {{ i18n.templates.app.addSite }}</a>
+                                <a @click="add"><i class="fas fa-plus"></i> {{ $t('templates.app.addSite') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -70,15 +82,15 @@ THE SOFTWARE.
                         ></Domain>
                     </template>
 
-                    <h2>{{ i18n.templates.app.globalConfig }}</h2>
+                    <h2>{{ $t('templates.app.globalConfig') }}</h2>
                     <Global :data="global"></Global>
 
-                    <h2>{{ i18n.templates.app.setup }}</h2>
+                    <h2>{{ $t('templates.app.setup') }}</h2>
                     <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
                 </div>
 
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
-                    <h2>{{ i18n.templates.app.configFiles }}</h2>
+                    <h2>{{ $t('templates.app.configFiles') }}</h2>
                     <div ref="files" class="columns is-multiline files">
                         <template v-for="confContents in confFilesOutput">
                             <component
@@ -102,6 +114,7 @@ THE SOFTWARE.
     import clone from 'clone';
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
+    import VueSelect from 'vue-select';
     import Header from 'do-vue/src/templates/header';
     import diff from 'files-diff';
 
@@ -109,8 +122,10 @@ THE SOFTWARE.
     import importData from '../util/import_data';
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
+    import browserLanguage from '../util/browser_language';
 
-    import i18n from '../i18n';
+    import * as i18nPacks from '../i18n';
+    import i18nDefault from '../i18n/default';
     import generators from '../generators';
 
     import Domain from './domain';
@@ -124,6 +139,7 @@ THE SOFTWARE.
         name: 'App',
         components: {
             Header,
+            VueSelect,
             Footer,
             Domain,
             Global,
@@ -134,9 +150,18 @@ THE SOFTWARE.
         },
         data() {
             return {
-                i18n,
                 domains: [],
-                global: Global.delegated,
+                global: {
+                    ...Global.delegated,
+                    app: {
+                        lang: {
+                            default: i18nDefault,
+                            value: i18nDefault,
+                            computed: i18nDefault,
+                            enabled: true,
+                        },
+                    },
+                },
                 active: 0,
                 ready: false,
                 splitColumn: false,
@@ -152,6 +177,23 @@ THE SOFTWARE.
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
+            lang: {
+                get() {
+                    return this.$data.global.app.lang.value;
+                },
+                set (value) {
+                    this.$data.global.app.lang.value = value;
+                    this.$data.global.app.lang.computed = value;
+                },
+            },
+            i18nPacks() {
+                return Object.keys(i18nPacks).map(pack => ({
+                    label: this.$t(`templates.app.${pack}`) + (pack === this.$i18n.locale
+                        ? ''
+                        : ` - ${this.$t(`templates.app.${pack}`, pack)}`),
+                    value: pack,
+                }));
+            },
         },
         watch: {
             confFiles(newConf, oldConf) {
@@ -164,13 +206,29 @@ THE SOFTWARE.
                 // Check next tick to see if anything has changed again
                 this.$nextTick(() => this.checkChange(newConf));
             },
+            '$data.global.app.lang': {
+                handler(data) {
+                    // Ensure valid pack
+                    if (!(data.value in i18nPacks)) data.computed = data.default;
+
+                    // Update the locale
+                    this.$i18n.locale = data.computed;
+                },
+                deep: true,
+            },
         },
-        mounted() {
+        async mounted() {
             // Import any data from the URL query params, defaulting to one domain
             // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
-            importData(query, this.$data.domains, this.$data.global, this.$nextTick);
+            const imported = await importData(query, this.$data.domains, this.$data.global, this.$nextTick);
+
+            // Apply browser language if not specified in query
+            if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
+                const language = browserLanguage();
+                if (language) this.lang = language;
+            }
 
             // Send an initial GA event for column mode
             this.splitColumnEvent(true);

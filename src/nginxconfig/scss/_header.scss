@@ -24,27 +24,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    back: '返回',
-    next: '下一個',
-    enable: '啟用',
-    php: 'PHP',
-    ssl: 'SSL',
-    nginx: 'NGINX',
-    http: 'HTTP',
-    https: 'HTTPS',
-    letsEncrypt: 'Let\'s Encrypt',
-    python: 'Python',
-    docker: 'Docker',
-    dockerCompose: 'Docker Compose',
-    wordPress: 'WordPress',
-    drupal: 'Drupal',
-    magento: 'Magento',
-    joomla: 'Joomla',
-    django: 'Django',
-    logging: '日誌記錄',
-    reverseProxy: '反向代理',
-    reverseProxyLower: '反向代理',
-    restrict: '限制',
-    path: '路徑',
-};
+.header {
+  padding: ($margin * 2) $margin ($margin * 1.5);
+
+  @media (min-width: $breakpoint) {
+    padding: ($margin * 3.75) 0 ($margin * .5);
+  }
+
+  .container {
+    form {
+      .input-container {
+        margin: 0;
+      }
+
+      .buttons {
+        > * {
+          margin: 0 0 1rem;
+        }
+      }
+    }
+  }
+}

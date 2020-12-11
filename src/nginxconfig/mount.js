@@ -26,12 +26,21 @@ THE SOFTWARE.
 
 import './scss/style.scss';
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import './util/prism_bundle';
 import App from './templates/app';
-import i18n from './i18n';
+import * as i18nPacks from './i18n';
+import i18nDefault from './i18n/default';
 
-document.head.title = i18n.templates.app.title;
+Vue.use(VueI18n);
+
+const i18n = new VueI18n({
+    locale: i18nDefault,
+    fallbackLocale: i18nDefault,
+    messages: i18nPacks,
+});
 
 new Vue({
+    i18n,
     render: h => h(App),
 }).$mount('#app');

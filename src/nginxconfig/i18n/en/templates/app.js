@@ -29,6 +29,9 @@ import common from '../common';
 export default {
     title: `${common.nginx}Config`,
     description: `The easiest way to configure a performant, secure, and stable ${common.nginx} server.`,
+    en: 'English',
+    zhCN: 'Chinese (simplified)',
+    zhTW: 'Chinese (traditional)',
     singleColumnMode: 'Single column mode',
     splitColumnMode: 'Split column mode',
     perWebsiteConfig: 'Per-website config',

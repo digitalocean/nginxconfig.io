@@ -70,7 +70,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="logNotFound" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.enableFileNotFoundErrorLogging }} error_log
+                                {{ $t('templates.globalSections.logging.enableFileNotFoundErrorLogging') }} error_log
                             </PrettyCheck>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.templates.globalSections.logging.logformat }}</label>
+                <label class="label">{{ $t('templates.globalSections.logging.logformat') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -88,7 +88,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cloudflare" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.enableCloudflare }}
+                                {{ $t('templates.globalSections.logging.enableCloudflare') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cfRay" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.cfRay }}
+                                {{ $t('templates.globalSections.logging.cfRay') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cfConnectingIp" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.cfConnectingIp }}
+                                {{ $t('templates.globalSections.logging.cfConnectingIp') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="xForwardedFor" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.xForwardedFor }}
+                                {{ $t('templates.globalSections.logging.xForwardedFor') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -120,7 +120,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="xForwardedProto" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.xForwardedProto }}
+                                {{ $t('templates.globalSections.logging.xForwardedProto') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="trueClientIp" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.trueClientIp }}
+                                {{ $t('templates.globalSections.logging.trueClientIp') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -136,7 +136,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cfIpCountry" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.cfIpCountry }}
+                                {{ $t('templates.globalSections.logging.cfIpCountry') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cfVisitor" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.cfVisitor }}
+                                {{ $t('templates.globalSections.logging.cfVisitor') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -152,7 +152,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="cdnLoop" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ i18n.templates.globalSections.logging.cdnLoop }}
+                                {{ $t('templates.globalSections.logging.cdnLoop') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -164,7 +164,6 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -221,7 +220,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalLogging',                                  // Component name
-        display: i18n.common.logging,                           // Display name for tab
+        display: 'common.logging',                              // Display name for tab (i18n key)
         key: 'logging',                                         // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
@@ -229,11 +228,6 @@ THE SOFTWARE.
         },
         props: {
             data: Object,                                       // Data delegated back to us from parent
-        },
-        data () {
-            return {
-                i18n,
-            };
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
         watch: {

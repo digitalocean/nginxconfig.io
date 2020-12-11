@@ -28,13 +28,13 @@ THE SOFTWARE.
     <div>
         <div v-if="!reverseProxyEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
-                <label class="label">{{ i18n.common.reverseProxy }}</label>
+                <label class="label">{{ $t('common.reverseProxy') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ i18n.templates.globalSections.reverseProxy.reverseProxyMustBeEnabledOnOneSite }}
+                            {{ $t('templates.globalSections.reverseProxy.reverseProxyMustBeEnabledOnOneSite') }}
                         </label>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ THE SOFTWARE.
                         </div>
                         <div class="control">
                             <a class="button is-static">
-                                {{ i18n.templates.globalSections.reverseProxy.seconds }}
+                                {{ $t('templates.globalSections.reverseProxy.seconds') }}
                             </a>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ THE SOFTWARE.
                         </div>
                         <div class="control">
                             <a class="button is-static">
-                                {{ i18n.templates.globalSections.reverseProxy.seconds }}
+                                {{ $t('templates.globalSections.reverseProxy.seconds') }}
                             </a>
                         </div>
                     </div>
@@ -107,7 +107,7 @@ THE SOFTWARE.
                         </div>
                         <div class="control">
                             <a class="button is-static">
-                                {{ i18n.templates.globalSections.reverseProxy.seconds }}
+                                {{ $t('templates.globalSections.reverseProxy.seconds') }}
                             </a>
                         </div>
                     </div>
@@ -118,7 +118,6 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import i18n from '../../i18n';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -154,7 +153,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalReverseProxy',                                 // Component name
-        display: i18n.common.reverseProxy,                          // Display name for tab
+        display: 'common.reverseProxy',                             // Display name for tab (i18n key)
         key: 'reverseProxy',                                        // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         props: {
@@ -162,7 +161,6 @@ THE SOFTWARE.
         },
         data() {
             return {
-                i18n,
                 reverseProxyEnabled: false,
             };
         },

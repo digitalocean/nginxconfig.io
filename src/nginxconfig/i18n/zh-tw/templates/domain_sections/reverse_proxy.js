@@ -31,5 +31,4 @@ export default {
     reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy}在啟用${common.php}時無法啟用。`,
     reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy}在啟用${common.python}時無法啟用。`,
     enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
-    path: '路徑',
 };
