@@ -154,7 +154,7 @@ export default (domain, domains, global) => {
     if (!commonHsts(domains) && domain.https.hsts.computed) {
         serverConfig.push(['# HSTS', '']);
         serverConfig.push(['add_header Strict-Transport-Security',
-            `'"max-age=31536000${domain.https.hstsSubdomains.computed ? '; includeSubDomains' : ''}${domain.https.hstsPreload.computed ? '; preload' : ''}" always'`]);
+            `"max-age=31536000${domain.https.hstsSubdomains.computed ? '; includeSubDomains' : ''}${domain.https.hstsPreload.computed ? '; preload' : ''}" always`]);
     }
 
     // Security
