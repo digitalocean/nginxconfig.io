@@ -66,7 +66,8 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
-                            <VueSelect v-model="phpBackupServer"
+                            <VueSelect ref="phpBackupServerSelect"
+                                       v-model="phpBackupServer"
                                        :options="phpBackupServerOptions"
                                        :clearable="false"
                                        :reduce="s => s.value"
@@ -173,6 +174,12 @@ THE SOFTWARE.
                     this.$props.data.phpBackupServer.computed = '';
                 },
                 deep: true,
+            },
+            // Ensure 'Disabled' gets translated in VueSelect on language switch
+            '$i18n.locale'() {
+                const updated = this.phpBackupServerOptions
+                    .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
+                if (updated) this.$refs.phpBackupServerSelect.$data._value = updated;
             },
         },
     };
