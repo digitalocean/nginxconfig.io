@@ -28,4 +28,10 @@ module.exports = {
     'vue/no-unused-vars': 0,
     'vue/html-self-closing': 0,
   },
+  'globals': {
+    'describe': true,
+    'expect': true,
+    'it': true,
+    'test': true,
+  },
 };
