@@ -213,7 +213,11 @@ THE SOFTWARE.
 
                     // Update the locale
                     this.$i18n.locale = data.computed;
-                    analytics('set_language', 'Language', data.computed);
+
+                    // Analytics
+                    const pack = data.computed.match(/^([a-z]+)([A-Z]*)$/).slice(1)
+                        .map(x => x.toLowerCase()).filter(x => !!x).join('_');
+                    analytics(`set_language${pack}`, 'Language');
                 },
                 deep: true,
             },
