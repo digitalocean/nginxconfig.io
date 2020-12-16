@@ -213,6 +213,7 @@ THE SOFTWARE.
 
                     // Update the locale
                     this.$i18n.locale = data.computed;
+                    analytics('set_language', 'Language', data.computed);
                 },
                 deep: true,
             },
