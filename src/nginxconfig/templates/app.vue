@@ -217,7 +217,7 @@ THE SOFTWARE.
                     // Analytics
                     const pack = data.computed.match(/^([a-z]+)([A-Z]*)$/).slice(1)
                         .map(x => x.toLowerCase()).filter(x => !!x).join('_');
-                    analytics(`set_language${pack}`, 'Language');
+                    analytics(`set_language_${pack}`, 'Language');
                 },
                 deep: true,
             },
