@@ -40,34 +40,32 @@
   "dependencies": {
     "clipboard": "^2.0.6",
     "clone": "^2.1.2",
-    "diff": "^4.0.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",
     "escape-html": "^1.0.3",
-    "files-diff": "0.0.3",
+    "files-diff": "0.0.4",
     "json-to-pretty-yaml": "^1.2.2",
     "memory-tar-create": "0.0.2",
     "pretty-checkbox-vue": "^1.1.9",
     "prismjs": "^1.22.0",
     "qs": "^6.9.4",
     "simple-js-sha2-256": "^1.0.7",
-    "string-similarity": "^4.0.2",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.2",
     "vue-select": "^3.10.8"
   },
   "devDependencies": {
-    "@vue/cli-service": "^4.5.7",
+    "@vue/cli-service": "^4.5.9",
     "babel-eslint": "^10.1.0",
-    "copyfiles": "^2.4.0",
+    "copyfiles": "^2.4.1",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint": "^7.11.0",
-    "eslint-plugin-vue": "^7.0.1",
-    "sass": "^1.27.0",
+    "eslint": "^7.15.0",
+    "eslint-plugin-vue": "^7.3.0",
+    "sass": "^1.30.0",
     "sass-lint": "^1.13.1",
     "sass-lint-auto-fix": "^0.21.2",
-    "sass-loader": "^10.0.3",
+    "sass-loader": "^10.1.0",
     "vue-template-compiler": "^2.6.12",
-    "webpack-bundle-analyzer": "^3.9.0"
+    "webpack-bundle-analyzer": "^4.3.0"
   }
 }
