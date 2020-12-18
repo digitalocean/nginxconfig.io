@@ -1,28 +1,31 @@
 import browserLanguage from '../src/nginxconfig/util/browser_language';
 
-class mockLocales{
+class MockLocales{
     static languages = [];
 
     static language = null;
-    IntlBackup = null;
 
-    setNavigatorLanguages(langs){
-        mockLocales.languages = langs;
+    static IntlBackup = null;
+
+    static navigator = null;
+
+    static setNavigatorLanguages(langs){
+        MockLocales.languages = langs;
         return this;
     }
 
-    setNavigatorLanguage(lang){
-        mockLocales.language = lang;
+    static setNavigatorLanguage(lang){
+        MockLocales.language = lang;
         return this;
     }
 
-    setDateTimeLocale(locale) {
+    static setDateTimeLocale(locale) {
         const newDateTimeForMat = new Intl.DateTimeFormat(locale);
-        this.IntlBackup = Intl;
+        MockLocales.IntlBackup = Intl;
         if (!locale){
             // eslint-disable-next-line no-global-assign
             Intl = undefined;
-            return;
+            return this;
         }
 
         // eslint-disable-next-line no-global-assign
@@ -34,79 +37,103 @@ class mockLocales{
         return this;
     }
 
-    restoreDateTimeLocale(){
+    static restoreDateTimeLocale(){
         // eslint-disable-next-line no-global-assign
-        Intl = this.IntlBackup;
+        Intl = MockLocales.IntlBackup;
+        MockLocales.IntlBackup = null;
+        return this;
+    }
+
+    static setNavigator(navigator)
+    {
+        MockLocales.navigator = window.navigator;
+        window.navigator = navigator;
+        return this;
+    }
+
+    static restoreNavigator(){
+        window.navigator = MockLocales.navigator;
+        MockLocales.navigator = null;
         return this;
     }
 }
 Object.defineProperty(window.navigator,'languages',{get:() => {
-    return mockLocales.languages ?? [];
-}});
+        return MockLocales.languages ?? [];
+    }});
 
 Object.defineProperty(window.navigator,'language',{get:() => {
-    return mockLocales.language ?? null;
-}});
+        return MockLocales.language ?? null;
+    }});
 
 
-describe('#testGetBrowserLanguage', ()=> {
-    const Locale = new mockLocales();
+describe('#browserLanguage', ()=> {
+    test('#Selects the first available exact match for language/region', ()=> {
+        MockLocales.setDateTimeLocale(undefined);
 
-    test('#inChina', ()=> {
-        Locale.setNavigatorLanguages(['zh-CN', 'zh', 'en-US', 'en']);
-        Locale.setDateTimeLocale(undefined);
+        MockLocales.setNavigatorLanguages(['zh-CN', 'zh','en-US','en']);
         expect(browserLanguage()).toEqual('zhCN');
-        Locale.restoreDateTimeLocale();
-    });
 
-    test('#inHongKong',()=> {
-        Locale.setNavigatorLanguages(['zh-TW','zh','en-US','en']);
-        Locale.setDateTimeLocale(undefined);
+        MockLocales.setNavigatorLanguages(['zh-TW','zh','en-US','en']);
         expect(browserLanguage()).toEqual('zhTW');
-        Locale.restoreDateTimeLocale();
+
+        MockLocales.setNavigatorLanguages(['ja-JP','ja']);
+        expect(browserLanguage()).toBeFalsy();
+
+        MockLocales.setNavigatorLanguages(['zh', 'en-US', 'en']);
+        expect(browserLanguage()).toEqual('en');
+
+        MockLocales.restoreDateTimeLocale();
     });
 
-    test('#inJapan',()=> {
-        Locale.setNavigatorLanguages(['ja-JP','ja']);
-        Locale.setDateTimeLocale(undefined);
-        expect(browserLanguage()).toBeFalsy();
-        Locale.restoreDateTimeLocale();
+    test('#Selects the first available language match based on language/region',()=> {
+        MockLocales.setDateTimeLocale(undefined);
+
+        MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'en-US']);
+        expect(browserLanguage()).toEqual('en');
+
+        MockLocales.restoreDateTimeLocale();
+    });
+
+    test('# Selects the first available language match based on language alone',()=>{
+        MockLocales.setDateTimeLocale(undefined);
+
+        MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'zh']);
+        expect(browserLanguage()).toEqual('zhCN');
+
+        MockLocales.restoreDateTimeLocale();
     });
 });
 
 describe('#test different sources',()=>{
-    const Locale = new mockLocales();
-
     test('#navigator and locale is undefined',()=>{
-        Locale.setNavigatorLanguages(undefined);
-        Locale.setNavigatorLanguage(undefined);
-        Locale.setDateTimeLocale(undefined);
+        MockLocales.setNavigatorLanguages(undefined);
+        MockLocales.setNavigatorLanguage(undefined);
+        MockLocales.setDateTimeLocale(undefined);
         expect(browserLanguage()).toBeFalsy();
-        Locale.restoreDateTimeLocale();
+        MockLocales.restoreDateTimeLocale();
     });
 
     test('#language as en and languages is undefined',()=>{
-        Locale.setNavigatorLanguage('en');
-        Locale.setNavigatorLanguages(undefined);
-        Locale.setDateTimeLocale(undefined);
+        MockLocales.setNavigatorLanguage('en');
+        MockLocales.setNavigatorLanguages(undefined);
+        MockLocales.setDateTimeLocale(undefined);
         expect(browserLanguage()).toEqual('en');
-        Locale.restoreDateTimeLocale();
+        MockLocales.restoreDateTimeLocale();
     });
 
     test('#language is undefined and languages is en-US,en and Intl is undefined',()=>{
-        Locale.setNavigatorLanguage(undefined);
-        Locale.setNavigatorLanguages(['en-US','en']);
-        Locale.setDateTimeLocale(undefined);
+        MockLocales.setNavigatorLanguage(undefined);
+        MockLocales.setNavigatorLanguages(['en-US','en']);
+        MockLocales.setDateTimeLocale(undefined);
         expect(browserLanguage()).toEqual('en');
-        Locale.restoreDateTimeLocale();
+        MockLocales.restoreDateTimeLocale();
     });
 
     test('#navigator is undefined and locale is en-US',()=>{
-        const oldNavigator = window.navigator;
-        window.navigator = undefined;
-        Locale.setDateTimeLocale('en-US');
+        MockLocales.setNavigator(undefined);
+        MockLocales.setDateTimeLocale('en-US');
         expect(browserLanguage()).toEqual('en');
-        Locale.restoreDateTimeLocale();
-        window.navigator = oldNavigator;
+        MockLocales.restoreDateTimeLocale();
+        MockLocales.restoreNavigator();
     });
 });
