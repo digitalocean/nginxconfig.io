@@ -129,10 +129,10 @@ THE SOFTWARE.
 
     &.is-tiny {
       font-size: 14px;
-      padding: ($margin * .5) ($margin * .75);
-      margin: .2rem .25rem;
       height: auto;
       line-height: normal;
+      margin: .2rem .25rem;
+      padding: ($margin * .5) ($margin * .75);
     }
   }
 
