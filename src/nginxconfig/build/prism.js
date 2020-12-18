@@ -24,31 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-$header: #0071fe;
-$highlight: #f2c94c;
-@import "~do-bulma/src/style";
+const fs = require('fs').promises;
+const path = require('path');
+const fetch = require('node-fetch');
 
-.do-bulma {
-  @import "../../../build/prism";
+const main = async () => {
+    const resp = await fetch('https://assets.digitalocean.com/prism/prism.css');
+    const text = await resp.text();
 
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
-  @import "~pretty-checkbox/src/pretty-checkbox";
+    // Fix $676767 -> #676767
+    const fixed = text.replace(/:\s*\$((?:[0-9a-fA-F]{3}){1,2});/g, ':#$1;');
 
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-  @import "~vue-select/src/scss/vue-select";
+    const buildDir = path.join(__dirname, '..', '..', '..', 'build');
+    await fs.writeFile(path.join(buildDir, 'prism.css'), fixed);
+};
 
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
-}
+main().then(() => {});
