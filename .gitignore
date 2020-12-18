@@ -1,8 +1,9 @@
-node_modules/
-.cache/
-dist/
-dev/
-.idea/
-.vscode/
-build/
+node_modules
+.cache
+.idea
+.vscode
 .DS_Store
+
+/build/
+/dist/
+/dev/
