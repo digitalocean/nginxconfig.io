@@ -48,6 +48,14 @@ THE SOFTWARE.
 
     &.is-aligned-top {
       align-items: flex-start;
+
+      > p {
+        @include sailec-medium;
+
+        color: $dark-grey;
+        font-size: 14px;
+        margin: 0 .5rem;
+      }
     }
 
     + .control {
@@ -117,6 +125,14 @@ THE SOFTWARE.
       border: 1px solid $border;
       color: $dark-grey;
       padding: 0 ($margin * 1.5);
+    }
+
+    &.is-tiny {
+      font-size: 14px;
+      padding: ($margin * .5) ($margin * .75);
+      margin: .2rem .25rem;
+      height: auto;
+      line-height: normal;
     }
   }
 
