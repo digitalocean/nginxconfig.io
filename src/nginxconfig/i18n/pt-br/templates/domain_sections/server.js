@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 export default {
     domain: 'Domínio',
-    documentRoot: 'Raiz de documentos',
+    documentRoot: 'Raiz dos documentos',
     oneOrMoreOtherDomainsAreAlsoNamed: 'Um ou mais outros domínios também são nomeados',
     thisWillCauseIssuesWithConfigGeneration: 'Isso causará problemas com a geração da configuração.',
     wwwSubdomain: 'Subdomínio www',

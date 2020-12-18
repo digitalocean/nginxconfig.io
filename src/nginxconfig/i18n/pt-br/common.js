@@ -42,7 +42,7 @@ export default {
 	magento: 'Magento',
 	joomla: 'Joomla',
 	django: 'Django',
-	logging: 'Logging',
+	logging: 'Logs',
     reverseProxy: 'Proxy reverso',
     reverseProxyLower: 'proxy reverso',
     restrict: 'Restringir',

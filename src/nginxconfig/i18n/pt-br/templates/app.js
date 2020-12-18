@@ -34,7 +34,7 @@ export default {
     zhTW: 'Chinês (tradicional)',
     ptBR: 'Português (brasileiro)'
     singleColumnMode: 'Modo de coluna única',
-    splitColumnMode: 'Modo de divisão de coluna',
+    splitColumnMode: 'Modo com divisão de colunas',
     perWebsiteConfig: 'Configuração por site',
     addSite: 'Adicionar site',
     globalConfig: 'Configuração global',
