@@ -99,7 +99,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalDocker',                               // Component name
-        display: 'common.docker',                           // Display name for tab (i18n key)
+        display: 'templates.globalSections.docker.docker',  // Display name for tab (i18n key)
         key: 'docker',                                      // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {

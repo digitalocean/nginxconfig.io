@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 const docker = 'Docker';
 const dockerfile = 'Dockerfile';
 
@@ -32,8 +34,8 @@ export default {
     dockerfile,
     dockerCompose: `${docker} Compose`,
     applyDockerTweaks: `Apply ${docker} tweaks`,
-    applyDockerTweaksForNginx: `Apply configuration tweaks for running nginx with ${docker}`,
-    applyDockerTweaksExplainer: 'Updates the nginx user to be <code class="slim">nginx</code> and the pid to <code class="slim">/var/run/nginx.pid</code>',
-    includeDockerfile: `Include ${dockerfile} to run nginx with ${docker}`,
-    includeDockerCompose: 'Include docker-compose to run nginx with docker-compose',
+    applyDockerTweaksForNginx: `Apply configuration tweaks for running ${common.nginx} with ${docker}`,
+    applyDockerTweaksExplainer: `Updates the ${common.nginx} user to be <code class="slim">nginx</code> and the pid to <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `Include ${dockerfile} to run ${common.nginx} with ${docker}`,
+    includeDockerCompose: `Include docker-compose to run ${common.nginx} with docker-compose`,
 };
