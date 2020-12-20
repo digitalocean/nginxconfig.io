@@ -18,12 +18,13 @@
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "analyze": "npm run build:tool -- --analyze",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
-    "test": "npm run test:eslint && npm run test:sass-lint",
+    "test": "npm run test:eslint && npm run test:sass-lint && npm run test:i18n-packs",
     "test:fix": "npm run test:eslint:fix && npm run test:sass-lint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:sass-lint": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
-    "test:sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss'"
+    "test:sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss'",
+    "test:i18n-packs": "node -r esm src/nginxconfig/i18n/verify.js"
   },
   "repository": {
     "type": "git",
@@ -57,10 +58,12 @@
   "devDependencies": {
     "@vue/cli-service": "^4.5.9",
     "babel-eslint": "^10.1.0",
+    "chalk": "^4.1.0",
     "copyfiles": "^2.4.1",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^7.15.0",
     "eslint-plugin-vue": "^7.3.0",
+    "esm": "^3.2.25",
     "sass": "^1.30.0",
     "sass-lint": "^1.13.1",
     "sass-lint-auto-fix": "^0.21.2",
