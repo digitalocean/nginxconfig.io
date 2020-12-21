@@ -26,7 +26,16 @@ THE SOFTWARE.
 
 import common from '../../common';
 
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
-    dockerfile: `生成Dockerfile運行${common.nginx}與${common.docker}`,
-    dockerCompose: '生成docker-compose.yaml來運行nginx docker-compose',
+    docker,
+    dockerfile,
+    dockerCompose: `${docker} Compose`, // TODO: translate
+    applyDockerTweaks: `Apply ${docker} tweaks`, // TODO: translate
+    applyDockerTweaksForNginx: `Apply configuration tweaks for running ${common.nginx} with ${docker}`, // TODO: translate
+    applyDockerTweaksExplainer: `Updates the ${common.nginx} user to be <code class="slim">nginx</code> and the pid to <code class="slim">/var/run/nginx.pid</code>`, // TODO: translate
+    includeDockerfile: `生成${dockerfile}運行${common.nginx}與${docker}`,
+    includeDockerCompose: `生成docker-compose.yaml來運行${common.nginx} docker-compose`,
 };

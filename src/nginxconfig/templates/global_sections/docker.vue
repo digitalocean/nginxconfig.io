@@ -28,7 +28,24 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('common.docker') }}</label>
+                <label class="label">{{ $t('templates.globalSections.docker.docker') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-horizontal is-aligned-top">
+                    <a class="button is-primary is-tiny" @click="applyDockerTweaks">
+                        {{ $t('templates.globalSections.docker.applyDockerTweaks') }}
+                    </a>
+                    <p>
+                        {{ $t('templates.globalSections.docker.applyDockerTweaksForNginx') }}
+                        <br />
+                        <small v-html="$t('templates.globalSections.docker.applyDockerTweaksExplainer')"></small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.globalSections.docker.dockerfile') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -36,7 +53,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="dockerfile" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ $t('templates.globalSections.docker.dockerfile') }}
+                                {{ $t('templates.globalSections.docker.includeDockerfile') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -45,7 +62,7 @@ THE SOFTWARE.
         </div>
         <div v-if="dockerfile" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('common.dockerCompose') }}</label>
+                <label class="label">{{ $t('templates.globalSections.docker.dockerCompose') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -53,7 +70,7 @@ THE SOFTWARE.
                         <div class="checkbox">
                             <PrettyCheck v-model="dockerCompose" class="p-default p-curve p-fill p-icon">
                                 <i slot="extra" class="icon fas fa-check"></i>
-                                {{ $t('templates.globalSections.docker.dockerCompose') }}
+                                {{ $t('templates.globalSections.docker.includeDockerCompose') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -67,6 +84,7 @@ THE SOFTWARE.
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import analytics from '../../util/analytics';
 
     const defaults = {
         dockerfile: {
@@ -81,7 +99,7 @@ THE SOFTWARE.
 
     export default {
         name: 'GlobalDocker',                               // Component name
-        display: 'common.docker',                           // Display name for tab (i18n key)
+        display: 'templates.globalSections.docker.docker',  // Display name for tab (i18n key)
         key: 'docker',                                      // Key for data in parent
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
@@ -104,6 +122,14 @@ THE SOFTWARE.
                     }
                 },
                 deep: true,
+            },
+        },
+        methods: {
+            applyDockerTweaks() {
+                analytics('apply_docker_tweaks', 'Presets');
+                this.$parent.setValue('nginx', 'user', 'nginx');
+                this.$parent.setValue('nginx', 'pid', '/var/run/nginx.pid');
+                this.$parent.setValue('docker', 'dockerfile', true);
             },
         },
     };
