@@ -27,6 +27,12 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    dockerfile: `Incluir o Dockerfile para executar o nginx com ${common.docker}`,
-    dockerCompose: 'Incluir docker-compose para executar o nginx com docker-compose',
+    docker,
+    dockerfile,
+    dockerCompose: `${docker} Compose`,
+    applyDockerTweaks: `Aplicar ajustes do ${docker}`,
+    applyDockerTweaksForNginx: `Aplicar ajustes de configuração para executar o ${common.nginx} com ${docker}`,
+    applyDockerTweaksExplainer: `Atualiza o usuário ${common.nginx} para ser <code class="slim">nginx</code> e o pid para <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `Incluir o ${dockerfile} para executar o ${common.nginx} com ${docker}`,
+    includeDockerCompose: `Incluir o docker-compose para executar o ${common.nginx} com docker-compose`,
 };
