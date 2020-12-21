@@ -26,6 +26,9 @@ THE SOFTWARE.
 
 import common from '../../common';
 
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
     docker,
     dockerfile,
