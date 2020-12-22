@@ -32,6 +32,7 @@ export default {
     en: 'English',
     zhCN: 'Chinese (simplified)',
     zhTW: 'Chinese (traditional)',
+    ptBR: 'Portuguese (brazilian)',
     singleColumnMode: 'Single column mode',
     splitColumnMode: 'Split column mode',
     perWebsiteConfig: 'Per-website config',

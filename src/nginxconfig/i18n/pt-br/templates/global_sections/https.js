@@ -39,7 +39,7 @@ export default {
     openDns: 'OpenDNS',
     quad9: 'Quad9',
     verisign: 'Verisign',
-    letsEncryptWebroot: `${common.letsEncrypt} webroot`,
+    letsEncryptWebroot: `Diretório raiz do ${common.letsEncrypt}`,
     letsEncryptCertRoot: `Diretório de certificado do ${common.letsEncrypt}`,
     mozillaModern: `${mozilla} Modern`,
     mozillaIntermediate: `${mozilla} Intermediate`,
