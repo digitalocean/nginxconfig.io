@@ -24,25 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-	back: 'Back',
-	next: 'Next',
-	enable: 'enable',
-	php: 'PHP',
-	ssl: 'SSL',
-	nginx: 'NGINX',
-	http: 'HTTP',
-	https: 'HTTPS',
-	letsEncrypt: 'Let\'s Encrypt',
-	python: 'Python',
-	wordPress: 'WordPress',
-	drupal: 'Drupal',
-	magento: 'Magento',
-	joomla: 'Joomla',
-	django: 'Django',
-	logging: 'Logging',
-    reverseProxy: 'Reverse proxy',
-    reverseProxyLower: 'reverse proxy',
-    restrict: 'Restrict',
-    path: 'Path',
+const fs = require('fs').promises;
+const path = require('path');
+const fetch = require('node-fetch');
+
+const main = async () => {
+    const resp = await fetch('https://assets.digitalocean.com/prism/prism.css');
+    const text = await resp.text();
+
+    // Fix $676767 -> #676767
+    const fixed = text.replace(/:\s*\$((?:[0-9a-fA-F]{3}){1,2});/g, ':#$1;');
+
+    const buildDir = path.join(__dirname, '..', '..', '..', 'build');
+    await fs.writeFile(path.join(buildDir, 'prism.css'), fixed);
 };
+
+main().then(() => {});

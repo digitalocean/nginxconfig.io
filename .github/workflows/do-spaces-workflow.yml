@@ -1,4 +1,4 @@
-name: Test and deploy to DigitalOcean Spaces
+name: Deploy to DigitalOcean Spaces
 
 on: push
 

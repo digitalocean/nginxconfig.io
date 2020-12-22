@@ -24,13 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-@import url("https://assets.digitalocean.com/prism/prism.css");
-
 $header: #0071fe;
 $highlight: #f2c94c;
 @import "~do-bulma/src/style";
 
 .do-bulma {
+  @import "../../../build/prism";
+
   $pretty--color-dark: $primary;
   $pretty--color-default: $primary;
   @import "~pretty-checkbox/src/pretty-checkbox";

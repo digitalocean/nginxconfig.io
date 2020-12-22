@@ -44,3 +44,24 @@ jobs:
 
       - name: Test with sass-lint
         run: npm run test:sass-lint
+
+  i18n-packs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      - name: Use Node.js (.nvmrc)
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test i18n packs integrity
+        run: npm run test:i18n-packs
