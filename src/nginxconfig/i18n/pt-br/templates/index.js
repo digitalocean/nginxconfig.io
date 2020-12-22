@@ -24,20 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../common';
+import app from './app';
+import setup from './setup';
+import footer from './footer';
+import domainSections from './domain_sections';
+import globalSections from './global_sections';
+import setupSections from './setup_sections';
 
-export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
-};
+export default { app, setup, footer, domainSections, globalSections, setupSections };

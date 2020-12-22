@@ -24,20 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../common';
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
 
 export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
+    sslProfile: `Perfil ${common.ssl}`,
+    httpsMustBeEnabledOnOneSite: `O ${common.https} deve estar habilitado em pelo menos um site para definir as configurações globais de ${common.https}.`,
+    ocspDnsResolvers: 'Resolvedores de DNS OCSP',
+    cloudflareResolver: 'Resolvedor Cloudflare',
+    googlePublicDns: 'DNS público do Google',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `Diretório raiz do ${common.letsEncrypt}`,
+    letsEncryptCertRoot: `Diretório de certificado do ${common.letsEncrypt}`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} apenas`,
+    ipv6Only: `${ipv6} apenas`,
+    ipv4AndIpv6: `${ipv4} & ${ipv6}`,
 };

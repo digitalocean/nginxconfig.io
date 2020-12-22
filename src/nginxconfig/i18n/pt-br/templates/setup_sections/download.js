@@ -24,20 +24,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../common';
+import common from '../../common';
 
 export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
+    downloadTheGeneratedConfig: '<b>Baixe</b> a configuração gerada:',
+    andUploadItToYourServers: 'e <b>carregue-a</b> para o',
+    directory: 'diretórioi do seu servidor.',
+    or: 'ou, ',
+    copyBase64StringOfCompressedConfig: 'Copie uma string base64 da configuração compactado',
+    pasteItInYourServersCommandLineAndExecute: ', cole-a na linha de comando do seu servidor e execute-a.',
+    navigateToYourNginxConfigurationDirectoryOnYourServer: `Navegue até o <b>diretório de configuração</b> do ${common.nginx} em seu servidor:`,
+    createABackupOfYourCurrentNginxConfiguration: `Crie um <b>backup</b> da sua configuração atual do ${common.nginx}:`,
+    extractTheNewCompressedConfigurationArchiveUsingTar: '<b>Extraia</b> o novo arquivo de configuração compactado usando tar:',
+    download: 'Baixar',
 };

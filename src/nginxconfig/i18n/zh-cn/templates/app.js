@@ -32,6 +32,7 @@ export default {
     en: '英语',
     zhCN: '简体中文',
     zhTW: '繁体中文',
+    ptBR: 'Portuguese (brazilian)', // TODO: translate
     singleColumnMode: '垂直模式',
     splitColumnMode: '水平模式',
     perWebsiteConfig: '站点配置',

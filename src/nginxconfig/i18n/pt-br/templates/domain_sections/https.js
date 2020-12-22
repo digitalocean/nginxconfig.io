@@ -24,20 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../common';
+import common from '../../common';
 
 export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
+    enableEncryptedSslConnection: `${common.enable} conexões ${common.ssl} criptografadas`,
+    http2: `${common.http}/2`,
+    enableHttp2Connections: `${common.enable} conexões ${common.http}/2`,
+    forceHttps: `Forçar ${common.https}`,
+    hsts: 'HSTS',
+    enableStrictTransportSecurity: `${common.enable} Strict Transport Security, requerendo conexões HTTPS`,
+    enableIncludeSubDomains: `${common.enable} a diretiva includeSubDomains, requerendo conexões HTTPS para TODOS os subdomínios`,
+    enablePreload: `${common.enable} a diretiva preload, dizendo aos navegadores para sempre fazer conexões HTTPS apenas`,
+    certificationType: 'Tipo de certificação',
+    customCertificate: 'Certificado personalizado',
+    letsEncryptEmail: `E-mail do ${common.letsEncrypt}`,
 };

@@ -24,20 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../common';
+import https from './https';
+import logging from './logging';
+import nginx from './nginx';
+import performance from './performance';
+import php from './php';
+import python from './python';
+import reverseProxy from './reverse_proxy';
+import security from './security';
+import tools from './tools';
+import docker from './docker';
 
-export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
-};
+export default { https, logging, nginx, performance, php, python, reverseProxy, security, tools, docker };

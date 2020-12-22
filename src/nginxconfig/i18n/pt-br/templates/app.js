@@ -27,17 +27,17 @@ THE SOFTWARE.
 import common from '../common';
 
 export default {
-    title: `${common.nginx} 配寘`,
-    description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
-    singleColumnMode: '垂直模式',
-    splitColumnMode: '水准模式',
-    perWebsiteConfig: '網站配寘',
-    addSite: '添加網站',
-    globalConfig: '全域配寘',
-    setup: '使用配寘',
-    configFiles: '配寘檔案',
+    title: `${common.nginx}Configuração`,
+    description: `A maneira mais fácil de configurar um servidor ${common.nginx} de alto desempenho, seguro e estável.`,
+    en: 'Inglês',
+    zhCN: 'Chinês (simplificado)',
+    zhTW: 'Chinês (tradicional)',
+    ptBR: 'Português (brasileiro)',
+    singleColumnMode: 'Modo de coluna única',
+    splitColumnMode: 'Modo com divisão de colunas',
+    perWebsiteConfig: 'Configuração por site',
+    addSite: 'Adicionar site',
+    globalConfig: 'Configuração global',
+    setup: 'Configurar',
+    configFiles: 'Arquivos de configuração',
 };
