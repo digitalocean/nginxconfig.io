@@ -231,7 +231,7 @@ THE SOFTWARE.
 
             // Apply browser language if not specified in query
             if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
-                const language = browserLanguage();
+                const language = browserLanguage(availablePacks);
                 if (language) this.lang = language;
             }
 

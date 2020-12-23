@@ -24,10 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { availablePacks } from './language_pack_context';
 import { fromSep } from './language_pack_name';
 
-export default () => {
+export default availablePacks => {
     if (typeof window === 'object' && typeof window.navigator === 'object') {
         const userLocales = new Set();
 
