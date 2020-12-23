@@ -37,10 +37,12 @@ THE SOFTWARE.
                            :options="i18nPacks"
                            :clearable="false"
                            :reduce="s => s.value"
+                           :disabled="languageLoading"
                 >
                     <template #selected-option="{ label }">
                         <span class="has-icon">
-                            <i class="icon fas fa-language"></i>
+                            <i v-if="languageLoading" class="icon fas fa-spinner fa-pulse"></i>
+                            <i v-else class="icon fas fa-language"></i>
                             <span>{{ label }}</span>
                         </span>
                     </template>
@@ -170,6 +172,8 @@ THE SOFTWARE.
                 confWatcherWaiting: false,
                 confFilesPrevious: {},
                 confFilesOutput: {},
+                languageLoading: false,
+                languagePrevious: defaultPack,
             };
         },
         computed: {
@@ -210,14 +214,30 @@ THE SOFTWARE.
             },
             '$data.global.app.lang': {
                 handler(data) {
+                    this.$data.languageLoading = true;
+
                     // Ensure valid pack
                     if (!availablePacks.includes(data.value)) data.computed = data.default;
 
                     // Update the locale
-                    setLanguagePack(data.computed).then(() => console.log('Language set to', data.computed));
+                    setLanguagePack(data.computed).then(() => {
+                        // Done
+                        console.log('Language set to', data.computed);
+                        this.$data.languagePrevious = data.computed;
+                        this.$data.languageLoading = false;
 
-                    // Analytics
-                    analytics(`set_language_${toSep(data.computed, '_')}`, 'Language');
+                        // Analytics
+                        analytics(`set_language_${toSep(data.computed, '_')}`, 'Language');
+                    }).catch((err) => {
+                        // Error
+                        console.log('Failed to set language to', data.computed);
+                        console.error(err);
+
+                        // Fallback to last known good
+                        data.value = this.$data.languagePrevious;
+                        data.computed = this.$data.languagePrevious;
+                        this.$data.languageLoading = false;
+                    });
                 },
                 deep: true,
             },
