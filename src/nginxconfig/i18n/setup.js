@@ -28,12 +28,22 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { defaultPack, defaultPackData } from '../util/language_pack_default';
 import { toSep } from '../util/language_pack_name';
-import { languagePackContext } from '../util/language_pack_context';
+import { languagePackContext, availablePacks } from '../util/language_pack_context';
 
 Vue.use(VueI18n);
 
+// Load in the full default pack
 const i18nPacks = {};
 i18nPacks[defaultPack] = defaultPackData;
+const loadedI18nPacks = [defaultPack];
+
+// Load in languages data from other packs
+// Use webpack magic to only build chunks for lang/languages.js
+const languagesContext = require.context('.', true, /^\.\/[^/]+\/languages\.js$/, 'sync');
+for (const availablePack of availablePacks) {
+    if (availablePack === defaultPack) continue;
+    i18nPacks[availablePack] = { languages: languagesContext(`./${toSep(availablePack, '-')}/languages.js`).default };
+}
 
 export const i18n = new VueI18n({
     locale: defaultPack,
@@ -46,11 +56,10 @@ const loadLanguagePack = pack => {
     if (i18n.locale === pack) return;
 
     // If language already loaded, do nothing
-    if (pack in i18nPacks) return;
+    if (loadedI18nPacks.includes(pack)) return;
 
     // Load the pack with webpack magic
-    const packDir = toSep(pack, '-');
-    return languagePackContext(`./${packDir}/index.js`).then(packData => i18nPacks[pack] = packData.default);
+    return languagePackContext(`./${toSep(pack, '-')}/index.js`).then(packData => i18nPacks[pack] = packData.default);
 };
 
 export const setLanguagePack = async pack => {
