@@ -24,7 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as en } from './en';
-export { default as zhCN } from './zh-cn';
-export { default as zhTW } from './zh-tw';
-export { default as ptBR } from './pt-br';
+export const toSep = (pack, sep) => pack
+    .match(/^([a-z]+)([A-Z]*)$/)
+    .slice(1)
+    .map(x => x.toLowerCase())
+    .filter(x => !!x)
+    .join(sep);
+
+export const fromSep = (pack, sep) => pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();

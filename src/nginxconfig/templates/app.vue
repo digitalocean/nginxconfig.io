@@ -123,9 +123,11 @@ THE SOFTWARE.
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
+    import { toSep } from '../util/language_pack_name';
+    import { defaultPack } from '../util/language_pack_default';
+    import { availablePacks } from '../util/language_pack_context';
 
-    import * as i18nPacks from '../i18n';
-    import i18nDefault from '../i18n/default';
+    import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';
 
     import Domain from './domain';
@@ -155,9 +157,9 @@ THE SOFTWARE.
                     ...Global.delegated,
                     app: {
                         lang: {
-                            default: i18nDefault,
-                            value: i18nDefault,
-                            computed: i18nDefault,
+                            default: defaultPack,
+                            value: defaultPack,
+                            computed: defaultPack,
                             enabled: true,
                         },
                     },
@@ -187,10 +189,10 @@ THE SOFTWARE.
                 },
             },
             i18nPacks() {
-                return Object.keys(i18nPacks).map(pack => ({
-                    label: this.$t(`templates.app.${pack}`) + (pack === this.$i18n.locale
+                return availablePacks.map(pack => ({
+                    label: this.$t(`languages.${pack}`) + (pack === this.$i18n.locale
                         ? ''
-                        : ` - ${this.$t(`templates.app.${pack}`, pack)}`),
+                        : ` - ${this.$t(`languages.${pack}`, pack)}`),
                     value: pack,
                 }));
             },
@@ -209,15 +211,13 @@ THE SOFTWARE.
             '$data.global.app.lang': {
                 handler(data) {
                     // Ensure valid pack
-                    if (!(data.value in i18nPacks)) data.computed = data.default;
+                    if (!availablePacks.includes(data.value)) data.computed = data.default;
 
                     // Update the locale
-                    this.$i18n.locale = data.computed;
+                    setLanguagePack(data.computed).then(() => console.log('Language set to', data.computed));
 
                     // Analytics
-                    const pack = data.computed.match(/^([a-z]+)([A-Z]*)$/).slice(1)
-                        .map(x => x.toLowerCase()).filter(x => !!x).join('_');
-                    analytics(`set_language_${pack}`, 'Language');
+                    analytics(`set_language_${toSep(data.computed, '_')}`, 'Language');
                 },
                 deep: true,
             },

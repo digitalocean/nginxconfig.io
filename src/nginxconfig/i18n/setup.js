@@ -24,8 +24,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from './common';
-import languages from './languages';
-import templates from './templates';
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import { defaultPack, defaultPackData } from '../util/language_pack_default';
+import { toSep } from '../util/language_pack_name';
+import { languagePackContext } from '../util/language_pack_context';
 
-export default { common, languages, templates };
+Vue.use(VueI18n);
+
+const i18nPacks = {};
+i18nPacks[defaultPack] = defaultPackData;
+
+export const i18n = new VueI18n({
+    locale: defaultPack,
+    fallbackLocale: defaultPack,
+    messages: i18nPacks,
+});
+
+const loadLanguagePack = pack => {
+    // If same language, do nothing
+    if (i18n.locale === pack) return;
+
+    // If language already loaded, do nothing
+    if (pack in i18nPacks) return;
+
+    // Load the pack with webpack magic
+    const packDir = toSep(pack, '-');
+    return languagePackContext(`./${packDir}/index.js`).then(packData => i18nPacks[pack] = packData.default);
+};
+
+export const setLanguagePack = async pack => {
+    await loadLanguagePack(pack);
+    i18n.locale = pack;
+};

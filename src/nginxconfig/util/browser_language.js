@@ -24,9 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import * as i18nPacks from '../i18n';
-
-const toPack = locale => locale.split('-', 2)[0].toLowerCase() + (locale.split('-', 2)[1] || '').toUpperCase();
+import { availablePacks } from './language_pack_context';
+import { fromSep } from './language_pack_name';
 
 export default () => {
     if (typeof window === 'object' && typeof window.navigator === 'object') {
@@ -42,12 +41,11 @@ export default () => {
                 userLocales.add(Intl.DateTimeFormat().resolvedOptions().locale);
 
         // Try to find an exact region/language match
-        const i18nPackLocales = Object.keys(i18nPacks);
-        const exactMatch = [...userLocales.values()].find(locale => i18nPackLocales.includes(toPack(locale)));
-        if (exactMatch) return toPack(exactMatch);
+        const exactMatch = [...userLocales.values()].find(locale => availablePacks.includes(fromSep(locale, '-')));
+        if (exactMatch) return fromSep(exactMatch, '-');
 
         // Build a map of languages to pack
-        const i18nPackLanguages = i18nPackLocales.reduce((map, pack) => {
+        const i18nPackLanguages = availablePacks.reduce((map, pack) => {
             const lang = pack.match(/^[a-z]+/)[0];
             if (!(lang in map)) map[lang] = pack;
             return map;

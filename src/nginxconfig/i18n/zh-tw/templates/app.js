@@ -29,10 +29,6 @@ import common from '../common';
 export default {
     title: `${common.nginx} 配寘`,
     description: `配寘高性能、安全、穩定的${common.nginx}服務器的最簡單方法。`,
-    en: '英語',
-    zhCN: '簡體中文',
-    zhTW: '繁體中文',
-    ptBR: '葡萄牙語（巴西）',
     singleColumnMode: '垂直模式',
     splitColumnMode: '水准模式',
     perWebsiteConfig: '網站配寘',

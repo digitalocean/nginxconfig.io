@@ -24,4 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default 'en';
+import { fromSep } from './language_pack_name';
+
+// Use webpack magic to only build chunks for lang/index.js, not subdirectories (e.g. lang/templates/index.js)
+export const languagePackContext = require.context('../i18n', true, /^\.\/[^/]+\/index\.js$/, 'lazy');
+
+// Webpack magic to get all the packs that are available
+export const availablePacks = Object.freeze(languagePackContext
+    .keys()
+    .map(pack => pack.match(/^\.\/([^/]+)\/index\.js$/))
+    .filter(pack => pack !== null)
+    .map(pack => fromSep(pack[1], '-')));
