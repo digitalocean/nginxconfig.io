@@ -24,8 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from './common';
-import languages from './languages';
-import templates from './templates';
-
-export default { common, languages, templates };
+export default {
+    en: '英語',
+    zhCN: '簡體中文',
+    zhTW: '繁體中文',
+    ptBR: '葡萄牙語（巴西）',
+};

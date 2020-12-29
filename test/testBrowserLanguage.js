@@ -46,7 +46,6 @@ class MockLocales {
     }
 
     static setDateTimeLocale(locale) {
-        const newDateTimeFormat = new Intl.DateTimeFormat(locale);
         MockLocales.IntlBackup = Intl;
         if (!locale) {
             // eslint-disable-next-line no-global-assign
@@ -54,6 +53,7 @@ class MockLocales {
             return this;
         }
 
+        const newDateTimeFormat = new Intl.DateTimeFormat(locale);
         // eslint-disable-next-line no-global-assign
         Intl = {
             DateTimeFormat() {
@@ -97,13 +97,13 @@ describe('browserLanguage', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['zh-CN', 'zh','en-US','en']);
-        expect(browserLanguage()).toEqual('zhCN');
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('zhCN');
 
         MockLocales.setNavigatorLanguages(['zh-TW','zh','en-US','en']);
-        expect(browserLanguage()).toEqual('zhTW');
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('zhTW');
 
         MockLocales.setNavigatorLanguages(['zh', 'en-US', 'en']);
-        expect(browserLanguage()).toEqual('en');
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
 
         MockLocales.restoreDateTimeLocale();
     });
@@ -112,7 +112,7 @@ describe('browserLanguage', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'en-US']);
-        expect(browserLanguage()).toEqual('en');
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
 
         MockLocales.restoreDateTimeLocale();
     });
@@ -121,7 +121,7 @@ describe('browserLanguage', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'zh']);
-        expect(browserLanguage()).toEqual('zhCN');
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('zhCN');
 
         MockLocales.restoreDateTimeLocale();
     });
@@ -130,7 +130,7 @@ describe('browserLanguage', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['ja-JP','ja']);
-        expect(browserLanguage()).toBeFalsy();
+        expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toBeFalsy();
 
         MockLocales.restoreDateTimeLocale();
     });
@@ -140,7 +140,7 @@ describe('browserLanguage', () => {
             MockLocales.setNavigatorLanguages(undefined);
             MockLocales.setNavigatorLanguage(undefined);
             MockLocales.setDateTimeLocale(undefined);
-            expect(browserLanguage()).toBeFalsy();
+            expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toBeFalsy();
             MockLocales.restoreDateTimeLocale();
         });
 
@@ -148,7 +148,7 @@ describe('browserLanguage', () => {
             MockLocales.setNavigatorLanguage('en');
             MockLocales.setNavigatorLanguages(undefined);
             MockLocales.setDateTimeLocale(undefined);
-            expect(browserLanguage()).toEqual('en');
+            expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
             MockLocales.restoreDateTimeLocale();
         });
 
@@ -156,14 +156,14 @@ describe('browserLanguage', () => {
             MockLocales.setNavigatorLanguage(undefined);
             MockLocales.setNavigatorLanguages(['en-US','en']);
             MockLocales.setDateTimeLocale(undefined);
-            expect(browserLanguage()).toEqual('en');
+            expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
             MockLocales.restoreDateTimeLocale();
         });
 
         test('navigator is `undefined` and Intl locale is `en-US`',() => {
             MockLocales.setNavigator(undefined);
             MockLocales.setDateTimeLocale('en-US');
-            expect(browserLanguage()).toEqual('en');
+            expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
             MockLocales.restoreDateTimeLocale();
             MockLocales.restoreNavigator();
         });

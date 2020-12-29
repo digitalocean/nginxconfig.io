@@ -24,9 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { readdirSync } from 'fs';
 import chalk from 'chalk';
-import defaultPack from './default';
-import * as packs from './index';
+import { defaultPack } from '../util/language_pack_default';
+import { fromSep } from '../util/language_pack_name';
+
+// Load all the packs in
+const packs = {};
+const packDirectories = readdirSync(__dirname, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+for (const packDirectory of packDirectories)
+    packs[fromSep(packDirectory, '-')] = require(`./${packDirectory}/index.js`).default;
 
 // Recursively get all keys in a i18n pack object fragment
 const explore = packFragment => {

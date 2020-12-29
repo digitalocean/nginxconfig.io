@@ -37,10 +37,12 @@ THE SOFTWARE.
                            :options="i18nPacks"
                            :clearable="false"
                            :reduce="s => s.value"
+                           :disabled="languageLoading"
                 >
                     <template #selected-option="{ label }">
                         <span class="has-icon">
-                            <i class="icon fas fa-language"></i>
+                            <i v-if="languageLoading" class="icon fas fa-spinner fa-pulse"></i>
+                            <i v-else class="icon fas fa-language"></i>
                             <span>{{ label }}</span>
                         </span>
                     </template>
@@ -123,9 +125,11 @@ THE SOFTWARE.
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
+    import { toSep } from '../util/language_pack_name';
+    import { defaultPack } from '../util/language_pack_default';
+    import { availablePacks } from '../util/language_pack_context';
 
-    import * as i18nPacks from '../i18n';
-    import i18nDefault from '../i18n/default';
+    import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';
 
     import Domain from './domain';
@@ -155,9 +159,9 @@ THE SOFTWARE.
                     ...Global.delegated,
                     app: {
                         lang: {
-                            default: i18nDefault,
-                            value: i18nDefault,
-                            computed: i18nDefault,
+                            default: defaultPack,
+                            value: defaultPack,
+                            computed: defaultPack,
                             enabled: true,
                         },
                     },
@@ -168,6 +172,8 @@ THE SOFTWARE.
                 confWatcherWaiting: false,
                 confFilesPrevious: {},
                 confFilesOutput: {},
+                languageLoading: false,
+                languagePrevious: defaultPack,
             };
         },
         computed: {
@@ -187,10 +193,10 @@ THE SOFTWARE.
                 },
             },
             i18nPacks() {
-                return Object.keys(i18nPacks).map(pack => ({
-                    label: this.$t(`templates.app.${pack}`) + (pack === this.$i18n.locale
+                return availablePacks.map(pack => ({
+                    label: this.$t(`languages.${pack}`) + (pack === this.$i18n.locale
                         ? ''
-                        : ` - ${this.$t(`templates.app.${pack}`, pack)}`),
+                        : ` - ${this.$t(`languages.${pack}`, pack)}`),
                     value: pack,
                 }));
             },
@@ -208,16 +214,30 @@ THE SOFTWARE.
             },
             '$data.global.app.lang': {
                 handler(data) {
+                    this.$data.languageLoading = true;
+
                     // Ensure valid pack
-                    if (!(data.value in i18nPacks)) data.computed = data.default;
+                    if (!availablePacks.includes(data.value)) data.computed = data.default;
 
                     // Update the locale
-                    this.$i18n.locale = data.computed;
+                    setLanguagePack(data.computed).then(() => {
+                        // Done
+                        console.log('Language set to', data.computed);
+                        this.$data.languagePrevious = data.computed;
+                        this.$data.languageLoading = false;
 
-                    // Analytics
-                    const pack = data.computed.match(/^([a-z]+)([A-Z]*)$/).slice(1)
-                        .map(x => x.toLowerCase()).filter(x => !!x).join('_');
-                    analytics(`set_language_${pack}`, 'Language');
+                        // Analytics
+                        analytics(`set_language_${toSep(data.computed, '_')}`, 'Language');
+                    }).catch((err) => {
+                        // Error
+                        console.log('Failed to set language to', data.computed);
+                        console.error(err);
+
+                        // Fallback to last known good
+                        data.value = this.$data.languagePrevious;
+                        data.computed = this.$data.languagePrevious;
+                        this.$data.languageLoading = false;
+                    });
                 },
                 deep: true,
             },
@@ -231,7 +251,7 @@ THE SOFTWARE.
 
             // Apply browser language if not specified in query
             if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
-                const language = browserLanguage();
+                const language = browserLanguage(availablePacks);
                 if (language) this.lang = language;
             }
 
