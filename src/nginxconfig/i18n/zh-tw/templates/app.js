@@ -32,7 +32,7 @@ export default {
     en: '英語',
     zhCN: '簡體中文',
     zhTW: '繁體中文',
-    ptBR: 'Portuguese (brazilian)', // TODO: translate
+    ptBR: '葡萄牙語（巴西）',
     singleColumnMode: '垂直模式',
     splitColumnMode: '水准模式',
     perWebsiteConfig: '網站配寘',
