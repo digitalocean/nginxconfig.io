@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 import { join, sep } from 'path';
 import chalk from 'chalk';
 import { defaultPack } from '../util/language_pack_default';
@@ -81,6 +81,20 @@ const files = directory => {
     return foundFiles;
 };
 
+const todos = file => {
+    const content = readFileSync(join(__dirname, file), 'utf8');
+    const lines = content.split('\n');
+    const items = [];
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const match = line.match(/\/\/\s*todo([([].*?[)\]])?\s*:?\s*(.*)/i);
+        if (match) items.push([i + 1, line, match[0], match[1], match[2]]);
+    }
+
+    return items;
+};
+
 // Get all the keys for the default "source" language pack
 const defaultKeys = explore(packs[defaultPack]);
 
@@ -123,7 +137,11 @@ for (const [pack, packData] of Object.entries(packs)) {
         .map(key => key.split('.').slice(0, -1).join('.')));
 
     // Warn for any files that aren't used as pack objects
-    [...packKeyFiles].filter(x => !packKeyObjects.has(x)).forEach(file => warnings.push(`Unused file \`${file}\``));
+    [...packKeyFiles].filter(file => !packKeyObjects.has(file)).forEach(file => warnings.push(`Unused file \`${file}\``));
+
+    // Locate any todos in each file as a warning
+    for (const file of packFiles)
+        todos(file).forEach(todo => warnings.push(`TODO in \`${file}\` on line ${todo[0]}`));
 
     // Output the pack results
     if (warnings.length)
