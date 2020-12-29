@@ -25,9 +25,11 @@ THE SOFTWARE.
 */
 
 import { readdirSync } from 'fs';
+import { join, sep } from 'path';
 import chalk from 'chalk';
 import { defaultPack } from '../util/language_pack_default';
-import { fromSep } from '../util/language_pack_name';
+import { toSep, fromSep } from '../util/language_pack_name';
+import snakeToCamel from '../util/snake_to_camel';
 
 // Load all the packs in
 const packs = {};
@@ -55,6 +57,30 @@ const explore = packFragment => {
     return foundKeys;
 };
 
+// Recursively get all the files in a i18n pack directory
+const files = directory => {
+    const foundFiles = new Set();
+
+    for (const dirent of readdirSync(join(__dirname, directory), { withFileTypes: true })) {
+        const base = join(directory, dirent.name);
+
+        // If this is a file, store it
+        if (dirent.isFile()) {
+            foundFiles.add(base);
+            continue;
+        }
+
+        // If this is a directory, recurse
+        if (dirent.isDirectory()) {
+            files(base).forEach(recurseFile => foundFiles.add(recurseFile));
+        }
+
+        // Otherwise, ignore this
+    }
+
+    return foundFiles;
+};
+
 // Get all the keys for the default "source" language pack
 const defaultKeys = explore(packs[defaultPack]);
 
@@ -65,21 +91,39 @@ let hadError = false;
 for (const [pack, packData] of Object.entries(packs)) {
     console.log(chalk.underline(`Language pack \`${pack}\``));
 
-    // We don't need to compare default to itself
-    if (pack === defaultPack) {
-        console.log(`  Default pack, found ${defaultKeys.size.toLocaleString()} keys`);
-        console.log(chalk.reset());
-        continue;
-    }
+    // Get the base data
+    const packKeys = explore(packData);
+    const packFiles = files(toSep(pack, '-'));
+    console.log(`  Found ${packKeys.size.toLocaleString()} keys, ${packFiles.size.toLocaleString()} files`);
+
+    // Track all our errors and warnings
+    const errors = [], warnings = [];
 
     // Get all the keys and the set differences
-    const packKeys = explore(packData);
     const missingKeys = [...defaultKeys].filter(x => !packKeys.has(x));
     const extraKeys = [...packKeys].filter(x => !defaultKeys.has(x));
 
-    // Missing keys are errors, extra keys are just warnings
-    const errors = missingKeys.map(key => `Missing key \`${key}\``);
-    const warnings = extraKeys.map(key => `Unexpected key \`${key}\``);
+    // Missing keys and extra keys are errors
+    missingKeys.forEach(key => errors.push(`Missing key \`${key}\``));
+    extraKeys.forEach(key => errors.push(`Unexpected key \`${key}\``));
+
+    // Get all the files in the pack directory
+    const packKeyFiles = new Set([...packFiles]
+        // Drop language pack prefix
+        .map(file => file.split(sep).slice(1).join(sep))
+        // Drop js extension
+        .map(file => file.split('.').slice(0, -1).join('.'))
+        // Replace sep with period and use camelCase
+        .map(file => file.split(sep).map(dir => snakeToCamel(dir)).join('.'))
+        // Drop index files
+        .filter(file => !file.endsWith('.index') && file !== 'index'));
+
+    // Get the objects from the pack keys
+    const packKeyObjects = new Set([...packKeys]
+        .map(key => key.split('.').slice(0, -1).join('.')));
+
+    // Warn for any files that aren't used as pack objects
+    [...packKeyFiles].filter(x => !packKeyObjects.has(x)).forEach(file => warnings.push(`Unused file \`${file}\``));
 
     // Output the pack results
     if (warnings.length)
@@ -89,7 +133,7 @@ for (const [pack, packData] of Object.entries(packs)) {
         for (const error of errors)
             console.log(`  ${chalk.red('error')}   ${error}`);
     if (!errors.length && !warnings.length)
-        console.log(`  ${chalk.green('No issues, all keys present with no unexpected keys')}`);
+        console.log(`  ${chalk.green('No issues')}`);
 
     // If we had errors, script should exit 1
     if (errors.length) hadError = true;
