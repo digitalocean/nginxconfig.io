@@ -81,6 +81,7 @@ const files = directory => {
     return foundFiles;
 };
 
+// Get all the todo items in a file
 const todos = file => {
     const content = readFileSync(join(__dirname, file), 'utf8');
     const lines = content.split('\n');
@@ -94,6 +95,15 @@ const todos = file => {
 
     return items;
 };
+
+// Convert a pack file to a pack object key
+const fileToObject = file => file
+    // Drop language pack prefix
+    .split(sep).slice(1).join(sep)
+    // Drop js extension
+    .split('.').slice(0, -1).join('.')
+    // Replace sep with period and use camelCase
+    .split(sep).map(dir => snakeToCamel(dir)).join('.');
 
 // Get all the keys for the default "source" language pack
 const defaultKeys = explore(packs[defaultPack]);
@@ -122,22 +132,15 @@ for (const [pack, packData] of Object.entries(packs)) {
     extraKeys.forEach(key => errors.push(`Unexpected key \`${key}\``));
 
     // Get all the files in the pack directory
-    const packKeyFiles = new Set([...packFiles]
-        // Drop language pack prefix
-        .map(file => file.split(sep).slice(1).join(sep))
-        // Drop js extension
-        .map(file => file.split('.').slice(0, -1).join('.'))
-        // Replace sep with period and use camelCase
-        .map(file => file.split(sep).map(dir => snakeToCamel(dir)).join('.'))
-        // Drop index files
-        .filter(file => !file.endsWith('.index') && file !== 'index'));
+    const packKeyFiles = new Set([...packFiles].filter(file => file.split(sep).slice(-1)[0] !== 'index.js'));
 
     // Get the objects from the pack keys
     const packKeyObjects = new Set([...packKeys]
         .map(key => key.split('.').slice(0, -1).join('.')));
 
     // Warn for any files that aren't used as pack objects
-    [...packKeyFiles].filter(file => !packKeyObjects.has(file)).forEach(file => warnings.push(`Unused file \`${file}\``));
+    [...packKeyFiles].filter(file => !packKeyObjects.has(fileToObject(file)))
+        .forEach(file => warnings.push(`Unused file \`${file}\``));
 
     // Locate any todos in each file as a warning
     for (const file of packFiles)
