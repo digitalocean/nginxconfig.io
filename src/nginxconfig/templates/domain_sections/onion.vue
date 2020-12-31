@@ -26,14 +26,31 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.onion.onionLocation') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${onionLocationChanged ? ' is-changed' : ''}`">
-                        <input v-model="onionLocation" class="input" type="text" :placeholder="onionLocationDefault" />
+                        <input v-model="onionLocation" class="input" type="text" :placeholder="$props.data.onionLocation.placeholder" />
+                    </div>
+
+                    <div class="control" v-if="!onionLocationChanged">
+                        <label class="text">
+                            {{ $t('templates.domainSections.onion.provideAnOnionLocationToSetOnionLocationHeader') }}
+                        </label>
+                        <label class="text">
+                            {{ $t('templates.domainSections.onion.letsVisitorsKnownOnionServicesIsAvailable') }}
+                        </label>
+                    </div>
+
+                    <div class="control" v-if="incorrectEnding">
+                        <label class="text message is-warning">
+                            <span class="message-body">
+                                {{ $t('templates.domainSections.onion.onionLocationExpectedToEndWithOnion') }}
+                            </span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -48,6 +65,7 @@ THE SOFTWARE.
     const defaults = {
         onionLocation: {
             default: '',
+            placeholder: '<your-onion-address>.onion',
             enabled: true,
         },
     };
@@ -60,7 +78,12 @@ THE SOFTWARE.
         props: {
             data: Object,                                       // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'onion'),      // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'onion'),         // Getters & setters for the delegated data
+            incorrectEnding() {
+                return this.onionLocationChanged && !this.$props.data.onionLocation.computed.endsWith('.onion');
+            },
+        },
         watch: {
             '$props.data.onionLocation': {
                 handler(data) {
