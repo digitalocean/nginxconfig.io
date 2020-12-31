@@ -36,14 +36,25 @@ THE SOFTWARE.
                         <input v-model="onionLocation" class="input" type="text" :placeholder="$props.data.onionLocation.placeholder" />
                     </div>
 
-                    <div class="control" v-if="!onionLocationChanged">
-                        <label class="text">
-                            {{ $t('templates.domainSections.onion.provideAnOnionLocationToSetOnionLocationHeader') }}
-                        </label>
-                        <label class="text">
-                            {{ $t('templates.domainSections.onion.letsVisitorsKnownOnionServicesIsAvailable') }}
-                        </label>
-                    </div>
+                    <template v-if="!onionLocationChanged">
+                        <div class="control">
+                            <label class="text">
+                                {{ $t('templates.domainSections.onion.provideAnOnionLocationToSetOnionLocationHeader') }}
+                            </label>
+                        </div>
+                        <div class="control">
+                            <label class="text">
+                                {{ $t('templates.domainSections.onion.letsVisitorsKnownOnionServicesIsAvailable') }}
+                            </label>
+                        </div>
+                        <div class="control">
+                            <label class="text">
+                                <ExternalLink :text="$t('templates.domainSections.onion.learnMoreAboutOnionServices')"
+                                              link="https://community.torproject.org/onion-services/"
+                                ></ExternalLink>
+                            </label>
+                        </div>
+                    </template>
 
                     <div class="control" v-if="incorrectEnding">
                         <label class="text message is-warning">
@@ -59,6 +70,7 @@ THE SOFTWARE.
 </template>
 
 <script>
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -75,6 +87,9 @@ THE SOFTWARE.
         display: 'templates.domainSections.onion.onion',        // Display name for tab (i18n key)
         key: 'onion',                                           // Key for data in parent
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        components: {
+            ExternalLink,
+        },
         props: {
             data: Object,                                       // Data delegated back to us from parent
         },
