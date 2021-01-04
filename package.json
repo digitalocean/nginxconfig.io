@@ -58,7 +58,8 @@
     "simple-js-sha2-256": "^1.0.7",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.2",
-    "vue-select": "^3.10.8"
+    "vue-select": "^3.10.8",
+    "webpack-require-from": "^1.8.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
