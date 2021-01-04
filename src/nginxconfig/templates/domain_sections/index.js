@@ -32,3 +32,4 @@ export { default as ReverseProxy } from './reverse_proxy';
 export { default as Routing } from './routing';
 export { default as Logging } from './logging';
 export { default as Restrict } from './restrict';
+export { default as Onion } from './onion';

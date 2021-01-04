@@ -150,6 +150,12 @@ export default (domain, domains, global) => {
     // HTTPS
     serverConfig.push(...sslConfig(domain, global));
 
+    // Onion location
+    if (domain.onion.onionLocation.computed) {
+        serverConfig.push(['# Onion services', '']);
+        serverConfig.push(['add_header Onion-Location', `http://${domain.onion.onionLocation.computed}$request_uri`]);
+    }
+
     // HSTS
     if (!commonHsts(domains) && domain.https.hsts.computed) {
         serverConfig.push(['# HSTS', '']);

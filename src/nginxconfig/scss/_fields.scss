@@ -49,6 +49,12 @@ THE SOFTWARE.
     &.is-aligned-top {
       align-items: flex-start;
 
+      > .field-label {
+        &.has-margin-top {
+          margin-top: .75rem;
+        }
+      }
+
       > p {
         @include sailec-medium;
 
@@ -116,6 +122,18 @@ THE SOFTWARE.
       display: inline-block;
       font-size: 14px;
       padding: 0 .5rem;
+
+      &.message {
+        padding: 0;
+
+        .message-body {
+          display: inline-block;
+        }
+      }
+
+      .fa-external-link-alt {
+        margin: 0 0 0 .25rem;
+      }
     }
   }
 
