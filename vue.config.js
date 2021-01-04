@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -39,9 +39,7 @@ module.exports = {
         plugins: [
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
             process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
-            new WebpackRequireFrom({
-                replaceSrcMethodName: '__replaceWebpackDynamicImport',
-            }),
+            new WebpackRequireFrom({ replaceSrcMethodName: '__replaceWebpackDynamicImport' }),
         ].filter(x => !!x),
     },
     chainWebpack: config => {

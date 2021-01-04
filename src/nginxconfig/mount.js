@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,12 +25,11 @@ THE SOFTWARE.
 */
 
 // Dynamic webpack import location (must be before app)
-const originalSrc = document.currentScript.src;
+const originalSrcDir = document.currentScript.src.split('/').slice(0, -1).join('/');
 (typeof global === 'undefined' ? window : global).__replaceWebpackDynamicImport = path => {
-    const dir = originalSrc.split('/').slice(0, -1).join('/');
     const base = path.split('/').pop();
-    console.log(`Modifying import ${path} to use dir ${dir} and base ${base}`);
-    return `${dir}/${base}`;
+    console.log(`Modifying import ${path} to use dir ${originalSrcDir} and base ${base}`);
+    return `${originalSrcDir}/${base}`;
 };
 
 // Load in the app
