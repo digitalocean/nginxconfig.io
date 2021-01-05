@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// Dynamic webpack import location (must be before app)
+const originalSrcDir = document.currentScript.src.split('/').slice(0, -1).join('/');
+(typeof global === 'undefined' ? window : global).__replaceWebpackDynamicImport = path => {
+    const base = path.split('/').pop();
+    console.log(`Modifying import ${path} to use dir ${originalSrcDir} and base ${base}`);
+    return `${originalSrcDir}/${base}`;
+};
+
+// Load in the app
 import './scss/style.scss';
 import Vue from 'vue';
 import './util/prism_bundle';
 import { i18n } from './i18n/setup';
 import App from './templates/app';
 
+// Run the app
 new Vue({
     i18n,
     render: h => h(App),
