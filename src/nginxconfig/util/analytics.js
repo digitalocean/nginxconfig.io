@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,49 +24,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default (action, category, label, value, nonInteraction = false) => {
+export default ({ category, action, label, value, nonInteraction }) => {
+    console.info('Analytics event:', { category, action, label, value, nonInteraction });
+
     try {
-        const tracker = window.ga.getAll()[0];
-        if (tracker) {
-            tracker.send({
-                hitType: 'event',
-                eventCategory: category,
-                eventAction: action,
-                eventLabel: label,
-                eventValue: value,
-                nonInteraction,
-            });
-        }
+        // Google
+        window.ga('send', 'event', {
+            eventCategory: category,
+            eventAction: action,
+            eventLabel: label,
+            eventValue: value,
+            nonInteraction,
+        });
     } catch (_) {
         // If analytics fail, don't block anything else
     }
 
-    /*try {
-        // gtag.js
-        if (window.gtag) {
-            window.gtag('event', action, {
-                event_category: category,
-                event_label: label,
-                value,
-            });
-        }
+    try {
+        // Segment
+        window.analytics.track(`${category} ${action}`, {
+            label,
+            value,
+            nonInteraction,
+        });
     } catch (_) {
         // If analytics fail, don't block anything else
-    }*/
-
-    /*try {
-        // analytics.js
-        if (window.ga) {
-            window.ga('send', {
-                hitType: 'event',
-                eventCategory: category,
-                eventAction: action,
-                eventLabel: label,
-                eventValue: value,
-                nonInteraction,
-            });
-        }
-    } catch (_) {
-        // If analytics fail, don't block anything else
-    }*/
+    }
 };
