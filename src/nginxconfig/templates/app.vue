@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -125,7 +125,6 @@ THE SOFTWARE.
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
-    import { toSep } from '../util/language_pack_name';
     import { defaultPack } from '../util/language_pack_default';
     import { availablePacks } from '../util/language_pack_context';
 
@@ -174,6 +173,7 @@ THE SOFTWARE.
                 confFilesOutput: {},
                 languageLoading: false,
                 languagePrevious: defaultPack,
+                interactiveEvents: false,
             };
         },
         computed: {
@@ -214,7 +214,11 @@ THE SOFTWARE.
             },
             '$data.global.app.lang': {
                 handler(data) {
+                    // Lock out the dropdown
                     this.$data.languageLoading = true;
+
+                    // Store if we should fire the event when this is done loading
+                    const interactive = this.$data.interactiveEvents;
 
                     // Ensure valid pack
                     if (!availablePacks.includes(data.value)) data.computed = data.default;
@@ -227,7 +231,7 @@ THE SOFTWARE.
                         this.$data.languageLoading = false;
 
                         // Analytics
-                        analytics(`set_language_${toSep(data.computed, '_')}`, 'Language');
+                        this.languageSetEvent(!interactive);
                     }).catch((err) => {
                         // Error
                         console.log('Failed to set language to', data.computed);
@@ -255,8 +259,10 @@ THE SOFTWARE.
                 if (language) this.lang = language;
             }
 
-            // Send an initial GA event for column mode
+            // Initial analytics events
             this.splitColumnEvent(true);
+            for (let i = 0; i < this.activeDomains.length; i++) this.addSiteEvent(i + 1, true);
+            this.$data.interactiveEvents = true;
         },
         methods: {
             changes(index) {
@@ -285,15 +291,15 @@ THE SOFTWARE.
                 this.$data.domains.push(data);
                 this.$data.active = this.$data.domains.length - 1;
 
-                // GA
-                analytics('add_site', 'Sites', undefined, this.activeDomains.length);
+                // Analytics
+                this.addSiteEvent(this.activeDomains.length);
             },
             remove(index) {
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
 
-                // GA
-                analytics('remove_site', 'Sites', undefined, this.activeDomains.length);
+                // Analytics
+                this.removeSiteEvent(this.activeDomains.length);
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
@@ -351,7 +357,35 @@ THE SOFTWARE.
                 this.splitColumnEvent();
             },
             splitColumnEvent(nonInteraction = false) {
-                analytics('toggle_split_column', 'Button', undefined, Number(this.$data.splitColumn), nonInteraction);
+                analytics({
+                    category: 'Split column',
+                    action: this.$data.splitColumn ? 'Enabled' : 'Disabled',
+                    nonInteraction,
+                });
+            },
+            languageSetEvent(nonInteraction = false) {
+                analytics({
+                    category: 'Language',
+                    action: 'Set',
+                    label: this.$data.global.app.lang.computed,
+                    nonInteraction,
+                });
+            },
+            addSiteEvent(count, nonInteraction = false) {
+                analytics({
+                    category: 'Site',
+                    action: 'Added',
+                    value: count,
+                    nonInteraction,
+                });
+            },
+            removeSiteEvent(count, nonInteraction = false) {
+                analytics({
+                    category: 'Site',
+                    action: 'Removed',
+                    value: count,
+                    nonInteraction,
+                });
             },
             getPrismComponent(confName) {
                 switch (confName) {
