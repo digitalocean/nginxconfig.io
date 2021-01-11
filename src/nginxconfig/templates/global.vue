@@ -29,7 +29,7 @@ THE SOFTWARE.
         <div class="tabs">
             <ul>
                 <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                    <a @click="active = tab.key">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
+                    <a @click="showTab(tab.key)">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
                 </li>
             </ul>
         </div>
@@ -43,10 +43,10 @@ THE SOFTWARE.
         ></component>
 
         <div class="navigation-buttons">
-            <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
+            <a v-if="previousTab !== false" class="button is-mini" @click="showPreviousTab">
                 <i class="fas fa-long-arrow-alt-left"></i> <span>{{ $t('common.back') }}</span>
             </a>
-            <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
+            <a v-if="nextTab !== false" class="button is-primary is-mini" @click="showNextTab">
                 <span>{{ $t('common.next') }}</span> <i class="fas fa-long-arrow-alt-right"></i>
             </a>
         </div>
@@ -54,6 +54,7 @@ THE SOFTWARE.
 </template>
 
 <script>
+    import analytics from '../util/analytics';
     import isChanged from '../util/is_changed';
     import * as Sections from './global_sections';
 
@@ -112,6 +113,39 @@ THE SOFTWARE.
                 const tabs = this.$data.tabs.map(t => t.key);
                 if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) classes.push('is-before');
                 return classes.join(' ');
+            },
+            showTab(target) {
+                // Analytics
+                analytics({
+                    category: 'Global',
+                    action: 'Tab clicked',
+                    label: `${this.$data.active}, ${target}`,
+                });
+
+                // Go!
+                this.$data.active = target;
+            },
+            showPreviousTab() {
+                // Analytics
+                analytics({
+                    category: 'Global',
+                    action: 'Back clicked',
+                    label: `${this.$data.active}, ${this.previousTab}`,
+                });
+
+                // Go!
+                this.$data.active = this.previousTab;
+            },
+            showNextTab() {
+                // Analytics
+                analytics({
+                    category: 'Global',
+                    action: 'Next clicked',
+                    label: `${this.$data.active}, ${this.nextTab}`,
+                });
+
+                // Go!
+                this.$data.active = this.nextTab;
             },
         },
     };
