@@ -56,7 +56,7 @@ THE SOFTWARE.
                         </div>
                     </template>
 
-                    <div class="control" v-if="incorrectEnding">
+                    <div v-if="incorrectEnding" class="control">
                         <label class="text message is-warning">
                             <span class="message-body">
                                 {{ $t('templates.domainSections.onion.onionLocationExpectedToEndWithOnion') }}
