@@ -295,11 +295,12 @@ THE SOFTWARE.
                 this.addSiteEvent(this.activeDomains.length);
             },
             remove(index) {
+                const name = this.$data.domains[index].server.domain.computed;
                 this.$set(this.$data.domains, index, null);
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
 
                 // Analytics
-                this.removeSiteEvent(this.activeDomains.length);
+                this.removeSiteEvent(this.activeDomains.length, name);
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
@@ -379,12 +380,12 @@ THE SOFTWARE.
                     nonInteraction,
                 });
             },
-            removeSiteEvent(count, nonInteraction = false) {
+            removeSiteEvent(count, name) {
                 analytics({
                     category: 'Site',
                     action: 'Removed',
+                    label: name,
                     value: count,
-                    nonInteraction,
                 });
             },
             getPrismComponent(confName) {

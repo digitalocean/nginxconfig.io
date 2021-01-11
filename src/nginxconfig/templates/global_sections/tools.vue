@@ -243,7 +243,10 @@ THE SOFTWARE.
                     this.$t('templates.globalSections.tools.resetGlobalConfig'),
                     this.$t('templates.globalSections.tools.resetGlobalConfigBody'),
                     () => {
-                        analytics('reset_global', 'Reset');
+                        // Analytics
+                        this.resetGlobalEvent();
+
+                        // Do the reset
                         Object.values(this.$parent.$props.data).forEach(category => {
                             Object.values(category).forEach(property => {
                                 property.value = property.default;
@@ -264,7 +267,10 @@ THE SOFTWARE.
                     ${domain.server.domain.computed}
                     ${this.$t('templates.globalSections.tools.domain')}`,
                     () => {
-                        analytics('reset_domain', 'Reset', domain.server.domain.computed);
+                        // Analytics
+                        this.resetDomainEvent(domain.server.domain.computed);
+
+                        // Do the reset
                         this.doResetDomain(domain);
                     },
                 );
@@ -280,13 +286,10 @@ THE SOFTWARE.
                     ${domain.server.domain.computed}
                     ${this.$t('templates.globalSections.tools.domainConfiguration')}`,
                     () => {
-                        analytics(
-                            'remove_domain',
-                            'Remove',
-                            domain.server.domain.computed,
-                            this.$parent.$parent.activeDomains.length - 1,
-                        );
+                        // Analytics
+                        this.removeDomainEvent(domain.server.domain.computed);
 
+                        // Do the removal
                         this.doRemoveDomain(index);
                     },
                 );
@@ -296,13 +299,13 @@ THE SOFTWARE.
                     this.$t('templates.globalSections.tools.resetAllDomainsConfig'),
                     this.$t('templates.globalSections.tools.resetAllDomainsConfigBody'),
                     () => {
-                        analytics(
-                            'reset_all',
-                            'Reset',
-                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed).join(','),
+                        // Analytics
+                        this.resetDomainsEvent(
+                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed),
                             this.$parent.$parent.activeDomains.length,
                         );
 
+                        // Do the reset
                         for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
                             this.doResetDomain(this.$parent.$parent.$data.domains[i]);
                         }
@@ -314,18 +317,61 @@ THE SOFTWARE.
                     this.$t('templates.globalSections.tools.removeAllDomains'),
                     this.$t('templates.globalSections.tools.removeAllDomainsBody'),
                     () => {
-                        analytics(
-                            'remove_all',
-                            'Remove',
-                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed).join(','),
+                        // Analytics
+                        this.removeDomainsEvent(
+                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed),
                             this.$parent.$parent.activeDomains.length,
                         );
 
+                        // Do the removal
                         for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++) {
                             this.doRemoveDomain(i);
                         }
                     },
                 );
+            },
+            resetGlobalEvent() {
+                analytics({
+                    category: 'Tools',
+                    action: 'Global settings reset',
+                });
+            },
+            resetDomainEvent(name) {
+                analytics({
+                    category: 'Tools',
+                    action: 'Site reset',
+                    label: name,
+                });
+            },
+            removeDomainEvent(name) {
+                analytics({
+                    category: 'Tools',
+                    action: 'Removed site',
+                    label: name,
+                });
+
+                // Also fire the general site removal event
+                this.$parent.$parent.removeSiteEvent(this.$parent.$parent.activeDomains.length - 1, name);
+            },
+            resetDomainsEvent(names, count) {
+                analytics({
+                    category: 'Tools',
+                    action: 'All sites reset',
+                    label: names.join(', '),
+                    value: count,
+                });
+            },
+            removeDomainsEvent(names, count) {
+                analytics({
+                    category: 'Tools',
+                    action: 'All sites removed',
+                    label: names.join(', '),
+                    value: count,
+                });
+
+                // Also fire the general site removal event
+                for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++)
+                    this.$parent.$parent.removeSiteEvent(this.$parent.$parent.activeDomains.length - i - 1, names[i]);
             },
             select(event) {
                 event.target.setSelectionRange(0, event.target.value.length);
