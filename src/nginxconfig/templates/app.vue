@@ -101,6 +101,7 @@ THE SOFTWARE.
                                 :name="confContents[0]"
                                 :conf="confContents[1]"
                                 :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
+                                @copied="codeCopiedEvent(confContents[3])"
                             ></component>
                         </template>
                     </div>
@@ -148,8 +149,8 @@ THE SOFTWARE.
             Global,
             Setup,
             NginxPrism,
-            'YamlPrism': () => import('./prism/yaml'),
-            'DockerPrism': () => import('./prism/docker'),
+            YamlPrism: () => import('./prism/yaml'),
+            DockerPrism: () => import('./prism/docker'),
         },
         data() {
             return {
@@ -170,7 +171,7 @@ THE SOFTWARE.
                 splitColumn: false,
                 confWatcherWaiting: false,
                 confFilesPrevious: {},
-                confFilesOutput: {},
+                confFilesOutput: [],
                 languageLoading: false,
                 languagePrevious: defaultPack,
                 interactiveEvents: false,
@@ -326,7 +327,7 @@ THE SOFTWARE.
                     const diffConf = diff(newConf, oldConf, {
                         highlightFunction: value => `<mark>${value}</mark>`,
                     });
-                    this.$data.confFilesOutput = Object.values(diffConf).map(({ name, content }) => {
+                    this.$data.confFilesOutput = Object.entries(diffConf).map(([ file, { name, content } ]) => {
                         const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
                         const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
                         const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
@@ -335,6 +336,7 @@ THE SOFTWARE.
                             confName,
                             diffContent,
                             `${sha2_256(confName)}-${sha2_256(diffContent)}`,
+                            file,
                         ];
                     });
                 } catch (e) {
@@ -346,6 +348,7 @@ THE SOFTWARE.
                             confName,
                             content,
                             `${sha2_256(confName)}-${sha2_256(content)}`,
+                            name,
                         ];
                     });
                 }
@@ -386,6 +389,13 @@ THE SOFTWARE.
                     action: 'Removed',
                     label: name,
                     value: count,
+                });
+            },
+            codeCopiedEvent(file) {
+                analytics({
+                    category: 'Config files',
+                    action: 'Code snippet copied',
+                    label: file,
                 });
             },
             getPrismComponent(confName) {
