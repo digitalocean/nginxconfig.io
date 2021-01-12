@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,6 +33,7 @@ THE SOFTWARE.
                     <br />
                     <BashPrism :key="`${$props.data.global.nginx.nginxConfigDirectory.computed}-${diffieHellmanValue}`"
                                :cmd="`openssl dhparam -out ${$props.data.global.nginx.nginxConfigDirectory.computed}/dhparam.pem ${diffieHellmanValue}`"
+                               @copied="codeCopiedEvent('Generate diffie-hellman keys')"
                     ></BashPrism>
                 </p>
             </li>
@@ -41,9 +42,13 @@ THE SOFTWARE.
                 <p>
                     <span v-html="$t('templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt')"></span>
                     <br />
-                    <BashPrism :key="letsEncryptDir" :cmd="`mkdir -p ${letsEncryptDir}`"></BashPrism>
+                    <BashPrism :key="letsEncryptDir"
+                               :cmd="`mkdir -p ${letsEncryptDir}`"
+                               @copied="codeCopiedEvent('Create let\'s encrypt directory')"
+                    ></BashPrism>
                     <BashPrism :key="`${nginxUser}-${letsEncryptDir}`"
                                :cmd="`chown ${nginxUser} ${letsEncryptDir}`"
+                               @copied="codeCopiedEvent('Set let\'s encrypt directory ownership')"
                     ></BashPrism>
                 </p>
             </li>
@@ -65,6 +70,7 @@ THE SOFTWARE.
 
 <script>
     import BashPrism from '../prism/bash';
+    import analytics from '../../util/analytics';
 
     export default {
         name: 'SetupSSL',
@@ -101,6 +107,15 @@ THE SOFTWARE.
                     }
                 }
                 return false;
+            },
+        },
+        methods: {
+            codeCopiedEvent(step) {
+                analytics({
+                    category: 'Setup',
+                    action: 'Code snippet copied',
+                    label: `ssl: ${step}`,
+                });
             },
         },
     };
