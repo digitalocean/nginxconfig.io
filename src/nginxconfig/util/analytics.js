@@ -240,4 +240,18 @@ Action: 'Copied base64 tar'
 Label: name of the tar file (incl. domain names)
 Value: total number of active domains
 
+# User copying a code snippet in setup
+
+File: setup.vue
+Category: 'Setup'
+Action: 'Code snippet copied'
+Label: tab name: a summary of the code snippet
+
+# User copying a config file
+
+File: app.vue
+Category: 'Config files'
+Action: 'Code snippet copied'
+Label: name of file without nginx directory
+
 */
