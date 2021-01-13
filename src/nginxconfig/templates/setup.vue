@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,7 +30,7 @@ THE SOFTWARE.
             <div class="tabs">
                 <ul>
                     <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                        <a @click="active = tab.key">{{ $t(tab.display) }}</a>
+                        <a @click="showTab(tab.key)">{{ $t(tab.display) }}</a>
                     </li>
                 </ul>
             </div>
@@ -44,10 +44,10 @@ THE SOFTWARE.
             ></component>
 
             <div class="navigation-buttons">
-                <a v-if="previousTab !== false" class="button is-mini" @click="active = previousTab">
+                <a v-if="previousTab !== false" class="button is-mini" @click="showPreviousTab">
                     <i class="fas fa-long-arrow-alt-left"></i> <span>{{ $t('common.back') }}</span>
                 </a>
-                <a v-if="nextTab !== false" class="button is-primary is-mini" @click="active = nextTab">
+                <a v-if="nextTab !== false" class="button is-primary is-mini" @click="showNextTab">
                     <span>{{ $t('common.next') }}</span> <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
@@ -92,6 +92,9 @@ THE SOFTWARE.
                 if (index >= 0) return tabs[index];
                 return false;
             },
+            domainCount() {
+                return this.$props.data.domains.filter(d => d !== null).length;
+            },
             tarName() {
                 const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
                 return `nginxconfig.io-${domains.join(',')}.tar.gz`;
@@ -123,11 +126,27 @@ THE SOFTWARE.
                 return new Tar(data).gz();
             },
             downloadTar() {
-                analytics('download_tar', 'Download', this.tarName);
+                // Analytics
+                analytics({
+                    category: 'Setup',
+                    action: 'Downloaded tar file',
+                    label: this.tarName,
+                    value: this.domainCount,
+                });
+
+                // Do tar generation
                 this.tarContents().download(this.tarName);
             },
             copyTar() {
-                analytics('download_base64', 'Download', this.tarName);
+                // Analytics
+                analytics({
+                    category: 'Setup',
+                    action: 'Copied base64 tar',
+                    label: this.tarName,
+                    value: this.domainCount,
+                });
+
+                // Do tar generation
                 const path = `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/${this.tarName}`;
                 return this.tarContents().base64(path);
             },
@@ -154,6 +173,39 @@ THE SOFTWARE.
                     elm.textContent = 'Press Ctrl + C to copy';
                     resetText();
                 });
+            },
+            showTab(target) {
+                // Analytics
+                analytics({
+                    category: 'Setup',
+                    action: 'Tab clicked',
+                    label: `${this.$data.active}, ${target}`,
+                });
+
+                // Go!
+                this.$data.active = target;
+            },
+            showPreviousTab() {
+                // Analytics
+                analytics({
+                    category: 'Setup',
+                    action: 'Back clicked',
+                    label: `${this.$data.active}, ${this.previousTab}`,
+                });
+
+                // Go!
+                this.$data.active = this.previousTab;
+            },
+            showNextTab() {
+                // Analytics
+                analytics({
+                    category: 'Setup',
+                    action: 'Next clicked',
+                    label: `${this.$data.active}, ${this.nextTab}`,
+                });
+
+                // Go!
+                this.$data.active = this.nextTab;
             },
         },
     };

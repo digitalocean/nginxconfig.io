@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -56,7 +56,6 @@ THE SOFTWARE.
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import analytics from '../../util/analytics';
-    import camelToSnake from '../../util/camel_to_snake';
 
     const defaults = {
         frontend: {
@@ -208,7 +207,7 @@ THE SOFTWARE.
             setPreset(key) {
                 // Set that we're using this preset
                 Object.keys(this.$props.data).forEach(preset => this[preset] = preset === key);
-                analytics(`apply_${camelToSnake(key)}`, 'Presets');
+                this.presetEvent(key, this.interacted);
 
                 // Restore some specific defaults first
                 this.$parent.resetValue('server', 'domain');
@@ -270,6 +269,13 @@ THE SOFTWARE.
                     this.$parent.setValue('php', 'joomlaRules', true);
                     break;
                 }
+            },
+            presetEvent(name, overwrite = false) {
+                analytics({
+                    category: 'Preset',
+                    action: overwrite ? 'Overwritten' : 'Applied', // TODO: Is overwritten the best word here?
+                    label: name,
+                });
             },
             toggleCollapse() {
                 if (this.interacted) {

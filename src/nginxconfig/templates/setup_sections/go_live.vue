@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,13 +32,16 @@ THE SOFTWARE.
         <p>
             {{ $t('templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration') }}
             <br />
-            <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
+            <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
+                       @copied="codeCopiedEvent('Reload nginx')"
+            ></BashPrism>
         </p>
     </div>
 </template>
 
 <script>
     import BashPrism from '../prism/bash';
+    import analytics from '../../util/analytics';
 
     export default {
         name: 'SetupGoLive',
@@ -49,6 +52,15 @@ THE SOFTWARE.
         },
         props: {
             data: Object,
+        },
+        methods: {
+            codeCopiedEvent(step) {
+                analytics({
+                    category: 'Setup',
+                    action: 'Code snippet copied',
+                    label: `goLive: ${step}`,
+                });
+            },
         },
     };
 </script>
