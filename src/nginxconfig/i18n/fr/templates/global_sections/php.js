@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    phpServer: `Serveur ${common.php}`,
+    phpMustBeEnabledOnOneSite: `${common.php} doit être activé sur au moins un site pour configurer les paramètres globaux de ${common.php}.`,
+    phpBackupServer: `Serveur de sauvegarde ${common.php}`,
+    tcp: 'TCP',
+    hhvmSocket: 'Socket HHVM',
+    php5Socket: 'Socket 5.x',
+    php70Socket: 'Socket 7.0',
+    php71Socket: 'Socket 7.1',
+    php72Socket: 'Socket 7.2',
+    php73Socket: 'Socket 7.3',
+    php74Socket: 'Socket 7.4',
+    php80Socket: 'Socket 8.0',
+    phpSocket: 'Socket PHP',
+    disabled: 'Désactivé',
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    gzipCompression: 'Compression Gzip',
+    enableGzipCompression: `${common.enable} la compression gzip`,
+    brotliCompression: 'Compression Brotli',
+    enableBrotliCompression: `${common.enable} la compression brotli`,
+    expirationForAssets: 'Expiration des assets',
+    expirationForMedia: 'Expiration des medias',
+    expirationForSvgs: 'Expiration des SVGs',
+    expirationForFonts: 'Expiration des fonts',
+    performance: 'Performances',
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    phpIsDisabled: `${common.php} est désactivé.`,
+    phpCannotBeEnabledWithReverseProxy: `${common.php} ne peut pas être activé en même temps que le ${common.reverseProxyLower}.`,
+    phpCannotBeEnabledWithPython: `${common.php} ne peut pas être activé en même temps que ${common.python}.`,
+    enablePhp: `${common.enable} ${common.php}`,
+    wordPressRules: `Règles ${common.wordPress}`,
+    enableWordPressRules: `${common.enable} les règles spécifiques à ${common.wordPress}`,
+    drupalRules: `Règles ${common.drupal}`,
+    enableDrupalRules: `${common.enable} les règles spécifiques à ${common.drupal}`,
+    magentoRules: `Règles ${common.magento}`,
+    enableMagentoRules: `${common.enable} les règles spécifiques à ${common.magento}`,
+    joomlaRules: `Règles ${common.joomla}`,
+    enableJoomlaRules: `${common.enable} les règles spécifiques à ${common.joomla}`,
 };

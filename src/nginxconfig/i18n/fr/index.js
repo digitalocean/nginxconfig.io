@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
-};
+import common from './common';
+import languages from './languages';
+import templates from './templates';
+
+export default { common, languages, templates };

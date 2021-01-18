@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
-};
+import https from './https';
+import logging from './logging';
+import php from './php';
+import presets from './presets';
+import python from './python';
+import reverseProxy from './reverse_proxy';
+import routing from './routing';
+import server from './server';
+import restrict from './restrict';
+import onion from './onion';
+
+export default { https, logging, php, presets, python, reverseProxy, routing, server, restrict, onion };

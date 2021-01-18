@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    enableFileNotFoundErrorLogging: `${common.enable} les erreurs de fichiers introuvables lors de la journalisation`,
+    logformat: 'log_format',
+    enableCloudflare: 'ajouter les en-têtes de requête CloudFlare au format de journal par défaut',
+    cfRay: 'CF-Ray',
+    cfConnectingIp: 'CF-Connecting-IP',
+    xForwardedFor: 'X-Forwarded-For',
+    xForwardedProto: 'X-Forwarded-Proto',
+    trueClientIp: 'True-Client-IP',
+    cfIpCountry: 'CF-IPCountry',
+    cfVisitor: 'CF-Visitor',
+    cdnLoop: 'CDN-Loop',
 };

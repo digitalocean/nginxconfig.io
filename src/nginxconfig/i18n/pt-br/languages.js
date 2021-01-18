@@ -29,4 +29,5 @@ export default {
     zhCN: 'Chinês (simplificado)',
     zhTW: 'Chinês (tradicional)',
     ptBR: 'Português (brasileiro)',
+    fr: 'Francês',
 };

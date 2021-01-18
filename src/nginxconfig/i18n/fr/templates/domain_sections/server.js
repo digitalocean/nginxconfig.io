@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,9 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    domain: 'Domaine',
+    documentRoot: 'Dossier racine',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'Un ou plusieurs autres domaines sont aussi nommés',
+    thisWillCauseIssuesWithConfigGeneration: 'Cela causera des problèmes lors de la génération de la configuration.',
+    wwwSubdomain: 'Sous-domaine www',
+    cdnSubdomain: 'Sous-domaine CDN',
+    redirectSubdomains: 'Rediriger les sous-domaines',
+    server: 'Serveur',
+    listen: 'écouter',
 };

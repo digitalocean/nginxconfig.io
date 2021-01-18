@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const certbot = 'Certbot';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: 'French', // TODO: translate
+    commentOutSslDirectivesInConfiguration: `Commentez les directives relatives à ${common.ssl}:`,
+    reloadYourNginxServer: `Relancez le serveur ${common.nginx}:`,
+    obtainSslCertificatesFromLetsEncrypt: `Obtenez les certificats ${common.ssl} de ${common.letsEncrypt} à l'aide de ${certbot}:`,
+    uncommentSslDirectivesInConfiguration: `Décommentez les directives relatives à ${common.ssl}:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `Configurez ${certbot} pour relancer ${common.nginx} lors du renouvellement des certificats:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `Il est inutile de configurer ${certbot} pour votre configuration ${common.nginx}.`,
+    certbot,
 };
