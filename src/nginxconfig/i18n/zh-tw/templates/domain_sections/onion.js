@@ -24,13 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const onion = 'Onion';
+const onion = '洋蔥';
 
 export default {
     onion,
-    onionLocation: `${onion} location`, // TODO: translate
-    provideAnOnionLocationToSetOnionLocationHeader: 'Provide an onion location address to set the Onion-Location header for your site.', // TODO: translate
-    letsVisitorsKnownOnionServicesIsAvailable: 'This lets visitors know that an onion services version of your site is available for Tor browsers.', // TODO: translate
-    learnMoreAboutOnionServices: 'Learn more about Onion services', // TODO: translate
-    onionLocationExpectedToEndWithOnion: 'Onion location addresses normally end with `.onion`.', // TODO: translate
+    onionLocation: `${onion}位置`,
+    provideAnOnionLocationToSetOnionLocationHeader: '提供一個洋蔥位置地址，為您的網站設定洋葱協定頭。',
+    letsVisitorsKnownOnionServicesIsAvailable: '這可以讓訪問者知道你的網站的洋蔥服務版本可用於Tor瀏覽器。',
+    learnMoreAboutOnionServices: '瞭解有關洋葱服務的更多資訊',
+    onionLocationExpectedToEndWithOnion: '洋蔥位置地址通常以.onion結尾。',
 };
