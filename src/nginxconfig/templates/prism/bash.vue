@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,7 +25,7 @@ THE SOFTWARE.
 -->
 
 <template>
-    <div>
+    <div @copied="copied">
         <pre><code class="language-bash">{{ cmd }}</code></pre>
     </div>
 </template>
@@ -41,6 +41,11 @@ THE SOFTWARE.
         mounted() {
             console.info(`Highlighting ${this.$props.cmd}...`);
             Prism.highlightAllUnder(this.$el);
+        },
+        methods: {
+            copied(event) {
+                this.$emit('copied', event.detail.text);
+            },
         },
     };
 </script>

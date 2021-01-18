@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,57 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import 'prismjs';
+import Clipboard from 'clipboard';
+import Prism from 'prismjs';
 import 'prismjs/components/prism-nginx';
 import 'prismjs/components/prism-bash';
 import 'prismjs/plugins/keep-markup/prism-keep-markup';
 import 'prismjs/plugins/toolbar/prism-toolbar';
 import 'prismjs/plugins/toolbar/prism-toolbar.css';
-import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
+
+// Custom copy to clipboard (based on the Prism one)
+const copyToClipboard = () => {
+    if (!Prism.plugins.toolbar) {
+        console.warn('Copy to Clipboard loaded before Toolbar.');
+        return;
+    }
+
+    Prism.plugins.toolbar.registerButton('copy-to-clipboard', env => {
+        const linkCopy = document.createElement('button');
+        linkCopy.textContent = 'Copy';
+
+        const element = env.element;
+        const clip = new Clipboard(linkCopy, {
+            'text': () => element.textContent,
+        });
+
+        const resetText = () => {
+            setTimeout(() => {
+                linkCopy.textContent = 'Copy';
+            }, 5000);
+        };
+
+        const emitEvent = () => {
+            linkCopy.dispatchEvent(new CustomEvent('copied', {
+                bubbles: true,
+                detail: { text: element.textContent },
+            }));
+        };
+
+        clip.on('success', () => {
+            linkCopy.textContent = 'Copied!';
+            emitEvent();
+            resetText();
+        });
+
+        clip.on('error', () => {
+            const isMac = navigator.platform.includes('Mac');
+            linkCopy.textContent = `Press ${isMac ? 'Cmd' : 'Ctrl'}+C to copy`;
+            resetText();
+        });
+
+        return linkCopy;
+    });
+};
+
+copyToClipboard();

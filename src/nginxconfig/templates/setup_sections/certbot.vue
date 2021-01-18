@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -34,6 +34,7 @@ THE SOFTWARE.
                 </p>
                 <BashPrism :key="sitesAvailable"
                            :cmd="`sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`"
+                           @copied="codeCopiedEvent('Disable ssl directives')"
                 ></BashPrism>
             </li>
 
@@ -42,7 +43,9 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
-                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
+                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
+                           @copied="codeCopiedEvent('Reload nginx')"
+                ></BashPrism>
             </li>
 
             <li>
@@ -50,7 +53,10 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt') }}
                     <br />
                 </p>
-                <BashPrism :key="certbotCmds" :cmd="certbotCmds"></BashPrism>
+                <BashPrism :key="certbotCmds"
+                           :cmd="certbotCmds"
+                           @copied="codeCopiedEvent('Obtain certificates using certbot')"
+                ></BashPrism>
             </li>
 
             <li>
@@ -58,7 +64,10 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration') }}
                     <br />
                 </p>
-                <BashPrism :key="sitesAvailable" :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"></BashPrism>
+                <BashPrism :key="sitesAvailable"
+                           :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"
+                           @copied="codeCopiedEvent('Enable ssl directives')"
+                ></BashPrism>
             </li>
 
             <li>
@@ -66,7 +75,9 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
-                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"></BashPrism>
+                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
+                           @copied="codeCopiedEvent('Reload nginx (2)')"
+                ></BashPrism>
             </li>
 
             <li>
@@ -74,8 +85,12 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
                     <br />
                 </p>
-                <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
-                <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"></BashPrism>
+                <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                           @copied="codeCopiedEvent('Create nginx auto-restart on renewal')"
+                ></BashPrism>
+                <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                           @copied="codeCopiedEvent('Enable execution of auto-restart')"
+                ></BashPrism>
             </li>
         </ol>
 
@@ -95,6 +110,7 @@ THE SOFTWARE.
 
 <script>
     import BashPrism from '../prism/bash';
+    import analytics from '../../util/analytics';
 
     export default {
         name: 'SetupCertbot',
@@ -142,6 +158,15 @@ THE SOFTWARE.
                             '-n --agree-tos --force-renewal',
                         ].filter(x => x !== null).join(' ')
                     )).join('\n');
+            },
+        },
+        methods: {
+            codeCopiedEvent(step) {
+                analytics({
+                    category: 'Setup',
+                    action: 'Code snippet copied',
+                    label: `certbot: ${step}`,
+                });
             },
         },
     };
