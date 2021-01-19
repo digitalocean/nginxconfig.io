@@ -41,8 +41,8 @@ export default {
     joomla: 'Joomla',
     django: 'Django',
     logging: 'Logs',
-    reverseProxy: 'Reverse Proxy',
-    reverseProxyLower: 'reverse proxy',
+    reverseProxy: 'Proxy Inverse',
+    reverseProxyLower: 'proxy inverse',
     restrict: 'Restreindre',
-    path: 'chemin',
+    path: 'Chemin',
 };
