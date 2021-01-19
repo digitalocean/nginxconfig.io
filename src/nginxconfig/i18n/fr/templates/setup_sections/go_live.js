@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
+    letsGoLive: 'C\'est en ligne!',
+    reloadNginxToLoadInYourNewConfiguration: `Relancez ${common.nginx} pour charger la nouvelle configuration:`,
+    goLive: 'C\'est en ligne!',
 };

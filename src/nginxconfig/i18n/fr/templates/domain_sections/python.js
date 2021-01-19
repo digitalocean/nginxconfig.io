@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
+    pythonIsDisabled: `${common.python} est désactivé.`,
+    pythonCannotBeEnabledWithReverseProxy: `${common.python} ne peut pas être activé en même temps que le ${common.reverseProxyLower}.`,
+    pythonCannotBeEnabledWithPhp: `${common.python} ne peut pas être activé en même temps que ${common.php}.`,
+    enablePython: `${common.enable} ${common.python}`,
+    djangoRules: `Règles de ${common.django}`,
+    enableDjangoRules: `${common.enable} les règles spécifiques à ${common.django}`,
 };

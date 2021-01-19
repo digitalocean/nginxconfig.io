@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
+    enableEncryptedSslConnection: `${common.enable} les connexions ${common.ssl}`,
+    http2: `${common.http}/2`,
+    enableHttp2Connections: `${common.enable} les connexions ${common.http}/2`,
+    forceHttps: `Forcer ${common.https}`,
+    hsts: 'HSTS',
+    enableStrictTransportSecurity: `${common.enable} Strict Transport Security, exigeant HTTPS`,
+    enableIncludeSubDomains: `${common.enable} la directive includeSubDomains, exigeant une connexion HTTPS pour tous les sous-domaines.`,
+    enablePreload: `${common.enable} la directive de préchargement, indiquant aux navigateurs de toujours utiliser une connexion HTTPS`,
+    certificationType: 'Type de certification',
+    customCertificate: 'Certificat personnalisé',
+    letsEncryptEmail: `E-mail ${common.letsEncrypt}`,
 };

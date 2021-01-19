@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-};
+import app from './app';
+import setup from './setup';
+import footer from './footer';
+import domainSections from './domain_sections';
+import globalSections from './global_sections';
+import setupSections from './setup_sections';
+
+export default { app, setup, footer, domainSections, globalSections, setupSections };

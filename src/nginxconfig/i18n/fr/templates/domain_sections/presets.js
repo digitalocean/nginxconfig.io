@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,9 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
+    presets: 'Préconfigurations',
+    itLooksLikeYouCustomisedTheConfig: 'Il semblerait que vous ayez customisé la configuration de ce domaine. Utiliser une nouvelle préconfiguration peut réinitialiser ou changer certains paramètres que vous avez définis.',
+    frontend: 'Frontend',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'Application monopage',
 };
