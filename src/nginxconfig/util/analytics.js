@@ -27,8 +27,8 @@ THE SOFTWARE.
 export default ({ category, action, label, value, nonInteraction }) => {
     console.info('Analytics event:', { category, action, label, value, nonInteraction });
 
-    try {
-        // Google
+    /*try {
+        // Google Analytics
         window.ga('send', 'event', {
             eventCategory: category,
             eventAction: action,
@@ -38,11 +38,28 @@ export default ({ category, action, label, value, nonInteraction }) => {
         });
     } catch (_) {
         // If analytics fail, don't block anything else
+    }*/
+
+    try {
+        // Google Tag Manager
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: `${category} ${action}`,
+            category,
+            action,
+            label,
+            value,
+            nonInteraction,
+        });
+    } catch (_) {
+        // If analytics fail, don't block anything else
     }
 
     try {
         // Segment
-        window.analytics.track(`${category} ${action}`, {
+        window.analytics.track('Web Interaction', {
+            category,
+            action,
             label,
             value,
             nonInteraction,
