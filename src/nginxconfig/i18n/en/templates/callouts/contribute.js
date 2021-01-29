@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import droplet from './droplet';
-import contribute from './contribute';
-
-export default { droplet, contribute };
+export default {
+    wantToContributeChanges: '👋 Want to request new features, contribute changes, or translate the tool into a new language?',
+    getInvolvedOnGitHub: 'Get involved on GitHub',
+};

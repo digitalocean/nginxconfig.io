@@ -1,4 +1,4 @@
-/*
+<!--
 Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,9 +22,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+-->
 
-import droplet from './droplet';
-import contribute from './contribute';
+<template>
+    <div class="callout floating">
+        <p>
+            {{ $t('templates.callouts.contribute.wantToContributeChanges') }}
+        </p>
+        <p>
+            <a href="https://github.com/digitalocean/nginxconfig.io"
+               class="button is-primary"
+               target="_blank"
+            >
+                {{ $t('templates.callouts.contribute.getInvolvedOnGitHub') }}
+            </a>
+        </p>
+    </div>
+</template>
 
-export default { droplet, contribute };
+<script>
+    export default {
+        name: 'ContributeCallout',
+    };
+</script>

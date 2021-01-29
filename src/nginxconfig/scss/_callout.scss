@@ -4,6 +4,29 @@
   margin: 2rem .5rem 1rem;
   padding: 1.875rem 1.875rem 1.5rem;
 
+  &.floating {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 20rem;
+    max-width: calc(100% - 1rem);
+    box-shadow: inset 0 0 0 $border-size $border-color;
+
+    p {
+      @include sailec-regular;
+
+      + p {
+        margin: 1.25rem 0 0;
+      }
+
+      .button {
+        display: block;
+        height: 3rem;
+        line-height: 3rem;
+      }
+    }
+  }
+
   p {
     @include sailec-medium;
 
@@ -13,8 +36,8 @@
 
     a {
       text-decoration: none;
-      padding: 0 0 1px;
-      border-bottom: 1px dotted $primary;
+      padding: 0 0 $border-size;
+      border-bottom: $border-size dotted $primary;
 
       &:hover {
         border-bottom-color: $primary-hover;

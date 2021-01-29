@@ -112,6 +112,7 @@ THE SOFTWARE.
         </div>
 
         <Footer></Footer>
+        <ContributeCallout></ContributeCallout>
     </div>
 </template>
 
@@ -137,6 +138,7 @@ THE SOFTWARE.
     import Domain from './domain';
     import Global from './global';
     import DropletCallout from './callouts/droplet';
+    import ContributeCallout from './callouts/contribute';
     import Setup from './setup';
     import Footer from './footer';
 
@@ -151,6 +153,7 @@ THE SOFTWARE.
             Domain,
             Global,
             DropletCallout,
+            ContributeCallout,
             Setup,
             NginxPrism,
             YamlPrism: () => import('./prism/yaml'),
