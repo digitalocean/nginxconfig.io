@@ -3,6 +3,7 @@
   border-radius: $border-radius;
   margin: 2rem .5rem 1rem;
   padding: 1.875rem 1.875rem 1.5rem;
+  transition: opacity $transition;
 
   &.floating {
     position: fixed;

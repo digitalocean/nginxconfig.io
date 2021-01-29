@@ -25,7 +25,7 @@ THE SOFTWARE.
 -->
 
 <template>
-    <div class="callout floating">
+    <div class="callout floating" :style="style">
         <p>
             {{ $t('templates.callouts.contribute.wantToContributeChanges') }}
         </p>
@@ -43,5 +43,25 @@ THE SOFTWARE.
 <script>
     export default {
         name: 'ContributeCallout',
+        data() {
+            return {
+                visible: false,
+            };
+        },
+        computed: {
+            style() {
+                return this.$data.visible ? undefined : {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                };
+            },
+        },
+        mounted() {
+            document.addEventListener('scroll', () => {
+                if (this.$data.visible) return;
+                if (window.scrollY < 300) return;
+                this.$data.visible = true;
+            });
+        },
     };
 </script>
