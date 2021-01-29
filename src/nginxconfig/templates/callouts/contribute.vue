@@ -26,17 +26,20 @@ THE SOFTWARE.
 
 <template>
     <div class="callout floating" :style="style">
-        <p>
-            {{ $t('templates.callouts.contribute.wantToContributeChanges') }}
-        </p>
-        <p>
-            <a href="https://github.com/digitalocean/nginxconfig.io"
-               class="button is-primary"
-               target="_blank"
-            >
-                {{ $t('templates.callouts.contribute.getInvolvedOnGitHub') }}
+        <div class="close">
+            <p>
+                {{ $t('templates.callouts.contribute.wantToContributeChanges') }}
+            </p>
+            <a @click="close">
+                <i class="fas fa-times"></i>
             </a>
-        </p>
+        </div>
+        <a href="https://github.com/digitalocean/nginxconfig.io"
+           class="button is-primary"
+           target="_blank"
+        >
+            {{ $t('templates.callouts.contribute.getInvolvedOnGitHub') }}
+        </a>
     </div>
 </template>
 
@@ -45,12 +48,16 @@ THE SOFTWARE.
         name: 'ContributeCallout',
         data() {
             return {
-                visible: false,
+                scrolled: false,
+                closed: false,
             };
         },
         computed: {
+            visible() {
+                return this.$data.scrolled && !this.$data.closed;
+            },
             style() {
-                return this.$data.visible ? undefined : {
+                return this.visible ? undefined : {
                     opacity: 0,
                     pointerEvents: 'none',
                 };
@@ -58,10 +65,15 @@ THE SOFTWARE.
         },
         mounted() {
             document.addEventListener('scroll', () => {
-                if (this.$data.visible) return;
+                if (this.$data.scrolled) return;
                 if (window.scrollY < 300) return;
-                this.$data.visible = true;
+                this.$data.scrolled = true;
             });
+        },
+        methods: {
+            close() {
+                this.$data.closed = true;
+            },
         },
     };
 </script>

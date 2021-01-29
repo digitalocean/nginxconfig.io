@@ -9,22 +9,41 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 20rem;
+    width: 22rem;
     max-width: calc(100% - 1rem);
     box-shadow: inset 0 0 0 $border-size $border-color;
 
+    .close {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      margin: 0 0 1.25rem;
+
+      p {
+        flex-grow: 1;
+        margin: 0 .5rem 0 0;
+      }
+
+      a {
+        color: $muted;
+        margin: 0 .5rem;
+        text-decoration: none;
+        transition: color $transition;
+
+        &:hover {
+          color: $text;
+        }
+      }
+    }
+
     p {
       @include sailec-regular;
+    }
 
-      + p {
-        margin: 1.25rem 0 0;
-      }
-
-      .button {
-        display: block;
-        height: 3rem;
-        line-height: 3rem;
-      }
+    .button {
+      display: block;
+      height: 3rem;
+      line-height: 3rem;
     }
   }
 
