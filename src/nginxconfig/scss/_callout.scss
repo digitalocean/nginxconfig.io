@@ -1,0 +1,28 @@
+.callout {
+  background: $callout;
+  border-radius: $border-radius;
+  margin: 2rem .5rem 1rem;
+  padding: 1.875rem 1.875rem 1.5rem;
+
+  p {
+    @include sailec-medium;
+
+    margin: 0;
+    text-align: left;
+    font-size: 15px;
+
+    a {
+      text-decoration: none;
+      padding: 0 0 1px;
+      border-bottom: 1px dotted $primary;
+
+      &:hover {
+        border-bottom-color: $primary-hover;
+      }
+
+      + i {
+        margin: 0 0 0 .25rem;
+      }
+    }
+  }
+}

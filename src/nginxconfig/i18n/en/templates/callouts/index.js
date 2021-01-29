@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,33 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-$header: #0071fe;
-$highlight: #f2c94c;
-$callout: #f3f5f9;
-@import "~do-bulma/src/style";
+import droplet from './droplet';
 
-.do-bulma {
-  @import "../../../build/prism";
-
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
-  @import "~pretty-checkbox/src/pretty-checkbox";
-
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-  @import "~vue-select/src/scss/vue-select";
-
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "callout";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
-}
+export default { droplet };
