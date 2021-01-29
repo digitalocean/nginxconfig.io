@@ -30,6 +30,7 @@ THE SOFTWARE.
             {{ $t('templates.callouts.droplet.lookingForAPlaceToDeploy') }}
             <ExternalLink :text="$t('templates.callouts.droplet.tryOutDigitalOceansDroplet')"
                           link="https://marketplace.digitalocean.com/apps/lemp"
+                          @click.native="linkClickEvent"
             ></ExternalLink>
         </p>
     </div>
@@ -37,11 +38,30 @@ THE SOFTWARE.
 
 <script>
     import ExternalLink from 'do-vue/src/templates/external_link';
+    import analytics from '../../util/analytics';
 
     export default {
         name: 'DropletCallout',
         components: {
             ExternalLink,
+        },
+        mounted() {
+            this.calloutVisibleEvent();
+        },
+        methods: {
+            calloutVisibleEvent() {
+                analytics({
+                    category: 'Droplet callout',
+                    action: 'Visible',
+                    nonInteraction: true,
+                });
+            },
+            linkClickEvent() {
+                analytics({
+                    category: 'Droplet callout',
+                    action: 'Clicked',
+                });
+            },
         },
     };
 </script>

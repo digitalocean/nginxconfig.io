@@ -254,4 +254,36 @@ Category: 'Config files'
 Action: 'Code snippet copied'
 Label: name of file without nginx directory
 
+# Droplet callout is rendered
+
+File: callouts/droplet.vue
+Category: 'Droplet callout'
+Action: 'Visible'
+Non-interaction: true
+
+# User clicks on droplet callout
+
+File: callouts/droplet.vue
+Category: 'Droplet callout'
+Action: 'Clicked'
+
+# Contribute callout is rendered (on scroll)
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Visible'
+Non-interaction: true
+
+# User clicks on contribute callout
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Clicked'
+
+# User closes the contribute callout
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Closed'
+
 */
