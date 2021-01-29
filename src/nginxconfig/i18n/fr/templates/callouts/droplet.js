@@ -24,75 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-.callout {
-  background: $callout;
-  border-radius: $border-radius;
-  margin: 2rem .5rem 1rem;
-  padding: 1.875rem 1.875rem 1.5rem;
-  transition: opacity $transition;
-
-  &.floating {
-    bottom: 0;
-    box-shadow: inset 0 0 0 $border-size $border-color;
-    max-width: calc(100% - 1rem);
-    position: fixed;
-    right: 0;
-    width: 22rem;
-    z-index: 100;
-
-    .close {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      margin: 0 0 1.25rem;
-
-      p {
-        flex-grow: 1;
-        margin: 0 .5rem 0 0;
-      }
-
-      a {
-        color: $muted;
-        margin: 0 .5rem;
-        text-decoration: none;
-        transition: color $transition;
-
-        &:hover {
-          color: $text;
-        }
-      }
-    }
-
-    p {
-      @include sailec-regular;
-    }
-
-    .button {
-      display: block;
-      height: 3rem;
-      line-height: 3rem;
-    }
-  }
-
-  p {
-    @include sailec-medium;
-
-    font-size: 15px;
-    margin: 0;
-    text-align: left;
-
-    a {
-      border-bottom: $border-size dotted $primary;
-      padding: 0 0 $border-size;
-      text-decoration: none;
-
-      &:hover {
-        border-bottom-color: $primary-hover;
-      }
-
-      + i {
-        margin: 0 0 0 .25rem;
-      }
-    }
-  }
-}
+export default {
+    lookingForAPlaceToDeploy: '👋 Looking for a place to deploy your new configuration?', // TODO: translate
+    tryOutDigitalOceansDroplet: 'Try out DigitalOcean\'s LEMP Droplet with NGINX', // TODO: translate
+};
