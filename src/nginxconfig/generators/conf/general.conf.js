@@ -124,6 +124,16 @@ export default (domains, global) => {
         config.brotli_types = gzipTypes;
     }
 
+    // Connection header for WebSocket reverse proxy
+    if (domains.some(d => d.reverseProxy.reverseProxy.computed)) {
+        config['# Connection header for WebSocket reverse proxy'] = '';
+        const map = 'map $http_upgrade $connection_upgrade';
+        config[map] = {
+            default: 'upgrade',
+            '""': 'close',
+        };
+    }
+
     // Done!
     return config;
 };
