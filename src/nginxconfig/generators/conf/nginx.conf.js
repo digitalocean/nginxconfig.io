@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,6 +27,7 @@ THE SOFTWARE.
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 import shareQuery from '../../util/share_query';
+import phpPath from '../../util/php_path';
 
 export default (domains, global) => {
     const config = {};
@@ -53,8 +54,8 @@ export default (domains, global) => {
     if (global.php.phpBackupServer.computed)
         config.http.push(['upstream php', {
             server: [
-                `${global.php.phpServer.computed[0] === '/' ? 'unix:' : ''}${global.php.phpServer.computed}`,
-                `${global.php.phpBackupServer.computed[0] === '/' ? 'unix:' : ''}${global.php.phpBackupServer.computed} backup`,
+                phpPath(global),
+                `${phpPath(global, true)} backup`,
             ],
         }]);
 

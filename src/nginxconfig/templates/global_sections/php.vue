@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -42,8 +42,8 @@ THE SOFTWARE.
         </div>
 
         <template v-else>
-            <div class="field is-horizontal">
-                <div class="field-label">
+            <div class="field is-horizontal is-aligned-top">
+                <div class="field-label has-margin-top">
                     <label class="label">{{ $t('templates.globalSections.php.phpServer') }}</label>
                 </div>
                 <div class="field-body">
@@ -55,12 +55,18 @@ THE SOFTWARE.
                                        :reduce="s => s.value"
                             ></VueSelect>
                         </div>
+
+                        <div v-if="phpServerCustomEnabled"
+                             :class="`control${phpServerCustomChanged ? ' is-changed' : ''}`"
+                        >
+                            <input v-model="phpServerCustom" class="input" type="text" :placeholder="$props.data.phpServerCustom.default" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="field is-horizontal">
-                <div class="field-label">
+            <div class="field is-horizontal is-aligned-top">
+                <div class="field-label has-margin-top">
                     <label class="label">{{ $t('templates.globalSections.php.phpBackupServer') }}</label>
                 </div>
                 <div class="field-body">
@@ -72,6 +78,12 @@ THE SOFTWARE.
                                        :clearable="false"
                                        :reduce="s => s.value"
                             ></VueSelect>
+                        </div>
+
+                        <div v-if="phpBackupServerCustomEnabled"
+                             :class="`control${phpBackupServerCustomChanged ? ' is-changed' : ''}`"
+                        >
+                            <input v-model="phpBackupServerCustom" class="input" type="text" :placeholder="$props.data.phpBackupServerCustom.default" />
                         </div>
                     </div>
                 </div>
@@ -98,6 +110,7 @@ THE SOFTWARE.
         '/var/run/php/php7.4-fpm.sock': 'templates.globalSections.php.php74Socket',
         '/var/run/php/php8.0-fpm.sock': 'templates.globalSections.php.php80Socket',
         '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
+        'custom': 'templates.globalSections.php.custom',
     };
 
     const defaults = {
@@ -106,10 +119,18 @@ THE SOFTWARE.
             options: serverOptions,
             enabled: true,
         },
+        phpServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
+        },
         phpBackupServer: {
             default: '',
             options: { '': 'templates.globalSections.php.disabled', ...serverOptions },
             enabled: true,
+        },
+        phpBackupServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
         },
     };
 
@@ -139,20 +160,36 @@ THE SOFTWARE.
             // Check server selection is valid
             '$props.data.phpServer': {
                 handler(data) {
-                    // This might cause recursion, but seems not to
-                    if (data.enabled)
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
                         if (!Object.keys(data.options).includes(data.computed))
                             data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpServerCustom.enabled = data.computed === 'custom';
+                        return;
+                    }
+
+                    // Hide custom if disabled
+                    this.$props.data.phpServerCustom.enabled = false;
                 },
                 deep: true,
             },
             // Check backup server selection is valid
             '$props.data.phpBackupServer': {
                 handler(data) {
-                    // This might cause recursion, but seems not to
-                    if (data.enabled)
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
                         if (!Object.keys(data.options).includes(data.computed))
                             data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpBackupServerCustom.enabled = data.computed === 'custom';
+                        return;
+                    }
+
+                    // Hide custom if disabled
+                    this.$props.data.phpBackupServerCustom.enabled = false;
                 },
                 deep: true,
             },
