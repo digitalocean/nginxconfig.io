@@ -112,6 +112,7 @@ THE SOFTWARE.
         '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
         'custom': 'templates.globalSections.php.custom',
     };
+    const hiddenValues = ['', 'custom'];
 
     const defaults = {
         phpServer: {
@@ -149,11 +150,11 @@ THE SOFTWARE.
             ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
             phpServerOptions() {
                 return Object.entries(this.$props.data.phpServer.options)
-                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
+                    .map(([key, value]) => this.formattedOption(key, value));
             },
             phpBackupServerOptions() {
                 return Object.entries(this.$props.data.phpBackupServer.options)
-                    .map(([key, value]) => ({ label: `${this.$t(value)}${key ? `: ${key}` : ''}`, value: key }));
+                    .map(([key, value]) => this.formattedOption(key, value));
             },
         },
         watch: {
@@ -212,11 +213,23 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
-            // Ensure 'Disabled' gets translated in VueSelect on language switch
+            // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
             '$i18n.locale'() {
-                const updated = this.phpBackupServerOptions
+                const updated = this.phpServerOptions
+                    .find(x => x.value === this.$refs.phpServerOptions.$data._value.value);
+                if (updated) this.$refs.phpServerOptions.$data._value = updated;
+
+                const updatedBackup = this.phpBackupServerOptions
                     .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
-                if (updated) this.$refs.phpBackupServerSelect.$data._value = updated;
+                if (updatedBackup) this.$refs.phpBackupServerSelect.$data._value = updatedBackup;
+            },
+        },
+        methods: {
+            formattedOption(key, value) {
+                return {
+                    label: `${this.$t(value)}${hiddenValues.includes(key) ? '' : `: ${key}`}`,
+                    value: key,
+                };
             },
         },
     };
