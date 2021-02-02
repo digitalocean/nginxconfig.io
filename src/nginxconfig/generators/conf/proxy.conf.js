@@ -32,7 +32,7 @@ export default global => {
 
     config['# Proxy headers'] = '';
     config['proxy_set_header Upgrade'] = '$http_upgrade';
-    config['proxy_set_header Connection'] = '"upgrade"';
+    config['proxy_set_header Connection'] = '$connection_upgrade';
     config['proxy_set_header Host'] = '$host';
     config['proxy_set_header X-Real-IP'] = '$remote_addr';
     config['proxy_set_header X-Forwarded-For'] = '$proxy_add_x_forwarded_for';
