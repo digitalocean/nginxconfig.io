@@ -190,6 +190,15 @@ export default (domains, global) => {
         }
     }
 
+    // Connection header for WebSocket reverse proxy
+    if (domains.some(d => d.reverseProxy.reverseProxy.computed)) {
+        config.http.push(['# Connection header for WebSocket reverse proxy', '']);
+        config.http.push(['map $http_upgrade $connection_upgrade', {
+            'default': 'upgrade',
+            '""': 'close',
+        }]);
+    }
+
     // Configs!
     config.http.push(['# Load configs', '']);
     config.http.push(['include', [
