@@ -85,7 +85,7 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
                     <br />
                 </p>
-                <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                <BashPrism cmd="echo -e '#!/bin/bash\nginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
                            @copied="codeCopiedEvent('Create nginx auto-restart on renewal')"
                 ></BashPrism>
                 <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
