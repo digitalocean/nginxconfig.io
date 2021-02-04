@@ -24,22 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
-
-export default {
-    phpServer: `${common.php} server`,
-    phpMustBeEnabledOnOneSite: `${common.php} must be enabled on at least one site to configure global ${common.php} settings.`,
-    phpBackupServer: `${common.php} backup server`,
-    tcp: 'TCP',
-    hhvmSocket: 'HHVM socket',
-    php5Socket: '5.x socket',
-    php70Socket: '7.0 socket',
-    php71Socket: '7.1 socket',
-    php72Socket: '7.2 socket',
-    php73Socket: '7.3 socket',
-    php74Socket: '7.4 socket',
-    php80Socket: '8.0 socket',
-    phpSocket: 'PHP socket',
-    custom: 'Custom',
-    disabled: 'Disabled',
+export default (global, backup = false) => {
+    const key = `php${backup ? 'Backup' : ''}Server`;
+    if (global.php[key].computed === 'custom') return global.php[`${key}Custom`].computed;
+    return (global.php[key].computed[0] === '/' ? 'unix:' : '') + global.php[key].computed;
 };

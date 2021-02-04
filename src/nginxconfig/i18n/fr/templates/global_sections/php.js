@@ -40,5 +40,6 @@ export default {
     php74Socket: 'Socket 7.4',
     php80Socket: 'Socket 8.0',
     phpSocket: 'Socket PHP',
+    custom: 'Custom', // TODO: translate
     disabled: 'Désactivé',
 };
