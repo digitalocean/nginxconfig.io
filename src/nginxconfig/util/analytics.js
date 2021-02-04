@@ -27,8 +27,8 @@ THE SOFTWARE.
 export default ({ category, action, label, value, nonInteraction }) => {
     console.info('Analytics event:', { category, action, label, value, nonInteraction });
 
-    try {
-        // Google
+    /*try {
+        // Google Analytics
         window.ga('send', 'event', {
             eventCategory: category,
             eventAction: action,
@@ -38,11 +38,28 @@ export default ({ category, action, label, value, nonInteraction }) => {
         });
     } catch (_) {
         // If analytics fail, don't block anything else
+    }*/
+
+    try {
+        // Google Tag Manager
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: `${category} ${action}`,
+            category,
+            action,
+            label,
+            value,
+            nonInteraction,
+        });
+    } catch (_) {
+        // If analytics fail, don't block anything else
     }
 
     try {
         // Segment
-        window.analytics.track(`${category} ${action}`, {
+        window.analytics.track('Web Interaction', {
+            category,
+            action,
             label,
             value,
             nonInteraction,
@@ -253,5 +270,37 @@ File: app.vue
 Category: 'Config files'
 Action: 'Code snippet copied'
 Label: name of file without nginx directory
+
+# Droplet callout is rendered
+
+File: callouts/droplet.vue
+Category: 'Droplet callout'
+Action: 'Visible'
+Non-interaction: true
+
+# User clicks on droplet callout
+
+File: callouts/droplet.vue
+Category: 'Droplet callout'
+Action: 'Clicked'
+
+# Contribute callout is rendered (on scroll)
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Visible'
+Non-interaction: true
+
+# User clicks on contribute callout
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Clicked'
+
+# User closes the contribute callout
+
+File: callouts/contribute.vue
+Category: 'Contribute callout'
+Action: 'Closed'
 
 */

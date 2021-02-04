@@ -1,4 +1,4 @@
-/*
+<!--
 Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,35 +22,46 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+-->
 
-$header: #0071fe;
-$highlight: #f2c94c;
-$callout: #f3f5f9;
-@import "~do-bulma/src/style";
+<template>
+    <div class="callout">
+        <p>
+            {{ $t('templates.callouts.droplet.lookingForAPlaceToDeploy') }}
+            <ExternalLink :text="$t('templates.callouts.droplet.tryOutDigitalOceansDroplet')"
+                          link="https://marketplace.digitalocean.com/apps/lemp"
+                          @click.native="linkClickEvent"
+            ></ExternalLink>
+        </p>
+    </div>
+</template>
 
-.do-bulma {
-  @import "../../../build/prism";
+<script>
+    import ExternalLink from 'do-vue/src/templates/external_link';
+    import analytics from '../../util/analytics';
 
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
-  @import "~pretty-checkbox/src/pretty-checkbox";
-
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-  @import "~vue-select/src/scss/vue-select";
-
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "callout";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
-}
+    export default {
+        name: 'DropletCallout',
+        components: {
+            ExternalLink,
+        },
+        mounted() {
+            this.calloutVisibleEvent();
+        },
+        methods: {
+            calloutVisibleEvent() {
+                analytics({
+                    category: 'Droplet callout',
+                    action: 'Visible',
+                    nonInteraction: true,
+                });
+            },
+            linkClickEvent() {
+                analytics({
+                    category: 'Droplet callout',
+                    action: 'Clicked',
+                });
+            },
+        },
+    };
+</script>

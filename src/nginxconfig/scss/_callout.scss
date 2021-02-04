@@ -24,33 +24,75 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-$header: #0071fe;
-$highlight: #f2c94c;
-$callout: #f3f5f9;
-@import "~do-bulma/src/style";
+.callout {
+  background: $callout;
+  border-radius: $border-radius;
+  margin: 2rem .5rem 1rem;
+  padding: 1.875rem 1.875rem 1.5rem;
+  transition: opacity $transition;
 
-.do-bulma {
-  @import "../../../build/prism";
+  &.floating {
+    bottom: 0;
+    box-shadow: inset 0 0 0 $border-size $border-color;
+    max-width: calc(100% - 1rem);
+    position: fixed;
+    right: 0;
+    width: 22rem;
+    z-index: 100;
 
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
-  @import "~pretty-checkbox/src/pretty-checkbox";
+    .close {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      margin: 0 0 1.25rem;
 
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-  @import "~vue-select/src/scss/vue-select";
+      p {
+        flex-grow: 1;
+        margin: 0 .5rem 0 0;
+      }
 
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "callout";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
+      a {
+        color: $muted;
+        margin: 0 .5rem;
+        text-decoration: none;
+        transition: color $transition;
+
+        &:hover {
+          color: $text;
+        }
+      }
+    }
+
+    p {
+      @include sailec-regular;
+    }
+
+    .button {
+      display: block;
+      height: 3rem;
+      line-height: 3rem;
+    }
+  }
+
+  p {
+    @include sailec-medium;
+
+    font-size: 15px;
+    margin: 0;
+    text-align: left;
+
+    a {
+      border-bottom: $border-size dotted $primary;
+      padding: 0 0 $border-size;
+      text-decoration: none;
+
+      &:hover {
+        border-bottom-color: $primary-hover;
+      }
+
+      + i {
+        margin: 0 0 0 .25rem;
+      }
+    }
+  }
 }
