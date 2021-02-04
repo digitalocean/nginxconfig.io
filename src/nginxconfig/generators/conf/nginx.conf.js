@@ -66,7 +66,8 @@ export default (domains, global) => {
         config.http.push(['server_tokens', 'off']);
     if (!global.logging.logNotFound.computed)
         config.http.push(['log_not_found', 'off']);
-    config.http.push(['types_hash_max_size', 2048]);
+    config.http.push(['types_hash_max_size', global.nginx.typesHashMaxSize.computed]);
+    config.http.push(['types_hash_bucket_size', global.nginx.typesHashBucketSize.computed]);
     config.http.push(['client_max_body_size', `${global.nginx.clientMaxBodySize.computed}M`]);
 
     config.http.push(['# MIME', '']);

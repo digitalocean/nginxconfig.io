@@ -116,6 +116,38 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">types_hash_max_size</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${typesHashMaxSizeChanged ? ' is-changed' : ''}`">
+                        <VueSelect v-model="typesHashMaxSize"
+                                   :options="$props.data.typesHashMaxSize.options"
+                                   :clearable="false"
+                        ></VueSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">types_hash_bucket_size</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${typesHashBucketSizeChanged ? ' is-changed' : ''}`">
+                        <VueSelect v-model="typesHashBucketSize"
+                                   :options="$props.data.typesHashBucketSize.options"
+                                   :clearable="false"
+                        ></VueSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -148,6 +180,16 @@ THE SOFTWARE.
         },
         clientMaxBodySize: {
             default: 16,
+            enabled: true,
+        },
+        typesHashMaxSize: {
+            default: 2048,
+            options: Array.from({ length: 8 }, (_, i) => Math.pow(2, i + 6)),
+            enabled: true,
+        },
+        typesHashBucketSize: {
+            default: 64,
+            options: Array.from({ length: 10 }, (_, i) => Math.pow(2, i + 4)),
             enabled: true,
         },
     };
@@ -192,6 +234,26 @@ THE SOFTWARE.
                     if (data.enabled)
                         if (data.computed < 0)
                             data.computed = 0;
+                },
+                deep: true,
+            },
+            // Check hash max size selection is valid
+            '$props.data.typesHashMaxSize': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!data.options.includes(data.computed))
+                            data.computed = data.default;
+                },
+                deep: true,
+            },
+            // Check hash bucket size selection is valid
+            '$props.data.typesHashBucketSize': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.enabled)
+                        if (!data.options.includes(data.computed))
+                            data.computed = data.default;
                 },
                 deep: true,
             },
