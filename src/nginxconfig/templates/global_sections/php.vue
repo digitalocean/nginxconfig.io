@@ -216,7 +216,7 @@ THE SOFTWARE.
             // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
             '$i18n.locale'() {
                 if (!this.$refs.phpServerOptions)
-                    return false
+                    return false;
                 const updated = this.phpServerOptions
                     .find(x => x.value === this.$refs.phpServerOptions.$data._value.value);
                 if (updated) this.$refs.phpServerOptions.$data._value = updated;
