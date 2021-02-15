@@ -44,7 +44,7 @@ export default ({ category, action, label, value, nonInteraction }) => {
         // Google Tag Manager
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-            event: `${category} ${action}`,
+            event: 'nginx_tool',
             category,
             action,
             label,
