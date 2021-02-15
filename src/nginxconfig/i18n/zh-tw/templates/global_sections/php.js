@@ -40,6 +40,6 @@ export default {
     php74Socket: '7.4 socket',
     php80Socket: '8.0 socket',
     phpSocket: 'PHP socket',
-    custom: 'Custom', // TODO: translate
+    custom: '自定义',
     disabled: '禁用',
 };

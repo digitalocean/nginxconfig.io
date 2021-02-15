@@ -25,6 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    wantToContributeChanges: '👋 Want to request new features, contribute changes, or translate the tool into a new language?', // TODO: translate
-    getInvolvedOnGitHub: 'Get involved on GitHub', // TODO: translate
+    wantToContributeChanges: '👋 想要申请新的功能，提出修改意见，或将该工具翻译成新的语言？',
+    getInvolvedOnGitHub: '在GitHub上参与进来',
 };
