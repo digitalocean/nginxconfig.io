@@ -42,9 +42,6 @@ const main = () => {
     // Inject our app mounting point
     template = template.replace('<block name="content"></block>', '<div id="app"></div>');
 
-    // Remove document.write calls that wipe the page
-    template = template.replace(/<script( .+?)?>\s*document\.write\(new Date\(\).getFullYear\(\)\);?\s*<\/script>/, new Date().getFullYear().toString());
-
     fs.writeFileSync(path.join(buildDir, 'index.html'), template);
 };
 
