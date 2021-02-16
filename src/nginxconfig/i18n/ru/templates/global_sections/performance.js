@@ -24,11 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    gzipCompression: 'Gzip сжатие',
+    enableGzipCompression: `${common.enable} gzip сжатие`,
+    brotliCompression: 'Brotli compression',
+    enableBrotliCompression: `${common.enable} brotli сжатие`,
+    expirationForAssets: 'Истечение срока для ассетов',
+    expirationForMedia: 'Истечение срока для медиа файлов',
+    expirationForSvgs: 'Истечение срока для SVG файлов',
+    expirationForFonts: 'Истечение срока для шрифтов',
+    performance: 'Производительность',
 };

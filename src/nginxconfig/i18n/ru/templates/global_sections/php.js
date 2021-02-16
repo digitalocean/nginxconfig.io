@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,11 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    phpServer: `${common.php} сервер`,
+    phpMustBeEnabledOnOneSite: `${common.php} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобаьные настройки ${common.php}.`,
+    phpBackupServer: `${common.php} бекап сервер`,
+    tcp: 'TCP',
+    hhvmSocket: 'HHVM сокет',
+    php5Socket: '5.x сокет',
+    php70Socket: '7.0 сокет',
+    php71Socket: '7.1 сокет',
+    php72Socket: '7.2 сокет',
+    php73Socket: '7.3 сокет',
+    php74Socket: '7.4 сокет',
+    php80Socket: '8.0 сокет',
+    phpSocket: 'PHP сокет',
+    custom: 'Другой',
+    disabled: 'Выключено',
 };

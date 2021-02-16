@@ -25,10 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    presets: 'Пресеты',
+    itLooksLikeYouCustomisedTheConfig: 'Похоже, вы уже настроили конфигурацию для этого домена. Выбор нового пресета может привести к сбросу или изменению некоторых настроек, которые Вы настроили ранее.',
+    frontend: 'Фронтэнд',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'Одностраничное приложение',
 };

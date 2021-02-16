@@ -25,10 +25,15 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    backToTop: 'Вернуться в начало',
+    thisToolIs: 'Этот инструмент',
+    openSourceOnGitHub: 'с открытым исходным кодом на GitHub',
+    underThe: 'под',
+    mit: 'MIT',
+    license: 'лицензией!',
+    weWelcomeFeedbackAndContributions: 'Мы приветсвуем обратную связь и поддержку.',
+    originallyCreatedBy: 'Начало проекта положил',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'при поддержке',
+    digitalOcean: 'DigitalOcean',
 };

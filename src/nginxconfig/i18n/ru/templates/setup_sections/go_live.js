@@ -24,11 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    letsGoLive: 'Время запуска!',
+    reloadNginxToLoadInYourNewConfiguration: `Перезагрузите ${common.nginx}, чтобы запустить его с новой конфигурацией:`,
+    goLive: 'Запустить!',
 };

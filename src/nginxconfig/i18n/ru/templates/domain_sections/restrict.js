@@ -25,10 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    disableForThisDomain: 'выключено для этого домена',
+    responseCode: 'Код ответа',
 };

@@ -25,10 +25,10 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'English',
-    zhCN: 'Chinese (simplified)',
-    zhTW: 'Chinese (traditional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
+    en: 'Английский',
+    zhCN: 'Китайский (упрощённый)',
+    zhTW: 'Китайский (традиционный)',
+    ptBR: 'Португальский (бразильский)',
+    fr: 'Французский',
+    ru: 'Русский',
 };
