@@ -30,4 +30,5 @@ export default {
     zhTW: '繁体中文',
     ptBR: '葡萄牙语 (巴西)',
     fr: '法语',
+    ru: '俄语',
 };

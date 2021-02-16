@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../common';
 
 export default {
-    title: `${common.nginx}Конфигурация`,
+    title: `${common.nginx}Config`,
     description: `Самый простой способ настроить производительный, безопасный и стабильный ${common.nginx} сервер.`,
     singleColumnMode: 'Одноколоночный режим',
     splitColumnMode: 'Режим разделения столбца',
