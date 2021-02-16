@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    nginxConfigDirectory: `Директуория конфигурации ${common.nginx}`,
+    nginxConfigDirectory: `Директория конфигурации ${common.nginx}`,
     mb: 'MB',
 };
