@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,7 +29,7 @@ import common from '../../common';
 export default {
     gzipCompression: 'Gzip сжатие',
     enableGzipCompression: `${common.enable} gzip сжатие`,
-    brotliCompression: 'Brotli compression',
+    brotliCompression: 'Brotli сжатие',
     enableBrotliCompression: `${common.enable} brotli сжатие`,
     expirationForAssets: 'Истечение срока для ассетов',
     expirationForMedia: 'Истечение срока для медиа файлов',

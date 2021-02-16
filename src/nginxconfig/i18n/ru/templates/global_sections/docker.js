@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,7 +35,7 @@ export default {
     dockerCompose: `${docker} Compose`,
     applyDockerTweaks: `Применить настройки ${docker}`,
     applyDockerTweaksForNginx: `Примените настройки конфигурации для запуска ${common.nginx} с ${docker}`,
-    applyDockerTweaksExplainer: `Updates the ${common.nginx} user to be <code class="slim">nginx</code> and the pid to <code class="slim">/var/run/nginx.pid</code>`,
+    applyDockerTweaksExplainer: `Обновляет пользователя ${common.nginx} на <code class="slim">nginx</code> и pid на <code class="slim">/var/run/nginx.pid</code>`,
     includeDockerfile: `Вставьте ${dockerfile}, чтобы запустить ${common.nginx} с ${docker}`,
     includeDockerCompose: `Вставьте docker-compose, чтобы запустить ${common.nginx} с docker-compose`,
 };

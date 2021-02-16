@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,22 +25,22 @@ THE SOFTWARE.
 */
 
 export default {
-	back: 'Назад',
-	next: 'Дальше',
-	enable: 'включить',
-	php: 'PHP',
-	ssl: 'SSL',
-	nginx: 'NGINX',
-	http: 'HTTP',
-	https: 'HTTPS',
-	letsEncrypt: 'Let\'s Encrypt',
-	python: 'Python',
-	wordPress: 'WordPress',
-	drupal: 'Drupal',
-	magento: 'Magento',
-	joomla: 'Joomla',
-	django: 'Django',
-	logging: 'Logging',
+    back: 'Назад',
+    next: 'Дальше',
+    enable: 'включить',
+    php: 'PHP',
+    ssl: 'SSL',
+    nginx: 'NGINX',
+    http: 'HTTP',
+    https: 'HTTPS',
+    letsEncrypt: 'Let\'s Encrypt',
+    python: 'Python',
+    wordPress: 'WordPress',
+    drupal: 'Drupal',
+    magento: 'Magento',
+    joomla: 'Joomla',
+    django: 'Django',
+    logging: 'Логирование',
     reverseProxy: 'Обратный прокси',
     reverseProxyLower: 'обратный прокси',
     restrict: 'Ограничить',
