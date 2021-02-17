@@ -32,6 +32,10 @@ THE SOFTWARE.
   }
 
   .container {
+    h3 {
+      @include sailec-medium;
+    }
+
     form {
       .input-container {
         margin: 0;
