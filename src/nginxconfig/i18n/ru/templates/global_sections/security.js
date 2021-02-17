@@ -24,11 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Во время использования ${common.wordPress}, <code class="slim">'unsafe-eval'</code> часто требуется в Content Security Policy, чтобы панель администратора работала исправно.`,
+    security: 'Безопасность',
 };

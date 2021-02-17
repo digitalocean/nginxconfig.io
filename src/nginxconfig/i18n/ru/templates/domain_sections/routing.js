@@ -24,11 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    fallbackRouting: 'Fallback маршрутизация',
+    fallbackRoutingPhpPath: `Путь к Fallback ${common.php}`,
+    legacyPhpRouting: `Устаревшая маршрутизация ${common.php}`,
+    enableLegacyRouting: `${common.enable} устаревшую маршрутизацию`,
+    routing: 'Маршрутизация',
 };

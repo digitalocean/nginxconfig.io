@@ -24,11 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    title: `${common.nginx}Config`,
+    description: `Самый простой способ настроить производительный, безопасный и стабильный ${common.nginx} сервер.`,
+    singleColumnMode: 'Одноколоночный режим',
+    splitColumnMode: 'Режим разделения столбца',
+    perWebsiteConfig: 'Конфигурация для каждого сайта',
+    addSite: 'Добавить сайт',
+    globalConfig: 'Глобальная конфигурация',
+    setup: 'Настройка',
+    configFiles: 'Файлы конфигурации',
 };

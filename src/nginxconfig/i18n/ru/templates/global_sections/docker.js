@@ -24,11 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    docker,
+    dockerfile,
+    dockerCompose: `${docker} Compose`,
+    applyDockerTweaks: `Применить настройки ${docker}`,
+    applyDockerTweaksForNginx: `Примените настройки конфигурации для запуска ${common.nginx} с ${docker}`,
+    applyDockerTweaksExplainer: `Обновляет пользователя ${common.nginx} на <code class="slim">nginx</code> и pid на <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `Вставьте ${dockerfile}, чтобы запустить ${common.nginx} с ${docker}`,
+    includeDockerCompose: `Вставьте docker-compose, чтобы запустить ${common.nginx} с docker-compose`,
 };

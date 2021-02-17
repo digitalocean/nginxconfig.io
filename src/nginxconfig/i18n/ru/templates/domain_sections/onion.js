@@ -24,11 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+const onion = 'Onion';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    onion,
+    onionLocation: `Расположение ${onion}`,
+    provideAnOnionLocationToSetOnionLocationHeader: `Укажите расположение ${onion}, чтобы задать заголовок Onion-Location для Вашего сайта.`,
+    letsVisitorsKnownOnionServicesIsAvailable: `Это позволит узнать посетителям, что у Вашего сайта есть ${onion}-версия, доступная в браузере Tor.`,
+    learnMoreAboutOnionServices: `Узнайте больше об ${onion}`,
+    onionLocationExpectedToEndWithOnion: `Адреса ${onion} обычно оканчиваются на \`.onion\`.`,
 };

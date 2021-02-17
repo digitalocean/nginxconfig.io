@@ -24,11 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    sslProfile: `${common.ssl} Профиль`,
+    httpsMustBeEnabledOnOneSite: `${common.https} должен быть включен хотя бы на одном сайте, чтобы сконфигурировать глобальные ${common.https} настройки.`,
+    ocspDnsResolvers: 'OCSP DNS Преобразователи',
+    cloudflareResolver: 'Cloudflare Преобразователь',
+    googlePublicDns: 'Публичные Google DNS',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `Директория ${common.letsEncrypt}`,
+    letsEncryptCertRoot: `Директория сертификата ${common.letsEncrypt}`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `только ${ipv4}`,
+    ipv6Only: `только ${ipv6}`,
+    ipv4AndIpv6: `${ipv4} & ${ipv6}`,
 };

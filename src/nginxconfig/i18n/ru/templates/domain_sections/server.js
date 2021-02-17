@@ -25,10 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    domain: 'Домен',
+    documentRoot: 'Корневая директория',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'Один или несколько других доменов также названы',
+    thisWillCauseIssuesWithConfigGeneration: 'Это вызовет проблемы с генерацией конфигурации.',
+    wwwSubdomain: 'www поддомен',
+    cdnSubdomain: 'CDN поддомен',
+    redirectSubdomains: 'Перенаправлять поддомены',
+    server: 'Сервер',
+    listen: 'слушать',
 };

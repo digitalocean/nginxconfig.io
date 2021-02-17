@@ -24,11 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-};
+import app from './app';
+import setup from './setup';
+import footer from './footer';
+import domainSections from './domain_sections';
+import globalSections from './global_sections';
+import setupSections from './setup_sections';
+import callouts from './callouts';
+
+export default { app, setup, footer, domainSections, globalSections, setupSections, callouts };

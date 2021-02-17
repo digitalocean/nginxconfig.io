@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,4 +30,5 @@ export default {
     zhTW: '繁體中文',
     ptBR: '葡萄牙語（巴西）',
     fr: '法語',
+    ru: '俄語',
 };

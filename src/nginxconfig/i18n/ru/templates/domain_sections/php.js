@@ -24,11 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    phpIsDisabled: `${common.php} выключен.`,
+    phpCannotBeEnabledWithReverseProxy: `${common.php} не может быть включен, пока включен обратный прокси.`,
+    phpCannotBeEnabledWithPython: `${common.php} не может быть включен, пока включен ${common.python}.`,
+    enablePhp: `${common.enable} ${common.php}`,
+    wordPressRules: `${common.wordPress} правила`,
+    enableWordPressRules: `${common.enable} ${common.wordPress}-специфичные правила`,
+    drupalRules: `${common.drupal} правила`,
+    enableDrupalRules: `${common.enable} ${common.drupal}-специфичные правила`,
+    magentoRules: `${common.magento} правила`,
+    enableMagentoRules: `${common.enable} ${common.magento}-специфичные правила`,
+    joomlaRules: `${common.joomla} правила`,
+    enableJoomlaRules: `${common.enable} ${common.joomla}-специфичные правила`,
 };

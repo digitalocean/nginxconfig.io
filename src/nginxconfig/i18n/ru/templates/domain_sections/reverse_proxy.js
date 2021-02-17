@@ -24,11 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    reverseProxyIsDisabled: `${common.reverseProxy} выключено.`,
+    reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy} не может быть включен, пока включен ${common.php}.`,
+    reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy} не может быть включен, пока включен ${common.python}.`,
+    enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
 };

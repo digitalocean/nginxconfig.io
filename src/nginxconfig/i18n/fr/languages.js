@@ -30,4 +30,5 @@ export default {
     zhTW: 'Chinois (traditionnel)',
     ptBR: 'Portugais (brésilien)',
     fr: 'Français',
+    ru: 'Russe',
 };

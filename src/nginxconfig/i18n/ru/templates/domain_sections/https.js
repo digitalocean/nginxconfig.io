@@ -24,11 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
+    enableEncryptedSslConnection: `${common.enable} зашифрованные ${common.ssl} соединения`,
+    http2: `${common.http}/2`,
+    enableHttp2Connections: `${common.enable} ${common.http}/2 соединения`,
+    forceHttps: `Использовать только ${common.https}`,
+    hsts: 'HSTS',
+    enableStrictTransportSecurity: `${common.enable} Strict Transport Security, требующая HTTPS соединения`,
+    enableIncludeSubDomains: `${common.enable} includeSubDomains директиву, требующая HTTPS соединения для ВСЕХ поддоменов`,
+    enablePreload: `${common.enable} preload директиву, указывающая браузерам всегда устанавливать только HTTPS-соединения`,
+    certificationType: 'Тип сертификации',
+    customCertificate: 'Другой сертификат',
+    letsEncryptEmail: `${common.letsEncrypt} email`,
 };
