@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    reverseProxyMustBeEnabledOnOneSite: `${common.reverseProxy} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобаьные настройки ${common.reverseProxyLower}.`,
+    reverseProxyMustBeEnabledOnOneSite: `${common.reverseProxy} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобальные настройки ${common.reverseProxyLower}.`,
     seconds: 'секунд',
 };

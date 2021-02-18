@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    enableFileNotFoundErrorLogging: `${common.enable} файл не найден, ошибка входа`,
+    enableFileNotFoundErrorLogging: `${common.enable} логирование ошибок для файлов, которые не были найдены при запросе`,
     logformat: 'log_format',
     enableCloudflare: 'добавить Cloudflare хедеры запроса в дефолтный формат логов',
     cfRay: 'CF-Ray',
