@@ -29,9 +29,9 @@ export default {
     documentRoot: 'Корневая директория',
     oneOrMoreOtherDomainsAreAlsoNamed: 'Один или несколько других доменов также названы',
     thisWillCauseIssuesWithConfigGeneration: 'Это вызовет проблемы с генерацией конфигурации.',
-    wwwSubdomain: 'www поддомен',
+    wwwSubdomain: 'WWW поддомен',
     cdnSubdomain: 'CDN поддомен',
     redirectSubdomains: 'Перенаправлять поддомены',
     server: 'Сервер',
-    listen: 'слушать',
+    listen: 'Слушать от адреса',
 };

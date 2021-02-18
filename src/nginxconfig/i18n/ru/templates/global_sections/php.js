@@ -28,7 +28,7 @@ import common from '../../common';
 
 export default {
     phpServer: `${common.php} сервер`,
-    phpMustBeEnabledOnOneSite: `${common.php} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобаьные настройки ${common.php}.`,
+    phpMustBeEnabledOnOneSite: `${common.php} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобальные настройки ${common.php}.`,
     phpBackupServer: `${common.php} бекап сервер`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM сокет',

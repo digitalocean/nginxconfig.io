@@ -36,6 +36,6 @@ export default {
     applyDockerTweaks: `Применить настройки ${docker}`,
     applyDockerTweaksForNginx: `Примените настройки конфигурации для запуска ${common.nginx} с ${docker}`,
     applyDockerTweaksExplainer: `Обновляет пользователя ${common.nginx} на <code class="slim">nginx</code> и pid на <code class="slim">/var/run/nginx.pid</code>`,
-    includeDockerfile: `Вставьте ${dockerfile}, чтобы запустить ${common.nginx} с ${docker}`,
-    includeDockerCompose: `Вставьте docker-compose, чтобы запустить ${common.nginx} с docker-compose`,
+    includeDockerfile: `Добавить ${dockerfile}, чтобы запустить ${common.nginx} с ${docker}`,
+    includeDockerCompose: `Добавить docker-compose, чтобы запустить ${common.nginx} с docker-compose`,
 };
