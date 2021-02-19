@@ -34,6 +34,9 @@ module.exports = {
     outputDir: 'dist',
     filenameHashing: false, // Don't hash the output, so we can embed on the DigitalOcean Community
     productionSourceMap: false,
+    devServer: {
+        historyApiFallback: false, // Don't serve index.html for 404s in dev
+    },
     configureWebpack: {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
