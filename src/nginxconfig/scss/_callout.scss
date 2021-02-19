@@ -69,8 +69,11 @@ THE SOFTWARE.
 
     .button {
       display: block;
-      height: 3rem;
-      line-height: 3rem;
+      height: auto;
+      line-height: 1.5rem;
+      min-height: 3rem;
+      padding: .75rem 0;
+      white-space: normal;
     }
   }
 
