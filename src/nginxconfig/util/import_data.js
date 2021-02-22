@@ -102,6 +102,15 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             // Create a new domain (assume it has had custom user settings)
             const domainImported = clone(Domain.delegated);
             domainImported.hasUserInteraction = true;
+
+            //  Backwards compatibility logic for old config URLs
+            if (isObject(data.global.php)){
+                if(data.global.php.phpServer)  domainImported.php.phpServer = data.global.php.phpServer;
+                if(data.global.php.phpServerCustom)  domainImported.php.phpServerCustom = data.global.php.phpServerCustom;
+                if(data.global.php.phpBackupServer)  domainImported.php.phpBackupServer = data.global.php.phpBackupServer;
+                if(data.global.php.phpBackupServerCustom)  domainImported.php.phpBackupServerCustom = data.global.php.phpBackupServerCustom;
+            }
+
             domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
