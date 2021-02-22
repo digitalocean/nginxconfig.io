@@ -350,25 +350,6 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
-            // Enable PHP server settings if any site uses PHP
-            '$parent.$parent.$data.domains': {
-                handler(data) {
-                    for (const domain of data) {
-                        if (domain && domain.php && domain.php.php && domain.php.php.computed) {
-                            this.$props.data.phpServer.enabled = true;
-                            this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
-                            this.$props.data.phpBackupServer.enabled = true;
-                            this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
-                            return;
-                        }
-                    }
-                    this.$props.data.phpServer.enabled = false;
-                    this.$props.data.phpServer.computed = '';
-                    this.$props.data.phpBackupServer.enabled = false;
-                    this.$props.data.phpBackupServer.computed = '';
-                },
-                deep: true,
-            },
             // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
             '$i18n.locale'() {
                 if (!this.$refs.phpServerOptions)
