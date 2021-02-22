@@ -292,14 +292,14 @@ export default (domain, domains, global) => {
 
         const fastcgiPass = {
             fastcgi_pass: domains.some(d => d.php.php.computed) && domain.php.phpBackupServer.computed !== ''
-                ? phpUpstream(domain) : phpPath(domain)
+                ? phpUpstream(domain) : phpPath(domain),
         };
 
         if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
             serverConfig.push([loc, {
                 include: 'nginxconfig.io/php_fastcgi.conf',
-                ...fastcgiPass
+                ...fastcgiPass,
             }]);
         } else {
             // Unified

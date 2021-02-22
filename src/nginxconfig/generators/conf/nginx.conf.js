@@ -61,7 +61,7 @@ export default (domains, global) => {
                 ],
             }]);
         }
-    })
+    });
 
     config.http.push(['charset', 'utf-8']);
     config.http.push(['sendfile', 'on']);

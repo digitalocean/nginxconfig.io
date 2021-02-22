@@ -187,196 +187,196 @@ THE SOFTWARE.
 </template>
 
 <script>
-import PrettyCheck from 'pretty-checkbox-vue/check';
-import VueSelect from 'vue-select';
-import delegatedFromDefaults from '../../util/delegated_from_defaults';
-import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from 'pretty-checkbox-vue/check';
+    import VueSelect from 'vue-select';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults';
+    import computedFromDefaults from '../../util/computed_from_defaults';
 
-// Value -> i18n key
-const serverOptions = {
-    '127.0.0.1:9000': 'templates.globalSections.php.tcp',
-    '/var/run/hhvm/sock': 'templates.globalSections.php.hhvmSocket',
-    '/var/run/hhvm/hhvm.sock': 'templates.globalSections.php.hhvmSocket',
-    '/var/run/php5-fpm.sock': 'templates.globalSections.php.php5Socket',
-    '/var/run/php/php7.1-fpm.sock': 'templates.globalSections.php.php71Socket',
-    '/var/run/php/php7.2-fpm.sock': 'templates.globalSections.php.php72Socket',
-    '/var/run/php/php7.0-fpm.sock': 'templates.globalSections.php.php70Socket',
-    '/var/run/php/php7.3-fpm.sock': 'templates.globalSections.php.php73Socket',
-    '/var/run/php/php7.4-fpm.sock': 'templates.globalSections.php.php74Socket',
-    '/var/run/php/php8.0-fpm.sock': 'templates.globalSections.php.php80Socket',
-    '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
-    'custom': 'templates.globalSections.php.custom',
-};
+    // Value -> i18n key
+    const serverOptions = {
+        '127.0.0.1:9000': 'templates.globalSections.php.tcp',
+        '/var/run/hhvm/sock': 'templates.globalSections.php.hhvmSocket',
+        '/var/run/hhvm/hhvm.sock': 'templates.globalSections.php.hhvmSocket',
+        '/var/run/php5-fpm.sock': 'templates.globalSections.php.php5Socket',
+        '/var/run/php/php7.1-fpm.sock': 'templates.globalSections.php.php71Socket',
+        '/var/run/php/php7.2-fpm.sock': 'templates.globalSections.php.php72Socket',
+        '/var/run/php/php7.0-fpm.sock': 'templates.globalSections.php.php70Socket',
+        '/var/run/php/php7.3-fpm.sock': 'templates.globalSections.php.php73Socket',
+        '/var/run/php/php7.4-fpm.sock': 'templates.globalSections.php.php74Socket',
+        '/var/run/php/php8.0-fpm.sock': 'templates.globalSections.php.php80Socket',
+        '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
+        'custom': 'templates.globalSections.php.custom',
+    };
 
-const hiddenValues = ['', 'custom'];
+    const hiddenValues = ['', 'custom'];
 
-const defaults = {
-    phpServer: {
-        default: '/var/run/php/php-fpm.sock',
-        options: serverOptions,
-        enabled: true,
-    },
-    phpServerCustom: {
-        default: 'unix:/var/run/php/php-fpm.sock',
-        enabled: false,
-    },
-    phpBackupServer: {
-        default: '',
-        options: { '': 'templates.globalSections.php.disabled', ...serverOptions },
-        enabled: true,
-    },
-    phpBackupServerCustom: {
-        default: 'unix:/var/run/php/php-fpm.sock',
-        enabled: false,
-    },
-    php: {
-        default: true,
-        enabled: true,
-    },
-    wordPressRules: {
-        default: false,
-        enabled: true,
-    },
-    drupalRules: {
-        default: false,
-        enabled: true,
-    },
-    magentoRules: {
-        default: false,
-        enabled: true,
-    },
-    joomlaRules: {
-        default: false,
-        enabled: true,
-    },
-};
-
-export default {
-    name: 'DomainPHP',                                  // Component name
-    display: 'common.php',                              // Display name for tab (i18n key)
-    key: 'php',                                         // Key for data in parent
-    delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
-    components: {
-        PrettyCheck,
-        VueSelect
-    },
-    props: {
-        data: Object,                                   // Data delegated back to us from parent
-    },
-    computed: {
-        ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
-        phpServerOptions() {
-            return Object.entries(this.$props.data.phpServer.options)
-                .map(([key, value]) => this.formattedOption(key, value));
+    const defaults = {
+        phpServer: {
+            default: '/var/run/php/php-fpm.sock',
+            options: serverOptions,
+            enabled: true,
         },
-        phpBackupServerOptions() {
-            return Object.entries(this.$props.data.phpBackupServer.options)
-                .map(([key, value]) => this.formattedOption(key, value));
+        phpServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
         },
-    },
-    watch: {
-        // If the Reverse proxy or Python is enabled, PHP will be forced off
-        '$parent.$props.data': {
-            handler(data) {
-                // This might cause recursion, but seems not to
-                if (data.reverseProxy.reverseProxy.computed || data.python.python.computed) {
-                    this.$props.data.php.enabled = false;
-                    this.$props.data.php.computed = false;
-                } else {
-                    this.$props.data.php.enabled = true;
-                    this.$props.data.php.computed = this.$props.data.php.value;
-                }
+        phpBackupServer: {
+            default: '',
+            options: { '': 'templates.globalSections.php.disabled', ...serverOptions },
+            enabled: true,
+        },
+        phpBackupServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
+        },
+        php: {
+            default: true,
+            enabled: true,
+        },
+        wordPressRules: {
+            default: false,
+            enabled: true,
+        },
+        drupalRules: {
+            default: false,
+            enabled: true,
+        },
+        magentoRules: {
+            default: false,
+            enabled: true,
+        },
+        joomlaRules: {
+            default: false,
+            enabled: true,
+        },
+    };
+
+    export default {
+        name: 'DomainPHP',                                  // Component name
+        display: 'common.php',                              // Display name for tab (i18n key)
+        key: 'php',                                         // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        components: {
+            PrettyCheck,
+            VueSelect,
+        },
+        props: {
+            data: Object,                                   // Data delegated back to us from parent
+        },
+        computed: {
+            ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
+            phpServerOptions() {
+                return Object.entries(this.$props.data.phpServer.options)
+                    .map(([key, value]) => this.formattedOption(key, value));
             },
-            deep: true,
-        },
-        // Disable everything if PHP is disabled
-        '$props.data.php': {
-            handler(data) {
-                if (data.computed) {
-                    this.$props.data.wordPressRules.enabled = true;
-                    this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
-                    this.$props.data.drupalRules.enabled = true;
-                    this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
-                    this.$props.data.magentoRules.enabled = true;
-                    this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
-                    this.$props.data.joomlaRules.enabled = true;
-                    this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
-                } else {
-                    this.$props.data.wordPressRules.enabled = false;
-                    this.$props.data.wordPressRules.computed = false;
-                    this.$props.data.drupalRules.enabled = false;
-                    this.$props.data.drupalRules.computed = false;
-                    this.$props.data.magentoRules.enabled = false;
-                    this.$props.data.magentoRules.computed = false;
-                    this.$props.data.joomlaRules.enabled = false;
-                    this.$props.data.joomlaRules.computed = false;
-                }
+            phpBackupServerOptions() {
+                return Object.entries(this.$props.data.phpBackupServer.options)
+                    .map(([key, value]) => this.formattedOption(key, value));
             },
-            deep: true,
         },
-        // Check server selection is valid
-        '$props.data.phpServer': {
-            handler(data) {
-                if (data.enabled) {
+        watch: {
+            // If the Reverse proxy or Python is enabled, PHP will be forced off
+            '$parent.$props.data': {
+                handler(data) {
                     // This might cause recursion, but seems not to
-                    if (!Object.keys(data.options).includes(data.computed))
-                        data.computed = data.default;
-
-                    // Show the custom box
-                    this.$props.data.phpServerCustom.enabled = data.computed === 'custom';
-                    return;
-                }
-
-                // Hide custom if disabled
-                this.$props.data.phpServerCustom.enabled = false;
+                    if (data.reverseProxy.reverseProxy.computed || data.python.python.computed) {
+                        this.$props.data.php.enabled = false;
+                        this.$props.data.php.computed = false;
+                    } else {
+                        this.$props.data.php.enabled = true;
+                        this.$props.data.php.computed = this.$props.data.php.value;
+                    }
+                },
+                deep: true,
             },
-            deep: true,
-        },
-        // Check backup server selection is valid
-        '$props.data.phpBackupServer': {
-            handler(data) {
-                if (data.enabled) {
-                    // This might cause recursion, but seems not to
-                    if (!Object.keys(data.options).includes(data.computed))
-                        data.computed = data.default;
-
-                    // Show the custom box
-                    this.$props.data.phpBackupServerCustom.enabled = data.computed === 'custom';
-                    return;
-                }
-
-                // Hide custom if disabled
-                this.$props.data.phpBackupServerCustom.enabled = false;
+            // Disable everything if PHP is disabled
+            '$props.data.php': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.wordPressRules.enabled = true;
+                        this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
+                        this.$props.data.drupalRules.enabled = true;
+                        this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
+                        this.$props.data.magentoRules.enabled = true;
+                        this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
+                        this.$props.data.joomlaRules.enabled = true;
+                        this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
+                    } else {
+                        this.$props.data.wordPressRules.enabled = false;
+                        this.$props.data.wordPressRules.computed = false;
+                        this.$props.data.drupalRules.enabled = false;
+                        this.$props.data.drupalRules.computed = false;
+                        this.$props.data.magentoRules.enabled = false;
+                        this.$props.data.magentoRules.computed = false;
+                        this.$props.data.joomlaRules.enabled = false;
+                        this.$props.data.joomlaRules.computed = false;
+                    }
+                },
+                deep: true,
             },
-            deep: true,
-        },
-        // Enable PHP server settings if any site uses PHP
-        '$parent.$parent.$data.domains': {
-            handler(data) {
-                for (const domain of data) {
-                    if (domain && domain.php && domain.php.php && domain.php.php.computed) {
-                        this.$props.data.phpServer.enabled = true;
-                        this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
-                        this.$props.data.phpBackupServer.enabled = true;
-                        this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
+            // Check server selection is valid
+            '$props.data.phpServer': {
+                handler(data) {
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpServerCustom.enabled = data.computed === 'custom';
                         return;
                     }
-                }
-                this.$props.data.phpServer.enabled = false;
-                this.$props.data.phpServer.computed = '';
-                this.$props.data.phpBackupServer.enabled = false;
-                this.$props.data.phpBackupServer.computed = '';
+
+                    // Hide custom if disabled
+                    this.$props.data.phpServerCustom.enabled = false;
+                },
+                deep: true,
             },
-            deep: true,
+            // Check backup server selection is valid
+            '$props.data.phpBackupServer': {
+                handler(data) {
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpBackupServerCustom.enabled = data.computed === 'custom';
+                        return;
+                    }
+
+                    // Hide custom if disabled
+                    this.$props.data.phpBackupServerCustom.enabled = false;
+                },
+                deep: true,
+            },
+            // Enable PHP server settings if any site uses PHP
+            '$parent.$parent.$data.domains': {
+                handler(data) {
+                    for (const domain of data) {
+                        if (domain && domain.php && domain.php.php && domain.php.php.computed) {
+                            this.$props.data.phpServer.enabled = true;
+                            this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
+                            this.$props.data.phpBackupServer.enabled = true;
+                            this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
+                            return;
+                        }
+                    }
+                    this.$props.data.phpServer.enabled = false;
+                    this.$props.data.phpServer.computed = '';
+                    this.$props.data.phpBackupServer.enabled = false;
+                    this.$props.data.phpBackupServer.computed = '';
+                },
+                deep: true,
+            },
         },
-    },
-    methods: {
-        formattedOption(key, value) {
-            return {
-                label: `${this.$t(value)}${hiddenValues.includes(key) ? '' : `: ${key}`}`,
-                value: key,
-            };
+        methods: {
+            formattedOption(key, value) {
+                return {
+                    label: `${this.$t(value)}${hiddenValues.includes(key) ? '' : `: ${key}`}`,
+                    value: key,
+                };
+            },
         },
-    },
-};
+    };
 </script>
