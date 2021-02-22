@@ -25,24 +25,44 @@ THE SOFTWARE.
 */
 
 import isObject from './is_object';
+
 // Handle converting the old query format to our new query params
-export default (data, domains) => {
-    // Handle converting domain settings
+export default data => {
+    // Handle converting old domain settings to new ones
     if ('global' in data && isObject(data.global)) {
+        // Handle specifics global data
+        const mappedData = {
+            php: {},
+        };
+
+        // Keys to map
+        const keysToMap = {
+            php: [
+                'phpServer',
+                'phpServerCustom',
+                'phpBackupServer',
+                'phpBackupServerCustom',
+            ],
+        };
+
         for (const key in data.global) {
-            // Don't include inherited props
             if (!Object.prototype.hasOwnProperty.call(data.global, key)) continue;
 
-            // Check this is an object
-            if (!isObject(data.global[key])) continue;
+            // Handle all includes php key
+            if (key === 'php'){
+                for (const domainKey in data.domains) {
+                    if (!Object.prototype.hasOwnProperty.call(data.domains, domainKey)) continue;
 
-            for (const index in domains) {
-                // Handle converting old domain settings to new ones
-                if (isObject(data.global.php)) {
-                    if(data.global.php.phpServer)  domains[index].php.phpServer.value = data.global.php.phpServer;
-                    if(data.global.php.phpServerCustom)  domains[index].php.phpServerCustom.value = data.global.php.phpServerCustom;
-                    if(data.global.php.phpBackupServer)  domains[index].php.phpBackupServer.value = data.global.php.phpBackupServer;
-                    if(data.global.php.phpBackupServerCustom)  domains[index].php.phpBackupServerCustom.value = data.global.php.phpBackupServerCustom;
+                    for (const valueKey in data.global[key]){
+                        if (!Object.prototype.hasOwnProperty.call(data.global[key], valueKey)) continue;
+
+                        if (keysToMap.php.includes(valueKey)) {
+                            mappedData[key][valueKey] = data.global[key][valueKey];
+                        }
+                    }
+
+                    // Overwrite mapped properties
+                    data.domains[domainKey] = {...data.domains[domainKey], ...mappedData};
                 }
             }
         }

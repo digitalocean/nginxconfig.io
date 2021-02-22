@@ -89,6 +89,9 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
     // Handle converting nginxconfig.io-angular params to the current version
     angularBackwardsCompatibility(data);
 
+    // Handle converting vue params to the current version
+    vueBackwardsCompatibility(data);
+
     // Handle domains
     if ('domains' in data && isObject(data.domains)) {
         // Work through all valid integer keys in the object
@@ -112,9 +115,6 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
         // If no configured domains, add a single default
         domains.push(clone(Domain.delegated));
     }
-
-    // Handle converting vue params to the current version
-    vueBackwardsCompatibility(data, domains);
 
     // Handle global settings
     if ('global' in data) {
