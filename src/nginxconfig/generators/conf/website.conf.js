@@ -286,6 +286,15 @@ export default (domain, domains, global) => {
 
     // PHP
     if (domain.php.php.computed) {
+        serverConfig.push(['# upstream', '']);
+
+        serverConfig.push([`upstream ${phpUpstream(domain)}`, {
+            server: [
+                phpPath(domain),
+                `${phpPath(domain, true)} backup`,
+            ],
+        }]);
+
         serverConfig.push(['# handle .php', '']);
 
         const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
@@ -298,14 +307,14 @@ export default (domain, domains, global) => {
         if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
             serverConfig.push([loc, {
-                include: 'nginxconfig.io/php_fastcgi.conf',
                 ...fastcgiPass,
+                include: 'nginxconfig.io/php_fastcgi.conf',
             }]);
         } else {
             // Unified
             serverConfig.push([loc, {
-                ...phpConf(domains),
                 ...fastcgiPass,
+                ...phpConf(domains),
             }]);
         }
     }
