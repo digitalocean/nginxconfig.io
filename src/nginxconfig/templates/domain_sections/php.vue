@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -65,14 +65,15 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="php" class="field is-horizontal">
+        <div v-if="phpServerEnabled" class="field is-horizontal">
             <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.php.phpServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${phpServerChanged ? ' is-changed' : ''}`">
-                        <VueSelect v-model="phpServer"
+                        <VueSelect ref="phpServerSelect"
+                                   v-model="phpServer"
                                    :options="phpServerOptions"
                                    :clearable="false"
                                    :reduce="s => s.value"
@@ -88,7 +89,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="php" class="field is-horizontal">
+        <div v-if="phpBackupServerEnabled" class="field is-horizontal">
             <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.php.phpBackupServer') }}</label>
             </div>
@@ -293,6 +294,10 @@ THE SOFTWARE.
             '$props.data.php': {
                 handler(data) {
                     if (data.computed) {
+                        this.$props.data.phpServer.enabled = true;
+                        this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
+                        this.$props.data.phpBackupServer.enabled = true;
+                        this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
                         this.$props.data.wordPressRules.enabled = true;
                         this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
                         this.$props.data.drupalRules.enabled = true;
@@ -302,6 +307,8 @@ THE SOFTWARE.
                         this.$props.data.joomlaRules.enabled = true;
                         this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
                     } else {
+                        this.$props.data.phpServer.enabled = false;
+                        this.$props.data.phpBackupServer.enabled = false;
                         this.$props.data.wordPressRules.enabled = false;
                         this.$props.data.wordPressRules.computed = false;
                         this.$props.data.drupalRules.enabled = false;
@@ -352,11 +359,11 @@ THE SOFTWARE.
             },
             // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
             '$i18n.locale'() {
-                if (!this.$refs.phpServerOptions)
+                if (!this.$refs.phpServerSelect)
                     return false;
                 const updated = this.phpServerOptions
-                    .find(x => x.value === this.$refs.phpServerOptions.$data._value.value);
-                if (updated) this.$refs.phpServerOptions.$data._value = updated;
+                    .find(x => x.value === this.$refs.phpServerSelect.$data._value.value);
+                if (updated) this.$refs.phpServerSelect.$data._value = updated;
                 const updatedBackup = this.phpBackupServerOptions
                     .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
                 if (updatedBackup) this.$refs.phpBackupServerSelect.$data._value = updatedBackup;
