@@ -67,7 +67,7 @@ THE SOFTWARE.
 
         <div v-if="php" class="field is-horizontal">
             <div class="field-label has-margin-top">
-                <label class="label">{{ $t('templates.globalSections.php.phpServer') }}</label>
+                <label class="label">{{ $t('templates.domainSections.php.phpServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -90,7 +90,7 @@ THE SOFTWARE.
 
         <div v-if="php" class="field is-horizontal">
             <div class="field-label has-margin-top">
-                <label class="label">{{ $t('templates.globalSections.php.phpBackupServer') }}</label>
+                <label class="label">{{ $t('templates.domainSections.php.phpBackupServer') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -194,18 +194,18 @@ THE SOFTWARE.
 
     // Value -> i18n key
     const serverOptions = {
-        '127.0.0.1:9000': 'templates.globalSections.php.tcp',
-        '/var/run/hhvm/sock': 'templates.globalSections.php.hhvmSocket',
-        '/var/run/hhvm/hhvm.sock': 'templates.globalSections.php.hhvmSocket',
-        '/var/run/php5-fpm.sock': 'templates.globalSections.php.php5Socket',
-        '/var/run/php/php7.1-fpm.sock': 'templates.globalSections.php.php71Socket',
-        '/var/run/php/php7.2-fpm.sock': 'templates.globalSections.php.php72Socket',
-        '/var/run/php/php7.0-fpm.sock': 'templates.globalSections.php.php70Socket',
-        '/var/run/php/php7.3-fpm.sock': 'templates.globalSections.php.php73Socket',
-        '/var/run/php/php7.4-fpm.sock': 'templates.globalSections.php.php74Socket',
-        '/var/run/php/php8.0-fpm.sock': 'templates.globalSections.php.php80Socket',
-        '/var/run/php/php-fpm.sock': 'templates.globalSections.php.phpSocket',
-        'custom': 'templates.globalSections.php.custom',
+        '127.0.0.1:9000': 'templates.domainSections.php.tcp',
+        '/var/run/hhvm/sock': 'templates.domainSections.php.hhvmSocket',
+        '/var/run/hhvm/hhvm.sock': 'templates.domainSections.php.hhvmSocket',
+        '/var/run/php5-fpm.sock': 'templates.domainSections.php.php5Socket',
+        '/var/run/php/php7.1-fpm.sock': 'templates.domainSections.php.php71Socket',
+        '/var/run/php/php7.2-fpm.sock': 'templates.domainSections.php.php72Socket',
+        '/var/run/php/php7.0-fpm.sock': 'templates.domainSections.php.php70Socket',
+        '/var/run/php/php7.3-fpm.sock': 'templates.domainSections.php.php73Socket',
+        '/var/run/php/php7.4-fpm.sock': 'templates.domainSections.php.php74Socket',
+        '/var/run/php/php8.0-fpm.sock': 'templates.domainSections.php.php80Socket',
+        '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
+        'custom': 'templates.domainSections.php.custom',
     };
 
     const hiddenValues = ['', 'custom'];
@@ -222,7 +222,7 @@ THE SOFTWARE.
         },
         phpBackupServer: {
             default: '',
-            options: { '': 'templates.globalSections.php.disabled', ...serverOptions },
+            options: { '': 'templates.domainSections.php.disabled', ...serverOptions },
             enabled: true,
         },
         phpBackupServerCustom: {
@@ -368,6 +368,17 @@ THE SOFTWARE.
                     this.$props.data.phpBackupServer.computed = '';
                 },
                 deep: true,
+            },
+            // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
+            '$i18n.locale'() {
+                if (!this.$refs.phpServerOptions)
+                    return false;
+                const updated = this.phpServerOptions
+                    .find(x => x.value === this.$refs.phpServerOptions.$data._value.value);
+                if (updated) this.$refs.phpServerOptions.$data._value = updated;
+                const updatedBackup = this.phpBackupServerOptions
+                    .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
+                if (updatedBackup) this.$refs.phpBackupServerSelect.$data._value = updatedBackup;
             },
         },
         methods: {
