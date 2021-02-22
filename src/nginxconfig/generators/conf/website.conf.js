@@ -38,6 +38,8 @@ import drupalConf from './drupal.conf';
 import magentoConf from './magento.conf';
 import joomlaConf from './joomla.conf';
 import letsEncryptConf from './letsencrypt.conf';
+import phpPath from '../../util/php_path';
+import phpUpstream from '../../util/php_ustream';
 
 const sslConfig = (domain, global) => {
     const config = [];
@@ -287,12 +289,21 @@ export default (domain, domains, global) => {
         serverConfig.push(['# handle .php', '']);
 
         const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
+
+        const fastcgiPass = {
+            fastcgi_pass: domains.some(d => d.php.php.computed) && domain.php.phpBackupServer.computed !== ''
+                ? phpUpstream(domain) : phpPath(domain)
+        };
+
         if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
-            serverConfig.push([loc, { include: 'nginxconfig.io/php_fastcgi.conf' }]);
+            serverConfig.push([loc, {
+                include: 'nginxconfig.io/php_fastcgi.conf',
+                ...fastcgiPass
+            }]);
         } else {
             // Unified
-            serverConfig.push([loc, phpConf(domains, global)]);
+            serverConfig.push([loc, phpConf(domains)]);
         }
     }
 

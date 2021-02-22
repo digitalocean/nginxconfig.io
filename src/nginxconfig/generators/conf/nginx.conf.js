@@ -28,6 +28,7 @@ import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 import shareQuery from '../../util/share_query';
 import phpPath from '../../util/php_path';
+import phpUpstream from '../../util/php_upstream';
 
 export default (domains, global) => {
     const config = {};
@@ -51,13 +52,16 @@ export default (domains, global) => {
     // HTTP (kv so we can use the same key multiple times)
     config.http = [];
 
-    if (global.php.phpBackupServer.computed)
-        config.http.push(['upstream php', {
-            server: [
-                phpPath(global),
-                `${phpPath(global, true)} backup`,
-            ],
-        }]);
+    domains.forEach(domain => {
+        if (domain.php.phpBackupServer.computed){
+            config.http.push([`upstream ${phpUpstream(domain)}`, {
+                server: [
+                    phpPath(domain),
+                    `${phpPath(domain, true)} backup`,
+                ],
+            }]);
+        }
+    })
 
     config.http.push(['charset', 'utf-8']);
     config.http.push(['sendfile', 'on']);
