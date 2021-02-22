@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -38,7 +38,7 @@ export default (data, domains) => {
 
             for (const index in domains) {
                 // Handle converting old domain settings to new ones
-                if (isObject(data.global.php)){
+                if (isObject(data.global.php)) {
                     if(data.global.php.phpServer)  domains[index].php.phpServer.value = data.global.php.phpServer;
                     if(data.global.php.phpServerCustom)  domains[index].php.phpServerCustom.value = data.global.php.phpServerCustom;
                     if(data.global.php.phpBackupServer)  domains[index].php.phpBackupServer.value = data.global.php.phpBackupServer;
