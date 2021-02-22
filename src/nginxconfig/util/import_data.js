@@ -28,7 +28,8 @@ import qs from 'qs';
 import clone from 'clone';
 import Domain from '../templates/domain';
 import isObject from './is_object';
-import backwardsCompatibility from './backwards_compatibility';
+import angularBackwardsCompatibility from './angular_backwards_compatibility';
+import vueBackwardsCompatibility from './vue_backwards_compatibility';
 
 const applyCategories = (categories, target) => {
     // Work through each potential category
@@ -86,7 +87,7 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
     });
 
     // Handle converting nginxconfig.io-angular params to the current version
-    backwardsCompatibility(data);
+    angularBackwardsCompatibility(data);
 
     // Handle domains
     if ('domains' in data && isObject(data.domains)) {
@@ -102,15 +103,6 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             // Create a new domain (assume it has had custom user settings)
             const domainImported = clone(Domain.delegated);
             domainImported.hasUserInteraction = true;
-
-            //  Backwards compatibility logic for old config URLs
-            if (isObject(data.global.php)){
-                if(data.global.php.phpServer)  domainImported.php.phpServer = data.global.php.phpServer;
-                if(data.global.php.phpServerCustom)  domainImported.php.phpServerCustom = data.global.php.phpServerCustom;
-                if(data.global.php.phpBackupServer)  domainImported.php.phpBackupServer = data.global.php.phpBackupServer;
-                if(data.global.php.phpBackupServerCustom)  domainImported.php.phpBackupServerCustom = data.global.php.phpBackupServerCustom;
-            }
-
             domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
@@ -120,6 +112,9 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
         // If no configured domains, add a single default
         domains.push(clone(Domain.delegated));
     }
+
+    // Handle converting vue params to the current version
+    vueBackwardsCompatibility(data, domains);
 
     // Handle global settings
     if ('global' in data) {
