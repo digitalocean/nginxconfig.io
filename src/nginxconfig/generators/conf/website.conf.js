@@ -286,14 +286,15 @@ export default (domain, domains, global) => {
 
     // PHP
     if (domain.php.php.computed) {
-        serverConfig.push(['# upstream', '']);
-
-        serverConfig.push([`upstream ${phpUpstream(domain)}`, {
-            server: [
-                phpPath(domain),
-                `${phpPath(domain, true)} backup`,
-            ],
-        }]);
+        if (domain.php.phpBackupServer.computed){
+            config.push(['# upstream', '']);
+            config.push([`upstream ${phpUpstream(domain)}`, {
+                server: [
+                    phpPath(domain),
+                    `${phpPath(domain, true)} backup`,
+                ],
+            }]);
+        }
 
         serverConfig.push(['# handle .php', '']);
 
