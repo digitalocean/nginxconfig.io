@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -286,8 +286,7 @@ export default (domain, domains, global) => {
 
     // PHP
     if (domain.php.php.computed) {
-        if (domain.php.phpBackupServer.computed){
-            config.push(['# upstream', '']);
+        if (domain.php.phpBackupServer.computed) {
             config.push([`upstream ${phpUpstream(domain)}`, {
                 server: [
                     phpPath(domain),
