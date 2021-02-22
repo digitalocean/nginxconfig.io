@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -40,7 +40,6 @@ export default {
     joomlaRules: `${common.joomla} 規則`,
     enableJoomlaRules: `${common.enable} ${common.joomla}專屬規則`,
     phpServer: `${common.php} 服務`,
-    phpMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.php}才能配寘全域${common.php}設定。`,
     phpBackupServer: `${common.php}備份服務器`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM socket',

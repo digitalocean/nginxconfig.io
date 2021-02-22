@@ -40,7 +40,6 @@ export default {
     joomlaRules: `${common.joomla} правила`,
     enableJoomlaRules: `${common.enable} ${common.joomla}-специфичные правила`,
     phpServer: `${common.php} сервер`,
-    phpMustBeEnabledOnOneSite: `${common.php} должен быть включен как минимум на одном сайте, чтобы сконфигурировать глобальные настройки ${common.php}.`,
     phpBackupServer: `${common.php} бекап сервер`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM сокет',

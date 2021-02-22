@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -40,7 +40,6 @@ export default {
     joomlaRules: `Regras do ${common.joomla}`,
     enableJoomlaRules: `${common.enable} regras específicas do ${common.joomla}`,
     phpServer: `Servidor ${common.php}`,
-    phpMustBeEnabledOnOneSite: `O ${common.php} deve estar habilitado em pelo menos um site para definir as configurações globais do ${common.php}.`,
     phpBackupServer: `Servidor de backup ${common.php}`,
     tcp: 'TCP',
     hhvmSocket: 'Socket HHVM',
