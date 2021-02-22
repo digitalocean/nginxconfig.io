@@ -178,8 +178,8 @@ export default (domain, domains, global) => {
     // Restrict Methods
     if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
         const allowedKeys = Object.keys(domain.restrict)
-                                .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
-                                .map(e => e.replace('Method', '').toUpperCase());
+            .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
+            .map(e => e.replace('Method', '').toUpperCase());
 
         serverConfig.push(['# restrict methods', '']);
         serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
@@ -291,7 +291,7 @@ export default (domain, domains, global) => {
         const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
 
         const fastcgiPass = {
-            fastcgi_pass: domains.some(d => d.php.php.computed) && domain.php.phpBackupServer.computed !== ''
+            fastcgi_pass: domain.php.phpBackupServer.computed !== ''
                 ? phpUpstream(domain) : phpPath(domain),
         };
 
@@ -303,7 +303,10 @@ export default (domain, domains, global) => {
             }]);
         } else {
             // Unified
-            serverConfig.push([loc, phpConf(domains)]);
+            serverConfig.push([loc, {
+                ...phpConf(domains),
+                ...fastcgiPass,
+            }]);
         }
     }
 
