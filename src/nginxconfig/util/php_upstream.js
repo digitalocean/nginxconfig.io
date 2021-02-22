@@ -24,6 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default (domain) => {
-    return `php_${domain.server.domain.computed.replace('.', '_')}`;
-};
+export default (domain) => `php_${domain.server.domain.computed.replace('.', '_')}`;
