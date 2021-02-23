@@ -39,6 +39,7 @@ export default {
     drupal: 'Drupal',
     magento: 'Magento',
     joomla: 'Joomla',
+    laravel: 'Laravel',
     django: 'Django',
     logging: '日志记录',
     reverseProxy: '反向代理',

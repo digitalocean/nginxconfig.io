@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,26 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    back: '返回',
-    next: '下一個',
-    enable: '啟用',
-    php: 'PHP',
-    ssl: 'SSL',
-    nginx: 'NGINX',
-    http: 'HTTP',
-    https: 'HTTPS',
-    letsEncrypt: 'Let\'s Encrypt',
-    python: 'Python',
-    wordPress: 'WordPress',
-    drupal: 'Drupal',
-    magento: 'Magento',
-    joomla: 'Joomla',
-    laravel: 'Laravel',
-    django: 'Django',
-    logging: '日誌記錄',
-    reverseProxy: '反向代理',
-    reverseProxyLower: '反向代理',
-    restrict: '限制',
-    path: '路徑',
+export default () => {
+    const config = {};
+
+    config['location /'] = {
+        try_files: '$uri $uri/ /index.php?$query_string',
+    };
+
+    return config;
 };

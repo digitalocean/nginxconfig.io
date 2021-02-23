@@ -38,6 +38,7 @@ import drupalConf from './drupal.conf';
 import magentoConf from './magento.conf';
 import joomlaConf from './joomla.conf';
 import letsEncryptConf from './letsencrypt.conf';
+import laravelConf from './laravel.conf';
 
 const sslConfig = (domain, global) => {
     const config = [];
@@ -269,6 +270,7 @@ export default (domain, domains, global) => {
         if (domain.php.drupalRules.computed) serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
         if (domain.php.magentoRules.computed) serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
         if (domain.php.joomlaRules.computed) serverConfig.push(['include', 'nginxconfig.io/joomla.conf']);
+        if (domain.php.laravelRules.computed) serverConfig.push(['include', 'nginxconfig.io/laravel.conf']);
     } else {
         // Unified
         serverConfig.push(...Object.entries(generalConf(domains, global)));
@@ -280,6 +282,7 @@ export default (domain, domains, global) => {
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
         if (domain.php.joomlaRules.computed) serverConfig.push(...Object.entries(joomlaConf()));
+        if (domain.php.laravelRules.computed) serverConfig.push(...Object.entries(laravelConf()));
     }
 
     // PHP

@@ -136,6 +136,24 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div v-if="laravelRulesEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.php.laravelRules') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${laravelRulesChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="laravelRules" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.domainSections.php.enableLaravelRules') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -162,6 +180,10 @@ THE SOFTWARE.
             enabled: true,
         },
         joomlaRules: {
+            default: false,
+            enabled: true,
+        },
+        laravelRules: {
             default: false,
             enabled: true,
         },
@@ -206,6 +228,8 @@ THE SOFTWARE.
                         this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
                         this.$props.data.joomlaRules.enabled = true;
                         this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
+                        this.$props.data.laravelRules.enabled = true;
+                        this.$props.data.laravelRules.computed = this.$props.data.laravelRules.value;
                     } else {
                         this.$props.data.wordPressRules.enabled = false;
                         this.$props.data.wordPressRules.computed = false;
@@ -215,6 +239,8 @@ THE SOFTWARE.
                         this.$props.data.magentoRules.computed = false;
                         this.$props.data.joomlaRules.enabled = false;
                         this.$props.data.joomlaRules.computed = false;
+                        this.$props.data.laravelRules.enabled = false;
+                        this.$props.data.laravelRules.computed = false;
                     }
                 },
                 deep: true,

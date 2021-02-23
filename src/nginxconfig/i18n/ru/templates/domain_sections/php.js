@@ -39,4 +39,6 @@ export default {
     enableMagentoRules: `${common.enable} ${common.magento}-специфичные правила`,
     joomlaRules: `${common.joomla} правила`,
     enableJoomlaRules: `${common.enable} ${common.joomla}-специфичные правила`,
+    laravelRules: `${common.laravel} правила`,
+    enableLaravelRules: `${common.enable} ${common.laravel}-специфичные правила`,
 };

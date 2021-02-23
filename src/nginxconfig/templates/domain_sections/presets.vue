@@ -82,7 +82,8 @@ THE SOFTWARE.
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
                     && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                    && !data.php.joomlaRules.computed
+                    && !data.php.laravelRules.computed;
             },
         },
         django: {
@@ -125,7 +126,8 @@ THE SOFTWARE.
                     && data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
                     && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                    && !data.php.joomlaRules.computed
+                    && !data.php.laravelRules.computed;
             },
         },
         drupal: {
@@ -139,7 +141,8 @@ THE SOFTWARE.
                     && !data.php.wordPressRules.computed
                     && data.php.drupalRules.computed
                     && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                    && !data.php.joomlaRules.computed
+                    && !data.php.laravelRules.computed;
             },
         },
         magento: {
@@ -153,7 +156,8 @@ THE SOFTWARE.
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
                     && data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                    && !data.php.joomlaRules.computed
+                    && !data.php.laravelRules.computed;
             },
         },
         joomla: {
@@ -167,7 +171,23 @@ THE SOFTWARE.
                     && !data.php.wordPressRules.computed
                     && !data.php.drupalRules.computed
                     && !data.php.magentoRules.computed
+                    && !data.php.laravelRules.computed
                     && data.php.joomlaRules.computed;
+            },
+        },
+        laravel: {
+            default: false,
+            display: 'common.laravel', // i18n key
+            enabled: true,
+            computedCheck(data) {
+                return data.routing.index.computed === 'index.php'
+                    && data.routing.fallbackPhp.computed
+                    && !data.routing.fallbackHtml.computed
+                    && !data.php.wordPressRules.computed
+                    && !data.php.drupalRules.computed
+                    && !data.php.magentoRules.computed
+                    && data.php.laravelRules.computed
+                    && !data.php.joomlaRules.computed;
             },
         },
     };
@@ -216,6 +236,7 @@ THE SOFTWARE.
                 this.$parent.resetValue('php', 'drupalRules');
                 this.$parent.resetValue('php', 'magentoRules');
                 this.$parent.resetValue('php', 'joomlaRules');
+                this.$parent.resetValue('php', 'laravelRules');
                 this.$parent.resetValue('python', 'python');
                 this.$parent.resetValue('python', 'djangoRules');
                 this.$parent.resetValue('reverseProxy', 'reverseProxy');
@@ -267,6 +288,10 @@ THE SOFTWARE.
 
                 case 'joomla':
                     this.$parent.setValue('php', 'joomlaRules', true);
+                    break;
+
+                case 'laravel':
+                    this.$parent.setValue('php', 'laravelRules', true);
                     break;
                 }
             },

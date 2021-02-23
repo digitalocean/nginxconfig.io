@@ -40,6 +40,7 @@ import magentoConf from './conf/magento.conf';
 import joomlaConf from './conf/joomla.conf';
 import dockerComposeYaml from './yaml/dockerCompose.yaml';
 import dockerConf from './ext/docker';
+import laravelConf from './conf/laravel.conf';
 
 export default (domains, global) => {
     const files = {};
@@ -98,6 +99,10 @@ export default (domains, global) => {
         // Joomla
         if (domains.some(d => d.php.joomlaRules.computed))
             files['nginxconfig.io/joomla.conf'] = toConf(joomlaConf());
+
+        // Laravel
+        if (domains.some(d => d.php.laravelRules.computed))
+            files['nginxconfig.io/laravel.conf'] = toConf(laravelConf());
 
     } else {
         // PHP
