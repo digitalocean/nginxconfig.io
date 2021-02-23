@@ -48,23 +48,31 @@ export default data => {
         for (const key in data.global) {
             if (!Object.prototype.hasOwnProperty.call(data.global, key)) continue;
 
-            // Handle all includes php key
-            if (key === 'php'){
-                for (const domainKey in data.domains) {
-                    if (!Object.prototype.hasOwnProperty.call(data.domains, domainKey)) continue;
+            for (const key2 in data.global[key]) {
+                if (!Object.prototype.hasOwnProperty.call(data.global[key], key2)) continue;
 
-                    for (const valueKey in data.global[key]){
-                        if (!Object.prototype.hasOwnProperty.call(data.global[key], valueKey)) continue;
-
-                        if (keysToMap.php.includes(valueKey)) {
-                            mappedData[key][valueKey] = data.global[key][valueKey];
-                        }
-                    }
-
-                    // Overwrite mapped properties
-                    data.domains[domainKey] = {...data.domains[domainKey], ...mappedData};
+                if (keysToMap.php.includes(key2)) {
+                    mappedData[key][key2] = data.global[key][key2];
                 }
             }
+        }
+
+        // Deep merge function
+        const deepMerge = function(target, source) {
+            Object.keys(source).forEach(function (key) {
+                if (source[key] && typeof source[key] === 'object') {
+                    deepMerge(target[key] = target[key] || {}, source[key]);
+                    return;
+                }
+                target[key] = source[key];
+            });
+        };
+
+        for (const key in data.domains) {
+            if (!Object.prototype.hasOwnProperty.call(data.domains, key)) continue;
+
+            // Deep merge new options
+            deepMerge(data.domains[key], mappedData);
         }
     }
 };

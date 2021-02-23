@@ -308,9 +308,9 @@ THE SOFTWARE.
                         this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
                     } else {
                         this.$props.data.phpServer.enabled = false;
+                        this.$props.data.phpServer.computed = '';
                         this.$props.data.phpBackupServer.enabled = false;
-                        this.$props.data.wordPressRules.enabled = false;
-                        this.$props.data.wordPressRules.computed = false;
+                        this.$props.data.phpBackupServer.computed = '';
                         this.$props.data.drupalRules.enabled = false;
                         this.$props.data.drupalRules.computed = false;
                         this.$props.data.magentoRules.enabled = false;
