@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,5 +30,6 @@ import footer from './footer';
 import domainSections from './domain_sections';
 import globalSections from './global_sections';
 import setupSections from './setup_sections';
+import callouts from './callouts';
 
-export default { app, setup, footer, domainSections, globalSections, setupSections };
+export default { app, setup, footer, domainSections, globalSections, setupSections, callouts };

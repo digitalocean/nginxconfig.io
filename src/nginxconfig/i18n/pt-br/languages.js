@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,4 +29,6 @@ export default {
     zhCN: 'Chinês (simplificado)',
     zhTW: 'Chinês (tradicional)',
     ptBR: 'Português (brasileiro)',
+    fr: 'Francês',
+    ru: 'Russa',
 };

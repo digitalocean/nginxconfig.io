@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import phpPath from '../../util/php_path';
+
 export default (domains, global) => {
     const legacyRouting = domains.some(d => d.routing.legacyPhpRouting.computed);
     const config = {};
@@ -42,8 +44,7 @@ export default (domains, global) => {
 
     config['# fastcgi settings'] = '';
     config.fastcgi_pass = domains.some(d => d.php.php.computed) && global.php.phpBackupServer.computed !== ''
-        ? 'php'
-        : ((global.php.phpServer.computed[0] === '/' ? 'unix:' : '') + global.php.phpServer.computed);
+        ? 'php' : phpPath(global);
     config.fastcgi_index = 'index.php';
     config.fastcgi_buffers = '8 16k';
     config.fastcgi_buffer_size = '32k';

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -40,5 +40,6 @@ export default {
     php74Socket: 'Socket 7.4',
     php80Socket: 'Socket 8.0',
     phpSocket: 'Socket PHP',
+    custom: 'Custom', // TODO: translate
     disabled: 'Desabilitado',
 };

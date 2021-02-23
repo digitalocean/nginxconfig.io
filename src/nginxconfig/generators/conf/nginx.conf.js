@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,6 +27,7 @@ THE SOFTWARE.
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 import shareQuery from '../../util/share_query';
+import phpPath from '../../util/php_path';
 
 export default (domains, global) => {
     const config = {};
@@ -53,8 +54,8 @@ export default (domains, global) => {
     if (global.php.phpBackupServer.computed)
         config.http.push(['upstream php', {
             server: [
-                `${global.php.phpServer.computed[0] === '/' ? 'unix:' : ''}${global.php.phpServer.computed}`,
-                `${global.php.phpBackupServer.computed[0] === '/' ? 'unix:' : ''}${global.php.phpBackupServer.computed} backup`,
+                phpPath(global),
+                `${phpPath(global, true)} backup`,
             ],
         }]);
 
@@ -66,7 +67,8 @@ export default (domains, global) => {
         config.http.push(['server_tokens', 'off']);
     if (!global.logging.logNotFound.computed)
         config.http.push(['log_not_found', 'off']);
-    config.http.push(['types_hash_max_size', 2048]);
+    config.http.push(['types_hash_max_size', global.nginx.typesHashMaxSize.computed]);
+    config.http.push(['types_hash_bucket_size', global.nginx.typesHashBucketSize.computed]);
     config.http.push(['client_max_body_size', `${global.nginx.clientMaxBodySize.computed}M`]);
 
     config.http.push(['# MIME', '']);
@@ -188,6 +190,15 @@ export default (domains, global) => {
             config.http.push(['resolver', `${ips.join(' ')} valid=60s`]);
             config.http.push(['resolver_timeout', '2s']);
         }
+    }
+
+    // Connection header for WebSocket reverse proxy
+    if (domains.some(d => d.reverseProxy.reverseProxy.computed)) {
+        config.http.push(['# Connection header for WebSocket reverse proxy', '']);
+        config.http.push(['map $http_upgrade $connection_upgrade', {
+            'default': 'upgrade',
+            '""': 'close',
+        }]);
     }
 
     // Configs!

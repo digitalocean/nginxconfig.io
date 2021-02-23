@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,7 +25,7 @@ THE SOFTWARE.
 -->
 
 <template>
-    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`">
+    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`" @copied="copied">
         <h3 v-html="name"></h3>
         <pre><code class="language-yaml" v-html="conf"></code></pre>
     </div>
@@ -45,6 +45,11 @@ THE SOFTWARE.
         mounted() {
             console.info(`Highlighting ${this.$props.name}...`);
             Prism.highlightAllUnder(this.$el);
+        },
+        methods: {
+            copied(event) {
+                this.$emit('copied', event.detail.text);
+            },
         },
     };
 </script>
