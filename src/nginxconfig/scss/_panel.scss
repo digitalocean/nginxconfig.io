@@ -38,10 +38,11 @@ THE SOFTWARE.
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .header-group {
+      justify-content: space-between;
+
       h3 {
         margin: 0;
       }
