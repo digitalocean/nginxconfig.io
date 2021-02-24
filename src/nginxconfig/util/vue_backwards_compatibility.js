@@ -25,6 +25,7 @@ THE SOFTWARE.
 */
 
 import isObject from './is_object';
+import deepMerge from './deep_merge';
 
 // Handle converting the old query format to our new query params
 export default data => {
@@ -48,30 +49,22 @@ export default data => {
         for (const key in data.global) {
             if (!Object.prototype.hasOwnProperty.call(data.global, key)) continue;
 
+            // Skip if key doesn't need to be mapped
+            if (!Object.prototype.hasOwnProperty.call(keysToMap, key)) continue;
+
             for (const key2 in data.global[key]) {
                 if (!Object.prototype.hasOwnProperty.call(data.global[key], key2)) continue;
 
-                if (keysToMap.php.includes(key2)) {
+                if (keysToMap[key].includes(key2)) {
                     mappedData[key][key2] = data.global[key][key2];
                 }
             }
         }
 
-        // Deep merge function
-        const deepMerge = function(target, source) {
-            Object.keys(source).forEach(function (key) {
-                if (source[key] && typeof source[key] === 'object') {
-                    deepMerge(target[key] = target[key] || {}, source[key]);
-                    return;
-                }
-                target[key] = source[key];
-            });
-        };
-
         for (const key in data.domains) {
             if (!Object.prototype.hasOwnProperty.call(data.domains, key)) continue;
 
-            // Deep merge new options
+            // Deep merge the mapped data
             deepMerge(data.domains[key], mappedData);
         }
     }
