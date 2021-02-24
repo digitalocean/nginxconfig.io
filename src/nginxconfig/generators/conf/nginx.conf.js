@@ -27,7 +27,6 @@ THE SOFTWARE.
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 import shareQuery from '../../util/share_query';
-import phpPath from '../../util/php_path';
 
 export default (domains, global) => {
     const config = {};
@@ -50,14 +49,6 @@ export default (domains, global) => {
 
     // HTTP (kv so we can use the same key multiple times)
     config.http = [];
-
-    if (global.php.phpBackupServer.computed)
-        config.http.push(['upstream php', {
-            server: [
-                phpPath(global),
-                `${phpPath(global, true)} backup`,
-            ],
-        }]);
 
     config.http.push(['charset', 'utf-8']);
     config.http.push(['sendfile', 'on']);

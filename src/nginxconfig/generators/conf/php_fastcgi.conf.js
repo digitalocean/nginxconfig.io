@@ -24,9 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import phpPath from '../../util/php_path';
-
-export default (domains, global) => {
+export default (domains) => {
     const legacyRouting = domains.some(d => d.routing.legacyPhpRouting.computed);
     const config = {};
 
@@ -43,8 +41,6 @@ export default (domains, global) => {
     config.include = 'fastcgi_params';
 
     config['# fastcgi settings'] = '';
-    config.fastcgi_pass = domains.some(d => d.php.php.computed) && global.php.phpBackupServer.computed !== ''
-        ? 'php' : phpPath(global);
     config.fastcgi_index = 'index.php';
     config.fastcgi_buffers = '8 16k';
     config.fastcgi_buffer_size = '32k';

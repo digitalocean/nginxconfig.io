@@ -24,22 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
-
-export default {
-    phpServer: `${common.php} 服务`,
-    phpMustBeEnabledOnOneSite: `必须在至少一个站点上启用${common.php}才能配置全局${common.php}设置。`,
-    phpBackupServer: `${common.php}备份服务器`,
-    tcp: 'TCP',
-    hhvmSocket: 'HHVM socket',
-    php5Socket: '5.x socket',
-    php70Socket: '7.0 socket',
-    php71Socket: '7.1 socket',
-    php72Socket: '7.2 socket',
-    php73Socket: '7.3 socket',
-    php74Socket: '7.4 socket',
-    php80Socket: '8.0 socket',
-    phpSocket: 'PHP socket',
-    custom: '自定义',
-    disabled: '禁用',
+export default (target, source) => {
+    const merge = (target, source) => {
+        Object.keys(source).forEach((key) => {
+            if (source[key] && typeof source[key] === 'object') {
+                merge(target[key] = target[key] || {}, source[key]);
+                return;
+            }
+            target[key] = source[key];
+        });
+    };
+    merge(target, source);
 };

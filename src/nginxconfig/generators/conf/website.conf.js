@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -38,6 +38,8 @@ import drupalConf from './drupal.conf';
 import magentoConf from './magento.conf';
 import joomlaConf from './joomla.conf';
 import letsEncryptConf from './letsencrypt.conf';
+import phpPath from '../../util/php_path';
+import phpUpstream from '../../util/php_upstream';
 
 const sslConfig = (domain, global) => {
     const config = [];
@@ -176,8 +178,8 @@ export default (domain, domains, global) => {
     // Restrict Methods
     if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
         const allowedKeys = Object.keys(domain.restrict)
-                                .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
-                                .map(e => e.replace('Method', '').toUpperCase());
+            .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
+            .map(e => e.replace('Method', '').toUpperCase());
 
         serverConfig.push(['# restrict methods', '']);
         serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
@@ -284,15 +286,36 @@ export default (domain, domains, global) => {
 
     // PHP
     if (domain.php.php.computed) {
+        if (domain.php.phpBackupServer.computed) {
+            config.push([`upstream ${phpUpstream(domain)}`, {
+                server: [
+                    phpPath(domain),
+                    `${phpPath(domain, true)} backup`,
+                ],
+            }]);
+        }
+
         serverConfig.push(['# handle .php', '']);
 
         const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
+
+        const fastcgiPass = {
+            fastcgi_pass: domain.php.phpBackupServer.computed !== ''
+                ? phpUpstream(domain) : phpPath(domain),
+        };
+
         if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
-            serverConfig.push([loc, { include: 'nginxconfig.io/php_fastcgi.conf' }]);
+            serverConfig.push([loc, {
+                ...fastcgiPass,
+                include: 'nginxconfig.io/php_fastcgi.conf',
+            }]);
         } else {
             // Unified
-            serverConfig.push([loc, phpConf(domains, global)]);
+            serverConfig.push([loc, {
+                ...fastcgiPass,
+                ...phpConf(domains),
+            }]);
         }
     }
 

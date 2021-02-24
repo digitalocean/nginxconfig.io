@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,7 +26,6 @@ THE SOFTWARE.
 
 export { default as HTTPS } from './https';
 export { default as Security } from './security';
-export { default as PHP } from './php';
 export { default as Python } from './python';
 export { default as ReverseProxy } from './reverse_proxy';
 export { default as Performance } from './performance';

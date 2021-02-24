@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -73,7 +73,7 @@ export default (domains, global) => {
 
         // PHP
         if (domains.some(d => d.php.php.computed))
-            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains, global));
+            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains));
 
         // Python
         if (domains.some(d => d.python.python.computed))
@@ -102,7 +102,7 @@ export default (domains, global) => {
     } else {
         // PHP
         if (domains.some(d => d.php.wordPressRules.computed))
-            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains, global));
+            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains));
     }
 
     return files;

@@ -39,4 +39,18 @@ export default {
     enableMagentoRules: `${common.enable} les règles spécifiques à ${common.magento}`,
     joomlaRules: `Règles ${common.joomla}`,
     enableJoomlaRules: `${common.enable} les règles spécifiques à ${common.joomla}`,
+    phpServer: `Serveur ${common.php}`,
+    phpBackupServer: `Serveur de sauvegarde ${common.php}`,
+    tcp: 'TCP',
+    hhvmSocket: 'Socket HHVM',
+    php5Socket: 'Socket 5.x',
+    php70Socket: 'Socket 7.0',
+    php71Socket: 'Socket 7.1',
+    php72Socket: 'Socket 7.2',
+    php73Socket: 'Socket 7.3',
+    php74Socket: 'Socket 7.4',
+    php80Socket: 'Socket 8.0',
+    phpSocket: 'Socket PHP',
+    custom: 'Custom', // TODO: translate
+    disabled: 'Désactivé',
 };

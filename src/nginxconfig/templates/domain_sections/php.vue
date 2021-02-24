@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -60,6 +60,54 @@ THE SOFTWARE.
                                 {{ $t('templates.domainSections.php.enablePhp') }}
                             </PrettyCheck>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="phpServerEnabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label has-margin-top">
+                <label class="label">{{ $t('templates.domainSections.php.phpServer') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${phpServerChanged ? ' is-changed' : ''}`">
+                        <VueSelect ref="phpServerSelect"
+                                   v-model="phpServer"
+                                   :options="phpServerOptions"
+                                   :clearable="false"
+                                   :reduce="s => s.value"
+                        ></VueSelect>
+                    </div>
+
+                    <div v-if="phpServerCustomEnabled"
+                         :class="`control${phpServerCustomChanged ? ' is-changed' : ''}`"
+                    >
+                        <input v-model="phpServerCustom" class="input" type="text" :placeholder="$props.data.phpServerCustom.default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="phpBackupServerEnabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label has-margin-top">
+                <label class="label">{{ $t('templates.domainSections.php.phpBackupServer') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
+                        <VueSelect ref="phpBackupServerSelect"
+                                   v-model="phpBackupServer"
+                                   :options="phpBackupServerOptions"
+                                   :clearable="false"
+                                   :reduce="s => s.value"
+                        ></VueSelect>
+                    </div>
+
+                    <div v-if="phpBackupServerCustomEnabled"
+                         :class="`control${phpBackupServerCustomChanged ? ' is-changed' : ''}`"
+                    >
+                        <input v-model="phpBackupServerCustom" class="input" type="text" :placeholder="$props.data.phpBackupServerCustom.default" />
                     </div>
                 </div>
             </div>
@@ -141,10 +189,47 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
+    import VueSelect from 'vue-select';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
+    // Value -> i18n key
+    const serverOptions = {
+        '127.0.0.1:9000': 'templates.domainSections.php.tcp',
+        '/var/run/hhvm/sock': 'templates.domainSections.php.hhvmSocket',
+        '/var/run/hhvm/hhvm.sock': 'templates.domainSections.php.hhvmSocket',
+        '/var/run/php5-fpm.sock': 'templates.domainSections.php.php5Socket',
+        '/var/run/php/php7.1-fpm.sock': 'templates.domainSections.php.php71Socket',
+        '/var/run/php/php7.2-fpm.sock': 'templates.domainSections.php.php72Socket',
+        '/var/run/php/php7.0-fpm.sock': 'templates.domainSections.php.php70Socket',
+        '/var/run/php/php7.3-fpm.sock': 'templates.domainSections.php.php73Socket',
+        '/var/run/php/php7.4-fpm.sock': 'templates.domainSections.php.php74Socket',
+        '/var/run/php/php8.0-fpm.sock': 'templates.domainSections.php.php80Socket',
+        '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
+        'custom': 'templates.domainSections.php.custom',
+    };
+
+    const hiddenValues = ['', 'custom'];
+
     const defaults = {
+        phpServer: {
+            default: '/var/run/php/php-fpm.sock',
+            options: serverOptions,
+            enabled: true,
+        },
+        phpServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
+        },
+        phpBackupServer: {
+            default: '',
+            options: { '': 'templates.domainSections.php.disabled', ...serverOptions },
+            enabled: true,
+        },
+        phpBackupServerCustom: {
+            default: 'unix:/var/run/php/php-fpm.sock',
+            enabled: false,
+        },
         php: {
             default: true,
             enabled: true,
@@ -174,11 +259,22 @@ THE SOFTWARE.
         delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
         components: {
             PrettyCheck,
+            VueSelect,
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'php'),    // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
+            phpServerOptions() {
+                return Object.entries(this.$props.data.phpServer.options)
+                    .map(([key, value]) => this.formattedOption(key, value));
+            },
+            phpBackupServerOptions() {
+                return Object.entries(this.$props.data.phpBackupServer.options)
+                    .map(([key, value]) => this.formattedOption(key, value));
+            },
+        },
         watch: {
             // If the Reverse proxy or Python is enabled, PHP will be forced off
             '$parent.$props.data': {
@@ -198,6 +294,10 @@ THE SOFTWARE.
             '$props.data.php': {
                 handler(data) {
                     if (data.computed) {
+                        this.$props.data.phpServer.enabled = true;
+                        this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
+                        this.$props.data.phpBackupServer.enabled = true;
+                        this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
                         this.$props.data.wordPressRules.enabled = true;
                         this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
                         this.$props.data.drupalRules.enabled = true;
@@ -207,6 +307,10 @@ THE SOFTWARE.
                         this.$props.data.joomlaRules.enabled = true;
                         this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
                     } else {
+                        this.$props.data.phpServer.enabled = false;
+                        this.$props.data.phpServer.computed = '';
+                        this.$props.data.phpBackupServer.enabled = false;
+                        this.$props.data.phpBackupServer.computed = '';
                         this.$props.data.wordPressRules.enabled = false;
                         this.$props.data.wordPressRules.computed = false;
                         this.$props.data.drupalRules.enabled = false;
@@ -218,6 +322,61 @@ THE SOFTWARE.
                     }
                 },
                 deep: true,
+            },
+            // Check server selection is valid
+            '$props.data.phpServer': {
+                handler(data) {
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpServerCustom.enabled = data.computed === 'custom';
+                        return;
+                    }
+
+                    // Hide custom if disabled
+                    this.$props.data.phpServerCustom.enabled = false;
+                },
+                deep: true,
+            },
+            // Check backup server selection is valid
+            '$props.data.phpBackupServer': {
+                handler(data) {
+                    if (data.enabled) {
+                        // This might cause recursion, but seems not to
+                        if (!Object.keys(data.options).includes(data.computed))
+                            data.computed = data.default;
+
+                        // Show the custom box
+                        this.$props.data.phpBackupServerCustom.enabled = data.computed === 'custom';
+                        return;
+                    }
+
+                    // Hide custom if disabled
+                    this.$props.data.phpBackupServerCustom.enabled = false;
+                },
+                deep: true,
+            },
+            // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
+            '$i18n.locale'() {
+                if (!this.$refs.phpServerSelect)
+                    return false;
+                const updated = this.phpServerOptions
+                    .find(x => x.value === this.$refs.phpServerSelect.$data._value.value);
+                if (updated) this.$refs.phpServerSelect.$data._value = updated;
+                const updatedBackup = this.phpBackupServerOptions
+                    .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
+                if (updatedBackup) this.$refs.phpBackupServerSelect.$data._value = updatedBackup;
+            },
+        },
+        methods: {
+            formattedOption(key, value) {
+                return {
+                    label: `${this.$t(value)}${hiddenValues.includes(key) ? '' : `: ${key}`}`,
+                    value: key,
+                };
             },
         },
     };

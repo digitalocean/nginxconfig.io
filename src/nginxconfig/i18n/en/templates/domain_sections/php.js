@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -39,4 +39,18 @@ export default {
     enableMagentoRules: `${common.enable} ${common.magento}-specific rules`,
     joomlaRules: `${common.joomla} rules`,
     enableJoomlaRules: `${common.enable} ${common.joomla}-specific rules`,
+    phpServer: `${common.php} server`,
+    phpBackupServer: `${common.php} backup server`,
+    tcp: 'TCP',
+    hhvmSocket: 'HHVM socket',
+    php5Socket: '5.x socket',
+    php70Socket: '7.0 socket',
+    php71Socket: '7.1 socket',
+    php72Socket: '7.2 socket',
+    php73Socket: '7.3 socket',
+    php74Socket: '7.4 socket',
+    php80Socket: '8.0 socket',
+    phpSocket: 'PHP socket',
+    custom: 'Custom',
+    disabled: 'Disabled',
 };
