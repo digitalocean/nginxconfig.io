@@ -65,7 +65,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="phpServerEnabled" class="field is-horizontal">
+        <div v-if="phpServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.php.phpServer') }}</label>
             </div>
@@ -89,7 +89,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="phpBackupServerEnabled" class="field is-horizontal">
+        <div v-if="phpBackupServerEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.php.phpBackupServer') }}</label>
             </div>
