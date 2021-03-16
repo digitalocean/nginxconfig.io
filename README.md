@@ -23,7 +23,7 @@
 
 <br />
 
-# ✨ [NGINX Config](do.co/nginxconfig)
+# ✨ [NGINX Config](https://do.co/nginxconfig)
 
 NGINX is so much more than just a webserver. You already knew that, probably.
 
