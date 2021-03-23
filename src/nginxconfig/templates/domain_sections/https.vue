@@ -62,6 +62,43 @@ THE SOFTWARE.
             </div>
         </div>
 
+        <div v-if="http3Enabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.https.http3') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${http3Changed ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="http3" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.domainSections.https.enableHttp3Connections') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="portReuseEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.https.portReuse') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.domainSections.https.enableReuseOfPort') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.https.forceHttps') }}</label>
@@ -206,6 +243,14 @@ THE SOFTWARE.
             default: true,
             enabled: true,
         },
+        http3: {
+            default: false,
+            enabled: true,
+        },
+        portReuse: {
+            default: true,
+            enabled: false,
+        },
         forceHttps: {
             default: true,
             enabled: true,
@@ -266,6 +311,8 @@ THE SOFTWARE.
                     if (state) {
                         this.$props.data.http2.enabled = true;
                         this.$props.data.http2.computed = this.$props.data.http2.value;
+                        this.$props.data.http3.enabled = true;
+                        this.$props.data.http3.computed = this.$props.data.http3.value;
                         this.$props.data.forceHttps.enabled = true;
                         this.$props.data.forceHttps.computed = this.$props.data.forceHttps.value;
                         this.$props.data.hsts.enabled = true;
@@ -275,12 +322,28 @@ THE SOFTWARE.
                     } else {
                         this.$props.data.http2.enabled = false;
                         this.$props.data.http2.computed = false;
+                        this.$props.data.http3.enabled = false;
+                        this.$props.data.http3.computed = false;
                         this.$props.data.forceHttps.enabled = false;
                         this.$props.data.forceHttps.computed = false;
                         this.$props.data.hsts.enabled = false;
                         this.$props.data.hsts.computed = false;
                         this.$props.data.certType.enabled = false;
                         this.$props.data.certType.computed = '';
+                    }
+                },
+                deep: true,
+            },
+            // Only allow port reuse when HTTP/3 is enabled first
+            '$props.data.http3': {
+                handler(data) {
+                    // This might cause recursion, but seems not to
+                    if (data.computed) {
+                        this.$props.data.portReuse.enabled = true;
+                        this.$props.data.portReuse.computed = this.$props.data.portReuse.value;
+                    } else {
+                        this.$props.data.portReuse.enabled = false;
+                        this.$props.data.portReuse.computed = false;
                     }
                 },
                 deep: true,

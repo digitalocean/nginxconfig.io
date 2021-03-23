@@ -30,6 +30,8 @@ export default {
     enableEncryptedSslConnection: `${common.enable} conexões ${common.ssl} criptografadas`,
     http2: `${common.http}/2`,
     enableHttp2Connections: `${common.enable} conexões ${common.http}/2`,
+    http3: `${common.http}/3`,
+    enableHttp3Connections: `${common.enable} conexões ${common.http}/3`,
     forceHttps: `Forçar ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable} Strict Transport Security, requerendo conexões HTTPS`,

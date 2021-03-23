@@ -30,6 +30,8 @@ export default {
     enableEncryptedSslConnection: `${common.enable}加密的${common.ssl}連接`,
     http2: `${common.http}/2`,
     enableHttp2Connections: `${common.enable} ${common.http}/2 連接`,
+    http3: `${common.http}/3`,
+    enableHttp3Connections: `${common.enable} ${common.http}/3 連接`,
     forceHttps: `強制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（強制用戶端、瀏覽器等使用HTTPS與服務器創建連結），需要HTTPS連接`,

@@ -60,13 +60,21 @@ const httpsListen = domain => {
     const config = [];
 
     // HTTPS
-    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-
+    config.push(['listen', 
+        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl` 
+        + `${domain.https.http2.computed ? ' http2' : '' }`
+        + `${domain.https.http3.computed ? ' http3' : ''}`
+        + `${domain.https.portReuse.computed ? ' reuseport' : ''}`
+    ]);
+    
     // v6
     if (domain.server.listenIpv6.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
-
+            `[${domain.server.listenIpv6.computed}]:443 ssl`
+            + `${domain.https.http2.computed ? ' http2' : '' }`
+            + `${domain.https.http3.computed ? ' http3' : ''}`
+            + `${domain.https.portReuse.computed ? ' reuseport' : ''}`
+        ]);
     return config;
 };
 
