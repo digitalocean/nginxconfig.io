@@ -32,7 +32,7 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 connections`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 connections`,
-    portReuse: `Port reuse`,
+    portReuse: 'Port reuse',
     enableReuseOfPort: `${common.enable} ...`,
     forceHttps: `Force ${common.https}`,
     hsts: 'HSTS',

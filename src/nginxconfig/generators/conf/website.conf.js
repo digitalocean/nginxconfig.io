@@ -64,7 +64,7 @@ const httpsListen = domain => {
         `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl` 
         + `${domain.https.http2.computed ? ' http2' : '' }`
         + `${domain.https.http3.computed ? ' http3' : ''}`
-        + `${domain.https.portReuse.computed ? ' reuseport' : ''}`
+        + `${domain.https.portReuse.computed ? ' reuseport' : ''}`,
     ]);
     
     // v6
@@ -73,7 +73,7 @@ const httpsListen = domain => {
             `[${domain.server.listenIpv6.computed}]:443 ssl`
             + `${domain.https.http2.computed ? ' http2' : '' }`
             + `${domain.https.http3.computed ? ' http3' : ''}`
-            + `${domain.https.portReuse.computed ? ' reuseport' : ''}`
+            + `${domain.https.portReuse.computed ? ' reuseport' : ''}`,
         ]);
     return config;
 };
