@@ -32,8 +32,8 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 соединения`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 соединения`,
-    portReuse: 'My English string', // TODO: translate
-    enableReuseOfPort: `${common.enable} My English string`, // TODO: translate
+    portReuse: 'Reuseport', // TODO: translate
+    enableReuseOfPort: `${common.enable} reuseport to generate a listening socket per worker`, // TODO: translate
     forceHttps: `Использовать только ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable} Strict Transport Security, требующая HTTPS соединения`,
