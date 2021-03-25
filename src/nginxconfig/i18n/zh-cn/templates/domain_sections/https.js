@@ -32,6 +32,8 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 连接`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 连接`,
+    portReuse: 'My English string', // TODO: translate
+    enableReuseOfPort: `${common.enable} My English string`, // TODO: translate
     forceHttps: `强制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（强制客户端、浏览器等使用 HTTPS 与服务器创建链接），需要HTTPS连接`,
