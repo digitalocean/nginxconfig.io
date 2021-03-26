@@ -231,7 +231,7 @@ THE SOFTWARE.
                 <div class="message-body">
                     {{ $t('templates.globalSections.https.http3Warning1') }}
                     <ExternalLink :text="$t('templates.globalSections.https.http3Warning2')"
-                                link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                                    link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
                     ></ExternalLink>
                     {{ $t('templates.globalSections.https.http3Warning3') }}
                 </div>
