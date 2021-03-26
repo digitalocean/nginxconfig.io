@@ -47,6 +47,10 @@ export default (domains, global) => {
         worker_connections: 65535,
     };
 
+    // Modules!
+    config['# Load modules'] = '';
+    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/modules-enabled/*`;
+
     // HTTP (kv so we can use the same key multiple times)
     config.http = [];
 
