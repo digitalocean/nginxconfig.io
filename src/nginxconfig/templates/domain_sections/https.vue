@@ -225,6 +225,18 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+        <template v-if="$props.data.http3.value === true">
+            <br />
+            <div class="message is-warning">
+                <div class="message-body">
+                    {{ $t('templates.globalSections.https.http3Warning1') }}
+                    <ExternalLink :text="$t('templates.globalSections.https.http3Warning2')"
+                                link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                    ></ExternalLink>
+                    {{ $t('templates.globalSections.https.http3Warning3') }}
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -233,6 +245,7 @@ THE SOFTWARE.
     import PrettyRadio from 'pretty-checkbox-vue/radio';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import ExternalLink from 'do-vue/src/templates/external_link';
 
     const defaults = {
         https: {
@@ -298,6 +311,7 @@ THE SOFTWARE.
         components: {
             PrettyCheck,
             PrettyRadio,
+            ExternalLink,
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent

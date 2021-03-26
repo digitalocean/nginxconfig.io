@@ -29,7 +29,7 @@ import common from '../../common';
 const mozilla = 'Mozilla';
 const ipv4 = 'IPv4';
 const ipv6 = 'IPv6';
-
+        
 export default {
     sslProfile: `${common.ssl}配寘`,
     httpsMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.https}才能配寘全域${common.https}設定。`,
@@ -47,4 +47,7 @@ export default {
     ipv4Only: `${ipv4}`,
     ipv6Only: `${ipv6}`,
     ipv4AndIpv6: `${ipv4} & ${ipv6}`,
+    http3Warning1: `HTTP/3 isn't a standard NGINX module, Check `,
+    http3Warning2: `NGINX quic readme `,
+    http3Warning3: `on how to build NGINX with HTTP/3!`,
 };

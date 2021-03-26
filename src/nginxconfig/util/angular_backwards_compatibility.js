@@ -78,8 +78,6 @@ const domainMap = {
 
     https:                  ['https', 'https', oldBool],
     http2:                  ['https', 'http2', oldBool],
-    http3:                  ['https', 'http3', oldBool],
-    port_reuse:             ['https', 'portReuse', oldBool],
     force_https:            ['https', 'forceHttps', oldBool],
     hsts:                   ['https', 'hsts', oldBool],
     hsts_subdomains:        ['https', 'hstsSubdomains', oldBool],
