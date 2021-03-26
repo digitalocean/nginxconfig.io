@@ -61,29 +61,26 @@ const httpsListen = domain => {
 
     // HTTPS
     config.push(['listen', 
-        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl` 
-        + `${domain.https.http2.computed ? ' http2' : '' }`,
-    ]);
+        `${domain.server.listenIpv4.computed === '*' ? '' :`${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' :''}`
+        ]);
 
     // HTTP/3
     if (domain.https.http3.computed)
         config.push(['listen',
-            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl http3` 
+            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3` 
             + `${domain.https.portReuse.computed ? ' reuseport' : ''}`,
         ]);
     
     // v6
     if (domain.server.listenIpv6.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 ssl`
-            + `${domain.https.http2.computed ? ' http2' : '' }`,
+            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : '' }`,
         ]);
 
     // v6 HTTP/3
     if (domain.server.listenIpv6.computed && domain.https.http3.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 ssl http3`
-            + `${domain.https.portReuse.computed ? ' reuseport' : ''}`,
+            `[${domain.server.listenIpv6.computed}]:443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`,
         ]);
     return config;
 };
