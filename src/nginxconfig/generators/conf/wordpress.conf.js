@@ -51,7 +51,7 @@ export default global => {
     };
 
     config['# WordPress: deny general stuff'] = '';
-    config['location ~* ^/(?:xmlrpc\\.php|wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|wp-comments-post\\.php|readme\\.html|license\\.txt)$'] = {
+    config['location ~* ^/(?:xmlrpc\\.php|wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|readme\\.html|license\\.txt)$'] = {
         deny: 'all',
     };
 
