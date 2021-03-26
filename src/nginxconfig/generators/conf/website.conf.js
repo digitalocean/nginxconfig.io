@@ -61,7 +61,7 @@ const httpsListen = domain => {
 
     // HTTPS
     config.push(['listen', 
-        `${domain.server.listenIpv4.computed === '*' ? '' :`${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' :''}`
+        `${domain.server.listenIpv4.computed === '*' ? '' :`${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' :''}`,
         ]);
 
     // HTTP/3
