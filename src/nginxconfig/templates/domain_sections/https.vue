@@ -62,6 +62,42 @@ THE SOFTWARE.
             </div>
         </div>
 
+        <div v-if="http3Enabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.https.http3') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${http3Changed ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="http3" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.domainSections.https.enableHttp3Connections') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="portReuseEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.https.portReuse') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.domainSections.https.enableReuseOfPort') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.https.forceHttps') }}</label>
@@ -188,12 +224,30 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <template v-if="$props.data.http3.value">
+            <br />
+            <div class="message is-warning">
+                <div class="message-body">
+                    {{ $t('templates.globalSections.https.http3Warning1') }}
+                    <ExternalLink :text="$t('templates.globalSections.https.http3Warning2')"
+                                  link="https://quic.nginx.org/README"
+                    ></ExternalLink>
+                    {{ $t('templates.globalSections.https.http3Warning3') }}
+                    <ExternalLink :text="$t('templates.globalSections.https.http3Warning4')"
+                                  link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                    ></ExternalLink>
+                    {{ $t('templates.globalSections.https.http3Warning5') }}
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -205,6 +259,14 @@ THE SOFTWARE.
         http2: {
             default: true,
             enabled: true,
+        },
+        http3: {
+            default: false,
+            enabled: true,
+        },
+        portReuse: {
+            default: true,
+            enabled: false,
         },
         forceHttps: {
             default: true,
@@ -253,6 +315,7 @@ THE SOFTWARE.
         components: {
             PrettyCheck,
             PrettyRadio,
+            ExternalLink,
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
@@ -266,6 +329,8 @@ THE SOFTWARE.
                     if (state) {
                         this.$props.data.http2.enabled = true;
                         this.$props.data.http2.computed = this.$props.data.http2.value;
+                        this.$props.data.http3.enabled = true;
+                        this.$props.data.http3.computed = this.$props.data.http3.value;
                         this.$props.data.forceHttps.enabled = true;
                         this.$props.data.forceHttps.computed = this.$props.data.forceHttps.value;
                         this.$props.data.hsts.enabled = true;
@@ -275,12 +340,27 @@ THE SOFTWARE.
                     } else {
                         this.$props.data.http2.enabled = false;
                         this.$props.data.http2.computed = false;
+                        this.$props.data.http3.enabled = false;
+                        this.$props.data.http3.computed = false;
                         this.$props.data.forceHttps.enabled = false;
                         this.$props.data.forceHttps.computed = false;
                         this.$props.data.hsts.enabled = false;
                         this.$props.data.hsts.computed = false;
                         this.$props.data.certType.enabled = false;
                         this.$props.data.certType.computed = '';
+                    }
+                },
+                deep: true,
+            },
+            // Only allow port reuse when HTTP/3 is enabled first
+            '$props.data.http3': {
+                handler(data) {
+                    if (data.computed) {
+                        this.$props.data.portReuse.enabled = true;
+                        this.$props.data.portReuse.computed = this.$props.data.portReuse.value;
+                    } else {
+                        this.$props.data.portReuse.enabled = false;
+                        this.$props.data.portReuse.computed = false;
                     }
                 },
                 deep: true,

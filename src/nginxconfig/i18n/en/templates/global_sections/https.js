@@ -47,4 +47,9 @@ export default {
     ipv4Only: `${ipv4} only`,
     ipv6Only: `${ipv6} only`,
     ipv4AndIpv6: `${ipv4} & ${ipv6}`,
+    http3Warning1: 'HTTP/3 isn\'t a standard NGINX module, check the ',
+    http3Warning2: 'NGINX QUIC readme ',
+    http3Warning3: ' or the ',
+    http3Warning4: 'Cloudflare quiche project ',
+    http3Warning5: ' for how to build NGINX with HTTP/3!',
 };
