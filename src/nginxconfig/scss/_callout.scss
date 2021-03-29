@@ -64,7 +64,7 @@ THE SOFTWARE.
     }
 
     p {
-      @include sailec-regular;
+      @include font-regular;
     }
 
     .button {
@@ -78,7 +78,7 @@ THE SOFTWARE.
   }
 
   p {
-    @include sailec-medium;
+    @include font-medium;
 
     font-size: 15px;
     margin: 0;

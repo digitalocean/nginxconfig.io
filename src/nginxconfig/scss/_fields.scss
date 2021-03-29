@@ -56,7 +56,7 @@ THE SOFTWARE.
       }
 
       > p {
-        @include sailec-medium;
+        @include font-medium;
 
         color: $dark-grey;
         font-size: 14px;
@@ -111,7 +111,7 @@ THE SOFTWARE.
   }
 
   label {
-    @include sailec-medium;
+    @include font-medium;
 
     color: $dark-blue;
     font-size: 1rem;
@@ -206,7 +206,7 @@ THE SOFTWARE.
         }
 
         label {
-          @include sailec-medium;
+          @include font-medium;
 
           color: $dark-grey;
           font-size: 14px;
