@@ -224,6 +224,7 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
         <template v-if="$props.data.http3.value">
             <br />
             <div class="message is-warning">
@@ -246,9 +247,9 @@ THE SOFTWARE.
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
     import PrettyRadio from 'pretty-checkbox-vue/radio';
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import ExternalLink from 'do-vue/src/templates/external_link';
 
     const defaults = {
         https: {

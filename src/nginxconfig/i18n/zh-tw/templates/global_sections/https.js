@@ -29,7 +29,7 @@ import common from '../../common';
 const mozilla = 'Mozilla';
 const ipv4 = 'IPv4';
 const ipv6 = 'IPv6';
-        
+
 export default {
     sslProfile: `${common.ssl}配寘`,
     httpsMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.https}才能配寘全域${common.https}設定。`,
