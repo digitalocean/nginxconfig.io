@@ -60,8 +60,8 @@ const httpsListen = domain => {
     const config = [];
 
     // HTTPS
-    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' :`${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' :''}`]);
-
+    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+    
     // HTTP/3
     if (domain.https.http3.computed)
         config.push(['listen',
@@ -71,8 +71,9 @@ const httpsListen = domain => {
     
     // v6
     if (domain.server.listenIpv6.computed)
-        config.push(['listen',`[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : '' }`]);
-
+        config.push(['listen',
+            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+    
     // v6 HTTP/3
     if (domain.server.listenIpv6.computed && domain.https.http3.computed)
         config.push(['listen',
