@@ -42,4 +42,9 @@ export default {
     certificationType: 'Тип сертификации',
     customCertificate: 'Другой сертификат',
     letsEncryptEmail: `${common.letsEncrypt} email`,
+    http3Warning1: 'HTTP/3 isn\'t a standard NGINX module, check the ', // TODO: translate
+    http3Warning2: 'NGINX QUIC readme ', // TODO: translate
+    http3Warning3: ' or the ', // TODO: translate
+    http3Warning4: 'Cloudflare quiche project ', // TODO: translate
+    http3Warning5: ' for how to build NGINX with HTTP/3!', // TODO: translate
 };
