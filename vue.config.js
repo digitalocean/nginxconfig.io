@@ -46,6 +46,19 @@ module.exports = {
         ].filter(x => !!x),
     },
     chainWebpack: config => {
+        // Inject resolve-url-loader into the SCSS loader rules (to allow relative fonts in do-bulma to work)
+        for (const rule of ['vue-modules', 'vue', 'normal-modules', 'normal']) {
+            config.module.rule('scss')
+                .oneOf(rule)
+                .use('resolve-url-loader')
+                .loader('resolve-url-loader')
+                .before('sass-loader')
+                .end()
+                .use('sass-loader')
+                .loader('sass-loader')
+                .tap(options => ({ ...options, sourceMap: true }));
+        }
+
         // Use a custom HTML template
         config.plugin('html').tap(options => {
             options[0].template = path.join(__dirname, 'build', 'index.html');
