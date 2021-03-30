@@ -32,8 +32,6 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import Prism from 'prismjs';
-
     export default {
         name: 'NginxPrism',
         props: {
@@ -43,7 +41,7 @@ THE SOFTWARE.
         },
         mounted() {
             console.info(`Highlighting ${this.$props.name}...`);
-            Prism.highlightAllUnder(this.$el);
+            window.Prism.highlightAllUnder(this.$el);
         },
         methods: {
             copied(event) {
