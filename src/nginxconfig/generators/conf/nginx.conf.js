@@ -42,14 +42,16 @@ export default (domains, global) => {
         config.pid = global.nginx.pid.computed;
     config.worker_processes = global.nginx.workerProcesses.computed;
     config.worker_rlimit_nofile = 65535;
+
+    // Modules
+    config['# Load modules'] = '';
+    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/modules-enabled/*.conf`;
+
+    // Events
     config.events = {
         multi_accept: 'on',
         worker_connections: 65535,
     };
-
-    // Modules!
-    config['# Load modules'] = '';
-    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/modules-enabled/*`;
 
     // HTTP (kv so we can use the same key multiple times)
     config.http = [];
