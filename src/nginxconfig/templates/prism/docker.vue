@@ -32,7 +32,6 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import Prism from 'prismjs';
     import 'prismjs/components/prism-docker';
 
     export default {
@@ -44,7 +43,7 @@ THE SOFTWARE.
         },
         mounted() {
             console.info(`Highlighting ${this.$props.name}...`);
-            Prism.highlightAllUnder(this.$el);
+            window.Prism.highlightAllUnder(this.$el);
         },
         methods: {
             copied(event) {
