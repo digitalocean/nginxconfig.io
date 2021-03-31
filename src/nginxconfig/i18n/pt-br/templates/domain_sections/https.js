@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -42,4 +42,9 @@ export default {
     certificationType: 'Tipo de certificação',
     customCertificate: 'Certificado personalizado',
     letsEncryptEmail: `E-mail do ${common.letsEncrypt}`,
+    http3Warning1: 'HTTP/3 isn\'t a standard NGINX module, check the ', // TODO: translate
+    http3Warning2: 'NGINX QUIC readme ', // TODO: translate
+    http3Warning3: ' or the ', // TODO: translate
+    http3Warning4: 'Cloudflare quiche project ', // TODO: translate
+    http3Warning5: ' for how to build NGINX with HTTP/3!', // TODO: translate
 };

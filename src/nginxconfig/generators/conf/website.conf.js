@@ -60,14 +60,13 @@ const httpsListen = domain => {
     const config = [];
 
     // HTTPS
-    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+    config.push(['listen',
+        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
 
     // HTTP/3
     if (domain.https.http3.computed)
         config.push(['listen',
-            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3` 
-            + `${domain.https.portReuse.computed ? ' reuseport' : ''}`,
-        ]);
+            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
 
     // v6
     if (domain.server.listenIpv6.computed)
@@ -77,8 +76,8 @@ const httpsListen = domain => {
     // v6 HTTP/3
     if (domain.server.listenIpv6.computed && domain.https.http3.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`,
-        ]);
+            `[${domain.server.listenIpv6.computed}]:443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+
     return config;
 };
 
@@ -86,7 +85,8 @@ const httpListen = domain => {
     const config = [];
 
     // Not HTTPS
-    config.push(['listen', `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`]);
+    config.push(['listen',
+        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`]);
 
     // v6
     if (domain.server.listenIpv6.computed)
@@ -204,7 +204,8 @@ export default (domain, domains, global) => {
         serverConfig.push(['# logging', '']);
 
         if (domain.logging.accessLog.computed)
-            serverConfig.push(['access_log', getAccessLogDomainPath(domain, global) + (global.logging.cloudflare.computed ? ' cloudflare' : '')]);
+            serverConfig.push(['access_log',
+                getAccessLogDomainPath(domain, global) + (global.logging.cloudflare.computed ? ' cloudflare' : '')]);
 
         if (domain.logging.errorLog.computed)
             serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
@@ -383,12 +384,14 @@ export default (domain, domains, global) => {
         const redirectConfig = [];
 
         redirectConfig.push(...listenConfig(domain));
-        redirectConfig.push(['server_name', `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
+        redirectConfig.push(['server_name',
+            `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
 
         // HTTPS
         redirectConfig.push(...sslConfig(domain, global));
 
-        redirectConfig.push(['return', `301 http${domain.https.https.computed ? 's' : ''}://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
+        redirectConfig.push(['return',
+            `301 http${domain.https.https.computed ? 's' : ''}://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
 
         // Add the redirect config to the parent config now its built
         config.push([`# ${domain.server.wwwSubdomain.computed ? 'non-www, ' : ''}subdomains redirect`, '']);
@@ -400,7 +403,8 @@ export default (domain, domains, global) => {
         // Add the redirect config to the parent config now its built
         config.push(['# HTTP redirect', '']);
         if (domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed, `www.${domain.server.domain.computed}`)]);
+            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed,
+                `www.${domain.server.domain.computed}`)]);
             config.push(['server', httpRedirectConfig(domain, global, `www.${domain.server.domain.computed}`)]);
         } else if (!domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
             config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed)]);
@@ -409,7 +413,8 @@ export default (domain, domains, global) => {
             config.push(['server', httpRedirectConfig(domain, global, `cdn.${domain.server.domain.computed}`)]);
         }
         if (domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, `.${domain.server.domain.computed}`, `${domain.server.wwwSubdomain.computed ? 'www.' : '' }${domain.server.domain.computed}`)]);
+            config.push(['server', httpRedirectConfig(domain, global, `.${domain.server.domain.computed}`,
+                `${domain.server.wwwSubdomain.computed ? 'www.' : '' }${domain.server.domain.computed}`)]);
         }
     }
 
