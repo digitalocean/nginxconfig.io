@@ -33,7 +33,7 @@ THE SOFTWARE.
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
-                           :cmd="`sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`"
+                           :cmd="`sed -i -r 's/(listen .*443)/\\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g; s/(server \\{)/\\1\\n    ssl off;/g' ${sitesAvailable}`"
                            @copied="codeCopiedEvent('Disable ssl directives')"
                 ></BashPrism>
             </li>
@@ -65,7 +65,7 @@ THE SOFTWARE.
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
-                           :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"
+                           :cmd="`sed -i -r -z 's/#?; ?#//g; s/(server \\{)\\n    ssl off;/\\1/g' ${sitesAvailable}`"
                            @copied="codeCopiedEvent('Enable ssl directives')"
                 ></BashPrism>
             </li>
