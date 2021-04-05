@@ -229,15 +229,15 @@ THE SOFTWARE.
             <br />
             <div class="message is-warning">
                 <div class="message-body">
-                    {{ $t('templates.globalSections.https.http3Warning1') }}
-                    <ExternalLink :text="$t('templates.globalSections.https.http3Warning2')"
+                    {{ $t('templates.domainSections.https.http3Warning1') }}
+                    <ExternalLink :text="$t('templates.domainSections.https.http3Warning2')"
                                   link="https://quic.nginx.org/README"
                     ></ExternalLink>
-                    {{ $t('templates.globalSections.https.http3Warning3') }}
-                    <ExternalLink :text="$t('templates.globalSections.https.http3Warning4')"
+                    {{ $t('templates.domainSections.https.http3Warning3') }}
+                    <ExternalLink :text="$t('templates.domainSections.https.http3Warning4')"
                                   link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
                     ></ExternalLink>
-                    {{ $t('templates.globalSections.https.http3Warning5') }}
+                    {{ $t('templates.domainSections.https.http3Warning5') }}
                 </div>
             </div>
         </template>
