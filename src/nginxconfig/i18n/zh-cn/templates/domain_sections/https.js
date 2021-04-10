@@ -33,7 +33,7 @@ export default {
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 连接`,
     portReuse: '端口重用',
-    enableReuseOfPort: `${common.enable} <b>重用端口</b> 为每个 NGINX Worker 单独生成一个监听套接字`,
+    enableReuseOfPort: `${common.enable} 重用端口 为每个 NGINX Worker 单独生成一个监听套接字`,
     forceHttps: `强制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（强制客户端、浏览器等使用 HTTPS 与服务器创建链接），需要HTTPS连接`,
