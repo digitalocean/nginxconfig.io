@@ -32,8 +32,8 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 连接`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 连接`,
-    portReuse: 'Reuseport', // TODO: translate
-    enableReuseOfPort: `${common.enable} reuseport to generate a listening socket per worker`, // TODO: translate
+    portReuse: '端口重用',
+    enableReuseOfPort: `${common.enable} 重用端口 为每个 NGINX Worker 单独生成一个监听套接字`,
     forceHttps: `强制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（强制客户端、浏览器等使用 HTTPS 与服务器创建链接），需要HTTPS连接`,
@@ -42,9 +42,9 @@ export default {
     certificationType: '证书类型',
     customCertificate: '本地证书',
     letsEncryptEmail: `${common.letsEncrypt} 邮箱`,
-    http3Warning1: 'HTTP/3 isn\'t a standard NGINX module, check the ', // TODO: translate
-    http3Warning2: 'NGINX QUIC readme ', // TODO: translate
-    http3Warning3: ' or the ', // TODO: translate
-    http3Warning4: 'Cloudflare quiche project ', // TODO: translate
-    http3Warning5: ' for how to build NGINX with HTTP/3!', // TODO: translate
+    http3Warning1: 'HTTP/3 并不是一个标准的 NGINX 模块, 请查看 ',
+    http3Warning2: 'NGINX QUIC 使用文档',
+    http3Warning3: ' 或者 ',
+    http3Warning4: 'Cloudflare quiche 项目',
+    http3Warning5: ' 以构建支持 HTTP/3 的 NGINX!',
 };
