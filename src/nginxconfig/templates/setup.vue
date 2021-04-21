@@ -64,9 +64,7 @@ THE SOFTWARE.
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
     import analytics from '../util/analytics';
-    import * as Sections from './setup_sections';
-
-    const tabs = Object.values(Sections);
+    import Sections from './setup_sections';
 
     export default {
         name: 'Setup',
@@ -75,8 +73,8 @@ THE SOFTWARE.
         },
         data() {
             return {
-                active: tabs[0].key,
-                tabs,
+                active: Sections[0].key,
+                tabs: Sections,
             };
         },
         computed: {

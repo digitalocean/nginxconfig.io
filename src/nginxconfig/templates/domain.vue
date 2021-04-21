@@ -63,13 +63,12 @@ THE SOFTWARE.
     import analytics from '../util/analytics';
     import isChanged from '../util/is_changed';
     import Presets from './domain_sections/presets';
-    import * as Sections from './domain_sections';
+    import Sections from './domain_sections';
 
-    const tabs = Object.values(Sections);
     const delegated = {
         hasUserInteraction: false,
         presets: Presets.delegated,
-        ...tabs.reduce((prev, tab) => {
+        ...Sections.reduce((prev, tab) => {
             prev[tab.key] = tab.delegated;
             return prev;
         }, {}),
@@ -86,8 +85,8 @@ THE SOFTWARE.
         },
         data() {
             return {
-                active: tabs[0].key,
-                tabs,
+                active: Sections[0].key,
+                tabs: Sections,
             };
         },
         computed: {
