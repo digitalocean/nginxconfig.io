@@ -110,9 +110,6 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
-
-        <Footer></Footer>
-        <ContributeCallout></ContributeCallout>
     </div>
 </template>
 
