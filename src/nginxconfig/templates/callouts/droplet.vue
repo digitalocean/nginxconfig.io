@@ -37,7 +37,7 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import ExternalLink from 'do-vue/src/templates/external_link.vue';
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import analytics from '../../util/analytics';
 
     export default {
