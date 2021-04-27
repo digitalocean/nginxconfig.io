@@ -145,8 +145,8 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import Modal from 'do-vue/src/templates/modal';
+    import PrettyCheck from 'pretty-checkbox-vue/check.vue';
+    import Modal from 'do-vue/src/templates/modal.vue';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import shareQuery from '../../util/share_query';

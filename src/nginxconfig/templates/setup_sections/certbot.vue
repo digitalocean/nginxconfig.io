@@ -109,7 +109,7 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import BashPrism from '../prism/bash';
+    import BashPrism from '../prism/bash.vue';
     import analytics from '../../util/analytics';
 
     export default {

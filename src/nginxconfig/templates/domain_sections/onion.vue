@@ -70,7 +70,7 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import ExternalLink from 'do-vue/src/templates/external_link';
+    import ExternalLink from 'do-vue/src/templates/external_link.vue';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
