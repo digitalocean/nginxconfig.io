@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 import qs from 'qs';
 import clone from 'clone';
-import Domain from '../templates/domain.vue';
+import Domain from '../templates/domain';
 import isObject from './is_object';
 import angularBackwardsCompatibility from './angular_backwards_compatibility';
 import vueBackwardsCompatibility from './vue_backwards_compatibility';

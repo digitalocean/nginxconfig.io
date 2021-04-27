@@ -117,8 +117,8 @@ THE SOFTWARE.
     import clone from 'clone';
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
-    import VueSelect from 'vue-select.vue';
-    import Header from 'do-vue/src/templates/header.vue';
+    import VueSelect from 'vue-select';
+    import Header from 'do-vue/src/templates/header';
     import diff from 'files-diff';
 
     import isChanged from '../util/is_changed';
@@ -132,14 +132,14 @@ THE SOFTWARE.
     import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';
 
-    import Domain from './domain.vue';
-    import Global from './global.vue';
-    import DropletCallout from './callouts/droplet.vue';
-    import ContributeCallout from './callouts/contribute.vue';
-    import Setup from './setup.vue';
-    import Footer from './footer.vue';
+    import Domain from './domain';
+    import Global from './global';
+    import DropletCallout from './callouts/droplet';
+    import ContributeCallout from './callouts/contribute';
+    import Setup from './setup';
+    import Footer from './footer';
 
-    import NginxPrism from './prism/nginx.vue';
+    import NginxPrism from './prism/nginx';
 
     export default {
         name: 'App',
@@ -153,8 +153,8 @@ THE SOFTWARE.
             ContributeCallout,
             Setup,
             NginxPrism,
-            YamlPrism: () => import('./prism/yaml.vue'),
-            DockerPrism: () => import('./prism/docker.vue'),
+            YamlPrism: () => import('./prism/yaml'),
+            DockerPrism: () => import('./prism/docker'),
         },
         data() {
             return {
