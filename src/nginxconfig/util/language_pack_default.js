@@ -25,6 +25,6 @@ THE SOFTWARE.
 */
 
 
-export const defaultPack = 'en';
+export const defaultPack = 'ru';
 
 export { default as defaultPackData } from '../i18n/ru';
