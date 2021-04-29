@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-$header: #0071fe;
+$header: #066BC6;
 $highlight: #f2c94c;
 $callout: #f3f5f9;
 @import "~do-bulma/src/style";
@@ -32,14 +32,14 @@ $callout: #f3f5f9;
 .do-bulma {
   @import "../../../build/prism";
 
-  $pretty--color-dark: $primary;
-  $pretty--color-default: $primary;
+  $pretty--color-dark: $header;
+  $pretty--color-default: $header;
   @import "~pretty-checkbox/src/pretty-checkbox";
 
   $vs-border-color: $border;
   $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
+  $vs-dropdown-box-shadow: 0 2px 4px rgba($header, .06);
+  $vs-state-active-bg: $header;
   @import "~vue-select/src/scss/vue-select";
 
   @import "header";

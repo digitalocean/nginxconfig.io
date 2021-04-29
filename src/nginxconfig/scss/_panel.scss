@@ -63,6 +63,10 @@ THE SOFTWARE.
 
       .button {
         margin: 0 .25rem .5rem;
+
+        &.is-primary {
+          background-color: $header;
+        }
       }
     }
   }
@@ -87,6 +91,11 @@ THE SOFTWARE.
 
     .button {
       margin-left: .5rem;
+      
+      &.is-mini {
+        background-color: $header;
+        color: $callout;
+      }
 
       i + span,
       span + i {

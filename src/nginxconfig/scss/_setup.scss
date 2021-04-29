@@ -31,6 +31,7 @@ THE SOFTWARE.
       overflow-wrap: break-word;
 
       a {
+        color: $header;
         text-decoration: none;
       }
     }
@@ -46,5 +47,9 @@ THE SOFTWARE.
 
   .buttons {
     margin: 1rem 0;
+  }
+
+  .dark-button {
+    background-color: $header;
   }
 }

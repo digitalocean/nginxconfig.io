@@ -55,7 +55,7 @@ THE SOFTWARE.
 
         <div class="buttons is-centered">
             <a class="button is-success" @click="downloadTar">{{ $t('templates.setup.downloadConfig') }}</a>
-            <a ref="copyTar" class="button is-primary">{{ $t('templates.setup.copyBase64') }}</a>
+            <a ref="copyTar" class="button is-primary dark-button">{{ $t('templates.setup.copyBase64') }}</a>
         </div>
     </div>
 </template>

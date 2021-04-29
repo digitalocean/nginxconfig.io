@@ -34,6 +34,7 @@ THE SOFTWARE.
   .container {
     h3 {
       @include font-medium;
+      font-size: medium;
     }
 
     form {
