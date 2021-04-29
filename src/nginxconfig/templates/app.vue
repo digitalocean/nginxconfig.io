@@ -47,12 +47,12 @@ THE SOFTWARE.
                         </span>
                     </template>
                 </VueSelect> -->
-                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
+                <!-- <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.singleColumnMode') }}
                 </a>
                 <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.splitColumnMode') }}
-                </a>
+                </a> -->
             </template>
         </Header>
 
