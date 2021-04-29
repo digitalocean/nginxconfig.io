@@ -10,6 +10,7 @@
   "main": "src/nginxconfig/mount.js",
   "scripts": {
     "build": "npm run build:clean && npm run build:template && npm run build:prism && npm run build:static && npm run build:tool",
+    "build:regru-static": "npm run build:clean && npm run build:template && npm run build:tool",
     "build:clean": "do-vue clean",
     "build:template": "node src/nginxconfig/build/template.js",
     "build:prism": "node src/nginxconfig/build/prism.js",
