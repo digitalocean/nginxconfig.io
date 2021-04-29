@@ -33,7 +33,7 @@ THE SOFTWARE.
             <template #header>
             </template>
             <template #buttons>
-                <VueSelect v-model="lang"
+                <!-- <VueSelect v-model="lang"
                            :options="i18nPacks"
                            :clearable="false"
                            :reduce="s => s.value"
@@ -46,7 +46,7 @@ THE SOFTWARE.
                             <span>{{ label }}</span>
                         </span>
                     </template>
-                </VueSelect>
+                </VueSelect> -->
                 <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.singleColumnMode') }}
                 </a>
@@ -259,10 +259,10 @@ THE SOFTWARE.
             const imported = await importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Apply browser language if not specified in query
-            if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
-                const language = browserLanguage(availablePacks);
-                if (language) this.lang = language;
-            }
+            // if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
+            //     const language = browserLanguage(availablePacks);
+            //     if (language) this.lang = language;
+            // }
 
             // Initial analytics events
             this.splitColumnEvent(true);
