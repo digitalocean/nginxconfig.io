@@ -61,6 +61,7 @@ THE SOFTWARE.
     .buttons-group {
       .button {
         margin: 0 .25rem .5rem;
+        flex: 1 1 auto;
 
         &.is-primary {
           background-color: $header;
