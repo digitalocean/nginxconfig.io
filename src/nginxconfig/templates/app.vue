@@ -26,14 +26,14 @@ THE SOFTWARE.
 
 <template>
     <div class="all do-bulma">
-        <Header :title="$t('templates.app.title')">
+        <Header class="b-text" :title="$t('templates.app.title')">
             <template #description>
                 {{ $t('templates.app.description') }}
             </template>
-            <template #header>
-            </template>
-            <template #buttons>
-                <!-- <VueSelect v-model="lang"
+            <!-- <template #header>
+            </template> -->
+            <!-- <template #buttons>
+                <VueSelect v-model="lang"
                            :options="i18nPacks"
                            :clearable="false"
                            :reduce="s => s.value"
@@ -46,14 +46,14 @@ THE SOFTWARE.
                             <span>{{ label }}</span>
                         </span>
                     </template>
-                </VueSelect> -->
-                <!-- <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
+                </VueSelect>
+                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.singleColumnMode') }}
                 </a>
                 <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.splitColumnMode') }}
-                </a> -->
-            </template>
+                </a>
+            </template> -->
         </Header>
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
