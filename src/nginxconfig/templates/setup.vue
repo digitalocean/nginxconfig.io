@@ -164,13 +164,13 @@ THE SOFTWARE.
                 });
 
                 clipboard.on('success', e => {
-                    elm.textContent = 'Copied';
+                    elm.textContent = this.$t('templates.setup.copied');
                     e.clearSelection();
                     resetText();
                 });
 
                 clipboard.on('error', () => {
-                    elm.textContent = 'Press Ctrl + C to copy';
+                    elm.textContent = this.$t('templates.setup.press_to_copy');
                     resetText();
                 });
             },
