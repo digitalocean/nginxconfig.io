@@ -48,7 +48,7 @@ THE SOFTWARE.
 
       .button {
         &.is-tiny {
-          background-color: $header;
+          background-color: lightgray;
           font-size: 20px;
         }
       }
@@ -66,8 +66,8 @@ THE SOFTWARE.
         margin: 0 .25rem .5rem;
 
         &.is-primary {
-          background-color: lightgray;
-          color: $dark-blue;
+          background-color: $header;
+          color: $callout;
         }
       }
     }
@@ -93,6 +93,8 @@ THE SOFTWARE.
 
     .button {
       margin-left: .5rem;
+      color: $callout;
+      background-color: $header;
       
       i + span,
       span + i {
@@ -100,9 +102,8 @@ THE SOFTWARE.
       }
     }
   }
-
-  .button {
+  
+  .dark-button {
     background-color: $header;
-    color: $callout;
   }
 }
