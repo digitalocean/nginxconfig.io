@@ -38,7 +38,6 @@ THE SOFTWARE.
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .header-group {
@@ -60,8 +59,6 @@ THE SOFTWARE.
     }
 
     .buttons-group {
-      align-items: center;
-
       .button {
         margin: 0 .25rem .5rem;
 
