@@ -34,6 +34,9 @@ THE SOFTWARE.
   .container {
     h3 {
       @include font-medium;
+    }
+    
+    p {
       font-size: medium;
     }
 

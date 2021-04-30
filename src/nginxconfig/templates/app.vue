@@ -26,12 +26,10 @@ THE SOFTWARE.
 
 <template>
     <div class="all do-bulma">
-        <Header class="b-text" :title="$t('templates.app.title')">
-            <template #description>
-                {{ $t('templates.app.description') }}
+        <Header :title="$t('templates.app.title')">
+            <template #header>
+                <p>{{ $t('templates.app.description') }}</p>
             </template>
-            <!-- <template #header>
-            </template> -->
             <!-- <template #buttons>
                 <VueSelect v-model="lang"
                            :options="i18nPacks"
