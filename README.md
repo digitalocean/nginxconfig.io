@@ -22,7 +22,7 @@ No any logic updates made here, it works just like ofirinal project.
 
 ## 🚀 Usage
 
-`GOTO` **[`reg.ru/web-tools/nginx-config-generator`](reg.ru/web-tools/nginx-config-generator)**
+`GOTO` **[`reg.ru/web-tools/nginx-config-generator`](https://www.reg.ru/web-tools/nginx-config-generator)**
 
 ## 👨‍💻 Author
 
