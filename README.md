@@ -24,19 +24,6 @@ No any logic updates made here, it works just like ofirinal project.
 
 `GOTO` **[`reg.ru/web-tools/nginx-config-generator`](https://www.reg.ru/web-tools/nginx-config-generator)**
 
-## 👨‍💻 Author
-
-### Rewrite & maintenance of Digital Ocean project
-
-**Matt (IPv4) Cowley &lt;me@mattcowley.co.uk&gt; (https://mattcowley.co.uk)**
-* GitHub: [@MattIPv4](https://github.com/MattIPv4)
-
-### Original version
-
-**Bálint Szekeres &lt;balint@szekeres.me&gt; (https://balint.szekeres.me)**
-* GitHub: [@0xB4LINT](https://github.com/0xB4LINT)
-* LinkedIn: [@0xB4LINT](https://www.linkedin.com/in/0xB4LINT/)
-
 ## ▶️ Development
 
 1. Clone the repository
@@ -78,6 +65,22 @@ No any logic updates made here, it works just like ofirinal project.
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+## 👨‍💻 Author
+
+### Rewrite & maintenance of this fork
+**Valery Kovalev &lt;v.kovalev@reg.ru; (https://reg.ru)**
+
+### Rewrite & maintenance of Digital Ocean project
+
+**Matt (IPv4) Cowley &lt;me@mattcowley.co.uk&gt; (https://mattcowley.co.uk)**
+* GitHub: [@MattIPv4](https://github.com/MattIPv4)
+
+### Original version
+
+**Bálint Szekeres &lt;balint@szekeres.me&gt; (https://balint.szekeres.me)**
+* GitHub: [@0xB4LINT](https://github.com/0xB4LINT)
+* LinkedIn: [@0xB4LINT](https://www.linkedin.com/in/0xB4LINT/)
 
 ## 📝 License
 
