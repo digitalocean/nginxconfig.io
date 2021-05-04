@@ -40,6 +40,7 @@ export default {
     magento: 'Magento',
     joomla: 'Joomla',
     django: 'Django',
+    nodejs: 'Node.js',
     logging: 'Логирование',
     reverseProxy: 'Обратный прокси',
     reverseProxyLower: 'обратный прокси',

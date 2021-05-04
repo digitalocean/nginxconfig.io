@@ -29,7 +29,10 @@ THE SOFTWARE.
         <div class="panel">
             <div class="tabs">
                 <ul>
-                    <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                    <li v-for="tab in tabs"
+                        :key="tab.key"
+                        :class="tabClass(tab.key)"
+                    >
                         <a @click="showTab(tab.key)">{{ $t(tab.display) }}</a>
                     </li>
                 </ul>
@@ -55,7 +58,7 @@ THE SOFTWARE.
 
         <div class="buttons is-centered">
             <a class="button is-success" @click="downloadTar">{{ $t('templates.setup.downloadConfig') }}</a>
-            <a ref="copyTar" class="button is-primary">{{ $t('templates.setup.copyBase64') }}</a>
+            <a ref="copyTar" class="button is-primary dark-button">{{ $t('templates.setup.copyBase64') }}</a>
         </div>
     </div>
 </template>
@@ -64,9 +67,9 @@ THE SOFTWARE.
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
     import analytics from '../util/analytics';
-    import * as Sections from './setup_sections';
+    import Sections from './setup_sections';
 
-    const tabs = Object.values(Sections);
+    const tabs = Sections;
 
     export default {
         name: 'Setup',
@@ -164,13 +167,13 @@ THE SOFTWARE.
                 });
 
                 clipboard.on('success', e => {
-                    elm.textContent = 'Copied';
+                    elm.textContent = this.$t('templates.setup.copied');
                     e.clearSelection();
                     resetText();
                 });
 
                 clipboard.on('error', () => {
-                    elm.textContent = 'Press Ctrl + C to copy';
+                    elm.textContent = this.$t('templates.setup.press_to_copy');
                     resetText();
                 });
             },

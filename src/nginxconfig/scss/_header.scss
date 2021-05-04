@@ -25,15 +25,20 @@ THE SOFTWARE.
 */
 
 .header {
-  padding: ($margin * 2) $margin ($margin * 1.5);
+  padding: ($margin) ($margin * 0.5) 0;
 
   @media (min-width: $breakpoint) {
-    padding: ($margin * 3.75) 0 ($margin * .5);
+    padding: ($margin) 0 0;
   }
 
   .container {
     h3 {
       @include font-medium;
+    }
+    
+    p {
+      font-size: medium;
+      color: #364364;
     }
 
     form {

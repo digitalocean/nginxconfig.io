@@ -32,7 +32,7 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field is-horizontal is-aligned-top">
-                    <a class="button is-primary is-tiny" @click="applyDockerTweaks">
+                    <a class="button is-primary is-tiny dark-button" @click="applyDockerTweaks">
                         {{ $t('templates.globalSections.docker.applyDockerTweaks') }}
                     </a>
                     <p>

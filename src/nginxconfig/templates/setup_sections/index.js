@@ -24,7 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as Download } from './download';
-export { default as SSL } from './ssl';
-export { default as Certbot } from './certbot';
-export { default as GoLive } from './go_live';
+import Download from './download';
+import SSL from './ssl';
+import Certbot from './certbot';
+import GoLive from './go_live';
+
+export default [
+    Download,
+    SSL,
+    Certbot,
+    GoLive,
+];

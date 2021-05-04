@@ -24,12 +24,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export { default as HTTPS } from './https';
-export { default as Security } from './security';
-export { default as Python } from './python';
-export { default as ReverseProxy } from './reverse_proxy';
-export { default as Performance } from './performance';
-export { default as Logging } from './logging';
-export { default as NGINX } from './nginx';
-export { default as Docker } from './docker';
-export { default as Tools } from './tools';
+import HTTPS from './https';
+import Security from './security';
+import Python from './python';
+import ReverseProxy from './reverse_proxy';
+import Performance from './performance';
+import Logging from './logging';
+import NGINX from './nginx';
+import Docker from './docker';
+import Tools from './tools';
+
+export default [
+    HTTPS,
+    Security,
+    Python,
+    ReverseProxy,
+    Performance,
+    Logging,
+    NGINX,
+    Docker,
+    Tools,
+];

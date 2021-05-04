@@ -27,4 +27,6 @@ THE SOFTWARE.
 export default {
     downloadConfig: 'Скачать конфигурацию',
     copyBase64: 'Копировать Base64',
+    copied: 'Скопировано',
+    press_to_copy: 'Нажмите Ctrl+C чтобы скопировать',
 };

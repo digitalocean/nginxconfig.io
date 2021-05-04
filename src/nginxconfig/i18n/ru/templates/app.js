@@ -27,8 +27,8 @@ THE SOFTWARE.
 import common from '../common';
 
 export default {
-    title: `${common.nginx}Config`,
-    description: `Самый простой способ настроить производительный, безопасный и стабильный ${common.nginx} сервер.`,
+    title: `Сервис настройки ${common.nginx}`,
+    description: `Заполните форму и сервис подготовит конфигурационные файлы веб-сервера ${common.nginx} для вашего кейса – веб-сервер, сервер для ${common.django} или ${common.nodejs}, сервер для CMS ${common.wordPress}, ${common.joomla}, ${common.drupal}. Настройка возможна как для одного и нескольких доменов. Готовые файлы конфигурации можно скачать или выполнить одну команду на сервере для автоматического обновления.`,
     singleColumnMode: 'Одноколоночный режим',
     splitColumnMode: 'Режим разделения столбца',
     perWebsiteConfig: 'Конфигурация для каждого сайта',

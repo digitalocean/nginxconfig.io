@@ -54,6 +54,11 @@ pre {
             text-align: initial;
             vertical-align: initial;
           }
+
+          &.function,
+          &.keyword { 
+            color: $header;
+          }
         }
       }
     }

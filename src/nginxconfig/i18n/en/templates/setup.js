@@ -27,4 +27,6 @@ THE SOFTWARE.
 export default {
     downloadConfig: 'Download Config',
     copyBase64: 'Copy Base64',
+    copied: 'Copied',
+    press_to_copy: 'Press Ctrl+C to copy',
 };

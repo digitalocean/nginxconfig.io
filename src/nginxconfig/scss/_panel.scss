@@ -38,7 +38,6 @@ THE SOFTWARE.
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
     }
 
     .header-group {
@@ -48,6 +47,7 @@ THE SOFTWARE.
 
       .button {
         &.is-tiny {
+          background-color: lightgray;
           font-size: 20px;
         }
       }
@@ -59,10 +59,14 @@ THE SOFTWARE.
     }
 
     .buttons-group {
-      align-items: center;
-
       .button {
         margin: 0 .25rem .5rem;
+        flex: 1 1 auto;
+
+        &.is-primary {
+          background-color: $header;
+          color: $callout;
+        }
       }
     }
   }
@@ -87,11 +91,17 @@ THE SOFTWARE.
 
     .button {
       margin-left: .5rem;
-
+      color: $callout;
+      background-color: $header;
+      
       i + span,
       span + i {
         margin: 0 0 0 .5rem;
       }
     }
+  }
+  
+  .dark-button {
+    background-color: $header;
   }
 }

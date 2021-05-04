@@ -35,25 +35,24 @@ THE SOFTWARE.
       &:focus {
         a {
           &::after {
-            background: $dark-blue;
+            background: $header;
           }
         }
       }
 
-      // Light blue color if the user has gone past a tab
       &.is-before {
         a {
-          color: mix($dark-grey, $primary);
+          color: mix($header, $header);
 
           &::after {
-            background: rgba($primary, .5);
+            background: rgba($header, .5);
           }
 
           &:hover {
-            color: $dark-blue;
+            color: $header;
 
             &::after {
-              background: $dark-blue;
+              background: $header;
             }
           }
         }
@@ -62,7 +61,7 @@ THE SOFTWARE.
       // If a user has changed something in the tab, we'll make the text dark always
       &.is-changed {
         a {
-          color: $dark-blue;
+          color: $header;
         }
       }
 

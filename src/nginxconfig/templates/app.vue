@@ -27,12 +27,10 @@ THE SOFTWARE.
 <template>
     <div class="all do-bulma">
         <Header :title="$t('templates.app.title')">
-            <template #description>
-                {{ $t('templates.app.description') }}
-            </template>
             <template #header>
+                <p>{{ $t('templates.app.description') }}</p>
             </template>
-            <template #buttons>
+            <!-- <template #buttons>
                 <VueSelect v-model="lang"
                            :options="i18nPacks"
                            :clearable="false"
@@ -53,7 +51,7 @@ THE SOFTWARE.
                 <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
                     {{ $t('templates.app.splitColumnMode') }}
                 </a>
-            </template>
+            </template> -->
         </Header>
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
@@ -63,7 +61,10 @@ THE SOFTWARE.
 
                     <div class="tabs">
                         <ul>
-                            <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
+                            <li v-for="data in activeDomains"
+                                :key="data[0].server.domain.computed"
+                                :class="data[1] === active ? 'is-active' : undefined"
+                            >
                                 <a class="domain" @click="active = data[1]">
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
                                 </a>
@@ -87,7 +88,7 @@ THE SOFTWARE.
                     <h2>{{ $t('templates.app.globalConfig') }}</h2>
                     <Global :data="global"></Global>
 
-                    <DropletCallout></DropletCallout>
+                    <!-- <DropletCallout></DropletCallout> -->
 
                     <h2>{{ $t('templates.app.setup') }}</h2>
                     <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
@@ -110,9 +111,6 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
-
-        <Footer></Footer>
-        <ContributeCallout></ContributeCallout>
     </div>
 </template>
 
@@ -262,10 +260,10 @@ THE SOFTWARE.
             const imported = await importData(query, this.$data.domains, this.$data.global, this.$nextTick);
 
             // Apply browser language if not specified in query
-            if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
-                const language = browserLanguage(availablePacks);
-                if (language) this.lang = language;
-            }
+            // if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
+            //     const language = browserLanguage(availablePacks);
+            //     if (language) this.lang = language;
+            // }
 
             // Initial analytics events
             this.splitColumnEvent(true);
