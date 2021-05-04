@@ -85,6 +85,7 @@ No any logic updates made here, it works just like ofirinal project.
 ## 📝 License
 
 Copyright © 2021 [Reg.ru, Inc (https://www.reg.ru)](https://www.reg.ru).
+<br />
 Copyright © 2021 [DigitalOcean, Inc &lt;contact@digitalocean.com&gt; (https://www.digitalocean.com)](https://www.digitalocean.com).
 <br />
 This project is licensed under the [MIT](https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE) license.
