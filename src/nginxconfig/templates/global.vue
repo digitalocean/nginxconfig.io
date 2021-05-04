@@ -59,9 +59,9 @@ THE SOFTWARE.
 <script>
     import analytics from '../util/analytics';
     import isChanged from '../util/is_changed';
-    import * as Sections from './global_sections';
+    import Sections from './global_sections';
 
-    const tabs = Object.values(Sections);
+    const tabs = Sections;
     const delegated = tabs.reduce((prev, tab) => {
         prev[tab.key] = tab.delegated;
         return prev;
