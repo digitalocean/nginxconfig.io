@@ -69,7 +69,7 @@ No any logic updates made here, it works just like ofirinal project.
 ## 👨‍💻 Author
 
 ### Rewrite & maintenance of this fork
-**Valery Kovalev &lt;v.kovalev@reg.ru; (https://reg.ru)**
+**Valery Kovalev &lt;v.kovalev@reg.ru&gt; (https://reg.ru)**
 
 ### Rewrite & maintenance of Digital Ocean project
 
