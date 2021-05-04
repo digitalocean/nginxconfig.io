@@ -25,7 +25,11 @@ THE SOFTWARE.
 */
 
 .header {
-  padding: 0;
+  padding: ($margin) ($margin * 0.5) 0;
+
+  @media (min-width: $breakpoint) {
+    padding: ($margin) 0 0;
+  }
 
   .container {
     h3 {
