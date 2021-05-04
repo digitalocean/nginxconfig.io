@@ -33,7 +33,10 @@ THE SOFTWARE.
         <div class="panel">
             <div class="tabs">
                 <ul>
-                    <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                    <li v-for="tab in tabs"
+                        :key="tab.key"
+                        :class="tabClass(tab.key)"
+                    >
                         <a @click="showTab(tab.key)">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
                     </li>
                 </ul>
@@ -63,9 +66,9 @@ THE SOFTWARE.
     import analytics from '../util/analytics';
     import isChanged from '../util/is_changed';
     import Presets from './domain_sections/presets';
-    import * as Sections from './domain_sections';
+    import Sections from './domain_sections';
 
-    const tabs = Object.values(Sections);
+    const tabs = Sections;
     const delegated = {
         hasUserInteraction: false,
         presets: Presets.delegated,

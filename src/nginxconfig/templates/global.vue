@@ -28,7 +28,10 @@ THE SOFTWARE.
     <div class="panel">
         <div class="tabs">
             <ul>
-                <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                <li v-for="tab in tabs"
+                    :key="tab.key"
+                    :class="tabClass(tab.key)"
+                >
                     <a @click="showTab(tab.key)">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
                 </li>
             </ul>

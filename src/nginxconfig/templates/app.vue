@@ -61,7 +61,10 @@ THE SOFTWARE.
 
                     <div class="tabs">
                         <ul>
-                            <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
+                            <li v-for="data in activeDomains"
+                                :key="data[0].server.domain.computed"
+                                :class="data[1] === active ? 'is-active' : undefined"
+                            >
                                 <a class="domain" @click="active = data[1]">
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
                                 </a>
