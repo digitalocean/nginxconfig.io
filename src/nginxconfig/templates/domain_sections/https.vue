@@ -62,8 +62,8 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="http3Enabled" class="field is-horizontal">
-            <div class="field-label">
+        <div v-if="http3Enabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">{{ $t('templates.domainSections.https.http3') }}</label>
             </div>
             <div class="field-body">
@@ -75,6 +75,22 @@ THE SOFTWARE.
                                 {{ $t('templates.domainSections.https.enableHttp3Connections') }}
                             </PrettyCheck>
                         </div>
+                    </div>
+
+                    <div v-if="showHttp3Warning" class="control">
+                        <label class="text message is-warning">
+                            <span class="message-body">
+                                {{ $t('templates.domainSections.https.http3Warning1') }}
+                                <ExternalLink :text="$t('templates.domainSections.https.http3Warning2')"
+                                              link="https://quic.nginx.org/README"
+                                ></ExternalLink>
+                                {{ $t('templates.domainSections.https.http3Warning3') }}
+                                <ExternalLink :text="$t('templates.domainSections.https.http3Warning4')"
+                                              link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                                ></ExternalLink>
+                                {{ $t('templates.domainSections.https.http3Warning5') }}
+                            </span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -224,23 +240,6 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
-
-        <template v-if="$props.data.http3.value">
-            <br />
-            <div class="message is-warning">
-                <div class="message-body">
-                    {{ $t('templates.domainSections.https.http3Warning1') }}
-                    <ExternalLink :text="$t('templates.domainSections.https.http3Warning2')"
-                                  link="https://quic.nginx.org/README"
-                    ></ExternalLink>
-                    {{ $t('templates.domainSections.https.http3Warning3') }}
-                    <ExternalLink :text="$t('templates.domainSections.https.http3Warning4')"
-                                  link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
-                    ></ExternalLink>
-                    {{ $t('templates.domainSections.https.http3Warning5') }}
-                </div>
-            </div>
-        </template>
     </div>
 </template>
 
@@ -320,7 +319,15 @@ THE SOFTWARE.
         props: {
             data: Object,                                   // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'https'),     // Getters & setters for the delegated data
+            showHttp3Warning() {
+                return this.$props.data.http3.computed;
+            },
+            hasWarnings() {
+                return this.showHttp3Warning;
+            },
+        },
         watch: {
             // Disable everything if https is disabled
             '$props.data.https': {
