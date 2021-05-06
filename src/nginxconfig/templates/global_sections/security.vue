@@ -55,14 +55,13 @@ THE SOFTWARE.
                                :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
-                    <template v-if="hasWordPress && !hasUnsafeEval">
-                        <br />
-                        <div class="message is-warning">
-                            <div class="message-body"
-                                 v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
-                            ></div>
-                        </div>
-                    </template>
+                    <div v-if="hasWordPress && !hasUnsafeEval" class="control">
+                        <label class="text message is-warning">
+                            <span class="message-body"
+                                  v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
+                            ></span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,6 +201,9 @@ THE SOFTWARE.
             },
             hasUnsafeEval() {
                 return this.$props.data.contentSecurityPolicy.computed.includes('\'unsafe-eval\'');
+            },
+            hasWarnings() {
+                return this.hasWordPress && !this.hasUnsafeEval;
             },
         },
         watch: {
