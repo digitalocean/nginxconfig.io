@@ -80,15 +80,15 @@ THE SOFTWARE.
                     <div v-if="showHttp3Warning" class="control">
                         <label class="text message is-warning">
                             <span class="message-body">
-                                {{ $t('templates.domainSections.https.http3Warning1') }}
-                                <ExternalLink :text="$t('templates.domainSections.https.http3Warning2')"
+                                {{ $t('templates.domainSections.https.http3IsANonStandardModule') }}
+                                <ExternalLink :text="$t('templates.domainSections.https.http3NginxQuicReadme')"
                                               link="https://quic.nginx.org/README"
                                 ></ExternalLink>
-                                {{ $t('templates.domainSections.https.http3Warning3') }}
-                                <ExternalLink :text="$t('templates.domainSections.https.http3Warning4')"
+                                {{ $t('templates.domainSections.https.http3OrThe') }}
+                                <ExternalLink :text="$t('templates.domainSections.https.http3CloudflareQuicheProject')"
                                               link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
                                 ></ExternalLink>
-                                {{ $t('templates.domainSections.https.http3Warning5') }}
+                                {{ $t('templates.domainSections.https.http3ForBuildingNginxWithHttp3') }}
                             </span>
                         </label>
                     </div>
