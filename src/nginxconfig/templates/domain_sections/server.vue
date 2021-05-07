@@ -49,16 +49,17 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <template v-if="duplicateDomain">
-            <br />
-            <div class="message is-warning">
-                <div class="message-body">
-                    {{ $t('templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed') }}
-                    <code class="slim">{{ $props.data.domain.computed }}</code>.
-                    {{ $t('templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration') }}
-                </div>
+        <div v-if="duplicateDomain" class="field">
+            <div class="control">
+                <label class="text message is-warning">
+                    <span class="message-body">
+                        {{ $t('templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed') }}
+                        <code class="slim">{{ $props.data.domain.computed }}</code>.
+                        {{ $t('templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration') }}
+                    </span>
+                </label>
             </div>
-        </template>
+        </div>
 
         <div class="field is-horizontal">
             <div class="field-label">
@@ -203,6 +204,9 @@ THE SOFTWARE.
             duplicateDomain() {
                 return this.$parent.$parent.$data.domains
                     .filter(d => d && d.server.domain.computed === this.$props.data.domain.computed).length > 1;
+            },
+            hasWarnings() {
+                return this.duplicateDomain;
             },
         },
         watch: {
