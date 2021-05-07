@@ -44,8 +44,8 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">{{ $t('templates.globalSections.performance.brotliCompression') }}</label>
             </div>
             <div class="field-body">
@@ -57,6 +57,19 @@ THE SOFTWARE.
                                 {{ $t('templates.globalSections.performance.enableBrotliCompression') }}
                             </PrettyCheck>
                         </div>
+                    </div>
+
+                    <div v-if="showBrotliWarning" class="control">
+                        <label class="text message is-warning">
+                            <span class="message-body">
+                                {{ $t('templates.globalSections.performance.brotliIsANonStandardModule') }}
+                                <ExternalLink
+                                    :text="$t('templates.globalSections.performance.brotliGoogleNgxBrotliProject')"
+                                    link="https://github.com/google/ngx_brotli"
+                                ></ExternalLink>
+                                {{ $t('templates.globalSections.performance.brotliForBuildingNginxWithBrotli') }}
+                            </span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -134,6 +147,7 @@ THE SOFTWARE.
 
 <script>
     import PrettyCheck from 'pretty-checkbox-vue/check';
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -171,10 +185,19 @@ THE SOFTWARE.
         delegated: delegatedFromDefaults(defaults),                     // Data the parent will present here
         components: {
             PrettyCheck,
+            ExternalLink,
         },
         props: {
             data: Object,                                               // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'performance'),        // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'performance'),           // Getters & setters for the delegated data
+            showBrotliWarning() {
+                return this.$props.data.brotliCompression.computed;
+            },
+            hasWarnings() {
+                return this.showBrotliWarning;
+            },
+        },
     };
 </script>
