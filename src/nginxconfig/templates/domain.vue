@@ -106,6 +106,9 @@ THE SOFTWARE.
                 if (index >= 0) return tabs[index];
                 return false;
             },
+            hasWarnings() {
+                return Object.values(this.$refs).some(ref => ref[0].hasWarnings || false);
+            },
         },
         methods: {
             changesCount(tab) {

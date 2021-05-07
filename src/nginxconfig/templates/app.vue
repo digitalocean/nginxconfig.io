@@ -66,6 +66,7 @@ THE SOFTWARE.
                             <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
                                 <a class="domain" @click="active = data[1]">
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
+                                    <i v-if="warnings(data[1])" class="fas fa-exclamation-triangle"></i>
                                 </a>
                                 <a class="remove" @click="remove(data[1])">
                                     <i class="fas fa-times"></i>
@@ -79,6 +80,7 @@ THE SOFTWARE.
 
                     <template v-for="data in activeDomains">
                         <Domain :key="data[1]"
+                                :ref="`domain-${data[1]}`"
                                 :data="data[0]"
                                 :style="{ display: data[1] === active ? undefined : 'none' }"
                         ></Domain>
@@ -283,6 +285,10 @@ THE SOFTWARE.
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
+            },
+            warnings(index) {
+                if (!Object.prototype.hasOwnProperty.call(this.$refs, `domain-${index}`)) return false;
+                return this.$refs[`domain-${index}`][0].hasWarnings || false;
             },
             add() {
                 const data = clone(Domain.delegated);
