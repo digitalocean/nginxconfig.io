@@ -97,16 +97,23 @@ THE SOFTWARE.
           }
 
           i {
+            font-size: .75em;
             margin: 0;
           }
         }
 
-        // Handle having the remove icon as well as the add icon
         i {
-          font-size: .75em;
-
+          // Add domain button
           &.fa-plus {
+            font-size: .75em;
             margin: 0 .35rem 0 0;
+          }
+
+          // Warning icon
+          &.fa-exclamation-triangle {
+            color: $warning-hover;
+            font-size: .9em;
+            margin: 0 0 .1rem .35rem;
           }
         }
       }

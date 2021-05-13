@@ -29,7 +29,10 @@ THE SOFTWARE.
         <div class="tabs">
             <ul>
                 <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                    <a @click="showTab(tab.key)">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
+                    <a @click="showTab(tab.key)">
+                        {{ $t(tab.display) }}{{ changes(tab.key) }}
+                        <i v-if="warnings(tab.key)" class="fas fa-exclamation-triangle"></i>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -37,6 +40,7 @@ THE SOFTWARE.
         <component :is="tab"
                    v-for="tab in tabs"
                    :key="tab.key"
+                   :ref="tab.key"
                    :data="$props.data[tab.key]"
                    :style="{ display: active === tab.key ? undefined : 'none' }"
                    class="container"
@@ -98,6 +102,10 @@ THE SOFTWARE.
                 const changes = this.changesCount(tab);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
+            },
+            warnings(tab) {
+                if (!Object.prototype.hasOwnProperty.call(this.$refs, tab)) return false;
+                return this.$refs[tab][0].hasWarnings || false;
             },
             setValue(tab, key, val) {
                 Object.assign(this.$props.data[tab][key], { value: val, computed: val });

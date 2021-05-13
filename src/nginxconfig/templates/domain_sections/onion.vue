@@ -98,6 +98,9 @@ THE SOFTWARE.
             incorrectEnding() {
                 return this.onionLocationChanged && !this.$props.data.onionLocation.computed.endsWith('.onion');
             },
+            hasWarnings() {
+                return this.incorrectEnding;
+            },
         },
         watch: {
             '$props.data.onionLocation': {

@@ -31,6 +31,9 @@ export default {
     enableGzipCompression: `${common.enable} la compression gzip`,
     brotliCompression: 'Compression Brotli',
     enableBrotliCompression: `${common.enable} la compression brotli`,
+    brotliIsANonStandardModule: 'Brotli isn\'t a standard NGINX module, check the ', // TODO: translate
+    brotliGoogleNgxBrotliProject: 'Google ngx_brotli project', // TODO: translate
+    brotliForBuildingNginxWithBrotli: ' for how to build NGINX with Brotli!', // TODO: translate
     expirationForAssets: 'Expiration des assets',
     expirationForMedia: 'Expiration des medias',
     expirationForSvgs: 'Expiration des SVGs',

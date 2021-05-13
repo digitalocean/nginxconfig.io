@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -31,6 +31,9 @@ export default {
     enableGzipCompression: `${common.enable}Gzip压缩`,
     brotliCompression: 'Brotli 压缩',
     enableBrotliCompression: `${common.enable}brotli压缩`,
+    brotliIsANonStandardModule: 'Brotli isn\'t a standard NGINX module, check the ', // TODO: translate
+    brotliGoogleNgxBrotliProject: 'Google ngx_brotli project', // TODO: translate
+    brotliForBuildingNginxWithBrotli: ' for how to build NGINX with Brotli!', // TODO: translate
     expirationForAssets: '资源有效期',
     expirationForMedia: '媒体资源有效期',
     expirationForSvgs: 'SVGs有效期',
