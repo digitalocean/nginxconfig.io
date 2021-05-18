@@ -40,9 +40,16 @@ module.exports = {
     configureWebpack: {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
+            // Fix dynamic imports from CDN (inject as first entry point before any imports can happen)
+            { apply: compiler => {
+                compiler.options.entry.app.import.unshift(
+                    path.join(__dirname, 'src', 'nginxconfig', 'build', 'webpack-dynamic-import.js'),
+                );
+            } },
+            new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL' }),
+            // Analyze the bundle
             process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
             process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
-            new WebpackRequireFrom({ replaceSrcMethodName: '__replaceWebpackDynamicImport' }),
         ].filter(x => !!x),
     },
     chainWebpack: config => {
