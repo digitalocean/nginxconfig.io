@@ -40,8 +40,8 @@ module.exports = {
     configureWebpack: {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
-            process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
-            process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
+            new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
+            new DuplicatePackageCheckerPlugin(),
             new WebpackRequireFrom({ replaceSrcMethodName: '__replaceWebpackDynamicImport' }),
         ].filter(x => !!x),
     },
