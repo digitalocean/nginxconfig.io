@@ -48,9 +48,9 @@ module.exports = {
             } },
             new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL' }),
             // Analyze the bundle
-            process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
-            process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
-        ].filter(x => !!x),
+            new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
+            new DuplicatePackageCheckerPlugin(),
+        ],
     },
     chainWebpack: config => {
         // Inject resolve-url-loader into the SCSS loader rules (to allow relative fonts in do-bulma to work)
