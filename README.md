@@ -88,12 +88,7 @@ routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, D
     npm test
     ```
 
-6. Analyze production bundle size & composition
-    ```sh
-    npm run analyze
-    ```
-
-7. Build for production *(to the `dist` directory)*
+6. Build for production *(to the `dist` directory)*
     ```sh
     npm run build
     ```
