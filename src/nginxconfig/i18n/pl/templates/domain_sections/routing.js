@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    fallbackRouting: 'Routing rezerwowy',
+    fallbackRoutingPhpPath: `Ścieżka routingu rezerwowego dla ${common.php}`,
+    legacyPhpRouting: `Routing stasrego typu dla ${common.php}`,
+    enableLegacyRouting: `${common.enable} routing starego typu`,
+    routing: 'Routing',
 };

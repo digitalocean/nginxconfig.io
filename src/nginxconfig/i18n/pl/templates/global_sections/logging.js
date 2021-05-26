@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    enableFileNotFoundErrorLogging: `${common.enable} file not found error logging in`,
+    logformat: 'log_format',
+    enableCloudflare: 'add Cloudflare request headers to the default log format',
+    cfRay: 'CF-Ray',
+    cfConnectingIp: 'CF-Connecting-IP',
+    xForwardedFor: 'X-Forwarded-For',
+    xForwardedProto: 'X-Forwarded-Proto',
+    trueClientIp: 'True-Client-IP',
+    cfIpCountry: 'CF-IPCountry',
+    cfVisitor: 'CF-Visitor',
+    cdnLoop: 'CDN-Loop',
 };

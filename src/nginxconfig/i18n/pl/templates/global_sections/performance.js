@@ -24,12 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    gzipCompression: 'Kompresja gzip',
+    enableGzipCompression: `${common.enable} kompresję gzip`,
+    brotliCompression: 'Kompresja brotli',
+    enableBrotliCompression: `${common.enable} kompresję brotli`,
+    brotliIsANonStandardModule: 'Brotli nie jest standardowym modułem NGINX, sprawdź ',
+    brotliGoogleNgxBrotliProject: 'projekt Google ngx_brotli',
+    brotliForBuildingNginxWithBrotli: ' aby dowiedzieć się jak korzystać z NGINX z Brotli!',
+    expirationForAssets: 'Wygaśnięcie assetów',
+    expirationForMedia: 'Wygaśnięcie mediów',
+    expirationForSvgs: 'Wygaśnięcie SVG',
+    expirationForFonts: 'Wygaśnięcie czcionek',
+    performance: 'Wydajność',
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    title: `${common.nginx}Config`,
+    description: `Najłatwiejszy sposób aby skonfigurować zoptymalizowany, bezpieczny i stabilny serwer ${common.nginx}.`,
+    singleColumnMode: 'Tryb jednokolumnowy',
+    splitColumnMode: 'Tryb wielokolumnowy',
+    perWebsiteConfig: 'Konfiguracja per strona',
+    addSite: 'Dodaj stronę',
+    globalConfig: 'Konfiguracja globalna',
+    setup: 'Setup',
+    configFiles: 'Pliki konfiguracyjne',
 };

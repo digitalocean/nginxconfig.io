@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Korzystając z ${common.wordPress}, <code class="slim">'unsafe-eval'</code> jest często wymagany w Content Security Policy aby panel administracyjny działał poprawnie.`,
+    security: 'Bezpieczeństwo',
 };

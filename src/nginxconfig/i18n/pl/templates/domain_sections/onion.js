@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+const onion = 'Onion';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    onion,
+    onionLocation: `lokalizacja ${onion}`,
+    provideAnOnionLocationToSetOnionLocationHeader: 'Podaj adres lokalizacji onion aby ustawić nagłówek Onion-Location dla Twojej strony.',
+    letsVisitorsKnownOnionServicesIsAvailable: 'Inforuje Twoich odiwedzających, że dostępna jest wersja onion Twojego serwisu dla przeglądarek Tor.',
+    learnMoreAboutOnionServices: 'Dowiedz się więcej o serwisach Onion',
+    onionLocationExpectedToEndWithOnion: 'Adres lokalizacji Onion zwykle kończy się na `.onion`.',
 };

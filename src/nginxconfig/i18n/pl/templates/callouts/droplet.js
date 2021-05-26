@@ -25,11 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    lookingForAPlaceToDeploy: '👋 Szukasz miejsca do wdrożenia nowej konfiguracji? ',
+    tryOutDigitalOceansDroplet: 'Wypróbuj LEMP Droplet z NGINX na DigitalOcean',
 };

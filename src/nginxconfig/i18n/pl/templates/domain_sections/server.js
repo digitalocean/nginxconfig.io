@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,11 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    domain: 'Domena',
+    documentRoot: 'Document root',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'Jedna lub więej domen ma również nazwę',
+    thisWillCauseIssuesWithConfigGeneration: 'Spowoduje to problem z generowaniem pliku konfiguracyjnego.',
+    wwwSubdomain: 'subdomena dla www',
+    cdnSubdomain: 'subdomena dla CDN',
+    redirectSubdomains: 'Przekieruj subdomeny',
+    server: 'Serwer',
+    listen: 'nasłuchuj',
 };

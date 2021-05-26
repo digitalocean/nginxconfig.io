@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Polish',
+    sslProfile: `Profil ${common.ssl}`,
+    httpsMustBeEnabledOnOneSite: `${common.https} musi być włączony na conajmniej jednej stronie, aby móc zastosować globalną konfigurację ${common.https}.`,
+    ocspDnsResolvers: 'OCSP DNS Resolvers',
+    cloudflareResolver: 'Cloudflare Resolver',
+    googlePublicDns: 'Google Public DNS',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `${common.letsEncrypt} webroot`,
+    letsEncryptCertRoot: `ścieżka certyfikatów ${common.letsEncrypt}`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `tylko ${ipv4}`,
+    ipv6Only: `tylko ${ipv6}`,
+    ipv4AndIpv6: `${ipv4} oraz ${ipv6}`,
 };
