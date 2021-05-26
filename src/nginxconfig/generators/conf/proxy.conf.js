@@ -35,7 +35,12 @@ export default global => {
     config['proxy_set_header Connection'] = '$connection_upgrade';
     config['proxy_set_header Host'] = '$host';
     config['proxy_set_header X-Real-IP'] = '$remote_addr';
-    config['proxy_set_header X-Forwarded-For'] = '$proxy_add_x_forwarded_for';
+    config['proxy_set_header Forwarded'] = '$proxy_add_forwarded';
+    if (global.reverseProxy.proxyCoexistenceXForwarded.computed == 'passOn') {
+        config['proxy_set_header X-Forwarded-For'] = '$proxy_add_x_forwarded_for';
+    } else {
+        config['proxy_set_header X-Forwarded-For'] = '""';
+    }
     config['proxy_set_header X-Forwarded-Proto'] = '$scheme';
     config['proxy_set_header X-Forwarded-Host'] = '$host';
     config['proxy_set_header X-Forwarded-Port'] = '$server_port';
