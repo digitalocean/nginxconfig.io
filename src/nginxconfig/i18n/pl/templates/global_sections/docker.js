@@ -35,7 +35,7 @@ export default {
     dockerCompose: `${docker} Compose`,
     applyDockerTweaks: `Zastosuj poprawki pod ${docker}a`,
     applyDockerTweaksForNginx: `Zastosuj poprawki konfiguracyjne pod ${common.nginx} z ${docker}em`,
-    applyDockerTweaksExplainer: `Updates the ${common.nginx} user to be <code class="slim">nginx</code> and the pid to <code class="slim">/var/run/nginx.pid</code>`,
-    includeDockerfile: `Include ${dockerfile} to run ${common.nginx} with ${docker}`,
-    includeDockerCompose: `Include docker-compose to run ${common.nginx} with docker-compose`,
+    applyDockerTweaksExplainer: `Aktualizuje urzytkownika ${common.nginx} na <code class="slim">nginx</code> oraz ustawia pid na <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `Dołącz ${dockerfile}, aby uruchomić ${common.nginx} z ${docker}`,
+    includeDockerCompose: `Dołącz docker-compose, aby uruchomić ${common.nginx} z docker-compose`,
 };

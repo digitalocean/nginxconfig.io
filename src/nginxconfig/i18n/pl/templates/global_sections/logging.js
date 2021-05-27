@@ -27,9 +27,9 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    enableFileNotFoundErrorLogging: `${common.enable} file not found error logging in`,
+    enableFileNotFoundErrorLogging: `${common.enable} logowanie błędów o nieznalezionych plikach`,
     logformat: 'log_format',
-    enableCloudflare: 'add Cloudflare request headers to the default log format',
+    enableCloudflare: 'dodaj nagłówki żądań Cloudflare do domyślnego formatu dziennika ',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',
     xForwardedFor: 'X-Forwarded-For',

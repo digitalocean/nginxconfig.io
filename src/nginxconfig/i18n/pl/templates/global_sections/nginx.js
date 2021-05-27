@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    nginxConfigDirectory: `${common.nginx} config directory`,
+    nginxConfigDirectory: `ścieżka konfiguracji ${common.nginx}`,
     mb: 'MB',
 };
