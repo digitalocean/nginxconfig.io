@@ -31,5 +31,5 @@ export default {
     ptBR: 'Португальский (бразильский)',
     fr: 'Французский',
     ru: 'Русский',
-    pl: 'Polish', // TODO: translate
+    pl: 'Польский',
 };

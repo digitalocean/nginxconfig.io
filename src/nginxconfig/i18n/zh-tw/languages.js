@@ -31,5 +31,5 @@ export default {
     ptBR: '葡萄牙語（巴西）',
     fr: '法語',
     ru: '俄語',
-    pl: 'Polish', // TODO: translate
+    pl: '拋光',
 };
