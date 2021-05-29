@@ -196,6 +196,21 @@ export default (domains, global) => {
             'default': 'upgrade',
             '""': 'close',
         }]);
+        // See https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/
+        config.http.push(['map $remote_addr $proxy_forwarded_elem', {
+            '# IPv4 addresses can be sent as-is': '',
+            '~^[0-9.]+$': '"for=$remote_addr"',
+            '# IPv6 addresses need to be bracketed and quoted': '',
+            '~^[0-9A-Fa-f:.]+$': '"for=\\"[$remote_addr]\\""',
+            '# Unix domain socket names cannot be represented in RFC 7239 syntax': '',
+            'default': '"for=unknown"',
+        }]);
+        config.http.push(['map $http_forwarded $proxy_add_forwarded', {
+            '# If the incoming Forwarded header is syntactically valid, append to it': '',
+            '': '"~^(,[ \\\\t]*)*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*([ \\\\t]*,([ \\\\t]*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*)?)*$" "$http_forwarded, $proxy_forwarded_elem"',
+            '# Otherwise, replace it': '',
+            'default': '"$proxy_forwarded_elem"',
+        }]);
     }
 
     // Configs!

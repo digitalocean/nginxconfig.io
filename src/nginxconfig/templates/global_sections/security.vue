@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -55,7 +55,7 @@ THE SOFTWARE.
                                :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
-                    <div v-if="hasWordPress && !hasUnsafeEval" class="control">
+                    <div v-if="hasWordPress && !hasWordPressUnsafeEval" class="control">
                         <label class="text message is-warning">
                             <span class="message-body"
                                   v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
@@ -199,11 +199,12 @@ THE SOFTWARE.
             hasWordPress() {
                 return this.$parent.$parent.$data.domains.some(d => d && d.php.wordPressRules.computed);
             },
-            hasUnsafeEval() {
-                return this.$props.data.contentSecurityPolicy.computed.includes('\'unsafe-eval\'');
+            hasWordPressUnsafeEval() {
+                return this.$props.data.contentSecurityPolicy.computed
+                    .match(/(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/) !== null;
             },
             hasWarnings() {
-                return this.hasWordPress && !this.hasUnsafeEval;
+                return this.hasWordPress && !this.hasWordPressUnsafeEval;
             },
         },
         watch: {
