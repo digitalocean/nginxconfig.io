@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -113,11 +113,34 @@ THE SOFTWARE.
                     </div>
                 </div>
             </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Coexistence with X-Forwarded-*</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="field">
+                            <div v-for="(name, value) in $props.data.proxyCoexistenceXForwarded.options"
+                                 :class="`control${proxyCoexistenceXForwardedChanged && value === proxyCoexistenceXForwarded ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">
+                                        <i slot="extra" class="icon fas fa-check"></i>
+                                        {{ $t(name) }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </template>
     </div>
 </template>
 
 <script>
+    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
 
@@ -135,6 +158,14 @@ THE SOFTWARE.
         proxyReadTimeout: {
             default: 60,
             computed: '60s', // We use a watcher to append 's'
+            enabled: false,
+        },
+        proxyCoexistenceXForwarded: {
+            default: 'passOn',
+            options: {
+                passOn: 'templates.globalSections.reverseProxy.passOn', // i18n key
+                remove: 'templates.globalSections.reverseProxy.remove', // i18n key
+            },
             enabled: false,
         },
     };
@@ -156,6 +187,9 @@ THE SOFTWARE.
         display: 'common.reverseProxy',                             // Display name for tab (i18n key)
         key: 'reverseProxy',                                        // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        components: {
+            PrettyRadio,
+        },
         props: {
             data: Object,                                           // Data delegated back to us from parent
         },
@@ -179,6 +213,8 @@ THE SOFTWARE.
                             this.$props.data.proxySendTimeout.computed = this.$props.data.proxySendTimeout.value;
                             this.$props.data.proxyReadTimeout.enabled = true;
                             this.$props.data.proxyReadTimeout.computed = this.$props.data.proxyReadTimeout.value;
+                            this.$props.data.proxyCoexistenceXForwarded.enabled = true;
+                            this.$props.data.proxyCoexistenceXForwarded.computed = this.$props.data.proxyCoexistenceXForwarded.value;
                             return;
                         }
                     }
@@ -190,6 +226,8 @@ THE SOFTWARE.
                     this.$props.data.proxySendTimeout.computed = '';
                     this.$props.data.proxyReadTimeout.enabled = false;
                     this.$props.data.proxyReadTimeout.computed = '';
+                    this.$props.data.proxyCoexistenceXForwarded.enabled = false;
+                    this.$props.data.proxyCoexistenceXForwarded.computed = '';
                 },
                 deep: true,
             },

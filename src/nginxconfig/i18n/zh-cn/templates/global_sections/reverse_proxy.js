@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,7 +26,11 @@ THE SOFTWARE.
 
 import common from '../../common';
 
+const legacyXForwarded = 'Legacy X-Forwarded-* headers'; // TODO: translate
+
 export default {
     reverseProxyMustBeEnabledOnOneSite: `必须在至少一个站点上启用${common.reverseProxy}才能配置全局${common.reverseProxy}设置。`,
     seconds: '秒',
+    passOn: `${legacyXForwarded} passed on`, // TODO: translate
+    remove: `${legacyXForwarded} actively removed`, // TODO: translate
 };
