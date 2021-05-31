@@ -31,4 +31,5 @@ export default {
     ptBR: 'Portuguese (brazilian)',
     fr: 'French',
     ru: 'Russian',
+    pl: 'Polish',
 };

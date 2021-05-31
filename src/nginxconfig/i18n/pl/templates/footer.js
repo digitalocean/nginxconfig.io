@@ -25,11 +25,15 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
+    backToTop: 'Wróć na górę',
+    thisToolIs: 'To narzędzie jest',
+    openSourceOnGitHub: 'open-source\'owane na GitHub',
+    underThe: 'na',
+    mit: 'licencji MIT',
+    license: '!',
+    weWelcomeFeedbackAndContributions: 'Mile widziane opinie oraz kontrybucje.',
+    originallyCreatedBy: 'Oryginalnie stworzone przez',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'utrzymywane przez',
+    digitalOcean: 'DigitalOcean',
 };

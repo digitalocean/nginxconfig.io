@@ -24,12 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
+    pythonServer: `Serwer ${common.python}`,
+    pythonMustBeEnabledOnOneSite: `${common.python} musi być włączony na conajmniej jednej stronie, aby móc utworzyć konfigurację globalną dla ${common.python}a.`,
 };

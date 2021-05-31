@@ -24,12 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
+    generateDiffieHellmanKeysByRunningThisCommandOnYourServer: 'Wygeneruj <b>klucze Diffie-Hellman</b> uruchamiając te komendę na swoim serwerze:',
+    createACommonAcmeChallengeDirectoryForLetsEncrypt: `Utwórz powszechny katalog <b>ACME-challenge</b> (dla <b>${common.letsEncrypt}</b>):`,
+    noAdditionalStepsAreNeededToSetUpSslForNginx: `Nie potrzeba żadnych dodatkowych kroków dla ${common.ssl} w Twojej konfiguracji ${common.nginx}.`,
+    sslInit: `${common.ssl} init`,
 };

@@ -24,12 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
+    title: `${common.nginx}Config`,
+    description: `Najłatwiejszy sposób aby skonfigurować zoptymalizowany, bezpieczny i stabilny serwer ${common.nginx}.`,
+    singleColumnMode: 'Tryb jednokolumnowy',
+    splitColumnMode: 'Tryb wielokolumnowy',
+    perWebsiteConfig: 'Konfiguracja per strona',
+    addSite: 'Dodaj stronę',
+    globalConfig: 'Konfiguracja globalna',
+    setup: 'Setup',
+    configFiles: 'Pliki konfiguracyjne',
 };

@@ -25,11 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
+    downloadConfig: 'Pobierz konfigurację',
+    copyBase64: 'Kopiuj Base64',
 };
