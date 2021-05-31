@@ -26,11 +26,11 @@ THE SOFTWARE.
 
 import common from '../../common';
 
-const legacyXForwarded = 'Legacy X-Forwarded-* headers'; // TODO: translate
+const legacyXForwarded = '傳統 X-Forwarded-* 標頭';
 
 export default {
     reverseProxyMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.reverseProxy}才能配寘全域${common.reverseProxy}設定。`,
     seconds: '秒',
-    passOn: `${legacyXForwarded} passed on`, // TODO: translate
-    remove: `${legacyXForwarded} actively removed`, // TODO: translate
+    passOn: `轉發 ${legacyXForwarded} `,
+    remove: `主動刪除 ${legacyXForwarded}`,
 };
