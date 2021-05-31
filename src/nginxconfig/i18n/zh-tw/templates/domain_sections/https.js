@@ -32,8 +32,8 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 連接`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 連接`,
-    portReuse: 'Reuseport', // TODO: translate
-    enableReuseOfPort: `${common.enable} reuseport to generate a listening socket per worker`, // TODO: translate
+    portReuse: '端口複用',
+    enableReuseOfPort: `${common.enable} 端口複用來為每個worker生成監聽套接字`,
     forceHttps: `強制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（強制用戶端、瀏覽器等使用HTTPS與服務器創建連結），需要HTTPS連接`,
@@ -42,9 +42,9 @@ export default {
     certificationType: '證書類型',
     customCertificate: '本地證書',
     letsEncryptEmail: `${common.letsEncrypt} 郵箱`,
-    http3IsANonStandardModule: 'HTTP/3 isn\'t a standard NGINX module, check the ', // TODO: translate
-    http3NginxQuicReadme: 'NGINX QUIC readme', // TODO: translate
-    http3OrThe: ' or the ', // TODO: translate
-    http3CloudflareQuicheProject: 'Cloudflare quiche project', // TODO: translate
-    http3ForBuildingNginxWithHttp3: ' for how to build NGINX with HTTP/3!', // TODO: translate
+    http3IsANonStandardModule: 'HTTP/3 並不是標準的 NGINX 模塊, 請查看 ',
+    http3NginxQuicReadme: 'NGINX QUIC 文檔',
+    http3OrThe: ' 或者 ', 
+    http3CloudflareQuicheProject: 'Cloudflare quiche 項目',
+    http3ForBuildingNginxWithHttp3: ' 來構建支持 HTTP/3 的 NGINX !',
 };
