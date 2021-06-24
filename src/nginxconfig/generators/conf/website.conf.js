@@ -66,7 +66,7 @@ const httpsListen = domain => {
     // HTTP/3
     if (domain.https.http3.computed)
         config.push(['listen',
-            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3`]);
 
     // v6
     if (domain.server.listenIpv6.computed)
@@ -76,7 +76,7 @@ const httpsListen = domain => {
     // v6 HTTP/3
     if (domain.server.listenIpv6.computed && domain.https.http3.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+            `[${domain.server.listenIpv6.computed}]:443 http3`]);
 
     return config;
 };
