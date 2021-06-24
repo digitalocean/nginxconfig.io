@@ -264,8 +264,8 @@ THE SOFTWARE.
             enabled: true,
         },
         portReuse: {
-            default: true,
-            enabled: false,
+            default: false,
+            enabled: true,
         },
         forceHttps: {
             default: true,
@@ -355,19 +355,6 @@ THE SOFTWARE.
                         this.$props.data.hsts.computed = false;
                         this.$props.data.certType.enabled = false;
                         this.$props.data.certType.computed = '';
-                    }
-                },
-                deep: true,
-            },
-            // Only allow port reuse when HTTP/3 is enabled first
-            '$props.data.http3': {
-                handler(data) {
-                    if (data.computed) {
-                        this.$props.data.portReuse.enabled = true;
-                        this.$props.data.portReuse.computed = this.$props.data.portReuse.value;
-                    } else {
-                        this.$props.data.portReuse.enabled = false;
-                        this.$props.data.portReuse.computed = false;
                     }
                 },
                 deep: true,
