@@ -68,6 +68,23 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
+                <label class="label">Permissions-Policy</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${permissionsPolicyChanged ? ' is-changed' : ''}`">
+                        <input v-model="permissionsPolicy"
+                               class="input"
+                               type="text"
+                               :placeholder="$props.data.permissionsPolicy.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
                 <label class="label">server_tokens</label>
             </div>
             <div class="field-body">
@@ -162,6 +179,10 @@ THE SOFTWARE.
         },
         contentSecurityPolicy: {
             default: 'default-src \'self\' http: https: data: blob: \'unsafe-inline\'; frame-ancestors \'self\';',
+            enabled: true,
+        },
+        permissionsPolicy: {
+            default: 'interest-cohort=()',
             enabled: true,
         },
         serverTokens: {

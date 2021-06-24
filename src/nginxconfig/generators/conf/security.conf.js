@@ -37,6 +37,9 @@ export default (domains, global) => {
     if (global.security.contentSecurityPolicy.computed)
         config.push(['add_header Content-Security-Policy', `"${global.security.contentSecurityPolicy.computed}" always`]);
 
+    if (global.security.permissionsPolicy.computed)
+        config.push(['add_header Permissions-Policy', `"${global.security.permissionsPolicy.computed}" always`]);
+
     // Every domain has HSTS enabled, and they all have same hstsSubdomains/hstsPreload settings
     if (commonHsts(domains)) {
         const commonHSTSSubdomains = domains.length && domains[0].https.hstsSubdomains.computed;
