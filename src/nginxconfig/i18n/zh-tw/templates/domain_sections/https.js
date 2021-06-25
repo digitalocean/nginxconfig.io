@@ -32,8 +32,6 @@ export default {
     enableHttp2Connections: `${common.enable} ${common.http}/2 連接`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} ${common.http}/3 連接`,
-    portReuse: '端口複用',
-    enableReuseOfPort: `${common.enable} 端口複用來為每個worker生成監聽套接字`,
     forceHttps: `強制 ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable}HSTS（強制用戶端、瀏覽器等使用HTTPS與服務器創建連結），需要HTTPS連接`,

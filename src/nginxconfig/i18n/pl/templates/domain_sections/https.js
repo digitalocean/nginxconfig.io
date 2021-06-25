@@ -32,8 +32,6 @@ export default {
     enableHttp2Connections: `${common.enable} połączenia ${common.http}/2`,
     http3: `${common.http}/3`,
     enableHttp3Connections: `${common.enable} połączenia ${common.http}/3`,
-    portReuse: 'Reuseport',
-    enableReuseOfPort: `${common.enable} reuseport aby generować listening socket per worker`,
     forceHttps: `Wymuś ${common.https}`,
     hsts: 'HSTS',
     enableStrictTransportSecurity: `${common.enable} Strict Transport Security, wymaga połaczenia HTTPS`,

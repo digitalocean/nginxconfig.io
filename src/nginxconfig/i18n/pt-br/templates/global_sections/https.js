@@ -33,6 +33,8 @@ const ipv6 = 'IPv6';
 export default {
     sslProfile: `Perfil ${common.ssl}`,
     httpsMustBeEnabledOnOneSite: `O ${common.https} deve estar habilitado em pelo menos um site para definir as configurações globais de ${common.https}.`,
+    portReuse: 'Reuseport', // TODO: translate
+    enableReuseOfPort: `${common.enable} reuseport to generate a listening socket per worker`, // TODO: translate
     ocspDnsResolvers: 'Resolvedores de DNS OCSP',
     cloudflareResolver: 'Resolvedor Cloudflare',
     googlePublicDns: 'DNS público do Google',
