@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -36,6 +36,9 @@ export default (domains, global) => {
 
     if (global.security.contentSecurityPolicy.computed)
         config.push(['add_header Content-Security-Policy', `"${global.security.contentSecurityPolicy.computed}" always`]);
+
+    if (global.security.permissionsPolicy.computed)
+        config.push(['add_header Permissions-Policy', `"${global.security.permissionsPolicy.computed}" always`]);
 
     // Every domain has HSTS enabled, and they all have same hstsSubdomains/hstsPreload settings
     if (commonHsts(domains)) {
