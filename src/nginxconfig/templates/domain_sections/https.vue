@@ -96,24 +96,6 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="portReuseEnabled" class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.https.portReuse') }}</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
-                        <div class="checkbox">
-                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
-                                {{ $t('templates.domainSections.https.enableReuseOfPort') }}
-                            </PrettyCheck>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.https.forceHttps') }}</label>
@@ -260,10 +242,6 @@ THE SOFTWARE.
             enabled: true,
         },
         http3: {
-            default: false,
-            enabled: true,
-        },
-        portReuse: {
             default: false,
             enabled: true,
         },

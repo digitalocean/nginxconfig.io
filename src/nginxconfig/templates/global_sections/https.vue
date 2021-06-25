@@ -66,6 +66,24 @@ THE SOFTWARE.
 
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
+                    <label class="label">{{ $t('templates.globalSections.https.portReuse') }}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
+                            <div class="checkbox">
+                                <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                                    <i slot="extra" class="icon fas fa-check"></i>
+                                    {{ $t('templates.globalSections.https.enableReuseOfPort') }}
+                                </PrettyCheck>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal is-aligned-top">
+                <div class="field-label">
                     <label class="label">{{ $t('templates.globalSections.https.ocspDnsResolvers') }}</label>
                 </div>
                 <div class="field-body">
@@ -246,6 +264,10 @@ THE SOFTWARE.
                 intermediate: 'templates.globalSections.https.mozillaIntermediate', // i18n key
                 old: 'templates.globalSections.https.mozillaOld', // i18n key
             },
+            enabled: true,
+        },
+        portReuse: {
+            default: false,
             enabled: true,
         },
         ocspCloudflare: {

@@ -56,12 +56,12 @@ const sslConfig = (domain, global) => {
     return config;
 };
 
-const httpsListen = domain => {
+const httpsListen = (domain, global) => {
     const config = [];
 
     // HTTPS
     config.push(['listen',
-        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}${global.https.portReuse.computed ? ' reuseport' : ''}`]);
 
     // HTTP/3
     if (domain.https.http3.computed)
@@ -71,7 +71,7 @@ const httpsListen = domain => {
     // v6
     if (domain.server.listenIpv6.computed)
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}${global.https.portReuse.computed ? ' reuseport' : ''}`]);
 
     // v6 HTTP/3
     if (domain.server.listenIpv6.computed && domain.https.http3.computed)
@@ -95,8 +95,8 @@ const httpListen = domain => {
     return config;
 };
 
-const listenConfig = domain => {
-    if (domain.https.https.computed) return httpsListen(domain);
+const listenConfig = (domain, global) => {
+    if (domain.https.https.computed) return httpsListen(domain, global);
     return httpListen(domain);
 };
 
@@ -141,7 +141,7 @@ export default (domain, domains, global) => {
     if (!domain.https.https.computed || !domain.https.forceHttps.computed) serverConfig.push(...httpListen(domain));
 
     // HTTPS
-    if (domain.https.https.computed) serverConfig.push(...httpsListen(domain));
+    if (domain.https.https.computed) serverConfig.push(...httpsListen(domain, global));
 
     serverConfig.push(['server_name',
         `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}`]);
@@ -340,7 +340,7 @@ export default (domain, domains, global) => {
         // Build the server config on its own before adding it to the parent config
         const cdnConfig = [];
 
-        cdnConfig.push(...listenConfig(domain));
+        cdnConfig.push(...listenConfig(domain, global));
         cdnConfig.push(['server_name', `cdn.${domain.server.domain.computed}`]);
         cdnConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
 
@@ -383,7 +383,7 @@ export default (domain, domains, global) => {
         // Build the server config on its own before adding it to the parent config
         const redirectConfig = [];
 
-        redirectConfig.push(...listenConfig(domain));
+        redirectConfig.push(...listenConfig(domain, global));
         redirectConfig.push(['server_name',
             `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
 
