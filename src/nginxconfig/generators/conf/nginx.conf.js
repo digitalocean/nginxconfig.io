@@ -222,9 +222,10 @@ export default (domains, global) => {
 
     // Single file configs
     if (!global.tools.modularizedStructure.computed) {
+        const ipPortPairs = new Set();
         for (const domain of domains) {
             config.http.push([`# ${domain.server.domain.computed}`, '']);
-            config.http.push(...websiteConf(domain, domains, global));
+            config.http.push(...websiteConf(domain, domains, global, ipPortPairs));
         }
     }
 
