@@ -57,8 +57,10 @@ export default (domains, global) => {
     // Modularised configs
     if (global.tools.modularizedStructure.computed) {
         // Domain config
+        const sitesDir = `sites-${global.tools.symlinkVhost.computed ? 'available' : 'enabled'}`;
+        const ipPortPairs = new Set();
         for (const domain of domains) {
-            files[`sites-${global.tools.symlinkVhost.computed ? 'available' : 'enabled'}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global));
+            files[`${sitesDir}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global, ipPortPairs));
         }
 
         // Let's encrypt

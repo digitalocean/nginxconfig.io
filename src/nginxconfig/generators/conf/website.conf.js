@@ -56,56 +56,75 @@ const sslConfig = (domain, global) => {
     return config;
 };
 
-const httpsListen = domain => {
+const httpsListen = (domain, global, ipPortPairs) => {
     const config = [];
+
+    // Check if reuseport needs to be set
+    const ipPortV4 = `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443`;
+    const reusePortV4 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV4);
+    if (reusePortV4) ipPortPairs.add(ipPortV4);
 
     // HTTPS
     config.push(['listen',
-        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+        `${ipPortV4} ssl${domain.https.http2.computed ? ' http2' : ''}${reusePortV4 ? ' reuseport' : ''}`]);
 
     // HTTP/3
     if (domain.https.http3.computed)
-        config.push(['listen',
-            `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+        config.push(['listen', `${ipPortV4} http3`]);
 
     // v6
-    if (domain.server.listenIpv6.computed)
-        config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 ssl${domain.https.http2.computed ? ' http2' : ''}`]);
+    if (domain.server.listenIpv6.computed) {
+        // Check if reuseport needs to be set
+        const ipPortV6 = `[${domain.server.listenIpv6.computed}]:443`;
+        const reusePortV6 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV6);
+        if (reusePortV6) ipPortPairs.add(ipPortV6);
 
-    // v6 HTTP/3
-    if (domain.server.listenIpv6.computed && domain.https.http3.computed)
+        // HTTPS
         config.push(['listen',
-            `[${domain.server.listenIpv6.computed}]:443 http3${domain.https.portReuse.computed ? ' reuseport' : ''}`]);
+            `${ipPortV6} ssl${domain.https.http2.computed ? ' http2' : ''}${reusePortV6 ? ' reuseport' : ''}`]);
+
+        // HTTP/3
+        if (domain.https.http3.computed)
+            config.push(['listen', `${ipPortV6} http3`]);
+    }
 
     return config;
 };
 
-const httpListen = domain => {
+const httpListen = (domain, global, ipPortPairs) => {
     const config = [];
 
-    // Not HTTPS
-    config.push(['listen',
-        `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`]);
+    // Check if reuseport needs to be set
+    const ipPortV4 = `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`;
+    const reusePortV4 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV4);
+    if (reusePortV4) ipPortPairs.add(ipPortV4);
+
+    // v4
+    config.push(['listen', `${ipPortV4}${reusePortV4 ? ' reuseport' : ''}`]);
 
     // v6
-    if (domain.server.listenIpv6.computed)
-        config.push(['listen', `[${domain.server.listenIpv6.computed}]:80`]);
+    if (domain.server.listenIpv6.computed) {
+        // Check if reuseport needs to be set
+        const ipPortV6 = `[${domain.server.listenIpv6.computed}]:80`;
+        const reusePortV6 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV6);
+        if (reusePortV6) ipPortPairs.add(ipPortV6);
+
+        config.push(['listen', `${ipPortV6}${reusePortV6 ? ' reuseport' : ''}`]);
+    }
 
     return config;
 };
 
-const listenConfig = domain => {
-    if (domain.https.https.computed) return httpsListen(domain);
-    return httpListen(domain);
+const listenConfig = (domain, global, ipPortPairs) => {
+    if (domain.https.https.computed) return httpsListen(domain, global, ipPortPairs);
+    return httpListen(domain, global, ipPortPairs);
 };
 
-
-const httpRedirectConfig = (domain, global, domainName, redirectDomain) => {
+const httpRedirectConfig = (domain, global, ipPortPairs, domainName, redirectDomain) => {
     // Build the server config on its own before adding it to the parent config
     const config = [];
 
-    config.push(...httpListen(domain));
+    config.push(...httpListen(domain, global, ipPortPairs));
     config.push(['server_name', domainName]);
 
     if (domain.https.certType.computed === 'letsEncrypt') {
@@ -130,7 +149,7 @@ const httpRedirectConfig = (domain, global, domainName, redirectDomain) => {
     return config;
 };
 
-export default (domain, domains, global) => {
+export default (domain, domains, global, ipPortPairs) => {
     // Use kv so we can use the same key multiple times
     const config = [];
 
@@ -138,10 +157,12 @@ export default (domain, domains, global) => {
     const serverConfig = [];
 
     // Not HTTPS or not force HTTPS
-    if (!domain.https.https.computed || !domain.https.forceHttps.computed) serverConfig.push(...httpListen(domain));
+    if (!domain.https.https.computed || !domain.https.forceHttps.computed)
+        serverConfig.push(...httpListen(domain, global, ipPortPairs));
 
     // HTTPS
-    if (domain.https.https.computed) serverConfig.push(...httpsListen(domain));
+    if (domain.https.https.computed)
+        serverConfig.push(...httpsListen(domain, global, ipPortPairs));
 
     serverConfig.push(['server_name',
         `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}`]);
@@ -340,7 +361,7 @@ export default (domain, domains, global) => {
         // Build the server config on its own before adding it to the parent config
         const cdnConfig = [];
 
-        cdnConfig.push(...listenConfig(domain));
+        cdnConfig.push(...listenConfig(domain, global, ipPortPairs));
         cdnConfig.push(['server_name', `cdn.${domain.server.domain.computed}`]);
         cdnConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
 
@@ -383,7 +404,7 @@ export default (domain, domains, global) => {
         // Build the server config on its own before adding it to the parent config
         const redirectConfig = [];
 
-        redirectConfig.push(...listenConfig(domain));
+        redirectConfig.push(...listenConfig(domain, global, ipPortPairs));
         redirectConfig.push(['server_name',
             `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
 
@@ -403,17 +424,21 @@ export default (domain, domains, global) => {
         // Add the redirect config to the parent config now its built
         config.push(['# HTTP redirect', '']);
         if (domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed,
+            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
+                domain.server.domain.computed, `www.${domain.server.domain.computed}`)]);
+            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
                 `www.${domain.server.domain.computed}`)]);
-            config.push(['server', httpRedirectConfig(domain, global, `www.${domain.server.domain.computed}`)]);
         } else if (!domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, domain.server.domain.computed)]);
+            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
+                domain.server.domain.computed)]);
         }
         if (domain.server.cdnSubdomain.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, `cdn.${domain.server.domain.computed}`)]);
+            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
+                `cdn.${domain.server.domain.computed}`)]);
         }
         if (domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, `.${domain.server.domain.computed}`,
+            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
+                `.${domain.server.domain.computed}`,
                 `${domain.server.wwwSubdomain.computed ? 'www.' : '' }${domain.server.domain.computed}`)]);
         }
     }

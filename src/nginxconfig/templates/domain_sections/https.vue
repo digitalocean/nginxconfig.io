@@ -96,24 +96,6 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="portReuseEnabled" class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.https.portReuse') }}</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
-                        <div class="checkbox">
-                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
-                                {{ $t('templates.domainSections.https.enableReuseOfPort') }}
-                            </PrettyCheck>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div v-if="forceHttpsEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.https.forceHttps') }}</label>
@@ -263,10 +245,6 @@ THE SOFTWARE.
             default: false,
             enabled: true,
         },
-        portReuse: {
-            default: true,
-            enabled: false,
-        },
         forceHttps: {
             default: true,
             enabled: true,
@@ -355,19 +333,6 @@ THE SOFTWARE.
                         this.$props.data.hsts.computed = false;
                         this.$props.data.certType.enabled = false;
                         this.$props.data.certType.computed = '';
-                    }
-                },
-                deep: true,
-            },
-            // Only allow port reuse when HTTP/3 is enabled first
-            '$props.data.http3': {
-                handler(data) {
-                    if (data.computed) {
-                        this.$props.data.portReuse.enabled = true;
-                        this.$props.data.portReuse.computed = this.$props.data.portReuse.value;
-                    } else {
-                        this.$props.data.portReuse.enabled = false;
-                        this.$props.data.portReuse.computed = false;
                     }
                 },
                 deep: true,

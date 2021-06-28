@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,6 +26,24 @@ THE SOFTWARE.
 
 <template>
     <div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.globalSections.https.portReuse') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                                <i slot="extra" class="icon fas fa-check"></i>
+                                {{ $t('templates.globalSections.https.enableReuseOfPort') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="!sslProfileEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
                 <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
@@ -239,6 +257,10 @@ THE SOFTWARE.
     };
 
     const defaults = {
+        portReuse: {
+            default: false,
+            enabled: true,
+        },
         sslProfile: {
             default: 'intermediate',
             options: {
