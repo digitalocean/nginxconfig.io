@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 import Download from './download';
 import SSL from './ssl';
-import Certbot from './certbot';
+import SLLCert from './ssl_cert';
 import GoLive from './go_live';
 
-export default [ Download, SSL, Certbot, GoLive ];
+export default [ Download, SSL, SLLCert, GoLive ];
