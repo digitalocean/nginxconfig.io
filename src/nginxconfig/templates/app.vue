@@ -193,8 +193,11 @@ THE SOFTWARE.
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
-            fullConfFiles() {
-                return this.addConfigDirectory(this.confFiles);
+            confFilesWithDirectory() {
+                return Object.entries(this.confFiles).reduce((obj, [ file, content ]) => ({
+                    ...obj,
+                    [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]: content,
+                }), {});
             },
             lang: {
                 get() {
@@ -215,7 +218,7 @@ THE SOFTWARE.
             },
         },
         watch: {
-            fullConfFiles(newConf, oldConf) {
+            confFilesWithDirectory(newConf, oldConf) {
                 if (this.$data.confWatcherWaiting) return;
 
                 // Set that we're waiting for changes to stop
@@ -321,27 +324,21 @@ THE SOFTWARE.
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
-                if (oldConf === this.fullConfFiles) {
+                if (oldConf === this.confFilesWithDirectory) {
                     // If this is the initial data load on app start, run the diff logic
                     // but with previous as this so that we don't highlight any changes
                     if (!this.$data.ready) {
-                        this.$data.confFilesPrevious = this.fullConfFiles;
+                        this.$data.confFilesPrevious = this.confFilesWithDirectory;
                         this.$nextTick(() => { this.$data.ready = true; });
                     }
 
                     // Do the diff!
-                    this.updateDiff(this.fullConfFiles, this.$data.confFilesPrevious);
+                    this.updateDiff(this.confFilesWithDirectory, this.$data.confFilesPrevious);
                     return;
                 }
 
                 // Check next tick to see if anything has changed again
-                this.$nextTick(() => this.checkChange(this.confFiles));
-            },
-            addConfigDirectory(conf) {
-                return Object.entries(conf).reduce((obj, [ file, content ]) => ({
-                    ...obj,
-                    [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]: content,
-                }), {});
+                this.$nextTick(() => this.checkChange(this.confFilesWithDirectory));
             },
             updateDiff(newConf, oldConf) {
                 try {
