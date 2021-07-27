@@ -47,7 +47,7 @@
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",
     "escape-html": "^1.0.3",
-    "files-diff": "0.0.5",
+    "files-diff": "0.0.6",
     "json-to-pretty-yaml": "^1.2.2",
     "memory-tar-create": "0.0.3",
     "pretty-checkbox-vue": "^1.1.9",
