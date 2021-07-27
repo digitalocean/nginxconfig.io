@@ -347,7 +347,6 @@ THE SOFTWARE.
                         highlightFunction: value => `<mark>${value}</mark>`,
                     });
                     this.$data.confFilesOutput = Object.entries(diffConf).map(([ file, { name, content } ]) => {
-                        console.log(file, name);
                         const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
                         const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
 
