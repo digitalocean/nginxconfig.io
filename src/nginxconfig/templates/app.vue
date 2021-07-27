@@ -193,6 +193,12 @@ THE SOFTWARE.
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
+            confFilesWithDirectory() {
+                return Object.entries(this.confFiles).reduce((obj, [ file, content ]) => ({
+                    ...obj,
+                    [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]: content,
+                }), {});
+            },
             lang: {
                 get() {
                     return this.$data.global.app.lang.value;
@@ -212,7 +218,7 @@ THE SOFTWARE.
             },
         },
         watch: {
-            confFiles(newConf, oldConf) {
+            confFilesWithDirectory(newConf, oldConf) {
                 if (this.$data.confWatcherWaiting) return;
 
                 // Set that we're waiting for changes to stop
@@ -318,21 +324,21 @@ THE SOFTWARE.
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
-                if (oldConf === this.confFiles) {
+                if (oldConf === this.confFilesWithDirectory) {
                     // If this is the initial data load on app start, run the diff logic
                     // but with previous as this so that we don't highlight any changes
                     if (!this.$data.ready) {
-                        this.$data.confFilesPrevious = this.confFiles;
+                        this.$data.confFilesPrevious = this.confFilesWithDirectory;
                         this.$nextTick(() => { this.$data.ready = true; });
                     }
 
                     // Do the diff!
-                    this.updateDiff(this.confFiles, this.$data.confFilesPrevious);
+                    this.updateDiff(this.confFilesWithDirectory, this.$data.confFilesPrevious);
                     return;
                 }
 
                 // Check next tick to see if anything has changed again
-                this.$nextTick(() => this.checkChange(this.confFiles));
+                this.$nextTick(() => this.checkChange(this.confFilesWithDirectory));
             },
             updateDiff(newConf, oldConf) {
                 try {
@@ -342,13 +348,12 @@ THE SOFTWARE.
                     });
                     this.$data.confFilesOutput = Object.entries(diffConf).map(([ file, { name, content } ]) => {
                         const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
-                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
                         const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
 
                         return [
-                            confName,
+                            diffName,
                             diffContent,
-                            `${sha2_256(confName)}-${sha2_256(diffContent)}`,
+                            `${sha2_256(diffName)}-${sha2_256(diffContent)}`,
                             file,
                         ];
                     });
@@ -356,11 +361,13 @@ THE SOFTWARE.
                     // If diff generation goes wrong, don't show any diff
                     console.error(e);
                     this.$data.confFilesOutput = Object.entries(newConf).map(([ name, content ]) => {
-                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${name}`;
+                        const safeName = escape(name);
+                        const safeContent = escape(content);
+
                         return [
-                            confName,
-                            content,
-                            `${sha2_256(confName)}-${sha2_256(content)}`,
+                            safeName,
+                            safeContent,
+                            `${sha2_256(safeName)}-${sha2_256(safeContent)}`,
                             name,
                         ];
                     });
