@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "12.16.2"
+    "node": "14.17.5"
   },
   "main": "src/nginxconfig/mount.js",
   "scripts": {
