@@ -29,7 +29,7 @@ THE SOFTWARE.
         <ol v-if="letsEncryptActive">
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.commentOutSslDirectivesInConfiguration') }}
+                    {{ $t('templates.setupSections.ssl_cert.commentOutSslDirectivesInConfiguration') }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
@@ -40,7 +40,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
+                    {{ $t('templates.setupSections.ssl_cert.reloadYourNginxServer') }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
@@ -50,18 +50,28 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt') }}
+                    {{ $t('templates.setupSections.ssl_cert.obtainSslCertificatesFromLetsEncrypt') }}
                     <br />
+                </p>
+                <p>
+                    Certbot:
                 </p>
                 <BashPrism :key="certbotCmds"
                            :cmd="certbotCmds"
                            @copied="codeCopiedEvent('Obtain certificates using certbot')"
                 ></BashPrism>
+                <p>
+                    Acme.sh:
+                </p>
+                <BashPrism :key="acmeShCmds"
+                           :cmd="acmeShCmds"
+                           @copied="codeCopiedEvent('Obtain certificates using acme.sh')"
+                ></BashPrism>
             </li>
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration') }}
+                    {{ $t('templates.setupSections.ssl_cert.uncommentSslDirectivesInConfiguration') }}
                     <br />
                 </p>
                 <BashPrism :key="sitesAvailable"
@@ -72,7 +82,7 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
+                    {{ $t('templates.setupSections.ssl_cert.reloadYourNginxServer') }}
                     <br />
                 </p>
                 <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
@@ -82,13 +92,27 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
+                    {{ $t('templates.setupSections.ssl_cert.configureSslCertToReloadNginxOnCertificateRenewal') }}
                     <br />
+                </p>
+                <p>
+                    Certbot:
                 </p>
                 <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
                            @copied="codeCopiedEvent('Create nginx auto-restart on renewal')"
                 ></BashPrism>
                 <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                           @copied="codeCopiedEvent('Enable execution of auto-restart')"
+                ></BashPrism>
+                <p>
+                    Acme.sh:
+                </p>
+                <BashPrism :key="acmeCopy"
+                           :cmd="acmeCopy"
+                           @copied="codeCopiedEvent('Move SSL certificates to Let`s Encrypt directory')"
+                ></BashPrism>
+                <BashPrism :key="acmeReload"
+                           :cmd="acmeReload"
                            @copied="codeCopiedEvent('Enable execution of auto-restart')"
                 ></BashPrism>
             </li>
@@ -99,7 +123,7 @@ THE SOFTWARE.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ $t('templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration') }}
+                            {{ $t('templates.setupSections.ssl_cert.sslCertDoesNotNeedToBeSetupForYourConfiguration') }}
                         </label>
                     </div>
                 </div>
@@ -113,9 +137,9 @@ THE SOFTWARE.
     import analytics from '../../util/analytics';
 
     export default {
-        name: 'SetupCertbot',
-        display: 'templates.setupSections.certbot.certbot', // i18n key
-        key: 'certbot',
+        name: 'SetupCert',
+        display: 'templates.setupSections.ssl_cert.sslCert', // i18n key
+        key: 'ssl_cert',
         components: {
             BashPrism,
         },
@@ -159,13 +183,54 @@ THE SOFTWARE.
                         ].filter(x => x !== null).join(' ')
                     )).join('\n');
             },
+            acmeShCmds() {
+                return this.$props.data.domains
+                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
+                    .map(domain => (
+                        [
+                            'acme.sh --issue',
+                            `-d ${domain.server.domain.computed}`,
+                            domain.server.wwwSubdomain.computed ? `-d www.${domain.server.domain.computed}` : null,
+                            domain.server.cdnSubdomain.computed ? `-d cdn.${domain.server.domain.computed}` : null,
+                            `-w ${domain.server.path.computed}${domain.server.documentRoot.computed}`,
+                        ].filter(x => x !== null).join(' ')
+                    )).join('\n');
+            },
+            acmeCopy() {
+                return this.$props.data.domains
+                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
+                    .map(domain => (
+                        [
+                            `cp -R /root/.acme.sh/${domain.server.domain.computed}`,
+                            domain.server.wwwSubdomain.computed ? `-d www.${domain.server.domain.computed}` : null,
+                            domain.server.cdnSubdomain.computed ? `-d cdn.${domain.server.domain.computed}` : null,
+                            this.$props.data.global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '') + '/' + domain.server.domain.computed,
+                        ].filter(x => x !== null).join(' ')
+                    )).join('\n');
+            },
+            acmeReload() {
+                const letEncryptPath = this.$props.data.global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '') + '/';
+                return this.$props.data.domains
+                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
+                    .map(domain => (
+                        [
+                            'acme.sh --install cert',
+                            `-d ${domain.server.domain.computed}`,
+                            domain.server.wwwSubdomain.computed ? `-d www.${domain.server.domain.computed}` : null,
+                            domain.server.cdnSubdomain.computed ? `-d cdn.${domain.server.domain.computed}` : null,
+                            '--keyfile ' + letEncryptPath + domain.server.domain.computed + '/' + domain.server.domain.computed +'.key',
+                            '--fullchain-file ' + letEncryptPath + domain.server.domain.computed + '/' + 'fullchain.cer',
+                            '--reload cmd \'systemctl restart nginx.service\'',
+                        ].filter(x => x !== null).join(' ')
+                    )).join('\n');
+            },
         },
         methods: {
             codeCopiedEvent(step) {
                 analytics({
                     category: 'Setup',
                     action: 'Code snippet copied',
-                    label: `certbot: ${step}`,
+                    label: `ssl_cert: ${step}`,
                 });
             },
         },

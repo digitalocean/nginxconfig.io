@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import certbot from './certbot';
+import ssl_cert from './ssl_cert';
 import download from './download';
 import goLive from './go_live';
 import ssl from './ssl';
 
-export default { certbot, download, goLive, ssl };
+export default { ssl_cert, download, goLive, ssl };
