@@ -32,7 +32,7 @@ export default (domain) => {
 
     config[`upstream ${domain[0].server.domain.computed}`] = {
         server: `unix:${domain[0].server.path.computed}/shared/sockets/puma.sock`,
-    }
+    };
 
     config['#Rails: Path for static files'] = '';
     config['root'] = `${staticRootPath}`;
@@ -52,7 +52,7 @@ export default (domain) => {
     config['# Rails: try files'] = '';
     config['location /'] = {
         proxy_http_version: 1.1,
-        try_files: `$uri/index.html $uri ${namedLocation}`
+        try_files: `$uri/index.html $uri ${namedLocation}`,
     };
 
     config['# Rails: "^~ /assets/" is a "prefix string", not a regex. "^~" will prevent further location searching after this location is matched.'] = '';
@@ -64,7 +64,7 @@ export default (domain) => {
         error_page: '404 /404_error.html',
     };
     
-    config['# Rails: Set named location to be used in try_files']
+    config['# Rails: Set named location to be used in try_files'];
     config[`location ${namedLocation} `] = {
         'proxy_set_header X-Forwarded-For': '$proxy_add_x_forwarded_for',
         'proxy_set_header X-Forwarded-Proto': 'https',
@@ -81,7 +81,7 @@ export default (domain) => {
         '# the url to add /index.html to the end of it': '',
         '# and then break to send it to the next config rules.': '',
         'if (-f $request_filename/index.html)': {
-            rewrite: `(.*) $1/index.html break`
+            rewrite: '(.*) $1/index.html break',
         },
         '# This is the meat of the rack page caching config': '',
         '# it adds .html to the end of the url and then checks': '',
@@ -91,12 +91,12 @@ export default (domain) => {
         '# if there is no file on the fs then it sets all the': '',
         '# necessary headers and proxies to our upstream pumas': '',
         'if (-f $request_filename.html)': {
-            rewrite: `(.*) $1.html break`
+            rewrite: '(.*) $1.html break',
         },
         'if (!-f $request_filename)': {
             proxy_pass: `http://${domain[0].server.domain.computed}`,
             '': 'break',
-          }
+          },
     };
 
     // Done!

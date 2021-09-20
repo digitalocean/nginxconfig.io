@@ -32,7 +32,7 @@ export default {
     railsCannotBeEnabledWithPhp: `${common.rails} cannot be enabled whilst ${common.php} is enabled.`,
     railsCannotBeEnabledWithPython: `${common.rails} cannot be enabled whilst ${common.python} is enabled.`,
     enableRails: `${common.enable} ${common.rails}`,
-    namedLocation: `App named location`,
-    provideANamedLocationToSetNamedLocation: 'Provide a named location address to set the \"Named Location\" configurations for your site.',
+    namedLocation: 'App named location',
+    provideANamedLocationToSetNamedLocation: 'Provide a named location address to set the "Named Location" configurations for your site.',
     namedLocationExpectedToBeginWithAmpersand: 'Named location should begin with `@`.',
 };

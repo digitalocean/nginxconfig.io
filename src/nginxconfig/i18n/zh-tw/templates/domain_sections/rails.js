@@ -34,6 +34,6 @@ export default {
     railsCannotBeEnabledWithPython: `${common.rails}在啟用${common.python}時無法啟用。`,
     enableRails: `${common.enable} ${common.rails}`,
     namedLocation: `${namedLocation} location`,
-    provideANamedLocationToSetNamedLocation: 'Provide a named location address to set the \"Named Location\" configurations for your site.',
+    provideANamedLocationToSetNamedLocation: 'Provide a named location address to set the "Named Location" configurations for your site.',
     namedLocationExpectedToBeginWithAmpersand: 'Named location should begin with `@`.',
 };
