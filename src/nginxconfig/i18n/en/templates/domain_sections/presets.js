@@ -30,4 +30,5 @@ export default {
     frontend: 'Frontend',
     nodeJs: 'Node.js',
     singlePageApplication: 'Single-page application',
+    rails: 'Rails',
 };

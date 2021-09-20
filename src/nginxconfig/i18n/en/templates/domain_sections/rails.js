@@ -24,11 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    presets: 'Predefinições',
-    itLooksLikeYouCustomisedTheConfig: 'Parece que você personalizou a configuração para este domínio. A escolha de uma nova predefinição pode redefinir ou alterar algumas das configurações que você personalizou.',
-    frontend: 'Frontend',
-    nodeJs: 'Node.js',
-    singlePageApplication: 'Aplicação de página única',
-    rails: 'Rails',
+    railsIsDisabled: `${common.rails} is disabled.`,
+    railsCannotBeEnabledWithReverseProxy: `${common.rails} cannot be enabled whilst the reverse proxy is enabled.`,
+    railsCannotBeEnabledWithPhp: `${common.rails} cannot be enabled whilst ${common.php} is enabled.`,
+    railsCannotBeEnabledWithPython: `${common.rails} cannot be enabled whilst ${common.python} is enabled.`,
+    enableRails: `${common.enable} ${common.rails}`,
+    namedLocation: `App named location`,
+    provideANamedLocationToSetNamedLocation: 'Provide a named location address to set the \"Named Location\" configurations for your site.',
+    namedLocationExpectedToBeginWithAmpersand: 'Named location should begin with `@`.',
 };

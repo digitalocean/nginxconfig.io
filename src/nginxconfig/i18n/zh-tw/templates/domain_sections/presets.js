@@ -30,4 +30,5 @@ export default {
     frontend: '前端',
     nodeJs: 'Node.js',
     singlePageApplication: '單頁面應用',
+    rails: 'Rails',
 };

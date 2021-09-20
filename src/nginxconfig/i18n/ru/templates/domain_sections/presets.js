@@ -30,4 +30,5 @@ export default {
     frontend: 'Фронтэнд',
     nodeJs: 'Node.js',
     singlePageApplication: 'Одностраничное приложение',
+    rails: 'Рельсы',
 };

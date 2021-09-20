@@ -33,6 +33,7 @@ import securityConf from './conf/security.conf';
 import generalConf from './conf/general.conf';
 import phpConf from './conf/php_fastcgi.conf';
 import pythonConf from './conf/python_uwsgi.conf';
+import railsConf from './conf/rails.conf';
 import proxyConf from './conf/proxy.conf';
 import wordPressConf from './conf/wordpress.conf';
 import drupalConf from './conf/drupal.conf';
@@ -80,6 +81,10 @@ export default (domains, global) => {
         // Python
         if (domains.some(d => d.python.python.computed))
             files['nginxconfig.io/python_uwsgi.conf'] = toConf(pythonConf(global));
+
+        // Rails
+        if (domains.some(d => d.rails.rails.computed))
+            files['nginxconfig.io/rails.conf'] = toConf(railsConf(domains, global));
 
         // Reverse proxy
         if (domains.some(d => d.reverseProxy.reverseProxy.computed))

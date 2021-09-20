@@ -170,6 +170,15 @@ THE SOFTWARE.
                     && data.php.joomlaRules.computed;
             },
         },
+        rails: {
+            default: false,
+            display: 'common.rails', // i18n key
+            enabled: true,
+            computedCheck(data) {
+                return data.rails.rails.computed
+                    && !data.routing.root.computed;
+            },
+        },
     };
 
     export default {
@@ -218,6 +227,7 @@ THE SOFTWARE.
                 this.$parent.resetValue('php', 'joomlaRules');
                 this.$parent.resetValue('python', 'python');
                 this.$parent.resetValue('python', 'djangoRules');
+                this.$parent.resetValue('rails', 'rails');
                 this.$parent.resetValue('reverseProxy', 'reverseProxy');
                 this.$parent.resetValue('routing', 'root');
                 this.$parent.resetValue('routing', 'index');
@@ -229,6 +239,7 @@ THE SOFTWARE.
                     this.$parent.setValue('php', 'php', false);
                     this.$parent.setValue('routing', 'index', 'index.html');
                     this.$parent.setValue('routing', 'fallbackHtml', true);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'php':
@@ -240,33 +251,48 @@ THE SOFTWARE.
                     this.$parent.setValue('python', 'python', true);
                     this.$parent.setValue('python', 'djangoRules', true);
                     this.$parent.setValue('routing', 'root', false);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'nodejs':
                     this.$parent.setValue('php', 'php', false);
                     this.$parent.setValue('reverseProxy', 'reverseProxy', true);
                     this.$parent.setValue('routing', 'root', false);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'singlePageApplication':
                     this.$parent.setValue('routing', 'index', 'index.html');
                     this.$parent.setValue('routing', 'fallbackHtml', true);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'wordPress':
                     this.$parent.setValue('php', 'wordPressRules', true);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'drupal':
                     this.$parent.setValue('php', 'drupalRules', true);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'magento':
                     this.$parent.setValue('php', 'magentoRules', true);
+                    this.$parent.setValue('rails', 'rails', false);
                     break;
 
                 case 'joomla':
                     this.$parent.setValue('php', 'joomlaRules', true);
+                    this.$parent.setValue('rails', 'rails', false);
+                    break;
+
+                case 'rails':
+                    this.$parent.setValue('rails', 'rails', true);
+                    this.$parent.setValue('php', 'php', false);
+                    this.$parent.setValue('python', 'python', false);
+                    this.$parent.setValue('python', 'djangoRules', false);
+                    this.$parent.setValue('routing', 'root', false);
                     break;
                 }
             },

@@ -35,6 +35,7 @@ export default {
     https: 'HTTPS',
     letsEncrypt: 'Let\'s Encrypt',
     python: 'Python',
+    rails: 'Rails',
     wordPress: 'WordPress',
     drupal: 'Drupal',
     magento: 'Magento',
