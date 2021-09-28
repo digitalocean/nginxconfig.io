@@ -28,7 +28,7 @@ import common from '../../common';
 
 export default {
     modularizedStructure: 'Модульная структура',
-    enableModularizedConfigFiles: `${common.enable} модульную структуру для фйлов конфигурации`,
+    enableModularizedConfigFiles: `${common.enable} модульную структуру для файлов конфигурации`,
     symlinkVhost: 'Symlink vhost',
     enableSymLinksFrom: `${common.enable} symlinks из`,
     to: 'в',
