@@ -72,7 +72,7 @@ THE SOFTWARE.
                     <span v-html="$t('templates.setupSections.download.extractTheNewCompressedConfigurationArchiveUsingTar')"></span>
                     <br />
                     <BashPrism :key="$parent.tarName"
-                               :cmd="`tar -xzvf ${$parent.tarName}`"
+                               :cmd="`tar -xzvf ${$parent.tarName} | xargs chmod 0644`"
                                @copied="codeCopiedEvent('Extract new nginx config tar')"
                     ></BashPrism>
                 </p>
