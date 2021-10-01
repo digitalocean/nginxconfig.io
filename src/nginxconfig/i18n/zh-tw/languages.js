@@ -32,4 +32,5 @@ export default {
     fr: '法語',
     ru: '俄語',
     pl: '波蘭語',
+    de: '德語',
 };

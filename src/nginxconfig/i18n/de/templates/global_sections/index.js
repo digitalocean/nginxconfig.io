@@ -24,13 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
-    de: 'Немецкий',
-};
+import https from './https';
+import logging from './logging';
+import nginx from './nginx';
+import performance from './performance';
+import python from './python';
+import reverseProxy from './reverse_proxy';
+import security from './security';
+import tools from './tools';
+import docker from './docker';
+
+export default { https, logging, nginx, performance, python, reverseProxy, security, tools, docker };
