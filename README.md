@@ -28,19 +28,19 @@
 NGINX is so much more than just a webserver. You already knew that, probably.
 
 We love NGINX, because:
-* low memory usage
-* high concurrency
-* asynchronous event-driven architecture
-* load balancing
-* reverse proxying
+* Low memory usage
+* High concurrency
+* Asynchronous event-driven architecture
+* Load balancing
+* Reverse proxying
 * FastCGI support with caching (PHP)
-* amazing fast handling of static files
+* Amazing fast handling of static files
 * TLS/SSL with SNI
 
 A lot of features with corresponding configuration directives.
-You can deep dive into the [NGINX documentation](http://nginx.org/en/docs/) right now OR you can use this tool to check
-how NGINX works, observe how your inputs are affecting the output, **generate the best config for your specific
-use-case** (and in parallel you can still use the docs).
+You can deep dive into the [NGINX documentation](http://nginx.org/en/docs/) right now OR you can [use this tool](https://do.co/nginxconfig) to check
+how NGINX works, observe how your inputs are affecting the output, and **generate the best config for your specific
+use-case** (in parallel you can also still use the docs).
 
 ## 🚀 Usage
 
@@ -53,7 +53,7 @@ routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, D
 
 ## 👨‍💻 Author
 
-### Rewrite & maintenance
+### Rewrite & Maintenance
 
 **Matt (IPv4) Cowley &lt;me@mattcowley.co.uk&gt; (https://mattcowley.co.uk)**
 * GitHub: [@MattIPv4](https://github.com/MattIPv4)
