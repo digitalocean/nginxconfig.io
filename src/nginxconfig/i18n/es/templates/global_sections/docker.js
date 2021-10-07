@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    docker,
+    dockerfile,
+    dockerCompose: `${docker} Compose`,
+    applyDockerTweaks: `Aplicar ajustes de ${docker}`,
+    applyDockerTweaksForNginx: `Aplicar ajuste de configuracion para ejecutar ${common.nginx} con ${docker}`,
+    applyDockerTweaksExplainer: `Actualizar el usuario de ${common.nginx} a <code class="slim">nginx</code> y el pid a <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `Incluir ${dockerfile} para ejecutar ${common.nginx} con ${docker}`,
+    includeDockerCompose: `Incluir docker-compose para ejecutar ${common.nginx} con docker-compose`,
 };

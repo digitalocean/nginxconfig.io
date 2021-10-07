@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    generateDiffieHellmanKeysByRunningThisCommandOnYourServer: 'Genera <b> llaves Diffie-Hellman</b> ejecutando este comando en su servidor:',
+    createACommonAcmeChallengeDirectoryForLetsEncrypt: `Crear una simple carpeta <b>ACME-challenge</b> (para <b>${common.letsEncrypt}</b>):`,
+    noAdditionalStepsAreNeededToSetUpSslForNginx: `No se necesitan pasos adicionales para configurar ${common.ssl} en tu configuracion de ${common.nginx}.`,
+    sslInit: `Preparar el ${common.ssl}`,
 };

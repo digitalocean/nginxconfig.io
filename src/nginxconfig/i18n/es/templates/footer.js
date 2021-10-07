@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// Here is a HACK, because the real traslation is: "bajo la licencia MIT!."
+// but the HTML order of the templates are wrong: "bajo la MIT licencia!."
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    backToTop: 'Ir al inicio',
+    thisToolIs: 'Esta herramienta es',
+    openSourceOnGitHub: 'open-source en GitHub',
+    underThe: 'bajo la',
+    mit: 'MIT',
+    license: 'license!',
+    weWelcomeFeedbackAndContributions: 'Agradecemos sus comentarios y contribuciones.',
+    originallyCreatedBy: 'Originalmente creado por',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'mantenido por',
+    digitalOcean: 'DigitalOcean',
 };

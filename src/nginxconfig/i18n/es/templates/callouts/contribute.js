@@ -25,12 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    wantToContributeChanges: '👋 ¿Quiere solicitar nuevas funciones, contribuir con cambios o traducir la herramienta a un nuevo idioma?',
+    getInvolvedOnGitHub: 'Involúcrate en GitHub',
 };

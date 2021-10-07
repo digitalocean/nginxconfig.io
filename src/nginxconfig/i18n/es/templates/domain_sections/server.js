@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// The traslation of "listen" is "escucha" but in informatic that terms is best in English
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    domain: 'Dominio',
+    documentRoot: 'Raiz del documento',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'Uno o más dominios tienen también ese mismo nombre',
+    thisWillCauseIssuesWithConfigGeneration: 'Esto va a causar problemas en la generación de la configuracion.',
+    wwwSubdomain: 'subdominio www',
+    cdnSubdomain: 'subdomain CDN',
+    redirectSubdomains: 'redirección de subdominio',
+    server: 'Servidor',
+    listen: 'listen',
 };

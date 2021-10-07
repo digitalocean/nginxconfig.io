@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+// "legacy" don't have a good translation in Spanish
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    fallbackRouting: 'Enrutamiento alternativo',
+    fallbackRoutingPhpPath: `Ruta ${common.php} para el enrutamiento alternativo`,
+    legacyPhpRouting: `Enrutamiento ${common.php} legacy`,
+    enableLegacyRouting: `${common.enable} enrutamiento legacy`,
+    routing: 'Enrutamiento',
 };

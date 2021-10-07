@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,13 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
+    reverseProxyIsDisabled: `${common.reverseProxy} esta desactivado.`,
+    reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy} no se puede habilitar mientras ${common.php} está habilitado.`,
+    reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy} no se puede habilitar mientras ${common.python} está habilitado.`,
+    enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
 };
