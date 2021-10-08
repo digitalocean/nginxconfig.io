@@ -24,13 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Английский',
-    zhCN: 'Китайский (упрощённый)',
-    zhTW: 'Китайский (традиционный)',
-    ptBR: 'Португальский (бразильский)',
-    fr: 'Французский',
-    ru: 'Русский',
-    pl: 'Польский',
-    de: 'Немецкий',
+    enableFileNotFoundErrorLogging: `${common.enable} "Seite nicht gefunden" Error Logging in`,
+    logformat: 'log_format',
+    enableCloudflare: 'Füge Cloudflare Anfrage-Header dem Standard Log-Format hinzu',
+    cfRay: 'CF-Ray',
+    cfConnectingIp: 'CF-Connecting-IP',
+    xForwardedFor: 'X-Forwarded-For',
+    xForwardedProto: 'X-Forwarded-Proto',
+    trueClientIp: 'True-Client-IP',
+    cfIpCountry: 'CF-IPCountry',
+    cfVisitor: 'CF-Visitor',
+    cdnLoop: 'CDN-Loop',
 };
