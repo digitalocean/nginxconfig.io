@@ -25,13 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    presets: 'Voreinstellungen',
+    itLooksLikeYouCustomisedTheConfig: 'Es sieht so aus, als hättest du die Konfiguration für diese Webseite angepasst. Eine neue Voreinstellung zu laden könnte manche deiner Anpassungen zurücksetzen oder ändern.',
+    frontend: 'Frontend',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'Single-Page-Webanwendung',
 };

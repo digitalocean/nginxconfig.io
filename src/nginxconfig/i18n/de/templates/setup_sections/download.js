@@ -24,14 +24,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    downloadTheGeneratedConfig: 'Generierte Konfigurationsdateien <b>herunterladen</b>:',
+    andUploadItToYourServers: 'Auf deinen Server <b>hochladen</b> und ins Verzeichnis ',
+    directory: 'verschieben.',
+    or: 'Oder ',
+    copyBase64StringOfCompressedConfig: 'kopiere einen Base64 String der komprimierten Konfiguration',
+    pasteItInYourServersCommandLineAndExecute: ', füge ihn auf der Kommandozeile deines Servers ein und führe ihn aus.',
+    navigateToYourNginxConfigurationDirectoryOnYourServer: `Wechsle in das ${common.nginx} <b>Konfigurationsverzeichnis</b> deines Servers:`,
+    createABackupOfYourCurrentNginxConfiguration: `Erstelle ein <b>Backup</b> deiner aktuellen ${common.nginx} Konfiguration:`,
+    extractTheNewCompressedConfigurationArchiveUsingTar: '<b>Entpacke</b> das komprimierte Konfigurationsverzeichnis mittels tar:',
+    download: 'Download',
 };
