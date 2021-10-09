@@ -29,8 +29,9 @@ export default {
     es: 'Español',
     zhCN: 'Chino (simplificado)',
     zhTW: 'Chino (tradicional)',
-    ptBR: 'Portuguese (brazilian)',
-    fr: 'French',
-    ru: 'Russian',
-    pl: 'Polish',
+    ptBR: 'Portugués (brasileño)',
+    fr: 'Francés',
+    ru: 'Ruso',
+    pl: 'Polaco',
+    de: 'Alemán',
 };
