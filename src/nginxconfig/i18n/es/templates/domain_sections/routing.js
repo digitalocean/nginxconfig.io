@@ -26,8 +26,6 @@ THE SOFTWARE.
 
 import common from '../../common';
 
-// "legacy" don't have a good translation in Spanish
-
 export default {
     fallbackRouting: 'Enrutamiento alternativo',
     fallbackRoutingPhpPath: `Ruta ${common.php} para el enrutamiento alternativo`,
