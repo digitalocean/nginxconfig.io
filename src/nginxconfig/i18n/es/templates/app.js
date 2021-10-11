@@ -24,14 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    title: `${common.nginx}Config`,
+    description: `La forma más fácil de configurar un rendidor, seguro y estable servidor de ${common.nginx}.`,
+    singleColumnMode: 'Modo de columna única',
+    splitColumnMode: 'Modo de columna dividida',
+    perWebsiteConfig: 'Configuración por sitio web',
+    addSite: 'Agregar sitio',
+    globalConfig: 'Configuración global',
+    setup: 'Configuración',
+    configFiles: 'Archivos de configuración',
 };

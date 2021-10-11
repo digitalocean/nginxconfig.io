@@ -24,14 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+// Here is a HACK, because the real traslation is: "y subirla en la carpeta '/etc/nginx' de tu servidor. "
+// but the HTML order of the templates are wrong: "y subirla en el servidor '/etc/nginx' carpeta."
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    downloadTheGeneratedConfig: '<b>Descargar</b> la configuracion generada:',
+    andUploadItToYourServers: 'y <b>subirla</b> en',
+    directory: '.',
+    or: 'o, ',
+    copyBase64StringOfCompressedConfig: 'Copiar el texto comprimido en base64 de la configuracion',
+    pasteItInYourServersCommandLineAndExecute: ', péguelo en la línea de comando de su servidor y ejecútelo.',
+    navigateToYourNginxConfigurationDirectoryOnYourServer: `Navega en <b>la carpeta de configuracion</b> de ${common.nginx} de tu servidor:`,
+    createABackupOfYourCurrentNginxConfiguration: `Crea un <b>respaldo</b> de tu configuracion actual de ${common.nginx}:`,
+    extractTheNewCompressedConfigurationArchiveUsingTar: '<b>Extraer</b> el nuevo archivo de configuracion comprimido usando tar:',
+    download: 'Descargar',
 };

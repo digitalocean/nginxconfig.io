@@ -24,14 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Cuando usan ${common.wordPress}, <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> es usualmente requerido en el Content Security Policy para permitir que el panel de administrador funcione correctamente.`,
+    security: 'Seguridad',
 };

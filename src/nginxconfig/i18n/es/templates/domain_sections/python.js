@@ -24,14 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    pythonIsDisabled: `${common.python} esta desactivado.`,
+    pythonCannotBeEnabledWithReverseProxy: `${common.python} no se puede habilitar mientras el proxy inverso está habilitado.`,
+    pythonCannotBeEnabledWithPhp: `${common.python} no se puede habilitar mientras ${common.php} está habilitado.`,
+    enablePython: `${common.enable} ${common.python}`,
+    djangoRules: `Reglas de ${common.django}`,
+    enableDjangoRules: `${common.enable} reglas especificas de ${common.django}`,
 };

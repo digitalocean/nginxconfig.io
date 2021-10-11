@@ -24,14 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const certbot = 'Certbot';
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    commentOutSslDirectivesInConfiguration: `Comente las directivas relacionadas con ${common.ssl} en la configuración:`,
+    reloadYourNginxServer: `Recargar el ${common.nginx}:`,
+    obtainSslCertificatesFromLetsEncrypt: `Obtenga los certificados ${common.ssl} de ${common.letsEncrypt} usando ${certbot}:`,
+    uncommentSslDirectivesInConfiguration: `Comente las directivas relacionadas con ${common.ssl} en la configuración:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `Configure ${certbot} para recargar ${common.nginx} cuando renueve los certificados exitosamente:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `${certbot} no es necesario configurarlo para su configuracion de ${common.nginx}.`,
+    certbot,
 };

@@ -26,6 +26,7 @@ THE SOFTWARE.
 
 export default {
     en: 'Angielski',
+    es: 'Hiszpański',
     zhCN: 'Chiński (uproszczony)',
     zhTW: 'Chiński (tradycyjny)',
     ptBR: 'Portugalski (brazylijski)',

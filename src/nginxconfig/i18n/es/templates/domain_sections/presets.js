@@ -24,14 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// Single-page application don't have a good translation in Spanish
+
 export default {
-    en: '英语',
-    es: '西班牙语',
-    zhCN: '简体中文',
-    zhTW: '繁体中文',
-    ptBR: '葡萄牙语 (巴西)',
-    fr: '法语',
-    ru: '俄语',
-    pl: '波兰语',
-    de: '德语',
+    presets: 'Preajustes',
+    itLooksLikeYouCustomisedTheConfig: 'Parece que ha personalizado la configuración para este dominio. La elección de un nuevo ajuste preestablecido puede restablecer o cambiar algunas de las configuraciones que ha personalizado.',
+    frontend: 'Frontend',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'Single-page application',
 };
