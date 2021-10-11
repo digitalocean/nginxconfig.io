@@ -24,9 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// Here is a HACK, because the real traslation is: "bajo la licencia MIT!."
-// but the HTML order of the templates are wrong: "bajo la MIT licencia!."
-
 export default {
     backToTop: 'Ir al inicio',
     thisToolIs: 'Esta herramienta es',
