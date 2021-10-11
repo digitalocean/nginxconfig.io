@@ -26,8 +26,6 @@ THE SOFTWARE.
 
 const onion = 'Onion';
 
-// Question: ¿"servicios Onion" or "servicios de Onion"?
-
 export default {
     onion,
     onionLocation: `Ubicación ${onion}`,
