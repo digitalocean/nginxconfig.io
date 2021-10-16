@@ -40,9 +40,9 @@ export default {
     certificationType: 'Type de certification',
     customCertificate: 'Certificat personnalisé',
     letsEncryptEmail: `E-mail ${common.letsEncrypt}`,
-    http3IsANonStandardModule: 'HTTP/3 isn\'t a standard NGINX module, check the ', // TODO: translate
-    http3NginxQuicReadme: 'NGINX QUIC readme', // TODO: translate
-    http3OrThe: ' or the ', // TODO: translate
-    http3CloudflareQuicheProject: 'Cloudflare quiche project', // TODO: translate
-    http3ForBuildingNginxWithHttp3: ' for how to build NGINX with HTTP/3!', // TODO: translate
+    http3IsANonStandardModule: 'HTTP/3 n\'est pas un module standard de NGINX, veuillez lire ',
+    http3NginxQuicReadme: 'le Readme de NGINX QUIC',
+    http3OrThe: ' ou le ',
+    http3CloudflareQuicheProject: 'projet Cloudflare quiche',
+    http3ForBuildingNginxWithHttp3: ' pour compiler NGINX avec le support HTTP/3!',
 };
