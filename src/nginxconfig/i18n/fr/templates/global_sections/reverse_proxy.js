@@ -26,11 +26,11 @@ THE SOFTWARE.
 
 import common from '../../common';
 
-const legacyXForwarded = 'Legacy X-Forwarded-* headers'; // TODO: translate
+const legacyXForwarded = 'En-têtes dépréciés X-Forwarded-*';
 
 export default {
     reverseProxyMustBeEnabledOnOneSite: `Le ${common.reverseProxyLower} doit être activé sur au moins un site pour configurer les paramètres globaux du ${common.reverseProxyLower}.`,
     seconds: 'secondes',
-    passOn: `${legacyXForwarded} passed on`, // TODO: translate
-    remove: `${legacyXForwarded} actively removed`, // TODO: translate
+    passOn: `${legacyXForwarded} transmis`,
+    remove: `${legacyXForwarded} supprimés`,
 };
