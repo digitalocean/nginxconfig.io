@@ -208,6 +208,7 @@ THE SOFTWARE.
         watch: {
             '$props.data.domain': {
                 handler(data) {
+                    data.computed = data.computed.replace(/<.+>/, '');
                     // Ignore www. if given, enable WWW subdomain
                     if (data.computed.startsWith('www.')) {
                         data.computed = data.computed.slice(4);

@@ -29,7 +29,7 @@ export default global => {
 
     config['# ACME-challenge'] = '';
     config['location ^~ /.well-known/acme-challenge/'] = {
-        root: global.https.letsEncryptRoot.computed.replace(/\/+$/, ''),
+        root: global.https.letsEncryptRoot.computed.replace(/(<.+>)|(\/+$)/, ''),
     };
 
     // Done!
