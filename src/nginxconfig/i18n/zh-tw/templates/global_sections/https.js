@@ -31,10 +31,10 @@ const ipv4 = 'IPv4';
 const ipv6 = 'IPv6';
 
 export default {
-    sslProfile: `${common.ssl}配寘`,
-    httpsMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.https}才能配寘全域${common.https}設定。`,
-    portReuse: '端口複用',
-    enableReuseOfPort: `${common.enable} 端口複用來為每個worker生成監聽套接字`,
+    sslProfile: `${common.ssl}配置`,
+    httpsMustBeEnabledOnOneSite: `必須在至少一個網站上啟用${common.https}才能配置全域${common.https}設定。`,
+    portReuse: '連接埠複用',
+    enableReuseOfPort: `${common.enable} 連接埠複用來為每個worker生成監聽套接字`,
     ocspDnsResolvers: 'OCSP DNS解析器',
     cloudflareResolver: 'Cloudflare解析器',
     googlePublicDns: '穀歌公共DNS',

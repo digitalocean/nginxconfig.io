@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    phpIsDisabled: `${common.php}已禁用。`,
+    phpIsDisabled: `${common.php}已停用。`,
     phpCannotBeEnabledWithReverseProxy: `${common.php}在啟用${common.reverseProxy}時無法啟用。`,
     phpCannotBeEnabledWithPython: `${common.php}在啟用${common.python}時無法啟用。`,
     enablePhp: `${common.enable} ${common.php}`,
@@ -40,7 +40,7 @@ export default {
     joomlaRules: `${common.joomla} 規則`,
     enableJoomlaRules: `${common.enable} ${common.joomla}專屬規則`,
     phpServer: `${common.php} 服務`,
-    phpBackupServer: `${common.php}備份服務器`,
+    phpBackupServer: `${common.php}備份伺服器`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM socket',
     php5Socket: '5.x socket',
@@ -51,6 +51,6 @@ export default {
     php74Socket: '7.4 socket',
     php80Socket: '8.0 socket',
     phpSocket: 'PHP socket',
-    custom: '自定义',
-    disabled: '禁用',
+    custom: '自定義',
+    disabled: '停用',
 };
