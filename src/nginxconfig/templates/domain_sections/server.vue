@@ -244,9 +244,28 @@ THE SOFTWARE.
             // Ensure there is a default path
             '$props.data.path': {
                 handler(data) {
+                    data.computed = data.computed.replace(/<.+>/, '');
                     if (!data.computed.trim()) {
                         data.computed = `/var/www/${this.$props.data.domain.computed}`;
                     }
+                },
+                deep: true,
+            },
+            '$props.data.documentRoot': {
+                handler(data) {
+                    data.computed = data.computed.replace(/<.+>/, '');
+                },
+                deep: true,
+            },
+            '$props.data.listenIpv4': {
+                handler(data) {
+                    data.computed = data.computed.replace(/<.+>/, '');
+                },
+                deep: true,
+            },
+            '$props.data.listenIpv6': {
+                handler(data) {
+                    data.computed = data.computed.replace(/<.+>/, '');
                 },
                 deep: true,
             },
