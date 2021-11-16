@@ -25,6 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    disableForThisDomain: '在此網站上禁用',
+    disableForThisDomain: '在此網站上停用',
     responseCode: '響應程式碼',
 };
