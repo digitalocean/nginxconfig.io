@@ -32,7 +32,7 @@ THE SOFTWARE.
                     <span v-html="$t('templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer')"></span>
                     <br />
                     <BashPrism :key="`${$props.data.global.nginx.nginxConfigDirectory.computed}-${diffieHellmanValue}`"
-                               :cmd="`openssl dhparam -out ${$props.data.global.nginx.nginxConfigDirectory.computed}/dhparam.pem ${diffieHellmanValue}`"
+                               :cmd="`curl https://ssl-config.mozilla.org/ffdhe2048.txt > ${$props.data.global.nginx.nginxConfigDirectory.computed}/dhparam.pem`"
                                @copied="codeCopiedEvent('Generate diffie-hellman keys')"
                     ></BashPrism>
                 </p>
