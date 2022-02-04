@@ -29,7 +29,7 @@ jobs:
       - name: Test with eslint
         run: npm run test:eslint
 
-  sass-lint:
+  stylelint:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,8 +52,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test with sass-lint
-        run: npm run test:sass-lint
+      - name: Test with stylelint
+        run: npm run test:stylelint
 
   i18n-packs:
     runs-on: ubuntu-latest
