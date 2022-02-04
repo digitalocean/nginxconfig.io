@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -34,10 +34,6 @@ const main = () => {
 
     // Inject our title now
     template = template.replace('<block name="title"><title>DigitalOcean</title></block>', '<title>NGINXConfig | DigitalOcean</title>');
-
-    // We don't need the head/script blocks, vue-cli-service handles those
-    template = template.replace('<block name="head"></block>', '');
-    template = template.replace('<block name="script"></block>', '');
 
     // Inject our app mounting point
     template = template.replace('<block name="content"></block>', '<div id="app"></div>');
