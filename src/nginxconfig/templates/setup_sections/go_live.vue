@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,8 +32,9 @@ THE SOFTWARE.
         <p>
             {{ $t('templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration') }}
             <br />
-            <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
-                       @copied="codeCopiedEvent('Reload nginx')"
+            <BashPrism
+                cmd="sudo nginx -t && sudo systemctl reload nginx"
+                @copied="codeCopiedEvent('Reload nginx')"
             ></BashPrism>
         </p>
     </div>

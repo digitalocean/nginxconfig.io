@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -192,12 +192,13 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${responseCodeChanged ? ' is-changed' : ''}`">
-                        <input v-model.number="responseCode"
-                               :class="['input', validResponseCode ? '' : 'is-danger']"
-                               type="number"
-                               min="100"
-                               step="1"
-                               :placeholder="$props.data.responseCode.default"
+                        <input
+                            v-model.number="responseCode"
+                            :class="['input', validResponseCode ? '' : 'is-danger']"
+                            type="number"
+                            min="100"
+                            step="1"
+                            :placeholder="$props.data.responseCode.default"
                         />
                     </div>
                 </div>

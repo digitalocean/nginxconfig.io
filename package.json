@@ -5,9 +5,11 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "14.17.5"
+    "node": "16.13.2",
+    "npm": "8.4.1"
   },
   "main": "src/nginxconfig/mount.js",
+  "type": "module",
   "scripts": {
     "build": "npm run build:clean && npm run build:template && npm run build:prism && npm run build:static && npm run build:tool",
     "build:clean": "do-vue clean",
@@ -19,12 +21,12 @@
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
     "test": "npm run test:eslint && npm run test:sass-lint && npm run test:i18n-packs && npm run test:jest",
-    "test:jest": "jest /test/.*.js?$",
+    "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:eslint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:sass-lint": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
-    "test:i18n-packs": "node -r esm src/nginxconfig/i18n/verify.js"
+    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js"
   },
   "jest": {
     "testRegex": "/test/.*.js?$"
@@ -42,7 +44,7 @@
   },
   "homepage": "https://github.com/digitalocean/nginxconfig.io#readme",
   "dependencies": {
-    "clipboard": "^2.0.8",
+    "clipboard": "^2.0.10",
     "clone": "^2.1.2",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
     "do-vue": "git+https://github.com/do-community/do-vue.git",
@@ -51,35 +53,39 @@
     "json-to-pretty-yaml": "^1.2.2",
     "memory-tar-create": "0.0.3",
     "pretty-checkbox-vue": "^1.1.9",
-    "prismjs": "^1.25.0",
-    "qs": "^6.10.1",
+    "prismjs": "^1.26.0",
+    "qs": "^6.10.3",
     "simple-js-sha2-256": "^1.0.7",
-    "vue": "^2.6.12",
-    "vue-i18n": "^8.24.4",
-    "vue-select": "^3.11.2",
-    "webpack-require-from": "^1.8.4"
+    "vue": "^2.6.14",
+    "vue-i18n": "^8.27.0",
+    "vue-select": "^3.16.0",
+    "webpack-require-from": "^1.8.6"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-transform-runtime": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "@babel/runtime": "^7.14.0",
-    "@vue/cli-service": "^5.0.0-beta.1",
-    "babel-eslint": "^10.1.0",
-    "chalk": "^4.1.1",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.0",
+    "@vue/cli-service": "^5.0.0-rc.2",
+    "ajv": "^8.10.0",
+    "chalk": "^5.0.0",
     "copyfiles": "^2.4.1",
-    "core-js": "^3.12.1",
+    "core-js": "^3.21.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint": "^7.26.0",
-    "eslint-plugin-vue": "^7.9.0",
+    "eslint": "^8.8.0",
+    "eslint-plugin-vue": "^8.4.1",
     "esm": "^3.2.25",
-    "jest": "^26.6.3",
-    "node-fetch": "^2.6.7",
-    "postcss": "^8.2.15",
-    "sass": "^1.32.13",
+    "jest": "^27.4.7",
+    "node-fetch": "^3.2.0",
+    "postcss": "^8.4.6",
+    "sass": "^1.49.7",
     "sass-lint": "git+https://github.com/do-community/sass-lint.git",
     "sass-loader": "^11.1.1",
-    "vue-template-compiler": "^2.6.12",
-    "webpack-bundle-analyzer": "^4.4.2"
+    "vue-template-compiler": "^2.6.14",
+    "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "overrides": {
+    "mini-css-extract-plugin": "^1.6.2"
   }
 }

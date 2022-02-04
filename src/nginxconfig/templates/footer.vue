@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,24 +32,28 @@ THE SOFTWARE.
             </p>
             <p>
                 {{ $t('templates.footer.thisToolIs') }}
-                <ExternalLink :text="$t('templates.footer.openSourceOnGitHub')"
-                              link="https://github.com/digitalocean/nginxconfig.io"
+                <ExternalLink
+                    :text="$t('templates.footer.openSourceOnGitHub')"
+                    link="https://github.com/digitalocean/nginxconfig.io"
                 ></ExternalLink>
                 {{ $t('templates.footer.underThe') }}
-                <ExternalLink :text="$t('templates.footer.mit')"
-                              link="https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE"
+                <ExternalLink
+                    :text="$t('templates.footer.mit')"
+                    link="https://github.com/digitalocean/nginxconfig.io/blob/master/LICENSE"
                 ></ExternalLink>
                 {{ $t('templates.footer.license') }}
                 {{ $t('templates.footer.weWelcomeFeedbackAndContributions') }}
             </p>
             <p>
                 {{ $t('templates.footer.originallyCreatedBy') }}
-                <ExternalLink :text="$t('templates.footer.balintSzekeres')"
-                              link="https://b4lint.hu/"
+                <ExternalLink
+                    :text="$t('templates.footer.balintSzekeres')"
+                    link="https://b4lint.hu/"
                 ></ExternalLink>,
                 {{ $t('templates.footer.maintainedBy') }}
-                <ExternalLink :text="$t('templates.footer.digitalOcean')"
-                              link="https://github.com/digitalocean/nginxconfig.io"
+                <ExternalLink
+                    :text="$t('templates.footer.digitalOcean')"
+                    link="https://github.com/digitalocean/nginxconfig.io"
                 ></ExternalLink>.
             </p>
         </div>

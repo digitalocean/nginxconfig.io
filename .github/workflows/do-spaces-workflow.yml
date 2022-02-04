@@ -7,35 +7,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-    - name: Read .nvmrc
-      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-      id: nvm
+      - name: Read Node.js & NPM versions
+        run: |
+          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
+          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
+        id: versions
 
-    - name: Use Node.js (.nvmrc)
-      uses: actions/setup-node@v1
-      with:
-        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Use correct Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "${{ steps.versions.outputs.NODE }}"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Use correct NPM version
+        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
 
-    - name: Build tool
-      run: npm run build
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Deploy commit to DigitalOcean Spaces
-      run: aws s3 sync ./dist s3://${{ secrets.SPACES_BUCKET }}/commits/nginxconfig/${{ github.sha }} --endpoint=https://${{ secrets.SPACES_REGION }}.digitaloceanspaces.com --acl public-read --content-encoding utf8
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ${{ secrets.SPACES_REGION }}
+      - name: Build tool
+        run: npm run build
 
-    - name: Leave a comment
-      run: npm run deploy:spaces:comment
-      env:
-        REPO_NAME: ${{ github.repository }}
-        COMMIT_SHA: ${{ github.sha }}
-        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SPACES_REGION: ${{ secrets.SPACES_REGION }}
-        SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
+      - name: Deploy commit to DigitalOcean Spaces
+        run: aws s3 sync ./dist s3://${{ secrets.SPACES_BUCKET }}/commits/nginxconfig/${{ github.sha }} --endpoint=https://${{ secrets.SPACES_REGION }}.digitaloceanspaces.com --acl public-read --content-encoding utf8
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.SPACES_REGION }}
+
+      - name: Leave a comment
+        run: npm run deploy:spaces:comment
+        env:
+          REPO_NAME: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}

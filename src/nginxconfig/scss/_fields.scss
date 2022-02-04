@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -214,7 +214,7 @@ THE SOFTWARE.
 
           color: $dark-grey;
           font-size: 14px;
-          padding-left: calc(#{$margin / 2} + 1.5em);
+          padding-left: calc(#{$margin * .5} + 1.5em);
           text-indent: initial;
 
           &::before,

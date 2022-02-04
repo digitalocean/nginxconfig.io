@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,9 +26,7 @@ THE SOFTWARE.
 
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import { defaultPack, defaultPackData } from '../util/language_pack_default';
-import { toSep } from '../util/language_pack_name';
-import { languagePackContext, availablePacks } from '../util/language_pack_context';
+import { defaultPack, defaultPackData, toSep, availablePacks } from '../util/language_packs';
 
 Vue.use(VueI18n);
 
@@ -37,32 +35,58 @@ const i18nPacks = {};
 i18nPacks[defaultPack] = defaultPackData;
 const loadedI18nPacks = [defaultPack];
 
-// Load in languages data from other packs
-// Use webpack magic to only build chunks for lang/languages.js
-const languagesContext = require.context('.', true, /^\.\/[^/]+\/languages\.js$/, 'sync');
-for (const availablePack of availablePacks) {
-    if (availablePack === defaultPack) continue;
-    i18nPacks[availablePack] = { languages: languagesContext(`./${toSep(availablePack, '-')}/languages.js`).default };
-}
+// Cache the i18n instance
+let i18n = null;
 
-export const i18n = new VueI18n({
-    locale: defaultPack,
-    fallbackLocale: defaultPack,
-    messages: i18nPacks,
-});
+export const getI18n = async () => {
+    // Use cached if available
+    if (i18n) return i18n;
 
-const loadLanguagePack = pack => {
+    // Load in languages data from other packs
+    // Use webpack magic to only build chunks for lang/languages.js
+    // These are eagerly loaded by Webpack, so don't generate extra chunks, and return an already resolved Promise
+    for (const availablePack of availablePacks) {
+        if (availablePack === defaultPack) continue;
+        if (i18nPacks[availablePack]) continue;
+        const { default: languageData } = await import(
+            /* webpackInclude: /i18n\/[^/]+\/languages\.js$/ */
+            /* webpackMode: "eager" */
+            `./${toSep(availablePack, '-')}/languages.js`
+        );
+        i18nPacks[availablePack] = { languages: languageData };
+    }
+
+    // Store and return the i18n instance with the loaded packs
+    i18n = new VueI18n({
+        locale: defaultPack,
+        fallbackLocale: defaultPack,
+        messages: i18nPacks,
+    });
+    return i18n;
+};
+
+const loadLanguagePack = async pack => {
     // If same language, do nothing
     if (i18n.locale === pack) return;
 
     // If language already loaded, do nothing
     if (loadedI18nPacks.includes(pack)) return;
 
-    // Load the pack with webpack magic
-    return languagePackContext(`./${toSep(pack, '-')}/index.js`).then(packData => i18nPacks[pack] = packData.default);
+    // Load in the full pack
+    // Use webpack magic to only build chunks for lang/index.js
+    const { default: packData } = await import(
+        /* webpackInclude: /i18n\/[^/]+\/index\.js$/ */
+        /* webpackMode: "lazy" */
+        `./${toSep(pack, '-')}/index.js`
+    );
+    i18nPacks[pack] = packData;
 };
 
 export const setLanguagePack = async pack => {
+    // If i18n not loaded, do nothing
+    if (!i18n) return;
+
+    // Load the pack if not already loaded, and set it as active
     await loadLanguagePack(pack);
     i18n.locale = pack;
 };

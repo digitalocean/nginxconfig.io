@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,9 +33,10 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${referrerPolicyChanged ? ' is-changed' : ''}`">
-                        <VueSelect v-model="referrerPolicy"
-                                   :options="$props.data.referrerPolicy.options"
-                                   :clearable="false"
+                        <VueSelect
+                            v-model="referrerPolicy"
+                            :options="$props.data.referrerPolicy.options"
+                            :clearable="false"
                         ></VueSelect>
                     </div>
                 </div>
@@ -49,16 +50,18 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${contentSecurityPolicyChanged ? ' is-changed' : ''}`">
-                        <input v-model="contentSecurityPolicy"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.contentSecurityPolicy.default"
+                        <input
+                            v-model="contentSecurityPolicy"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
                     <div v-if="hasWordPress && !hasWordPressUnsafeEval" class="control">
                         <label class="text message is-warning">
-                            <span class="message-body"
-                                  v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
+                            <span
+                                class="message-body"
+                                v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
                             ></span>
                         </label>
                     </div>
@@ -73,10 +76,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${permissionsPolicyChanged ? ' is-changed' : ''}`">
-                        <input v-model="permissionsPolicy"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.permissionsPolicy.default"
+                        <input
+                            v-model="permissionsPolicy"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.permissionsPolicy.default"
                         />
                     </div>
                 </div>
@@ -144,10 +148,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
-                        <input v-model="securityTxtPath"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.securityTxtPath.default"
+                        <input
+                            v-model="securityTxtPath"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.securityTxtPath.default"
                         />
                     </div>
                 </div>

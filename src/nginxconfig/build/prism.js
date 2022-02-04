@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const fs = require('fs').promises;
-const path = require('path');
-const fetch = require('node-fetch');
+import { promises as fs } from 'fs';
+import { URL } from 'url';
+import fetch from 'node-fetch';
 
 const main = async () => {
     const resp = await fetch('https://assets.digitalocean.com/prism/prism.css');
@@ -35,8 +35,11 @@ const main = async () => {
     // Fix $676767 -> #676767
     const fixed = text.replace(/:\s*\$((?:[0-9a-fA-F]{3}){1,2});/g, ':#$1;');
 
-    const buildDir = path.join(__dirname, '..', '..', '..', 'build');
-    await fs.writeFile(path.join(buildDir, 'prism.css'), fixed);
+    const buildDir = '../../../build';
+    await fs.writeFile(new URL(`${buildDir}/prism.css`, import.meta.url), fixed);
 };
 
-main().then(() => {});
+main().then(() => {}).catch(err => {
+    console.error(err);
+    process.exit(1);
+});

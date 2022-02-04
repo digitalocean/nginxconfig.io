@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const path = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-const WebpackRequireFrom = require('webpack-require-from');
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+import WebpackRequireFrom from 'webpack-require-from';
+import { URL, fileURLToPath } from 'url';
 
-module.exports = {
+export default {
     publicPath: './',
     outputDir: 'dist',
     filenameHashing: false, // Don't hash the output, so we can embed on the DigitalOcean Community
@@ -43,10 +43,10 @@ module.exports = {
             // Fix dynamic imports from CDN (inject as first entry point before any imports can happen)
             { apply: compiler => {
                 compiler.options.entry.app.import.unshift(
-                    path.join(__dirname, 'src', 'nginxconfig', 'build', 'webpack-dynamic-import.js'),
+                    fileURLToPath(new URL('src/nginxconfig/build/webpack-dynamic-import.js', import.meta.url)),
                 );
             } },
-            new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL' }),
+            new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL', suppressErrors: true }),
             // Analyze the bundle
             new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
             new DuplicatePackageCheckerPlugin(),
@@ -68,7 +68,7 @@ module.exports = {
 
         // Use a custom HTML template
         config.plugin('html').tap(options => {
-            options[0].template = path.join(__dirname, 'build', 'index.html');
+            options[0].template = fileURLToPath(new URL('build/index.html', import.meta.url));
             return options;
         });
     },
