@@ -7,37 +7,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-    - name: Read .nvmrc
-      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-      id: nvm
+      - name: Read Node.js & NPM versions
+        run: |
+          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
+          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
+        id: versions
 
-    - name: Use Node.js (.nvmrc)
-      uses: actions/setup-node@v1
-      with:
-        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Use correct Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "${{ steps.versions.outputs.NODE }}"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Use correct NPM version
+        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
 
-    - name: Test with eslint
-      run: npm run test:eslint
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test with eslint
+        run: npm run test:eslint
 
   sass-lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
+      - name: Read Node.js & NPM versions
+        run: |
+          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
+          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
+        id: versions
 
-      - name: Use Node.js (.nvmrc)
-        uses: actions/setup-node@v1
+      - name: Use correct Node.js version
+        uses: actions/setup-node@v2
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          node-version: "${{ steps.versions.outputs.NODE }}"
+
+      - name: Use correct NPM version
+        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
 
       - name: Install dependencies
         run: npm ci
@@ -49,16 +59,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
+      - name: Read Node.js & NPM versions
+        run: |
+          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
+          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
+        id: versions
 
-      - name: Use Node.js (.nvmrc)
-        uses: actions/setup-node@v1
+      - name: Use correct Node.js version
+        uses: actions/setup-node@v2
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          node-version: "${{ steps.versions.outputs.NODE }}"
+
+      - name: Use correct NPM version
+        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
 
       - name: Install dependencies
         run: npm ci
