@@ -37,12 +37,15 @@ export const toSep = (pack, sep) => pack
 
 export const fromSep = (pack, sep) => pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();
 
-// Use webpack magic to get all the language packs we've bundled
-// If not in a webpack context, return no packs
-/* global __webpack_modules__ */
-export const availablePacks = typeof __webpack_modules__ === 'undefined'
-    ? []
-    : Object.keys(__webpack_modules__)
-        .map(pack => pack.match(/i18n\/([^/]+)\/languages\.js$/))
-        .filter(pack => pack !== null)
-        .map(pack => fromSep(pack[1], '-'));
+// Export a static array of all language packs
+export const availablePacks = Object.freeze([
+    'de',
+    'en',
+    'es',
+    'fr',
+    'pl',
+    'ptBR',
+    'ru',
+    'zhCN',
+    'zhTW',
+]);

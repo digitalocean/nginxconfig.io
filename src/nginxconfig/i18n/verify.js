@@ -28,7 +28,7 @@ import { readdirSync, readFileSync } from 'fs';
 import { join, sep } from 'path';
 import { URL } from 'url';
 import chalk from 'chalk';
-import { defaultPack, toSep, fromSep } from '../util/language_packs';
+import { defaultPack, availablePacks, toSep, fromSep } from '../util/language_packs';
 import snakeToCamel from '../util/snake_to_camel';
 
 // Recursively get all keys in a i18n pack object fragment
@@ -150,10 +150,10 @@ const main = async () => {
         // Output the pack results
         if (warnings.length)
             for (const warning of warnings)
-                console.log(`  ${chalk.yellow('warning')} ${warning}`);
+                console.warn(`  ${chalk.yellow('warning')} ${warning}`);
         if (errors.length)
             for (const error of errors)
-                console.log(`  ${chalk.red('error')}   ${error}`);
+                console.error(`  ${chalk.red('error')}   ${error}`);
         if (!errors.length && !warnings.length)
             console.log(`  ${chalk.green('No issues')}`);
 
@@ -163,6 +163,16 @@ const main = async () => {
         // Linebreak before next pack or exit
         console.log(chalk.reset());
     }
+
+    // Check available language packs
+    const packKeys = Object.keys(packs);
+    const missingPacks = packKeys.filter(x => !availablePacks.includes(x));
+    const extraPacks = availablePacks.filter(x => !packKeys.includes(x));
+
+    // Missing packs and extra packs are errors
+    missingPacks.forEach(pack => console.error(`${chalk.red('error')} Language pack \`${pack}\` not included in \`availablePacks\``));
+    extraPacks.forEach(pack => console.error(`${chalk.red('error')} Language pack \`${pack}\` included in \`availablePacks\` but not found`));
+    if (missingPacks.length || extraPacks.length) hadError = true;
 
     // Exit 1 if we had errors
     if (hadError) process.exit(1);
