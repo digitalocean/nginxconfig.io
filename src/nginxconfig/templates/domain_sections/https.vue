@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -81,12 +81,14 @@ THE SOFTWARE.
                         <label class="text message is-warning">
                             <span class="message-body">
                                 {{ $t('templates.domainSections.https.http3IsANonStandardModule') }}
-                                <ExternalLink :text="$t('templates.domainSections.https.http3NginxQuicReadme')"
-                                              link="https://quic.nginx.org/README"
+                                <ExternalLink
+                                    :text="$t('templates.domainSections.https.http3NginxQuicReadme')"
+                                    link="https://quic.nginx.org/README"
                                 ></ExternalLink>
                                 {{ $t('templates.domainSections.https.http3OrThe') }}
-                                <ExternalLink :text="$t('templates.domainSections.https.http3CloudflareQuicheProject')"
-                                              link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                                <ExternalLink
+                                    :text="$t('templates.domainSections.https.http3CloudflareQuicheProject')"
+                                    link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
                                 ></ExternalLink>
                                 {{ $t('templates.domainSections.https.http3ForBuildingNginxWithHttp3') }}
                             </span>
@@ -158,8 +160,9 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div v-for="(name, value) in $props.data.certType.options"
-                         :class="`control${certTypeChanged && value === certType ? ' is-changed' : ''}`"
+                    <div
+                        v-for="(name, value) in $props.data.certType.options"
+                        :class="`control${certTypeChanged && value === certType ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">
@@ -179,10 +182,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${letsEncryptEmailChanged ? ' is-changed' : ''}`">
-                        <input v-model="letsEncryptEmail"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.letsEncryptEmail.computed"
+                        <input
+                            v-model="letsEncryptEmail"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.letsEncryptEmail.computed"
                         />
                     </div>
                 </div>
@@ -196,10 +200,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${sslCertificateChanged ? ' is-changed' : ''}`">
-                        <input v-model="sslCertificate"
-                               class="input"
-                               type="text"
-                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
+                        <input
+                            v-model="sslCertificate"
+                            class="input"
+                            type="text"
+                            :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
                         />
                     </div>
                 </div>
@@ -213,10 +218,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${sslCertificateKeyChanged ? ' is-changed' : ''}`">
-                        <input v-model="sslCertificateKey"
-                               class="input"
-                               type="text"
-                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.key`"
+                        <input
+                            v-model="sslCertificateKey"
+                            class="input"
+                            type="text"
+                            :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.key`"
                         />
                     </div>
                 </div>

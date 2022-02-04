@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -72,10 +72,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div :class="`field${pathChanged ? ' is-changed' : ''}`">
                     <div class="control">
-                        <input v-model="path"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.path.default"
+                        <input
+                            v-model="path"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.path.default"
                         />
                     </div>
                 </div>
@@ -89,10 +90,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div :class="`field${proxyPassChanged ? ' is-changed' : ''}`">
                     <div class="control">
-                        <input v-model="proxyPass"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.proxyPass.default"
+                        <input
+                            v-model="proxyPass"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.proxyPass.default"
                         />
                     </div>
                 </div>

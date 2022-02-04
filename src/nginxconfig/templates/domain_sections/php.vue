@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -72,16 +72,18 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${phpServerChanged ? ' is-changed' : ''}`">
-                        <VueSelect ref="phpServerSelect"
-                                   v-model="phpServer"
-                                   :options="phpServerOptions"
-                                   :clearable="false"
-                                   :reduce="s => s.value"
+                        <VueSelect
+                            ref="phpServerSelect"
+                            v-model="phpServer"
+                            :options="phpServerOptions"
+                            :clearable="false"
+                            :reduce="s => s.value"
                         ></VueSelect>
                     </div>
 
-                    <div v-if="phpServerCustomEnabled"
-                         :class="`control${phpServerCustomChanged ? ' is-changed' : ''}`"
+                    <div
+                        v-if="phpServerCustomEnabled"
+                        :class="`control${phpServerCustomChanged ? ' is-changed' : ''}`"
                     >
                         <input v-model="phpServerCustom" class="input" type="text" :placeholder="$props.data.phpServerCustom.default" />
                     </div>
@@ -96,16 +98,18 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${phpBackupServerChanged ? ' is-changed' : ''}`">
-                        <VueSelect ref="phpBackupServerSelect"
-                                   v-model="phpBackupServer"
-                                   :options="phpBackupServerOptions"
-                                   :clearable="false"
-                                   :reduce="s => s.value"
+                        <VueSelect
+                            ref="phpBackupServerSelect"
+                            v-model="phpBackupServer"
+                            :options="phpBackupServerOptions"
+                            :clearable="false"
+                            :reduce="s => s.value"
                         ></VueSelect>
                     </div>
 
-                    <div v-if="phpBackupServerCustomEnabled"
-                         :class="`control${phpBackupServerCustomChanged ? ' is-changed' : ''}`"
+                    <div
+                        v-if="phpBackupServerCustomEnabled"
+                        :class="`control${phpBackupServerCustomChanged ? ' is-changed' : ''}`"
                     >
                         <input v-model="phpBackupServerCustom" class="input" type="text" :placeholder="$props.data.phpBackupServerCustom.default" />
                     </div>

@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -82,10 +82,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${assetsExpirationChanged ? ' is-changed' : ''}`">
-                        <input v-model="assetsExpiration"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.assetsExpiration.default"
+                        <input
+                            v-model="assetsExpiration"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.assetsExpiration.default"
                         />
                     </div>
                 </div>
@@ -99,10 +100,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${mediaExpirationChanged ? ' is-changed' : ''}`">
-                        <input v-model="mediaExpiration"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.mediaExpiration.default"
+                        <input
+                            v-model="mediaExpiration"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.mediaExpiration.default"
                         />
                     </div>
                 </div>
@@ -116,10 +118,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${svgExpirationChanged ? ' is-changed' : ''}`">
-                        <input v-model="svgExpiration"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.svgExpiration.default"
+                        <input
+                            v-model="svgExpiration"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.svgExpiration.default"
                         />
                     </div>
                 </div>
@@ -133,10 +136,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${fontsExpirationChanged ? ' is-changed' : ''}`">
-                        <input v-model="fontsExpiration"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.fontsExpiration.default"
+                        <input
+                            v-model="fontsExpiration"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.fontsExpiration.default"
                         />
                     </div>
                 </div>

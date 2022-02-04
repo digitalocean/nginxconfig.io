@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -34,10 +34,11 @@ THE SOFTWARE.
                 <i class="fas fa-times"></i>
             </a>
         </div>
-        <a href="https://github.com/digitalocean/nginxconfig.io"
-           class="button is-primary"
-           target="_blank"
-           @click="linkClickEvent"
+        <a
+            href="https://github.com/digitalocean/nginxconfig.io"
+            class="button is-primary"
+            target="_blank"
+            @click="linkClickEvent"
         >
             {{ $t('templates.callouts.contribute.getInvolvedOnGitHub') }}
         </a>

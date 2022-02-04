@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -67,8 +67,9 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div class="field">
-                            <div v-for="(name, value) in $props.data.sslProfile.options"
-                                 :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.sslProfile.options"
+                                :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">
@@ -97,8 +98,9 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <div v-if="$props.data.ocspCloudflare.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspCloudflareType.options"
-                                 :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspCloudflareType.options"
+                                :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
@@ -118,8 +120,9 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <div v-if="$props.data.ocspGoogle.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspGoogleType.options"
-                                 :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspGoogleType.options"
+                                :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
@@ -139,8 +142,9 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <div v-if="$props.data.ocspOpenDns.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspOpenDnsType.options"
-                                 :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspOpenDnsType.options"
+                                :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
@@ -160,8 +164,9 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <div v-if="$props.data.ocspQuad9.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspQuad9Type.options"
-                                 :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspQuad9Type.options"
+                                :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
@@ -181,8 +186,9 @@ THE SOFTWARE.
                             </div>
                         </div>
                         <div v-if="$props.data.ocspVerisign.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspVerisignType.options"
-                                 :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspVerisignType.options"
+                                :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
@@ -203,10 +209,11 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${letsEncryptRootChanged ? ' is-changed' : ''}`">
-                            <input v-model="letsEncryptRoot"
-                                   class="input"
-                                   type="text"
-                                   :placeholder="$props.data.letsEncryptRoot.default"
+                            <input
+                                v-model="letsEncryptRoot"
+                                class="input"
+                                type="text"
+                                :placeholder="$props.data.letsEncryptRoot.default"
                             />
                         </div>
                     </div>
@@ -220,10 +227,11 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${letsEncryptCertRootChanged ? ' is-changed' : ''}`">
-                            <input v-model="letsEncryptCertRoot"
-                                   class="input"
-                                   type="text"
-                                   :placeholder="$props.data.letsEncryptCertRoot.default"
+                            <input
+                                v-model="letsEncryptCertRoot"
+                                class="input"
+                                type="text"
+                                :placeholder="$props.data.letsEncryptCertRoot.default"
                             />
                         </div>
                     </div>

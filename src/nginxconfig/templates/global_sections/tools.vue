@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -70,11 +70,12 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input v-model="shareLink"
-                               class="input"
-                               type="text"
-                               readonly="readonly"
-                               @click="select"
+                        <input
+                            v-model="shareLink"
+                            class="input"
+                            type="text"
+                            readonly="readonly"
+                            @click="select"
                         />
                     </div>
                 </div>

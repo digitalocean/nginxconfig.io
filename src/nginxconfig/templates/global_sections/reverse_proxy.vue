@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -49,12 +49,13 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxyConnectTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxyConnectTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxyConnectTimeout.default"
+                            <input
+                                v-model.number="proxyConnectTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxyConnectTimeout.default"
                             />
                         </div>
                         <div class="control">
@@ -73,12 +74,13 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxySendTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxySendTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxySendTimeout.default"
+                            <input
+                                v-model.number="proxySendTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxySendTimeout.default"
                             />
                         </div>
                         <div class="control">
@@ -97,12 +99,13 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxyReadTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxyReadTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxyReadTimeout.default"
+                            <input
+                                v-model.number="proxyReadTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxyReadTimeout.default"
                             />
                         </div>
                         <div class="control">
@@ -121,8 +124,9 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div class="field">
-                            <div v-for="(name, value) in $props.data.proxyCoexistenceXForwarded.options"
-                                 :class="`control${proxyCoexistenceXForwardedChanged && value === proxyCoexistenceXForwarded ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.proxyCoexistenceXForwarded.options"
+                                :class="`control${proxyCoexistenceXForwardedChanged && value === proxyCoexistenceXForwarded ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">

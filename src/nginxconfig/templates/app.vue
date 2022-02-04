@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,11 +33,12 @@ THE SOFTWARE.
             <template #header>
             </template>
             <template #buttons>
-                <VueSelect v-model="lang"
-                           :options="i18nPacks"
-                           :clearable="false"
-                           :reduce="s => s.value"
-                           :disabled="languageLoading"
+                <VueSelect
+                    v-model="lang"
+                    :options="i18nPacks"
+                    :clearable="false"
+                    :reduce="s => s.value"
+                    :disabled="languageLoading"
                 >
                     <template #selected-option="{ label }">
                         <span class="has-icon">
@@ -79,10 +80,11 @@ THE SOFTWARE.
                     </div>
 
                     <template v-for="data in activeDomains">
-                        <Domain :key="data[1]"
-                                :ref="`domain-${data[1]}`"
-                                :data="data[0]"
-                                :style="{ display: data[1] === active ? undefined : 'none' }"
+                        <Domain
+                            :key="data[1]"
+                            :ref="`domain-${data[1]}`"
+                            :data="data[0]"
+                            :style="{ display: data[1] === active ? undefined : 'none' }"
                         ></Domain>
                     </template>
 

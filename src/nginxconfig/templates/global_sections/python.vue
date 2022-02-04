@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -48,10 +48,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${pythonServerChanged ? ' is-changed' : ''}`">
-                        <input v-model="pythonServer"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.pythonServer.default"
+                        <input
+                            v-model="pythonServer"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.pythonServer.default"
                         />
                     </div>
                 </div>

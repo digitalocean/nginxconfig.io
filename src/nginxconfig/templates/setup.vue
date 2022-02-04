@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,12 +35,13 @@ THE SOFTWARE.
                 </ul>
             </div>
 
-            <component :is="tab"
-                       v-for="tab in tabs"
-                       :key="tab.key"
-                       :data="$props.data"
-                       :style="{ display: active === tab.key ? undefined : 'none' }"
-                       class="container"
+            <component
+                :is="tab"
+                v-for="tab in tabs"
+                :key="tab.key"
+                :data="$props.data"
+                :style="{ display: active === tab.key ? undefined : 'none' }"
+                class="container"
             ></component>
 
             <div class="navigation-buttons">

@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,10 +33,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
-                        <input v-model="accessLog"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.accessLog.default"
+                        <input
+                            v-model="accessLog"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.accessLog.default"
                         />
                     </div>
                 </div>
@@ -50,10 +51,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
-                        <input v-model="errorLog"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.errorLog.default"
+                        <input
+                            v-model="errorLog"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.errorLog.default"
                         />
                     </div>
                 </div>

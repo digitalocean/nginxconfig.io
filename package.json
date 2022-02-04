@@ -60,13 +60,13 @@
     "webpack-require-from": "^1.8.6"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/runtime": "^7.17.0",
     "@vue/cli-service": "^5.0.0-rc.2",
     "ajv": "^8.9.0",
-    "babel-eslint": "^10.1.0",
     "chalk": "^5.0.0",
     "copyfiles": "^2.4.1",
     "core-js": "^3.21.0",

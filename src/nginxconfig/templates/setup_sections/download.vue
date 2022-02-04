@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -50,9 +50,10 @@ THE SOFTWARE.
                 <p>
                     <span v-html="$t('templates.setupSections.download.navigateToYourNginxConfigurationDirectoryOnYourServer')"></span>
                     <br />
-                    <BashPrism :key="$props.data.global.nginx.nginxConfigDirectory.computed"
-                               :cmd="`cd ${$props.data.global.nginx.nginxConfigDirectory.computed}`"
-                               @copied="codeCopiedEvent('Navigate to nginx config directory')"
+                    <BashPrism
+                        :key="$props.data.global.nginx.nginxConfigDirectory.computed"
+                        :cmd="`cd ${$props.data.global.nginx.nginxConfigDirectory.computed}`"
+                        @copied="codeCopiedEvent('Navigate to nginx config directory')"
                     ></BashPrism>
                 </p>
             </li>
@@ -61,8 +62,9 @@ THE SOFTWARE.
                 <p>
                     <span v-html="$t('templates.setupSections.download.createABackupOfYourCurrentNginxConfiguration')"></span>
                     <br />
-                    <BashPrism cmd="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"
-                               @copied="codeCopiedEvent('Create nginx config backup tar')"
+                    <BashPrism
+                        cmd="tar -czvf nginx_$(date +'%F_%H-%M-%S').tar.gz nginx.conf sites-available/ sites-enabled/ nginxconfig.io/"
+                        @copied="codeCopiedEvent('Create nginx config backup tar')"
                     ></BashPrism>
                 </p>
             </li>
@@ -71,9 +73,10 @@ THE SOFTWARE.
                 <p>
                     <span v-html="$t('templates.setupSections.download.extractTheNewCompressedConfigurationArchiveUsingTar')"></span>
                     <br />
-                    <BashPrism :key="$parent.tarName"
-                               :cmd="`tar -xzvf ${$parent.tarName} | xargs chmod 0644`"
-                               @copied="codeCopiedEvent('Extract new nginx config tar')"
+                    <BashPrism
+                        :key="$parent.tarName"
+                        :cmd="`tar -xzvf ${$parent.tarName} | xargs chmod 0644`"
+                        @copied="codeCopiedEvent('Extract new nginx config tar')"
                     ></BashPrism>
                 </p>
             </li>
