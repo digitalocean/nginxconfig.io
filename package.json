@@ -20,7 +20,7 @@
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
     "test": "npm run test:eslint && npm run test:sass-lint && npm run test:i18n-packs && npm run test:jest",
-    "test:jest": "jest /test/.*.js?$",
+    "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:eslint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
