@@ -86,8 +86,6 @@
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "overrides": {
-    "@vue/cli-service": {
-      "mini-css-extract-plugin": "^1.6.2"
-    }
+    "mini-css-extract-plugin": "^1.6.2"
   }
 }
