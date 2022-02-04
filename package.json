@@ -5,7 +5,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "14.17.5"
+    "node": "16.13.2",
+    "npm": "8.4.1"
   },
   "main": "src/nginxconfig/mount.js",
   "type": "module",
@@ -83,5 +84,10 @@
     "sass-loader": "^11.1.1",
     "vue-template-compiler": "^2.6.14",
     "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "overrides": {
+    "@vue/cli-service": {
+      "mini-css-extract-plugin": "^1.6.2"
+    }
   }
 }
