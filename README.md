@@ -83,7 +83,7 @@ routing, reverse proxy, www/non-www redirect, CDN, PHP (TCP/socket, WordPress, D
 
 4. Open the development site **[localhost:8080](http://localhost:8080)**
 
-5. Lint your code *(eslint & sass-lint)*
+5. Lint your code *(eslint & stylelint)*
     ```sh
     npm test
     ```

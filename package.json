@@ -20,12 +20,12 @@
     "dev": "npm run build:template && npm run build:prism && npm run dev:tool",
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
-    "test": "npm run test:eslint && npm run test:sass-lint && npm run test:i18n-packs && npm run test:jest",
+    "test": "npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
     "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:eslint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
-    "test:sass-lint": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
+    "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js"
   },
   "jest": {
@@ -80,8 +80,10 @@
     "node-fetch": "^3.2.0",
     "postcss": "^8.4.6",
     "sass": "^1.49.7",
-    "sass-lint": "git+https://github.com/do-community/sass-lint.git",
     "sass-loader": "^11.1.1",
+    "stylelint": "^14.3.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-order": "^5.0.0",
     "vue-template-compiler": "^2.6.14",
     "webpack-bundle-analyzer": "^4.5.0"
   },
