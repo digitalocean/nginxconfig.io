@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-// sass-lint:disable-block class-name-format
+// stylelint-disable selector-class-pattern
 .v-select {
   &.vs--open {
     > ul {
@@ -49,7 +49,7 @@ THE SOFTWARE.
   }
 
   > ul {
-    display: block !important; // sass-lint:disable-line no-important
+    display: block !important;
     margin: 0;
     opacity: 0;
     transition: opacity $transition;
