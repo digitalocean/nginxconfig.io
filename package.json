@@ -8,6 +8,7 @@
     "node": "14.17.5"
   },
   "main": "src/nginxconfig/mount.js",
+  "type": "module",
   "scripts": {
     "build": "npm run build:clean && npm run build:template && npm run build:prism && npm run build:static && npm run build:tool",
     "build:clean": "do-vue clean",
@@ -24,7 +25,7 @@
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:sass-lint": "sass-lint 'src/**/*.scss' --verbose --no-exit --config .sasslintrc",
-    "test:i18n-packs": "node -r esm src/nginxconfig/i18n/verify.js"
+    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js"
   },
   "jest": {
     "testRegex": "/test/.*.js?$"

@@ -133,8 +133,7 @@ THE SOFTWARE.
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
-    import { defaultPack } from '../util/language_pack_default';
-    import { availablePacks } from '../util/language_pack_context';
+    import { defaultPack, availablePacks } from '../util/language_packs';
 
     import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';

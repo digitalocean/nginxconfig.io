@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+export const defaultPack = 'en';
+
+export { default as defaultPackData } from '../i18n/en';
+
 export const toSep = (pack, sep) => pack
     .match(/^([a-z]+)([A-Z]*)$/)
     .slice(1)
@@ -32,3 +36,13 @@ export const toSep = (pack, sep) => pack
     .join(sep);
 
 export const fromSep = (pack, sep) => pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();
+
+// Use webpack magic to get all the language packs we've bundled
+// If not in a webpack context, return no packs
+/* global __webpack_modules__ */
+export const availablePacks = typeof __webpack_modules__ === 'undefined'
+    ? []
+    : Object.keys(__webpack_modules__)
+        .map(pack => pack.match(/i18n\/([^/]+)\/languages\.js$/))
+        .filter(pack => pack !== null)
+        .map(pack => fromSep(pack[1], '-'));
