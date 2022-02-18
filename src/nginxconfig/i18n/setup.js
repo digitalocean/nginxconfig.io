@@ -24,11 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
 import { defaultPack, defaultPackData, toSep, availablePacks } from '../util/language_packs';
-
-Vue.use(VueI18n);
 
 // Load in the full default pack
 const i18nPacks = {};
@@ -57,7 +54,7 @@ export const getI18n = async () => {
     }
 
     // Store and return the i18n instance with the loaded packs
-    i18n = new VueI18n({
+    i18n = createI18n({
         locale: defaultPack,
         fallbackLocale: defaultPack,
         messages: i18nPacks,

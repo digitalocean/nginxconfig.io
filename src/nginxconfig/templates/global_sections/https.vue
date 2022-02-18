@@ -242,11 +242,11 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import clone from 'clone';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const ipType = {
         default: 'ipv4',

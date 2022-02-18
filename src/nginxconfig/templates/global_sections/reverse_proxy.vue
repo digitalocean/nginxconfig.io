@@ -144,9 +144,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         proxyConnectTimeout: {

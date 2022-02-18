@@ -26,16 +26,25 @@ THE SOFTWARE.
 
 // Load in the app
 import './scss/style.scss';
-import Vue from 'vue';
+import { createApp } from 'vue';
 import './util/prism_bundle';
 import { getI18n } from './i18n/setup';
 import App from './templates/app';
 
 // Load the i18n languages and run the app
 getI18n().then(i18n => {
-    new Vue({
-        i18n,
-        render: h => h(App),
-    }).$mount('#app');
+    const app = createApp(App);
+    app.use(i18n);
+    app.mount('#app');
 });
 
+/*
+
+Vue 3 upgrade notes:
+
+- pretty-checkbox-vue is not compatible with Vue 3, find alternate solution for templates/inputs/(checkbox|radio).vue
+- Selecting a different language is not updating strings anywhere
+- Adding a second domain and reloading the page half loads the second domain settings
+  (tab + dupe warning show correct, but input shows incorrect and the dupe warning is showing)
+
+*/

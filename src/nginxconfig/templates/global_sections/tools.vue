@@ -146,12 +146,12 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import Modal from 'do-vue/src/templates/modal';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import shareQuery from '../../util/share_query';
     import analytics from '../../util/analytics';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         modularizedStructure: {
