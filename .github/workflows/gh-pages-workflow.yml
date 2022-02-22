@@ -34,6 +34,8 @@ jobs:
 
       - name: Build tool
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Deploy master to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@2.0.0
