@@ -1,4 +1,4 @@
-<!--
+/*
 Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,33 +22,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
--->
+*/
 
-<template>
-    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`" @copied="copied">
-        <h3 v-html="name"></h3>
-        <pre><code class="language-nginx" v-html="conf"></code></pre>
-    </div>
-</template>
+export const info = process.env.NODE_ENV !== 'production' ? console.info.bind(console) : () => {};
+export const log = process.env.NODE_ENV !== 'production' ? console.log.bind(console) : () => {};
 
-<script>
-    import { info } from '../../util/log';
-
-    export default {
-        name: 'NginxPrism',
-        props: {
-            name: String,
-            conf: String,
-            half: Boolean,
-        },
-        mounted() {
-            info(`Highlighting ${this.$props.name}...`);
-            window.Prism.highlightAllUnder(this.$el);
-        },
-        methods: {
-            copied(event) {
-                this.$emit('copied', event.detail.text);
-            },
-        },
-    };
-</script>
+export const warn = console.warn.bind(console);
+export const error = console.error.bind(console);

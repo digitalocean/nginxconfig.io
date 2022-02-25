@@ -28,6 +28,8 @@ jobs:
 
       - name: Build tool
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Deploy commit to DigitalOcean Spaces
         run: aws s3 sync ./dist s3://${{ secrets.SPACES_BUCKET }}/commits/nginxconfig/${{ github.sha }} --endpoint=https://${{ secrets.SPACES_REGION }}.digitaloceanspaces.com --acl public-read --content-encoding utf8
