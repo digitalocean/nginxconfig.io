@@ -88,7 +88,7 @@ THE SOFTWARE.
                                 {{ $t('templates.domainSections.https.http3OrThe') }}
                                 <ExternalLink
                                     :text="$t('templates.domainSections.https.http3CloudflareQuicheProject')"
-                                    link="https://github.com/cloudflare/quiche/tree/master/extras/nginx"
+                                    link="https://github.com/cloudflare/quiche/tree/master/nginx"
                                 ></ExternalLink>
                                 {{ $t('templates.domainSections.https.http3ForBuildingNginxWithHttp3') }}
                             </span>
