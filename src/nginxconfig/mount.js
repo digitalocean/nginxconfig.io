@@ -44,7 +44,5 @@ Vue 3 upgrade notes:
 
 - pretty-checkbox-vue is not compatible with Vue 3, find alternate solution for templates/inputs/(checkbox|radio).vue
 - Selecting a different language is not updating strings anywhere
-- Adding a second domain and reloading the page half loads the second domain settings
-  (tab + dupe warning show correct, but input shows incorrect and the dupe warning is showing)
 
 */
