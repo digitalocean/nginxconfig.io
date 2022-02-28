@@ -104,12 +104,12 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             }
 
             // Create a new domain (assume it has had custom user settings)
-            const domainImported = clone(Domain.delegated);
+            // Push transforms the object to a proxy, so re-fetch the proxy from the array
+            const domainImported = domains[domains.push(clone(Domain.delegated)) - 1];
             domainImported.hasUserInteraction = true;
-            domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
-            nextTick(() => applyCategories(data.domains[i], domains[domains.length - 1]));
+            nextTick(() => applyCategories(data.domains[i], domainImported));
         }
     } else {
         // If no configured domains, add a single default
