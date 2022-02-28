@@ -85,5 +85,5 @@ export const setLanguagePack = async pack => {
 
     // Load the pack if not already loaded, and set it as active
     await loadLanguagePack(pack);
-    i18n.locale = pack;
+    i18n.global.locale = pack;
 };
