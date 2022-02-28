@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -109,7 +109,7 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
-            nextTick(() => applyCategories(data.domains[i], domainImported));
+            nextTick(() => applyCategories(data.domains[i], domains[domains.length - 1]));
         }
     } else {
         // If no configured domains, add a single default
