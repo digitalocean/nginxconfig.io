@@ -43,6 +43,5 @@ getI18n().then(i18n => {
 Vue 3 upgrade notes:
 
 - pretty-checkbox-vue is not compatible with Vue 3, find alternate solution for templates/inputs/(checkbox|radio).vue
-- Selecting a different language is not updating strings anywhere
 
 */
