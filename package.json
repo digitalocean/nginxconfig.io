@@ -53,7 +53,7 @@
     "json-to-pretty-yaml": "^1.2.2",
     "memory-tar-create": "0.0.3",
     "pretty-checkbox-vue": "^1.1.9",
-    "prismjs": "^1.26.0",
+    "prismjs": "^1.27.0",
     "qs": "^6.10.3",
     "simple-js-sha2-256": "^1.0.7",
     "vue": "^2.6.14",
