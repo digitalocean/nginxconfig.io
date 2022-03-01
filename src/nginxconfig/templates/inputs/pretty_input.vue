@@ -25,11 +25,32 @@ THE SOFTWARE.
 -->
 
 <script>
-    import PrettyInput from './pretty_input';
+    import PrettyInput from 'pretty-checkbox-vue/src/PrettyInput';
 
-    export default {
-        ...PrettyInput,
-        name: 'Radio',
-        input_type: 'radio',
-    };
+    // Vue 3 fix: Remove top-level model as it's unused
+    Reflect.deleteProperty(PrettyInput, 'model');
+
+    // Vue 3 fix: Patch in an empty vnode object as it doesn't exist
+    PrettyInput.mounted = (original => function (...args) {
+        return original.apply(new Proxy(this, {
+            get: (target, key) => key === '$vnode'
+                ? {}
+                : Reflect.get(target, key),
+        }), args);
+    })(PrettyInput.mounted);
+
+    // Vue 3 fix: Patch in firing update:modelValue event on input change
+    PrettyInput.methods.updateInput = (original => function (...args) {
+        return original.apply(new Proxy(this, {
+            get: (target, key) => key === '$emit'
+                ? function (event, ...eventArgs) {
+                    return Reflect.get(target, key).apply(this, [event === 'change'
+                        ? 'update:modelValue'
+                        : event].concat(eventArgs));
+                }
+                : Reflect.get(target, key),
+        }), args);
+    })(PrettyInput.methods.updateInput);
+
+    export default PrettyInput;
 </script>
