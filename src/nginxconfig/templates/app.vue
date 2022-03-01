@@ -315,7 +315,7 @@ THE SOFTWARE.
             },
             remove(index) {
                 const name = this.$data.domains[index].server.domain.computed;
-                this.$set(this.$data.domains, index, null);
+                this.$data.domains[index] = null;
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
 
                 // Analytics
