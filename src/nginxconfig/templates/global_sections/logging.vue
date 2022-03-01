@@ -71,9 +71,6 @@ THE SOFTWARE.
                     <div :class="`control${logNotFoundChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="logNotFound" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.enableFileNotFoundErrorLogging') }} error_log
                             </PrettyCheck>
                         </div>
@@ -91,9 +88,6 @@ THE SOFTWARE.
                     <div v-if="cloudflareEnabled" :class="`control${cloudflareChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cloudflare" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.enableCloudflare') }}
                             </PrettyCheck>
                         </div>
@@ -101,9 +95,6 @@ THE SOFTWARE.
                     <div v-if="cfRayEnabled" :class="`control${cfRayChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cfRay" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.cfRay') }}
                             </PrettyCheck>
                         </div>
@@ -111,9 +102,6 @@ THE SOFTWARE.
                     <div v-if="cfConnectingIpEnabled" :class="`control${cfConnectingIpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cfConnectingIp" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.cfConnectingIp') }}
                             </PrettyCheck>
                         </div>
@@ -121,9 +109,6 @@ THE SOFTWARE.
                     <div v-if="xForwardedForEnabled" :class="`control${xForwardedForChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="xForwardedFor" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.xForwardedFor') }}
                             </PrettyCheck>
                         </div>
@@ -131,9 +116,6 @@ THE SOFTWARE.
                     <div v-if="xForwardedProtoEnabled" :class="`control${xForwardedProtoChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="xForwardedProto" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.xForwardedProto') }}
                             </PrettyCheck>
                         </div>
@@ -141,9 +123,6 @@ THE SOFTWARE.
                     <div v-if="trueClientIpEnabled" :class="`control${trueClientIpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="trueClientIp" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.trueClientIp') }}
                             </PrettyCheck>
                         </div>
@@ -151,9 +130,6 @@ THE SOFTWARE.
                     <div v-if="cfIpCountryEnabled" :class="`control${cfIpCountryChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cfIpCountry" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.cfIpCountry') }}
                             </PrettyCheck>
                         </div>
@@ -161,9 +137,6 @@ THE SOFTWARE.
                     <div v-if="cfVisitorEnabled" :class="`control${cfVisitorChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cfVisitor" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.cfVisitor') }}
                             </PrettyCheck>
                         </div>
@@ -171,9 +144,6 @@ THE SOFTWARE.
                     <div v-if="cdnLoopEnabled" :class="`control${cdnLoopChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cdnLoop" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.globalSections.logging.cdnLoop') }}
                             </PrettyCheck>
                         </div>

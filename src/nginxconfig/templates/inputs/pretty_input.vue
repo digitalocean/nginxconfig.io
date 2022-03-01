@@ -24,7 +24,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-<script>
+<template>
+    <PrettyInput>
+        <!-- Set the FontAwesome check as the default extra while we're here -->
+        <template #extra>
+            <slot name="extra">
+                <i class="icon fas fa-check"></i>
+            </slot>
+        </template>
+
+        <!-- Load in all other slots -->
+        <template v-for="(_, slot) in $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope || {}" />
+        </template>
+    </PrettyInput>
+</template>
+
+<script setup>
     import PrettyInput from 'pretty-checkbox-vue/src/PrettyInput';
 
     // Vue 3 fix: Remove top-level model as it's unused
@@ -51,6 +67,4 @@ THE SOFTWARE.
                 : Reflect.get(target, key),
         }), args);
     })(PrettyInput.methods.updateInput);
-
-    export default PrettyInput;
 </script>

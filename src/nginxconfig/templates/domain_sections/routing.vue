@@ -35,9 +35,6 @@ THE SOFTWARE.
                     <div :class="`control${rootChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -58,9 +55,6 @@ THE SOFTWARE.
                     >
                         <div class="radio">
                             <PrettyRadio v-model="index" :value="value" class="p-default p-round p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ value }}
                             </PrettyRadio>
                         </div>
@@ -78,9 +72,6 @@ THE SOFTWARE.
                     <div v-if="fallbackHtmlEnabled" :class="`control${fallbackHtmlChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="fallbackHtml" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 index.html
                             </PrettyCheck>
                         </div>
@@ -88,9 +79,6 @@ THE SOFTWARE.
                     <div v-if="fallbackPhpEnabled" :class="`control${fallbackPhpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="fallbackPhp" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 index.php
                             </PrettyCheck>
                         </div>
@@ -126,9 +114,6 @@ THE SOFTWARE.
                     <div :class="`control${legacyPhpRoutingChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="legacyPhpRouting" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.domainSections.routing.enableLegacyRouting') }}
                             </PrettyCheck>
                         </div>

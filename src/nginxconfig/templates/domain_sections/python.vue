@@ -56,9 +56,6 @@ THE SOFTWARE.
                     <div :class="`control${pythonChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="python" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.domainSections.python.enablePython') }}
                             </PrettyCheck>
                         </div>
@@ -76,9 +73,6 @@ THE SOFTWARE.
                     <div :class="`control${djangoRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="djangoRules" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.domainSections.python.enableDjangoRules') }}
                             </PrettyCheck>
                         </div>

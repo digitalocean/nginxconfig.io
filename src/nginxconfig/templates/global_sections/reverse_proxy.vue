@@ -130,9 +130,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">
-                                        <template #extra>
-                                            <i class="icon fas fa-check"></i>
-                                        </template>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>

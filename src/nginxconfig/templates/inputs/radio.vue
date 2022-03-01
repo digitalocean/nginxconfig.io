@@ -24,12 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-<script>
-    import PrettyInput from './pretty_input';
+<template>
+    <PrettyInput type="radio">
+        <template v-for="(_, slot) in $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope || {}" />
+        </template>
+    </PrettyInput>
+</template>
 
-    export default {
-        ...PrettyInput,
-        name: 'Radio',
-        input_type: 'radio',
-    };
+<script setup>
+    import PrettyInput from './pretty_input';
 </script>

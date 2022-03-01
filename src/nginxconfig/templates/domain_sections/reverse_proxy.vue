@@ -56,9 +56,6 @@ THE SOFTWARE.
                     <div class="control">
                         <div class="checkbox">
                             <PrettyCheck v-model="reverseProxy" class="p-default p-curve p-fill p-icon">
-                                <template #extra>
-                                    <i class="icon fas fa-check"></i>
-                                </template>
                                 {{ $t('templates.domainSections.reverseProxy.enableReverseProxy') }}
                             </PrettyCheck>
                         </div>
