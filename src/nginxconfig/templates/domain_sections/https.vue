@@ -35,7 +35,9 @@ THE SOFTWARE.
                     <div :class="`control${httpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="https" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enableEncryptedSslConnection') }}
                             </PrettyCheck>
                         </div>
@@ -53,7 +55,9 @@ THE SOFTWARE.
                     <div :class="`control${http2Changed ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="http2" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enableHttp2Connections') }}
                             </PrettyCheck>
                         </div>
@@ -71,7 +75,9 @@ THE SOFTWARE.
                     <div :class="`control${http3Changed ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="http3" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enableHttp3Connections') }}
                             </PrettyCheck>
                         </div>
@@ -107,7 +113,9 @@ THE SOFTWARE.
                     <div :class="`control${forceHttpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="forceHttps" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 (http://{{ $parent.$props.data.server.domain.computed }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
                                 https://{{ $parent.$props.data.server.domain.computed }})
@@ -127,7 +135,9 @@ THE SOFTWARE.
                     <div :class="`control${hstsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hsts" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enableStrictTransportSecurity') }}
                             </PrettyCheck>
                         </div>
@@ -136,7 +146,9 @@ THE SOFTWARE.
                     <div v-if="hstsSubdomainsEnabled" :class="`control${hstsSubdomainsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsSubdomains" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enableIncludeSubDomains') }}
                             </PrettyCheck>
                         </div>
@@ -145,7 +157,9 @@ THE SOFTWARE.
                     <div v-if="hstsPreloadEnabled" :class="`control${hstsPreloadChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsPreload" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.https.enablePreload') }}
                             </PrettyCheck>
                         </div>
@@ -166,7 +180,9 @@ THE SOFTWARE.
                     >
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t(name) }}
                             </PrettyRadio>
                         </div>

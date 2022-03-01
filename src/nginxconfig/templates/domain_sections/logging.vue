@@ -35,7 +35,9 @@ THE SOFTWARE.
                     <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>
@@ -53,7 +55,9 @@ THE SOFTWARE.
                     <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>

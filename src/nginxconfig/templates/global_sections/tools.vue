@@ -35,7 +35,9 @@ THE SOFTWARE.
                     <div :class="`control${modularizedStructureChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="modularizedStructure" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.tools.enableModularizedConfigFiles') }}
                             </PrettyCheck>
                         </div>
@@ -53,7 +55,9 @@ THE SOFTWARE.
                     <div :class="`control${symlinkVhostChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="symlinkVhost" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.tools.enableSymLinksFrom') }} sites-available/
                                 {{ $t('templates.globalSections.tools.to') }} sites-enabled/
                             </PrettyCheck>

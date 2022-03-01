@@ -96,7 +96,9 @@ THE SOFTWARE.
                     <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -114,7 +116,9 @@ THE SOFTWARE.
                     <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -132,7 +136,9 @@ THE SOFTWARE.
                     <div :class="`control${securityTxt ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>

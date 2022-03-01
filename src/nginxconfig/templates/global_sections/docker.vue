@@ -52,7 +52,9 @@ THE SOFTWARE.
                     <div :class="`control${dockerfileChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="dockerfile" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.docker.includeDockerfile') }}
                             </PrettyCheck>
                         </div>
@@ -69,7 +71,9 @@ THE SOFTWARE.
                     <div :class="`control${dockerComposeChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="dockerCompose" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.docker.includeDockerCompose') }}
                             </PrettyCheck>
                         </div>

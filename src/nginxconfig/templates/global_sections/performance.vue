@@ -35,7 +35,9 @@ THE SOFTWARE.
                     <div :class="`control${gzipCompressionChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="gzipCompression" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.performance.enableGzipCompression') }}
                             </PrettyCheck>
                         </div>
@@ -53,7 +55,9 @@ THE SOFTWARE.
                     <div :class="`control${brotliCompressionChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="brotliCompression" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
+                                <template #extra>
+                                    <i class="icon fas fa-check"></i>
+                                </template>
                                 {{ $t('templates.globalSections.performance.enableBrotliCompression') }}
                             </PrettyCheck>
                         </div>
