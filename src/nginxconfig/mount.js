@@ -37,11 +37,3 @@ getI18n().then(i18n => {
     app.use(i18n);
     app.mount('#app');
 });
-
-/*
-
-Vue 3 upgrade notes:
-
-- pretty-checkbox-vue is not compatible with Vue 3, find alternate solution for templates/inputs/(checkbox|radio).vue
-
-*/
