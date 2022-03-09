@@ -279,6 +279,7 @@ THE SOFTWARE.
         watch: {
             '$props.data.responseCode': {
                 handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
                     if (data.computed && /^[1-5][0-9][0-9]$/.test(data.computed)) {
                         this.validResponseCode = true;
                     } else {
