@@ -96,6 +96,12 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
+            '$props.data.pythonServer': {
+                handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                },
+                deep: true,
+            },
         },
     };
 </script>
