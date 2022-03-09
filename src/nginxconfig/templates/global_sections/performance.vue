@@ -176,5 +176,31 @@ THE SOFTWARE.
             data: Object,                                               // Data delegated back to us from parent
         },
         computed: computedFromDefaults(defaults, 'performance'),        // Getters & setters for the delegated data
+        watch: {
+            '$props.data.svgExpiration': {
+                handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                },
+                deep: true,
+            },
+            '$props.data.assetsExpiration': {
+                handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                },
+                deep: true,
+            },
+            '$props.data.fontsExpiration': {
+                handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                },
+                deep: true,
+            },
+            '$props.data.mediaExpiration': {
+                handler(data) {
+                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                },
+                deep: true,
+            },
+        },
     };
 </script>
