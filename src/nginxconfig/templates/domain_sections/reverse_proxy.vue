@@ -165,18 +165,6 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
-            '$props.data.path': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
-            '$props.data.proxyPass': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
         },
     };
 </script>
