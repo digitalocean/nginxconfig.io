@@ -374,7 +374,7 @@ THE SOFTWARE.
             },
             '$props.data.letsEncryptCertRoot': {
                 handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                    data.computed = data.computed.replace(/<.+>/, '');
                 },
                 deep: true,
             },

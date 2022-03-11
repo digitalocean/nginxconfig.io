@@ -272,18 +272,6 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
-            '$props.data.accessLog': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
-            '$props.data.errorLog': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
         },
     };
 </script>

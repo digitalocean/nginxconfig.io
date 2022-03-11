@@ -103,7 +103,7 @@ THE SOFTWARE.
             '$props.data.onionLocation': {
                 handler(data) {
                     // Drop http(s)://
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                    data.computed = data.computed.replace(/^https?:\/\//, '');
                 },
                 deep: true,
             },

@@ -210,11 +210,10 @@ THE SOFTWARE.
             // Clean nginx directory of trailing slashes
             '$props.data.nginxConfigDirectory': {
                 handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
                     // This might cause recursion, but seems not to
                     if (data.enabled)
                         if (data.computed.endsWith('/'))
-                            data.computed = data.default;
+                            data.computed = data.computed.replace(/\/+$/, '');
                 },
                 deep: true,
             },
@@ -224,7 +223,7 @@ THE SOFTWARE.
                     // This might cause recursion, but seems not to
                     if (data.enabled)
                         if (!data.options.includes(data.computed))
-                            data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                            data.computed = data.default;
                 },
                 deep: true,
             },
@@ -232,7 +231,6 @@ THE SOFTWARE.
             '$props.data.clientMaxBodySize': {
                 handler(data) {
                     // This might cause recursion, but seems not to
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
                     if (data.enabled)
                         if (data.computed < 0)
                             data.computed = 0;
@@ -245,7 +243,7 @@ THE SOFTWARE.
                     // This might cause recursion, but seems not to
                     if (data.enabled)
                         if (!data.options.includes(data.computed))
-                            data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                            data.computed = data.default;
                 },
                 deep: true,
             },
@@ -255,19 +253,7 @@ THE SOFTWARE.
                     // This might cause recursion, but seems not to
                     if (data.enabled)
                         if (!data.options.includes(data.computed))
-                            data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
-            '$props.data.user': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
-                },
-                deep: true,
-            },
-            '$props.data.pid': {
-                handler(data) {
-                    data.computed = data.computed.replace(/([^\d]*)(\d*)([^\w]*)/, '');
+                            data.computed = data.default;
                 },
                 deep: true,
             },
