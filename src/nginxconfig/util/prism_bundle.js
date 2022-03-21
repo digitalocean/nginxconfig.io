@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,10 +32,12 @@ import 'prismjs/plugins/keep-markup/prism-keep-markup';
 import 'prismjs/plugins/toolbar/prism-toolbar';
 import 'prismjs/plugins/toolbar/prism-toolbar.css';
 
+import { warn } from './log';
+
 // Custom copy to clipboard (based on the Prism one)
 const copyToClipboard = () => {
     if (!Prism.plugins.toolbar) {
-        console.warn('Copy to Clipboard loaded before Toolbar.');
+        warn('Copy to Clipboard loaded before Toolbar.');
         return;
     }
 

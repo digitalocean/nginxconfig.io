@@ -132,6 +132,7 @@ THE SOFTWARE.
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
     import { defaultPack, availablePacks } from '../util/language_packs';
+    import { info, error } from '../util/log';
 
     import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';
@@ -241,7 +242,7 @@ THE SOFTWARE.
                     // Update the locale
                     setLanguagePack(data.computed).then(() => {
                         // Done
-                        console.log('Language set to', data.computed);
+                        info('Language set to', data.computed);
                         this.$data.languagePrevious = data.computed;
                         this.$data.languageLoading = false;
 
@@ -249,8 +250,7 @@ THE SOFTWARE.
                         this.languageSetEvent(!interactive);
                     }).catch((err) => {
                         // Error
-                        console.log('Failed to set language to', data.computed);
-                        console.error(err);
+                        error(`Failed to set language to ${data.computed}`, err);
 
                         // Fallback to last known good
                         data.value = this.$data.languagePrevious;
@@ -356,9 +356,9 @@ THE SOFTWARE.
                             file,
                         ];
                     });
-                } catch (e) {
+                } catch (err) {
                     // If diff generation goes wrong, don't show any diff
-                    console.error(e);
+                    error('Failed to compute and highlight diff', err);
                     this.$data.confFilesOutput = Object.entries(newConf).map(([ name, content ]) => {
                         const safeName = escape(name);
                         const safeContent = escape(content);
