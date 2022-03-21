@@ -1,4 +1,4 @@
-/*
+<!--
 Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
@@ -22,18 +22,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+-->
 
-// Load in the app
-import './scss/style.scss';
-import { createApp } from 'vue';
-import './util/prism_bundle';
-import { getI18n } from './i18n/setup';
-import App from './templates/app';
+<template>
+    <PrettyCheck>
+        <!-- Set the FontAwesome check as the default extra -->
+        <template #extra>
+            <slot name="extra">
+                <i class="icon fas fa-check"></i>
+            </slot>
+        </template>
 
-// Load the i18n languages and run the app
-getI18n().then(i18n => {
-    const app = createApp(App);
-    app.use(i18n);
-    app.mount('#app');
-});
+        <!-- Load in all other slots -->
+        <template v-for="(_, slot) in $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope || {}" />
+        </template>
+    </PrettyCheck>
+</template>
+
+<script setup>
+    import PrettyCheck from 'do-vue/src/templates/pretty-checkbox-vue/pretty_check';
+</script>

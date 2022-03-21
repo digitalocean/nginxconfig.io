@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,7 +35,6 @@ THE SOFTWARE.
                     <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>
@@ -53,7 +52,6 @@ THE SOFTWARE.
                     <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
                             </PrettyCheck>
                         </div>
@@ -65,9 +63,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         accessLog: {

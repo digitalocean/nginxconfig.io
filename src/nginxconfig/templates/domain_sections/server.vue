@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -70,7 +70,6 @@ THE SOFTWARE.
                     <div :class="`control${wwwSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="wwwSubdomain" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 (www.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
@@ -88,7 +87,6 @@ THE SOFTWARE.
                     <div :class="`control${cdnSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="cdnSubdomain" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 (cdn.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
@@ -106,7 +104,6 @@ THE SOFTWARE.
                     <div :class="`control${redirectSubdomainsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="redirectSubdomains" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 ({{ wwwSubdomain ? `${domain}, ` : '' }}*.{{ $props.data.domain.computed }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
                                 {{ wwwSubdomain ? 'www.' : '' }}{{ $props.data.domain.computed }})
@@ -148,9 +145,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         domain: {

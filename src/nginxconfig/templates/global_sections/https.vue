@@ -35,7 +35,6 @@ THE SOFTWARE.
                     <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.globalSections.https.enableReuseOfPort') }}
                             </PrettyCheck>
                         </div>
@@ -73,7 +72,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -92,7 +90,6 @@ THE SOFTWARE.
                         <div :class="`control${ocspCloudflareChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspCloudflare" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.cloudflareResolver') }}
                                 </PrettyCheck>
                             </div>
@@ -104,7 +101,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -114,7 +110,6 @@ THE SOFTWARE.
                         <div :class="`control${ocspGoogleChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.googlePublicDns') }}
                                 </PrettyCheck>
                             </div>
@@ -126,7 +121,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -136,7 +130,6 @@ THE SOFTWARE.
                         <div :class="`control${ocspOpenDnsChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.openDns') }}
                                 </PrettyCheck>
                             </div>
@@ -148,7 +141,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -158,7 +150,6 @@ THE SOFTWARE.
                         <div :class="`control${ocspQuad9Changed ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspQuad9" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.quad9') }}
                                 </PrettyCheck>
                             </div>
@@ -170,7 +161,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -180,7 +170,6 @@ THE SOFTWARE.
                         <div :class="`control${ocspVerisignChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspVerisign" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.verisign') }}
                                 </PrettyCheck>
                             </div>
@@ -192,7 +181,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -242,11 +230,11 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import clone from 'clone';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const ipType = {
         default: 'ipv4',

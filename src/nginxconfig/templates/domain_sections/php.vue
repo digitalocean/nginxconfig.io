@@ -56,7 +56,6 @@ THE SOFTWARE.
                     <div :class="`control${phpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="php" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.php.enablePhp') }}
                             </PrettyCheck>
                         </div>
@@ -126,7 +125,6 @@ THE SOFTWARE.
                     <div :class="`control${wordPressRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="wordPressRules" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.php.enableWordPressRules') }}
                             </PrettyCheck>
                         </div>
@@ -144,7 +142,6 @@ THE SOFTWARE.
                     <div :class="`control${drupalRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="drupalRules" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.php.enableDrupalRules') }}
                             </PrettyCheck>
                         </div>
@@ -162,7 +159,6 @@ THE SOFTWARE.
                     <div :class="`control${magentoRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="magentoRules" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.php.enableMagentoRules') }}
                             </PrettyCheck>
                         </div>
@@ -180,7 +176,6 @@ THE SOFTWARE.
                     <div :class="`control${joomlaRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="joomlaRules" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.php.enableJoomlaRules') }}
                             </PrettyCheck>
                         </div>
@@ -192,10 +187,10 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import VueSelect from 'vue-select';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     // Value -> i18n key
     const serverOptions = {

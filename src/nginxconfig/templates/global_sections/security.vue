@@ -96,7 +96,6 @@ THE SOFTWARE.
                     <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -114,7 +113,6 @@ THE SOFTWARE.
                     <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -132,7 +130,6 @@ THE SOFTWARE.
                     <div :class="`control${securityTxt ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -162,10 +159,10 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import VueSelect from 'vue-select';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         referrerPolicy: {

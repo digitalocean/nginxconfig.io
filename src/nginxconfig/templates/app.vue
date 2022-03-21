@@ -79,14 +79,13 @@ THE SOFTWARE.
                         </ul>
                     </div>
 
-                    <template v-for="data in activeDomains">
-                        <Domain
-                            :key="data[1]"
-                            :ref="`domain-${data[1]}`"
-                            :data="data[0]"
-                            :style="{ display: data[1] === active ? undefined : 'none' }"
-                        ></Domain>
-                    </template>
+                    <Domain
+                        v-for="data in activeDomains"
+                        :key="data[1]"
+                        :ref="`domain-${data[1]}`"
+                        :data="data[0]"
+                        :style="{ display: data[1] === active ? undefined : 'none' }"
+                    ></Domain>
 
                     <h2>{{ $t('templates.app.globalConfig') }}</h2>
                     <Global :data="global"></Global>
@@ -100,16 +99,15 @@ THE SOFTWARE.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
                     <h2>{{ $t('templates.app.configFiles') }}</h2>
                     <div ref="files" class="columns is-multiline files">
-                        <template v-for="confContents in confFilesOutput">
-                            <component
-                                :is="getPrismComponent(confContents[0])"
-                                :key="confContents[2]"
-                                :name="confContents[0]"
-                                :conf="confContents[1]"
-                                :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
-                                @copied="codeCopiedEvent(confContents[3])"
-                            ></component>
-                        </template>
+                        <component
+                            v-for="confContents in confFilesOutput"
+                            :is="getPrismComponent(confContents[0])"
+                            :key="confContents[2]"
+                            :name="confContents[0]"
+                            :conf="confContents[1]"
+                            :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
+                            @copied="codeCopiedEvent(confContents[3])"
+                        ></component>
                     </div>
                 </div>
             </div>
@@ -317,7 +315,7 @@ THE SOFTWARE.
             },
             remove(index) {
                 const name = this.$data.domains[index].server.domain.computed;
-                this.$set(this.$data.domains, index, null);
+                this.$data.domains[index] = null;
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
 
                 // Analytics

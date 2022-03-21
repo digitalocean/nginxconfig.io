@@ -56,7 +56,6 @@ THE SOFTWARE.
                     <div class="control">
                         <div class="checkbox">
                             <PrettyCheck v-model="reverseProxy" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.reverseProxy.enableReverseProxy') }}
                             </PrettyCheck>
                         </div>
@@ -104,9 +103,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         reverseProxy: {

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -104,9 +104,9 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             }
 
             // Create a new domain (assume it has had custom user settings)
-            const domainImported = clone(Domain.delegated);
+            // Push transforms the object to a proxy, so re-fetch the proxy from the array
+            const domainImported = domains[domains.push(clone(Domain.delegated)) - 1];
             domainImported.hasUserInteraction = true;
-            domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
             nextTick(() => applyCategories(data.domains[i], domainImported));

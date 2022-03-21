@@ -130,7 +130,6 @@ THE SOFTWARE.
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -144,9 +143,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         proxyConnectTimeout: {
