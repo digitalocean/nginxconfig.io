@@ -235,7 +235,12 @@ export default (domain, domains, global, ipPortPairs) => {
     // index.php
     if (domain.routing.index.computed === 'index.php') {
         serverConfig.push(['# index.php', '']);
-        serverConfig.push(['index', 'index.php']);
+        serverConfig.push(['index', 'index.php' + domain.routing.fallbackHtml.computed ? ' index.html' : '']);
+    }
+
+    if (domain.routing.index.computed === 'index.html') {
+        serverConfig.push(['# index.php', '']);
+        serverConfig.push(['index', 'index.html' + domain.routing.fallbackPhp.computed ? ' index.php' : '']);
     }
 
     // Fallback index.html or index.php
