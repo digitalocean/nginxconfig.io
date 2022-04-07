@@ -102,6 +102,8 @@ THE SOFTWARE.
         watch: {
             '$props.data.onionLocation': {
                 handler(data) {
+                    data.computed = data.computed.replace(/</, '&lt;');
+                    data.computed = data.computed.replace(/>/, '&gt;');
                     // Drop http(s)://
                     data.computed = data.computed.replace(/^https?:\/\//, '');
                 },
