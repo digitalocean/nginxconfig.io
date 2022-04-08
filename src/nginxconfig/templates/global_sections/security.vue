@@ -205,6 +205,20 @@ THE SOFTWARE.
             },
         },
         watch: {
+            '$props.data.securityTxtPath': {
+                handler(data) {
+                    data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                },
+                deep: true,
+            },
+            '$props.data.contentSecurityPolicy': {
+                handler(data) {
+                    data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                },
+                deep: true,
+            },
             // Check referrer policy selection is valid
             '$props.data.referrerPolicy': {
                 handler(data) {

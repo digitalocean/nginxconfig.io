@@ -279,6 +279,11 @@ THE SOFTWARE.
         watch: {
             '$props.data.responseCode': {
                 handler(data) {
+                    if( typeof data.computed === 'string' ) {
+                        data.computed = data.computed.replaceAll(/</g, '&lt;');
+                        data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                    }
+
                     if (data.computed && /^[1-5][0-9][0-9]$/.test(data.computed)) {
                         this.validResponseCode = true;
                     } else {

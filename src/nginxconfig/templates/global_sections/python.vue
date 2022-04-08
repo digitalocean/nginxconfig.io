@@ -96,6 +96,13 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
+            '$props.data.pythonServer': {
+                handler(data) {
+                    data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                },
+                deep: true,
+            },
         },
     };
 </script>

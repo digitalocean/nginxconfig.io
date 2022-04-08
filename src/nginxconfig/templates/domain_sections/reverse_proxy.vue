@@ -137,6 +137,9 @@ THE SOFTWARE.
             // If the PHP or Python is enabled, the Reverse proxy will be forced off
             '$parent.$props.data': {
                 handler(data) {
+                    data.reverseProxy.path.computed = data.reverseProxy.path.computed.replaceAll(/</g, '&lt;');
+                    data.reverseProxy.proxyPass.computed = data.reverseProxy.proxyPass.computed.replaceAll(/>/g, '&gt;');
+
                     // This might cause recursion, but seems not to
                     if (data.php.php.computed || data.python.python.computed) {
                         this.$props.data.reverseProxy.enabled = false;

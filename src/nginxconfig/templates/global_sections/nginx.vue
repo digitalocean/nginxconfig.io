@@ -207,9 +207,26 @@ THE SOFTWARE.
         },
         computed: computedFromDefaults(defaults, 'nginx'),  // Getters & setters for the delegated data
         watch: {
+            '$props.data.user': {
+                handler(data) {
+                    data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                },
+                deep: true,
+            },
+            '$props.data.pid': {
+                handler(data) {
+                    data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    data.computed = data.computed.replaceAll(/>/g, '&gt;');
+                },
+                deep: true,
+            },
             // Clean nginx directory of trailing slashes
             '$props.data.nginxConfigDirectory': {
                 handler(data) {
+                    // data.computed = data.computed.replaceAll(/</g, '&lt;');
+                    // data.computed = data.computed.replaceAll(/>/g, '&gt;');
+
                     // This might cause recursion, but seems not to
                     if (data.enabled)
                         if (data.computed.endsWith('/'))
