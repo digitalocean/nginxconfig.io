@@ -372,12 +372,6 @@ THE SOFTWARE.
                 },
                 deep: true,
             },
-            '$props.data.letsEncryptCertRoot': {
-                handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
-                },
-                deep: true,
-            },
         },
     };
 </script>

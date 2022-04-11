@@ -56,10 +56,10 @@ export default (domains, global) => {
         config.push(['location /security.txt', {
             return: '301 /.well-known/security.txt',
         }]);
-        
+
         // Custom security.txt path
         config.push(['location = /.well-known/security.txt', {
-            alias: `${global.security.securityTxtPath.value}`,
+            alias: `${global.security.securityTxtPath.computed}`,
         }]);
     }
 

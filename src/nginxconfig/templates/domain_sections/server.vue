@@ -208,7 +208,6 @@ THE SOFTWARE.
         watch: {
             '$props.data.domain': {
                 handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
                     // Ignore www. if given, enable WWW subdomain
                     if (data.computed.startsWith('www.')) {
                         data.computed = data.computed.slice(4);
@@ -244,28 +243,9 @@ THE SOFTWARE.
             // Ensure there is a default path
             '$props.data.path': {
                 handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
                     if (!data.computed.trim()) {
                         data.computed = `/var/www/${this.$props.data.domain.computed}`;
                     }
-                },
-                deep: true,
-            },
-            '$props.data.documentRoot': {
-                handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
-                },
-                deep: true,
-            },
-            '$props.data.listenIpv4': {
-                handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
-                },
-                deep: true,
-            },
-            '$props.data.listenIpv6': {
-                handler(data) {
-                    data.computed = data.computed.replace(/<.+>/, '');
                 },
                 deep: true,
             },

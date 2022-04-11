@@ -27,7 +27,7 @@ THE SOFTWARE.
 <template>
     <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`" @copied="copied">
         <h3 v-html="name"></h3>
-        <pre><code class="language-nginx" v-html="conf"></code></pre>
+        <pre><code class="language-nginx" v-html="showConf"></code></pre>
     </div>
 </template>
 
@@ -38,6 +38,26 @@ THE SOFTWARE.
             name: String,
             conf: String,
             half: Boolean,
+        },
+        data() {
+            return {
+                htmlEntityConf: '',
+            };
+        },
+        computed: {
+            showConf() {
+                return this.htmlEntityConf || this.conf;
+            },
+        },
+        watch: {
+            conf: {
+                handler( value ) {
+                    if( ( /<|>/gm ).test( value ) ) {
+                        this.htmlEntityConf = value.replaceAll(/</g, '&lt;').replaceAll(/>/g, '&gt;');
+                    }
+                },
+                immediate: true,
+            },
         },
         mounted() {
             console.info(`Highlighting ${this.$props.name}...`);
