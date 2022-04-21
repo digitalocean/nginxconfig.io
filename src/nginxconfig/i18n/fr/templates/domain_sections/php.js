@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -50,6 +50,7 @@ export default {
     php73Socket: 'Socket 7.3',
     php74Socket: 'Socket 7.4',
     php80Socket: 'Socket 8.0',
+    php81Socket: 'Socket 8.1',
     phpSocket: 'Socket PHP',
     custom: 'Custom',
     disabled: 'Désactivé',

@@ -204,6 +204,7 @@ THE SOFTWARE.
         '/var/run/php/php7.3-fpm.sock': 'templates.domainSections.php.php73Socket',
         '/var/run/php/php7.4-fpm.sock': 'templates.domainSections.php.php74Socket',
         '/var/run/php/php8.0-fpm.sock': 'templates.domainSections.php.php80Socket',
+        '/var/run/php/php8.1-fpm.sock': 'templates.domainSections.php.php81Socket',
         '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
         'custom': 'templates.domainSections.php.custom',
     };
