@@ -60,6 +60,7 @@ export default global => {
         config['location = /wp-login.php'] = {
             limit_req: 'zone=login burst=2 nodelay',
             include: 'nginxconfig.io/php_fastcgi.conf',
+            fastcgi_pass: 'unix:/run/php/php7.4-fpm.sock',
         };
     }
 
