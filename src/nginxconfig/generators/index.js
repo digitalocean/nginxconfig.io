@@ -63,7 +63,7 @@ export default (domains, global) => {
             files[`${sitesDir}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global, ipPortPairs));
             // WordPress
             if (domains.some(d => d.php.wordPressRules.computed))
-                files['nginxconfig.io/wordpress.conf'] = toConf(wordPressConf(global, domain));
+                files[`nginxconfig.io/${domain.server.domain.computed}.wordpress.conf`] = toConf(wordPressConf(global, domain));
         }
 
         // Let's encrypt

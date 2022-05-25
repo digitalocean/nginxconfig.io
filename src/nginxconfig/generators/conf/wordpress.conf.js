@@ -24,6 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import phpPath from '../../util/php_path';
+import phpUpstream from '../../util/php_upstream';
+
 export default (global, domain) => {
     const config = {};
 
@@ -62,7 +65,8 @@ export default (global, domain) => {
             include: 'nginxconfig.io/php_fastcgi.conf',
         };
         if (domain.php.wordPressRules.computed) {
-            config['location = /wp-login.php'].fastcgi_pass = 'unix:/run/php/php7.4-fpm.sock';
+            config['location = /wp-login.php'].fastcgi_pass = domain.php.phpBackupServer.computed !== ''
+            ? phpUpstream(domain) : phpPath(domain)
         }
     }
 
