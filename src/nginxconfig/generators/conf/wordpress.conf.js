@@ -66,7 +66,7 @@ export default (global, domain) => {
         };
         if (domain.php.wordPressRules.computed) {
             config['location = /wp-login.php'].fastcgi_pass = domain.php.phpBackupServer.computed !== ''
-            ? phpUpstream(domain) : phpPath(domain)
+            ? phpUpstream(domain) : phpPath(domain);
         }
     }
 
