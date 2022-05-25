@@ -61,6 +61,9 @@ export default (domains, global) => {
         const ipPortPairs = new Set();
         for (const domain of domains) {
             files[`${sitesDir}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global, ipPortPairs));
+            // WordPress
+            if (domains.some(d => d.php.wordPressRules.computed))
+                files['nginxconfig.io/wordpress.conf'] = toConf(wordPressConf(global, domain));
         }
 
         // Let's encrypt
@@ -84,10 +87,6 @@ export default (domains, global) => {
         // Reverse proxy
         if (domains.some(d => d.reverseProxy.reverseProxy.computed))
             files['nginxconfig.io/proxy.conf'] = toConf(proxyConf(global));
-
-        // WordPress
-        if (domains.some(d => d.php.wordPressRules.computed))
-            files['nginxconfig.io/wordpress.conf'] = toConf(wordPressConf(global));
 
         // Drupal
         if (domains.some(d => d.php.drupalRules.computed))

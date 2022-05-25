@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default global => {
+export default (global, domain) => {
     const config = {};
 
     config['# WordPress: allow TinyMCE'] = '';
@@ -60,8 +60,10 @@ export default global => {
         config['location = /wp-login.php'] = {
             limit_req: 'zone=login burst=2 nodelay',
             include: 'nginxconfig.io/php_fastcgi.conf',
-            fastcgi_pass: 'unix:/run/php/php7.4-fpm.sock',
         };
+        if (domain.php.wordPressRules.computed) {
+            config['location = /wp-login.php'].fastcgi_pass = 'unix:/run/php/php7.4-fpm.sock';
+        }
     }
 
     // Done!

@@ -312,7 +312,7 @@ export default (domain, domains, global, ipPortPairs) => {
         if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
             serverConfig.push(...Object.entries(letsEncryptConf(global)));
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
+        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global, domain)));
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
         if (domain.php.joomlaRules.computed) serverConfig.push(...Object.entries(joomlaConf()));
