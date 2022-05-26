@@ -24,7 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default global => {
+import phpPath from '../../util/php_path';
+import phpUpstream from '../../util/php_upstream';
+
+export default (global, domain) => {
     const config = {};
 
     config['# WordPress: allow TinyMCE'] = '';
@@ -61,6 +64,10 @@ export default global => {
             limit_req: 'zone=login burst=2 nodelay',
             include: 'nginxconfig.io/php_fastcgi.conf',
         };
+        if (domain.php.wordPressRules.computed) {
+            config['location = /wp-login.php'].fastcgi_pass = domain.php.phpBackupServer.computed !== ''
+            ? phpUpstream(domain) : phpPath(domain);
+        }
     }
 
     // Done!

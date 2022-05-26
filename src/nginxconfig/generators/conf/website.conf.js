@@ -301,7 +301,7 @@ export default (domain, domains, global, ipPortPairs) => {
         if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
             serverConfig.push(['include', 'nginxconfig.io/letsencrypt.conf']);
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(['include', 'nginxconfig.io/wordpress.conf']);
+        if (domain.php.wordPressRules.computed) serverConfig.push(['include', `nginxconfig.io/${domain.server.domain.computed}.wordpress.conf`]);
         if (domain.php.drupalRules.computed) serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
         if (domain.php.magentoRules.computed) serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
         if (domain.php.joomlaRules.computed) serverConfig.push(['include', 'nginxconfig.io/joomla.conf']);
@@ -312,7 +312,7 @@ export default (domain, domains, global, ipPortPairs) => {
         if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
             serverConfig.push(...Object.entries(letsEncryptConf(global)));
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global)));
+        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global, domain)));
         if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
         if (domain.php.joomlaRules.computed) serverConfig.push(...Object.entries(joomlaConf()));
