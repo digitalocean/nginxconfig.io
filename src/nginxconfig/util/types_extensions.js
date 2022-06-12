@@ -37,4 +37,5 @@ export const extensions = {
         'docx?|dotx?|docm|dotm|' +
         'xlsx?|xltx?|xlsm|xltm|' +
         'pptx?|potx?|pptm|potm|ppsx?',
+    html: 'html',
 };

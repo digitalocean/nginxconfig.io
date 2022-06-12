@@ -45,6 +45,7 @@ const globalMap = {
 
     python_server:              ['python', 'pythonServer'],
 
+    changesTakeEffect:          ['performance', 'changesTakeEffect', oldBool],
     gzip:                       ['performance', 'gzipCompression', oldBool],
     brotli:                     ['performance', 'brotliCompression', oldBool],
     expires_assets:             ['performance', 'assetsExpiration'],

@@ -26,7 +26,9 @@ THE SOFTWARE.
 
 import common from '../../common';
 
-export default {
+export default {    
+    changesTakeEffect: 'Changes take effect in time',
+    enableChangesTakeEffect: `${common.enable} changes take effect in time`,
     gzipCompression: 'Compresión Gzip',
     enableGzipCompression: `${common.enable} compresión gzip`,
     brotliCompression: 'Compresión Brotli',
@@ -38,5 +40,6 @@ export default {
     expirationForMedia: 'Expiración para media',
     expirationForSvgs: 'Expiración para SVGs',
     expirationForFonts: 'Expiración para fuentes',
+
     performance: 'Rendimiento',
 };

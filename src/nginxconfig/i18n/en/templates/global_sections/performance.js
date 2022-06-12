@@ -27,6 +27,8 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
+    changesTakeEffect: 'Changes take effect in time',
+    enableChangesTakeEffect: `${common.enable} changes take effect in time`,
     gzipCompression: 'Gzip compression',
     enableGzipCompression: `${common.enable} gzip compression`,
     brotliCompression: 'Brotli compression',

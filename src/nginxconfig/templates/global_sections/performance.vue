@@ -26,6 +26,25 @@ THE SOFTWARE.
 
 <template>
     <div>
+
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.globalSections.performance.changesTakeEffect') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${changesTakeEffectChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="changesTakeEffect" class="p-default p-curve p-fill p-icon">
+                                {{ $t('templates.globalSections.performance.enableChangesTakeEffect') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.globalSections.performance.gzipCompression') }}</label>
@@ -127,23 +146,8 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div class="field is-horizontal">
-            <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.performance.expirationForFonts') }}</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div :class="`control${fontsExpirationChanged ? ' is-changed' : ''}`">
-                        <input
-                            v-model="fontsExpiration"
-                            class="input"
-                            type="text"
-                            :placeholder="$props.data.fontsExpiration.default"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
     </div>
 </template>
 
@@ -154,6 +158,10 @@ THE SOFTWARE.
     import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
+        changesTakeEffect: {
+            default: true,
+            enabled: true,
+        },
         gzipCompression: {
             default: true,
             enabled: true,
@@ -178,6 +186,7 @@ THE SOFTWARE.
             default: '7d',
             enabled: true,
         },
+
     };
 
     export default {

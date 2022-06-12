@@ -41,6 +41,17 @@ export default (domains, global) => {
     };
     if (global.logging.accessLog.computed) config['location = /robots.txt'].access_log = 'off';
 
+    if (global.performance.changesTakeEffect.computed) {
+        // Take effect in time for html
+        config['# Take effect in time for html'] = '';
+        const loc = `location ~* \\.(?:${extensions.html})$`;
+        config[loc] = {
+            add_header: 'Cache-Control "no-cache"',
+        };
+        if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+     }
+ 
+
     if (domains.every(d => d.routing.root.computed)) {
         if (global.performance.assetsExpiration.computed === global.performance.mediaExpiration.computed) {
             if (global.performance.assetsExpiration.computed) {
@@ -124,6 +135,7 @@ export default (domains, global) => {
         config.brotli_types = gzipTypes;
     }
 
+   
     // Done!
     return config;
 };
