@@ -30,13 +30,13 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.performance.changesTakeEffect') }}</label>
+                <label class="label">{{ $t('templates.globalSections.performance.disableHtmlCaching') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${changesTakeEffectChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${disableHtmlCachingChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="changesTakeEffect" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="disableHtmlCaching" class="p-default p-curve p-fill p-icon">
                                 {{ $t('templates.globalSections.performance.enableChangesTakeEffect') }}
                             </PrettyCheck>
                         </div>
@@ -158,7 +158,7 @@ THE SOFTWARE.
     import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
-        changesTakeEffect: {
+        disableHtmlCaching: {
             default: true,
             enabled: true,
         },
@@ -186,7 +186,6 @@ THE SOFTWARE.
             default: '7d',
             enabled: true,
         },
-
     };
 
     export default {

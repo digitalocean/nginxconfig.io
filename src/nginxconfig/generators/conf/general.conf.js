@@ -41,9 +41,9 @@ export default (domains, global) => {
     };
     if (global.logging.accessLog.computed) config['location = /robots.txt'].access_log = 'off';
 
-    if (global.performance.changesTakeEffect.computed) {
-        // Take effect in time for html
-        config['# Take effect in time for html'] = '';
+    if (global.performance.disableHtmlCaching.computed) {
+        // Disable HTML caching for changes take effect in time
+        config['# Disable HTML caching'] = '';
         const loc = `location ~* \\.(?:${extensions.html})$`;
         config[loc] = {
             add_header: 'Cache-Control "no-cache"',
@@ -135,7 +135,6 @@ export default (domains, global) => {
         config.brotli_types = gzipTypes;
     }
 
-   
     // Done!
     return config;
 };
