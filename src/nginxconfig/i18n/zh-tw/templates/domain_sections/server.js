@@ -25,13 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    domain: '網站',
-    documentRoot: '運行目錄',
-    oneOrMoreOtherDomainsAreAlsoNamed: '發現了重複的域名',
-    thisWillCauseIssuesWithConfigGeneration: '這將導致生成配置出現問題。',
-    wwwSubdomain: 'www 子域名',
-    cdnSubdomain: 'CDN 子域名',
-    redirectSubdomains: '子域名重定向',
+    domain: '網域',
+    documentRoot: '檔案根目錄',
+    oneOrMoreOtherDomainsAreAlsoNamed: '發現了重複的網域',
+    thisWillCauseIssuesWithConfigGeneration: '產生設定時將發生錯誤。',
+    wwwSubdomain: 'www 子網域',
+    cdnSubdomain: 'CDN 子網域',
+    redirectSubdomains: '重新導向子網域',
     server: '服務',
     listen: '監聽',
 };

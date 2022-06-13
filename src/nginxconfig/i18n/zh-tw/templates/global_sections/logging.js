@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    enableFileNotFoundErrorLogging: `${common.enable}“檔案未找到”錯誤日誌：`,
+    enableFileNotFoundErrorLogging: `${common.enable}｢找不到檔案｣錯誤日誌：`,
     logformat: 'log_format',
     enableCloudflare: '將 Cloudflare 請求標頭加入預設日誌格式',
     cfRay: 'CF-Ray',

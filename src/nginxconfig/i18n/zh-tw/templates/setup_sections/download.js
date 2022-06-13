@@ -27,14 +27,14 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    downloadTheGeneratedConfig: '<b>下載</b> 產生的配置：',
+    downloadTheGeneratedConfig: '<b>下載</b>產生的設定：',
     andUploadItToYourServers: '然後<b>上傳</b>到您的伺服器的',
     directory: '目錄。',
     or: '或',
-    copyBase64StringOfCompressedConfig: '複製壓縮配置的base64字串',
-    pasteItInYourServersCommandLineAndExecute: '，將其粘貼到伺服器的命令列並執行。',
-    navigateToYourNginxConfigurationDirectoryOnYourServer: `進入您的${common.nginx}伺服器上的<b>配置資料夾</b>:`,
-    createABackupOfYourCurrentNginxConfiguration: `創建當前${common.nginx}配置的<b>備份</b>:`,
-    extractTheNewCompressedConfigurationArchiveUsingTar: '使用tar<b>解壓</b>新的壓縮配置',
+    copyBase64StringOfCompressedConfig: '複製壓縮過的設定的 base64 字串',
+    pasteItInYourServersCommandLineAndExecute: '，將其貼到伺服器的命令列並執行。',
+    navigateToYourNginxConfigurationDirectoryOnYourServer: `前往您的 ${common.nginx} 伺服器的<b>設定資料夾</b>：`,
+    createABackupOfYourCurrentNginxConfiguration: `建立${common.nginx} 目前設定的<b>備份</b>：`,
+    extractTheNewCompressedConfigurationArchiveUsingTar: '使用 tar <b>解壓縮</b>新的設定：',
     download: '下載',
 };

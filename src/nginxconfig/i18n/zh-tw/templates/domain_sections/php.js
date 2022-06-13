@@ -39,7 +39,7 @@ export default {
     enableMagentoRules: `${common.enable} ${common.magento} 專屬規則`,
     joomlaRules: `${common.joomla} 規則`,
     enableJoomlaRules: `${common.enable} ${common.joomla} 專屬規則`,
-    phpServer: `${common.php} 服務`,
+    phpServer: `${common.php} 伺服器`,
     phpBackupServer: `${common.php} 備份伺服器`,
     tcp: 'TCP',
     hhvmSocket: 'HHVM 通訊端',

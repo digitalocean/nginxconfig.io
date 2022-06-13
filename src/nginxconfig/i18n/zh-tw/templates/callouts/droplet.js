@@ -26,5 +26,5 @@ THE SOFTWARE.
 
 export default {
     lookingForAPlaceToDeploy: '👋 在尋找部署新設定的地方？',
-    tryOutDigitalOceansDroplet: '試試用於 Nginx 的 DigitalOcean 的 LEMP Droplet。',
+    tryOutDigitalOceansDroplet: '試試 DigitalOcean 推出的 LEMP Droplet，適用於 NGINX。',
 };
