@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    byDomain: '在此網站',
-    enableForThisDomain: `為此網站${common.enable}`,
+    byDomain: '在此網域',
+    enableForThisDomain: `為此網域${common.enable}`,
 };

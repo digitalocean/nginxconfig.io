@@ -48,6 +48,6 @@ export default {
     removeAllDomainsBody: '您確定要删除所有網站的配置嗎?',
     areYouSureYouWantToResetAllConfigurationOptionsForThe: '您確定要重置',
     domain: '網站的所有配置選項嗎?',
-    areYouSureYouWantToRemoveThe: '你確定要删除',
+    areYouSureYouWantToRemoveThe: '您確定要删除',
     domainConfiguration: '的網站配置嗎？',
 };

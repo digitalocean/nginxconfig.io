@@ -27,7 +27,7 @@ THE SOFTWARE.
 export default {
     domain: '網站',
     documentRoot: '運行目錄',
-    oneOrMoreOtherDomainsAreAlsoNamed: '發現了重復的域名',
+    oneOrMoreOtherDomainsAreAlsoNamed: '發現了重複的域名',
     thisWillCauseIssuesWithConfigGeneration: '這將導致生成配置出現問題。',
     wwwSubdomain: 'www 子域名',
     cdnSubdomain: 'CDN 子域名',

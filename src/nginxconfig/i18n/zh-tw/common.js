@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 export default {
     back: '返回',
-    next: '下一個',
+    next: '下一步',
     enable: '啟用',
     php: 'PHP',
     ssl: 'SSL',
@@ -40,9 +40,9 @@ export default {
     magento: 'Magento',
     joomla: 'Joomla',
     django: 'Django',
-    logging: '日誌記錄',
-    reverseProxy: '反向代理',
-    reverseProxyLower: '反向代理',
+    logging: '日誌',
+    reverseProxy: '反向 Proxy',
+    reverseProxyLower: '反向 Proxy',
     restrict: '限制',
     path: '路徑',
 };

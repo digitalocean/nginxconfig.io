@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    nginxConfigDirectory: `${common.nginx}配置目錄`,
+    nginxConfigDirectory: `${common.nginx} 設定目錄`,
     mb: 'MB',
 };
