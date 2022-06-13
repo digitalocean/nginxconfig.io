@@ -28,7 +28,7 @@ import common from '../../common';
 
 export default {
     disableHtmlCaching: 'Disable HTML caching',
-    enableChangesTakeEffect: `disable HTML caching`,
+    enableChangesTakeEffect: 'disable HTML caching',
     gzipCompression: 'Gzip 壓縮',
     enableGzipCompression: `${common.enable}Gzip壓縮`,
     brotliCompression: 'Brotli 壓縮',
