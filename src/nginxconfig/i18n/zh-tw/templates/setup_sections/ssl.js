@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,8 +27,8 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    generateDiffieHellmanKeysByRunningThisCommandOnYourServer: '在您的伺服器上運行此命令生成<b>Diffie-Hellman keys</b>:',
-    createACommonAcmeChallengeDirectoryForLetsEncrypt: `創建一個通用的<b>ACME-challenge</b>目錄（用於 <b>${common.letsEncrypt}</b>):`,
-    noAdditionalStepsAreNeededToSetUpSslForNginx: `無需任何操作，即可為您的${common.nginx}完成${common.ssl}配置`,
+    generateDiffieHellmanKeysByRunningThisCommandOnYourServer: '在您的伺服器上執行此命令來產生<b>迪菲-赫爾曼密鑰</b>：',
+    createACommonAcmeChallengeDirectoryForLetsEncrypt: `建立一個通用的 <b>ACME-challenge</b> 目錄（用於 <b>${common.letsEncrypt}</b>)：`,
+    noAdditionalStepsAreNeededToSetUpSslForNginx: `您的 ${common.nginx} 設定已完成 ${common.ssl} 設定，無須任何操作。`,
     sslInit: `${common.ssl} 初始化`,
 };

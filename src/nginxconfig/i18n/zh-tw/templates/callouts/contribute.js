@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,6 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    wantToContributeChanges: '👋 想要申請新的功能，提出修改意見，或將該工具翻譯成新的語言？',
-    getInvolvedOnGitHub: '在GitHub上參與進來',
+    wantToContributeChanges: '👋 想要請求新功能，貢獻更動，或將本工具翻譯成新的語言嗎？',
+    getInvolvedOnGitHub: '在 GitHub 上共襄盛舉',
 };
