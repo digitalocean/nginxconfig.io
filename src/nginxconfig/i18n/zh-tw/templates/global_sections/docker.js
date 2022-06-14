@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,10 +32,10 @@ const dockerfile = 'Dockerfile';
 export default {
     docker,
     dockerfile,
-    dockerCompose: `${docker} 編排服務`,
-    applyDockerTweaks: `應用${docker}調整`,
-    applyDockerTweaksForNginx: `為使用${docker}運行${common.nginx}進行配置調整。`,
-    applyDockerTweaksExplainer: `將${common.nginx}用戶更新為<code class="slim">nginx</code>，將pid更新為<code class="slim">/var/run/nginx.pid</code>`,
-    includeDockerfile: `生成${dockerfile}運行${common.nginx}與${docker}`,
-    includeDockerCompose: `生成docker-compose.yaml來運行${common.nginx} docker-compose`,
+    dockerCompose: `${docker} Compose`,
+    applyDockerTweaks: `套用 ${docker} 調校`,
+    applyDockerTweaksForNginx: `套用在 ${docker} 中執行 ${common.nginx} 所需的設定調校`,
+    applyDockerTweaksExplainer: `將 ${common.nginx} 使用者設為 <code class="slim">nginx</code>，將 pid 設為<code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `產生 ${dockerfile} 以使用 ${docker} 來執行 ${common.nginx}`,
+    includeDockerCompose: `產生 docker-compose 以使用 docker-compose 來執行 ${common.nginx}`,
 };
