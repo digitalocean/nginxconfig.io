@@ -34,4 +34,5 @@ export default {
     ru: 'Russa',
     pl: 'Polonês',
     de: 'Alemão',
+    ja: 'Japonês',
 };

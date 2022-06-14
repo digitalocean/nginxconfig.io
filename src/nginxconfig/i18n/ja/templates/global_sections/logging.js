@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    enableFileNotFoundErrorLogging: `FILE NOT FOUND エラーのロギングを${common.enable}`,
+    logformat: 'log_format',
+    enableCloudflare: 'デフォルトのログフォーマットに Cloudflare のリクエストヘッダを追加する',
+    cfRay: 'CF-Ray',
+    cfConnectingIp: 'CF-Connecting-IP',
+    xForwardedFor: 'X-Forwarded-For',
+    xForwardedProto: 'X-Forwarded-Proto',
+    trueClientIp: 'True-Client-IP',
+    cfIpCountry: 'CF-IPCountry',
+    cfVisitor: 'CF-Visitor',
+    cdnLoop: 'CDN-Loop',
 };

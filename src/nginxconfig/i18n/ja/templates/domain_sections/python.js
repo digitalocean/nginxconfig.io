@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    pythonIsDisabled: `${common.python} は無効です。`,
+    pythonCannotBeEnabledWithReverseProxy: `リバースプロキシが有効な場合は、${common.python} を有効にすることはできません。`,
+    pythonCannotBeEnabledWithPhp: `${common.php} が有効な場合は、 ${common.python} を有効にすることはできません。`,
+    enablePython: `${common.python}を${common.enable}`,
+    djangoRules: `${common.django} ルール`,
+    enableDjangoRules: `${common.django} 用ルールを${common.enable}`,
 };

@@ -25,14 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    lookingForAPlaceToDeploy: '👋 この新しい設定のデプロイ先をお探しですか?',
+    tryOutDigitalOceansDroplet: 'DigitalOceanの NGINXを使ったLEMP Droplet を試してみましょう',
 };

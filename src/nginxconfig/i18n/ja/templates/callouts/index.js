@@ -24,15 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
-};
+import droplet from './droplet';
+import contribute from './contribute';
+
+export default { droplet, contribute };

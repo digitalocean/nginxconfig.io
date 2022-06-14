@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,14 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    domain: 'ドメイン',
+    documentRoot: 'ドキュメントルート',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'このドメインは別の設定で利用されています',
+    thisWillCauseIssuesWithConfigGeneration: 'これは、設定ファイル生成で問題を引き起こします。',
+    wwwSubdomain: 'www サブドメイン',
+    cdnSubdomain: 'CDN サブドメイン',
+    redirectSubdomains: 'リダイレクトサブドメイン',
+    server: 'サーバ',
+    listen: 'リッスン',
 };

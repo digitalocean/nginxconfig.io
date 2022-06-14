@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    pythonServer: `${common.python} サーバ`,
+    pythonMustBeEnabledOnOneSite: `グローバルな ${common.python} の設定を行うには、少なくとも1つのサイトで ${common.python} が有効になっている必要があります。`,
 };

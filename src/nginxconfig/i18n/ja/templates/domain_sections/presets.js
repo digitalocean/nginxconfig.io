@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,14 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    presets: 'プリセット',
+    itLooksLikeYouCustomisedTheConfig: 'このドメインの設定をカスタマイズしているようです。新しいプリセットを選択すると、カスタマイズした設定の一部がリセットまたは変更される場合があります。',
+    frontend: 'フロントエンド',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'シングルページアプリケーション(SPA)',
 };

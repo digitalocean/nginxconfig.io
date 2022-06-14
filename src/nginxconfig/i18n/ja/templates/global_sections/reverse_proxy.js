@@ -24,15 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const legacyXForwarded = 'Legacy X-Forwarded-* headers';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    reverseProxyMustBeEnabledOnOneSite: `グローバルな ${common.reverseProxyLower} の設定を行うには、少なくとも1つのサイトで ${common.reverseProxy} が有効になっている必要があります。`,
+    seconds: '秒',
+    passOn: `${legacyXForwarded} が渡されます`,
+    remove: `${legacyXForwarded} は積極的に削除されます`,
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+const onion = 'Onion';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    onion,
+    onionLocation: `${onion} location`,
+    provideAnOnionLocationToSetOnionLocationHeader: 'サイトのOnion-Locationヘッダを設定するために、Onion locationアドレスを提供する。',
+    letsVisitorsKnownOnionServicesIsAvailable: 'これにより、あなたのサイトのオニオンサービス版がTorブラウザで利用可能であることをサイト訪問者に知らせます。',
+    learnMoreAboutOnionServices: 'Onion サービスについて詳しくはこちら',
+    onionLocationExpectedToEndWithOnion: 'Onion location アドレスは通常 `.onion` で終わります。',
 };

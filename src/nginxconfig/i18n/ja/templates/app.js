@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    title: `${common.nginx}設定`,
+    description: `パフォーマンス、安全性、安定性に優れた ${common.nginx} サーバーを簡単に構成できます。`,
+    singleColumnMode: 'シングルカラムモード',
+    splitColumnMode: '並列表示モード',
+    perWebsiteConfig: 'Webサイトごとの設定',
+    addSite: 'サイトを追加する',
+    globalConfig: 'グローバル設定',
+    setup: 'セットアップ',
+    configFiles: '設定ファイル',
 };

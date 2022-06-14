@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const certbot = 'Certbot';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    commentOutSslDirectivesInConfiguration: `設定中の ${common.ssl} 関連ディレクティブをコメントアウトします:`,
+    reloadYourNginxServer: `${common.nginx} サーバをリロードします:`,
+    obtainSslCertificatesFromLetsEncrypt: `${certbot} を利用して、 ${common.ssl} 証明書を ${common.letsEncrypt} から取得します:`,
+    uncommentSslDirectivesInConfiguration: `設定中の ${common.ssl} 関連ディレクティブのコメントアウトを外します:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `証明書の更新に成功したら ${certbot} が ${common.nginx} をリロードするように設定します:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `${certbot} は、${common.nginx}の設定に合わせて設定する必要はありません。`,
+    certbot,
 };

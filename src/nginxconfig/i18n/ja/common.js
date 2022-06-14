@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,14 +25,24 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+	back: '戻る',
+	next: '次へ',
+	enable: '有効にする',
+	php: 'PHP',
+	ssl: 'SSL',
+	nginx: 'NGINX',
+	http: 'HTTP',
+	https: 'HTTPS',
+	letsEncrypt: 'Let\'s Encrypt',
+	python: 'Python',
+	wordPress: 'WordPress',
+	drupal: 'Drupal',
+	magento: 'Magento',
+	joomla: 'Joomla',
+	django: 'Django',
+	logging: 'ログ',
+    reverseProxy: 'リバースプロキシ',
+    reverseProxyLower: 'リバースプロキシ',
+    restrict: '制限',
+    path: 'パス',
 };

@@ -34,4 +34,5 @@ export default {
     ru: '俄语',
     pl: '波兰语',
     de: '德语',
+    ja: '日语',
 };

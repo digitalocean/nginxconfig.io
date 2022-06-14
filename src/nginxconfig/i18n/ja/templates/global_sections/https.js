@@ -24,15 +24,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    en: 'Anglais',
-    es: 'Espanol',
-    zhCN: 'Chinois (simplifié)',
-    zhTW: 'Chinois (traditionnel)',
-    ptBR: 'Portugais (brésilien)',
-    fr: 'Français',
-    ru: 'Russe',
-    pl: 'Polonais',
-    de: 'Allemand',
-    ja: 'Japonais',
+    sslProfile: `${common.ssl} プロファイル`,
+    httpsMustBeEnabledOnOneSite: `グローバルな ${common.https} の設定を行うには、少なくとも1つのサイトで ${common.https} が有効になっている必要があります。`,
+    portReuse: 'Reuseport',
+    enableReuseOfPort: `ワーカーごとにリスニングソケットを生成するために reuseport を${common.enable}`,
+    ocspDnsResolvers: 'OCSP DNS Resolvers',
+    cloudflareResolver: 'Cloudflare Resolver',
+    googlePublicDns: 'Google Public DNS',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `${common.letsEncrypt} webrootディレクトリ`,
+    letsEncryptCertRoot: `${common.letsEncrypt} 証明書ディレクトリ`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} のみ`,
+    ipv6Only: `${ipv6} のみ`,
+    ipv4AndIpv6: `${ipv4} と ${ipv6}`,
 };
