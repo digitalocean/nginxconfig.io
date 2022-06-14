@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../common';
 
 export default {
-    title: `${common.nginx} 設定`,
+    title: `${common.nginx}Config`,
     description: `設定高效能、安全、穩定的 ${common.nginx} 伺服器最簡單的方法。`,
     singleColumnMode: '單欄模式',
     splitColumnMode: '雙欄模式',
