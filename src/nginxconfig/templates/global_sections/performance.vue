@@ -28,6 +28,23 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
+                <label class="label">{{ $t('templates.globalSections.performance.disableHtmlCaching') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${disableHtmlCachingChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="disableHtmlCaching" class="p-default p-curve p-fill p-icon">
+                                {{ $t('templates.globalSections.performance.enableDisableHtmlCaching') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
                 <label class="label">{{ $t('templates.globalSections.performance.gzipCompression') }}</label>
             </div>
             <div class="field-body">
@@ -154,6 +171,10 @@ THE SOFTWARE.
     import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
+        disableHtmlCaching: {
+            default: false,
+            enabled: true,
+        },
         gzipCompression: {
             default: true,
             enabled: true,

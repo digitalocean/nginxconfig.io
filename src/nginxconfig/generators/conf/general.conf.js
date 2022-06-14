@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -40,6 +40,17 @@ export default (domains, global) => {
         log_not_found: 'off',
     };
     if (global.logging.accessLog.computed) config['location = /robots.txt'].access_log = 'off';
+
+    if (global.performance.disableHtmlCaching.computed) {
+        // Disable HTML caching for changes take effect in time
+        config['# Disable HTML caching'] = '';
+        const loc = `location ~* \\.(?:${extensions.html})$`;
+        config[loc] = {
+            add_header: 'Cache-Control "no-cache"',
+        };
+        if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+     }
+ 
 
     if (domains.every(d => d.routing.root.computed)) {
         if (global.performance.assetsExpiration.computed === global.performance.mediaExpiration.computed) {

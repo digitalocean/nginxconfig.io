@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,8 +27,10 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
+    disableHtmlCaching: '禁用 HTML 缓存',
+    enableDisableHtmlCaching: '禁用 HTML 缓存',
     gzipCompression: 'Gzip 压缩',
-    enableGzipCompression: `${common.enable}Gzip压缩`,
+    enableGzipCompression: `${common.enable} Gzip 压缩`,
     brotliCompression: 'Brotli 压缩',
     enableBrotliCompression: `${common.enable} Brotli 压缩`,
     brotliIsANonStandardModule: 'Brotli 并不是一个 standard NGINX 模块, 请查看 ',

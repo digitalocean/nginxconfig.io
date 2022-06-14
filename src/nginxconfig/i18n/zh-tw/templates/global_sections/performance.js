@@ -27,6 +27,8 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
+    disableHtmlCaching: 'Disable HTML caching', // TODO: translate
+    enableDisableHtmlCaching: 'disable HTML caching', // TODO: translate
     gzipCompression: 'Gzip 壓縮',
     enableGzipCompression: `${common.enable} Gzip 壓縮`,
     brotliCompression: 'Brotli 壓縮',
