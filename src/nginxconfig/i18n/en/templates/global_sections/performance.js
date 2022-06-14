@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -28,7 +28,7 @@ import common from '../../common';
 
 export default {
     disableHtmlCaching: 'Disable HTML caching',
-    enableChangesTakeEffect: 'disable HTML caching',
+    enableDisableHtmlCaching: 'disable HTML caching',
     gzipCompression: 'Gzip compression',
     enableGzipCompression: `${common.enable} gzip compression`,
     brotliCompression: 'Brotli compression',

@@ -45,7 +45,6 @@ const globalMap = {
 
     python_server:              ['python', 'pythonServer'],
 
-    disableHtmlCaching:         ['performance', 'disableHtmlCaching', oldBool],
     gzip:                       ['performance', 'gzipCompression', oldBool],
     brotli:                     ['performance', 'brotliCompression', oldBool],
     expires_assets:             ['performance', 'assetsExpiration'],
