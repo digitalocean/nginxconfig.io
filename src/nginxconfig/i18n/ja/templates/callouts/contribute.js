@@ -26,5 +26,5 @@ THE SOFTWARE.
 
 export default {
     wantToContributeChanges: '👋 新機能や変更の提案や実装、翻訳をしてみませんか?',
-    getInvolvedOnGitHub: 'Get involved on GitHub',
+    getInvolvedOnGitHub: 'GitHub で参加しよう',
 };

@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    letsGoLive: 'Let\'s go live!',
+    letsGoLive: '起動しよう!',
     reloadNginxToLoadInYourNewConfiguration: `${common.nginx} をリロードして新しい設定を反映します:`,
-    goLive: 'Go live!',
+    goLive: '起動!',
 };

@@ -28,7 +28,7 @@ import common from '../../common';
 
 export default {
     disableHtmlCaching: 'HTML キャッシュの無効化',
-    enableDisableHtmlCaching: 'TML キャッシュを無効にする',
+    enableDisableHtmlCaching: 'HTML キャッシュを無効にする',
     gzipCompression: 'Gzip 圧縮',
     enableGzipCompression: `gzip 圧縮を${common.enable}`,
     brotliCompression: 'Brotli 圧縮',
