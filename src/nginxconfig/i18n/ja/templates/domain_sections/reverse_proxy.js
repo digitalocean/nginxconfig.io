@@ -24,15 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    reverseProxyIsDisabled: `${common.reverseProxy} は無効です。`,
+    reverseProxyCannotBeEnabledWithPhp: `${common.php} が有効な場合は、 ${common.reverseProxy} を有効にすることはできません。`,
+    reverseProxyCannotBeEnabledWithPython: `${common.python} が有効な場合は、 ${common.reverseProxy} を有効にすることはできません。`,
+    enableReverseProxy: `${common.reverseProxyLower}を${common.enable}`,
 };

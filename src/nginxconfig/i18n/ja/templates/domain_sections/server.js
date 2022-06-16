@@ -25,14 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    domain: 'ドメイン',
+    documentRoot: 'ドキュメントルート',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'このドメインは別の設定で利用されています',
+    thisWillCauseIssuesWithConfigGeneration: 'これは、設定ファイル生成で問題を引き起こします。',
+    wwwSubdomain: 'www サブドメイン',
+    cdnSubdomain: 'CDN サブドメイン',
+    redirectSubdomains: 'リダイレクトサブドメイン',
+    server: 'サーバ',
+    listen: 'リッスン',
 };

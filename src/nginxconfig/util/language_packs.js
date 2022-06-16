@@ -43,6 +43,7 @@ export const availablePacks = Object.freeze([
     'en',
     'es',
     'fr',
+    'ja',
     'pl',
     'ptBR',
     'ru',

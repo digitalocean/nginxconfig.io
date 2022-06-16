@@ -25,14 +25,15 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    backToTop: 'TOPへ戻る',
+    thisToolIs: 'このツールは',
+    openSourceOnGitHub: 'オープンソースとしてGitHub上に',
+    underThe: '',
+    mit: 'MIT',
+    license: 'ライセンスで公開されています。',
+    weWelcomeFeedbackAndContributions: 'リードバックやコントリビュートは大歓迎です。',
+    originallyCreatedBy: 'オリジナル開発者: ',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'メンテナンス: ',
+    digitalOcean: 'DigitalOcean',
 };

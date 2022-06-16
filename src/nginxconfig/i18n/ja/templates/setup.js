@@ -25,14 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    downloadConfig: '設定をダウンロードする',
+    copyBase64: 'Base64でコピーする',
 };

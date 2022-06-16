@@ -24,15 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    pythonIsDisabled: `${common.python} は無効です。`,
+    pythonCannotBeEnabledWithReverseProxy: `リバースプロキシが有効な場合は、${common.python} を有効にすることはできません。`,
+    pythonCannotBeEnabledWithPhp: `${common.php} が有効な場合は、 ${common.python} を有効にすることはできません。`,
+    enablePython: `${common.python}を${common.enable}`,
+    djangoRules: `${common.django} ルール`,
+    enableDjangoRules: `${common.django} 用ルールを${common.enable}`,
 };

@@ -25,14 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    presets: 'プリセット',
+    itLooksLikeYouCustomisedTheConfig: 'このドメインの設定をカスタマイズしているようです。新しいプリセットを選択すると、カスタマイズした設定の一部がリセットまたは変更される場合があります。',
+    frontend: 'フロントエンド',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'シングルページアプリケーション(SPA)',
 };

@@ -25,14 +25,14 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    en: '英語',
+    es: 'スペイン語',
+    zhCN: '中国語 (簡体字)',
+    zhTW: '中国語 (繁体字)',
+    ptBR: 'ポルトガル語 (ブラジル)',
+    fr: 'フランス語',
+    ru: 'ロシア語',
+    pl: 'ポーランド語',
+    de: 'ドイツ語',
+    ja: '日本語',
 };

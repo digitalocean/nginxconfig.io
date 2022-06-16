@@ -24,15 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    title: `${common.nginx}設定`,
+    description: `パフォーマンス、安全性、安定性に優れた ${common.nginx} サーバーを簡単に構成できます。`,
+    singleColumnMode: 'シングルカラムモード',
+    splitColumnMode: '並列表示モード',
+    perWebsiteConfig: 'Webサイトごとの設定',
+    addSite: 'サイトを追加する',
+    globalConfig: 'グローバル設定',
+    setup: 'セットアップ',
+    configFiles: '設定ファイル',
 };

@@ -24,15 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    docker,
+    dockerfile,
+    dockerCompose: `${docker} Compose`,
+    applyDockerTweaks: `${docker} の調整を適用する`,
+    applyDockerTweaksForNginx: `${common.nginx} を ${docker} 上で動作させるため、設定の微調整を適用します。`,
+    applyDockerTweaksExplainer: `${common.nginx} ユーザを <code class="slim">nginx</code> に、 pid を <code class="slim">/var/run/nginx.pid</code> に変更してください。`,
+    includeDockerfile: `${common.nginx} を ${docker} 上で動作させるための ${dockerfile} を含む`,
+    includeDockerCompose: `${common.nginx} with docker-compose で動作させるための docker-compose.yaml を含む`,
 };

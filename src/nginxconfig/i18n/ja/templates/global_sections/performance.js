@@ -24,15 +24,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    disableHtmlCaching: 'HTML キャッシュの無効化',
+    enableDisableHtmlCaching: 'HTML キャッシュを無効にする',
+    gzipCompression: 'Gzip 圧縮',
+    enableGzipCompression: `gzip 圧縮を${common.enable}`,
+    brotliCompression: 'Brotli 圧縮',
+    enableBrotliCompression: `brotli 圧縮を${common.enable}`,
+    brotliIsANonStandardModule: 'Brotli はNGINXの標準モジュールではありません, くわしくは ',
+    brotliGoogleNgxBrotliProject: 'Google ngx_brotli プロジェクト',
+    brotliForBuildingNginxWithBrotli: ' のBrotliを使ったNGINXの構築方法を確認してください!',
+    expirationForAssets: 'アセットの有効期限',
+    expirationForMedia: 'メディアの有効期限',
+    expirationForSvgs: 'SVG の有効期限',
+    expirationForFonts: 'フォントの有効期限',
+    performance: 'パフォーマンス',
 };

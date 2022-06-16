@@ -24,15 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const certbot = 'Certbot';
+
 export default {
-    en: 'Ingles',
-    es: 'Español',
-    zhCN: 'Chino (simplificado)',
-    zhTW: 'Chino (tradicional)',
-    ptBR: 'Portugués (brasileño)',
-    fr: 'Francés',
-    ru: 'Ruso',
-    pl: 'Polaco',
-    de: 'Alemán',
-    ja: 'Japonés',
+    commentOutSslDirectivesInConfiguration: `設定中の ${common.ssl} 関連ディレクティブをコメントアウトします:`,
+    reloadYourNginxServer: `${common.nginx} サーバをリロードします:`,
+    obtainSslCertificatesFromLetsEncrypt: `${certbot} を利用して、 ${common.ssl} 証明書を ${common.letsEncrypt} から取得します:`,
+    uncommentSslDirectivesInConfiguration: `設定中の ${common.ssl} 関連ディレクティブのコメントアウトを外します:`,
+    configureCertbotToReloadNginxOnCertificateRenewal: `証明書の更新に成功したら ${certbot} が ${common.nginx} をリロードするように設定します:`,
+    certbotDoesNotNeedToBeSetupForYourConfiguration: `${certbot} は、${common.nginx}の設定に合わせて設定する必要はありません。`,
+    certbot,
 };
