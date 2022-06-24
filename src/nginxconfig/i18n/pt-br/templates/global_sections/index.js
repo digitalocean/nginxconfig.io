@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -28,11 +28,10 @@ import https from './https';
 import logging from './logging';
 import nginx from './nginx';
 import performance from './performance';
-import php from './php';
 import python from './python';
 import reverseProxy from './reverse_proxy';
 import security from './security';
 import tools from './tools';
 import docker from './docker';
 
-export default { https, logging, nginx, performance, php, python, reverseProxy, security, tools, docker };
+export default { https, logging, nginx, performance, python, reverseProxy, security, tools, docker };

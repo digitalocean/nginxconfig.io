@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,13 +30,15 @@ export default (domains, global) => {
     const config = [];
 
     config.push(['# security headers', '']);
-    config.push(['add_header X-Frame-Options', '"SAMEORIGIN" always']);
     config.push(['add_header X-XSS-Protection', '"1; mode=block" always']);
     config.push(['add_header X-Content-Type-Options', '"nosniff" always']);
     config.push(['add_header Referrer-Policy', `"${global.security.referrerPolicy.computed}" always`]);
 
     if (global.security.contentSecurityPolicy.computed)
         config.push(['add_header Content-Security-Policy', `"${global.security.contentSecurityPolicy.computed}" always`]);
+
+    if (global.security.permissionsPolicy.computed)
+        config.push(['add_header Permissions-Policy', `"${global.security.permissionsPolicy.computed}" always`]);
 
     // Every domain has HSTS enabled, and they all have same hstsSubdomains/hstsPreload settings
     if (commonHsts(domains)) {

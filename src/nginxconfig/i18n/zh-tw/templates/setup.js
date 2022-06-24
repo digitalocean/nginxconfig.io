@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,6 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    downloadConfig: '下載配寘',
-    copyBase64: '複製Base64',
+    downloadConfig: '下載配置',
+    copyBase64: '複製 Base64',
 };

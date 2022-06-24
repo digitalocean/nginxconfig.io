@@ -31,7 +31,7 @@ export default {
     underThe: 'под',
     mit: 'MIT',
     license: 'лицензией!',
-    weWelcomeFeedbackAndContributions: 'Мы приветсвуем обратную связь и поддержку.',
+    weWelcomeFeedbackAndContributions: 'Мы приветствуем обратную связь и поддержку.',
     originallyCreatedBy: 'Начало проекта положил',
     balintSzekeres: 'Bálint Szekeres',
     maintainedBy: 'при поддержке',

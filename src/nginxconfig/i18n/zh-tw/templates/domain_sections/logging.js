@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    byDomain: '在此網站',
-    enableForThisDomain: `為此網站${common.enable}`,
+    byDomain: '在此網域',
+    enableForThisDomain: `為此網域${common.enable}`,
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,15 +27,22 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    enableEncryptedSslConnection: `${common.enable}加密的${common.ssl}連接`,
+    enableEncryptedSslConnection: `${common.enable}加密的 ${common.ssl} 連線`,
     http2: `${common.http}/2`,
-    enableHttp2Connections: `${common.enable} ${common.http}/2 連接`,
-    forceHttps: `強制 ${common.https}`,
+    enableHttp2Connections: `${common.enable} ${common.http}/2 連線`,
+    http3: `${common.http}/3`,
+    enableHttp3Connections: `${common.enable} ${common.http}/3 連線`,
+    forceHttps: `強制使用 ${common.https}`,
     hsts: 'HSTS',
-    enableStrictTransportSecurity: `${common.enable}HSTS（強制用戶端、瀏覽器等使用HTTPS與服務器創建連結），需要HTTPS連接`,
-    enableIncludeSubDomains: `${common.enable}includeSubDomains指令，HSTS對所有子域生效`,
-    enablePreload: `${common.enable}preload指令，強制用戶端只可以使用https連接`,
-    certificationType: '證書類型',
-    customCertificate: '本地證書',
-    letsEncryptEmail: `${common.letsEncrypt} 郵箱`,
+    enableStrictTransportSecurity: `${common.enable} HSTS（強制安全傳輸），需要 HTTPS 連線`,
+    enableIncludeSubDomains: `${common.enable} includeSubDomains 指令，所有子網域須啟用 HTTPS 連線`,
+    enablePreload: `${common.enable} preload 指令，強制瀏覽器使用 HTTPS 連線`,
+    certificationType: '憑證類型',
+    customCertificate: '自訂憑證',
+    letsEncryptEmail: `${common.letsEncrypt} 電子郵件地址`,
+    http3IsANonStandardModule: 'HTTP/3 並不是標準的 NGINX 模組，請查閱 ',
+    http3NginxQuicReadme: 'NGINX QUIC 說明',
+    http3OrThe: ' 或者 ', 
+    http3CloudflareQuicheProject: 'Cloudflare quiche 專案',
+    http3ForBuildingNginxWithHttp3: '以了解如何建置支援 HTTP/3 的 NGINX !',
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,12 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const path = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-const WebpackRequireFrom = require('webpack-require-from');
+import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+import WebpackRequireFrom from 'webpack-require-from';
+import { URL, fileURLToPath } from 'url';
 
-module.exports = {
+export default {
     publicPath: './',
     outputDir: 'dist',
     filenameHashing: false, // Don't hash the output, so we can embed on the DigitalOcean Community
@@ -40,15 +41,37 @@ module.exports = {
     configureWebpack: {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
-            process.argv.includes('--analyze') && new BundleAnalyzerPlugin(),
-            process.argv.includes('--analyze') && new DuplicatePackageCheckerPlugin(),
-            new WebpackRequireFrom({ replaceSrcMethodName: '__replaceWebpackDynamicImport' }),
-        ].filter(x => !!x),
+            // Fix dynamic imports from CDN (inject as first entry point before any imports can happen)
+            { apply: compiler => {
+                compiler.options.entry.app.import.unshift(
+                    fileURLToPath(new URL('src/nginxconfig/build/webpack-dynamic-import.js', import.meta.url)),
+                );
+            } },
+            new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL', suppressErrors: true }),
+            // Pass the env in for logging
+            new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+            // Analyze the bundle
+            new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
+            new DuplicatePackageCheckerPlugin(),
+        ],
     },
     chainWebpack: config => {
+        // Inject resolve-url-loader into the SCSS loader rules (to allow relative fonts in do-bulma to work)
+        for (const rule of ['vue-modules', 'vue', 'normal-modules', 'normal']) {
+            config.module.rule('scss')
+                .oneOf(rule)
+                .use('resolve-url-loader')
+                .loader('resolve-url-loader')
+                .before('sass-loader')
+                .end()
+                .use('sass-loader')
+                .loader('sass-loader')
+                .tap(options => ({ ...options, sourceMap: true }));
+        }
+
         // Use a custom HTML template
         config.plugin('html').tap(options => {
-            options[0].template = path.join(__dirname, 'build', 'index.html');
+            options[0].template = fileURLToPath(new URL('build/index.html', import.meta.url));
             return options;
         });
     },

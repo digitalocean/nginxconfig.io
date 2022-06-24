@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,9 +26,13 @@ THE SOFTWARE.
 
 export default {
     en: 'Anglais',
+    es: 'Espanol',
     zhCN: 'Chinois (simplifié)',
     zhTW: 'Chinois (traditionnel)',
     ptBR: 'Portugais (brésilien)',
     fr: 'Français',
     ru: 'Russe',
+    pl: 'Polonais',
+    de: 'Allemand',
+    ja: 'Japonais',
 };

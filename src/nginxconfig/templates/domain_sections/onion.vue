@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -49,8 +49,9 @@ THE SOFTWARE.
                         </div>
                         <div class="control">
                             <label class="text">
-                                <ExternalLink :text="$t('templates.domainSections.onion.learnMoreAboutOnionServices')"
-                                              link="https://community.torproject.org/onion-services/"
+                                <ExternalLink
+                                    :text="$t('templates.domainSections.onion.learnMoreAboutOnionServices')"
+                                    link="https://community.torproject.org/onion-services/"
                                 ></ExternalLink>
                             </label>
                         </div>
@@ -97,6 +98,9 @@ THE SOFTWARE.
             ...computedFromDefaults(defaults, 'onion'),         // Getters & setters for the delegated data
             incorrectEnding() {
                 return this.onionLocationChanged && !this.$props.data.onionLocation.computed.endsWith('.onion');
+            },
+            hasWarnings() {
+                return this.incorrectEnding;
             },
         },
         watch: {

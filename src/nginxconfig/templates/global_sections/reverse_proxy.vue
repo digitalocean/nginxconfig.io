@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -49,12 +49,13 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxyConnectTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxyConnectTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxyConnectTimeout.default"
+                            <input
+                                v-model.number="proxyConnectTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxyConnectTimeout.default"
                             />
                         </div>
                         <div class="control">
@@ -73,12 +74,13 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxySendTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxySendTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxySendTimeout.default"
+                            <input
+                                v-model.number="proxySendTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxySendTimeout.default"
                             />
                         </div>
                         <div class="control">
@@ -97,18 +99,41 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field has-addons">
                         <div :class="`control is-expanded${proxyReadTimeoutChanged ? ' is-changed' : ''}`">
-                            <input v-model.number="proxyReadTimeout"
-                                   class="input"
-                                   type="number"
-                                   min="0"
-                                   step="1"
-                                   :placeholder="$props.data.proxyReadTimeout.default"
+                            <input
+                                v-model.number="proxyReadTimeout"
+                                class="input"
+                                type="number"
+                                min="0"
+                                step="1"
+                                :placeholder="$props.data.proxyReadTimeout.default"
                             />
                         </div>
                         <div class="control">
                             <a class="button is-static">
                                 {{ $t('templates.globalSections.reverseProxy.seconds') }}
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Coexistence with X-Forwarded-*</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="field">
+                            <div
+                                v-for="(name, value) in $props.data.proxyCoexistenceXForwarded.options"
+                                :class="`control${proxyCoexistenceXForwardedChanged && value === proxyCoexistenceXForwarded ? ' is-changed' : ''}`"
+                            >
+                                <div class="radio">
+                                    <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">
+                                        {{ $t(name) }}
+                                    </PrettyRadio>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,6 +145,7 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         proxyConnectTimeout: {
@@ -135,6 +161,14 @@ THE SOFTWARE.
         proxyReadTimeout: {
             default: 60,
             computed: '60s', // We use a watcher to append 's'
+            enabled: false,
+        },
+        proxyCoexistenceXForwarded: {
+            default: 'passOn',
+            options: {
+                passOn: 'templates.globalSections.reverseProxy.passOn', // i18n key
+                remove: 'templates.globalSections.reverseProxy.remove', // i18n key
+            },
             enabled: false,
         },
     };
@@ -156,6 +190,9 @@ THE SOFTWARE.
         display: 'common.reverseProxy',                             // Display name for tab (i18n key)
         key: 'reverseProxy',                                        // Key for data in parent
         delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        components: {
+            PrettyRadio,
+        },
         props: {
             data: Object,                                           // Data delegated back to us from parent
         },
@@ -179,6 +216,8 @@ THE SOFTWARE.
                             this.$props.data.proxySendTimeout.computed = this.$props.data.proxySendTimeout.value;
                             this.$props.data.proxyReadTimeout.enabled = true;
                             this.$props.data.proxyReadTimeout.computed = this.$props.data.proxyReadTimeout.value;
+                            this.$props.data.proxyCoexistenceXForwarded.enabled = true;
+                            this.$props.data.proxyCoexistenceXForwarded.computed = this.$props.data.proxyCoexistenceXForwarded.value;
                             return;
                         }
                     }
@@ -190,6 +229,8 @@ THE SOFTWARE.
                     this.$props.data.proxySendTimeout.computed = '';
                     this.$props.data.proxyReadTimeout.enabled = false;
                     this.$props.data.proxyReadTimeout.computed = '';
+                    this.$props.data.proxyCoexistenceXForwarded.enabled = false;
+                    this.$props.data.proxyCoexistenceXForwarded.computed = '';
                 },
                 deep: true,
             },

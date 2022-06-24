@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default (global, backup = false) => {
+export default (domain, backup = false) => {
     const key = `php${backup ? 'Backup' : ''}Server`;
-    if (global.php[key].computed === 'custom') return global.php[`${key}Custom`].computed;
-    return (global.php[key].computed[0] === '/' ? 'unix:' : '') + global.php[key].computed;
+    if (domain.php[key].computed === 'custom') return domain.php[`${key}Custom`].computed;
+    return (domain.php[key].computed[0] === '/' ? 'unix:' : '') + domain.php[key].computed;
 };

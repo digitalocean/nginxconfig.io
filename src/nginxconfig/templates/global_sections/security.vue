@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,9 +33,10 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${referrerPolicyChanged ? ' is-changed' : ''}`">
-                        <VueSelect v-model="referrerPolicy"
-                                   :options="$props.data.referrerPolicy.options"
-                                   :clearable="false"
+                        <VueSelect
+                            v-model="referrerPolicy"
+                            :options="$props.data.referrerPolicy.options"
+                            :clearable="false"
                         ></VueSelect>
                     </div>
                 </div>
@@ -49,20 +50,39 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${contentSecurityPolicyChanged ? ' is-changed' : ''}`">
-                        <input v-model="contentSecurityPolicy"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.contentSecurityPolicy.default"
+                        <input
+                            v-model="contentSecurityPolicy"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
-                    <template v-if="hasWordPress && !hasUnsafeEval">
-                        <br />
-                        <div class="message is-warning">
-                            <div class="message-body"
-                                 v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
-                            ></div>
-                        </div>
-                    </template>
+                    <div v-if="hasWordPress && !hasWordPressUnsafeEval" class="control">
+                        <label class="text message is-warning">
+                            <span
+                                class="message-body"
+                                v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
+                            ></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">Permissions-Policy</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${permissionsPolicyChanged ? ' is-changed' : ''}`">
+                        <input
+                            v-model="permissionsPolicy"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.permissionsPolicy.default"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,7 +96,6 @@ THE SOFTWARE.
                     <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -94,7 +113,6 @@ THE SOFTWARE.
                     <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -112,7 +130,6 @@ THE SOFTWARE.
                     <div :class="`control${securityTxt ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -128,10 +145,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
-                        <input v-model="securityTxtPath"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.securityTxtPath.default"
+                        <input
+                            v-model="securityTxtPath"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.securityTxtPath.default"
                         />
                     </div>
                 </div>
@@ -141,10 +159,10 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import VueSelect from 'vue-select';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         referrerPolicy: {
@@ -162,7 +180,11 @@ THE SOFTWARE.
             enabled: true,
         },
         contentSecurityPolicy: {
-            default: 'default-src \'self\' http: https: data: blob: \'unsafe-inline\'',
+            default: 'default-src \'self\' http: https: ws: wss: data: blob: \'unsafe-inline\'; frame-ancestors \'self\';',
+            enabled: true,
+        },
+        permissionsPolicy: {
+            default: 'interest-cohort=()',
             enabled: true,
         },
         serverTokens: {
@@ -200,8 +222,12 @@ THE SOFTWARE.
             hasWordPress() {
                 return this.$parent.$parent.$data.domains.some(d => d && d.php.wordPressRules.computed);
             },
-            hasUnsafeEval() {
-                return this.$props.data.contentSecurityPolicy.computed.includes('\'unsafe-eval\'');
+            hasWordPressUnsafeEval() {
+                return this.$props.data.contentSecurityPolicy.computed
+                    .match(/(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/) !== null;
+            },
+            hasWarnings() {
+                return this.hasWordPress && !this.hasWordPressUnsafeEval;
             },
         },
         watch: {

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -37,4 +37,5 @@ export const extensions = {
         'docx?|dotx?|docm|dotm|' +
         'xlsx?|xltx?|xlsm|xltm|' +
         'pptx?|potx?|pptm|potm|ppsx?',
+    html: 'html?',
 };

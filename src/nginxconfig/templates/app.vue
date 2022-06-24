@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,11 +33,12 @@ THE SOFTWARE.
             <template #header>
             </template>
             <template #buttons>
-                <VueSelect v-model="lang"
-                           :options="i18nPacks"
-                           :clearable="false"
-                           :reduce="s => s.value"
-                           :disabled="languageLoading"
+                <VueSelect
+                    v-model="lang"
+                    :options="i18nPacks"
+                    :clearable="false"
+                    :reduce="s => s.value"
+                    :disabled="languageLoading"
                 >
                     <template #selected-option="{ label }">
                         <span class="has-icon">
@@ -66,6 +67,7 @@ THE SOFTWARE.
                             <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
                                 <a class="domain" @click="active = data[1]">
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
+                                    <i v-if="warnings(data[1])" class="fas fa-exclamation-triangle"></i>
                                 </a>
                                 <a class="remove" @click="remove(data[1])">
                                     <i class="fas fa-times"></i>
@@ -77,12 +79,13 @@ THE SOFTWARE.
                         </ul>
                     </div>
 
-                    <template v-for="data in activeDomains">
-                        <Domain :key="data[1]"
-                                :data="data[0]"
-                                :style="{ display: data[1] === active ? undefined : 'none' }"
-                        ></Domain>
-                    </template>
+                    <Domain
+                        v-for="data in activeDomains"
+                        :key="data[1]"
+                        :ref="`domain-${data[1]}`"
+                        :data="data[0]"
+                        :style="{ display: data[1] === active ? undefined : 'none' }"
+                    ></Domain>
 
                     <h2>{{ $t('templates.app.globalConfig') }}</h2>
                     <Global :data="global"></Global>
@@ -96,16 +99,15 @@ THE SOFTWARE.
                 <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
                     <h2>{{ $t('templates.app.configFiles') }}</h2>
                     <div ref="files" class="columns is-multiline files">
-                        <template v-for="confContents in confFilesOutput">
-                            <component
-                                :is="getPrismComponent(confContents[0])"
-                                :key="confContents[2]"
-                                :name="confContents[0]"
-                                :conf="confContents[1]"
-                                :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
-                                @copied="codeCopiedEvent(confContents[3])"
-                            ></component>
-                        </template>
+                        <component
+                            v-for="confContents in confFilesOutput"
+                            :is="getPrismComponent(confContents[0])"
+                            :key="confContents[2]"
+                            :name="confContents[0]"
+                            :conf="confContents[1]"
+                            :half="Object.keys(confFilesOutput).length > 1 && !splitColumn"
+                            @copied="codeCopiedEvent(confContents[3])"
+                        ></component>
                     </div>
                 </div>
             </div>
@@ -129,8 +131,8 @@ THE SOFTWARE.
     import isObject from '../util/is_object';
     import analytics from '../util/analytics';
     import browserLanguage from '../util/browser_language';
-    import { defaultPack } from '../util/language_pack_default';
-    import { availablePacks } from '../util/language_pack_context';
+    import { defaultPack, availablePacks } from '../util/language_packs';
+    import { info, error } from '../util/log';
 
     import { setLanguagePack } from '../i18n/setup';
     import generators from '../generators';
@@ -191,6 +193,12 @@ THE SOFTWARE.
             confFiles() {
                 return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
             },
+            confFilesWithDirectory() {
+                return Object.entries(this.confFiles).reduce((obj, [ file, content ]) => ({
+                    ...obj,
+                    [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]: content,
+                }), {});
+            },
             lang: {
                 get() {
                     return this.$data.global.app.lang.value;
@@ -210,7 +218,7 @@ THE SOFTWARE.
             },
         },
         watch: {
-            confFiles(newConf, oldConf) {
+            confFilesWithDirectory(newConf, oldConf) {
                 if (this.$data.confWatcherWaiting) return;
 
                 // Set that we're waiting for changes to stop
@@ -234,7 +242,7 @@ THE SOFTWARE.
                     // Update the locale
                     setLanguagePack(data.computed).then(() => {
                         // Done
-                        console.log('Language set to', data.computed);
+                        info('Language set to', data.computed);
                         this.$data.languagePrevious = data.computed;
                         this.$data.languageLoading = false;
 
@@ -242,8 +250,7 @@ THE SOFTWARE.
                         this.languageSetEvent(!interactive);
                     }).catch((err) => {
                         // Error
-                        console.log('Failed to set language to', data.computed);
-                        console.error(err);
+                        error(`Failed to set language to ${data.computed}`, err);
 
                         // Fallback to last known good
                         data.value = this.$data.languagePrevious;
@@ -284,6 +291,10 @@ THE SOFTWARE.
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },
+            warnings(index) {
+                if (!Object.prototype.hasOwnProperty.call(this.$refs, `domain-${index}`)) return false;
+                return this.$refs[`domain-${index}`][0].hasWarnings || false;
+            },
             add() {
                 const data = clone(Domain.delegated);
 
@@ -304,7 +315,7 @@ THE SOFTWARE.
             },
             remove(index) {
                 const name = this.$data.domains[index].server.domain.computed;
-                this.$set(this.$data.domains, index, null);
+                this.$data.domains[index] = null;
                 if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
 
                 // Analytics
@@ -312,21 +323,21 @@ THE SOFTWARE.
             },
             checkChange(oldConf) {
                 // If nothing has changed for a tick, we can use the config files
-                if (oldConf === this.confFiles) {
+                if (oldConf === this.confFilesWithDirectory) {
                     // If this is the initial data load on app start, run the diff logic
                     // but with previous as this so that we don't highlight any changes
                     if (!this.$data.ready) {
-                        this.$data.confFilesPrevious = this.confFiles;
+                        this.$data.confFilesPrevious = this.confFilesWithDirectory;
                         this.$nextTick(() => { this.$data.ready = true; });
                     }
 
                     // Do the diff!
-                    this.updateDiff(this.confFiles, this.$data.confFilesPrevious);
+                    this.updateDiff(this.confFilesWithDirectory, this.$data.confFilesPrevious);
                     return;
                 }
 
                 // Check next tick to see if anything has changed again
-                this.$nextTick(() => this.checkChange(this.confFiles));
+                this.$nextTick(() => this.checkChange(this.confFilesWithDirectory));
             },
             updateDiff(newConf, oldConf) {
                 try {
@@ -336,25 +347,26 @@ THE SOFTWARE.
                     });
                     this.$data.confFilesOutput = Object.entries(diffConf).map(([ file, { name, content } ]) => {
                         const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
-                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${diffName}`;
                         const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
 
                         return [
-                            confName,
+                            diffName,
                             diffContent,
-                            `${sha2_256(confName)}-${sha2_256(diffContent)}`,
+                            `${sha2_256(diffName)}-${sha2_256(diffContent)}`,
                             file,
                         ];
                     });
-                } catch (e) {
+                } catch (err) {
                     // If diff generation goes wrong, don't show any diff
-                    console.error(e);
+                    error('Failed to compute and highlight diff', err);
                     this.$data.confFilesOutput = Object.entries(newConf).map(([ name, content ]) => {
-                        const confName = `${escape(this.$data.global.nginx.nginxConfigDirectory.computed)}/${name}`;
+                        const safeName = escape(name);
+                        const safeContent = escape(content);
+
                         return [
-                            confName,
-                            content,
-                            `${sha2_256(confName)}-${sha2_256(content)}`,
+                            safeName,
+                            safeContent,
+                            `${sha2_256(safeName)}-${sha2_256(safeContent)}`,
                             name,
                         ];
                     });

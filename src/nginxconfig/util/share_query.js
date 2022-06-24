@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,5 +30,5 @@ import exportData from './export_data';
 export default (domains, global) => {
     const data = exportData(domains, global);
     const query = qs.stringify(data, { allowDots: true });
-    return `${query.length > 4000 ? '#' : ''}${query.length ? '?' : ''}${query}`;
+    return `${query.length > 1000 ? '#' : ''}${query.length ? '?' : ''}${query}`;
 };

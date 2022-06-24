@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `当使用${common.wordPress}时，, <code class="slim">'unsafe-eval'</code>经常需要在内容安全策略中，以允许管理面板的功能正确。`,
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `当使用${common.wordPress}时，<code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> 通常需要置于内容安全策略中，以确保管理面板的正常运行。`,
     security: '安全',
 };

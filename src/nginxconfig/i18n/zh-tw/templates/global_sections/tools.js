@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,22 +32,22 @@ export default {
     symlinkVhost: '符號連結 vhost',
     enableSymLinksFrom: `${common.enable}符號連結`,
     to: '到',
-    shareConfiguration: '分享配寘',
-    resetConfiguration: '重置配寘',
-    resetGlobalConfig: '重置全域配寘',
-    resetAllDomains: '重置所有網站',
-    resetAllDomainsConfig: '重置所有網站',
-    removeAllDomains: '删除所有網站',
-    resetDomainConfig: '重置網站配寘',
-    removeDomain: '删除網站',
-    yesImSure: '好的',
+    shareConfiguration: '分享設定',
+    resetConfiguration: '重置設定',
+    resetGlobalConfig: '重置全域設定',
+    resetAllDomains: '重置所有網域',
+    removeAllDomains: '移除所有網域',
+    resetAllDomainsConfig: '重置所有網域',
+    resetDomainConfig: '重置網域設定',
+    removeDomain: '移除網域',
+    yesImSure: '是，我確定',
     noCancel: '取消',
     tools: '工具',
-    resetGlobalConfigBody: '您確定要重置全域配寘部分中的所有配置選項嗎?',
-    resetAllDomainsConfigBody: '您確定要重置所有網站的配寘嗎?',
-    removeAllDomainsBody: '您確定要删除所有網站的配寘嗎?',
+    resetGlobalConfigBody: '您確定要重置全域設定中的所有設定嗎？',
+    resetAllDomainsConfigBody: '您確定要重置所有網域的設定嗎？',
+    removeAllDomainsBody: '您確定要移除所有網域的設定嗎？',
     areYouSureYouWantToResetAllConfigurationOptionsForThe: '您確定要重置',
-    domain: '網站的所有配置選項嗎?',
-    areYouSureYouWantToRemoveThe: '你確定要删除',
-    domainConfiguration: '的網站配寘嗎？',
+    domain: '網域的所有設定嗎？',
+    areYouSureYouWantToRemoveThe: '您確定要移除',
+    domainConfiguration: '的網域設定嗎？',
 };

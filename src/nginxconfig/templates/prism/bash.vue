@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -31,7 +31,7 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import Prism from 'prismjs';
+    import { info } from '../../util/log';
 
     export default {
         name: 'BashPrism',
@@ -39,8 +39,8 @@ THE SOFTWARE.
             cmd: String,
         },
         mounted() {
-            console.info(`Highlighting ${this.$props.cmd}...`);
-            Prism.highlightAllUnder(this.$el);
+            info(`Highlighting ${this.$props.cmd}...`);
+            window.Prism.highlightAllUnder(this.$el);
         },
         methods: {
             copied(event) {

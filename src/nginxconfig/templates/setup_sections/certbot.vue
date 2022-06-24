@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -32,9 +32,10 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.commentOutSslDirectivesInConfiguration') }}
                     <br />
                 </p>
-                <BashPrism :key="sitesAvailable"
-                           :cmd="`sed -i -r 's/(listen .*443)/\\1;#/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g' ${sitesAvailable}`"
-                           @copied="codeCopiedEvent('Disable ssl directives')"
+                <BashPrism
+                    :key="sitesAvailable"
+                    :cmd="`sed -i -r 's/(listen .*443)/\\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g; s/(server \\{)/\\1\\n    ssl off;/g' ${sitesAvailable}`"
+                    @copied="codeCopiedEvent('Disable ssl directives')"
                 ></BashPrism>
             </li>
 
@@ -43,8 +44,9 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
-                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
-                           @copied="codeCopiedEvent('Reload nginx')"
+                <BashPrism
+                    cmd="sudo nginx -t && sudo systemctl reload nginx"
+                    @copied="codeCopiedEvent('Reload nginx')"
                 ></BashPrism>
             </li>
 
@@ -53,9 +55,10 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.obtainSslCertificatesFromLetsEncrypt') }}
                     <br />
                 </p>
-                <BashPrism :key="certbotCmds"
-                           :cmd="certbotCmds"
-                           @copied="codeCopiedEvent('Obtain certificates using certbot')"
+                <BashPrism
+                    :key="certbotCmds"
+                    :cmd="certbotCmds"
+                    @copied="codeCopiedEvent('Obtain certificates using certbot')"
                 ></BashPrism>
             </li>
 
@@ -64,9 +67,10 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration') }}
                     <br />
                 </p>
-                <BashPrism :key="sitesAvailable"
-                           :cmd="`sed -i -r 's/#?;#//g' ${sitesAvailable}`"
-                           @copied="codeCopiedEvent('Enable ssl directives')"
+                <BashPrism
+                    :key="sitesAvailable"
+                    :cmd="`sed -i -r -z 's/#?; ?#//g; s/(server \\{)\\n    ssl off;/\\1/g' ${sitesAvailable}`"
+                    @copied="codeCopiedEvent('Enable ssl directives')"
                 ></BashPrism>
             </li>
 
@@ -75,8 +79,9 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.reloadYourNginxServer') }}
                     <br />
                 </p>
-                <BashPrism cmd="sudo nginx -t && sudo systemctl reload nginx"
-                           @copied="codeCopiedEvent('Reload nginx (2)')"
+                <BashPrism
+                    cmd="sudo nginx -t && sudo systemctl reload nginx"
+                    @copied="codeCopiedEvent('Reload nginx (2)')"
                 ></BashPrism>
             </li>
 
@@ -85,11 +90,13 @@ THE SOFTWARE.
                     {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
                     <br />
                 </p>
-                <BashPrism cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
-                           @copied="codeCopiedEvent('Create nginx auto-restart on renewal')"
+                <BashPrism
+                    cmd="echo -e '#!/bin/bash\nnginx -t && systemctl reload nginx' | sudo tee /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                    @copied="codeCopiedEvent('Create nginx auto-restart on renewal')"
                 ></BashPrism>
-                <BashPrism cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
-                           @copied="codeCopiedEvent('Enable execution of auto-restart')"
+                <BashPrism
+                    cmd="sudo chmod a+x /etc/letsencrypt/renewal-hooks/post/nginx-reload.sh"
+                    @copied="codeCopiedEvent('Enable execution of auto-restart')"
                 ></BashPrism>
             </li>
         </ol>

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -28,8 +28,7 @@ THE SOFTWARE.
   ul {
     li {
       display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
+      flex-flow: row nowrap;
 
       &:hover,
       &:focus {
@@ -97,16 +96,23 @@ THE SOFTWARE.
           }
 
           i {
+            font-size: .75em;
             margin: 0;
           }
         }
 
-        // Handle having the remove icon as well as the add icon
         i {
-          font-size: .75em;
-
+          // Add domain button
           &.fa-plus {
+            font-size: .75em;
             margin: 0 .35rem 0 0;
+          }
+
+          // Warning icon
+          &.fa-exclamation-triangle {
+            color: $warning-hover;
+            font-size: .9em;
+            margin: 0 0 .1rem .35rem;
           }
         }
       }

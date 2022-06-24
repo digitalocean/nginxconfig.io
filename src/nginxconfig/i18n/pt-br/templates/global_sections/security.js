@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,6 +27,6 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Ao utilizar o ${common.wordPress}, <code class="slim">'unsafe-eval'</code> é frequentemente exigido na Política de Segurança de Conteúdo para permitir que o painel de administração funcione corretamente.`,
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Ao utilizar o ${common.wordPress}, <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> é frequentemente exigido na Política de Segurança de Conteúdo para permitir que o painel de administração funcione corretamente.`,
     security: 'Segurança',
 };

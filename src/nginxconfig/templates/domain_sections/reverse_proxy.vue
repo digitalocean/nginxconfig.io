@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -56,7 +56,6 @@ THE SOFTWARE.
                     <div class="control">
                         <div class="checkbox">
                             <PrettyCheck v-model="reverseProxy" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.reverseProxy.enableReverseProxy') }}
                             </PrettyCheck>
                         </div>
@@ -72,10 +71,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div :class="`field${pathChanged ? ' is-changed' : ''}`">
                     <div class="control">
-                        <input v-model="path"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.path.default"
+                        <input
+                            v-model="path"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.path.default"
                         />
                     </div>
                 </div>
@@ -89,10 +89,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div :class="`field${proxyPassChanged ? ' is-changed' : ''}`">
                     <div class="control">
-                        <input v-model="proxyPass"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.proxyPass.default"
+                        <input
+                            v-model="proxyPass"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.proxyPass.default"
                         />
                     </div>
                 </div>
@@ -102,9 +103,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         reverseProxy: {

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -28,7 +28,8 @@ import qs from 'qs';
 import clone from 'clone';
 import Domain from '../templates/domain';
 import isObject from './is_object';
-import backwardsCompatibility from './backwards_compatibility';
+import angularBackwardsCompatibility from './angular_backwards_compatibility';
+import vueBackwardsCompatibility from './vue_backwards_compatibility';
 
 const applyCategories = (categories, target) => {
     // Work through each potential category
@@ -86,7 +87,10 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
     });
 
     // Handle converting nginxconfig.io-angular params to the current version
-    backwardsCompatibility(data);
+    angularBackwardsCompatibility(data);
+
+    // Handle converting vue params to the current version
+    vueBackwardsCompatibility(data);
 
     // Handle domains
     if ('domains' in data && isObject(data.domains)) {
@@ -100,9 +104,9 @@ export default (query, domains, global, nextTick) => new Promise(resolve => {
             }
 
             // Create a new domain (assume it has had custom user settings)
-            const domainImported = clone(Domain.delegated);
+            // Push transforms the object to a proxy, so re-fetch the proxy from the array
+            const domainImported = domains[domains.push(clone(Domain.delegated)) - 1];
             domainImported.hasUserInteraction = true;
-            domains.push(domainImported);
 
             // Apply the initial values on the next Vue tick, once the watchers are ready
             nextTick(() => applyCategories(data.domains[i], domainImported));

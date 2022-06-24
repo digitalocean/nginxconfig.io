@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,7 +35,6 @@ THE SOFTWARE.
                     <div :class="`control${httpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="https" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.https.enableEncryptedSslConnection') }}
                             </PrettyCheck>
                         </div>
@@ -53,10 +52,44 @@ THE SOFTWARE.
                     <div :class="`control${http2Changed ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="http2" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.https.enableHttp2Connections') }}
                             </PrettyCheck>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="http3Enabled" class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
+                <label class="label">{{ $t('templates.domainSections.https.http3') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${http3Changed ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="http3" class="p-default p-curve p-fill p-icon">
+                                {{ $t('templates.domainSections.https.enableHttp3Connections') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+
+                    <div v-if="showHttp3Warning" class="control">
+                        <label class="text message is-warning">
+                            <span class="message-body">
+                                {{ $t('templates.domainSections.https.http3IsANonStandardModule') }}
+                                <ExternalLink
+                                    :text="$t('templates.domainSections.https.http3NginxQuicReadme')"
+                                    link="https://quic.nginx.org/README"
+                                ></ExternalLink>
+                                {{ $t('templates.domainSections.https.http3OrThe') }}
+                                <ExternalLink
+                                    :text="$t('templates.domainSections.https.http3CloudflareQuicheProject')"
+                                    link="https://github.com/cloudflare/quiche/tree/master/nginx"
+                                ></ExternalLink>
+                                {{ $t('templates.domainSections.https.http3ForBuildingNginxWithHttp3') }}
+                            </span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -71,7 +104,6 @@ THE SOFTWARE.
                     <div :class="`control${forceHttpsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="forceHttps" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 (http://{{ $parent.$props.data.server.domain.computed }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
                                 https://{{ $parent.$props.data.server.domain.computed }})
@@ -91,7 +123,6 @@ THE SOFTWARE.
                     <div :class="`control${hstsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hsts" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.https.enableStrictTransportSecurity') }}
                             </PrettyCheck>
                         </div>
@@ -100,7 +131,6 @@ THE SOFTWARE.
                     <div v-if="hstsSubdomainsEnabled" :class="`control${hstsSubdomainsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsSubdomains" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.https.enableIncludeSubDomains') }}
                             </PrettyCheck>
                         </div>
@@ -109,7 +139,6 @@ THE SOFTWARE.
                     <div v-if="hstsPreloadEnabled" :class="`control${hstsPreloadChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="hstsPreload" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.https.enablePreload') }}
                             </PrettyCheck>
                         </div>
@@ -124,12 +153,12 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div v-for="(name, value) in $props.data.certType.options"
-                         :class="`control${certTypeChanged && value === certType ? ' is-changed' : ''}`"
+                    <div
+                        v-for="(name, value) in $props.data.certType.options"
+                        :class="`control${certTypeChanged && value === certType ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
                             <PrettyRadio v-model="certType" :value="value" class="p-default p-round p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t(name) }}
                             </PrettyRadio>
                         </div>
@@ -145,10 +174,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${letsEncryptEmailChanged ? ' is-changed' : ''}`">
-                        <input v-model="letsEncryptEmail"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.letsEncryptEmail.computed"
+                        <input
+                            v-model="letsEncryptEmail"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.letsEncryptEmail.computed"
                         />
                     </div>
                 </div>
@@ -162,10 +192,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${sslCertificateChanged ? ' is-changed' : ''}`">
-                        <input v-model="sslCertificate"
-                               class="input"
-                               type="text"
-                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
+                        <input
+                            v-model="sslCertificate"
+                            class="input"
+                            type="text"
+                            :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.crt`"
                         />
                     </div>
                 </div>
@@ -179,10 +210,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${sslCertificateKeyChanged ? ' is-changed' : ''}`">
-                        <input v-model="sslCertificateKey"
-                               class="input"
-                               type="text"
-                               :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.key`"
+                        <input
+                            v-model="sslCertificateKey"
+                            class="input"
+                            type="text"
+                            :placeholder="`${$parent.$parent.$data.global.nginx.nginxConfigDirectory.computed}/ssl/${$parent.$props.data.server.domain.computed}.key`"
                         />
                     </div>
                 </div>
@@ -192,10 +224,11 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
+    import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         https: {
@@ -204,6 +237,10 @@ THE SOFTWARE.
         },
         http2: {
             default: true,
+            enabled: true,
+        },
+        http3: {
+            default: false,
             enabled: true,
         },
         forceHttps: {
@@ -253,11 +290,20 @@ THE SOFTWARE.
         components: {
             PrettyCheck,
             PrettyRadio,
+            ExternalLink,
         },
         props: {
             data: Object,                                   // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
+        computed: {
+            ...computedFromDefaults(defaults, 'https'),     // Getters & setters for the delegated data
+            showHttp3Warning() {
+                return this.$props.data.http3.computed;
+            },
+            hasWarnings() {
+                return this.showHttp3Warning;
+            },
+        },
         watch: {
             // Disable everything if https is disabled
             '$props.data.https': {
@@ -266,6 +312,8 @@ THE SOFTWARE.
                     if (state) {
                         this.$props.data.http2.enabled = true;
                         this.$props.data.http2.computed = this.$props.data.http2.value;
+                        this.$props.data.http3.enabled = true;
+                        this.$props.data.http3.computed = this.$props.data.http3.value;
                         this.$props.data.forceHttps.enabled = true;
                         this.$props.data.forceHttps.computed = this.$props.data.forceHttps.value;
                         this.$props.data.hsts.enabled = true;
@@ -275,6 +323,8 @@ THE SOFTWARE.
                     } else {
                         this.$props.data.http2.enabled = false;
                         this.$props.data.http2.computed = false;
+                        this.$props.data.http3.enabled = false;
+                        this.$props.data.http3.computed = false;
                         this.$props.data.forceHttps.enabled = false;
                         this.$props.data.forceHttps.computed = false;
                         this.$props.data.hsts.enabled = false;

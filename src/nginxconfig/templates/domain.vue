@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -34,17 +34,22 @@ THE SOFTWARE.
             <div class="tabs">
                 <ul>
                     <li v-for="tab in tabs" :class="tabClass(tab.key)">
-                        <a @click="showTab(tab.key)">{{ $t(tab.display) }}{{ changes(tab.key) }}</a>
+                        <a @click="showTab(tab.key)">
+                            {{ $t(tab.display) }}{{ changes(tab.key) }}
+                            <i v-if="warnings(tab.key)" class="fas fa-exclamation-triangle"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
 
-            <component :is="tab"
-                       v-for="tab in tabs"
-                       :key="tab.key"
-                       :data="$props.data[tab.key]"
-                       :style="{ display: active === tab.key ? undefined : 'none' }"
-                       class="container"
+            <component
+                :is="tab"
+                v-for="tab in tabs"
+                :key="tab.key"
+                :ref="tab.key"
+                :data="$props.data[tab.key]"
+                :style="{ display: active === tab.key ? undefined : 'none' }"
+                class="container"
             ></component>
 
             <div class="navigation-buttons">
@@ -63,13 +68,12 @@ THE SOFTWARE.
     import analytics from '../util/analytics';
     import isChanged from '../util/is_changed';
     import Presets from './domain_sections/presets';
-    import * as Sections from './domain_sections';
+    import Sections from './domain_sections';
 
-    const tabs = Object.values(Sections);
     const delegated = {
         hasUserInteraction: false,
         presets: Presets.delegated,
-        ...tabs.reduce((prev, tab) => {
+        ...Sections.reduce((prev, tab) => {
             prev[tab.key] = tab.delegated;
             return prev;
         }, {}),
@@ -86,8 +90,8 @@ THE SOFTWARE.
         },
         data() {
             return {
-                active: tabs[0].key,
-                tabs,
+                active: Sections[0].key,
+                tabs: Sections,
             };
         },
         computed: {
@@ -103,6 +107,9 @@ THE SOFTWARE.
                 if (index >= 0) return tabs[index];
                 return false;
             },
+            hasWarnings() {
+                return Object.values(this.$refs).some(ref => ref[0].hasWarnings || false);
+            },
         },
         methods: {
             changesCount(tab) {
@@ -113,6 +120,10 @@ THE SOFTWARE.
                 const changes = this.changesCount(tab);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
+            },
+            warnings(tab) {
+                if (!Object.prototype.hasOwnProperty.call(this.$refs, tab)) return false;
+                return this.$refs[tab][0].hasWarnings || false;
             },
             setValue(tab, key, val) {
                 Object.assign(this.$props.data[tab][key], { value: val, computed: val });

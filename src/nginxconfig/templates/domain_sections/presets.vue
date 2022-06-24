@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -41,9 +41,10 @@ THE SOFTWARE.
             </div>
 
             <div class="buttons-group">
-                <a v-for="(preset, key) in $props.data"
-                   :class="`button${preset.computed ? ' is-primary' : ''}`"
-                   @click="setPreset(key)"
+                <a
+                    v-for="(preset, key) in $props.data"
+                    :class="`button${preset.computed ? ' is-primary' : ''}`"
+                    @click="setPreset(key)"
                 >
                     {{ $t(preset.display) }}
                 </a>

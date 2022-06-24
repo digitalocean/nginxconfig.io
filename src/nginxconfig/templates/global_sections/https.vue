@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,6 +26,23 @@ THE SOFTWARE.
 
 <template>
     <div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.globalSections.https.portReuse') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                                {{ $t('templates.globalSections.https.enableReuseOfPort') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="!sslProfileEnabled" class="field is-horizontal is-aligned-top">
             <div class="field-label">
                 <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
@@ -49,12 +66,12 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div class="field">
-                            <div v-for="(name, value) in $props.data.sslProfile.options"
-                                 :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.sslProfile.options"
+                                :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -73,18 +90,17 @@ THE SOFTWARE.
                         <div :class="`control${ocspCloudflareChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspCloudflare" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.cloudflareResolver') }}
                                 </PrettyCheck>
                             </div>
                         </div>
                         <div v-if="$props.data.ocspCloudflare.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspCloudflareType.options"
-                                 :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspCloudflareType.options"
+                                :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -94,18 +110,17 @@ THE SOFTWARE.
                         <div :class="`control${ocspGoogleChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.googlePublicDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
                         <div v-if="$props.data.ocspGoogle.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspGoogleType.options"
-                                 :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspGoogleType.options"
+                                :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -115,18 +130,17 @@ THE SOFTWARE.
                         <div :class="`control${ocspOpenDnsChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.openDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
                         <div v-if="$props.data.ocspOpenDns.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspOpenDnsType.options"
-                                 :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspOpenDnsType.options"
+                                :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -136,18 +150,17 @@ THE SOFTWARE.
                         <div :class="`control${ocspQuad9Changed ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspQuad9" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.quad9') }}
                                 </PrettyCheck>
                             </div>
                         </div>
                         <div v-if="$props.data.ocspQuad9.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspQuad9Type.options"
-                                 :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspQuad9Type.options"
+                                :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -157,18 +170,17 @@ THE SOFTWARE.
                         <div :class="`control${ocspVerisignChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
                                 <PrettyCheck v-model="ocspVerisign" class="p-default p-curve p-fill p-icon">
-                                    <i slot="extra" class="icon fas fa-check"></i>
                                     {{ $t('templates.globalSections.https.verisign') }}
                                 </PrettyCheck>
                             </div>
                         </div>
                         <div v-if="$props.data.ocspVerisign.computed" class="control field is-horizontal is-expanded">
-                            <div v-for="(name, value) in $props.data.ocspVerisignType.options"
-                                 :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
+                            <div
+                                v-for="(name, value) in $props.data.ocspVerisignType.options"
+                                :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
                             >
                                 <div class="radio">
                                     <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
-                                        <i slot="extra" class="icon fas fa-check"></i>
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -185,10 +197,11 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${letsEncryptRootChanged ? ' is-changed' : ''}`">
-                            <input v-model="letsEncryptRoot"
-                                   class="input"
-                                   type="text"
-                                   :placeholder="$props.data.letsEncryptRoot.default"
+                            <input
+                                v-model="letsEncryptRoot"
+                                class="input"
+                                type="text"
+                                :placeholder="$props.data.letsEncryptRoot.default"
                             />
                         </div>
                     </div>
@@ -202,10 +215,11 @@ THE SOFTWARE.
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${letsEncryptCertRootChanged ? ' is-changed' : ''}`">
-                            <input v-model="letsEncryptCertRoot"
-                                   class="input"
-                                   type="text"
-                                   :placeholder="$props.data.letsEncryptCertRoot.default"
+                            <input
+                                v-model="letsEncryptCertRoot"
+                                class="input"
+                                type="text"
+                                :placeholder="$props.data.letsEncryptCertRoot.default"
                             />
                         </div>
                     </div>
@@ -216,11 +230,11 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import clone from 'clone';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const ipType = {
         default: 'ipv4',
@@ -239,6 +253,10 @@ THE SOFTWARE.
     };
 
     const defaults = {
+        portReuse: {
+            default: false,
+            enabled: true,
+        },
         sslProfile: {
             default: 'intermediate',
             options: {

@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,7 +35,6 @@ THE SOFTWARE.
                     <div :class="`control${rootChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -50,12 +49,12 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div v-for="value in $props.data.index.options"
-                         :class="`control${indexChanged && value === index ? ' is-changed' : ''}`"
+                    <div
+                        v-for="value in $props.data.index.options"
+                        :class="`control${indexChanged && value === index ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
                             <PrettyRadio v-model="index" :value="value" class="p-default p-round p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ value }}
                             </PrettyRadio>
                         </div>
@@ -73,7 +72,6 @@ THE SOFTWARE.
                     <div v-if="fallbackHtmlEnabled" :class="`control${fallbackHtmlChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="fallbackHtml" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 index.html
                             </PrettyCheck>
                         </div>
@@ -81,7 +79,6 @@ THE SOFTWARE.
                     <div v-if="fallbackPhpEnabled" :class="`control${fallbackPhpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="fallbackPhp" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 index.php
                             </PrettyCheck>
                         </div>
@@ -97,10 +94,11 @@ THE SOFTWARE.
             <div class="field-body">
                 <div :class="`field${fallbackPhpPathChanged ? ' is-changed' : ''}`">
                     <div class="control">
-                        <input v-model="fallbackPhpPath"
-                               class="input"
-                               type="text"
-                               :placeholder="$props.data.fallbackPhpPath.default"
+                        <input
+                            v-model="fallbackPhpPath"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.fallbackPhpPath.default"
                         />
                     </div>
                 </div>
@@ -116,7 +114,6 @@ THE SOFTWARE.
                     <div :class="`control${legacyPhpRoutingChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
                             <PrettyCheck v-model="legacyPhpRouting" class="p-default p-curve p-fill p-icon">
-                                <i slot="extra" class="icon fas fa-check"></i>
                                 {{ $t('templates.domainSections.routing.enableLegacyRouting') }}
                             </PrettyCheck>
                         </div>
@@ -128,10 +125,10 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import PrettyCheck from 'pretty-checkbox-vue/check';
-    import PrettyRadio from 'pretty-checkbox-vue/radio';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         root: {

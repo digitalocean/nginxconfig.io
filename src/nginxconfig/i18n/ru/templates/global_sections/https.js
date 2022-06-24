@@ -33,6 +33,8 @@ const ipv6 = 'IPv6';
 export default {
     sslProfile: `${common.ssl} Профиль`,
     httpsMustBeEnabledOnOneSite: `${common.https} должен быть включен хотя бы на одном сайте, чтобы сконфигурировать глобальные ${common.https} настройки.`,
+    portReuse: 'Reuseport',
+    enableReuseOfPort: `${common.enable} reuseport чтобы создавать отдельный слушающий сокет для каждого рабочего процесса`,
     ocspDnsResolvers: 'OCSP DNS Преобразователи',
     cloudflareResolver: 'Cloudflare Преобразователь',
     googlePublicDns: 'Публичные Google DNS',

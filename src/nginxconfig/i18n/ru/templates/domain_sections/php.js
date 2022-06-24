@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -39,4 +39,19 @@ export default {
     enableMagentoRules: `${common.enable} ${common.magento}-специфичные правила`,
     joomlaRules: `${common.joomla} правила`,
     enableJoomlaRules: `${common.enable} ${common.joomla}-специфичные правила`,
+    phpServer: `${common.php} сервер`,
+    phpBackupServer: `${common.php} бекап сервер`,
+    tcp: 'TCP',
+    hhvmSocket: 'HHVM сокет',
+    php5Socket: '5.x сокет',
+    php70Socket: '7.0 сокет',
+    php71Socket: '7.1 сокет',
+    php72Socket: '7.2 сокет',
+    php73Socket: '7.3 сокет',
+    php74Socket: '7.4 сокет',
+    php80Socket: '8.0 сокет',
+    php81Socket: '8.1 сокет',
+    phpSocket: 'PHP сокет',
+    custom: 'Другой',
+    disabled: 'Выключено',
 };

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,8 +26,7 @@ THE SOFTWARE.
 
 .field-row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   margin: 0 -.5rem;
 
   .field {
@@ -53,10 +52,14 @@ THE SOFTWARE.
         &.has-margin-top {
           margin-top: .75rem;
         }
+
+        &.has-small-margin-top {
+          margin-top: .25rem;
+        }
       }
 
       > p {
-        @include sailec-medium;
+        @include font-medium;
 
         color: $dark-grey;
         font-size: 14px;
@@ -83,7 +86,7 @@ THE SOFTWARE.
 
   .is-changed {
     input {
-      &:not(.vs__search) {
+      &:not(.vs__search) { // stylelint-disable-line selector-class-pattern
         &,
         &:focus {
           background: rgba($highlight, .35);
@@ -104,14 +107,14 @@ THE SOFTWARE.
     }
 
     .v-select {
-      .vs__dropdown-toggle { // sass-lint:disable-line class-name-format
+      .vs__dropdown-toggle { // stylelint-disable-line selector-class-pattern
         background: rgba($highlight, .35);
       }
     }
   }
 
   label {
-    @include sailec-medium;
+    @include font-medium;
 
     color: $dark-blue;
     font-size: 1rem;
@@ -206,11 +209,11 @@ THE SOFTWARE.
         }
 
         label {
-          @include sailec-medium;
+          @include font-medium;
 
           color: $dark-grey;
           font-size: 14px;
-          padding-left: calc(#{$margin / 2} + 1.5em);
+          padding-left: calc(#{$margin * .5} + 1.5em);
           text-indent: initial;
 
           &::before,

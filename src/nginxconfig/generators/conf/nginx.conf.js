@@ -27,7 +27,6 @@ THE SOFTWARE.
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 import shareQuery from '../../util/share_query';
-import phpPath from '../../util/php_path';
 
 export default (domains, global) => {
     const config = {};
@@ -43,6 +42,12 @@ export default (domains, global) => {
         config.pid = global.nginx.pid.computed;
     config.worker_processes = global.nginx.workerProcesses.computed;
     config.worker_rlimit_nofile = 65535;
+
+    // Modules
+    config['# Load modules'] = '';
+    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/modules-enabled/*.conf`;
+
+    // Events
     config.events = {
         multi_accept: 'on',
         worker_connections: 65535,
@@ -50,14 +55,6 @@ export default (domains, global) => {
 
     // HTTP (kv so we can use the same key multiple times)
     config.http = [];
-
-    if (global.php.phpBackupServer.computed)
-        config.http.push(['upstream php', {
-            server: [
-                phpPath(global),
-                `${phpPath(global, true)} backup`,
-            ],
-        }]);
 
     config.http.push(['charset', 'utf-8']);
     config.http.push(['sendfile', 'on']);
@@ -199,6 +196,21 @@ export default (domains, global) => {
             'default': 'upgrade',
             '""': 'close',
         }]);
+        // See https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/
+        config.http.push(['map $remote_addr $proxy_forwarded_elem', {
+            '# IPv4 addresses can be sent as-is': '',
+            '~^[0-9.]+$': '"for=$remote_addr"',
+            '# IPv6 addresses need to be bracketed and quoted': '',
+            '~^[0-9A-Fa-f:.]+$': '"for=\\"[$remote_addr]\\""',
+            '# Unix domain socket names cannot be represented in RFC 7239 syntax': '',
+            'default': '"for=unknown"',
+        }]);
+        config.http.push(['map $http_forwarded $proxy_add_forwarded', {
+            '# If the incoming Forwarded header is syntactically valid, append to it': '',
+            '': '"~^(,[ \\\\t]*)*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*([ \\\\t]*,([ \\\\t]*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*)?)*$" "$http_forwarded, $proxy_forwarded_elem"',
+            '# Otherwise, replace it': '',
+            'default': '"$proxy_forwarded_elem"',
+        }]);
     }
 
     // Configs!
@@ -210,9 +222,10 @@ export default (domains, global) => {
 
     // Single file configs
     if (!global.tools.modularizedStructure.computed) {
+        const ipPortPairs = new Set();
         for (const domain of domains) {
             config.http.push([`# ${domain.server.domain.computed}`, '']);
-            config.http.push(...websiteConf(domain, domains, global));
+            config.http.push(...websiteConf(domain, domains, global, ipPortPairs));
         }
     }
 

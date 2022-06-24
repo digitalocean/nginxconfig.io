@@ -1,5 +1,5 @@
 <!--
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,12 +35,13 @@ THE SOFTWARE.
                 </ul>
             </div>
 
-            <component :is="tab"
-                       v-for="tab in tabs"
-                       :key="tab.key"
-                       :data="$props.data"
-                       :style="{ display: active === tab.key ? undefined : 'none' }"
-                       class="container"
+            <component
+                :is="tab"
+                v-for="tab in tabs"
+                :key="tab.key"
+                :data="$props.data"
+                :style="{ display: active === tab.key ? undefined : 'none' }"
+                class="container"
             ></component>
 
             <div class="navigation-buttons">
@@ -64,9 +65,7 @@ THE SOFTWARE.
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
     import analytics from '../util/analytics';
-    import * as Sections from './setup_sections';
-
-    const tabs = Object.values(Sections);
+    import Sections from './setup_sections';
 
     export default {
         name: 'Setup',
@@ -75,8 +74,8 @@ THE SOFTWARE.
         },
         data() {
             return {
-                active: tabs[0].key,
-                tabs,
+                active: Sections[0].key,
+                tabs: Sections,
             };
         },
         computed: {

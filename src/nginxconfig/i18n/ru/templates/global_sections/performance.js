@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,10 +27,15 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
+    disableHtmlCaching: 'Disable HTML caching', // TODO: translate
+    enableDisableHtmlCaching: 'disable HTML caching', // TODO: translate
     gzipCompression: 'Gzip сжатие',
     enableGzipCompression: `${common.enable} gzip сжатие`,
     brotliCompression: 'Brotli сжатие',
     enableBrotliCompression: `${common.enable} brotli сжатие`,
+    brotliIsANonStandardModule: 'Brotli isn\'t a standard NGINX module, check the ', // TODO: translate
+    brotliGoogleNgxBrotliProject: 'Google ngx_brotli project', // TODO: translate
+    brotliForBuildingNginxWithBrotli: ' for how to build NGINX with Brotli!', // TODO: translate
     expirationForAssets: 'Истечение срока для ассетов',
     expirationForMedia: 'Истечение срока для медиа файлов',
     expirationForSvgs: 'Истечение срока для SVG файлов',

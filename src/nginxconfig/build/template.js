@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,25 +24,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-const path = require('path');
-const fs = require('fs');
+import fs from 'fs';
+import { URL } from 'url';
 
 // Fetch the posthtml template and convert it to an ejs template
 const main = () => {
-    const buildDir = path.join(__dirname, '..', '..', '..', 'build');
-    let template = fs.readFileSync(path.join(buildDir, 'base.html'), 'utf8');
+    const buildDir = '../../../build';
+    let template = fs.readFileSync(new URL(`${buildDir}/base.html`, import.meta.url), 'utf8');
 
     // Inject our title now
     template = template.replace('<block name="title"><title>DigitalOcean</title></block>', '<title>NGINXConfig | DigitalOcean</title>');
 
-    // We don't need the head/script blocks, vue-cli-service handles those
-    template = template.replace('<block name="head"></block>', '');
-    template = template.replace('<block name="script"></block>', '');
-
     // Inject our app mounting point
     template = template.replace('<block name="content"></block>', '<div id="app"></div>');
 
-    fs.writeFileSync(path.join(buildDir, 'index.html'), template);
+    fs.writeFileSync(new URL(`${buildDir}/index.html`, import.meta.url), template);
 };
 
 main();

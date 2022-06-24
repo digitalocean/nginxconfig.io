@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -57,8 +57,13 @@ export default (domains, global) => {
     // Modularised configs
     if (global.tools.modularizedStructure.computed) {
         // Domain config
+        const sitesDir = `sites-${global.tools.symlinkVhost.computed ? 'available' : 'enabled'}`;
+        const ipPortPairs = new Set();
         for (const domain of domains) {
-            files[`sites-${global.tools.symlinkVhost.computed ? 'available' : 'enabled'}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global));
+            files[`${sitesDir}/${domain.server.domain.computed}.conf`] = toConf(websiteConf(domain, domains, global, ipPortPairs));
+            // WordPress
+            if (domains.some(d => d.php.wordPressRules.computed))
+                files[`nginxconfig.io/${domain.server.domain.computed}.wordpress.conf`] = toConf(wordPressConf(global, domain));
         }
 
         // Let's encrypt
@@ -73,7 +78,7 @@ export default (domains, global) => {
 
         // PHP
         if (domains.some(d => d.php.php.computed))
-            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains, global));
+            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains));
 
         // Python
         if (domains.some(d => d.python.python.computed))
@@ -82,10 +87,6 @@ export default (domains, global) => {
         // Reverse proxy
         if (domains.some(d => d.reverseProxy.reverseProxy.computed))
             files['nginxconfig.io/proxy.conf'] = toConf(proxyConf(global));
-
-        // WordPress
-        if (domains.some(d => d.php.wordPressRules.computed))
-            files['nginxconfig.io/wordpress.conf'] = toConf(wordPressConf(global));
 
         // Drupal
         if (domains.some(d => d.php.drupalRules.computed))
@@ -102,7 +103,7 @@ export default (domains, global) => {
     } else {
         // PHP
         if (domains.some(d => d.php.wordPressRules.computed))
-            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains, global));
+            files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains));
     }
 
     return files;

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,8 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { info } from './log';
+
 export default ({ category, action, label, value, nonInteraction }) => {
-    console.info('Analytics event:', { category, action, label, value, nonInteraction });
+    info('Analytics event:', { category, action, label, value, nonInteraction });
 
     /*try {
         // Google Analytics
