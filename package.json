@@ -5,8 +5,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "16.13.2",
-    "npm": "8.4.1"
+    "node": "^16.16.0",
+    "npm": "^8.11.0"
   },
   "main": "src/nginxconfig/mount.js",
   "type": "module",
@@ -89,6 +89,11 @@
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "overrides": {
-    "mini-css-extract-plugin": "^1.6.2"
+    "@vue/cli-service": {
+      "mini-css-extract-plugin": "^1.6.2"
+    },
+    "pretty-checkbox-vue": {
+      "vue": "$vue"
+    }
   }
 }
