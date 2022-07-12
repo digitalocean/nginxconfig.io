@@ -100,8 +100,8 @@ THE SOFTWARE.
                     <h2>{{ $t('templates.app.configFiles') }}</h2>
                     <div ref="files" class="columns is-multiline files">
                         <component
-                            v-for="confContents in confFilesOutput"
                             :is="getPrismComponent(confContents[0])"
+                            v-for="confContents in confFilesOutput"
                             :key="confContents[2]"
                             :name="confContents[0]"
                             :conf="confContents[1]"
@@ -119,6 +119,7 @@ THE SOFTWARE.
 </template>
 
 <script>
+    import { defineAsyncComponent } from 'vue';
     import clone from 'clone';
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
@@ -158,8 +159,8 @@ THE SOFTWARE.
             ContributeCallout,
             Setup,
             NginxPrism,
-            YamlPrism: () => import('./prism/yaml'),
-            DockerPrism: () => import('./prism/docker'),
+            YamlPrism: defineAsyncComponent(() => import('./prism/yaml')),
+            DockerPrism: defineAsyncComponent(() => import('./prism/docker')),
         },
         data() {
             return {

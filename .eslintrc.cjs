@@ -29,6 +29,7 @@ module.exports = {
     'vue/no-unused-vars': 0,
     'vue/html-self-closing': 0,
     'vue/multi-word-component-names': 0,
+    'vue/no-reserved-component-names': 0,
   },
   globals: {
     'describe': true,
