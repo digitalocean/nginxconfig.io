@@ -123,6 +123,23 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
+                <label class="label">disable xmlrc</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${wpDisableXmlrpc ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="wpDisableXmlrpc" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
                 <label class="label">security.txt</label>
             </div>
             <div class="field-body">
@@ -189,6 +206,10 @@ THE SOFTWARE.
         },
         serverTokens: {
             default: false,
+            enabled: true,
+        },
+        wpDisableXmlrpc:{
+            default: true,
             enabled: true,
         },
         limitReq: {

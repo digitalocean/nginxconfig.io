@@ -54,9 +54,16 @@ export default (global, domain) => {
     };
 
     config['# WordPress: deny general stuff'] = '';
-    config['location ~* ^/(?:xmlrpc\\.php|wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|readme\\.html|license\\.txt)$'] = {
+    config['location ~* ^/(?:wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|readme\\.html|license\\.txt)$'] = {
         deny: 'all',
     };
+
+    if(global.security.wpDisableXmlrpc.computed){
+        config["# Wordpress: deny xmlrpc, required for mobile and desktop apps"] = ''
+        config['location ~* ^/(?:xmlrpc\\.php)$'] = {
+            deny:'all'
+        }
+    }
 
     if (global.security.limitReq.computed) {
         config['# WordPress: throttle wp-login.php'] = '';

@@ -39,6 +39,7 @@ const globalMap = {
     content_security_policy:    ['security', 'contentSecurityPolicy'],
     server_tokens:              ['security', 'serverTokens', oldBool],
     limit_req:                  ['security', 'limitReq', oldBool],
+    wp_disable_xmlrpc:          ['security','wpDisableXmlrpc', oldBool],
 
     php_server:                 ['php', 'phpServer'],
     php_server_backup:          ['php', 'phpBackupServer'],
