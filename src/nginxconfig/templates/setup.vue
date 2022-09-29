@@ -151,9 +151,9 @@ THE SOFTWARE.
             },
             setupCopy(elm) {
 
-                const resetText = () => {
+                const resetText = (originalText) => {
                     setTimeout(() => {
-                        elm.textContent = this.$t('templates.setup.copyBase64');
+                        elm.textContent = originalText;
                     }, 5000);
                 };
 
@@ -162,9 +162,10 @@ THE SOFTWARE.
                 });
 
                 clipboard.on('success', e => {
+                    const originalTextCopy = elm.textContent;
                     elm.textContent = this.$tm('templates.app.copied');
                     e.clearSelection();
-                    resetText();
+                    resetText(originalTextCopy);
                 });
 
                 clipboard.on('error', () => {
