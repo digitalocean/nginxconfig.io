@@ -36,4 +36,5 @@ export default {
     globalConfig: '全局配置',
     setup: '使用配置',
     configFiles: '配置文件',
+    copied: '已复制',
 };

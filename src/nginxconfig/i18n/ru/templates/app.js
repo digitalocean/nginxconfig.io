@@ -36,4 +36,5 @@ export default {
     globalConfig: 'Глобальная конфигурация',
     setup: 'Настройка',
     configFiles: 'Файлы конфигурации',
+    copied: 'Скопировано',
 };

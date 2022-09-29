@@ -36,4 +36,5 @@ export default {
     globalConfig: 'Configuración global',
     setup: 'Configuración',
     configFiles: 'Archivos de configuración',
+    copied: 'Copiado',
 };
