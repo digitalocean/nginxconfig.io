@@ -150,7 +150,6 @@ THE SOFTWARE.
                 return this.tarContents().base64(path);
             },
             setupCopy(elm) {
-
                 const resetText = (originalText) => {
                     setTimeout(() => {
                         elm.textContent = originalText;
@@ -163,7 +162,7 @@ THE SOFTWARE.
 
                 clipboard.on('success', e => {
                     const originalTextCopy = elm.textContent;
-                    elm.textContent = this.$tm('templates.app.copied');
+                    elm.textContent = this.$t('templates.app.copied');
                     e.clearSelection();
                     resetText(originalTextCopy);
                 });
