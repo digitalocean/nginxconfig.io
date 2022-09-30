@@ -28,6 +28,7 @@
 NGINX is so much more than just a webserver. You already knew that, probably.
 
 We love NGINX, because:
+
 * Low memory usage
 * High concurrency
 * Asynchronous event-driven architecture
