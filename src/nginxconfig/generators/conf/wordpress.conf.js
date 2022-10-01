@@ -48,6 +48,9 @@ export default (global, domain) => {
     config['# WordPress: SEO plugin'] = '';
     config['location ~* ^/wp-content/plugins/wordpress-seo(?:-premium)?/css/main-sitemap\\.xsl$'] = {};
 
+    config['# WordPress: allow Podlove subscribe button widget'] = '';
+    config['location ~ ^/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/lib/modules/subscribe_button/dist/button\\.html'] = {};
+
     config['# WordPress: deny wp-content/plugins (except earlier rules)'] = '';
     config['location ~ ^/wp-content/plugins'] = {
         deny: 'all',
