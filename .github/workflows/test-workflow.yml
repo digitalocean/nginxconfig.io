@@ -9,19 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Read Node.js & NPM versions
-        run: |
-          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
-          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
-        id: versions
-
-      - name: Use correct Node.js version
-        uses: actions/setup-node@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.0
         with:
-          node-version: "${{ steps.versions.outputs.NODE }}"
-
-      - name: Use correct NPM version
-        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
+          node-version-file: ".nvmrc"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -35,19 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Read Node.js & NPM versions
-        run: |
-          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
-          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
-        id: versions
-
-      - name: Use correct Node.js version
-        uses: actions/setup-node@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.0
         with:
-          node-version: "${{ steps.versions.outputs.NODE }}"
-
-      - name: Use correct NPM version
-        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
+          node-version-file: ".nvmrc"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -61,19 +45,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Read Node.js & NPM versions
-        run: |
-          echo "##[set-output name=NODE;]$(cat package.json | jq -r '.engines.node')"
-          echo "##[set-output name=NPM;]$(cat package.json | jq -r '.engines.npm')"
-        id: versions
-
-      - name: Use correct Node.js version
-        uses: actions/setup-node@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.0
         with:
-          node-version: "${{ steps.versions.outputs.NODE }}"
-
-      - name: Use correct NPM version
-        run: npm i -g npm@"${{ steps.versions.outputs.NPM }}"
+          node-version-file: ".nvmrc"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
