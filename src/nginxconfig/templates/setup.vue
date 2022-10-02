@@ -150,9 +150,7 @@ THE SOFTWARE.
                 return this.tarContents().base64(path);
             },
             setupCopy(elm) {
-                const originalText = elm.textContent;
-
-                const resetText = () => {
+                const resetText = (originalText) => {
                     setTimeout(() => {
                         elm.textContent = originalText;
                     }, 5000);
@@ -163,14 +161,16 @@ THE SOFTWARE.
                 });
 
                 clipboard.on('success', e => {
-                    elm.textContent = 'Copied';
+                    const originalTextCopy = elm.textContent;
+                    elm.textContent = this.$t('templates.app.copied');
                     e.clearSelection();
-                    resetText();
+                    resetText(originalTextCopy);
                 });
 
                 clipboard.on('error', () => {
+                    const originalTextCopy = elm.textContent;
                     elm.textContent = 'Press Ctrl + C to copy';
-                    resetText();
+                    resetText(originalTextCopy);
                 });
             },
             showTab(target) {

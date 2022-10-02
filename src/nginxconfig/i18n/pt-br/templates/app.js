@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -36,4 +36,5 @@ export default {
     globalConfig: 'Configuração global',
     setup: 'Configurar',
     configFiles: 'Arquivos de configuração',
+    copied: 'Copiado',
 };
