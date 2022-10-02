@@ -66,8 +66,9 @@ export default (domains, global) => {
     }
 
     if (global.security.blockCommonExploits.computed) {
+        // Based on https://github.com/NginxProxyManager/nginx-proxy-manager/blob/v2.9.0/docker/rootfs/etc/nginx/conf.d/include/block-exploits.conf
         // Block SQL Injections
-        config.push(['## Block SQL injections', '']);
+        config.push(['# Block SQL injections', '']);
         config.push(['set $block_sql_injections', '0']);
         config.push([
             'if ($query_string ~ "union.*select.*(")',

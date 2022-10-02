@@ -158,14 +158,13 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">Block common exploits</label>
+                <label class="label">{{$t('templates.globalSections.security.blockCommonExploits')}}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="`control${blockCommonExploits ? ' is-changed' : ''}`">
+                    <div :class="`control${blockCommonExploits ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck  v-model="blockCommonExploits" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="blockCommonExploits" class="p-default p-curve p-fill p-icon">
                                 {{ $t("common.enable") }}
                             </PrettyCheck>
                         </div>
@@ -222,7 +221,6 @@ THE SOFTWARE.
             enabled: true,
         },
     };
-    
     export default {
         name: 'GlobalSecurity',                                     // Component name
         display: 'templates.globalSections.security.security',      // Display name for tab (i18n key)
