@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 <template>
     <div>
-           <div class="field is-horizontal">
+        <div class="field is-horizontal">
             <div class="field-label">
                 <label class="label">Referrer-Policy</label>
             </div>
@@ -181,6 +181,7 @@ THE SOFTWARE.
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import PrettyCheck from '../inputs/checkbox';
+
     const defaults = {
         referrerPolicy: {
             default: 'no-referrer-when-downgrade',
@@ -221,6 +222,7 @@ THE SOFTWARE.
             enabled: true,
         },
     };
+    
     export default {
         name: 'GlobalSecurity',                                     // Component name
         display: 'templates.globalSections.security.security',      // Display name for tab (i18n key)
