@@ -220,6 +220,10 @@ THE SOFTWARE.
             default: '~/security.txt',
             enabled: true,
         },
+        blockCommonExploits: {
+            default: false,
+            enabled: true,
+        },
     };
     export default {
         name: 'GlobalSecurity',                                     // Component name
