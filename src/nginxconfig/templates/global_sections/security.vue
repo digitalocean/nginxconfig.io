@@ -26,19 +26,13 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div class="field is-horizontal">
+           <div class="field is-horizontal">
             <div class="field-label">
                 <label class="label">Referrer-Policy</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${
-                                referrerPolicyChanged ? ' is-changed' : ''
-                            }`
-                        "
-                    >
+                    <div :class="`control${referrerPolicyChanged ? ' is-changed' : ''}`">
                         <VueSelect
                             v-model="referrerPolicy"
                             :options="$props.data.referrerPolicy.options"
@@ -49,48 +43,25 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div
-            :class="
-                `field is-horizontal${
-                    hasWordPress && !hasUnsafeEval ? ' is-aligned-top' : ''
-                }`
-            "
-        >
+        <div :class="`field is-horizontal${hasWordPress && !hasUnsafeEval ? ' is-aligned-top' : ''}`">
             <div class="field-label">
                 <label class="label">Content-Security-Policy</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${
-                                contentSecurityPolicyChanged
-                                    ? ' is-changed'
-                                    : ''
-                            }`
-                        "
-                    >
+                    <div :class="`control${contentSecurityPolicyChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="contentSecurityPolicy"
                             class="input"
                             type="text"
-                            :placeholder="
-                                $props.data.contentSecurityPolicy.default
-                            "
+                            :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
-                    <div
-                        v-if="hasWordPress && !hasWordPressUnsafeEval"
-                        class="control"
-                    >
+                    <div v-if="hasWordPress && !hasWordPressUnsafeEval" class="control">
                         <label class="text message is-warning">
                             <span
                                 class="message-body"
-                                v-html="
-                                    $t(
-                                        'templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality'
-                                    )
-                                "
+                                v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
                             ></span>
                         </label>
                     </div>
@@ -104,13 +75,7 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${
-                                permissionsPolicyChanged ? ' is-changed' : ''
-                            }`
-                        "
-                    >
+                    <div :class="`control${permissionsPolicyChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="permissionsPolicy"
                             class="input"
@@ -128,17 +93,10 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${serverTokensChanged ? ' is-changed' : ''}`
-                        "
-                    >
+                    <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck
-                                v-model="serverTokens"
-                                class="p-default p-curve p-fill p-icon"
-                            >
-                                {{ $t("common.enable") }}
+                            <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -152,17 +110,10 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${limitReqChanged ? ' is-changed' : ''}`
-                        "
-                    >
+                    <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck
-                                v-model="limitReq"
-                                class="p-default p-curve p-fill p-icon"
-                            >
-                                {{ $t("common.enable") }}
+                            <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -178,11 +129,8 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${securityTxt ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck
-                                v-model="securityTxt"
-                                class="p-default p-curve p-fill p-icon"
-                            >
-                                {{ $t("common.enable") }}
+                            <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -190,20 +138,13 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div
-            v-if="$props.data.securityTxt.computed"
-            class="field is-horizontal"
-        >
+        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">security.txt path</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div
-                        :class="
-                            `control${securityTxtChanged ? ' is-changed' : ''}`
-                        "
-                    >
+                    <div :class="`control${securityTxtChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="securityTxtPath"
                             class="input"
@@ -222,15 +163,9 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div
-                        :class="
-                            `control${blockCommonExploits ? ' is-changed' : ''}`
-                        "
-                    >
+                        :class="`control${blockCommonExploits ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck
-                                v-model="blockCommonExploits"
-                                class="p-default p-curve p-fill p-icon"
-                            >
+                            <PrettyCheck  v-model="blockCommonExploits" class="p-default p-curve p-fill p-icon">
                                 {{ $t("common.enable") }}
                             </PrettyCheck>
                         </div>
