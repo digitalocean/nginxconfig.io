@@ -29,4 +29,5 @@ import common from '../../common';
 export default {
     whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `${common.wordPress} を利用している場合、 <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> は、管理画面を正しく機能させるために、コンテンツセキュリティポリシーで要求されることが多いようです。`,
     security: 'セキュリティ',
+    blockCommonExploits: 'Block common exploits', // TODO: translate
 };

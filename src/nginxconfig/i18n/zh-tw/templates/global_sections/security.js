@@ -29,4 +29,5 @@ import common from '../../common';
 export default {
     whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `使用 ${common.wordPress} 時，通常需在 CSP 中加入 <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code>，以使管理面板正常運作。`,
     security: '安全性',
+    blockCommonExploits: 'Block common exploits', // TODO: translate
 };
