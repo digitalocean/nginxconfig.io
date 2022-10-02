@@ -168,8 +168,9 @@ THE SOFTWARE.
                 });
 
                 clipboard.on('error', () => {
+                    const originalTextCopy = elm.textContent;
                     elm.textContent = 'Press Ctrl + C to copy';
-                    resetText();
+                    resetText(originalTextCopy);
                 });
             },
             showTab(target) {
