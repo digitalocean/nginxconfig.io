@@ -91,7 +91,7 @@ export default (domains, global) => {
         config.push(['if ($block_sql_injections = 1)', { return: '403' }]);
 
         // Block file injections
-        config.push(['## Block file injections', '']);
+        config.push(['# Block file injections', '']);
         config.push(['set $block_file_injections', '0']);
         config.push([
             'if ($query_string ~ "[a-zA-Z0-9_]=http://")',
@@ -108,7 +108,7 @@ export default (domains, global) => {
         config.push(['if ($block_file_injections = 1)', { return: '403' }]);
 
         // Block common exploits
-        config.push(['## Block common exploits', '']);
+        config.push(['# Block common exploits', '']);
         config.push(['set $block_common_exploits', '0']);
         config.push([
             'if ($query_string ~ "(<|%3C).*script.*(>|%3E)")',
