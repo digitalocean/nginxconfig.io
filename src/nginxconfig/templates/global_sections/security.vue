@@ -181,7 +181,6 @@ THE SOFTWARE.
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
     import PrettyCheck from '../inputs/checkbox';
-
     const defaults = {
         referrerPolicy: {
             default: 'no-referrer-when-downgrade',
@@ -198,8 +197,7 @@ THE SOFTWARE.
             enabled: true,
         },
         contentSecurityPolicy: {
-            default:
-                'default-src \'self\' http: https: ws: wss: data: blob: \'unsafe-inline\'; frame-ancestors \'self\';',
+            default: 'default-src \'self\' http: https: ws: wss: data: blob: \'unsafe-inline\'; frame-ancestors \'self\';',
             enabled: true,
         },
         permissionsPolicy: {
@@ -222,37 +220,27 @@ THE SOFTWARE.
             default: '~/security.txt',
             enabled: true,
         },
-        blockCommonExploits: {
-            default: false,
-            enabled: true,
-        },
     };
-
     export default {
-        name: 'GlobalSecurity', // Component name
-        display: 'templates.globalSections.security.security', // Display name for tab (i18n key)
-        key: 'security', // Key for data in parent
-        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
+        name: 'GlobalSecurity',                                     // Component name
+        display: 'templates.globalSections.security.security',      // Display name for tab (i18n key)
+        key: 'security',                                            // Key for data in parent
+        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
         components: {
             PrettyCheck,
             VueSelect,
         },
         props: {
-            data: Object, // Data delegated back to us from parent
+            data: Object,                                           // Data delegated back to us from parent
         },
         computed: {
-            ...computedFromDefaults(defaults, 'security'), // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'security'),          // Getters & setters for the delegated data
             hasWordPress() {
-                return this.$parent.$parent.$data.domains.some(
-                    d => d && d.php.wordPressRules.computed,
-                );
+                return this.$parent.$parent.$data.domains.some(d => d && d.php.wordPressRules.computed);
             },
             hasWordPressUnsafeEval() {
-                return (
-                    this.$props.data.contentSecurityPolicy.computed.match(
-                        /(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/,
-                    ) !== null
-                );
+                return this.$props.data.contentSecurityPolicy.computed
+                    .match(/(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/) !== null;
             },
             hasWarnings() {
                 return this.hasWordPress && !this.hasWordPressUnsafeEval;
