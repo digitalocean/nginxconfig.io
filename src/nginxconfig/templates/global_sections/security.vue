@@ -158,7 +158,7 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{$t('templates.globalSections.security.blockCommonExploits')}}</label>
+                <label class="label">{{ $t('templates.globalSections.security.blockCommonExploits') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
