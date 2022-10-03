@@ -99,6 +99,24 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div v-if="proxyHeaderOverrideEnabled" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">{{ $t('templates.domainSections.reverseProxy.proxyHeaderOverride') }}</label>
+            </div>
+            <div class="field-body">
+                <div :class="`field${proxyHeaderOverrideChanged ? ' is-changed' : ''}`">
+                    <div class="control">
+                        <input
+                            v-model="proxyHeaderOverride"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.proxyHeaderOverride.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -118,6 +136,10 @@ THE SOFTWARE.
         },
         proxyPass: {
             default: 'http://127.0.0.1:3000',
+            enabled: false,
+        },
+        proxyHeaderOverride: {
+            default: '$host',
             enabled: false,
         },
     };
@@ -157,11 +179,15 @@ THE SOFTWARE.
                         this.$props.data.path.computed = this.$props.data.path.value;
                         this.$props.data.proxyPass.enabled = true;
                         this.$props.data.proxyPass.computed = this.$props.data.proxyPass.value;
+                        this.$props.data.proxyHeaderOverride.enabled = true;
+                        this.$props.data.proxyHeaderOverride.computed = this.$props.data.proxyHeaderOverride.value;
                     } else {
                         this.$props.data.path.enabled = false;
                         this.$props.data.path.computed = '';
                         this.$props.data.proxyPass.enabled = false;
                         this.$props.data.proxyPass.computed = '';
+                        this.$props.data.proxyHeaderOverride.enabled = false;
+                        this.$props.data.proxyHeaderOverride.computed = '';
                     }
                 },
                 deep: true,
