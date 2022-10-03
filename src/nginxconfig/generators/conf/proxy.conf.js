@@ -30,6 +30,9 @@ export default global => {
     config.proxy_http_version = '1.1';
     config.proxy_cache_bypass = '$http_upgrade';
 
+    config['# Proxy SSL'] = '';
+    config['proxy_ssl_server_name'] = 'on';
+
     config['# Proxy headers'] = '';
     config['proxy_set_header Upgrade'] = '$http_upgrade';
     config['proxy_set_header Connection'] = '$connection_upgrade';
