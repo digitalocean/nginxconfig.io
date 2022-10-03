@@ -31,4 +31,5 @@ export default {
     reverseProxyCannotBeEnabledWithPhp: `${common.php} が有効な場合は、 ${common.reverseProxy} を有効にすることはできません。`,
     reverseProxyCannotBeEnabledWithPython: `${common.python} が有効な場合は、 ${common.reverseProxy} を有効にすることはできません。`,
     enableReverseProxy: `${common.reverseProxyLower}を${common.enable}`,
+    proxyHeaderOverride: 'Proxy header override', // TODO: translate
 };
