@@ -36,5 +36,5 @@ export default {
     globalConfig: '全域設定',
     setup: '使用設定',
     configFiles: '設定檔',
-    copied: '已復制',
+    copied: '已複製',
 };
