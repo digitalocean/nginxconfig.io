@@ -40,7 +40,7 @@ import magentoConf from './conf/magento.conf';
 import joomlaConf from './conf/joomla.conf';
 import dockerComposeYaml from './yaml/dockerCompose.yaml';
 import dockerConf from './ext/docker';
-import shareQuery from '../util/share_query.js';
+import shareQuery from '../util/share_query';
 
 export default (domains, global) => {
     const files = {};
