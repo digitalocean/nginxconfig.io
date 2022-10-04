@@ -40,6 +40,7 @@ import magentoConf from './conf/magento.conf';
 import joomlaConf from './conf/joomla.conf';
 import dockerComposeYaml from './yaml/dockerCompose.yaml';
 import dockerConf from './ext/docker';
+import shareQuery from "../util/share_query.js";
 
 export default (domains, global) => {
     const files = {};
@@ -105,6 +106,9 @@ export default (domains, global) => {
         if (domains.some(d => d.php.wordPressRules.computed))
             files['nginxconfig.io/php_fastcgi.conf'] = toConf(phpConf(domains));
     }
+
+    const query = shareQuery(domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null), global);
+    files['nginxconfig.txt'] = `${window.location.protocol}//${window.location.host}${window.location.pathname}${query}`;
 
     return files;
 };
