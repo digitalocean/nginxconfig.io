@@ -26,6 +26,7 @@ THE SOFTWARE.
 
 // Load in the app
 import './scss/style.scss';
+import 'vue-select/dist/vue-select.css';
 import { createApp } from 'vue';
 import './util/prism_bundle';
 import { getI18n } from './i18n/setup';

@@ -38,13 +38,6 @@ $callout: #f3f5f9;
 
   @import "~pretty-checkbox/src/pretty-checkbox";
 
-  $vs-border-color: $border;
-  $vs-border-radius: $border-radius;
-  $vs-dropdown-box-shadow: 0 2px 4px rgba($dark-blue, .06);
-  $vs-state-active-bg: $primary;
-
-  @import "~vue-select/src/scss/vue-select";
-
   // Local imports
   @import "header";
   @import "tabs";
