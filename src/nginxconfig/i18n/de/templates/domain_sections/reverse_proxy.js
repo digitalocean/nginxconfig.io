@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -31,4 +31,5 @@ export default {
     reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy} kann nicht aktiviert werden, während ${common.php} aktiviert ist.`,
     reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy} kann nicht aktiviert werden, während ${common.python} aktiviert ist.`,
     enableReverseProxy: `${common.enable} ${common.reverseProxy}`,
+    proxyHostHeader: 'Proxy Host header', // TODO: translate
 };

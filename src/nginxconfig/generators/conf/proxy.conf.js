@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -33,7 +33,6 @@ export default global => {
     config['# Proxy headers'] = '';
     config['proxy_set_header Upgrade'] = '$http_upgrade';
     config['proxy_set_header Connection'] = '$connection_upgrade';
-    config['proxy_set_header Host'] = '$host';
     config['proxy_set_header X-Real-IP'] = '$remote_addr';
     config['proxy_set_header Forwarded'] = '$proxy_add_forwarded';
     if (global.reverseProxy.proxyCoexistenceXForwarded.computed == 'passOn') {

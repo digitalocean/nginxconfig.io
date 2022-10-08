@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -279,6 +279,7 @@ export default (domain, domains, global, ipPortPairs) => {
     if (domain.reverseProxy.reverseProxy.computed) {
         const locConf = [];
         locConf.push(['proxy_pass', domain.reverseProxy.proxyPass.computed]);
+        locConf.push(['proxy_set_header Host', domain.reverseProxy.proxyHostHeader.computed]);
 
         if (global.tools.modularizedStructure.computed) {
             // Modularized
