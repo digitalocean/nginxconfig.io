@@ -102,7 +102,7 @@ THE SOFTWARE.
 
         <div v-if="proxyHostHeaderEnabled" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.reverseProxy.proxyHeaderOverride') }}</label>
+                <label class="label">{{ $t('templates.domainSections.reverseProxy.proxyHostHeader') }}</label>
             </div>
             <div class="field-body">
                 <div :class="`field${proxyHostHeaderChanged ? ' is-changed' : ''}`">
