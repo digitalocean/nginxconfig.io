@@ -279,7 +279,7 @@ export default (domain, domains, global, ipPortPairs) => {
     if (domain.reverseProxy.reverseProxy.computed) {
         const locConf = [];
         locConf.push(['proxy_pass', domain.reverseProxy.proxyPass.computed]);
-        locConf.push(['proxy_set_header Host', domain.reverseProxy.proxyHeaderOverride.computed]);
+        locConf.push(['proxy_set_header Host', domain.reverseProxy.proxyHostHeader.computed]);
 
         if (global.tools.modularizedStructure.computed) {
             // Modularized

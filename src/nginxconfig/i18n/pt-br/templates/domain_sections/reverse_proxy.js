@@ -31,5 +31,5 @@ export default {
     reverseProxyCannotBeEnabledWithPhp: `O ${common.reverseProxy} não pode ser habilitado enquanto o ${common.php} estiver habilitado.`,
     reverseProxyCannotBeEnabledWithPython: `O ${common.reverseProxy} não pode ser habilitado enquanto o ${common.python} estiver habilitado.`,
     enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
-    proxyHeaderOverride: 'Proxy header override', // TODO: translate
+    proxyHostHeader: 'Proxy Host header', // TODO: translate
 };

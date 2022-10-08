@@ -100,18 +100,18 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="proxyHeaderOverrideEnabled" class="field is-horizontal">
+        <div v-if="proxyHostHeaderEnabled" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.reverseProxy.proxyHeaderOverride') }}</label>
             </div>
             <div class="field-body">
-                <div :class="`field${proxyHeaderOverrideChanged ? ' is-changed' : ''}`">
+                <div :class="`field${proxyHostHeaderChanged ? ' is-changed' : ''}`">
                     <div class="control">
                         <input
-                            v-model="proxyHeaderOverride"
+                            v-model="proxyHostHeader"
                             class="input"
                             type="text"
-                            :placeholder="$props.data.proxyHeaderOverride.default"
+                            :placeholder="$props.data.proxyHostHeader.default"
                         />
                     </div>
                 </div>
@@ -138,7 +138,7 @@ THE SOFTWARE.
             default: 'http://127.0.0.1:3000',
             enabled: false,
         },
-        proxyHeaderOverride: {
+        proxyHostHeader: {
             default: '$host',
             enabled: false,
         },
@@ -179,15 +179,15 @@ THE SOFTWARE.
                         this.$props.data.path.computed = this.$props.data.path.value;
                         this.$props.data.proxyPass.enabled = true;
                         this.$props.data.proxyPass.computed = this.$props.data.proxyPass.value;
-                        this.$props.data.proxyHeaderOverride.enabled = true;
-                        this.$props.data.proxyHeaderOverride.computed = this.$props.data.proxyHeaderOverride.value;
+                        this.$props.data.proxyHostHeader.enabled = true;
+                        this.$props.data.proxyHostHeader.computed = this.$props.data.proxyHostHeader.value;
                     } else {
                         this.$props.data.path.enabled = false;
                         this.$props.data.path.computed = '';
                         this.$props.data.proxyPass.enabled = false;
                         this.$props.data.proxyPass.computed = '';
-                        this.$props.data.proxyHeaderOverride.enabled = false;
-                        this.$props.data.proxyHeaderOverride.computed = '';
+                        this.$props.data.proxyHostHeader.enabled = false;
+                        this.$props.data.proxyHostHeader.computed = '';
                     }
                 },
                 deep: true,
