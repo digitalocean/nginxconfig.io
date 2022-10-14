@@ -26,7 +26,8 @@
     "test:eslint": "eslint 'src/**/*.{js,vue}'",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
-    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js"
+    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
+    "prepare": "husky install"
   },
   "jest": {
     "testRegex": "/test/.*.js?$"
@@ -87,7 +88,8 @@
     "stylelint-order": "^5.0.0",
     "vue-template-compiler": "^2.7.10",
     "webpack": "^5.74.0",
-    "webpack-bundle-analyzer": "^4.6.1"
+    "webpack-bundle-analyzer": "^4.6.1",
+    "husky": "^7.0.0"
   },
   "overrides": {
     "@vue/cli-service": {
