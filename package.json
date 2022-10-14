@@ -77,8 +77,10 @@
     "eslint": "^8.24.0",
     "eslint-plugin-vue": "^9.5.1",
     "esm": "^3.2.25",
+    "husky": "^7.0.0",
     "jest": "^29.1.2",
     "jest-environment-jsdom": "^29.1.2",
+    "lint-staged": "^13.0.3",
     "node-fetch": "^3.2.10",
     "postcss": "^8.4.17",
     "sass": "^1.55.0",
@@ -88,8 +90,15 @@
     "stylelint-order": "^5.0.0",
     "vue-template-compiler": "^2.7.10",
     "webpack": "^5.74.0",
-    "webpack-bundle-analyzer": "^4.6.1",
-    "husky": "^7.0.0"
+    "webpack-bundle-analyzer": "^4.6.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --quiet --cache --fix"
+    ],
+    "*.{json,js,ts,jsx,tsx,html}": [
+      "prettier --write"
+    ]
   },
   "overrides": {
     "@vue/cli-service": {
