@@ -93,7 +93,7 @@
     "webpack-bundle-analyzer": "^4.6.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,vue}": [
       "eslint --quiet --cache --fix"
     ]
   },
