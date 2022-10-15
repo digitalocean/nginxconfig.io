@@ -95,6 +95,9 @@
   "lint-staged": {
     "*.{js,vue}": [
       "eslint --quiet --cache --fix"
+    ],
+    "*.{scss}": [
+      "stylelint --fix"
     ]
   },
   "overrides": {
