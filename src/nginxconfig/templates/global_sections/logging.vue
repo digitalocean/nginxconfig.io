@@ -307,7 +307,7 @@ THE SOFTWARE.
                     }
                 },
                 deep: true,
-            }
+            },
         },
     };
 </script>

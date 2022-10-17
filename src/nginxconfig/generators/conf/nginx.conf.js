@@ -110,7 +110,7 @@ export default (domains, global) => {
     if (global.logging.accessLog.computed) {
         config.http.push(['access_log', global.logging.accessLogPath.computed.trim() +
             (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-            (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}` : '')
+            (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}` : ''),
         ]);
     } else {
         config.http.push(['access_log', 'off']);

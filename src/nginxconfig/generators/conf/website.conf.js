@@ -228,7 +228,7 @@ export default (domain, domains, global, ipPortPairs) => {
             serverConfig.push(['access_log',
                 getAccessLogDomainPath(domain, global) +
                 (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-                (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}`: '')
+                (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}`: ''),
             ]);
 
         if (domain.logging.errorLog.computed)
