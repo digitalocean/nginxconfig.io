@@ -33,11 +33,36 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                    <div v-if="$props.data.accessLog.computed" class="control field is-horizontal is-expanded">
                         <input
-                            v-model="accessLog"
+                            v-model="accessLogPath"
                             class="input"
                             type="text"
-                            :placeholder="$props.data.accessLog.default"
+                            :placeholder="$props.data.accessLogPath.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">access_log arguments</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${accessLogArgumentsChanged ? ' is-changed' : ''}`">
+                        <input
+                            v-model="accessLogArguments"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.accessLogArguments.default"
                         />
                     </div>
                 </div>
@@ -51,11 +76,18 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                    <div v-if="$props.data.errorLog.computed" class="control field is-horizontal is-expanded">
                         <input
-                            v-model="errorLog"
+                            v-model="errorLogPath"
                             class="input"
                             type="text"
-                            :placeholder="$props.data.errorLog.default"
+                            :placeholder="$props.data.errorLogPath.default"
                         />
                     </div>
                 </div>
@@ -161,10 +193,22 @@ THE SOFTWARE.
 
     const defaults = {
         accessLog: {
+            default: false,
+            enabled: true,
+        },
+        accessLogPath: {
             default: '/var/log/nginx/access.log',
             enabled: true,
         },
+        accessLogArguments: {
+            default: 'buffer=512k flush=1m',
+            enabled: true,
+        },
         errorLog: {
+            default: false,
+            enabled: true,
+        },
+        errorLogPath: {
             default: '/var/log/nginx/error.log warn',
             enabled: true,
         },
@@ -263,7 +307,7 @@ THE SOFTWARE.
                     }
                 },
                 deep: true,
-            },
+            }
         },
     };
 </script>

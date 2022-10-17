@@ -226,7 +226,10 @@ export default (domain, domains, global, ipPortPairs) => {
 
         if (domain.logging.accessLog.computed)
             serverConfig.push(['access_log',
-                getAccessLogDomainPath(domain, global) + (global.logging.cloudflare.computed ? ' cloudflare' : '')]);
+                getAccessLogDomainPath(domain, global) +
+                (global.logging.cloudflare.computed ? ' cloudflare' : '') +
+                (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}`: '')
+            ]);
 
         if (domain.logging.errorLog.computed)
             serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
@@ -368,9 +371,6 @@ export default (domain, domains, global, ipPortPairs) => {
 
         // HTTPS
         cdnConfig.push(...sslConfig(domain, global));
-
-        cdnConfig.push(['# disable access_log', '']);
-        cdnConfig.push(['access_log', 'off']);
 
         // Gzip
         if (global.performance.gzipCompression.computed) {

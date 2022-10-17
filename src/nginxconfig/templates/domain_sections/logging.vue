@@ -69,11 +69,11 @@ THE SOFTWARE.
 
     const defaults = {
         accessLog: {
-            default: false,
+            default: true,
             enabled: true,
         },
         errorLog: {
-            default: false,
+            default: true,
             enabled: true,
         },
     };

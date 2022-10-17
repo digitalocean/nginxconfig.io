@@ -25,9 +25,9 @@ THE SOFTWARE.
 */
 
 export const getAccessLogDomainPath = (domain, global) => {
-    return global.logging.accessLog.computed.replace(/([^/]+)\.log$/, `${domain.server.domain.computed}.$1.log`);
+    return global.logging.accessLogPath.computed.replace(/([^/]+)\.log$/, `${domain.server.domain.computed}.$1.log`);
 };
 
 export const getErrorLogDomainPath = (domain, global) => {
-    return global.logging.errorLog.computed.replace(/([^/]+)\.log (.+)$/, `${domain.server.domain.computed}.$1.log $2`);
+    return global.logging.errorLogPath.computed.replace(/([^/]+)\.log (.+)$/, `${domain.server.domain.computed}.$1.log $2`);
 };

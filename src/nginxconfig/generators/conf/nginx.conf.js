@@ -107,8 +107,19 @@ export default (domains, global) => {
     }
 
     config.http.push(['# Logging', '']);
-    config.http.push(['access_log', (global.logging.accessLog.computed.trim() + (global.logging.cloudflare.computed ? ' cloudflare' : '')) || 'off']);
-    config.http.push(['error_log', global.logging.errorLog.computed.trim() || '/dev/null']);
+    if (global.logging.accessLog.computed) {
+        config.http.push(['access_log', global.logging.accessLogPath.computed.trim() +
+            (global.logging.cloudflare.computed ? ' cloudflare' : '') +
+            (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}` : '')
+        ]);
+    } else {
+        config.http.push(['access_log', 'off']);
+    }
+    if (global.logging.errorLog.computed) {
+        config.http.push(['error_log', global.logging.errorLogPath.computed.trim()]);
+    } else {
+        config.http.push(['error_log', '/dev/null']);
+    }
 
     if (global.security.limitReq.computed) {
         config.http.push(['# Limits', '']);
