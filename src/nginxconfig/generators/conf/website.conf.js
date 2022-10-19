@@ -372,6 +372,9 @@ export default (domain, domains, global, ipPortPairs) => {
         // HTTPS
         cdnConfig.push(...sslConfig(domain, global));
 
+        cdnConfig.push(['# disable access_log', '']);
+        cdnConfig.push(['access_log', 'off']);
+
         // Gzip
         if (global.performance.gzipCompression.computed) {
             cdnConfig.push(['# gzip', '']);
