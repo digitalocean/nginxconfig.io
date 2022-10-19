@@ -25,7 +25,6 @@ THE SOFTWARE.
 */
 
 import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate';
-import { getAccessLogDomainPath, getErrorLogDomainPath } from '../../util/get_log_paths';
 import { extensions, gzipTypes } from '../../util/types_extensions';
 import commonHsts from '../../util/common_hsts';
 import securityConf from './security.conf';
@@ -226,13 +225,16 @@ export default (domain, domains, global, ipPortPairs) => {
 
         if (domain.logging.accessLog.computed)
             serverConfig.push(['access_log',
-                getAccessLogDomainPath(domain, global) +
+                domain.logging.accessLogPath.computed.trim() +
                 (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-                (global.logging.accessLogArguments.computed ? ` ${global.logging.accessLogArguments.computed.trim()}`: ''),
+                (domain.logging.accessLogParameters.computed ? ` ${domain.logging.accessLogParameters.computed.trim()}`: ''),
             ]);
 
         if (domain.logging.errorLog.computed)
-            serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
+            serverConfig.push(['error_log', 
+                domain.logging.errorLogPath.computed.trim() +
+                ` ${domain.logging.errorLogLevel.computed}`,
+            ]);
     }
 
     // index.php

@@ -29,4 +29,6 @@ import common from '../../common';
 export default {
     byDomain: 'wg. domen',
     enableForThisDomain: `${common.enable} dla tej domeny`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
 };

@@ -51,18 +51,18 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div v-if="$props.data.accessLog.computed" class="field is-horizontal">
             <div class="field-label">
-                <label class="label">access_log arguments</label>
+                <label class="label">access_log {{ $t('templates.globalSections.logging.arguments') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${accessLogArgumentsChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${accessLogParametersChanged ? ' is-changed' : ''}`">
                         <input
-                            v-model="accessLogArguments"
+                            v-model="accessLogParameters"
                             class="input"
                             type="text"
-                            :placeholder="$props.data.accessLogArguments.default"
+                            :placeholder="$props.data.accessLogParameters.default"
                         />
                     </div>
                 </div>
@@ -89,6 +89,26 @@ THE SOFTWARE.
                             type="text"
                             :placeholder="$props.data.errorLogPath.default"
                         />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="$props.data.errorLog.computed" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">error_log {{ $t('templates.globalSections.logging.level') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-horizontal">
+                    <div
+                        v-for="value in $props.data.errorLogLevel.options"
+                        :class="`control${errorLogLevelChanged && value === errorLogLevel ? ' is-changed' : ''}`"
+                    >
+                        <div class="radio">
+                            <PrettyRadio v-model="errorLogLevel" :value="value" class="p-default p-round p-fill p-icon">
+                                {{ value }}
+                            </PrettyRadio>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -189,7 +209,9 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import { accessLogParamsDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
         accessLog: {
@@ -200,8 +222,8 @@ THE SOFTWARE.
             default: '/var/log/nginx/access.log',
             enabled: true,
         },
-        accessLogArguments: {
-            default: 'buffer=512k flush=1m',
+        accessLogParameters: {
+            default: accessLogParamsDefault,
             enabled: true,
         },
         errorLog: {
@@ -209,7 +231,12 @@ THE SOFTWARE.
             enabled: true,
         },
         errorLogPath: {
-            default: '/var/log/nginx/error.log warn',
+            default: '/var/log/nginx/error.log',
+            enabled: true,
+        },
+        errorLogLevel: {
+            default: errorLogLevelDefault,
+            options: errorLogLevelOptions,
             enabled: true,
         },
         logNotFound: {
@@ -261,6 +288,7 @@ THE SOFTWARE.
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
             PrettyCheck,
+            PrettyRadio,
         },
         props: {
             data: Object,                                       // Data delegated back to us from parent

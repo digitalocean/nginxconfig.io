@@ -27,4 +27,6 @@ THE SOFTWARE.
 export default {
     byDomain: 'der Domain',
     enableForThisDomain: 'Für diese Domain aktivieren',
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
 };

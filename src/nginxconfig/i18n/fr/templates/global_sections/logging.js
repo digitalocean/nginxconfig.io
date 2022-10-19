@@ -29,6 +29,8 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} les erreurs de fichiers introuvables lors de la journalisation`,
     logformat: 'log_format',
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
     enableCloudflare: 'ajouter les en-têtes de requête CloudFlare au format de journal par défaut',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',

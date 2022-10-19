@@ -29,4 +29,6 @@ import common from '../../common';
 export default {
     byDomain: 'по домену',
     enableForThisDomain: `${common.enable} для этого домена`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
 };

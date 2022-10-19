@@ -29,6 +29,8 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} логирование ошибок для файлов, которые не были найдены при запросе`,
     logformat: 'log_format',
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
     enableCloudflare: 'добавить Cloudflare хедеры запроса в дефолтный формат логов',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',

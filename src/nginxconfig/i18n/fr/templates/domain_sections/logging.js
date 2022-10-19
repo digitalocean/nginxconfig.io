@@ -29,4 +29,6 @@ import common from '../../common';
 export default {
     byDomain: 'par domaine',
     enableForThisDomain: `${common.enable} pour ce domaine`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
 };
