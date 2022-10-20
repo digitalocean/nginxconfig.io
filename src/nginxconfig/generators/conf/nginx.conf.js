@@ -116,7 +116,8 @@ export default (domains, global) => {
         config.http.push(['access_log', 'off']);
     }
     if (global.logging.errorLog.computed) {
-        config.http.push(['error_log', global.logging.errorLogPath.computed.trim()]);
+        config.http.push(['error_log', global.logging.errorLogPath.computed.trim() +
+            ` ${global.logging.errorLogLevel.computed}`]);
     } else {
         config.http.push(['error_log', '/dev/null']);
     }
