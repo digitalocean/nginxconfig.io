@@ -44,7 +44,7 @@ THE SOFTWARE.
                             v-model="accessLogPath"
                             class="input"
                             type="text"
-                            :placeholder="$props.data.accessLogPath.computed"
+                            :placeholder="`/var/log/nginx/${$parent.$props.data.server.domain.computed}.access.log`"
                         />
                     </div>
                 </div>
@@ -86,7 +86,7 @@ THE SOFTWARE.
                                 v-model="errorLogPath"
                                 class="input"
                                 type="text"
-                                :placeholder="$props.data.errorLogPath.computed"
+                                :placeholder="`/var/log/nginx/${$parent.$props.data.server.domain.computed}.error.log`"
                             />
                         </div>
                     </div>
@@ -130,7 +130,6 @@ THE SOFTWARE.
         },
         accessLogPath: {
             default: '',
-            computed: '/var/log/nginx/example.com.access.log', // No default value, but a default computed
             enabled: true,
         },
         accessLogParameters: {
@@ -143,7 +142,6 @@ THE SOFTWARE.
         },
         errorLogPath: {
             default: '',
-            computed: '/var/log/nginx/example.com.error.log', // No default value, but a default computed
             enabled: true,
         },
         errorLogLevel: {

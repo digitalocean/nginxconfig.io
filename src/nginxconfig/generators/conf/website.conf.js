@@ -26,6 +26,7 @@ THE SOFTWARE.
 
 import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate';
 import { extensions, gzipTypes } from '../../util/types_extensions';
+import { getDomainAccessLog, getDomainErrorLog } from '../../util/logging';
 import commonHsts from '../../util/common_hsts';
 import securityConf from './security.conf';
 import pythonConf from './python_uwsgi.conf';
@@ -224,17 +225,10 @@ export default (domain, domains, global, ipPortPairs) => {
         serverConfig.push(['# logging', '']);
 
         if (domain.logging.accessLog.computed)
-            serverConfig.push(['access_log',
-                domain.logging.accessLogPath.computed.trim() +
-                (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-                (domain.logging.accessLogParameters.computed ? ` ${domain.logging.accessLogParameters.computed.trim()}`: ''),
-            ]);
+            serverConfig.push(['access_log', getDomainAccessLog(domain, global)]);
 
         if (domain.logging.errorLog.computed)
-            serverConfig.push(['error_log', 
-                domain.logging.errorLogPath.computed.trim() +
-                ` ${domain.logging.errorLogLevel.computed}`,
-            ]);
+            serverConfig.push(['error_log', getDomainErrorLog(domain)]);
     }
 
     // index.php
