@@ -26,8 +26,8 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">access_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
@@ -69,8 +69,8 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">error_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
