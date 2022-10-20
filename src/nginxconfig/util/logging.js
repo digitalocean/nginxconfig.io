@@ -32,16 +32,16 @@ export const getDomainAccessLog = (domain, global) => {
 
     return path + 
         (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-        (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '')
+        (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
 };
 
 export const getDomainErrorLog = (domain) => {
-    let path = domain.logging.errorLogPath.computed.trim()
+    let path = domain.logging.errorLogPath.computed.trim();
     if (!path) {
         path = `/var/log/nginx/${domain.server.domain.computed}.error.log`;
     }
     return `${path} ${domain.logging.errorLogLevel.computed}`;
-}
+};
 
 export const accessLogParamsDefault = 'buffer=512k flush=1m';
 
