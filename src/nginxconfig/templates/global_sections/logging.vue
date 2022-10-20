@@ -39,7 +39,7 @@ THE SOFTWARE.
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="$props.data.accessLog.computed" class="control field is-horizontal is-expanded">
+                    <div v-if="$props.data.accessLog.computed" :class="`control field is-horizontal is-expanded${accessLogPathChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="accessLogPath"
                             class="input"
@@ -82,7 +82,7 @@ THE SOFTWARE.
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="$props.data.errorLog.computed" class="control field is-horizontal is-expanded">
+                    <div v-if="$props.data.errorLog.computed" :class="`control field is-horizontal is-expanded${errorLogPathChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="errorLogPath"
                             class="input"
