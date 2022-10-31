@@ -43,7 +43,6 @@ export default {
     phpBackupServer: `Servidor de backup ${common.php}`,
     tcp: 'TCP',
     hhvmSocket: 'Socket HHVM',
-    php5Socket: 'Socket 5.x',
     php70Socket: 'Socket 7.0',
     php71Socket: 'Socket 7.1',
     php72Socket: 'Socket 7.2',
@@ -51,6 +50,7 @@ export default {
     php74Socket: 'Socket 7.4',
     php80Socket: 'Socket 8.0',
     php81Socket: 'Socket 8.1',
+    php82Socket: 'Socket 8.2',
     phpSocket: 'Socket PHP',
     custom: 'Custom', // TODO: translate
     disabled: 'Desabilitado',

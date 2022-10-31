@@ -197,7 +197,6 @@ THE SOFTWARE.
         '127.0.0.1:9000': 'templates.domainSections.php.tcp',
         '/var/run/hhvm/sock': 'templates.domainSections.php.hhvmSocket',
         '/var/run/hhvm/hhvm.sock': 'templates.domainSections.php.hhvmSocket',
-        '/var/run/php5-fpm.sock': 'templates.domainSections.php.php5Socket',
         '/var/run/php/php7.1-fpm.sock': 'templates.domainSections.php.php71Socket',
         '/var/run/php/php7.2-fpm.sock': 'templates.domainSections.php.php72Socket',
         '/var/run/php/php7.0-fpm.sock': 'templates.domainSections.php.php70Socket',
@@ -205,6 +204,7 @@ THE SOFTWARE.
         '/var/run/php/php7.4-fpm.sock': 'templates.domainSections.php.php74Socket',
         '/var/run/php/php8.0-fpm.sock': 'templates.domainSections.php.php80Socket',
         '/var/run/php/php8.1-fpm.sock': 'templates.domainSections.php.php81Socket',
+        '/var/run/php/php8.2-fpm.sock': 'templates.domainSections.php.php82Socket',
         '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
         'custom': 'templates.domainSections.php.custom',
     };
