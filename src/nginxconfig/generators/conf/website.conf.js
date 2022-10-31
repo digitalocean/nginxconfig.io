@@ -221,13 +221,13 @@ export default (domain, domains, global, ipPortPairs) => {
     }
 
     // Access log or error log for domain
-    if (domain.logging.accessLog.computed || domain.logging.errorLog.computed) {
+    if (domain.logging.accessLogEnabled.computed || domain.logging.errorLogEnabled.computed) {
         serverConfig.push(['# logging', '']);
 
-        if (domain.logging.accessLog.computed)
+        if (domain.logging.accessLogEnabled.computed)
             serverConfig.push(['access_log', getDomainAccessLog(domain, global)]);
 
-        if (domain.logging.errorLog.computed)
+        if (domain.logging.errorLogEnabled.computed)
             serverConfig.push(['error_log', getDomainErrorLog(domain)]);
     }
 

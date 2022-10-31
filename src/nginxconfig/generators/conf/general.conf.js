@@ -33,13 +33,13 @@ export default (domains, global) => {
     config['location = /favicon.ico'] = {
         log_not_found: 'off',
     };
-    if (global.logging.accessLog.computed) config['location = /favicon.ico'].access_log = 'off';
+    if (global.logging.accessLogEnabled.computed) config['location = /favicon.ico'].access_log = 'off';
 
     config['# robots.txt'] = '';
     config['location = /robots.txt'] = {
         log_not_found: 'off',
     };
-    if (global.logging.accessLog.computed) config['location = /robots.txt'].access_log = 'off';
+    if (global.logging.accessLogEnabled.computed) config['location = /robots.txt'].access_log = 'off';
 
     if (global.performance.disableHtmlCaching.computed) {
         // Disable HTML caching for changes take effect in time
@@ -48,7 +48,7 @@ export default (domains, global) => {
         config[loc] = {
             add_header: 'Cache-Control "no-cache"',
         };
-        if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+        if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
      }
  
 
@@ -61,7 +61,7 @@ export default (domains, global) => {
                 config[loc] = {
                     expires: global.performance.assetsExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
         } else {
             // Assets & media separately
@@ -71,7 +71,7 @@ export default (domains, global) => {
                 config[loc] = {
                     expires: global.performance.assetsExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
 
             if (global.performance.mediaExpiration.computed) {
@@ -80,7 +80,7 @@ export default (domains, global) => {
                 config[loc] = {
                     expires: global.performance.mediaExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
         }
 
@@ -93,7 +93,7 @@ export default (domains, global) => {
                     add_header: 'Access-Control-Allow-Origin "*"',
                     expires: global.performance.svgExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
         } else {
             // SVG & fonts separately
@@ -104,7 +104,7 @@ export default (domains, global) => {
                     add_header: 'Access-Control-Allow-Origin "*"',
                     expires: global.performance.svgExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
 
             if (global.performance.fontsExpiration.computed) {
@@ -114,7 +114,7 @@ export default (domains, global) => {
                     add_header: 'Access-Control-Allow-Origin "*"',
                     expires: global.performance.fontsExpiration.computed,
                 };
-                if (global.logging.accessLog.computed) config[loc].access_log = 'off';
+                if (global.logging.accessLogEnabled.computed) config[loc].access_log = 'off';
             }
         }
     }

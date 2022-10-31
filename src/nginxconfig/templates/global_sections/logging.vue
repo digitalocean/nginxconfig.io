@@ -32,14 +32,14 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${accessLogEnabledChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="accessLogEnabled" class="p-default p-curve p-fill p-icon">
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="$props.data.accessLog.computed" :class="`control field is-horizontal is-expanded${accessLogPathChanged ? ' is-changed' : ''}`">
+                    <div v-if="$props.data.accessLogEnabled.computed" :class="`control field is-horizontal is-expanded${accessLogPathChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="accessLogPath"
                             class="input"
@@ -51,7 +51,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="$props.data.accessLog.computed" class="field is-horizontal">
+        <div v-if="$props.data.accessLogEnabled.computed" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">access_log {{ $t('templates.globalSections.logging.arguments') }}</label>
             </div>
@@ -75,14 +75,14 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${errorLogEnabledChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="errorLogEnabled" class="p-default p-curve p-fill p-icon">
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="$props.data.errorLog.computed" :class="`control field is-horizontal is-expanded${errorLogPathChanged ? ' is-changed' : ''}`">
+                    <div v-if="$props.data.errorLogEnabled.computed" :class="`control field is-horizontal is-expanded${errorLogPathChanged ? ' is-changed' : ''}`">
                         <input
                             v-model="errorLogPath"
                             class="input"
@@ -94,7 +94,7 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="$props.data.errorLog.computed" class="field is-horizontal">
+        <div v-if="$props.data.errorLogEnabled.computed" class="field is-horizontal">
             <div class="field-label">
                 <label class="label">error_log {{ $t('templates.globalSections.logging.level') }}</label>
             </div>
@@ -214,7 +214,7 @@ THE SOFTWARE.
     import PrettyRadio from '../inputs/radio';
 
     const defaults = {
-        accessLog: {
+        accessLogEnabled: {
             default: false,
             enabled: true,
         },
@@ -226,7 +226,7 @@ THE SOFTWARE.
             default: accessLogParamsDefault,
             enabled: true,
         },
-        errorLog: {
+        errorLogEnabled: {
             default: false,
             enabled: true,
         },
