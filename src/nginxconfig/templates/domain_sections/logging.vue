@@ -44,7 +44,7 @@ THE SOFTWARE.
                             v-model="accessLogPath"
                             class="input"
                             type="text"
-                            :placeholder="`/var/log/nginx/${$parent.$props.data.server.domain.computed}.access.log`"
+                            :placeholder="$props.data.accessLogPath.default"
                         />
                     </div>
                 </div>
@@ -86,7 +86,7 @@ THE SOFTWARE.
                                 v-model="errorLogPath"
                                 class="input"
                                 type="text"
-                                :placeholder="`/var/log/nginx/${$parent.$props.data.server.domain.computed}.error.log`"
+                                :placeholder="$props.data.errorLogPath.default"
                             />
                         </div>
                     </div>
@@ -119,7 +119,7 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import { accessLogParamsDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
+    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -129,7 +129,7 @@ THE SOFTWARE.
             enabled: true,
         },
         accessLogPath: {
-            default: '',
+            default: accessLogPathDefault,
             enabled: true,
         },
         accessLogParameters: {
@@ -141,7 +141,7 @@ THE SOFTWARE.
             enabled: true,
         },
         errorLogPath: {
-            default: '',
+            default: errorLogPathDefault,
             enabled: true,
         },
         errorLogLevel: {
@@ -164,18 +164,5 @@ THE SOFTWARE.
             data: Object,                                       // Data delegated back to us from parent
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
-        watch: {
-            '$parent.$props.data.server.domain': {
-                handler(data) {
-                    if (!this.$props.data.accessLogPath.value.trim()) {
-                        this.$props.data.accessLogPath.computed = `/var/log/nginx/${data.computed}.access.log`;
-                    }
-                    if (!this.$props.data.errorLogPath.value.trim()) {
-                        this.$props.data.errorLogPath.computed = `/var/log/nginx/${data.computed}.error.log`;
-                    }
-                },
-                deep: true,
-            },  
-        },
     };
 </script>

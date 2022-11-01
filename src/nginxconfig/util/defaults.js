@@ -24,28 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const getDomainAccessLog = (domain, global) => {
-    let path = domain.logging.accessLogPath.computed.trim();
-    if (!path) {
-        path = `/var/log/nginx/${domain.server.domain.computed}.access.log`;
-    }
-
-    return path + 
-        (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-        (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
-};
-
-export const getDomainErrorLog = (domain) => {
-    let path = domain.logging.errorLogPath.computed.trim();
-    if (!path) {
-        path = `/var/log/nginx/${domain.server.domain.computed}.error.log`;
-    }
-    return `${path} ${domain.logging.errorLogLevel.computed}`;
-};
-
-export const accessLogPathDefault = '/var/log/nginx/access.log';
-export const accessLogParamsDefault = 'buffer=512k flush=1m';
-
-export const errorLogPathDefault = '/var/log/nginx/error.log';
-export const errorLogLevelDefault = 'warn';
-export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
+export const serverDomainDefault = 'example.com';

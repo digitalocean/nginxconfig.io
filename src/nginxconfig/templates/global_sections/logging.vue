@@ -166,7 +166,7 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import { errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
+    import { errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -176,7 +176,7 @@ THE SOFTWARE.
             enabled: true,
         },
         errorLogPath: {
-            default: '/var/log/nginx/error.log',
+            default: errorLogPathDefault,
             enabled: true,
         },
         errorLogLevel: {
