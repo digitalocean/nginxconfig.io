@@ -31,4 +31,5 @@ export default {
     enableForThisDomain: `為此網域${common.enable}`,
     arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

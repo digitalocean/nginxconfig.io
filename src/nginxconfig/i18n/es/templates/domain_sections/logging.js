@@ -31,4 +31,5 @@ export default {
     enableForThisDomain: `${common.enable} para este dominio`,
     arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

@@ -29,4 +29,5 @@ export default {
     enableForThisDomain: 'Für diese Domain aktivieren',
     arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };
