@@ -71,6 +71,23 @@ THE SOFTWARE.
 
         <div class="field is-horizontal is-aligned-top">
             <div class="field-label has-small-margin-top">
+                <label class="label">access_log {{ $t('templates.domainSections.logging.forRedirects') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${redirectAccessLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="redirectAccessLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">error_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
@@ -113,6 +130,23 @@ THE SOFTWARE.
                 </div>
             </div>
         </div>
+
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
+                <label class="label">error_log {{ $t('templates.domainSections.logging.forRedirects') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${redirectErrorLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="redirectErrorLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -136,6 +170,10 @@ THE SOFTWARE.
             default: accessLogParamsDefault,
             enabled: true,
         },
+        redirectAccessLog: {
+            default: false,
+            enabled: true,
+        },
         errorLogEnabled: {
             default: true,
             enabled: true,
@@ -147,6 +185,10 @@ THE SOFTWARE.
         errorLogLevel: {
             default: errorLogLevelDefault,
             options: errorLogLevelOptions,
+            enabled: true,
+        },
+        redirectErrorLog: {
+            default: false,
             enabled: true,
         },
     };

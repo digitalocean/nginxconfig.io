@@ -31,4 +31,5 @@ export default {
     enableForThisDomain: `${common.enable} for this domain`,
     arguments: 'arguments',
     level: 'logging level',
+    forRedirects: 'for redirects',
 };
