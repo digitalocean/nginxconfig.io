@@ -107,14 +107,7 @@ export default (domains, global) => {
     }
 
     config.http.push(['# Logging', '']);
-    if (global.logging.accessLogEnabled.computed) {
-        config.http.push(['access_log', global.logging.accessLogPath.computed.trim() +
-            (global.logging.cloudflare.computed ? ' cloudflare' : '') +
-            (global.logging.accessLogParameters.computed ? ` ${global.logging.accessLogParameters.computed.trim()}` : ''),
-        ]);
-    } else {
-        config.http.push(['access_log', 'off']);
-    }
+    config.http.push(['access_log', 'off']);
     if (global.logging.errorLogEnabled.computed) {
         config.http.push(['error_log', global.logging.errorLogPath.computed.trim() +
             ` ${global.logging.errorLogLevel.computed}`]);

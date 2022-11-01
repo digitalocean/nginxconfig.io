@@ -29,7 +29,6 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} erro de arquivo não encontrado ao fazer login`,
     logformat: 'log_format',
-    arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
     enableCloudflare: 'adicionar cabeçalhos de solicitação Cloudflare ao formato de log padrão',
     cfRay: 'CF-Ray',

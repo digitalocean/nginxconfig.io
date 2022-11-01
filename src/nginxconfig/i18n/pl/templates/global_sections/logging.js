@@ -29,7 +29,6 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} logowanie błędów o nieznalezionych plikach`,
     logformat: 'log_format',
-    arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
     enableCloudflare: 'dodaj nagłówki żądań Cloudflare do domyślnego formatu dziennika ',
     cfRay: 'CF-Ray',

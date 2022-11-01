@@ -29,7 +29,6 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} "Seite nicht gefunden" Error Logging in`,
     logformat: 'log_format',
-    arguments: 'arguments', // TODO: translate
     level: 'logging level', // TODO: translate
     enableCloudflare: 'Füge Cloudflare Anfrage-Header dem Standard Log-Format hinzu',
     cfRay: 'CF-Ray',
