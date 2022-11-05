@@ -47,7 +47,7 @@ const migrateLogging = data => {
     const [globalErrorLogPath, ...globalErrorLogLevel] = (globalLogging.errorLog || `${errorLogPathDefault} ${errorLogLevelDefault}`).split(' ');
     const globalErrorLogEnabled = 
         !('errorLog' in globalLogging) || // errorLog was enabled by default and might not appear at all
-        globalErrorLogPath !== '/dev/null'; // *or* someone turned it off explicitly
+        (globalErrorLogPath !== '' && globalErrorLogPath !== '/dev/null'); // *or* someone turned it off explicitly
 
     // set global access_log / error_log files for every domain UNLESS it was explicitly
     // enabled for the domain
