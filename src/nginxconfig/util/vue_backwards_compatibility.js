@@ -66,7 +66,7 @@ const migrateLogging = data => {
         const perDomainAccessLogEnabled = !!perDomainLogging.accessLog;
         if (perDomainAccessLogEnabled) {
             accessLogEnabled = true;
-            accessLogPath = `/var/log/nginx/${perDomainServer.domain}.access.log`;
+            accessLogPath = accessLogPath.replace(/([^/]+)\.log$/, `${perDomainServer.domain}.$1.log`);
         }
 
         // error_log
@@ -77,7 +77,7 @@ const migrateLogging = data => {
         const perDomainErrorLogEnabled = !!perDomainLogging.errorLog;
         if (perDomainErrorLogEnabled) {
             errorLogEnabled = true;
-            errorLogPath = `/var/log/nginx/${perDomainServer.domain}.error.log`;
+            errorLogPath = errorLogPath.replace(/([^/]+)\.log$/, `${perDomainServer.domain}.$1.log`);
         }
 
         data.domains[key].logging = {
