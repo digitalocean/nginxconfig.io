@@ -128,11 +128,16 @@ const httpRedirectConfig = (domain, global, ipPortPairs, domainName, redirectDom
     config.push(['server_name', domainName]);
 
     // Logging
-    if (domain.logging.redirectAccessLog.computed) {
-        config.push(['access_log', getDomainAccessLog(domain, global)]);
-    }
-    if (domain.logging.redirectErrorLog.computed) {
-        config.push(['error_log', getDomainErrorLog(domain)]);
+    if (domain.logging.redirectAccessLog.computed || domain.logging.redirectErrorLog.computed) {
+        config.push(['# logging', '']);
+
+        if (domain.logging.redirectAccessLog.computed) {
+            config.push(['access_log', getDomainAccessLog(domain, global)]);
+        }
+
+        if (domain.logging.redirectErrorLog.computed) {
+            config.push(['error_log', getDomainErrorLog(domain)]);
+        }
     }
 
     if (domain.https.certType.computed === 'letsEncrypt') {
@@ -420,11 +425,15 @@ export default (domain, domains, global, ipPortPairs) => {
         redirectConfig.push(...sslConfig(domain, global));
         
         // Logging
-        if (domain.logging.redirectAccessLog.computed) {
-            redirectConfig.push(['access_log', getDomainAccessLog(domain, global)]);
-        }
-        if (domain.logging.redirectErrorLog.computed) {
-            redirectConfig.push(['error_log', getDomainErrorLog(domain)]);
+        if (domain.logging.redirectAccessLog.computed || domain.logging.redirectErrorLog.computed) {
+            redirectConfig.push(['# logging', '']);
+
+            if (domain.logging.redirectAccessLog.computed) {
+                redirectConfig.push(['access_log', getDomainAccessLog(domain, global)]);
+            }
+            if (domain.logging.redirectErrorLog.computed) {
+                redirectConfig.push(['error_log', getDomainErrorLog(domain)]);
+            }
         }
         
         redirectConfig.push(['return',
