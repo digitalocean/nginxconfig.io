@@ -31,9 +31,7 @@ import { serverDomainDefault } from './defaults';
 
 // Migrate old logging settings to new ones
 const migrateLogging = data => {
-    if (Object.keys(data).length === 0) {
-        // Not having anything to migrate, so skip this logic
-    }
+    if (Object.keys(data).length === 0) return;
 
     const globalLogging = 'logging' in data.global && isObject(data.global.logging) ? data.global.logging : {};
 
