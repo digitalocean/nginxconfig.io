@@ -52,8 +52,9 @@ const migrateLogging = data => {
     for (const key in data.domains) {
         if (!Object.prototype.hasOwnProperty.call(data.domains, key)) continue;
 
-        const perDomainServer = 'server' in data.domains[key] && isObject(data.domains[key].server) ? data.domains[key].server : {
+        const perDomainServer = {
             domain: serverDomainDefault,
+            ...('server' in data.domains[key] && isObject(data.domains[key].server) ? data.domains[key].server : {}),
         };
         const perDomainLogging = 'logging' in data.domains[key] && isObject(data.domains[key].logging) ? data.domains[key].logging : {};
 
