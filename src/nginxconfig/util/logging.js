@@ -40,7 +40,9 @@ export const getDomainErrorLog = (domain) => {
     if (!path) {
         path = `/var/log/nginx/${domain.server.domain.computed}.error.log`;
     }
-    return `${path} ${domain.logging.errorLogLevel.computed}`;
+
+    const errorLogLevel = errorLogLevelOptions.includes(domain.logging.errorLogLevel.computed) ? ` ${domain.logging.errorLogLevel.computed}` : '';
+    return `${path}${errorLogLevel}`;
 };
 
 export const accessLogPathDefault = '/var/log/nginx/access.log';
@@ -49,3 +51,4 @@ export const accessLogParamsDefault = 'buffer=512k flush=1m';
 export const errorLogPathDefault = '/var/log/nginx/error.log';
 export const errorLogLevelDefault = 'warn';
 export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
+export const errorLogLevelDisabled = 'none';

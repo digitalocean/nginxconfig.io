@@ -103,6 +103,7 @@ THE SOFTWARE.
                                 v-model="errorLogPath"
                                 class="input"
                                 type="text"
+                                :disabled="!errorLogPathEnabled"
                                 :placeholder="$props.data.errorLogPath.default"
                             />
                         </div>
@@ -153,7 +154,7 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
+    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions, errorLogLevelDisabled } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -184,7 +185,7 @@ THE SOFTWARE.
         },
         errorLogLevel: {
             default: errorLogLevelDefault,
-            options: errorLogLevelOptions,
+            options: [errorLogLevelDisabled, ...errorLogLevelOptions],
             enabled: true,
         },
         redirectErrorLog: {
@@ -206,5 +207,20 @@ THE SOFTWARE.
             data: Object,                                       // Data delegated back to us from parent
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
+        watch: {
+            '$props.data.errorLogLevel': {
+                handler(data) {
+                    // disable `error_log` path selection if log level is set to `none`
+                    if (data.computed === errorLogLevelDisabled) {
+                        this.$props.data.errorLogPath.enabled = false;
+                        this.$props.data.errorLogPath.value = '/dev/null';
+                    } else if (!this.$props.data.errorLogPath.enabled) {
+                        this.$props.data.errorLogPath.enabled = true;
+                        this.$props.data.errorLogPath.value = this.$props.data.errorLogPath.default;
+                    }
+                },
+                deep: true,
+            },
+        },
     };
 </script>
