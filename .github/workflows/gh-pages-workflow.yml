@@ -5,17 +5,25 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-workflow
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3.5.0
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version-file: ".nvmrc"
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Setup NPM
@@ -40,9 +48,8 @@ jobs:
           NODE_ENV: production
 
       - name: Deploy master to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@2.0.0
-        env:
-          ACCESS_TOKEN: ${{ secrets.DEV_GITHUB_TOKEN }}
-          BASE_BRANCH: master
-          BRANCH: gh-pages
-          FOLDER: dist
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          clean: true
+          single-commit: true
