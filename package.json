@@ -97,7 +97,7 @@
       "eslint --quiet --cache --fix"
     ],
     "*.{scss}": [
-      "stylelint --fix"
+      "stylelint --config node_modules/do-bulma/.stylelintrc.json --fix"
     ]
   },
   "overrides": {
