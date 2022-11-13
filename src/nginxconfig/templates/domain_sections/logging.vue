@@ -154,7 +154,7 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions, errorLogLevelDisabled } from '../../util/logging';
+    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogPathDisabled, errorLogLevelDefault, errorLogLevelOptions, errorLogLevelDisabled } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -213,10 +213,10 @@ THE SOFTWARE.
                     // disable `error_log` path selection if log level is set to `none`
                     if (data.computed === errorLogLevelDisabled) {
                         this.$props.data.errorLogPath.enabled = false;
-                        this.$props.data.errorLogPath.value = '/dev/null';
+                        this.$props.data.errorLogPath.computed = errorLogPathDisabled;
                     } else if (!this.$props.data.errorLogPath.enabled) {
                         this.$props.data.errorLogPath.enabled = true;
-                        this.$props.data.errorLogPath.value = this.$props.data.errorLogPath.default;
+                        this.$props.data.errorLogPath.computed = this.$props.data.errorLogPath.value;
                     }
                 },
                 deep: true,

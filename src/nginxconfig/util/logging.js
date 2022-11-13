@@ -28,6 +28,7 @@ export const accessLogPathDefault = '/var/log/nginx/access.log';
 export const accessLogParamsDefault = 'buffer=512k flush=1m';
 
 export const errorLogPathDefault = '/var/log/nginx/error.log';
+export const errorLogPathDisabled = '/dev/null';
 export const errorLogLevelDefault = 'warn';
 export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
 export const errorLogLevelDisabled = 'none';

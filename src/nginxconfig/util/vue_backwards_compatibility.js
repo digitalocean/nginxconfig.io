@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 import isObject from './is_object';
 import deepMerge from './deep_merge';
-import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogLevelDefault } from './logging';
+import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogPathDisabled, errorLogLevelDefault } from './logging';
 import { serverDomainDefault } from './defaults';
 
 // Migrate old logging settings to new ones
@@ -45,7 +45,7 @@ const migrateLogging = data => {
     const [globalErrorLogPath, ...globalErrorLogLevel] = (globalLogging.errorLog || `${errorLogPathDefault} ${errorLogLevelDefault}`).split(' ');
     const globalErrorLogEnabled = 
         !('errorLog' in globalLogging) || // errorLog was enabled by default and might not appear at all
-        (globalErrorLogPath !== '' && globalErrorLogPath !== '/dev/null'); // *or* someone turned it off explicitly
+        (globalErrorLogPath !== '' && globalErrorLogPath !== errorLogPathDisabled); // *or* someone turned it off explicitly
 
     // set global access_log / error_log files for every domain UNLESS it was explicitly
     // enabled for the domain

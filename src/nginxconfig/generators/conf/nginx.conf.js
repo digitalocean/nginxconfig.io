@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { errorLogPathDisabled } from '../../util/logging';
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 
@@ -112,7 +113,7 @@ export default (domains, global) => {
         config.http.push(['error_log', global.logging.errorLogPath.computed.trim() +
             ` ${global.logging.errorLogLevel.computed}`]);
     } else {
-        config.http.push(['error_log', '/dev/null']);
+        config.http.push(['error_log', errorLogPathDisabled]);
     }
 
     if (global.security.limitReq.computed) {
