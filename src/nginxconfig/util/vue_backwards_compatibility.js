@@ -81,13 +81,13 @@ const migrateLogging = data => {
         }
 
         data.domains[key].logging = {
-            ...perDomainLogging,
             accessLogEnabled,
             accessLogPath,
             accessLogParameters,
             errorLogEnabled,
             errorLogPath,
             errorLogLevel,
+            ...perDomainLogging,
         };
     }
 };
