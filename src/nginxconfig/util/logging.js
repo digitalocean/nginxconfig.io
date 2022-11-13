@@ -24,10 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+export const accessLogPathDefault = '/var/log/nginx/access.log';
+export const accessLogParamsDefault = 'buffer=512k flush=1m';
+
+export const errorLogPathDefault = '/var/log/nginx/error.log';
+export const errorLogLevelDefault = 'warn';
+export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
+export const errorLogLevelDisabled = 'none';
+
 export const getDomainAccessLog = (domain, global) => {
     let path = domain.logging.accessLogPath.computed.trim();
     if (!path) {
-        path = `/var/log/nginx/${domain.server.domain.computed}.access.log`;
+        path = accessLogPathDefault;
     }
 
     return path + 
@@ -38,17 +46,9 @@ export const getDomainAccessLog = (domain, global) => {
 export const getDomainErrorLog = (domain) => {
     let path = domain.logging.errorLogPath.computed.trim();
     if (!path) {
-        path = `/var/log/nginx/${domain.server.domain.computed}.error.log`;
+        path = errorLogPathDefault;
     }
 
     const errorLogLevel = errorLogLevelOptions.includes(domain.logging.errorLogLevel.computed) ? ` ${domain.logging.errorLogLevel.computed}` : '';
     return `${path}${errorLogLevel}`;
 };
-
-export const accessLogPathDefault = '/var/log/nginx/access.log';
-export const accessLogParamsDefault = 'buffer=512k flush=1m';
-
-export const errorLogPathDefault = '/var/log/nginx/error.log';
-export const errorLogLevelDefault = 'warn';
-export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
-export const errorLogLevelDisabled = 'none';
