@@ -147,16 +147,17 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import { serverDomainDefault } from '../../util/defaults';
     import PrettyCheck from '../inputs/checkbox';
 
     const defaults = {
         domain: {
-            default: 'example.com',
+            default: serverDomainDefault,
             enabled: true,
         },
         path: {
             default: '',
-            computed: '/var/www/example.com', // No default value, but a default computed
+            computed: `/var/www/${serverDomainDefault}`, // No default value, but a default computed
             enabled: true,
         },
         documentRoot: {

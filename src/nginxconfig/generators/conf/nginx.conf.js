@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import { errorLogPathDisabled } from '../../util/logging';
 import sslProfiles from '../../util/ssl_profiles';
 import websiteConf from './website.conf';
 
@@ -107,8 +108,13 @@ export default (domains, global) => {
     }
 
     config.http.push(['# Logging', '']);
-    config.http.push(['access_log', (global.logging.accessLog.computed.trim() + (global.logging.cloudflare.computed ? ' cloudflare' : '')) || 'off']);
-    config.http.push(['error_log', global.logging.errorLog.computed.trim() || '/dev/null']);
+    config.http.push(['access_log', 'off']);
+    if (global.logging.errorLogEnabled.computed) {
+        config.http.push(['error_log', global.logging.errorLogPath.computed.trim() +
+            ` ${global.logging.errorLogLevel.computed}`]);
+    } else {
+        config.http.push(['error_log', errorLogPathDisabled]);
+    }
 
     if (global.security.limitReq.computed) {
         config.http.push(['# Limits', '']);

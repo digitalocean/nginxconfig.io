@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,6 +29,7 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} el registro de error de archivo no encontrado`,
     logformat: 'log_format',
+    level: 'logging level', // TODO: translate
     enableCloudflare: 'agregar cabecera de petición de Cloudflare en el formato por defecto del registro',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',

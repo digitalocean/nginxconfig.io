@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,6 +29,7 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} file not found error logging in`,
     logformat: 'log_format',
+    level: 'logging level',
     enableCloudflare: 'add Cloudflare request headers to the default log format',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',

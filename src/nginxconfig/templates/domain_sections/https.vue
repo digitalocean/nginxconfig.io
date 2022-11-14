@@ -227,6 +227,7 @@ THE SOFTWARE.
     import ExternalLink from 'do-vue/src/templates/external_link';
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import { serverDomainDefault } from '../../util/defaults';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -269,7 +270,7 @@ THE SOFTWARE.
         },
         letsEncryptEmail: {
             default: '',
-            computed: 'info@example.com', // No default value, but a default computed
+            computed: `info@${serverDomainDefault}`, // No default value, but a default computed
             enabled: true,
         },
         sslCertificate: {

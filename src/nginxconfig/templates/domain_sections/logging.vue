@@ -26,16 +26,59 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">access_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${accessLogChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${accessLogEnabledChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="accessLog" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="accessLogEnabled" class="p-default p-curve p-fill p-icon">
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
+                    <div v-if="$props.data.accessLogEnabled.computed" :class="`control field is-horizontal is-expanded${accessLogPathChanged ? ' is-changed' : ''}`">
+                        <input
+                            v-model="accessLogPath"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.accessLogPath.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="$props.data.accessLogEnabled.computed" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">access_log {{ $t('templates.domainSections.logging.arguments') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${accessLogParametersChanged ? ' is-changed' : ''}`">
+                        <input
+                            v-model="accessLogParameters"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.accessLogParameters.default"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
+                <label class="label">access_log {{ $t('templates.domainSections.logging.forRedirects') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${redirectAccessLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="redirectAccessLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -43,16 +86,62 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div class="field is-horizontal">
-            <div class="field-label">
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
                 <label class="label">error_log {{ $t('templates.domainSections.logging.byDomain') }}</label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div :class="`control${errorLogChanged ? ' is-changed' : ''}`">
+                    <div :class="`control${errorLogEnabledChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="errorLog" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck v-model="errorLogEnabled" class="p-default p-curve p-fill p-icon">
                                 {{ $t('templates.domainSections.logging.enableForThisDomain') }}
+                            </PrettyCheck>
+                        </div>
+                        <div v-if="$props.data.errorLogEnabled.computed" :class="`control field is-horizontal is-expanded${errorLogPathChanged ? ' is-changed' : ''}`">
+                            <input
+                                v-model="errorLogPath"
+                                class="input"
+                                type="text"
+                                :disabled="!errorLogPathEnabled"
+                                :placeholder="$props.data.errorLogPath.default"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="$props.data.errorLogEnabled.computed" class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">error_log {{ $t('templates.domainSections.logging.level') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-horizontal">
+                    <div
+                        v-for="value in $props.data.errorLogLevel.options"
+                        :class="`control${errorLogLevelChanged && value === errorLogLevel ? ' is-changed' : ''}`"
+                    >
+                        <div class="radio">
+                            <PrettyRadio v-model="errorLogLevel" :value="value" class="p-default p-round p-fill p-icon">
+                                {{ value }}
+                            </PrettyRadio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal is-aligned-top">
+            <div class="field-label has-small-margin-top">
+                <label class="label">error_log {{ $t('templates.domainSections.logging.forRedirects') }}</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div :class="`control${redirectErrorLogChanged ? ' is-changed' : ''}`">
+                        <div class="checkbox">
+                            <PrettyCheck v-model="redirectErrorLog" class="p-default p-curve p-fill p-icon">
+                                {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -65,14 +154,41 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
+    import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogPathDisabled, errorLogLevelDefault, errorLogLevelOptions, errorLogLevelDisabled } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
+    import PrettyRadio from '../inputs/radio';
 
     const defaults = {
-        accessLog: {
+        accessLogEnabled: {
+            default: true,
+            enabled: true,
+        },
+        accessLogPath: {
+            default: accessLogPathDefault,
+            enabled: true,
+        },
+        accessLogParameters: {
+            default: accessLogParamsDefault,
+            enabled: true,
+        },
+        redirectAccessLog: {
             default: false,
             enabled: true,
         },
-        errorLog: {
+        errorLogEnabled: {
+            default: true,
+            enabled: true,
+        },
+        errorLogPath: {
+            default: errorLogPathDefault,
+            enabled: true,
+        },
+        errorLogLevel: {
+            default: errorLogLevelDefault,
+            options: [errorLogLevelDisabled, ...errorLogLevelOptions],
+            enabled: true,
+        },
+        redirectErrorLog: {
             default: false,
             enabled: true,
         },
@@ -85,10 +201,26 @@ THE SOFTWARE.
         delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
         components: {
             PrettyCheck,
+            PrettyRadio,
         },
         props: {
             data: Object,                                       // Data delegated back to us from parent
         },
         computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
+        watch: {
+            '$props.data.errorLogLevel': {
+                handler(data) {
+                    // disable `error_log` path selection if log level is set to `none`
+                    if (data.computed === errorLogLevelDisabled) {
+                        this.$props.data.errorLogPath.enabled = false;
+                        this.$props.data.errorLogPath.computed = errorLogPathDisabled;
+                    } else if (!this.$props.data.errorLogPath.enabled) {
+                        this.$props.data.errorLogPath.enabled = true;
+                        this.$props.data.errorLogPath.computed = this.$props.data.errorLogPath.value;
+                    }
+                },
+                deep: true,
+            },
+        },
     };
 </script>

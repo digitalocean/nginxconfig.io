@@ -25,8 +25,8 @@ THE SOFTWARE.
 */
 
 import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate';
-import { getAccessLogDomainPath, getErrorLogDomainPath } from '../../util/get_log_paths';
 import { extensions, gzipTypes } from '../../util/types_extensions';
+import { getDomainAccessLog, getDomainErrorLog } from '../../util/logging';
 import commonHsts from '../../util/common_hsts';
 import securityConf from './security.conf';
 import pythonConf from './python_uwsgi.conf';
@@ -127,6 +127,19 @@ const httpRedirectConfig = (domain, global, ipPortPairs, domainName, redirectDom
     config.push(...httpListen(domain, global, ipPortPairs));
     config.push(['server_name', domainName]);
 
+    // Logging
+    if (domain.logging.redirectAccessLog.computed || domain.logging.redirectErrorLog.computed) {
+        config.push(['# logging', '']);
+
+        if (domain.logging.redirectAccessLog.computed) {
+            config.push(['access_log', getDomainAccessLog(domain, global)]);
+        }
+
+        if (domain.logging.redirectErrorLog.computed) {
+            config.push(['error_log', getDomainErrorLog(domain)]);
+        }
+    }
+
     if (domain.https.certType.computed === 'letsEncrypt') {
         // Let's encrypt
 
@@ -221,15 +234,14 @@ export default (domain, domains, global, ipPortPairs) => {
     }
 
     // Access log or error log for domain
-    if (domain.logging.accessLog.computed || domain.logging.errorLog.computed) {
+    if (domain.logging.accessLogEnabled.computed || domain.logging.errorLogEnabled.computed) {
         serverConfig.push(['# logging', '']);
 
-        if (domain.logging.accessLog.computed)
-            serverConfig.push(['access_log',
-                getAccessLogDomainPath(domain, global) + (global.logging.cloudflare.computed ? ' cloudflare' : '')]);
+        if (domain.logging.accessLogEnabled.computed)
+            serverConfig.push(['access_log', getDomainAccessLog(domain, global)]);
 
-        if (domain.logging.errorLog.computed)
-            serverConfig.push(['error_log', getErrorLogDomainPath(domain, global)]);
+        if (domain.logging.errorLogEnabled.computed)
+            serverConfig.push(['error_log', getDomainErrorLog(domain)]);
     }
 
     // index.php
@@ -411,7 +423,19 @@ export default (domain, domains, global, ipPortPairs) => {
 
         // HTTPS
         redirectConfig.push(...sslConfig(domain, global));
+        
+        // Logging
+        if (domain.logging.redirectAccessLog.computed || domain.logging.redirectErrorLog.computed) {
+            redirectConfig.push(['# logging', '']);
 
+            if (domain.logging.redirectAccessLog.computed) {
+                redirectConfig.push(['access_log', getDomainAccessLog(domain, global)]);
+            }
+            if (domain.logging.redirectErrorLog.computed) {
+                redirectConfig.push(['error_log', getDomainErrorLog(domain)]);
+            }
+        }
+        
         redirectConfig.push(['return',
             `301 http${domain.https.https.computed ? 's' : ''}://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
 

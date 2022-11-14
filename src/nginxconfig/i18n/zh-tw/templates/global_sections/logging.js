@@ -29,6 +29,7 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable}｢找不到檔案｣錯誤日誌：`,
     logformat: 'log_format',
+    level: 'logging level', // TODO: translate
     enableCloudflare: '將 Cloudflare 請求標頭加入預設日誌格式',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',
