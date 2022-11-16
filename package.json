@@ -23,7 +23,7 @@
     "test": "npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
     "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:eslint:fix",
-    "test:eslint": "eslint 'src/**/*.{js,vue}'",
+    "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix --cache",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
