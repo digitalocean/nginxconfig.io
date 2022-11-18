@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 export const accessLogPathDefault = '/var/log/nginx/access.log';
-export const accessLogParamsDefault = 'buffer=512k flush=1m';
+export const accessLogParamsDefault = 'combined buffer=512k flush=1m';
 
 export const errorLogPathDefault = '/var/log/nginx/error.log';
 export const errorLogPathDisabled = '/dev/null';
