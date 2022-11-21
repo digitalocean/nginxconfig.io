@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 export const accessLogPathDefault = '/var/log/nginx/access.log';
-export const accessLogParamsDefault = 'combined buffer=512k flush=1m';
+export const accessLogParamsDefault = 'buffer=512k flush=1m';
 
 export const errorLogPathDefault = '/var/log/nginx/error.log';
 export const errorLogPathDisabled = '/dev/null';
@@ -40,7 +40,7 @@ export const getDomainAccessLog = (domain, global) => {
     }
 
     return path + 
-        (global.logging.cloudflare.computed ? ' cloudflare' : '') +
+        (global.logging.cloudflare.computed ? ' cloudflare' : ' combined') +
         (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
 };
 
