@@ -29,4 +29,7 @@ import common from '../../common';
 export default {
     byDomain: '在此網域',
     enableForThisDomain: `為此網域${common.enable}`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

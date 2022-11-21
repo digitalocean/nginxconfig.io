@@ -24,19 +24,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+export const accessLogPathDefault = '/var/log/nginx/access.log';
+export const accessLogParamsDefault = 'buffer=512k flush=1m';
 
-export default {
-    enableFileNotFoundErrorLogging: `${common.enable}“文件未找到”错误日志：`,
-    logformat: 'log_format',
-    level: 'logging level', // TODO: translate
-    enableCloudflare: '将Cloudflare请求头部添加到默认日志格式',
-    cfRay: 'CF-Ray',
-    cfConnectingIp: 'CF-Connecting-IP',
-    xForwardedFor: 'X-Forwarded-For',
-    xForwardedProto: 'X-Forwarded-Proto',
-    trueClientIp: 'True-Client-IP',
-    cfIpCountry: 'CF-IPCountry',
-    cfVisitor: 'CF-Visitor',
-    cdnLoop: 'CDN-Loop',
+export const errorLogPathDefault = '/var/log/nginx/error.log';
+export const errorLogPathDisabled = '/dev/null';
+export const errorLogLevelDefault = 'warn';
+export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
+export const errorLogLevelDisabled = 'none';
+
+export const getDomainAccessLog = (domain, global) => {
+    let path = domain.logging.accessLogPath.computed.trim();
+    if (!path) {
+        path = accessLogPathDefault;
+    }
+
+    return path + 
+        (global.logging.cloudflare.computed ? ' cloudflare' : '') +
+        (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
+};
+
+export const getDomainErrorLog = (domain) => {
+    let path = domain.logging.errorLogPath.computed.trim();
+    if (!path) {
+        path = errorLogPathDefault;
+    }
+
+    const errorLogLevel = errorLogLevelOptions.includes(domain.logging.errorLogLevel.computed) ? ` ${domain.logging.errorLogLevel.computed}` : '';
+    return `${path}${errorLogLevel}`;
 };

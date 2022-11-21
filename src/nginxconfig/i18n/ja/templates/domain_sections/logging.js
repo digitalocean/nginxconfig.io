@@ -29,4 +29,7 @@ import common from '../../common';
 export default {
     byDomain: '(ドメインごと)',
     enableForThisDomain: `このドメインで${common.enable}`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

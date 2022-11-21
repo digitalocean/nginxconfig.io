@@ -30,6 +30,7 @@ module.exports = {
     'vue/html-self-closing': 0,
     'vue/multi-word-component-names': 0,
     'vue/no-reserved-component-names': 0,
+    'eol-last': ['error', 'always'],
   },
   globals: {
     'describe': true,

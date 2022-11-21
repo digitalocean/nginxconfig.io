@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,6 +29,7 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable} les erreurs de fichiers introuvables lors de la journalisation`,
     logformat: 'log_format',
+    level: 'logging level', // TODO: translate
     enableCloudflare: 'ajouter les en-têtes de requête CloudFlare au format de journal par défaut',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',

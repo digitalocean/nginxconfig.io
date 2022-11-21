@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,4 +27,7 @@ THE SOFTWARE.
 export default {
     byDomain: 'der Domain',
     enableForThisDomain: 'Für diese Domain aktivieren',
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

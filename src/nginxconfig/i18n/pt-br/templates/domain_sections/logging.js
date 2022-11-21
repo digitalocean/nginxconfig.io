@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,4 +29,7 @@ import common from '../../common';
 export default {
     byDomain: 'por domínio',
     enableForThisDomain: `${common.enable} para este domínio`,
+    arguments: 'arguments', // TODO: translate
+    level: 'logging level', // TODO: translate
+    forRedirects: 'for redirects', // TODO: translate
 };

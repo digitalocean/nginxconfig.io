@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,10 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const getAccessLogDomainPath = (domain, global) => {
-    return global.logging.accessLog.computed.replace(/([^/]+)\.log$/, `${domain.server.domain.computed}.$1.log`);
-};
-
-export const getErrorLogDomainPath = (domain, global) => {
-    return global.logging.errorLog.computed.replace(/([^/]+)\.log (.+)$/, `${domain.server.domain.computed}.$1.log $2`);
-};
+export const serverDomainDefault = 'example.com';
