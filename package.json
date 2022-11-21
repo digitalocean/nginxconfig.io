@@ -96,7 +96,7 @@
     "*.{js,vue}": [
       "eslint --quiet --cache --fix"
     ],
-    "*.{scss}": [
+    "*.scss": [
       "stylelint --config node_modules/do-bulma/.stylelintrc.json --fix"
     ]
   },
