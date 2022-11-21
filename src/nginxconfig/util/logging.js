@@ -40,7 +40,7 @@ export const getDomainAccessLog = (domain, global) => {
     }
 
     return path + 
-        (global.logging.cloudflare.computed ? ' cloudflare' : '') +
+        (global.logging.cloudflare.computed ? ' cloudflare' : ' combined') +
         (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
 };
 
