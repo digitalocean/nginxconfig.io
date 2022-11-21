@@ -23,10 +23,11 @@
     "test": "npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
     "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:eslint:fix",
-    "test:eslint": "eslint 'src/**/*.{js,vue}'",
+    "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
-    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js"
+    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
+    "prepare": "husky install"
   },
   "jest": {
     "testRegex": "/test/.*.js?$"
@@ -76,8 +77,10 @@
     "eslint": "^8.24.0",
     "eslint-plugin-vue": "^9.5.1",
     "esm": "^3.2.25",
+    "husky": "^7.0.0",
     "jest": "^29.1.2",
     "jest-environment-jsdom": "^29.1.2",
+    "lint-staged": "^13.0.3",
     "node-fetch": "^3.2.10",
     "postcss": "^8.4.17",
     "sass": "^1.55.0",
@@ -88,6 +91,14 @@
     "vue-template-compiler": "^2.7.10",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.6.1"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --quiet --cache --fix"
+    ],
+    "*.{scss}": [
+      "stylelint --config node_modules/do-bulma/.stylelintrc.json --fix"
+    ]
   },
   "overrides": {
     "@vue/cli-service": {
