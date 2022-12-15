@@ -46,7 +46,7 @@ export const getI18n = async () => {
         if (availablePack === defaultPack) continue;
         if (i18nPacks[availablePack]) continue;
         const { default: languageData } = await import(
-            /* webpackInclude: /i18n\/[^/]+\/languages\.js$/ */
+            /* webpackInclude: /i18n[\/\\][^\/\\]+[\/\\]languages\.js$/ */
             /* webpackMode: "eager" */
             `./${toSep(availablePack, '-')}/languages.js`
         );
@@ -72,7 +72,7 @@ const loadLanguagePack = async pack => {
     // Load in the full pack
     // Use webpack magic to only build chunks for lang/index.js
     const { default: packData } = await import(
-        /* webpackInclude: /i18n\/[^/]+\/index\.js$/ */
+        /* webpackInclude: /i18n[\/\\][^\/\\]+[\/\\]index\.js$/ */
         /* webpackMode: "lazy" */
         `./${toSep(pack, '-')}/index.js`
     );
