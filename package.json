@@ -89,7 +89,7 @@
     "stylelint-config-standard-scss": "^6.1.0",
     "stylelint-order": "^5.0.0",
     "vue-template-compiler": "^2.7.14",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.0",
     "webpack-bundle-analyzer": "^4.7.0"
   },
   "lint-staged": {
