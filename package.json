@@ -85,9 +85,9 @@
     "postcss": "^8.4.23",
     "sass": "^1.62.0",
     "sass-loader": "^13.2.2",
-    "stylelint": "^14.16.1",
-    "stylelint-config-standard-scss": "^6.1.0",
-    "stylelint-order": "^5.0.0",
+    "stylelint": "^15.6.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "stylelint-order": "^6.0.3",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.80.0",
     "webpack-bundle-analyzer": "^4.8.0"
