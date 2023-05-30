@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,9 +35,9 @@ THE SOFTWARE.
 
         <template v-if="!$parent.$props.data.hasUserInteraction || expanded">
             <div v-if="$parent.$props.data.hasUserInteraction" class="message is-warning">
-                <div class="message-body">
+                <p class="message-body">
                     {{ $t('templates.domainSections.presets.itLooksLikeYouCustomisedTheConfig') }}
-                </div>
+                </p>
             </div>
 
             <div class="buttons-group">

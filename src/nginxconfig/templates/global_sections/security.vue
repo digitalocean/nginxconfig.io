@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -62,7 +62,7 @@ THE SOFTWARE.
                             <span
                                 class="message-body"
                                 v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
-                            ></span>
+                            />
                         </label>
                     </div>
                 </div>

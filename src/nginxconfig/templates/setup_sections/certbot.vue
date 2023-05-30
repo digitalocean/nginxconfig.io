@@ -39,7 +39,10 @@ THE SOFTWARE.
                 ></BashPrism>
 
                 <div class="text message is-warning">
-                    <p class="message-body" v-html="$t('templates.setupSections.certbot.sslOffDeprecationWarning')" />
+                    <p
+                        class="message-body"
+                        v-html="$t('templates.setupSections.certbot.sslOffDeprecationWarning')"
+                    />
                 </div>
             </li>
 
