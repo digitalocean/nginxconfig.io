@@ -30,7 +30,7 @@ const certbot = 'Certbot';
 
 export default {
     commentOutSslDirectivesInConfiguration: `Commentez les directives relatives à ${common.ssl}:`,
-    sslOffDeprecationWarning: `This command will add a temporary <code class="slim">ssl off</code> directive to ensure that ${common.ssl} directives are not active. This may cause ${common.nginx} to emit a warning, which is safe to ignore. The directive will be removed once ${certbot} is configured.`, // TODO: translate
+    sslOffDeprecationWarning: `Cette commande ajoutera une directive temporaire <code class="slim">ssl off</code> pour s'assurer que les directives ${common.ssl} ne sont pas actives. Cela peut amener ${common.nginx} à émettre un avertissement, qui peut être ignoré en toute sécurité. La directive sera supprimée une fois que ${certbot} sera configuré.`,
     reloadYourNginxServer: `Relancez le serveur ${common.nginx}:`,
     obtainSslCertificatesFromLetsEncrypt: `Obtenez les certificats ${common.ssl} de ${common.letsEncrypt} à l'aide de ${certbot}:`,
     uncommentSslDirectivesInConfiguration: `Décommentez les directives relatives à ${common.ssl}:`,
