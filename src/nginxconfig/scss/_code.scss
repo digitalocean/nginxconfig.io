@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -63,6 +63,22 @@ pre {
 .code-toolbar {
   > .toolbar {
     right: calc(.2em + 16px);
+
+    > .toolbar-item {
+      > button {
+        background: rgba($input, .9);
+        border: 1px solid $input-border;
+        color: rgba($input-border, .75);
+        cursor: pointer;
+        transition: color $transition, background $transition;
+
+        &:hover,
+        &:focus {
+          background: $input;
+          color: $input-border;
+        }
+      }
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -37,6 +37,13 @@ THE SOFTWARE.
                     :cmd="`sed -i -r 's/(listen .*443)/\\1; #/g; s/(ssl_(certificate|certificate_key|trusted_certificate) )/#;#\\1/g; s/(server \\{)/\\1\\n    ssl off;/g' ${sitesAvailable}`"
                     @copied="codeCopiedEvent('Disable ssl directives')"
                 ></BashPrism>
+
+                <div class="text message is-warning">
+                    <p
+                        class="message-body"
+                        v-html="$t('templates.setupSections.certbot.sslOffDeprecationWarning')"
+                    />
+                </div>
             </li>
 
             <li>

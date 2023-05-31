@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,6 +30,7 @@ const certbot = 'Certbot';
 
 export default {
     commentOutSslDirectivesInConfiguration: `Comment out ${common.ssl} related directives in the configuration:`,
+    sslOffDeprecationWarning: `This command will add a temporary <code class="slim">ssl off</code> directive to ensure that ${common.ssl} directives are not active. This may cause ${common.nginx} to emit a warning, which is safe to ignore. The directive will be removed once ${certbot} is configured.`,
     reloadYourNginxServer: `Reload your ${common.nginx} server:`,
     obtainSslCertificatesFromLetsEncrypt: `Obtain ${common.ssl} certificates from ${common.letsEncrypt} using ${certbot}:`,
     uncommentSslDirectivesInConfiguration: `Uncomment ${common.ssl} related directives in the configuration:`,
