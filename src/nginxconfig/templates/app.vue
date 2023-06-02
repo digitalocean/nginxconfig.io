@@ -59,7 +59,7 @@ THE SOFTWARE.
 
         <div class="main container" :style="{ display: ready ? undefined : 'none' }">
             <div class="columns is-multiline">
-                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`" :style="splitColumn ? {overflowY: 'auto', height: '100vh'} : {}">
                     <h2>{{ $t('templates.app.perWebsiteConfig') }}</h2>
 
                     <div class="tabs">
@@ -96,7 +96,7 @@ THE SOFTWARE.
                     <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
                 </div>
 
-                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`">
+                <div :class="`column ${splitColumn ? 'is-half' : 'is-full'} is-full-touch`" :style="splitColumn ? {overflowY: 'auto', height: '100vh'} : {}">
                     <h2>{{ $t('templates.app.configFiles') }}</h2>
                     <div ref="files" class="columns is-multiline files">
                         <component
