@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -28,7 +28,13 @@ THE SOFTWARE.
     <div class="footer">
         <div class="container">
             <p>
-                <button type="button" class="button is-primary is-small" @click="handleScrollToTop">{{ $t('templates.footer.backToTop') }}</button>
+                <button
+                    type="button"
+                    class="button is-primary is-small"
+                    @click="handleScrollToTop"
+                >
+                    {{ $t('templates.footer.backToTop') }}
+                </button>
             </p>
             <p>
                 {{ $t('templates.footer.thisToolIs') }}
@@ -72,9 +78,8 @@ THE SOFTWARE.
             handleScrollToTop: () => {
                 window.scrollTo({top: 0});
 
-                const columns = document.querySelectorAll('.column-scroll-y');
-
-                columns.forEach(column => column.scrollTo({top: 0}));
+                document.querySelectorAll('.column-scroll-y')
+                    .forEach(column => column.scrollTo({ top: 0 }));
             },
         },
     };
