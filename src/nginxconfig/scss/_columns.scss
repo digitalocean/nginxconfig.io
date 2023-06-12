@@ -24,31 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-$header: #0071fe;
-$highlight: #f2c94c;
-$callout: #f3f5f9;
-
-@import "~do-bulma/src/style";
-
-.do-bulma {
-  @import "../../../build/prism";
-
-  $pretty--color-dark: $primary; // stylelint-disable-line scss/dollar-variable-pattern
-  $pretty--color-default: $primary; // stylelint-disable-line scss/dollar-variable-pattern
-
-  @import "~pretty-checkbox/src/pretty-checkbox";
-
-  // Local imports
-  @import "header";
-  @import "tabs";
-  @import "panel";
-  @import "fields";
-  @import "vue-select";
-  @import "modals";
-  @import "callout";
-  @import "setup";
-  @import "code";
-  @import "files";
-  @import "footer";
-  @import "columns";
+.columns {
+  .column-scroll-y {
+    overflow-y: auto;
+    height: 100vh;
+  }
 }
