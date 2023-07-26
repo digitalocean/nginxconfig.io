@@ -26,16 +26,6 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
-      - name: Setup NPM
-        run: |
-          NPM_VERSION=$(jq -r .engines.npm package.json)
-          NPM_VERSION=${NPM_VERSION/\^/}
-          if [ "$(npm --version)" != "$NPM_VERSION" ]; then
-            npm install -g npm@$NPM_VERSION && npm --version
-          else
-            echo "NPM version is same as package.json engines.npm"
-          fi
-
       - name: Install dependencies
         run: npm ci
 
