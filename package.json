@@ -4,10 +4,6 @@
   "description": "NGINX config generator on steroids",
   "private": true,
   "license": "MIT",
-  "engines": {
-    "node": "^16.17.1",
-    "npm": "^8.15.0"
-  },
   "main": "src/nginxconfig/mount.js",
   "type": "module",
   "scripts": {
