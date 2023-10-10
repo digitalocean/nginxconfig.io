@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:vue/recommended',
+    'prettier',
   ],
   parserOptions: {
     parser: '@babel/eslint-parser',
@@ -16,7 +17,6 @@ module.exports = {
   rules: {
     'linebreak-style': ['error', 'unix'],
     semi: ['error', 'always'],
-    quotes: ['error', 'single'],
     'comma-dangle': ['error', 'always-multiline'],
     'vue/require-v-for-key': 0,
     'vue/require-default-prop': 0,
@@ -25,6 +25,7 @@ module.exports = {
     'vue/html-indent': ['error', 4],
     'vue/script-indent': ['error', 4, {
       baseIndent: 1,
+      switchCase: 1,
     }],
     'vue/no-unused-vars': 0,
     'vue/html-self-closing': 0,

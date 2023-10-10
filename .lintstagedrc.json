@@ -1,0 +1,9 @@
+{
+  "*.{js,vue}": [
+    "prettier --write",
+    "eslint --quiet --cache --fix"
+  ],
+  "*.scss": [
+    "stylelint --config node_modules/do-bulma/.stylelintrc.json --fix"
+  ]
+}
