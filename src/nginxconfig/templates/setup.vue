@@ -29,7 +29,10 @@ THE SOFTWARE.
         <div class="panel">
             <div class="tabs">
                 <ul>
-                    <li v-for="tab in tabs" :class="tabClass(tab.key)">
+                    <li
+                        v-for="tab in tabs"
+                        :class="tabClass(tab.key)"
+                    >
                         <a @click="showTab(tab.key)">{{ $t(tab.display) }}</a>
                     </li>
                 </ul>
@@ -45,18 +48,38 @@ THE SOFTWARE.
             ></component>
 
             <div class="navigation-buttons">
-                <a v-if="previousTab !== false" class="button is-mini" @click="showPreviousTab">
-                    <i class="fas fa-long-arrow-alt-left"></i> <span>{{ $t('common.back') }}</span>
+                <a
+                    v-if="previousTab !== false"
+                    class="button is-mini"
+                    @click="showPreviousTab"
+                >
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                    <span>{{ $t('common.back') }}</span>
                 </a>
-                <a v-if="nextTab !== false" class="button is-primary is-mini" @click="showNextTab">
-                    <span>{{ $t('common.next') }}</span> <i class="fas fa-long-arrow-alt-right"></i>
+                <a
+                    v-if="nextTab !== false"
+                    class="button is-primary is-mini"
+                    @click="showNextTab"
+                >
+                    <span>{{ $t('common.next') }}</span>
+                    <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
         </div>
 
         <div class="buttons is-centered">
-            <a class="button is-success" @click="downloadTar">{{ $t('templates.setup.downloadConfig') }}</a>
-            <a ref="copyTar" class="button is-primary">{{ $t('templates.setup.copyBase64') }}</a>
+            <a
+                class="button is-success"
+                @click="downloadTar"
+            >
+                {{ $t('templates.setup.downloadConfig') }}
+            </a>
+            <a
+                ref="copyTar"
+                class="button is-primary"
+            >
+                {{ $t('templates.setup.copyBase64') }}
+            </a>
         </div>
     </div>
 </template>
@@ -80,22 +103,24 @@ THE SOFTWARE.
         },
         computed: {
             nextTab() {
-                const tabs = this.$data.tabs.map(t => t.key);
+                const tabs = this.$data.tabs.map((t) => t.key);
                 const index = tabs.indexOf(this.$data.active) + 1;
                 if (index < tabs.length) return tabs[index];
                 return false;
             },
             previousTab() {
-                const tabs = this.$data.tabs.map(t => t.key);
+                const tabs = this.$data.tabs.map((t) => t.key);
                 const index = tabs.indexOf(this.$data.active) - 1;
                 if (index >= 0) return tabs[index];
                 return false;
             },
             domainCount() {
-                return this.$props.data.domains.filter(d => d !== null).length;
+                return this.$props.data.domains.filter((d) => d !== null).length;
             },
             tarName() {
-                const domains = this.$props.data.domains.filter(d => d !== null).map(d => d.server.domain.computed);
+                const domains = this.$props.data.domains
+                    .filter((d) => d !== null)
+                    .map((d) => d.server.domain.computed);
                 return `nginxconfig.io-${domains.join(',')}.tar.gz`;
             },
         },
@@ -105,7 +130,7 @@ THE SOFTWARE.
         methods: {
             tabClass(tab) {
                 if (tab === this.$data.active) return 'is-active';
-                const tabs = this.$data.tabs.map(t => t.key);
+                const tabs = this.$data.tabs.map((t) => t.key);
                 if (tabs.indexOf(tab) < tabs.indexOf(this.$data.active)) return 'is-before';
                 return undefined;
             },
@@ -114,12 +139,18 @@ THE SOFTWARE.
 
                 // Add all our config files to the tar
                 for (const fileName in this.$props.data.confFiles) {
-                    if (!Object.prototype.hasOwnProperty.call(this.$props.data.confFiles, fileName)) continue;
+                    if (!Object.prototype.hasOwnProperty.call(this.$props.data.confFiles, fileName))
+                        continue;
                     data[fileName] = { contents: this.$props.data.confFiles[fileName] };
 
                     // If symlinks are enabled and this is in sites-available, symlink to sites-enabled
-                    if (this.$props.data.global.tools.symlinkVhost.computed && fileName.startsWith('sites-available'))
-                        data[fileName.replace(/^sites-available/, 'sites-enabled')] = { target: `../${fileName}` };
+                    if (
+                        this.$props.data.global.tools.symlinkVhost.computed &&
+                        fileName.startsWith('sites-available')
+                    )
+                        data[fileName.replace(/^sites-available/, 'sites-enabled')] = {
+                            target: `../${fileName}`,
+                        };
                 }
 
                 return new Tar(data).gz();
@@ -160,7 +191,7 @@ THE SOFTWARE.
                     text: this.copyTar,
                 });
 
-                clipboard.on('success', e => {
+                clipboard.on('success', (e) => {
                     const originalTextCopy = elm.textContent;
                     elm.textContent = this.$t('templates.app.copied');
                     e.clearSelection();

@@ -28,7 +28,9 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.nginx.nginxConfigDirectory') }}</label>
+                <label class="label">
+                    {{ $t('templates.globalSections.nginx.nginxConfigDirectory') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -103,7 +105,11 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field has-addons">
-                    <div :class="`control is-expanded${clientMaxBodySizeChanged ? ' is-changed' : ''}`">
+                    <div
+                        :class="`control is-expanded${
+                            clientMaxBodySizeChanged ? ' is-changed' : ''
+                        }`"
+                    >
                         <input
                             v-model.number="clientMaxBodySize"
                             class="input"
@@ -171,10 +177,7 @@ THE SOFTWARE.
         },
         workerProcesses: {
             default: 'auto',
-            options: [
-                'auto',
-                ...Array.from({ length: 16 }, (_, i) => i + 1),
-            ],
+            options: ['auto', ...Array.from({ length: 16 }, (_, i) => i + 1)],
             enabled: true,
         },
         user: {
@@ -202,17 +205,17 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalNGINX',                                // Component name
-        display: 'common.nginx',                            // Display name for tab (i18n key)
-        key: 'nginx',                                       // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'GlobalNGINX', // Component name
+        display: 'common.nginx', // Display name for tab (i18n key)
+        key: 'nginx', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             VueSelect,
         },
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'nginx'),  // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'nginx'), // Getters & setters for the delegated data
         watch: {
             // Clean nginx directory of trailing slashes
             '$props.data.nginxConfigDirectory': {
@@ -229,8 +232,7 @@ THE SOFTWARE.
                 handler(data) {
                     // This might cause recursion, but seems not to
                     if (data.enabled)
-                        if (!data.options.includes(data.computed))
-                            data.computed = data.default;
+                        if (!data.options.includes(data.computed)) data.computed = data.default;
                 },
                 deep: true,
             },
@@ -238,9 +240,7 @@ THE SOFTWARE.
             '$props.data.clientMaxBodySize': {
                 handler(data) {
                     // This might cause recursion, but seems not to
-                    if (data.enabled)
-                        if (data.computed < 0)
-                            data.computed = 0;
+                    if (data.enabled) if (data.computed < 0) data.computed = 0;
                 },
                 deep: true,
             },
@@ -249,8 +249,7 @@ THE SOFTWARE.
                 handler(data) {
                     // This might cause recursion, but seems not to
                     if (data.enabled)
-                        if (!data.options.includes(data.computed))
-                            data.computed = data.default;
+                        if (!data.options.includes(data.computed)) data.computed = data.default;
                 },
                 deep: true,
             },
@@ -259,8 +258,7 @@ THE SOFTWARE.
                 handler(data) {
                     // This might cause recursion, but seems not to
                     if (data.enabled)
-                        if (!data.options.includes(data.computed))
-                            data.computed = data.default;
+                        if (!data.options.includes(data.computed)) data.computed = data.default;
                 },
                 deep: true,
             },

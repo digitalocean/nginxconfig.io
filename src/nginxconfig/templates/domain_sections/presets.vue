@@ -26,15 +26,25 @@ THE SOFTWARE.
 
 <template>
     <div class="container">
-        <div class="header-group" :style="{ cursor: interacted ? 'pointer' : undefined }" @click="toggleCollapse">
+        <div
+            class="header-group"
+            :style="{ cursor: interacted ? 'pointer' : undefined }"
+            @click="toggleCollapse"
+        >
             <h3>{{ $t('templates.domainSections.presets.presets') }}</h3>
-            <a v-if="interacted" class="button is-tiny">
+            <a
+                v-if="interacted"
+                class="button is-tiny"
+            >
                 <i :class="`fas fa-angle-${expanded ? 'up' : 'down'}`"></i>
             </a>
         </div>
 
         <template v-if="!$parent.$props.data.hasUserInteraction || expanded">
-            <div v-if="$parent.$props.data.hasUserInteraction" class="message is-warning">
+            <div
+                v-if="$parent.$props.data.hasUserInteraction"
+                class="message is-warning"
+            >
                 <p class="message-body">
                     {{ $t('templates.domainSections.presets.itLooksLikeYouCustomisedTheConfig') }}
                 </p>
@@ -64,11 +74,13 @@ THE SOFTWARE.
             display: 'templates.domainSections.presets.frontend', // i18n key
             enabled: true,
             computedCheck(data) {
-                return !data.php.php.computed
-                    && !data.python.python.computed
-                    && !data.reverseProxy.reverseProxy.computed
-                    && data.routing.index.computed === 'index.html'
-                    && data.routing.fallbackHtml.computed;
+                return (
+                    !data.php.php.computed &&
+                    !data.python.python.computed &&
+                    !data.reverseProxy.reverseProxy.computed &&
+                    data.routing.index.computed === 'index.html' &&
+                    data.routing.fallbackHtml.computed
+                );
             },
         },
         php: {
@@ -76,14 +88,16 @@ THE SOFTWARE.
             display: 'common.php', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.php.php.computed
-                    && data.routing.index.computed === 'index.php'
-                    && data.routing.fallbackPhp.computed
-                    && !data.routing.fallbackHtml.computed
-                    && !data.php.wordPressRules.computed
-                    && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                return (
+                    data.php.php.computed &&
+                    data.routing.index.computed === 'index.php' &&
+                    data.routing.fallbackPhp.computed &&
+                    !data.routing.fallbackHtml.computed &&
+                    !data.php.wordPressRules.computed &&
+                    !data.php.drupalRules.computed &&
+                    !data.php.magentoRules.computed &&
+                    !data.php.joomlaRules.computed
+                );
             },
         },
         django: {
@@ -91,9 +105,11 @@ THE SOFTWARE.
             display: 'common.django', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.python.python.computed
-                    && data.python.djangoRules.computed
-                    && !data.routing.root.computed;
+                return (
+                    data.python.python.computed &&
+                    data.python.djangoRules.computed &&
+                    !data.routing.root.computed
+                );
             },
         },
         nodejs: {
@@ -101,8 +117,7 @@ THE SOFTWARE.
             display: 'templates.domainSections.presets.nodeJs', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.reverseProxy.reverseProxy.computed
-                    && !data.routing.root.computed;
+                return data.reverseProxy.reverseProxy.computed && !data.routing.root.computed;
             },
         },
         singlePageApplication: {
@@ -110,9 +125,11 @@ THE SOFTWARE.
             display: 'templates.domainSections.presets.singlePageApplication', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.php.php.computed
-                    && data.routing.index.computed === 'index.html'
-                    && data.routing.fallbackHtml.computed;
+                return (
+                    data.php.php.computed &&
+                    data.routing.index.computed === 'index.html' &&
+                    data.routing.fallbackHtml.computed
+                );
             },
         },
         wordPress: {
@@ -120,13 +137,15 @@ THE SOFTWARE.
             display: 'common.wordPress', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.routing.index.computed === 'index.php'
-                    && data.routing.fallbackPhp.computed
-                    && !data.routing.fallbackHtml.computed
-                    && data.php.wordPressRules.computed
-                    && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                return (
+                    data.routing.index.computed === 'index.php' &&
+                    data.routing.fallbackPhp.computed &&
+                    !data.routing.fallbackHtml.computed &&
+                    data.php.wordPressRules.computed &&
+                    !data.php.drupalRules.computed &&
+                    !data.php.magentoRules.computed &&
+                    !data.php.joomlaRules.computed
+                );
             },
         },
         drupal: {
@@ -134,13 +153,15 @@ THE SOFTWARE.
             display: 'common.drupal', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.routing.index.computed === 'index.php'
-                    && data.routing.fallbackPhp.computed
-                    && !data.routing.fallbackHtml.computed
-                    && !data.php.wordPressRules.computed
-                    && data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                return (
+                    data.routing.index.computed === 'index.php' &&
+                    data.routing.fallbackPhp.computed &&
+                    !data.routing.fallbackHtml.computed &&
+                    !data.php.wordPressRules.computed &&
+                    data.php.drupalRules.computed &&
+                    !data.php.magentoRules.computed &&
+                    !data.php.joomlaRules.computed
+                );
             },
         },
         magento: {
@@ -148,13 +169,15 @@ THE SOFTWARE.
             display: 'common.magento', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.routing.index.computed === 'index.php'
-                    && data.routing.fallbackPhp.computed
-                    && !data.routing.fallbackHtml.computed
-                    && !data.php.wordPressRules.computed
-                    && !data.php.drupalRules.computed
-                    && data.php.magentoRules.computed
-                    && !data.php.joomlaRules.computed;
+                return (
+                    data.routing.index.computed === 'index.php' &&
+                    data.routing.fallbackPhp.computed &&
+                    !data.routing.fallbackHtml.computed &&
+                    !data.php.wordPressRules.computed &&
+                    !data.php.drupalRules.computed &&
+                    data.php.magentoRules.computed &&
+                    !data.php.joomlaRules.computed
+                );
             },
         },
         joomla: {
@@ -162,24 +185,26 @@ THE SOFTWARE.
             display: 'common.joomla', // i18n key
             enabled: true,
             computedCheck(data) {
-                return data.routing.index.computed === 'index.php'
-                    && data.routing.fallbackPhp.computed
-                    && !data.routing.fallbackHtml.computed
-                    && !data.php.wordPressRules.computed
-                    && !data.php.drupalRules.computed
-                    && !data.php.magentoRules.computed
-                    && data.php.joomlaRules.computed;
+                return (
+                    data.routing.index.computed === 'index.php' &&
+                    data.routing.fallbackPhp.computed &&
+                    !data.routing.fallbackHtml.computed &&
+                    !data.php.wordPressRules.computed &&
+                    !data.php.drupalRules.computed &&
+                    !data.php.magentoRules.computed &&
+                    data.php.joomlaRules.computed
+                );
             },
         },
     };
 
     export default {
-        name: 'DomainPresets',                                      // Component name
-        display: 'templates.domainSections.presets.presets',        // Display name for tab (i18n key)
-        key: 'presets',                                             // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'DomainPresets', // Component name
+        display: 'templates.domainSections.presets.presets', // Display name for tab (i18n key)
+        key: 'presets', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         data() {
             return {
@@ -187,7 +212,7 @@ THE SOFTWARE.
             };
         },
         computed: {
-            ...computedFromDefaults(defaults, 'presets', false),    // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'presets', false), // Getters & setters for the delegated data
             interacted() {
                 return this.$parent.$props.data.hasUserInteraction;
             },
@@ -197,8 +222,9 @@ THE SOFTWARE.
             '$parent.$props.data': {
                 handler(data) {
                     // This might cause recursion, but seems not to
-                    Object.keys(this.$props.data).forEach(preset => {
-                        this.$props.data[preset].computed = this.$props.data[preset].computedCheck(data);
+                    Object.keys(this.$props.data).forEach((preset) => {
+                        this.$props.data[preset].computed =
+                            this.$props.data[preset].computedCheck(data);
                     });
                 },
                 deep: true,
@@ -207,7 +233,7 @@ THE SOFTWARE.
         methods: {
             setPreset(key) {
                 // Set that we're using this preset
-                Object.keys(this.$props.data).forEach(preset => this[preset] = preset === key);
+                Object.keys(this.$props.data).forEach((preset) => (this[preset] = preset === key));
                 this.presetEvent(key, this.interacted);
 
                 // Restore some specific defaults first
@@ -226,49 +252,49 @@ THE SOFTWARE.
                 this.$parent.resetValue('routing', 'fallbackPhp');
 
                 switch (key) {
-                case 'frontend':
-                    this.$parent.setValue('php', 'php', false);
-                    this.$parent.setValue('routing', 'index', 'index.html');
-                    this.$parent.setValue('routing', 'fallbackHtml', true);
-                    break;
+                    case 'frontend':
+                        this.$parent.setValue('php', 'php', false);
+                        this.$parent.setValue('routing', 'index', 'index.html');
+                        this.$parent.setValue('routing', 'fallbackHtml', true);
+                        break;
 
-                case 'php':
-                    // Defaults should be PHP
-                    break;
+                    case 'php':
+                        // Defaults should be PHP
+                        break;
 
-                case 'django':
-                    this.$parent.setValue('php', 'php', false);
-                    this.$parent.setValue('python', 'python', true);
-                    this.$parent.setValue('python', 'djangoRules', true);
-                    this.$parent.setValue('routing', 'root', false);
-                    break;
+                    case 'django':
+                        this.$parent.setValue('php', 'php', false);
+                        this.$parent.setValue('python', 'python', true);
+                        this.$parent.setValue('python', 'djangoRules', true);
+                        this.$parent.setValue('routing', 'root', false);
+                        break;
 
-                case 'nodejs':
-                    this.$parent.setValue('php', 'php', false);
-                    this.$parent.setValue('reverseProxy', 'reverseProxy', true);
-                    this.$parent.setValue('routing', 'root', false);
-                    break;
+                    case 'nodejs':
+                        this.$parent.setValue('php', 'php', false);
+                        this.$parent.setValue('reverseProxy', 'reverseProxy', true);
+                        this.$parent.setValue('routing', 'root', false);
+                        break;
 
-                case 'singlePageApplication':
-                    this.$parent.setValue('routing', 'index', 'index.html');
-                    this.$parent.setValue('routing', 'fallbackHtml', true);
-                    break;
+                    case 'singlePageApplication':
+                        this.$parent.setValue('routing', 'index', 'index.html');
+                        this.$parent.setValue('routing', 'fallbackHtml', true);
+                        break;
 
-                case 'wordPress':
-                    this.$parent.setValue('php', 'wordPressRules', true);
-                    break;
+                    case 'wordPress':
+                        this.$parent.setValue('php', 'wordPressRules', true);
+                        break;
 
-                case 'drupal':
-                    this.$parent.setValue('php', 'drupalRules', true);
-                    break;
+                    case 'drupal':
+                        this.$parent.setValue('php', 'drupalRules', true);
+                        break;
 
-                case 'magento':
-                    this.$parent.setValue('php', 'magentoRules', true);
-                    break;
+                    case 'magento':
+                        this.$parent.setValue('php', 'magentoRules', true);
+                        break;
 
-                case 'joomla':
-                    this.$parent.setValue('php', 'joomlaRules', true);
-                    break;
+                    case 'joomla':
+                        this.$parent.setValue('php', 'joomlaRules', true);
+                        break;
                 }
             },
             presetEvent(name, overwrite = false) {

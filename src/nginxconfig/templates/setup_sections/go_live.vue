@@ -27,7 +27,8 @@ THE SOFTWARE.
 <template>
     <div>
         <p>
-            <b>{{ $t('templates.setupSections.goLive.letsGoLive') }}</b> 🎉
+            <b>{{ $t('templates.setupSections.goLive.letsGoLive') }}</b>
+            🎉
         </p>
         <p>
             {{ $t('templates.setupSections.goLive.reloadNginxToLoadInYourNewConfiguration') }}

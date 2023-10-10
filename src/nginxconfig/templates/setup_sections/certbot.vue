@@ -29,7 +29,9 @@ THE SOFTWARE.
         <ol v-if="letsEncryptActive">
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.commentOutSslDirectivesInConfiguration') }}
+                    {{
+                        $t('templates.setupSections.certbot.commentOutSslDirectivesInConfiguration')
+                    }}
                     <br />
                 </p>
                 <BashPrism
@@ -71,7 +73,9 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration') }}
+                    {{
+                        $t('templates.setupSections.certbot.uncommentSslDirectivesInConfiguration')
+                    }}
                     <br />
                 </p>
                 <BashPrism
@@ -94,7 +98,11 @@ THE SOFTWARE.
 
             <li>
                 <p>
-                    {{ $t('templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal') }}
+                    {{
+                        $t(
+                            'templates.setupSections.certbot.configureCertbotToReloadNginxOnCertificateRenewal',
+                        )
+                    }}
                     <br />
                 </p>
                 <BashPrism
@@ -108,12 +116,19 @@ THE SOFTWARE.
             </li>
         </ol>
 
-        <div v-else class="field is-horizontal">
+        <div
+            v-else
+            class="field is-horizontal"
+        >
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ $t('templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration') }}
+                            {{
+                                $t(
+                                    'templates.setupSections.certbot.certbotDoesNotNeedToBeSetupForYourConfiguration',
+                                )
+                            }}
                         </label>
                     </div>
                 </div>
@@ -152,26 +167,38 @@ THE SOFTWARE.
                 if (!this.$props.data.global.tools.modularizedStructure.computed)
                     return `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/nginx.conf`;
 
-                const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed ? 'available' : 'enabled';
+                const enabledAvailable = this.$props.data.global.tools.symlinkVhost.computed
+                    ? 'available'
+                    : 'enabled';
                 return this.$props.data.domains
-                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
-                    .map(domain => `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`)
+                    .filter((domain) => domain.https.certType.computed === 'letsEncrypt')
+                    .map(
+                        (domain) =>
+                            `${this.$props.data.global.nginx.nginxConfigDirectory.computed}/sites-${enabledAvailable}/${domain.server.domain.computed}.conf`,
+                    )
                     .join(' ');
             },
             certbotCmds() {
                 return this.$props.data.domains
-                    .filter(domain => domain.https.certType.computed === 'letsEncrypt')
-                    .map(domain => (
+                    .filter((domain) => domain.https.certType.computed === 'letsEncrypt')
+                    .map((domain) =>
                         [
                             'certbot certonly --webroot',
                             `-d ${domain.server.domain.computed}`,
-                            domain.server.wwwSubdomain.computed ? `-d www.${domain.server.domain.computed}` : null,
-                            domain.server.cdnSubdomain.computed ? `-d cdn.${domain.server.domain.computed}` : null,
+                            domain.server.wwwSubdomain.computed
+                                ? `-d www.${domain.server.domain.computed}`
+                                : null,
+                            domain.server.cdnSubdomain.computed
+                                ? `-d cdn.${domain.server.domain.computed}`
+                                : null,
                             `--email ${domain.https.letsEncryptEmail.computed}`,
                             `-w ${this.letsEncryptDir}`,
                             '-n --agree-tos --force-renewal',
-                        ].filter(x => x !== null).join(' ')
-                    )).join('\n');
+                        ]
+                            .filter((x) => x !== null)
+                            .join(' '),
+                    )
+                    .join('\n');
             },
         },
         methods: {

@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 export default (domains) => {
-    const legacyRouting = domains.some(d => d.routing.legacyPhpRouting.computed);
+    const legacyRouting = domains.some((d) => d.routing.legacyPhpRouting.computed);
     const config = {};
 
     if (legacyRouting) {

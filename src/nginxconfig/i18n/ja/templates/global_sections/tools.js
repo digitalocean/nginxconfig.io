@@ -46,7 +46,8 @@ export default {
     resetGlobalConfigBody: 'グローバル設定の全ての設定をリセットします、よろしいですか?',
     resetAllDomainsConfigBody: '全てのドメインの設定をリセットします、よろしいですか?',
     removeAllDomainsBody: '全てのドメインを削除します、よろしいですか?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: '次のドメインの設定をリセットします、よろしいですか?',
+    areYouSureYouWantToResetAllConfigurationOptionsForThe:
+        '次のドメインの設定をリセットします、よろしいですか?',
     domain: '',
     areYouSureYouWantToRemoveThe: '次のドメインの設定を削除します、よろしいですか?',
     domainConfiguration: '',

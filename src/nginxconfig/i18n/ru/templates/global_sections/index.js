@@ -34,4 +34,14 @@ import security from './security';
 import tools from './tools';
 import docker from './docker';
 
-export default { https, logging, nginx, performance, python, reverseProxy, security, tools, docker };
+export default {
+    https,
+    logging,
+    nginx,
+    performance,
+    python,
+    reverseProxy,
+    security,
+    tools,
+    docker,
+};

@@ -26,7 +26,10 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div v-if="!reverseProxyEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="!reverseProxyEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.reverseProxy') }}</label>
             </div>
@@ -34,7 +37,11 @@ THE SOFTWARE.
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ $t('templates.globalSections.reverseProxy.reverseProxyMustBeEnabledOnOneSite') }}
+                            {{
+                                $t(
+                                    'templates.globalSections.reverseProxy.reverseProxyMustBeEnabledOnOneSite',
+                                )
+                            }}
                         </label>
                     </div>
                 </div>
@@ -48,7 +55,11 @@ THE SOFTWARE.
                 </div>
                 <div class="field-body">
                     <div class="field has-addons">
-                        <div :class="`control is-expanded${proxyConnectTimeoutChanged ? ' is-changed' : ''}`">
+                        <div
+                            :class="`control is-expanded${
+                                proxyConnectTimeoutChanged ? ' is-changed' : ''
+                            }`"
+                        >
                             <input
                                 v-model.number="proxyConnectTimeout"
                                 class="input"
@@ -73,7 +84,11 @@ THE SOFTWARE.
                 </div>
                 <div class="field-body">
                     <div class="field has-addons">
-                        <div :class="`control is-expanded${proxySendTimeoutChanged ? ' is-changed' : ''}`">
+                        <div
+                            :class="`control is-expanded${
+                                proxySendTimeoutChanged ? ' is-changed' : ''
+                            }`"
+                        >
                             <input
                                 v-model.number="proxySendTimeout"
                                 class="input"
@@ -98,7 +113,11 @@ THE SOFTWARE.
                 </div>
                 <div class="field-body">
                     <div class="field has-addons">
-                        <div :class="`control is-expanded${proxyReadTimeoutChanged ? ' is-changed' : ''}`">
+                        <div
+                            :class="`control is-expanded${
+                                proxyReadTimeoutChanged ? ' is-changed' : ''
+                            }`"
+                        >
                             <input
                                 v-model.number="proxyReadTimeout"
                                 class="input"
@@ -125,11 +144,21 @@ THE SOFTWARE.
                     <div class="field">
                         <div class="field">
                             <div
-                                v-for="(name, value) in $props.data.proxyCoexistenceXForwarded.options"
-                                :class="`control${proxyCoexistenceXForwardedChanged && value === proxyCoexistenceXForwarded ? ' is-changed' : ''}`"
+                                v-for="(name, value) in $props.data.proxyCoexistenceXForwarded
+                                    .options"
+                                :class="`control${
+                                    proxyCoexistenceXForwardedChanged &&
+                                    value === proxyCoexistenceXForwarded
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="proxyCoexistenceXForwarded" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="proxyCoexistenceXForwarded"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -173,7 +202,7 @@ THE SOFTWARE.
         },
     };
 
-    const validTimeout = data => {
+    const validTimeout = (data) => {
         let val = parseFloat(data.computed);
 
         // Use default if we've got an invalid setting
@@ -186,38 +215,46 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalReverseProxy',                                 // Component name
-        display: 'common.reverseProxy',                             // Display name for tab (i18n key)
-        key: 'reverseProxy',                                        // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'GlobalReverseProxy', // Component name
+        display: 'common.reverseProxy', // Display name for tab (i18n key)
+        key: 'reverseProxy', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyRadio,
         },
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         data() {
             return {
                 reverseProxyEnabled: false,
             };
         },
-        computed: computedFromDefaults(defaults, 'reverseProxy'),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'reverseProxy'), // Getters & setters for the delegated data
         watch: {
             // Disable all options if Reverse proxy is disabled
             '$parent.$parent.$data.domains': {
                 handler(data) {
                     for (const domain of data) {
-                        if (domain && domain.reverseProxy && domain.reverseProxy.reverseProxy
-                            && domain.reverseProxy.reverseProxy.computed) {
+                        if (
+                            domain &&
+                            domain.reverseProxy &&
+                            domain.reverseProxy.reverseProxy &&
+                            domain.reverseProxy.reverseProxy.computed
+                        ) {
                             this.$data.reverseProxyEnabled = true;
                             this.$props.data.proxyConnectTimeout.enabled = true;
-                            this.$props.data.proxyConnectTimeout.computed = this.$props.data.proxyConnectTimeout.value;
+                            this.$props.data.proxyConnectTimeout.computed =
+                                this.$props.data.proxyConnectTimeout.value;
                             this.$props.data.proxySendTimeout.enabled = true;
-                            this.$props.data.proxySendTimeout.computed = this.$props.data.proxySendTimeout.value;
+                            this.$props.data.proxySendTimeout.computed =
+                                this.$props.data.proxySendTimeout.value;
                             this.$props.data.proxyReadTimeout.enabled = true;
-                            this.$props.data.proxyReadTimeout.computed = this.$props.data.proxyReadTimeout.value;
+                            this.$props.data.proxyReadTimeout.computed =
+                                this.$props.data.proxyReadTimeout.value;
                             this.$props.data.proxyCoexistenceXForwarded.enabled = true;
-                            this.$props.data.proxyCoexistenceXForwarded.computed = this.$props.data.proxyCoexistenceXForwarded.value;
+                            this.$props.data.proxyCoexistenceXForwarded.computed =
+                                this.$props.data.proxyCoexistenceXForwarded.value;
                             return;
                         }
                     }

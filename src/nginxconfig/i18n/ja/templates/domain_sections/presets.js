@@ -26,7 +26,8 @@ THE SOFTWARE.
 
 export default {
     presets: 'プリセット',
-    itLooksLikeYouCustomisedTheConfig: 'このドメインの設定をカスタマイズしているようです。新しいプリセットを選択すると、カスタマイズした設定の一部がリセットまたは変更される場合があります。',
+    itLooksLikeYouCustomisedTheConfig:
+        'このドメインの設定をカスタマイズしているようです。新しいプリセットを選択すると、カスタマイズした設定の一部がリセットまたは変更される場合があります。',
     frontend: 'フロントエンド',
     nodeJs: 'Node.js',
     singlePageApplication: 'シングルページアプリケーション(SPA)',

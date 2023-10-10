@@ -62,7 +62,7 @@ export const getI18n = async () => {
     return i18n;
 };
 
-const loadLanguagePack = async pack => {
+const loadLanguagePack = async (pack) => {
     // If same language, do nothing
     if (i18n.locale === pack) return;
 
@@ -79,7 +79,7 @@ const loadLanguagePack = async pack => {
     i18nPacks[pack] = packData;
 };
 
-export const setLanguagePack = async pack => {
+export const setLanguagePack = async (pack) => {
     // If i18n not loaded, do nothing
     if (!i18n) return;
 

@@ -34,8 +34,14 @@ THE SOFTWARE.
         </template>
 
         <!-- Load in all other slots -->
-        <template v-for="(_, slot) in $slots" #[slot]="scope">
-            <slot :name="slot" v-bind="scope || {}" />
+        <template
+            v-for="(_, slot) in $slots"
+            #[slot]="scope"
+        >
+            <slot
+                :name="slot"
+                v-bind="scope || {}"
+            />
         </template>
     </PrettyCheck>
 </template>

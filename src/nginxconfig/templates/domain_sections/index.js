@@ -34,4 +34,4 @@ import Logging from './logging';
 import Restrict from './restrict';
 import Onion from './onion';
 
-export default [ Server, HTTPS, PHP, Python, ReverseProxy, Routing, Logging, Restrict, Onion ];
+export default [Server, HTTPS, PHP, Python, ReverseProxy, Routing, Logging, Restrict, Onion];

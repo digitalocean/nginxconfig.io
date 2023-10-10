@@ -43,10 +43,13 @@ export default {
     yesImSure: 'Ja, ich bin sicher',
     noCancel: 'Nein, abbrechen',
     tools: 'Tools',
-    resetGlobalConfigBody: 'Bist du dir sicher, dass du alle Optionen im Bereich "Globale Konfiguration" zurücksetzen möchtest?',
-    resetAllDomainsConfigBody: 'Bist du dir sicher, dass du die Konfiguration ALLER Domains zurücksetzen möchtest?',
+    resetGlobalConfigBody:
+        'Bist du dir sicher, dass du alle Optionen im Bereich "Globale Konfiguration" zurücksetzen möchtest?',
+    resetAllDomainsConfigBody:
+        'Bist du dir sicher, dass du die Konfiguration ALLER Domains zurücksetzen möchtest?',
     removeAllDomainsBody: 'Bist du dir sicher, dass du ALLE Domains entfernen möchtest?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: 'Bist du dir sicher, dass du die Konfiguration von',
+    areYouSureYouWantToResetAllConfigurationOptionsForThe:
+        'Bist du dir sicher, dass du die Konfiguration von',
     domain: 'zurücksetzen möchtest?',
     areYouSureYouWantToRemoveThe: 'Bist du dir sicher, dass du die Domain ',
     domainConfiguration: 'entfernen möchtest?',

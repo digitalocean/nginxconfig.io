@@ -34,12 +34,20 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${errorLogEnabledChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="errorLogEnabled" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="errorLogEnabled"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="$props.data.errorLogEnabled.computed" :class="`control field is-horizontal is-expanded${errorLogPathChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="$props.data.errorLogEnabled.computed"
+                        :class="`control field is-horizontal is-expanded${
+                            errorLogPathChanged ? ' is-changed' : ''
+                        }`"
+                    >
                         <input
                             v-model="errorLogPath"
                             class="input"
@@ -51,18 +59,29 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="$props.data.errorLogEnabled.computed" class="field is-horizontal">
+        <div
+            v-if="$props.data.errorLogEnabled.computed"
+            class="field is-horizontal"
+        >
             <div class="field-label">
-                <label class="label">error_log {{ $t('templates.globalSections.logging.level') }}</label>
+                <label class="label">
+                    error_log {{ $t('templates.globalSections.logging.level') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field is-horizontal">
                     <div
                         v-for="value in $props.data.errorLogLevel.options"
-                        :class="`control${errorLogLevelChanged && value === errorLogLevel ? ' is-changed' : ''}`"
+                        :class="`control${
+                            errorLogLevelChanged && value === errorLogLevel ? ' is-changed' : ''
+                        }`"
                     >
                         <div class="radio">
-                            <PrettyRadio v-model="errorLogLevel" :value="value" class="p-default p-round p-fill p-icon">
+                            <PrettyRadio
+                                v-model="errorLogLevel"
+                                :value="value"
+                                class="p-default p-round p-fill p-icon"
+                            >
                                 {{ value }}
                             </PrettyRadio>
                         </div>
@@ -79,8 +98,16 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${logNotFoundChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="logNotFound" class="p-default p-curve p-fill p-icon">
-                                {{ $t('templates.globalSections.logging.enableFileNotFoundErrorLogging') }} error_log
+                            <PrettyCheck
+                                v-model="logNotFound"
+                                class="p-default p-curve p-fill p-icon"
+                            >
+                                {{
+                                    $t(
+                                        'templates.globalSections.logging.enableFileNotFoundErrorLogging',
+                                    )
+                                }}
+                                error_log
                             </PrettyCheck>
                         </div>
                     </div>
@@ -94,65 +121,119 @@ THE SOFTWARE.
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div v-if="cloudflareEnabled" :class="`control${cloudflareChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cloudflareEnabled"
+                        :class="`control${cloudflareChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cloudflare" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cloudflare"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.enableCloudflare') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cfRayEnabled" :class="`control${cfRayChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cfRayEnabled"
+                        :class="`control${cfRayChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cfRay" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cfRay"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.cfRay') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cfConnectingIpEnabled" :class="`control${cfConnectingIpChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cfConnectingIpEnabled"
+                        :class="`control${cfConnectingIpChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cfConnectingIp" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cfConnectingIp"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.cfConnectingIp') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="xForwardedForEnabled" :class="`control${xForwardedForChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="xForwardedForEnabled"
+                        :class="`control${xForwardedForChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="xForwardedFor" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="xForwardedFor"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.xForwardedFor') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="xForwardedProtoEnabled" :class="`control${xForwardedProtoChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="xForwardedProtoEnabled"
+                        :class="`control${xForwardedProtoChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="xForwardedProto" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="xForwardedProto"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.xForwardedProto') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="trueClientIpEnabled" :class="`control${trueClientIpChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="trueClientIpEnabled"
+                        :class="`control${trueClientIpChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="trueClientIp" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="trueClientIp"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.trueClientIp') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cfIpCountryEnabled" :class="`control${cfIpCountryChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cfIpCountryEnabled"
+                        :class="`control${cfIpCountryChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cfIpCountry" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cfIpCountry"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.cfIpCountry') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cfVisitorEnabled" :class="`control${cfVisitorChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cfVisitorEnabled"
+                        :class="`control${cfVisitorChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cfVisitor" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cfVisitor"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.cfVisitor') }}
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="cdnLoopEnabled" :class="`control${cdnLoopChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="cdnLoopEnabled"
+                        :class="`control${cdnLoopChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="cdnLoop" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cdnLoop"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.logging.cdnLoop') }}
                             </PrettyCheck>
                         </div>
@@ -166,7 +247,11 @@ THE SOFTWARE.
 <script>
     import delegatedFromDefaults from '../../util/delegated_from_defaults';
     import computedFromDefaults from '../../util/computed_from_defaults';
-    import { errorLogPathDefault, errorLogLevelDefault, errorLogLevelOptions } from '../../util/logging';
+    import {
+        errorLogPathDefault,
+        errorLogLevelDefault,
+        errorLogLevelOptions,
+    } from '../../util/logging';
     import PrettyCheck from '../inputs/checkbox';
     import PrettyRadio from '../inputs/radio';
 
@@ -227,18 +312,18 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalLogging',                                  // Component name
-        display: 'common.logging',                              // Display name for tab (i18n key)
-        key: 'logging',                                         // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'GlobalLogging', // Component name
+        display: 'common.logging', // Display name for tab (i18n key)
+        key: 'logging', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'logging'),    // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'logging'), // Getters & setters for the delegated data
         watch: {
             // Show Cloudflare header options if Cloudflare is enabled
             '$props.data.cloudflare': {
@@ -247,13 +332,17 @@ THE SOFTWARE.
                         this.$props.data.cfRay.enabled = true;
                         this.$props.data.cfRay.computed = this.$props.data.cfRay.value;
                         this.$props.data.cfConnectingIp.enabled = true;
-                        this.$props.data.cfConnectingIp.computed = this.$props.data.cfConnectingIp.value;
+                        this.$props.data.cfConnectingIp.computed =
+                            this.$props.data.cfConnectingIp.value;
                         this.$props.data.xForwardedFor.enabled = true;
-                        this.$props.data.xForwardedFor.computed = this.$props.data.xForwardedFor.value;
+                        this.$props.data.xForwardedFor.computed =
+                            this.$props.data.xForwardedFor.value;
                         this.$props.data.xForwardedProto.enabled = true;
-                        this.$props.data.xForwardedProto.computed = this.$props.data.xForwardedProto.value;
+                        this.$props.data.xForwardedProto.computed =
+                            this.$props.data.xForwardedProto.value;
                         this.$props.data.trueClientIp.enabled = true;
-                        this.$props.data.trueClientIp.computed = this.$props.data.trueClientIp.value;
+                        this.$props.data.trueClientIp.computed =
+                            this.$props.data.trueClientIp.value;
                         this.$props.data.cfIpCountry.enabled = true;
                         this.$props.data.cfIpCountry.computed = this.$props.data.cfIpCountry.value;
                         this.$props.data.cfVisitor.enabled = true;

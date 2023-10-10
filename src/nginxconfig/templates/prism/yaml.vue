@@ -25,7 +25,10 @@ THE SOFTWARE.
 -->
 
 <template>
-    <div :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`" @copied="copied">
+    <div
+        :class="`column ${half ? 'is-half' : 'is-full'} is-full-mobile is-full-tablet`"
+        @copied="copied"
+    >
         <h3 v-html="name"></h3>
         <pre><code class="language-yaml" v-html="conf"></code></pre>
     </div>

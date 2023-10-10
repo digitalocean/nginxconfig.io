@@ -40,7 +40,7 @@ export default {
     certificationType: 'Certification type',
     customCertificate: 'Custom certificate',
     letsEncryptEmail: `${common.letsEncrypt} email`,
-    http3IsANonStandardModule: 'HTTP/3 isn\'t a standard NGINX module, check the ',
+    http3IsANonStandardModule: "HTTP/3 isn't a standard NGINX module, check the ",
     http3NginxQuicReadme: 'NGINX QUIC readme',
     http3OrThe: ' or the ',
     http3CloudflareQuicheProject: 'Cloudflare quiche project',

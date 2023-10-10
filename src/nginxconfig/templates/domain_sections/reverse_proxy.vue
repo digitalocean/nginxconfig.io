@@ -26,7 +26,10 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div v-if="!reverseProxyEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="!reverseProxyEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.reverseProxy') }}</label>
             </div>
@@ -36,10 +39,20 @@ THE SOFTWARE.
                         <label class="text">
                             {{ $t('templates.domainSections.reverseProxy.reverseProxyIsDisabled') }}
                             <template v-if="$parent.$props.data.php.php.computed">
-                                <br />{{ $t('templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPhp') }}
+                                <br />
+                                {{
+                                    $t(
+                                        'templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPhp',
+                                    )
+                                }}
                             </template>
                             <template v-if="$parent.$props.data.python.python.computed">
-                                <br />{{ $t('templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPython') }}
+                                <br />
+                                {{
+                                    $t(
+                                        'templates.domainSections.reverseProxy.reverseProxyCannotBeEnabledWithPython',
+                                    )
+                                }}
                             </template>
                         </label>
                     </div>
@@ -47,7 +60,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-else class="field is-horizontal">
+        <div
+            v-else
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.reverseProxy') }}</label>
             </div>
@@ -55,7 +71,10 @@ THE SOFTWARE.
                 <div :class="`field${reverseProxyChanged ? ' is-changed' : ''}`">
                     <div class="control">
                         <div class="checkbox">
-                            <PrettyCheck v-model="reverseProxy" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="reverseProxy"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.reverseProxy.enableReverseProxy') }}
                             </PrettyCheck>
                         </div>
@@ -64,7 +83,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="pathEnabled" class="field is-horizontal">
+        <div
+            v-if="pathEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.path') }}</label>
             </div>
@@ -82,7 +104,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="proxyPassEnabled" class="field is-horizontal">
+        <div
+            v-if="proxyPassEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">proxy_pass</label>
             </div>
@@ -100,9 +125,14 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="proxyHostHeaderEnabled" class="field is-horizontal">
+        <div
+            v-if="proxyHostHeaderEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.reverseProxy.proxyHostHeader') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.reverseProxy.proxyHostHeader') }}
+                </label>
             </div>
             <div class="field-body">
                 <div :class="`field${proxyHostHeaderChanged ? ' is-changed' : ''}`">
@@ -145,17 +175,17 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainReverseProxy',                                 // Component name
-        display: 'common.reverseProxy',                             // Display name for tab (i18n key)
-        key: 'reverseProxy',                                        // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'DomainReverseProxy', // Component name
+        display: 'common.reverseProxy', // Display name for tab (i18n key)
+        key: 'reverseProxy', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'reverseProxy'),   // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'reverseProxy'), // Getters & setters for the delegated data
         watch: {
             // If the PHP or Python is enabled, the Reverse proxy will be forced off
             '$parent.$props.data': {
@@ -166,7 +196,8 @@ THE SOFTWARE.
                         this.$props.data.reverseProxy.computed = false;
                     } else {
                         this.$props.data.reverseProxy.enabled = true;
-                        this.$props.data.reverseProxy.computed = this.$props.data.reverseProxy.value;
+                        this.$props.data.reverseProxy.computed =
+                            this.$props.data.reverseProxy.value;
                     }
                 },
                 deep: true,
@@ -180,7 +211,8 @@ THE SOFTWARE.
                         this.$props.data.proxyPass.enabled = true;
                         this.$props.data.proxyPass.computed = this.$props.data.proxyPass.value;
                         this.$props.data.proxyHostHeader.enabled = true;
-                        this.$props.data.proxyHostHeader.computed = this.$props.data.proxyHostHeader.value;
+                        this.$props.data.proxyHostHeader.computed =
+                            this.$props.data.proxyHostHeader.value;
                     } else {
                         this.$props.data.path.enabled = false;
                         this.$props.data.path.computed = '';

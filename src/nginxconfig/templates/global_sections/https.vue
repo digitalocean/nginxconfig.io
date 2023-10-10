@@ -34,7 +34,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${portReuseChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="portReuse" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="portReuse"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.globalSections.https.enableReuseOfPort') }}
                             </PrettyCheck>
                         </div>
@@ -43,7 +46,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="!sslProfileEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="!sslProfileEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
             </div>
@@ -61,17 +67,25 @@ THE SOFTWARE.
         <template v-else>
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">{{ $t('templates.globalSections.https.sslProfile') }}</label>
+                    <label class="label">
+                        {{ $t('templates.globalSections.https.sslProfile') }}
+                    </label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="field">
                             <div
                                 v-for="(name, value) in $props.data.sslProfile.options"
-                                :class="`control${sslProfileChanged && value === sslProfile ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    sslProfileChanged && value === sslProfile ? ' is-changed' : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="sslProfile" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="sslProfile"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -83,24 +97,40 @@ THE SOFTWARE.
 
             <div class="field is-horizontal is-aligned-top">
                 <div class="field-label">
-                    <label class="label">{{ $t('templates.globalSections.https.ocspDnsResolvers') }}</label>
+                    <label class="label">
+                        {{ $t('templates.globalSections.https.ocspDnsResolvers') }}
+                    </label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div :class="`control${ocspCloudflareChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
-                                <PrettyCheck v-model="ocspCloudflare" class="p-default p-curve p-fill p-icon">
+                                <PrettyCheck
+                                    v-model="ocspCloudflare"
+                                    class="p-default p-curve p-fill p-icon"
+                                >
                                     {{ $t('templates.globalSections.https.cloudflareResolver') }}
                                 </PrettyCheck>
                             </div>
                         </div>
-                        <div v-if="$props.data.ocspCloudflare.computed" class="control field is-horizontal is-expanded">
+                        <div
+                            v-if="$props.data.ocspCloudflare.computed"
+                            class="control field is-horizontal is-expanded"
+                        >
                             <div
                                 v-for="(name, value) in $props.data.ocspCloudflareType.options"
-                                :class="`control${ocspCloudflareTypeChanged && value === ocspCloudflareType ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    ocspCloudflareTypeChanged && value === ocspCloudflareType
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="ocspCloudflareType" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="ocspCloudflareType"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -109,18 +139,32 @@ THE SOFTWARE.
 
                         <div :class="`control${ocspGoogleChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
-                                <PrettyCheck v-model="ocspGoogle" class="p-default p-curve p-fill p-icon">
+                                <PrettyCheck
+                                    v-model="ocspGoogle"
+                                    class="p-default p-curve p-fill p-icon"
+                                >
                                     {{ $t('templates.globalSections.https.googlePublicDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
-                        <div v-if="$props.data.ocspGoogle.computed" class="control field is-horizontal is-expanded">
+                        <div
+                            v-if="$props.data.ocspGoogle.computed"
+                            class="control field is-horizontal is-expanded"
+                        >
                             <div
                                 v-for="(name, value) in $props.data.ocspGoogleType.options"
-                                :class="`control${ocspGoogleTypeChanged && value === ocspGoogleType ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    ocspGoogleTypeChanged && value === ocspGoogleType
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="ocspGoogleType" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="ocspGoogleType"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -129,18 +173,32 @@ THE SOFTWARE.
 
                         <div :class="`control${ocspOpenDnsChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
-                                <PrettyCheck v-model="ocspOpenDns" class="p-default p-curve p-fill p-icon">
+                                <PrettyCheck
+                                    v-model="ocspOpenDns"
+                                    class="p-default p-curve p-fill p-icon"
+                                >
                                     {{ $t('templates.globalSections.https.openDns') }}
                                 </PrettyCheck>
                             </div>
                         </div>
-                        <div v-if="$props.data.ocspOpenDns.computed" class="control field is-horizontal is-expanded">
+                        <div
+                            v-if="$props.data.ocspOpenDns.computed"
+                            class="control field is-horizontal is-expanded"
+                        >
                             <div
                                 v-for="(name, value) in $props.data.ocspOpenDnsType.options"
-                                :class="`control${ocspOpenDnsTypeChanged && value === ocspOpenDnsType ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    ocspOpenDnsTypeChanged && value === ocspOpenDnsType
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="ocspOpenDnsType" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="ocspOpenDnsType"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -149,18 +207,32 @@ THE SOFTWARE.
 
                         <div :class="`control${ocspQuad9Changed ? ' is-changed' : ''}`">
                             <div class="checkbox">
-                                <PrettyCheck v-model="ocspQuad9" class="p-default p-curve p-fill p-icon">
+                                <PrettyCheck
+                                    v-model="ocspQuad9"
+                                    class="p-default p-curve p-fill p-icon"
+                                >
                                     {{ $t('templates.globalSections.https.quad9') }}
                                 </PrettyCheck>
                             </div>
                         </div>
-                        <div v-if="$props.data.ocspQuad9.computed" class="control field is-horizontal is-expanded">
+                        <div
+                            v-if="$props.data.ocspQuad9.computed"
+                            class="control field is-horizontal is-expanded"
+                        >
                             <div
                                 v-for="(name, value) in $props.data.ocspQuad9Type.options"
-                                :class="`control${ocspQuad9TypeChanged && value === ocspQuad9Type ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    ocspQuad9TypeChanged && value === ocspQuad9Type
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="ocspQuad9Type" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="ocspQuad9Type"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -169,18 +241,32 @@ THE SOFTWARE.
 
                         <div :class="`control${ocspVerisignChanged ? ' is-changed' : ''}`">
                             <div class="checkbox">
-                                <PrettyCheck v-model="ocspVerisign" class="p-default p-curve p-fill p-icon">
+                                <PrettyCheck
+                                    v-model="ocspVerisign"
+                                    class="p-default p-curve p-fill p-icon"
+                                >
                                     {{ $t('templates.globalSections.https.verisign') }}
                                 </PrettyCheck>
                             </div>
                         </div>
-                        <div v-if="$props.data.ocspVerisign.computed" class="control field is-horizontal is-expanded">
+                        <div
+                            v-if="$props.data.ocspVerisign.computed"
+                            class="control field is-horizontal is-expanded"
+                        >
                             <div
                                 v-for="(name, value) in $props.data.ocspVerisignType.options"
-                                :class="`control${ocspVerisignTypeChanged && value === ocspVerisignType ? ' is-changed' : ''}`"
+                                :class="`control${
+                                    ocspVerisignTypeChanged && value === ocspVerisignType
+                                        ? ' is-changed'
+                                        : ''
+                                }`"
                             >
                                 <div class="radio">
-                                    <PrettyRadio v-model="ocspVerisignType" :value="value" class="p-default p-round p-fill p-icon">
+                                    <PrettyRadio
+                                        v-model="ocspVerisignType"
+                                        :value="value"
+                                        class="p-default p-round p-fill p-icon"
+                                    >
                                         {{ $t(name) }}
                                     </PrettyRadio>
                                 </div>
@@ -190,9 +276,14 @@ THE SOFTWARE.
                 </div>
             </div>
 
-            <div v-if="letsEncryptRootEnabled" class="field is-horizontal">
+            <div
+                v-if="letsEncryptRootEnabled"
+                class="field is-horizontal"
+            >
                 <div class="field-label">
-                    <label class="label">{{ $t('templates.globalSections.https.letsEncryptWebroot') }}</label>
+                    <label class="label">
+                        {{ $t('templates.globalSections.https.letsEncryptWebroot') }}
+                    </label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -208,9 +299,14 @@ THE SOFTWARE.
                 </div>
             </div>
 
-            <div v-if="letsEncryptCertRootEnabled" class="field is-horizontal">
+            <div
+                v-if="letsEncryptCertRootEnabled"
+                class="field is-horizontal"
+            >
                 <div class="field-label">
-                    <label class="label">{{ $t('templates.globalSections.https.letsEncryptCertRoot') }}</label>
+                    <label class="label">
+                        {{ $t('templates.globalSections.https.letsEncryptCertRoot') }}
+                    </label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -246,10 +342,9 @@ THE SOFTWARE.
         enabled: true,
     };
 
-    const validOptionCheck = data => {
+    const validOptionCheck = (data) => {
         if (data.enabled)
-            if (!Object.keys(data.options).includes(data.computed))
-                data.computed = data.default;
+            if (!Object.keys(data.options).includes(data.computed)) data.computed = data.default;
     };
 
     const defaults = {
@@ -302,18 +397,18 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalHTTPS',                                // Component name
-        display: 'common.https',                            // Display name for tab (i18n key)
-        key: 'https',                                       // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'GlobalHTTPS', // Component name
+        display: 'common.https', // Display name for tab (i18n key)
+        key: 'https', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'https'),  // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'https'), // Getters & setters for the delegated data
         watch: {
             // Check SSL profile is valid
             '$props.data.sslProfile': {
@@ -343,29 +438,45 @@ THE SOFTWARE.
             },
             '$parent.$parent.$data.domains': {
                 handler(data) {
-                    let httpsEnabled = false, leEnabled = false;
+                    let httpsEnabled = false,
+                        leEnabled = false;
 
                     for (const domain of data) {
                         // Enable HTTPS server settings if any site uses HTTPS
-                        if (domain && domain.https && domain.https.https && domain.https.https.computed) {
+                        if (
+                            domain &&
+                            domain.https &&
+                            domain.https.https &&
+                            domain.https.https.computed
+                        ) {
                             this.$props.data.sslProfile.enabled = true;
-                            this.$props.data.sslProfile.computed = this.$props.data.sslProfile.value;
+                            this.$props.data.sslProfile.computed =
+                                this.$props.data.sslProfile.value;
                             this.$props.data.ocspCloudflare.enabled = true;
-                            this.$props.data.ocspCloudflare.computed = this.$props.data.ocspCloudflare.value;
+                            this.$props.data.ocspCloudflare.computed =
+                                this.$props.data.ocspCloudflare.value;
                             this.$props.data.ocspGoogle.enabled = true;
-                            this.$props.data.ocspGoogle.computed = this.$props.data.ocspGoogle.value;
+                            this.$props.data.ocspGoogle.computed =
+                                this.$props.data.ocspGoogle.value;
                             this.$props.data.ocspOpenDns.enabled = true;
-                            this.$props.data.ocspOpenDns.computed = this.$props.data.ocspOpenDns.value;
+                            this.$props.data.ocspOpenDns.computed =
+                                this.$props.data.ocspOpenDns.value;
                             this.$props.data.letsEncryptRoot.enabled = true;
-                            this.$props.data.letsEncryptRoot.computed = this.$props.data.letsEncryptRoot.value;
+                            this.$props.data.letsEncryptRoot.computed =
+                                this.$props.data.letsEncryptRoot.value;
                             httpsEnabled = true;
                         }
 
                         // Enable LE webroot if any site uses LE
-                        if (domain && domain.https && domain.https.certType
-                            && domain.https.certType.computed === 'letsEncrypt') {
+                        if (
+                            domain &&
+                            domain.https &&
+                            domain.https.certType &&
+                            domain.https.certType.computed === 'letsEncrypt'
+                        ) {
                             this.$props.data.letsEncryptRoot.enabled = true;
-                            this.$props.data.letsEncryptRoot.computed = this.$props.data.letsEncryptRoot.value;
+                            this.$props.data.letsEncryptRoot.computed =
+                                this.$props.data.letsEncryptRoot.value;
                             leEnabled = true;
                         }
                     }

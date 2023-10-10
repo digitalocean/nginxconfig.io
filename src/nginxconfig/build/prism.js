@@ -39,7 +39,9 @@ const main = async () => {
     await fs.writeFile(new URL(`${buildDir}/prism.css`, import.meta.url), fixed);
 };
 
-main().then(() => {}).catch(err => {
-    console.error(err);
-    process.exit(1);
-});
+main()
+    .then(() => {})
+    .catch((err) => {
+        console.error(err);
+        process.exit(1);
+    });

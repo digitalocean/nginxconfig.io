@@ -41,13 +41,13 @@ const copyToClipboard = () => {
         return;
     }
 
-    Prism.plugins.toolbar.registerButton('copy-to-clipboard', env => {
+    Prism.plugins.toolbar.registerButton('copy-to-clipboard', (env) => {
         const linkCopy = document.createElement('button');
         linkCopy.textContent = 'Copy';
 
         const element = env.element;
         const clip = new Clipboard(linkCopy, {
-            'text': () => element.textContent,
+            text: () => element.textContent,
         });
 
         const resetText = () => {
@@ -57,10 +57,12 @@ const copyToClipboard = () => {
         };
 
         const emitEvent = () => {
-            linkCopy.dispatchEvent(new CustomEvent('copied', {
-                bubbles: true,
-                detail: { text: element.textContent },
-            }));
+            linkCopy.dispatchEvent(
+                new CustomEvent('copied', {
+                    bubbles: true,
+                    detail: { text: element.textContent },
+                }),
+            );
         };
 
         clip.on('success', () => {
