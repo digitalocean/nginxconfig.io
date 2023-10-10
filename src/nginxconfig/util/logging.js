@@ -30,7 +30,16 @@ export const accessLogParamsDefault = 'buffer=512k flush=1m';
 export const errorLogPathDefault = '/var/log/nginx/error.log';
 export const errorLogPathDisabled = '/dev/null';
 export const errorLogLevelDefault = 'warn';
-export const errorLogLevelOptions = Object.freeze(['debug', 'info', 'notice', 'warn', 'error', 'crit', 'alert', 'emerg']);
+export const errorLogLevelOptions = Object.freeze([
+    'debug',
+    'info',
+    'notice',
+    'warn',
+    'error',
+    'crit',
+    'alert',
+    'emerg',
+]);
 export const errorLogLevelDisabled = 'none';
 
 export const getDomainAccessLog = (domain, global) => {
@@ -39,9 +48,13 @@ export const getDomainAccessLog = (domain, global) => {
         path = accessLogPathDefault;
     }
 
-    return path + 
+    return (
+        path +
         (global.logging.cloudflare.computed ? ' cloudflare' : ' combined') +
-        (domain.logging.accessLogParameters.computed.trim() ? ` ${domain.logging.accessLogParameters.computed.trim()}`: '');
+        (domain.logging.accessLogParameters.computed.trim()
+            ? ` ${domain.logging.accessLogParameters.computed.trim()}`
+            : '')
+    );
 };
 
 export const getDomainErrorLog = (domain) => {
@@ -50,6 +63,8 @@ export const getDomainErrorLog = (domain) => {
         path = errorLogPathDefault;
     }
 
-    const errorLogLevel = errorLogLevelOptions.includes(domain.logging.errorLogLevel.computed) ? ` ${domain.logging.errorLogLevel.computed}` : '';
+    const errorLogLevel = errorLogLevelOptions.includes(domain.logging.errorLogLevel.computed)
+        ? ` ${domain.logging.errorLogLevel.computed}`
+        : '';
     return `${path}${errorLogLevel}`;
 };

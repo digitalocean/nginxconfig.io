@@ -24,4 +24,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default str => str.replace(/_(\w)/g, m => `${m[0].replace('_', '')}${m[1].toUpperCase()}`);
+export default (str) =>
+    str.replace(/_(\w)/g, (m) => `${m[0].replace('_', '')}${m[1].toUpperCase()}`);

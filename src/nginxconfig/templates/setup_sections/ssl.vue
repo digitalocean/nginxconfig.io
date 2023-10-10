@@ -29,7 +29,13 @@ THE SOFTWARE.
         <ol v-if="diffieHellmanValue || letsEncryptActive">
             <li v-if="diffieHellmanValue">
                 <p>
-                    <span v-html="$t('templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer')"></span>
+                    <span
+                        v-html="
+                            $t(
+                                'templates.setupSections.ssl.generateDiffieHellmanKeysByRunningThisCommandOnYourServer',
+                            )
+                        "
+                    ></span>
                     <br />
                     <BashPrism
                         :key="`${$props.data.global.nginx.nginxConfigDirectory.computed}-${diffieHellmanValue}`"
@@ -41,7 +47,13 @@ THE SOFTWARE.
 
             <li v-if="letsEncryptActive">
                 <p>
-                    <span v-html="$t('templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt')"></span>
+                    <span
+                        v-html="
+                            $t(
+                                'templates.setupSections.ssl.createACommonAcmeChallengeDirectoryForLetsEncrypt',
+                            )
+                        "
+                    ></span>
                     <br />
                     <BashPrism
                         :key="letsEncryptDir"
@@ -57,12 +69,19 @@ THE SOFTWARE.
             </li>
         </ol>
 
-        <div v-else class="field is-horizontal">
+        <div
+            v-else
+            class="field is-horizontal"
+        >
             <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <label class="text">
-                            {{ $t('templates.setupSections.ssl.noAdditionalStepsAreNeededToSetUpSslForNginx') }}
+                            {{
+                                $t(
+                                    'templates.setupSections.ssl.noAdditionalStepsAreNeededToSetUpSslForNginx',
+                                )
+                            }}
                         </label>
                     </div>
                 </div>
@@ -94,13 +113,13 @@ THE SOFTWARE.
             },
             diffieHellmanValue() {
                 switch (this.$props.data.global.https.sslProfile.computed) {
-                case 'intermediate':
-                    return 2048;
-                case 'old':
-                    return 1024;
-                case 'modern':
-                default:
-                    return 0;
+                    case 'intermediate':
+                        return 2048;
+                    case 'old':
+                        return 1024;
+                    case 'modern':
+                    default:
+                        return 0;
                 }
             },
             letsEncryptActive() {

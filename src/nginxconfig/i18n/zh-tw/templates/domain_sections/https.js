@@ -42,7 +42,7 @@ export default {
     letsEncryptEmail: `${common.letsEncrypt} 電子郵件地址`,
     http3IsANonStandardModule: 'HTTP/3 並不是標準的 NGINX 模組，請查閱 ',
     http3NginxQuicReadme: 'NGINX QUIC 說明',
-    http3OrThe: ' 或者 ', 
+    http3OrThe: ' 或者 ',
     http3CloudflareQuicheProject: 'Cloudflare quiche 專案',
     http3ForBuildingNginxWithHttp3: '以了解如何建置支援 HTTP/3 的 NGINX !',
 };

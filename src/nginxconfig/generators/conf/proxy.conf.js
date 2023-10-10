@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default global => {
+export default (global) => {
     const config = {};
 
     config.proxy_http_version = '1.1';
@@ -49,7 +49,6 @@ export default global => {
         config['proxy_set_header X-Forwarded-Host'] = '""';
         config['proxy_set_header X-Forwarded-Port'] = '""';
     }
-    
 
     config['# Proxy timeouts'] = '';
     config['proxy_connect_timeout'] = global.reverseProxy.proxyConnectTimeout.computed;

@@ -26,24 +26,35 @@ THE SOFTWARE.
 
 import isObject from './is_object';
 import deepMerge from './deep_merge';
-import { accessLogPathDefault, accessLogParamsDefault, errorLogPathDefault, errorLogPathDisabled, errorLogLevelDefault } from './logging';
+import {
+    accessLogPathDefault,
+    accessLogParamsDefault,
+    errorLogPathDefault,
+    errorLogPathDisabled,
+    errorLogLevelDefault,
+} from './logging';
 import { serverDomainDefault } from './defaults';
 
 // Migrate old logging settings to new ones
-const migrateLogging = data => {
+const migrateLogging = (data) => {
     if (Object.keys(data).length === 0) return;
 
-    const globalLogging = 'logging' in data.global && isObject(data.global.logging) ? data.global.logging : {};
+    const globalLogging =
+        'logging' in data.global && isObject(data.global.logging) ? data.global.logging : {};
 
     // global access_log
-    const [globalAccessLogPath, ...globalAccessLogParameters] = (globalLogging.accessLog || accessLogPathDefault).split(' ');
-    const globalAccessLogEnabled = 
+    const [globalAccessLogPath, ...globalAccessLogParameters] = (
+        globalLogging.accessLog || accessLogPathDefault
+    ).split(' ');
+    const globalAccessLogEnabled =
         !('accessLog' in globalLogging) || // accessLog was enabled by default and might not appear at all
         (globalAccessLogPath !== '' && globalAccessLogPath !== 'off'); // *or* someone turned it off explicitly
 
     // global error_log
-    const [globalErrorLogPath, ...globalErrorLogLevel] = (globalLogging.errorLog || `${errorLogPathDefault} ${errorLogLevelDefault}`).split(' ');
-    const globalErrorLogEnabled = 
+    const [globalErrorLogPath, ...globalErrorLogLevel] = (
+        globalLogging.errorLog || `${errorLogPathDefault} ${errorLogLevelDefault}`
+    ).split(' ');
+    const globalErrorLogEnabled =
         !('errorLog' in globalLogging) || // errorLog was enabled by default and might not appear at all
         (globalErrorLogPath !== '' && globalErrorLogPath !== errorLogPathDisabled); // *or* someone turned it off explicitly
 
@@ -54,9 +65,14 @@ const migrateLogging = data => {
 
         const perDomainServer = {
             domain: serverDomainDefault,
-            ...('server' in data.domains[key] && isObject(data.domains[key].server) ? data.domains[key].server : {}),
+            ...('server' in data.domains[key] && isObject(data.domains[key].server)
+                ? data.domains[key].server
+                : {}),
         };
-        const perDomainLogging = 'logging' in data.domains[key] && isObject(data.domains[key].logging) ? data.domains[key].logging : {};
+        const perDomainLogging =
+            'logging' in data.domains[key] && isObject(data.domains[key].logging)
+                ? data.domains[key].logging
+                : {};
 
         // access_log
         let accessLogEnabled = globalAccessLogEnabled,
@@ -66,18 +82,24 @@ const migrateLogging = data => {
         const perDomainAccessLogEnabled = !!perDomainLogging.accessLog;
         if (perDomainAccessLogEnabled) {
             accessLogEnabled = true;
-            accessLogPath = accessLogPath.replace(/([^/]+)\.log$/, `${perDomainServer.domain}.$1.log`);
+            accessLogPath = accessLogPath.replace(
+                /([^/]+)\.log$/,
+                `${perDomainServer.domain}.$1.log`,
+            );
         }
 
         // error_log
         let errorLogEnabled = globalErrorLogEnabled,
             errorLogPath = globalErrorLogPath;
         const errorLogLevel = globalErrorLogLevel.join(' ') || errorLogLevelDefault;
-        
+
         const perDomainErrorLogEnabled = !!perDomainLogging.errorLog;
         if (perDomainErrorLogEnabled) {
             errorLogEnabled = true;
-            errorLogPath = errorLogPath.replace(/([^/]+)\.log$/, `${perDomainServer.domain}.$1.log`);
+            errorLogPath = errorLogPath.replace(
+                /([^/]+)\.log$/,
+                `${perDomainServer.domain}.$1.log`,
+            );
         }
 
         data.domains[key].logging = {
@@ -93,7 +115,7 @@ const migrateLogging = data => {
 };
 
 // Handle converting the old query format to our new query params
-export default data => {
+export default (data) => {
     // Handle converting old domain settings to new ones
     if ('global' in data && isObject(data.global)) {
         // Handle specifics global data
@@ -103,12 +125,7 @@ export default data => {
 
         // Keys to map
         const keysToMap = {
-            php: [
-                'phpServer',
-                'phpServerCustom',
-                'phpBackupServer',
-                'phpBackupServerCustom',
-            ],
+            php: ['phpServer', 'phpServerCustom', 'phpBackupServer', 'phpBackupServerCustom'],
         };
 
         for (const key in data.global) {

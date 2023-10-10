@@ -26,7 +26,10 @@ THE SOFTWARE.
 
 <template>
     <div>
-        <div v-if="!phpEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="!phpEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.php') }}</label>
             </div>
@@ -36,10 +39,18 @@ THE SOFTWARE.
                         <label class="text">
                             {{ $t('templates.domainSections.php.phpIsDisabled') }}
                             <template v-if="$parent.$props.data.reverseProxy.reverseProxy.computed">
-                                <br />{{ $t('templates.domainSections.php.phpCannotBeEnabledWithReverseProxy') }}
+                                <br />
+                                {{
+                                    $t(
+                                        'templates.domainSections.php.phpCannotBeEnabledWithReverseProxy',
+                                    )
+                                }}
                             </template>
                             <template v-if="$parent.$props.data.python.python.computed">
-                                <br />{{ $t('templates.domainSections.php.phpCannotBeEnabledWithPython') }}
+                                <br />
+                                {{
+                                    $t('templates.domainSections.php.phpCannotBeEnabledWithPython')
+                                }}
                             </template>
                         </label>
                     </div>
@@ -47,7 +58,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-else class="field is-horizontal">
+        <div
+            v-else
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('common.php') }}</label>
             </div>
@@ -55,7 +69,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${phpChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="php" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="php"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.php.enablePhp') }}
                             </PrettyCheck>
                         </div>
@@ -64,7 +81,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="phpServerEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="phpServerEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label has-margin-top">
                 <label class="label">{{ $t('templates.domainSections.php.phpServer') }}</label>
             </div>
@@ -76,7 +96,7 @@ THE SOFTWARE.
                             v-model="phpServer"
                             :options="phpServerOptions"
                             :clearable="false"
-                            :reduce="s => s.value"
+                            :reduce="(s) => s.value"
                         ></VueSelect>
                     </div>
 
@@ -84,15 +104,25 @@ THE SOFTWARE.
                         v-if="phpServerCustomEnabled"
                         :class="`control${phpServerCustomChanged ? ' is-changed' : ''}`"
                     >
-                        <input v-model="phpServerCustom" class="input" type="text" :placeholder="$props.data.phpServerCustom.default" />
+                        <input
+                            v-model="phpServerCustom"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.phpServerCustom.default"
+                        />
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="phpBackupServerEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="phpBackupServerEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label has-margin-top">
-                <label class="label">{{ $t('templates.domainSections.php.phpBackupServer') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.php.phpBackupServer') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -102,7 +132,7 @@ THE SOFTWARE.
                             v-model="phpBackupServer"
                             :options="phpBackupServerOptions"
                             :clearable="false"
-                            :reduce="s => s.value"
+                            :reduce="(s) => s.value"
                         ></VueSelect>
                     </div>
 
@@ -110,13 +140,21 @@ THE SOFTWARE.
                         v-if="phpBackupServerCustomEnabled"
                         :class="`control${phpBackupServerCustomChanged ? ' is-changed' : ''}`"
                     >
-                        <input v-model="phpBackupServerCustom" class="input" type="text" :placeholder="$props.data.phpBackupServerCustom.default" />
+                        <input
+                            v-model="phpBackupServerCustom"
+                            class="input"
+                            type="text"
+                            :placeholder="$props.data.phpBackupServerCustom.default"
+                        />
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="wordPressRulesEnabled" class="field is-horizontal">
+        <div
+            v-if="wordPressRulesEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.php.wordPressRules') }}</label>
             </div>
@@ -124,7 +162,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${wordPressRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="wordPressRules" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="wordPressRules"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.php.enableWordPressRules') }}
                             </PrettyCheck>
                         </div>
@@ -133,7 +174,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="drupalRulesEnabled" class="field is-horizontal">
+        <div
+            v-if="drupalRulesEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.php.drupalRules') }}</label>
             </div>
@@ -141,7 +185,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${drupalRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="drupalRules" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="drupalRules"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.php.enableDrupalRules') }}
                             </PrettyCheck>
                         </div>
@@ -150,7 +197,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="magentoRulesEnabled" class="field is-horizontal">
+        <div
+            v-if="magentoRulesEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.php.magentoRules') }}</label>
             </div>
@@ -158,7 +208,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${magentoRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="magentoRules" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="magentoRules"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.php.enableMagentoRules') }}
                             </PrettyCheck>
                         </div>
@@ -167,7 +220,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="joomlaRulesEnabled" class="field is-horizontal">
+        <div
+            v-if="joomlaRulesEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">{{ $t('templates.domainSections.php.joomlaRules') }}</label>
             </div>
@@ -175,7 +231,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${joomlaRulesChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="joomlaRules" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="joomlaRules"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.php.enableJoomlaRules') }}
                             </PrettyCheck>
                         </div>
@@ -206,7 +265,7 @@ THE SOFTWARE.
         '/var/run/php/php8.1-fpm.sock': 'templates.domainSections.php.php81Socket',
         '/var/run/php/php8.2-fpm.sock': 'templates.domainSections.php.php82Socket',
         '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
-        'custom': 'templates.domainSections.php.custom',
+        custom: 'templates.domainSections.php.custom',
     };
 
     const hiddenValues = ['', 'custom'];
@@ -253,26 +312,28 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainPHP',                                  // Component name
-        display: 'common.php',                              // Display name for tab (i18n key)
-        key: 'php',                                         // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'DomainPHP', // Component name
+        display: 'common.php', // Display name for tab (i18n key)
+        key: 'php', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             VueSelect,
         },
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         computed: {
-            ...computedFromDefaults(defaults, 'php'),   // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'php'), // Getters & setters for the delegated data
             phpServerOptions() {
-                return Object.entries(this.$props.data.phpServer.options)
-                    .map(([key, value]) => this.formattedOption(key, value));
+                return Object.entries(this.$props.data.phpServer.options).map(([key, value]) =>
+                    this.formattedOption(key, value),
+                );
             },
             phpBackupServerOptions() {
-                return Object.entries(this.$props.data.phpBackupServer.options)
-                    .map(([key, value]) => this.formattedOption(key, value));
+                return Object.entries(this.$props.data.phpBackupServer.options).map(
+                    ([key, value]) => this.formattedOption(key, value),
+                );
             },
         },
         watch: {
@@ -297,13 +358,16 @@ THE SOFTWARE.
                         this.$props.data.phpServer.enabled = true;
                         this.$props.data.phpServer.computed = this.$props.data.phpServer.value;
                         this.$props.data.phpBackupServer.enabled = true;
-                        this.$props.data.phpBackupServer.computed = this.$props.data.phpBackupServer.value;
+                        this.$props.data.phpBackupServer.computed =
+                            this.$props.data.phpBackupServer.value;
                         this.$props.data.wordPressRules.enabled = true;
-                        this.$props.data.wordPressRules.computed = this.$props.data.wordPressRules.value;
+                        this.$props.data.wordPressRules.computed =
+                            this.$props.data.wordPressRules.value;
                         this.$props.data.drupalRules.enabled = true;
                         this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
                         this.$props.data.magentoRules.enabled = true;
-                        this.$props.data.magentoRules.computed = this.$props.data.magentoRules.value;
+                        this.$props.data.magentoRules.computed =
+                            this.$props.data.magentoRules.value;
                         this.$props.data.joomlaRules.enabled = true;
                         this.$props.data.joomlaRules.computed = this.$props.data.joomlaRules.value;
                     } else {
@@ -361,13 +425,14 @@ THE SOFTWARE.
             },
             // Ensure 'Custom'/'Disabled' get translated in VueSelect on language switch
             '$i18n.locale'() {
-                if (!this.$refs.phpServerSelect)
-                    return false;
-                const updated = this.phpServerOptions
-                    .find(x => x.value === this.$refs.phpServerSelect.$data._value.value);
+                if (!this.$refs.phpServerSelect) return false;
+                const updated = this.phpServerOptions.find(
+                    (x) => x.value === this.$refs.phpServerSelect.$data._value.value,
+                );
                 if (updated) this.$refs.phpServerSelect.$data._value = updated;
-                const updatedBackup = this.phpBackupServerOptions
-                    .find(x => x.value === this.$refs.phpBackupServerSelect.$data._value.value);
+                const updatedBackup = this.phpBackupServerOptions.find(
+                    (x) => x.value === this.$refs.phpBackupServerSelect.$data._value.value,
+                );
                 if (updatedBackup) this.$refs.phpBackupServerSelect.$data._value = updatedBackup;
             },
         },

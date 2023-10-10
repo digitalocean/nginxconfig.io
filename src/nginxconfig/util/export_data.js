@@ -35,7 +35,6 @@ const categoriesExport = (categories) => {
 
         // Go over each property in the category
         for (const property in categories[category]) {
-
             // If the user input differs from the default, they changed it, so we save it
             const propertyData = categories[category][property];
             if (propertyData.value !== propertyData.default) {
@@ -57,10 +56,12 @@ export default (domains, global) => {
 
     // Handle domains
     // Always save changes, even if none, so we can replicate the correct number of domains
-    exportData.domains = domains.map(domain => categoriesExport(domain[0])).reduce((prev, current, index) => {
-        prev[index] = current;
-        return prev;
-    }, {});
+    exportData.domains = domains
+        .map((domain) => categoriesExport(domain[0]))
+        .reduce((prev, current, index) => {
+            prev[index] = current;
+            return prev;
+        }, {});
 
     // Handle global
     // If there were any category changes, save global changes

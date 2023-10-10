@@ -30,51 +30,86 @@ THE SOFTWARE.
             <template #description>
                 {{ $t('templates.app.description') }}
             </template>
-            <template #header>
-            </template>
+            <template #header></template>
             <template #buttons>
                 <VueSelect
                     v-model="lang"
                     :options="i18nPacks"
                     :clearable="false"
-                    :reduce="s => s.value"
+                    :reduce="(s) => s.value"
                     :disabled="languageLoading"
                 >
                     <template #selected-option="{ label }">
                         <span class="has-icon">
-                            <i v-if="languageLoading" class="icon fas fa-spinner fa-pulse"></i>
-                            <i v-else class="icon fas fa-language"></i>
+                            <i
+                                v-if="languageLoading"
+                                class="icon fas fa-spinner fa-pulse"
+                            ></i>
+                            <i
+                                v-else
+                                class="icon fas fa-language"
+                            ></i>
                             <span>{{ label }}</span>
                         </span>
                     </template>
                 </VueSelect>
-                <a v-if="splitColumn" class="button is-primary is-outline is-hidden-touch" @click="splitColumnToggle">
+                <a
+                    v-if="splitColumn"
+                    class="button is-primary is-outline is-hidden-touch"
+                    @click="splitColumnToggle"
+                >
                     {{ $t('templates.app.singleColumnMode') }}
                 </a>
-                <a v-else class="button is-primary is-hidden-touch" @click="splitColumnToggle">
+                <a
+                    v-else
+                    class="button is-primary is-hidden-touch"
+                    @click="splitColumnToggle"
+                >
                     {{ $t('templates.app.splitColumnMode') }}
                 </a>
             </template>
         </Header>
 
-        <div class="main container" :style="{ display: ready ? undefined : 'none' }">
+        <div
+            class="main container"
+            :style="{ display: ready ? undefined : 'none' }"
+        >
             <div class="columns is-multiline">
-                <div :class="`column ${splitColumn ? 'is-half column-scroll-y' : 'is-full'} is-full-touch`">
+                <div
+                    :class="`column ${
+                        splitColumn ? 'is-half column-scroll-y' : 'is-full'
+                    } is-full-touch`"
+                >
                     <h2>{{ $t('templates.app.perWebsiteConfig') }}</h2>
 
                     <div class="tabs">
                         <ul>
-                            <li v-for="data in activeDomains" :class="data[1] === active ? 'is-active' : undefined">
-                                <a class="domain" @click="active = data[1]">
+                            <li
+                                v-for="data in activeDomains"
+                                :class="data[1] === active ? 'is-active' : undefined"
+                            >
+                                <a
+                                    class="domain"
+                                    @click="active = data[1]"
+                                >
                                     {{ data[0].server.domain.computed }}{{ changes(data[1]) }}
-                                    <i v-if="warnings(data[1])" class="fas fa-exclamation-triangle"></i>
+                                    <i
+                                        v-if="warnings(data[1])"
+                                        class="fas fa-exclamation-triangle"
+                                    ></i>
                                 </a>
-                                <a class="remove" @click="remove(data[1])">
+                                <a
+                                    class="remove"
+                                    @click="remove(data[1])"
+                                >
                                     <i class="fas fa-times"></i>
                                 </a>
                             </li>
                             <li>
-                                <a @click="add"><i class="fas fa-plus"></i> {{ $t('templates.app.addSite') }}</a>
+                                <a @click="add">
+                                    <i class="fas fa-plus"></i>
+                                    {{ $t('templates.app.addSite') }}
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -93,12 +128,21 @@ THE SOFTWARE.
                     <DropletCallout></DropletCallout>
 
                     <h2>{{ $t('templates.app.setup') }}</h2>
-                    <Setup :data="{ domains: domains.filter(d => d !== null), global, confFiles }"></Setup>
+                    <Setup
+                        :data="{ domains: domains.filter((d) => d !== null), global, confFiles }"
+                    ></Setup>
                 </div>
 
-                <div :class="`column ${splitColumn ? 'is-half column-scroll-y' : 'is-full'} is-full-touch`">
+                <div
+                    :class="`column ${
+                        splitColumn ? 'is-half column-scroll-y' : 'is-full'
+                    } is-full-touch`"
+                >
                     <h2>{{ $t('templates.app.configFiles') }}</h2>
-                    <div ref="files" class="columns is-multiline files">
+                    <div
+                        ref="files"
+                        class="columns is-multiline files"
+                    >
                         <component
                             :is="getPrismComponent(confContents[0])"
                             v-for="confContents in confFilesOutput"
@@ -189,31 +233,42 @@ THE SOFTWARE.
         },
         computed: {
             activeDomains() {
-                return this.$data.domains.map((domain, index) => [domain, index]).filter(d => d[0] !== null);
+                return this.$data.domains
+                    .map((domain, index) => [domain, index])
+                    .filter((d) => d[0] !== null);
             },
             confFiles() {
-                return generators(this.$data.domains.filter(d => d !== null), this.$data.global);
+                return generators(
+                    this.$data.domains.filter((d) => d !== null),
+                    this.$data.global,
+                );
             },
             confFilesWithDirectory() {
-                return Object.entries(this.confFiles).reduce((obj, [ file, content ]) => ({
-                    ...obj,
-                    [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]: content,
-                }), {});
+                return Object.entries(this.confFiles).reduce(
+                    (obj, [file, content]) => ({
+                        ...obj,
+                        [`${this.$data.global.nginx.nginxConfigDirectory.computed}/${file}`]:
+                            content,
+                    }),
+                    {},
+                );
             },
             lang: {
                 get() {
                     return this.$data.global.app.lang.value;
                 },
-                set (value) {
+                set(value) {
                     this.$data.global.app.lang.value = value;
                     this.$data.global.app.lang.computed = value;
                 },
             },
             i18nPacks() {
-                return availablePacks.map(pack => ({
-                    label: this.$t(`languages.${pack}`) + (pack === this.$i18n.locale
-                        ? ''
-                        : ` - ${this.$t(`languages.${pack}`, pack)}`),
+                return availablePacks.map((pack) => ({
+                    label:
+                        this.$t(`languages.${pack}`) +
+                        (pack === this.$i18n.locale
+                            ? ''
+                            : ` - ${this.$t(`languages.${pack}`, pack)}`),
                     value: pack,
                 }));
             },
@@ -241,23 +296,25 @@ THE SOFTWARE.
                     if (!availablePacks.includes(data.value)) data.computed = data.default;
 
                     // Update the locale
-                    setLanguagePack(data.computed).then(() => {
-                        // Done
-                        info('Language set to', data.computed);
-                        this.$data.languagePrevious = data.computed;
-                        this.$data.languageLoading = false;
+                    setLanguagePack(data.computed)
+                        .then(() => {
+                            // Done
+                            info('Language set to', data.computed);
+                            this.$data.languagePrevious = data.computed;
+                            this.$data.languageLoading = false;
 
-                        // Analytics
-                        this.languageSetEvent(!interactive);
-                    }).catch((err) => {
-                        // Error
-                        error(`Failed to set language to ${data.computed}`, err);
+                            // Analytics
+                            this.languageSetEvent(!interactive);
+                        })
+                        .catch((err) => {
+                            // Error
+                            error(`Failed to set language to ${data.computed}`, err);
 
-                        // Fallback to last known good
-                        data.value = this.$data.languagePrevious;
-                        data.computed = this.$data.languagePrevious;
-                        this.$data.languageLoading = false;
-                    });
+                            // Fallback to last known good
+                            data.value = this.$data.languagePrevious;
+                            data.computed = this.$data.languagePrevious;
+                            this.$data.languageLoading = false;
+                        });
                 },
                 deep: true,
             },
@@ -267,10 +324,20 @@ THE SOFTWARE.
             // Fallback to the window hash if no search query params, from the Angular version of nginxconfig
             // The config file watcher will handle setting the app as ready
             const query = window.location.search || window.location.hash.slice(1);
-            const imported = await importData(query, this.$data.domains, this.$data.global, this.$nextTick);
+            const imported = await importData(
+                query,
+                this.$data.domains,
+                this.$data.global,
+                this.$nextTick,
+            );
 
             // Apply browser language if not specified in query
-            if (!imported || !imported.global || !imported.global.app || !imported.global.app.lang) {
+            if (
+                !imported ||
+                !imported.global ||
+                !imported.global.app ||
+                !imported.global.app.lang
+            ) {
                 const language = browserLanguage(availablePacks);
                 if (language) this.lang = language;
             }
@@ -286,14 +353,17 @@ THE SOFTWARE.
                 const changes = Object.entries(data).reduce((prev, current) => {
                     if (current[0] === 'presets') return prev; // Ignore changes from presets
                     if (!isObject(current[1])) return prev; // Ignore non-objects (things that aren't tabs)
-                    prev += Object.keys(current[1]).filter(key => isChanged(current[1][key], current[0], key)).length;
+                    prev += Object.keys(current[1]).filter((key) =>
+                        isChanged(current[1][key], current[0], key),
+                    ).length;
                     return prev;
                 }, 0);
                 if (changes) return ` (${changes.toLocaleString()})`;
                 return '';
             },
             warnings(index) {
-                if (!Object.prototype.hasOwnProperty.call(this.$refs, `domain-${index}`)) return false;
+                if (!Object.prototype.hasOwnProperty.call(this.$refs, `domain-${index}`))
+                    return false;
                 return this.$refs[`domain-${index}`][0].hasWarnings || false;
             },
             add() {
@@ -301,9 +371,16 @@ THE SOFTWARE.
 
                 // Avoid dupe domains
                 let count = 1;
-                while (this.$data.domains.some(d => d && d.server.domain.computed === data.server.domain.computed)) {
+                while (
+                    this.$data.domains.some(
+                        (d) => d && d.server.domain.computed === data.server.domain.computed,
+                    )
+                ) {
                     count++;
-                    data.server.domain.computed = data.server.domain.default.replace('.com', `${count}.com`);
+                    data.server.domain.computed = data.server.domain.default.replace(
+                        '.com',
+                        `${count}.com`,
+                    );
                 }
                 data.server.domain.value = data.server.domain.computed;
 
@@ -317,7 +394,8 @@ THE SOFTWARE.
             remove(index) {
                 const name = this.$data.domains[index].server.domain.computed;
                 this.$data.domains[index] = null;
-                if (this.$data.active === index) this.$data.active = this.$data.domains.findIndex(d => d !== null);
+                if (this.$data.active === index)
+                    this.$data.active = this.$data.domains.findIndex((d) => d !== null);
 
                 // Analytics
                 this.removeSiteEvent(this.activeDomains.length, name);
@@ -329,7 +407,9 @@ THE SOFTWARE.
                     // but with previous as this so that we don't highlight any changes
                     if (!this.$data.ready) {
                         this.$data.confFilesPrevious = this.confFilesWithDirectory;
-                        this.$nextTick(() => { this.$data.ready = true; });
+                        this.$nextTick(() => {
+                            this.$data.ready = true;
+                        });
                     }
 
                     // Do the diff!
@@ -344,23 +424,31 @@ THE SOFTWARE.
                 try {
                     // Calculate the diff & highlight after render
                     const diffConf = diff(newConf, oldConf, {
-                        highlightFunction: value => `<mark>${value}</mark>`,
+                        highlightFunction: (value) => `<mark>${value}</mark>`,
                     });
-                    this.$data.confFilesOutput = Object.entries(diffConf).map(([ file, { name, content } ]) => {
-                        const diffName = name.filter(x => !x.removed).map(x => x.value).join('');
-                        const diffContent = content.filter(x => !x.removed).map(x => x.value).join('');
+                    this.$data.confFilesOutput = Object.entries(diffConf).map(
+                        ([file, { name, content }]) => {
+                            const diffName = name
+                                .filter((x) => !x.removed)
+                                .map((x) => x.value)
+                                .join('');
+                            const diffContent = content
+                                .filter((x) => !x.removed)
+                                .map((x) => x.value)
+                                .join('');
 
-                        return [
-                            diffName,
-                            diffContent,
-                            `${sha2_256(diffName)}-${sha2_256(diffContent)}`,
-                            file,
-                        ];
-                    });
+                            return [
+                                diffName,
+                                diffContent,
+                                `${sha2_256(diffName)}-${sha2_256(diffContent)}`,
+                                file,
+                            ];
+                        },
+                    );
                 } catch (err) {
                     // If diff generation goes wrong, don't show any diff
                     error('Failed to compute and highlight diff', err);
-                    this.$data.confFilesOutput = Object.entries(newConf).map(([ name, content ]) => {
+                    this.$data.confFilesOutput = Object.entries(newConf).map(([name, content]) => {
                         const safeName = escape(name);
                         const safeContent = escape(content);
 
@@ -374,7 +462,7 @@ THE SOFTWARE.
                 }
 
                 // Once rendered, begin looking for changes again
-                this.$nextTick(() => this.$data.confWatcherWaiting = false);
+                this.$nextTick(() => (this.$data.confWatcherWaiting = false));
             },
             splitColumnToggle() {
                 this.$data.splitColumn = !this.$data.splitColumn;
@@ -420,12 +508,12 @@ THE SOFTWARE.
             },
             getPrismComponent(confName) {
                 switch (confName) {
-                case '/etc/nginx/Dockerfile':
-                    return 'DockerPrism';
-                case '/etc/nginx/docker-compose.yaml':
-                    return 'YamlPrism';
-                default:
-                    return 'NginxPrism';
+                    case '/etc/nginx/Dockerfile':
+                        return 'DockerPrism';
+                    case '/etc/nginx/docker-compose.yaml':
+                        return 'YamlPrism';
+                    default:
+                        return 'NginxPrism';
                 }
             },
         },

@@ -26,7 +26,8 @@ THE SOFTWARE.
 
 export default {
     presets: '預設',
-    itLooksLikeYouCustomisedTheConfig: '您似乎調整過此網域的設定。選擇新的預設可能會重置或更改一些您自訂的設定。',
+    itLooksLikeYouCustomisedTheConfig:
+        '您似乎調整過此網域的設定。選擇新的預設可能會重置或更改一些您自訂的設定。',
     frontend: '前端',
     nodeJs: 'Node.js',
     singlePageApplication: 'SPA',

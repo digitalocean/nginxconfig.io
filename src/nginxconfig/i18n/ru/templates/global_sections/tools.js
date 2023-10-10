@@ -43,10 +43,12 @@ export default {
     yesImSure: 'Да, я уверен',
     noCancel: 'Нет, отменить',
     tools: 'Инструменты',
-    resetGlobalConfigBody: 'Вы уверены, что хотите сбросить все параметры конфигурации в разделе глобальной конфигурации?',
+    resetGlobalConfigBody:
+        'Вы уверены, что хотите сбросить все параметры конфигурации в разделе глобальной конфигурации?',
     resetAllDomainsConfigBody: 'Вы уверены, что хотите сбросить конфигурацию ВСЕХ доменов?',
     removeAllDomainsBody: 'Вы действительно хотите удалить ВСЕ конфигурации домена?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: 'Вы действительно хотите сбросить все параметры конфигурации для',
+    areYouSureYouWantToResetAllConfigurationOptionsForThe:
+        'Вы действительно хотите сбросить все параметры конфигурации для',
     domain: 'домена?',
     areYouSureYouWantToRemoveThe: 'Вы уверены, что желаете удалить ',
     domainConfiguration: 'конфигурацию домена?',

@@ -34,7 +34,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${rootChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="root" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="root"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -43,7 +46,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="indexEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="indexEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
                 <label class="label">index</label>
             </div>
@@ -54,7 +60,11 @@ THE SOFTWARE.
                         :class="`control${indexChanged && value === index ? ' is-changed' : ''}`"
                     >
                         <div class="radio">
-                            <PrettyRadio v-model="index" :value="value" class="p-default p-round p-fill p-icon">
+                            <PrettyRadio
+                                v-model="index"
+                                :value="value"
+                                class="p-default p-round p-fill p-icon"
+                            >
                                 {{ value }}
                             </PrettyRadio>
                         </div>
@@ -63,22 +73,39 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="fallbackHtmlEnabled || fallbackPhpEnabled" class="field is-horizontal is-aligned-top">
+        <div
+            v-if="fallbackHtmlEnabled || fallbackPhpEnabled"
+            class="field is-horizontal is-aligned-top"
+        >
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.routing.fallbackRouting') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.routing.fallbackRouting') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div v-if="fallbackHtmlEnabled" :class="`control${fallbackHtmlChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="fallbackHtmlEnabled"
+                        :class="`control${fallbackHtmlChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="fallbackHtml" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="fallbackHtml"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 index.html
                             </PrettyCheck>
                         </div>
                     </div>
-                    <div v-if="fallbackPhpEnabled" :class="`control${fallbackPhpChanged ? ' is-changed' : ''}`">
+                    <div
+                        v-if="fallbackPhpEnabled"
+                        :class="`control${fallbackPhpChanged ? ' is-changed' : ''}`"
+                    >
                         <div class="checkbox">
-                            <PrettyCheck v-model="fallbackPhp" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="fallbackPhp"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 index.php
                             </PrettyCheck>
                         </div>
@@ -87,9 +114,14 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="fallbackPhpPathEnabled" class="field is-horizontal">
+        <div
+            v-if="fallbackPhpPathEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.routing.fallbackRoutingPhpPath') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.routing.fallbackRoutingPhpPath') }}
+                </label>
             </div>
             <div class="field-body">
                 <div :class="`field${fallbackPhpPathChanged ? ' is-changed' : ''}`">
@@ -105,15 +137,23 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="legacyPhpRoutingEnabled" class="field is-horizontal">
+        <div
+            v-if="legacyPhpRoutingEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.routing.legacyPhpRouting') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.routing.legacyPhpRouting') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${legacyPhpRoutingChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="legacyPhpRouting" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="legacyPhpRouting"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('templates.domainSections.routing.enableLegacyRouting') }}
                             </PrettyCheck>
                         </div>
@@ -159,18 +199,18 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainRouting',                                  // Component name
-        display: 'templates.domainSections.routing.routing',    // Display name for tab (i18n key)
-        key: 'routing',                                         // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'DomainRouting', // Component name
+        display: 'templates.domainSections.routing.routing', // Display name for tab (i18n key)
+        key: 'routing', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             PrettyRadio,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
-        computed: computedFromDefaults(defaults, 'routing'),    // Getters & setters for the delegated data
+        computed: computedFromDefaults(defaults, 'routing'), // Getters & setters for the delegated data
         watch: {
             // Disable all options (expect legacy php) if root is disabled
             '$props.data.root': {
@@ -179,7 +219,8 @@ THE SOFTWARE.
                         this.$props.data.index.enabled = true;
                         this.$props.data.index.computed = this.$props.data.index.value;
                         this.$props.data.fallbackHtml.enabled = true;
-                        this.$props.data.fallbackHtml.computed = this.$props.data.fallbackHtml.value;
+                        this.$props.data.fallbackHtml.computed =
+                            this.$props.data.fallbackHtml.value;
                         this.$props.data.fallbackPhp.enabled = true;
                         this.$props.data.fallbackPhp.computed = this.$props.data.fallbackPhp.value;
                     } else {
@@ -199,7 +240,8 @@ THE SOFTWARE.
                     // This might cause recursion, but seems not to
                     if (data.fallbackHtml.computed && data.fallbackPhp.computed) {
                         this.$props.data.fallbackPhpPath.enabled = true;
-                        this.$props.data.fallbackPhpPath.computed = this.$props.data.fallbackPhpPath.value;
+                        this.$props.data.fallbackPhpPath.computed =
+                            this.$props.data.fallbackPhpPath.value;
                     } else {
                         this.$props.data.fallbackPhpPath.enabled = false;
                         this.$props.data.fallbackPhpPath.computed = '';

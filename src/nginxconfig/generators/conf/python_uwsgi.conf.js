@@ -24,15 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default global => {
+export default (global) => {
     const config = {};
 
     config['# default uwsgi_params'] = '';
     config.include = 'uwsgi_params';
 
     config['# uwsgi settings'] = '';
-    config.uwsgi_pass = (global.python.pythonServer.computed[0] === '/' ? 'unix:' : '')
-        + global.python.pythonServer.computed;
+    config.uwsgi_pass =
+        (global.python.pythonServer.computed[0] === '/' ? 'unix:' : '') +
+        global.python.pythonServer.computed;
     config['uwsgi_param Host'] = '$host';
     config['uwsgi_param X-Real-IP'] = '$remote_addr';
     config['uwsgi_param X-Forwarded-For'] = '$proxy_add_x_forwarded_for';

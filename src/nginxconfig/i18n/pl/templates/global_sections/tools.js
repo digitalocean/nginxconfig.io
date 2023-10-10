@@ -43,10 +43,12 @@ export default {
     yesImSure: 'Tak, jestem pewien',
     noCancel: 'Nie, poniechaj',
     tools: 'Narzędzia',
-    resetGlobalConfigBody: 'Czy na pewno chcesz zresetować wszystkie opcje konfiguracji w sekcji konfiguracji globalnej?',
+    resetGlobalConfigBody:
+        'Czy na pewno chcesz zresetować wszystkie opcje konfiguracji w sekcji konfiguracji globalnej?',
     resetAllDomainsConfigBody: 'Czy na pewno chcesz zresetować konfigurację WSZYSTKICH domen?',
     removeAllDomainsBody: 'Czy na pewno chcesz usunąć WSZYSTKIE konfiguracje domeny?',
-    areYouSureYouWantToResetAllConfigurationOptionsForThe: 'Czy na pewno chcesz zresetować wszystkie opcje konfiguracji domeny',
+    areYouSureYouWantToResetAllConfigurationOptionsForThe:
+        'Czy na pewno chcesz zresetować wszystkie opcje konfiguracji domeny',
     domain: '?',
     areYouSureYouWantToRemoveThe: 'Czy napewno chcesz usunąć konfigurację dla domeny ',
     domainConfiguration: '?',

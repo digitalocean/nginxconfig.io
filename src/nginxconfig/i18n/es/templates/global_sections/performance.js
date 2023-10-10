@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 import common from '../../common';
 
-export default {    
+export default {
     disableHtmlCaching: 'Disable HTML caching', // TODO: translate
     enableDisableHtmlCaching: 'disable HTML caching', // TODO: translate
     gzipCompression: 'Compresión Gzip',

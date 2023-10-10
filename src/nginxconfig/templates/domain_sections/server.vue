@@ -30,32 +30,59 @@ THE SOFTWARE.
             <div class="field">
                 <label class="label">{{ $t('templates.domainSections.server.domain') }}</label>
                 <div :class="`control${domainChanged ? ' is-changed' : ''}`">
-                    <input v-model="domain" class="input" type="text" :placeholder="domainDefault" />
+                    <input
+                        v-model="domain"
+                        class="input"
+                        type="text"
+                        :placeholder="domainDefault"
+                    />
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">{{ $t('common.path') }}</label>
                 <div :class="`control${pathChanged ? ' is-changed' : ''}`">
-                    <input v-model="path" class="input" type="text" :placeholder="`/var/www/${domain}`" />
+                    <input
+                        v-model="path"
+                        class="input"
+                        type="text"
+                        :placeholder="`/var/www/${domain}`"
+                    />
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">{{ $t('templates.domainSections.server.documentRoot') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.server.documentRoot') }}
+                </label>
                 <div :class="`control${documentRootChanged ? ' is-changed' : ''}`">
-                    <input v-model="documentRoot" class="input" type="text" :placeholder="documentRootDefault" />
+                    <input
+                        v-model="documentRoot"
+                        class="input"
+                        type="text"
+                        :placeholder="documentRootDefault"
+                    />
                 </div>
             </div>
         </div>
 
-        <div v-if="duplicateDomain" class="field">
+        <div
+            v-if="duplicateDomain"
+            class="field"
+        >
             <div class="control">
                 <label class="text message is-warning">
                     <span class="message-body">
-                        {{ $t('templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed') }}
-                        <code class="slim">{{ $props.data.domain.computed }}</code>.
-                        {{ $t('templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration') }}
+                        {{
+                            $t('templates.domainSections.server.oneOrMoreOtherDomainsAreAlsoNamed')
+                        }}
+                        <code class="slim">{{ $props.data.domain.computed }}</code>
+                        .
+                        {{
+                            $t(
+                                'templates.domainSections.server.thisWillCauseIssuesWithConfigGeneration',
+                            )
+                        }}
                     </span>
                 </label>
             </div>
@@ -63,13 +90,18 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.server.wwwSubdomain') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.server.wwwSubdomain') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${wwwSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="wwwSubdomain" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="wwwSubdomain"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 (www.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
@@ -78,15 +110,23 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="cdnSubdomainEnabled" class="field is-horizontal">
+        <div
+            v-if="cdnSubdomainEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.server.cdnSubdomain') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.server.cdnSubdomain') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${cdnSubdomainChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="cdnSubdomain" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="cdnSubdomain"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 (cdn.{{ $props.data.domain.computed }})
                             </PrettyCheck>
                         </div>
@@ -97,14 +137,21 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.domainSections.server.redirectSubdomains') }}</label>
+                <label class="label">
+                    {{ $t('templates.domainSections.server.redirectSubdomains') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${redirectSubdomainsChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="redirectSubdomains" class="p-default p-curve p-fill p-icon">
-                                ({{ wwwSubdomain ? `${domain}, ` : '' }}*.{{ $props.data.domain.computed }}
+                            <PrettyCheck
+                                v-model="redirectSubdomains"
+                                class="p-default p-curve p-fill p-icon"
+                            >
+                                ({{ wwwSubdomain ? `${domain}, ` : '' }}*.{{
+                                    $props.data.domain.computed
+                                }}
                                 <i class="fas fa-long-arrow-alt-right"></i>
                                 {{ wwwSubdomain ? 'www.' : '' }}{{ $props.data.domain.computed }})
                             </PrettyCheck>
@@ -121,22 +168,28 @@ THE SOFTWARE.
             <div class="field-body">
                 <div class="field has-addons">
                     <div class="control">
-                        <a class="button is-static">
-                            IPv4
-                        </a>
+                        <a class="button is-static">IPv4</a>
                     </div>
                     <div :class="`control is-expanded${listenIpv4Changed ? ' is-changed' : ''}`">
-                        <input v-model="listenIpv4" class="input" type="text" :placeholder="listenIpv4Default" />
+                        <input
+                            v-model="listenIpv4"
+                            class="input"
+                            type="text"
+                            :placeholder="listenIpv4Default"
+                        />
                     </div>
                 </div>
                 <div class="field has-addons">
                     <div class="control">
-                        <a class="button is-static">
-                            IPv6
-                        </a>
+                        <a class="button is-static">IPv6</a>
                     </div>
                     <div :class="`control is-expanded${listenIpv6Changed ? ' is-changed' : ''}`">
-                        <input v-model="listenIpv6" class="input" type="text" :placeholder="listenIpv6Default" />
+                        <input
+                            v-model="listenIpv6"
+                            class="input"
+                            type="text"
+                            :placeholder="listenIpv6Default"
+                        />
                     </div>
                 </div>
             </div>
@@ -187,21 +240,24 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'DomainServer',                                   // Component name
-        display: 'templates.domainSections.server.server',      // Display name for tab (i18n key)
-        key: 'server',                                          // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),             // Data the parent will present here
+        name: 'DomainServer', // Component name
+        display: 'templates.domainSections.server.server', // Display name for tab (i18n key)
+        key: 'server', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
         },
         props: {
-            data: Object,                                       // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         computed: {
-            ...computedFromDefaults(defaults, 'server'),        // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'server'), // Getters & setters for the delegated data
             duplicateDomain() {
-                return this.$parent.$parent.$data.domains
-                    .filter(d => d && d.server.domain.computed === this.$props.data.domain.computed).length > 1;
+                return (
+                    this.$parent.$parent.$data.domains.filter(
+                        (d) => d && d.server.domain.computed === this.$props.data.domain.computed,
+                    ).length > 1
+                );
             },
             hasWarnings() {
                 return this.duplicateDomain;
@@ -234,7 +290,8 @@ THE SOFTWARE.
                     // This might cause recursion, but seems not to
                     if (data.computed) {
                         this.$props.data.cdnSubdomain.enabled = true;
-                        this.$props.data.cdnSubdomain.computed = this.$props.data.cdnSubdomain.value;
+                        this.$props.data.cdnSubdomain.computed =
+                            this.$props.data.cdnSubdomain.value;
                     } else {
                         this.$props.data.cdnSubdomain.enabled = false;
                         this.$props.data.cdnSubdomain.computed = false;

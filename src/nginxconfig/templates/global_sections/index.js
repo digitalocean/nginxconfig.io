@@ -34,4 +34,4 @@ import NGINX from './nginx';
 import Docker from './docker';
 import Tools from './tools';
 
-export default [ HTTPS, Security, Python, ReverseProxy, Performance, Logging, NGINX, Docker, Tools ];
+export default [HTTPS, Security, Python, ReverseProxy, Performance, Logging, NGINX, Docker, Tools];

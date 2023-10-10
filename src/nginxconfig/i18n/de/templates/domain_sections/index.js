@@ -35,4 +35,15 @@ import reverseProxy from './reverse_proxy';
 import routing from './routing';
 import server from './server';
 
-export default { https, logging, php, presets, python, reverseProxy, routing, server, restrict, onion };
+export default {
+    https,
+    logging,
+    php,
+    presets,
+    python,
+    reverseProxy,
+    routing,
+    server,
+    restrict,
+    onion,
+};

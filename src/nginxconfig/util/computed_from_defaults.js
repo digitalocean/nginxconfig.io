@@ -32,15 +32,17 @@ export default (defaults, cat, isInteraction = true) => {
             get() {
                 return this.$props.data[key].value;
             },
-            set (value) {
+            set(value) {
                 // Save user interaction if value changed
-                if (isInteraction
-                    && this.$parent
-                    && 'data' in this.$parent.$props
-                    && 'hasUserInteraction' in this.$parent.$props.data
-                    && !this.$parent.$props.data.hasUserInteraction
-                    && this.$props.data[key].value !== value)
-                        this.$parent.$props.data.hasUserInteraction = true;
+                if (
+                    isInteraction &&
+                    this.$parent &&
+                    'data' in this.$parent.$props &&
+                    'hasUserInteraction' in this.$parent.$props.data &&
+                    !this.$parent.$props.data.hasUserInteraction &&
+                    this.$props.data[key].value !== value
+                )
+                    this.$parent.$props.data.hasUserInteraction = true;
 
                 this.$props.data[key].value = value;
                 this.$props.data[key].computed = value;
