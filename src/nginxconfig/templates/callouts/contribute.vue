@@ -64,12 +64,12 @@ THE SOFTWARE.
                 return this.$data.scrolled && !this.$data.closed;
             },
             style() {
-                return this.visible
-                    ? undefined
-                    : {
-                        opacity: 0,
-                        pointerEvents: 'none',
-                    };
+                const nonVisibleStyle = {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                };
+
+                return this.visible ? undefined : nonVisibleStyle;
             },
         },
         mounted() {

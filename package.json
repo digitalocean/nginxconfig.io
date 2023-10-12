@@ -24,7 +24,8 @@
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
     "prepare": "husky install",
-    "prettier": "prettier --write 'src/**/*.{js,vue}'"
+    "prettier": "prettier --write 'src/**/*.{js,vue}'",
+    "prettier:check": "prettier 'src/**/*.{js,vue}' --check"
   },
   "jest": {
     "testRegex": "/test/.*.js?$"
@@ -73,6 +74,7 @@
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-vue": "^9.16.1",
     "esm": "^3.2.25",
     "husky": "^8.0.3",
