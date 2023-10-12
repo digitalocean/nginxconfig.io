@@ -23,6 +23,7 @@
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
+    "test:prettier": "npm run prettier:check",
     "prepare": "husky install",
     "prettier": "prettier --write 'src/**/*.{js,vue}'",
     "prettier:check": "prettier 'src/**/*.{js,vue}' --check"
