@@ -28,14 +28,23 @@ THE SOFTWARE.
     <div>
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.tools.modularizedStructure') }}</label>
+                <label class="label">
+                    {{ $t('templates.globalSections.tools.modularizedStructure') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div :class="`control${modularizedStructureChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="modularizedStructure" class="p-default p-curve p-fill p-icon">
-                                {{ $t('templates.globalSections.tools.enableModularizedConfigFiles') }}
+                            <PrettyCheck
+                                v-model="modularizedStructure"
+                                class="p-default p-curve p-fill p-icon"
+                            >
+                                {{
+                                    $t(
+                                        'templates.globalSections.tools.enableModularizedConfigFiles',
+                                    )
+                                }}
                             </PrettyCheck>
                         </div>
                     </div>
@@ -43,7 +52,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="symlinkVhostEnabled" class="field is-horizontal">
+        <div
+            v-if="symlinkVhostEnabled"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label"></label>
             </div>
@@ -51,8 +63,12 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${symlinkVhostChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="symlinkVhost" class="p-default p-curve p-fill p-icon">
-                                {{ $t('templates.globalSections.tools.enableSymLinksFrom') }} sites-available/
+                            <PrettyCheck
+                                v-model="symlinkVhost"
+                                class="p-default p-curve p-fill p-icon"
+                            >
+                                {{ $t('templates.globalSections.tools.enableSymLinksFrom') }}
+                                sites-available/
                                 {{ $t('templates.globalSections.tools.to') }} sites-enabled/
                             </PrettyCheck>
                         </div>
@@ -63,7 +79,9 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.tools.shareConfiguration') }}</label>
+                <label class="label">
+                    {{ $t('templates.globalSections.tools.shareConfiguration') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field">
@@ -82,22 +100,39 @@ THE SOFTWARE.
 
         <div class="field is-horizontal">
             <div class="field-label">
-                <label class="label">{{ $t('templates.globalSections.tools.resetConfiguration') }}</label>
+                <label class="label">
+                    {{ $t('templates.globalSections.tools.resetConfiguration') }}
+                </label>
             </div>
             <div class="field-body">
                 <div class="field is-grouped">
                     <div class="control">
-                        <a class="button is-danger is-outline is-mini" @click="resetGlobal">
+                        <a
+                            class="button is-danger is-outline is-mini"
+                            @click="resetGlobal"
+                        >
                             {{ $t('templates.globalSections.tools.resetGlobalConfig') }}
                         </a>
                     </div>
-                    <div v-if="hasDomain" class="control">
-                        <a class="button is-danger is-outline is-mini" @click="resetDomains">
+                    <div
+                        v-if="hasDomain"
+                        class="control"
+                    >
+                        <a
+                            class="button is-danger is-outline is-mini"
+                            @click="resetDomains"
+                        >
                             {{ $t('templates.globalSections.tools.resetAllDomains') }}
                         </a>
                     </div>
-                    <div v-if="hasDomain" class="control">
-                        <a class="button is-danger is-outline is-mini" @click="removeDomains">
+                    <div
+                        v-if="hasDomain"
+                        class="control"
+                    >
+                        <a
+                            class="button is-danger is-outline is-mini"
+                            @click="removeDomains"
+                        >
                             {{ $t('templates.globalSections.tools.removeAllDomains') }}
                         </a>
                     </div>
@@ -106,22 +141,30 @@ THE SOFTWARE.
         </div>
 
         <div class="field is-horizontal">
-            <div class="field-label">
-            </div>
+            <div class="field-label"></div>
             <div class="field-body is-vertical">
-                <div v-for="domainData in $parent.$parent.activeDomains" class="field is-horizontal">
+                <div
+                    v-for="domainData in $parent.$parent.activeDomains"
+                    class="field is-horizontal"
+                >
                     <div class="field-label">
                         <label class="label">{{ domainData[0].server.domain.computed }}</label>
                     </div>
                     <div class="field-body">
                         <div class="field is-grouped">
                             <div class="control">
-                                <a class="button is-danger is-outline is-mini" @click="resetDomain(domainData[1])">
+                                <a
+                                    class="button is-danger is-outline is-mini"
+                                    @click="resetDomain(domainData[1])"
+                                >
                                     {{ $t('templates.globalSections.tools.resetDomainConfig') }}
                                 </a>
                             </div>
                             <div class="control">
-                                <a class="button is-danger is-outline is-mini" @click="removeDomain(domainData[1])">
+                                <a
+                                    class="button is-danger is-outline is-mini"
+                                    @click="removeDomain(domainData[1])"
+                                >
                                     {{ $t('templates.globalSections.tools.removeDomain') }}
                                 </a>
                             </div>
@@ -131,12 +174,21 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <Modal ref="confirmModal" :title="confirmTitle">
+        <Modal
+            ref="confirmModal"
+            :title="confirmTitle"
+        >
             <p>{{ confirmBody }}</p>
-            <a class="button is-danger is-outline" @click="doConfirmAction">
+            <a
+                class="button is-danger is-outline"
+                @click="doConfirmAction"
+            >
                 {{ $t('templates.globalSections.tools.yesImSure') }}
             </a>
-            <a class="button is-outline" @click="$refs.confirmModal.close()">
+            <a
+                class="button is-outline"
+                @click="$refs.confirmModal.close()"
+            >
                 {{ $t('templates.globalSections.tools.noCancel') }}
             </a>
         </Modal>
@@ -163,16 +215,16 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalTools',                                // Component name
-        display: 'templates.globalSections.tools.tools',    // Display name for tab (i18n key)
-        key: 'tools',                                       // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),         // Data the parent will present here
+        name: 'GlobalTools', // Component name
+        display: 'templates.globalSections.tools.tools', // Display name for tab (i18n key)
+        key: 'tools', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             Modal,
         },
         props: {
-            data: Object,                                   // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         data() {
             return {
@@ -182,7 +234,7 @@ THE SOFTWARE.
             };
         },
         computed: {
-            ...computedFromDefaults(defaults, 'tools'),     // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'tools'), // Getters & setters for the delegated data
             hasDomain() {
                 return this.$parent.$parent.activeDomains.length > 0;
             },
@@ -204,7 +256,8 @@ THE SOFTWARE.
                 handler(data) {
                     if (data.computed) {
                         this.$props.data.symlinkVhost.enabled = true;
-                        this.$props.data.symlinkVhost.computed = this.$props.data.symlinkVhost.value;
+                        this.$props.data.symlinkVhost.computed =
+                            this.$props.data.symlinkVhost.value;
                     } else {
                         this.$props.data.symlinkVhost.enabled = false;
                         this.$props.data.symlinkVhost.computed = false;
@@ -227,8 +280,8 @@ THE SOFTWARE.
             doResetDomain(domain) {
                 if (!domain) return;
 
-                Object.values(domain).forEach(category => {
-                    Object.values(category).forEach(property => {
+                Object.values(domain).forEach((category) => {
+                    Object.values(category).forEach((property) => {
                         property.value = property.default;
                         property.computed = property.default;
                     });
@@ -246,8 +299,8 @@ THE SOFTWARE.
                         this.resetGlobalEvent();
 
                         // Do the reset
-                        Object.values(this.$parent.$props.data).forEach(category => {
-                            Object.values(category).forEach(property => {
+                        Object.values(this.$parent.$props.data).forEach((category) => {
+                            Object.values(category).forEach((property) => {
                                 property.value = property.default;
                                 property.computed = property.default;
                             });
@@ -262,7 +315,9 @@ THE SOFTWARE.
 
                 this.confirm(
                     this.$t('templates.globalSections.tools.resetDomainConfig'),
-                    `${this.$t('templates.globalSections.tools.areYouSureYouWantToResetAllConfigurationOptionsForThe')}
+                    `${this.$t(
+                        'templates.globalSections.tools.areYouSureYouWantToResetAllConfigurationOptionsForThe',
+                    )}
                     ${domain.server.domain.computed}
                     ${this.$t('templates.globalSections.tools.domain')}`,
                     () => {
@@ -300,7 +355,9 @@ THE SOFTWARE.
                     () => {
                         // Analytics
                         this.resetDomainsEvent(
-                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed),
+                            this.$parent.$parent.activeDomains.map(
+                                (x) => x[0].server.domain.computed,
+                            ),
                             this.$parent.$parent.activeDomains.length,
                         );
 
@@ -318,7 +375,9 @@ THE SOFTWARE.
                     () => {
                         // Analytics
                         this.removeDomainsEvent(
-                            this.$parent.$parent.activeDomains.map(x => x[0].server.domain.computed),
+                            this.$parent.$parent.activeDomains.map(
+                                (x) => x[0].server.domain.computed,
+                            ),
                             this.$parent.$parent.activeDomains.length,
                         );
 
@@ -350,7 +409,10 @@ THE SOFTWARE.
                 });
 
                 // Also fire the general site removal event
-                this.$parent.$parent.removeSiteEvent(this.$parent.$parent.activeDomains.length - 1, name);
+                this.$parent.$parent.removeSiteEvent(
+                    this.$parent.$parent.activeDomains.length - 1,
+                    name,
+                );
             },
             resetDomainsEvent(names, count) {
                 analytics({
@@ -370,7 +432,10 @@ THE SOFTWARE.
 
                 // Also fire the general site removal event
                 for (let i = 0; i < this.$parent.$parent.$data.domains.length; i++)
-                    this.$parent.$parent.removeSiteEvent(this.$parent.$parent.activeDomains.length - i - 1, names[i]);
+                    this.$parent.$parent.removeSiteEvent(
+                        this.$parent.$parent.activeDomains.length - i - 1,
+                        names[i],
+                    );
             },
             select(event) {
                 event.target.setSelectionRange(0, event.target.value.length);

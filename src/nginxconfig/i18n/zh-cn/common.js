@@ -33,7 +33,7 @@ export default {
     nginx: 'NGINX',
     http: 'HTTP',
     https: 'HTTPS',
-    letsEncrypt: 'Let\'s Encrypt',
+    letsEncrypt: "Let's Encrypt",
     python: 'Python',
     wordPress: 'WordPress',
     drupal: 'Drupal',

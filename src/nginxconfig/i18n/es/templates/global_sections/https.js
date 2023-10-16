@@ -30,7 +30,6 @@ const mozilla = 'Mozilla';
 const ipv4 = 'IPv4';
 const ipv6 = 'IPv6';
 
-
 // 'Resolvers', 'webroot', 'listening socket' and 'worker' don't have a good translation in Spanish
 
 export default {

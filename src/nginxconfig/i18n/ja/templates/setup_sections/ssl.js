@@ -27,7 +27,8 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    generateDiffieHellmanKeysByRunningThisCommandOnYourServer: 'サーバでこのコマンドを実行して <b>Diffie-Hellman keys</b> を生成します:',
+    generateDiffieHellmanKeysByRunningThisCommandOnYourServer:
+        'サーバでこのコマンドを実行して <b>Diffie-Hellman keys</b> を生成します:',
     createACommonAcmeChallengeDirectoryForLetsEncrypt: `共通の <b>ACME-challenge</b> ディレクトリを作成します (<b>${common.letsEncrypt}</b> の場合):`,
     noAdditionalStepsAreNeededToSetUpSslForNginx: `${common.ssl} を ${common.nginx} の構成に設定するための追加の手順は必要ありません。`,
     sslInit: `${common.ssl} 初期設定`,

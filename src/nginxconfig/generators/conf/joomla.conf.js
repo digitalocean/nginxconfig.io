@@ -43,7 +43,6 @@ export default () => {
         expires: '14d',
     };
 
-
     // Done!
     return config;
 };

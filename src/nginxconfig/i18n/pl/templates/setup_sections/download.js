@@ -35,6 +35,7 @@ export default {
     pasteItInYourServersCommandLineAndExecute: ', wklej go w terminalu na serwerze i uruchom go.',
     navigateToYourNginxConfigurationDirectoryOnYourServer: `Nawiguj do <b>ścieżki konfiguracyjnej</b> ${common.nginx} na swoim serwerze:`,
     createABackupOfYourCurrentNginxConfiguration: `Utrwórz <b>kopię zapasową</b> swojego obecnego pliku konfiguracyjnego ${common.nginx}:`,
-    extractTheNewCompressedConfigurationArchiveUsingTar: '<b>Wypakuj</b> skompresowane archiwum z konfiguracją, korzystając z tar:',
+    extractTheNewCompressedConfigurationArchiveUsingTar:
+        '<b>Wypakuj</b> skompresowane archiwum z konfiguracją, korzystając z tar:',
     download: 'Pobierz',
 };

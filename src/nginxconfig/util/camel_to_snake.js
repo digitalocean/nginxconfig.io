@@ -24,4 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export default str => str.replace(/[\w]([A-Z])/g, m => `${m[0]}_${m[1]}`).toLowerCase();
+export default (str) => str.replace(/[\w]([A-Z])/g, (m) => `${m[0]}_${m[1]}`).toLowerCase();

@@ -50,8 +50,12 @@ const sslConfig = (domain, global) => {
 
         // Let's encrypt
         if (domain.https.certType.computed === 'letsEncrypt')
-            config.push(['ssl_trusted_certificate',
-                `${global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '')}/${domain.server.domain.computed}/chain.pem`]);
+            config.push([
+                'ssl_trusted_certificate',
+                `${global.https.letsEncryptCertRoot.computed.replace(/\/+$/, '')}/${
+                    domain.server.domain.computed
+                }/chain.pem`,
+            ]);
     }
     return config;
 };
@@ -60,17 +64,22 @@ const httpsListen = (domain, global, ipPortPairs) => {
     const config = [];
 
     // Check if reuseport needs to be set
-    const ipPortV4 = `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}443`;
+    const ipPortV4 = `${
+        domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`
+    }443`;
     const reusePortV4 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV4);
     if (reusePortV4) ipPortPairs.add(ipPortV4);
 
     // HTTPS
-    config.push(['listen',
-        `${ipPortV4} ssl${domain.https.http2.computed ? ' http2' : ''}${reusePortV4 ? ' reuseport' : ''}`]);
+    config.push([
+        'listen',
+        `${ipPortV4} ssl${domain.https.http2.computed ? ' http2' : ''}${
+            reusePortV4 ? ' reuseport' : ''
+        }`,
+    ]);
 
     // HTTP/3
-    if (domain.https.http3.computed)
-        config.push(['listen', `${ipPortV4} http3`]);
+    if (domain.https.http3.computed) config.push(['listen', `${ipPortV4} http3`]);
 
     // v6
     if (domain.server.listenIpv6.computed) {
@@ -80,12 +89,15 @@ const httpsListen = (domain, global, ipPortPairs) => {
         if (reusePortV6) ipPortPairs.add(ipPortV6);
 
         // HTTPS
-        config.push(['listen',
-            `${ipPortV6} ssl${domain.https.http2.computed ? ' http2' : ''}${reusePortV6 ? ' reuseport' : ''}`]);
+        config.push([
+            'listen',
+            `${ipPortV6} ssl${domain.https.http2.computed ? ' http2' : ''}${
+                reusePortV6 ? ' reuseport' : ''
+            }`,
+        ]);
 
         // HTTP/3
-        if (domain.https.http3.computed)
-            config.push(['listen', `${ipPortV6} http3`]);
+        if (domain.https.http3.computed) config.push(['listen', `${ipPortV6} http3`]);
     }
 
     return config;
@@ -95,7 +107,9 @@ const httpListen = (domain, global, ipPortPairs) => {
     const config = [];
 
     // Check if reuseport needs to be set
-    const ipPortV4 = `${domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`}80`;
+    const ipPortV4 = `${
+        domain.server.listenIpv4.computed === '*' ? '' : `${domain.server.listenIpv4.computed}:`
+    }80`;
     const reusePortV4 = global.https.portReuse.computed && !ipPortPairs.has(ipPortV4);
     if (reusePortV4) ipPortPairs.add(ipPortV4);
 
@@ -151,12 +165,18 @@ const httpRedirectConfig = (domain, global, ipPortPairs, domainName, redirectDom
             config.push(...Object.entries(letsEncryptConf(global)));
         }
 
-        config.push(['location /', {
-            return: `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`,
-        }]);
+        config.push([
+            'location /',
+            {
+                return: `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`,
+            },
+        ]);
     } else {
         // Custom cert
-        config.push(['return', `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`]);
+        config.push([
+            'return',
+            `301 https://${redirectDomain ? redirectDomain : domainName}$request_uri`,
+        ]);
     }
 
     return config;
@@ -174,14 +194,18 @@ export default (domain, domains, global, ipPortPairs) => {
         serverConfig.push(...httpListen(domain, global, ipPortPairs));
 
     // HTTPS
-    if (domain.https.https.computed)
-        serverConfig.push(...httpsListen(domain, global, ipPortPairs));
+    if (domain.https.https.computed) serverConfig.push(...httpsListen(domain, global, ipPortPairs));
 
-    serverConfig.push(['server_name',
-        `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}`]);
+    serverConfig.push([
+        'server_name',
+        `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}`,
+    ]);
 
     // PHP or Django
-    if (domain.php.php.computed || (domain.python.python.computed && domain.python.djangoRules.computed)) {
+    if (
+        domain.php.php.computed ||
+        (domain.python.python.computed && domain.python.djangoRules.computed)
+    ) {
         serverConfig.push(['set', `$base ${domain.server.path.computed}`]);
 
         // root
@@ -190,10 +214,15 @@ export default (domain, domains, global, ipPortPairs) => {
     }
 
     // Not PHP and not Django and root
-    if (!domain.php.php.computed
-        && (!domain.python.python.computed || !domain.python.djangoRules.computed)
-        && domain.routing.root.computed)
-        serverConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
+    if (
+        !domain.php.php.computed &&
+        (!domain.python.python.computed || !domain.python.djangoRules.computed) &&
+        domain.routing.root.computed
+    )
+        serverConfig.push([
+            'root',
+            `${domain.server.path.computed}${domain.server.documentRoot.computed}`,
+        ]);
 
     // HTTPS
     serverConfig.push(...sslConfig(domain, global));
@@ -201,14 +230,21 @@ export default (domain, domains, global, ipPortPairs) => {
     // Onion location
     if (domain.onion.onionLocation.computed) {
         serverConfig.push(['# Onion services', '']);
-        serverConfig.push(['add_header Onion-Location', `http://${domain.onion.onionLocation.computed}$request_uri`]);
+        serverConfig.push([
+            'add_header Onion-Location',
+            `http://${domain.onion.onionLocation.computed}$request_uri`,
+        ]);
     }
 
     // HSTS
     if (!commonHsts(domains) && domain.https.hsts.computed) {
         serverConfig.push(['# HSTS', '']);
-        serverConfig.push(['add_header Strict-Transport-Security',
-            `"max-age=31536000${domain.https.hstsSubdomains.computed ? '; includeSubDomains' : ''}${domain.https.hstsPreload.computed ? '; preload' : ''}" always`]);
+        serverConfig.push([
+            'add_header Strict-Transport-Security',
+            `"max-age=31536000${domain.https.hstsSubdomains.computed ? '; includeSubDomains' : ''}${
+                domain.https.hstsPreload.computed ? '; preload' : ''
+            }" always`,
+        ]);
     }
 
     // Security
@@ -222,15 +258,22 @@ export default (domain, domains, global, ipPortPairs) => {
     }
 
     // Restrict Methods
-    if (Object.keys(domain.restrict).find(k => domain.restrict[k].computed && k !== 'responseCode')) {
+    if (
+        Object.keys(domain.restrict).find(
+            (k) => domain.restrict[k].computed && k !== 'responseCode',
+        )
+    ) {
         const allowedKeys = Object.keys(domain.restrict)
-            .filter(k => !domain.restrict[k].computed && k !== 'responseCode')
-            .map(e => e.replace('Method', '').toUpperCase());
+            .filter((k) => !domain.restrict[k].computed && k !== 'responseCode')
+            .map((e) => e.replace('Method', '').toUpperCase());
 
         serverConfig.push(['# restrict methods', '']);
-        serverConfig.push([`if ($request_method !~ ^(${allowedKeys.join('|')})$)`, {
-            'return': `'${domain.restrict.responseCode.computed}'`,
-        }]);
+        serverConfig.push([
+            `if ($request_method !~ ^(${allowedKeys.join('|')})$)`,
+            {
+                return: `'${domain.restrict.responseCode.computed}'`,
+            },
+        ]);
     }
 
     // Access log or error log for domain
@@ -251,20 +294,43 @@ export default (domain, domains, global, ipPortPairs) => {
     }
 
     // Fallback index.html or index.php
-    if ((domain.routing.fallbackHtml.computed || domain.routing.fallbackPhp.computed)
-        && (!domain.reverseProxy.reverseProxy.computed || domain.reverseProxy.path.computed !== '/')) {
-        serverConfig.push([`# index.${domain.routing.fallbackHtml.computed ? 'html' : (domain.routing.fallbackPhp.computed ? 'php' : '')} fallback`, '']);
-        serverConfig.push(['location /', {
-            try_files: `$uri $uri/ /index.${domain.routing.fallbackHtml.computed ? 'html' : (domain.routing.fallbackPhp.computed ? 'php?$query_string' : '')}`,
-        }]);
+    if (
+        (domain.routing.fallbackHtml.computed || domain.routing.fallbackPhp.computed) &&
+        (!domain.reverseProxy.reverseProxy.computed || domain.reverseProxy.path.computed !== '/')
+    ) {
+        serverConfig.push([
+            `# index.${
+                domain.routing.fallbackHtml.computed
+                    ? 'html'
+                    : domain.routing.fallbackPhp.computed
+                    ? 'php'
+                    : ''
+            } fallback`,
+            '',
+        ]);
+        serverConfig.push([
+            'location /',
+            {
+                try_files: `$uri $uri/ /index.${
+                    domain.routing.fallbackHtml.computed
+                        ? 'html'
+                        : domain.routing.fallbackPhp.computed
+                        ? 'php?$query_string'
+                        : ''
+                }`,
+            },
+        ]);
     }
 
     // Fallback index.html and index.php
     if (domain.routing.fallbackHtml.computed && domain.routing.fallbackPhp.computed) {
         serverConfig.push(['# index.php fallback', '']);
-        serverConfig.push([`location ~ ^${domain.routing.fallbackPhpPath.computed}`, {
-            try_files: '$uri $uri/ /index.php?$query_string',
-        }]);
+        serverConfig.push([
+            `location ~ ^${domain.routing.fallbackPhpPath.computed}`,
+            {
+                try_files: '$uri $uri/ /index.php?$query_string',
+            },
+        ]);
     }
 
     // Python
@@ -314,10 +380,17 @@ export default (domain, domains, global, ipPortPairs) => {
         if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
             serverConfig.push(['include', 'nginxconfig.io/letsencrypt.conf']);
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(['include', `nginxconfig.io/${domain.server.domain.computed}.wordpress.conf`]);
-        if (domain.php.drupalRules.computed) serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
-        if (domain.php.magentoRules.computed) serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
-        if (domain.php.joomlaRules.computed) serverConfig.push(['include', 'nginxconfig.io/joomla.conf']);
+        if (domain.php.wordPressRules.computed)
+            serverConfig.push([
+                'include',
+                `nginxconfig.io/${domain.server.domain.computed}.wordpress.conf`,
+            ]);
+        if (domain.php.drupalRules.computed)
+            serverConfig.push(['include', 'nginxconfig.io/drupal.conf']);
+        if (domain.php.magentoRules.computed)
+            serverConfig.push(['include', 'nginxconfig.io/magento.conf']);
+        if (domain.php.joomlaRules.computed)
+            serverConfig.push(['include', 'nginxconfig.io/joomla.conf']);
     } else {
         // Unified
         serverConfig.push(...Object.entries(generalConf(domains, global)));
@@ -325,8 +398,10 @@ export default (domain, domains, global, ipPortPairs) => {
         if (!domain.https.forceHttps.computed && domain.https.certType.computed === 'letsEncrypt')
             serverConfig.push(...Object.entries(letsEncryptConf(global)));
 
-        if (domain.php.wordPressRules.computed) serverConfig.push(...Object.entries(wordPressConf(global, domain)));
-        if (domain.php.drupalRules.computed) serverConfig.push(...Object.entries(drupalConf(global)));
+        if (domain.php.wordPressRules.computed)
+            serverConfig.push(...Object.entries(wordPressConf(global, domain)));
+        if (domain.php.drupalRules.computed)
+            serverConfig.push(...Object.entries(drupalConf(global)));
         if (domain.php.magentoRules.computed) serverConfig.push(...Object.entries(magentoConf()));
         if (domain.php.joomlaRules.computed) serverConfig.push(...Object.entries(joomlaConf()));
     }
@@ -334,35 +409,43 @@ export default (domain, domains, global, ipPortPairs) => {
     // PHP
     if (domain.php.php.computed) {
         if (domain.php.phpBackupServer.computed) {
-            config.push([`upstream ${phpUpstream(domain)}`, {
-                server: [
-                    phpPath(domain),
-                    `${phpPath(domain, true)} backup`,
-                ],
-            }]);
+            config.push([
+                `upstream ${phpUpstream(domain)}`,
+                {
+                    server: [phpPath(domain), `${phpPath(domain, true)} backup`],
+                },
+            ]);
         }
 
         serverConfig.push(['# handle .php', '']);
 
-        const loc = `location ~ ${domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'}`;
+        const loc = `location ~ ${
+            domain.routing.legacyPhpRouting.computed ? '[^/]\\.php(/|$)' : '\\.php$'
+        }`;
 
         const fastcgiPass = {
-            fastcgi_pass: domain.php.phpBackupServer.computed !== ''
-                ? phpUpstream(domain) : phpPath(domain),
+            fastcgi_pass:
+                domain.php.phpBackupServer.computed !== '' ? phpUpstream(domain) : phpPath(domain),
         };
 
         if (global.tools.modularizedStructure.computed || domain.php.wordPressRules.computed) {
             // Modularized
-            serverConfig.push([loc, {
-                ...fastcgiPass,
-                include: 'nginxconfig.io/php_fastcgi.conf',
-            }]);
+            serverConfig.push([
+                loc,
+                {
+                    ...fastcgiPass,
+                    include: 'nginxconfig.io/php_fastcgi.conf',
+                },
+            ]);
         } else {
             // Unified
-            serverConfig.push([loc, {
-                ...fastcgiPass,
-                ...phpConf(domains),
-            }]);
+            serverConfig.push([
+                loc,
+                {
+                    ...fastcgiPass,
+                    ...phpConf(domains),
+                },
+            ]);
         }
     }
 
@@ -376,7 +459,10 @@ export default (domain, domains, global, ipPortPairs) => {
 
         cdnConfig.push(...listenConfig(domain, global, ipPortPairs));
         cdnConfig.push(['server_name', `cdn.${domain.server.domain.computed}`]);
-        cdnConfig.push(['root', `${domain.server.path.computed}${domain.server.documentRoot.computed}`]);
+        cdnConfig.push([
+            'root',
+            `${domain.server.path.computed}${domain.server.documentRoot.computed}`,
+        ]);
 
         // HTTPS
         cdnConfig.push(...sslConfig(domain, global));
@@ -418,12 +504,14 @@ export default (domain, domains, global, ipPortPairs) => {
         const redirectConfig = [];
 
         redirectConfig.push(...listenConfig(domain, global, ipPortPairs));
-        redirectConfig.push(['server_name',
-            `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`]);
+        redirectConfig.push([
+            'server_name',
+            `${domain.server.wwwSubdomain.computed ? '' : '*'}.${domain.server.domain.computed}`,
+        ]);
 
         // HTTPS
         redirectConfig.push(...sslConfig(domain, global));
-        
+
         // Logging
         if (domain.logging.redirectAccessLog.computed || domain.logging.redirectErrorLog.computed) {
             redirectConfig.push(['# logging', '']);
@@ -435,12 +523,19 @@ export default (domain, domains, global, ipPortPairs) => {
                 redirectConfig.push(['error_log', getDomainErrorLog(domain)]);
             }
         }
-        
-        redirectConfig.push(['return',
-            `301 http${domain.https.https.computed ? 's' : ''}://${domain.server.wwwSubdomain.computed ? 'www.' : ''}${domain.server.domain.computed}$request_uri`]);
+
+        redirectConfig.push([
+            'return',
+            `301 http${domain.https.https.computed ? 's' : ''}://${
+                domain.server.wwwSubdomain.computed ? 'www.' : ''
+            }${domain.server.domain.computed}$request_uri`,
+        ]);
 
         // Add the redirect config to the parent config now its built
-        config.push([`# ${domain.server.wwwSubdomain.computed ? 'non-www, ' : ''}subdomains redirect`, '']);
+        config.push([
+            `# ${domain.server.wwwSubdomain.computed ? 'non-www, ' : ''}subdomains redirect`,
+            '',
+        ]);
         config.push(['server', redirectConfig]);
     }
 
@@ -449,22 +544,58 @@ export default (domain, domains, global, ipPortPairs) => {
         // Add the redirect config to the parent config now its built
         config.push(['# HTTP redirect', '']);
         if (domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
-                domain.server.domain.computed, `www.${domain.server.domain.computed}`)]);
-            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
-                `www.${domain.server.domain.computed}`)]);
-        } else if (!domain.server.wwwSubdomain.computed && !domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
-                domain.server.domain.computed)]);
+            config.push([
+                'server',
+                httpRedirectConfig(
+                    domain,
+                    global,
+                    ipPortPairs,
+                    domain.server.domain.computed,
+                    `www.${domain.server.domain.computed}`,
+                ),
+            ]);
+            config.push([
+                'server',
+                httpRedirectConfig(
+                    domain,
+                    global,
+                    ipPortPairs,
+                    `www.${domain.server.domain.computed}`,
+                ),
+            ]);
+        } else if (
+            !domain.server.wwwSubdomain.computed &&
+            !domain.server.redirectSubdomains.computed
+        ) {
+            config.push([
+                'server',
+                httpRedirectConfig(domain, global, ipPortPairs, domain.server.domain.computed),
+            ]);
         }
         if (domain.server.cdnSubdomain.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
-                `cdn.${domain.server.domain.computed}`)]);
+            config.push([
+                'server',
+                httpRedirectConfig(
+                    domain,
+                    global,
+                    ipPortPairs,
+                    `cdn.${domain.server.domain.computed}`,
+                ),
+            ]);
         }
         if (domain.server.redirectSubdomains.computed) {
-            config.push(['server', httpRedirectConfig(domain, global, ipPortPairs,
-                `.${domain.server.domain.computed}`,
-                `${domain.server.wwwSubdomain.computed ? 'www.' : '' }${domain.server.domain.computed}`)]);
+            config.push([
+                'server',
+                httpRedirectConfig(
+                    domain,
+                    global,
+                    ipPortPairs,
+                    `.${domain.server.domain.computed}`,
+                    `${domain.server.wwwSubdomain.computed ? 'www.' : ''}${
+                        domain.server.domain.computed
+                    }`,
+                ),
+            ]);
         }
     }
 

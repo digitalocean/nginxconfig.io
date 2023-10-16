@@ -55,12 +55,14 @@ THE SOFTWARE.
                 <ExternalLink
                     :text="$t('templates.footer.balintSzekeres')"
                     link="https://b4lint.hu/"
-                ></ExternalLink>,
+                ></ExternalLink>
+                ,
                 {{ $t('templates.footer.maintainedBy') }}
                 <ExternalLink
                     :text="$t('templates.footer.digitalOcean')"
                     link="https://github.com/digitalocean/nginxconfig.io"
-                ></ExternalLink>.
+                ></ExternalLink>
+                .
             </p>
         </div>
     </div>
@@ -76,10 +78,11 @@ THE SOFTWARE.
         },
         methods: {
             handleScrollToTop: () => {
-                window.scrollTo({top: 0});
+                window.scrollTo({ top: 0 });
 
-                document.querySelectorAll('.column-scroll-y')
-                    .forEach(column => column.scrollTo({ top: 0 }));
+                document
+                    .querySelectorAll('.column-scroll-y')
+                    .forEach((column) => column.scrollTo({ top: 0 }));
             },
         },
     };

@@ -29,8 +29,10 @@ const onion = '洋蔥';
 export default {
     onion,
     onionLocation: `${onion}位置`,
-    provideAnOnionLocationToSetOnionLocationHeader: '提供一個洋蔥位址，來為您的網站設定 Onion-Location 標頭。',
-    letsVisitorsKnownOnionServicesIsAvailable: '這可以讓訪客知道您的網站有可用於 Tor 瀏覽器的洋蔥服務版本。',
+    provideAnOnionLocationToSetOnionLocationHeader:
+        '提供一個洋蔥位址，來為您的網站設定 Onion-Location 標頭。',
+    letsVisitorsKnownOnionServicesIsAvailable:
+        '這可以讓訪客知道您的網站有可用於 Tor 瀏覽器的洋蔥服務版本。',
     learnMoreAboutOnionServices: '瞭解有關洋蔥服務的更多資訊',
     onionLocationExpectedToEndWithOnion: '洋蔥位址通常以 .onion 結尾。',
 };

@@ -26,22 +26,23 @@ THE SOFTWARE.
 
 import isObject from '../util/is_object';
 
-const isBlock = item => {
+const isBlock = (item) => {
     // If an object, or kv entries, this is considered a block
-    return isObject(item) || (Array.isArray(item) && item.every(i => Array.isArray(i) && i.length === 2));
+    return (
+        isObject(item) ||
+        (Array.isArray(item) && item.every((i) => Array.isArray(i) && i.length === 2))
+    );
 };
 
-const longestKey = items => {
+const longestKey = (items) => {
     let longest = 0;
 
     for (const item of items) {
         // Only consider up to the first block
-        if (isBlock(item[1]))
-            return longest;
+        if (isBlock(item[1])) return longest;
 
         // If this is the new longest, and not a comment, use this
-        if (item[0].length > longest && !item[0].startsWith('#'))
-            longest = item[0].length;
+        if (item[0].length > longest && !item[0].startsWith('#')) longest = item[0].length;
     }
 
     // Done!
@@ -54,12 +55,13 @@ const recurse = (entriesOrObject, depth) => {
     const entries = isObject(entriesOrObject) ? Object.entries(entriesOrObject) : entriesOrObject;
 
     // If not a valid kv entries array, return
-    if (!Array.isArray(entries) || !entries.every(i => Array.isArray(i) && i.length === 2)) return '';
+    if (!Array.isArray(entries) || !entries.every((i) => Array.isArray(i) && i.length === 2))
+        return '';
 
     // Initial values
     let retVal = '';
     let longestKeyLen = longestKey(entries);
-    const indent = ('    ').repeat(depth);
+    const indent = '    '.repeat(depth);
 
     // Track whether the previous was a block, for indentation
     let previousBlock = false;
@@ -91,20 +93,24 @@ const recurse = (entriesOrObject, depth) => {
         const val = Array.isArray(item[1]) ? item[1] : [item[1]];
 
         // Calculate spacing
-        const keyValSpacing = (longestKeyLen - item[0].length) + 1;
-        const keyValIndent = (' ').repeat(Math.max(keyValSpacing, 0));
+        const keyValSpacing = longestKeyLen - item[0].length + 1;
+        const keyValIndent = ' '.repeat(Math.max(keyValSpacing, 0));
 
         // Work through each item in the array
-        val.forEach(subVal => {
+        val.forEach((subVal) => {
             const val = subVal.toString();
-            retVal += indent + (item[0] + keyValIndent + val).trim() + (item[0].startsWith('#') ? '' : ';') + '\n';
+            retVal +=
+                indent +
+                (item[0] + keyValIndent + val).trim() +
+                (item[0].startsWith('#') ? '' : ';') +
+                '\n';
         });
     }
 
     return retVal;
 };
 
-export default entriesOrObject => {
+export default (entriesOrObject) => {
     // Generate the conf
     let conf = recurse(entriesOrObject, 0);
 
@@ -127,7 +133,12 @@ export default entriesOrObject => {
     do {
         match = /^([^\S\r\n]*})(?:\n[^\S\r\n]*)+\n([^\S\r\n]*})/m.exec(conf);
         if (match)
-            conf = conf.slice(0, match.index) + match[1] + '\n' + match[2] + conf.slice(match.index + match[0].length);
+            conf =
+                conf.slice(0, match.index) +
+                match[1] +
+                '\n' +
+                match[2] +
+                conf.slice(match.index + match[0].length);
     } while (match);
 
     // Remove initial & trailing whitespace

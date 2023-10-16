@@ -25,7 +25,10 @@ THE SOFTWARE.
 -->
 
 <template>
-    <div class="callout floating" :style="style">
+    <div
+        class="callout floating"
+        :style="style"
+    >
         <div class="close">
             <p>
                 {{ $t('templates.callouts.contribute.wantToContributeChanges') }}
@@ -61,10 +64,12 @@ THE SOFTWARE.
                 return this.$data.scrolled && !this.$data.closed;
             },
             style() {
-                return this.visible ? undefined : {
+                const nonVisibleStyle = {
                     opacity: 0,
                     pointerEvents: 'none',
                 };
+
+                return this.visible ? undefined : nonVisibleStyle;
             },
         },
         mounted() {

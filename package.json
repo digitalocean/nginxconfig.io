@@ -16,13 +16,15 @@
     "dev": "npm run build:template && npm run build:prism && npm run dev:tool",
     "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
     "deploy:spaces:comment": "do-vue comment nginxconfig",
-    "test": "npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
+    "test": "npm run test:prettier:fix && npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
     "test:jest": "jest --env=jsdom /test/.*.js?$",
-    "test:fix": "npm run test:eslint:fix",
+    "test:fix": "npm run test:prettier:fix && npm run test:eslint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
+    "test:prettier": "prettier 'src/**/*.{js,vue}' --check",
+    "test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
     "prepare": "husky install"
   },
   "jest": {
@@ -71,6 +73,8 @@
     "core-js": "^3.32.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-vue": "^9.16.1",
     "esm": "^3.2.25",
     "husky": "^8.0.3",
@@ -79,6 +83,7 @@
     "lint-staged": "^13.2.3",
     "node-fetch": "^3.3.2",
     "postcss": "^8.4.31",
+    "prettier": "3.0.3",
     "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "stylelint": "^15.10.2",
@@ -87,14 +92,6 @@
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.88.2",
     "webpack-bundle-analyzer": "^4.9.0"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "eslint --quiet --cache --fix"
-    ],
-    "*.scss": [
-      "stylelint --config node_modules/do-bulma/.stylelintrc.json --fix"
-    ]
   },
   "overrides": {
     "@vue/cli-service": {

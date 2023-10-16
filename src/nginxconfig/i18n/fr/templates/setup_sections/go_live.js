@@ -27,7 +27,7 @@ THE SOFTWARE.
 import common from '../../common';
 
 export default {
-    letsGoLive: 'C\'est en ligne!',
+    letsGoLive: "C'est en ligne!",
     reloadNginxToLoadInYourNewConfiguration: `Relancez ${common.nginx} pour charger la nouvelle configuration:`,
-    goLive: 'C\'est en ligne!',
+    goLive: "C'est en ligne!",
 };

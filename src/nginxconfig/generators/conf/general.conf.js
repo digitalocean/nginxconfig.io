@@ -46,11 +46,13 @@ export default (domains, global) => {
         config[loc] = {
             add_header: 'Cache-Control "no-cache"',
         };
-     }
- 
+    }
 
-    if (domains.every(d => d.routing.root.computed)) {
-        if (global.performance.assetsExpiration.computed === global.performance.mediaExpiration.computed) {
+    if (domains.every((d) => d.routing.root.computed)) {
+        if (
+            global.performance.assetsExpiration.computed ===
+            global.performance.mediaExpiration.computed
+        ) {
             if (global.performance.assetsExpiration.computed) {
                 // Assets & media combined
                 config['# assets, media'] = '';
@@ -78,7 +80,10 @@ export default (domains, global) => {
             }
         }
 
-        if (global.performance.svgExpiration.computed === global.performance.fontsExpiration.computed) {
+        if (
+            global.performance.svgExpiration.computed ===
+            global.performance.fontsExpiration.computed
+        ) {
             if (global.performance.svgExpiration.computed) {
                 // SVG & fonts combined
                 config['# svg, fonts'] = '';

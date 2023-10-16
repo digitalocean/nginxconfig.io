@@ -37,14 +37,16 @@ export default (domains, global) => {
 
     // Basic nginx conf
     config.user = global.nginx.user.computed;
-    if (global.nginx.pid.computed)
-        config.pid = global.nginx.pid.computed;
+    if (global.nginx.pid.computed) config.pid = global.nginx.pid.computed;
     config.worker_processes = global.nginx.workerProcesses.computed;
     config.worker_rlimit_nofile = 65535;
 
     // Modules
     config['# Load modules'] = '';
-    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/modules-enabled/*.conf`;
+    config.include = `${global.nginx.nginxConfigDirectory.computed.replace(
+        /\/+$/,
+        '',
+    )}/modules-enabled/*.conf`;
 
     // Events
     config.events = {
@@ -59,10 +61,8 @@ export default (domains, global) => {
     config.http.push(['sendfile', 'on']);
     config.http.push(['tcp_nopush', 'on']);
     config.http.push(['tcp_nodelay', 'on']);
-    if (!global.security.serverTokens.computed)
-        config.http.push(['server_tokens', 'off']);
-    if (!global.logging.logNotFound.computed)
-        config.http.push(['log_not_found', 'off']);
+    if (!global.security.serverTokens.computed) config.http.push(['server_tokens', 'off']);
+    if (!global.logging.logNotFound.computed) config.http.push(['log_not_found', 'off']);
     config.http.push(['types_hash_max_size', global.nginx.typesHashMaxSize.computed]);
     config.http.push(['types_hash_bucket_size', global.nginx.typesHashBucketSize.computed]);
     config.http.push(['client_max_body_size', `${global.nginx.clientMaxBodySize.computed}M`]);
@@ -76,33 +76,33 @@ export default (domains, global) => {
         config.http.push(['# Log Format', '']);
 
         // Define default log format as an array
-        let logging = ['$remote_addr', '-', '$remote_user', '[$time_local]',
-        '"$request"', '$status', '$body_bytes_sent',
-        '"$http_referer"', '"$http_user_agent"'];
+        let logging = [
+            '$remote_addr',
+            '-',
+            '$remote_user',
+            '[$time_local]',
+            '"$request"',
+            '$status',
+            '$body_bytes_sent',
+            '"$http_referer"',
+            '"$http_user_agent"',
+        ];
 
-        if (global.logging.cfRay.computed)
-            logging.push('$http_cf_ray');
+        if (global.logging.cfRay.computed) logging.push('$http_cf_ray');
 
-        if (global.logging.cfConnectingIp.computed)
-            logging.push('$http_cf_connecting_ip');
+        if (global.logging.cfConnectingIp.computed) logging.push('$http_cf_connecting_ip');
 
-        if (global.logging.xForwardedFor.computed)
-            logging.push('$http_x_forwarded_for');
+        if (global.logging.xForwardedFor.computed) logging.push('$http_x_forwarded_for');
 
-        if (global.logging.xForwardedProto.computed)
-            logging.push('$http_x_forwarded_proto');
+        if (global.logging.xForwardedProto.computed) logging.push('$http_x_forwarded_proto');
 
-        if (global.logging.trueClientIp.computed)
-            logging.push('$http_true_client_ip');
+        if (global.logging.trueClientIp.computed) logging.push('$http_true_client_ip');
 
-        if (global.logging.cfIpCountry.computed)
-            logging.push('$http_cf_ipcountry');
+        if (global.logging.cfIpCountry.computed) logging.push('$http_cf_ipcountry');
 
-        if (global.logging.cfVisitor.computed)
-            logging.push('$http_cf_visitor');
+        if (global.logging.cfVisitor.computed) logging.push('$http_cf_visitor');
 
-        if (global.logging.cdnLoop.computed)
-            logging.push('$http_cdn_loop');
+        if (global.logging.cdnLoop.computed) logging.push('$http_cdn_loop');
 
         config.http.push(['log_format', `cloudflare '${logging.join(' ')}'`]);
     }
@@ -110,8 +110,11 @@ export default (domains, global) => {
     config.http.push(['# Logging', '']);
     config.http.push(['access_log', 'off']);
     if (global.logging.errorLogEnabled.computed) {
-        config.http.push(['error_log', global.logging.errorLogPath.computed.trim() +
-            ` ${global.logging.errorLogLevel.computed}`]);
+        config.http.push([
+            'error_log',
+            global.logging.errorLogPath.computed.trim() +
+                ` ${global.logging.errorLogLevel.computed}`,
+        ]);
     } else {
         config.http.push(['error_log', errorLogPathDisabled]);
     }
@@ -140,7 +143,10 @@ export default (domains, global) => {
         if (sslProfile) {
             if (sslProfile.dh_param_size) {
                 config.http.push(['# Diffie-Hellman parameter for DHE ciphersuites', '']);
-                config.http.push(['ssl_dhparam', `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/dhparam.pem`]);
+                config.http.push([
+                    'ssl_dhparam',
+                    `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/dhparam.pem`,
+                ]);
             }
 
             config.http.push([`# ${sslProfile.name} configuration`, '']);
@@ -194,35 +200,52 @@ export default (domains, global) => {
     }
 
     // Connection header for WebSocket reverse proxy
-    if (domains.some(d => d.reverseProxy.reverseProxy.computed)) {
+    if (domains.some((d) => d.reverseProxy.reverseProxy.computed)) {
         config.http.push(['# Connection header for WebSocket reverse proxy', '']);
-        config.http.push(['map $http_upgrade $connection_upgrade', {
-            'default': 'upgrade',
-            '""': 'close',
-        }]);
+        config.http.push([
+            'map $http_upgrade $connection_upgrade',
+            {
+                default: 'upgrade',
+                '""': 'close',
+            },
+        ]);
         // See https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/
-        config.http.push(['map $remote_addr $proxy_forwarded_elem', {
-            '# IPv4 addresses can be sent as-is': '',
-            '~^[0-9.]+$': '"for=$remote_addr"',
-            '# IPv6 addresses need to be bracketed and quoted': '',
-            '~^[0-9A-Fa-f:.]+$': '"for=\\"[$remote_addr]\\""',
-            '# Unix domain socket names cannot be represented in RFC 7239 syntax': '',
-            'default': '"for=unknown"',
-        }]);
-        config.http.push(['map $http_forwarded $proxy_add_forwarded', {
-            '# If the incoming Forwarded header is syntactically valid, append to it': '',
-            '': '"~^(,[ \\\\t]*)*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*([ \\\\t]*,([ \\\\t]*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*)?)*$" "$http_forwarded, $proxy_forwarded_elem"',
-            '# Otherwise, replace it': '',
-            'default': '"$proxy_forwarded_elem"',
-        }]);
+        config.http.push([
+            'map $remote_addr $proxy_forwarded_elem',
+            {
+                '# IPv4 addresses can be sent as-is': '',
+                '~^[0-9.]+$': '"for=$remote_addr"',
+                '# IPv6 addresses need to be bracketed and quoted': '',
+                '~^[0-9A-Fa-f:.]+$': '"for=\\"[$remote_addr]\\""',
+                '# Unix domain socket names cannot be represented in RFC 7239 syntax': '',
+                default: '"for=unknown"',
+            },
+        ]);
+        config.http.push([
+            'map $http_forwarded $proxy_add_forwarded',
+            {
+                '# If the incoming Forwarded header is syntactically valid, append to it': '',
+                '': '"~^(,[ \\\\t]*)*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*([ \\\\t]*,([ \\\\t]*([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?(;([!#$%&\'*+.^_`|~0-9A-Za-z-]+=([!#$%&\'*+.^_`|~0-9A-Za-z-]+|\\"([\\\\t \\\\x21\\\\x23-\\\\x5B\\\\x5D-\\\\x7E\\\\x80-\\\\xFF]|\\\\\\\\[\\\\t \\\\x21-\\\\x7E\\\\x80-\\\\xFF])*\\"))?)*)?)*$" "$http_forwarded, $proxy_forwarded_elem"',
+                '# Otherwise, replace it': '',
+                default: '"$proxy_forwarded_elem"',
+            },
+        ]);
     }
 
     // Configs!
     config.http.push(['# Load configs', '']);
-    config.http.push(['include', [
-        `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/conf.d/*.conf`,
-        global.tools.modularizedStructure.computed ? `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/sites-enabled/*` : '',
-    ].filter(x => x.length)]);
+    config.http.push([
+        'include',
+        [
+            `${global.nginx.nginxConfigDirectory.computed.replace(/\/+$/, '')}/conf.d/*.conf`,
+            global.tools.modularizedStructure.computed
+                ? `${global.nginx.nginxConfigDirectory.computed.replace(
+                      /\/+$/,
+                      '',
+                  )}/sites-enabled/*`
+                : '',
+        ].filter((x) => x.length),
+    ]);
 
     // Single file configs
     if (!global.tools.modularizedStructure.computed) {

@@ -30,7 +30,8 @@ export default {
     domain: 'Dominio',
     documentRoot: 'Raiz del documento',
     oneOrMoreOtherDomainsAreAlsoNamed: 'Uno o más dominios tienen también ese mismo nombre',
-    thisWillCauseIssuesWithConfigGeneration: 'Esto va a causar problemas en la generación de la configuracion.',
+    thisWillCauseIssuesWithConfigGeneration:
+        'Esto va a causar problemas en la generación de la configuracion.',
     wwwSubdomain: 'subdominio www',
     cdnSubdomain: 'subdominio CDN',
     redirectSubdomains: 'redirección de subdominio',

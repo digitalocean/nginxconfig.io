@@ -29,8 +29,10 @@ const onion = 'Onion';
 export default {
     onion,
     onionLocation: `${onion} location`,
-    provideAnOnionLocationToSetOnionLocationHeader: 'サイトのOnion-Locationヘッダを設定するために、Onion locationアドレスを提供する。',
-    letsVisitorsKnownOnionServicesIsAvailable: 'これにより、あなたのサイトのオニオンサービス版がTorブラウザで利用可能であることをサイト訪問者に知らせます。',
+    provideAnOnionLocationToSetOnionLocationHeader:
+        'サイトのOnion-Locationヘッダを設定するために、Onion locationアドレスを提供する。',
+    letsVisitorsKnownOnionServicesIsAvailable:
+        'これにより、あなたのサイトのオニオンサービス版がTorブラウザで利用可能であることをサイト訪問者に知らせます。',
     learnMoreAboutOnionServices: 'Onion サービスについて詳しくはこちら',
     onionLocationExpectedToEndWithOnion: 'Onion location アドレスは通常 `.onion` で終わります。',
 };

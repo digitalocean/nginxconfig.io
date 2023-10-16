@@ -43,7 +43,9 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div :class="`field is-horizontal${hasWordPress && !hasUnsafeEval ? ' is-aligned-top' : ''}`">
+        <div
+            :class="`field is-horizontal${hasWordPress && !hasUnsafeEval ? ' is-aligned-top' : ''}`"
+        >
             <div class="field-label">
                 <label class="label">Content-Security-Policy</label>
             </div>
@@ -57,11 +59,18 @@ THE SOFTWARE.
                             :placeholder="$props.data.contentSecurityPolicy.default"
                         />
                     </div>
-                    <div v-if="hasWordPress && !hasWordPressUnsafeEval" class="control">
+                    <div
+                        v-if="hasWordPress && !hasWordPressUnsafeEval"
+                        class="control"
+                    >
                         <label class="text message is-warning">
                             <span
                                 class="message-body"
-                                v-html="$t('templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality')"
+                                v-html="
+                                    $t(
+                                        'templates.globalSections.security.whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality',
+                                    )
+                                "
                             />
                         </label>
                     </div>
@@ -95,7 +104,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${serverTokensChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="serverTokens" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="serverTokens"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -112,7 +124,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${limitReqChanged ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="limitReq" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="limitReq"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -129,7 +144,10 @@ THE SOFTWARE.
                 <div class="field">
                     <div :class="`control${securityTxt ? ' is-changed' : ''}`">
                         <div class="checkbox">
-                            <PrettyCheck v-model="securityTxt" class="p-default p-curve p-fill p-icon">
+                            <PrettyCheck
+                                v-model="securityTxt"
+                                class="p-default p-curve p-fill p-icon"
+                            >
                                 {{ $t('common.enable') }}
                             </PrettyCheck>
                         </div>
@@ -138,7 +156,10 @@ THE SOFTWARE.
             </div>
         </div>
 
-        <div v-if="$props.data.securityTxt.computed" class="field is-horizontal">
+        <div
+            v-if="$props.data.securityTxt.computed"
+            class="field is-horizontal"
+        >
             <div class="field-label">
                 <label class="label">security.txt path</label>
             </div>
@@ -180,7 +201,8 @@ THE SOFTWARE.
             enabled: true,
         },
         contentSecurityPolicy: {
-            default: 'default-src \'self\' http: https: ws: wss: data: blob: \'unsafe-inline\'; frame-ancestors \'self\';',
+            default:
+                "default-src 'self' http: https: ws: wss: data: blob: 'unsafe-inline'; frame-ancestors 'self';",
             enabled: true,
         },
         permissionsPolicy: {
@@ -206,25 +228,30 @@ THE SOFTWARE.
     };
 
     export default {
-        name: 'GlobalSecurity',                                     // Component name
-        display: 'templates.globalSections.security.security',      // Display name for tab (i18n key)
-        key: 'security',                                            // Key for data in parent
-        delegated: delegatedFromDefaults(defaults),                 // Data the parent will present here
+        name: 'GlobalSecurity', // Component name
+        display: 'templates.globalSections.security.security', // Display name for tab (i18n key)
+        key: 'security', // Key for data in parent
+        delegated: delegatedFromDefaults(defaults), // Data the parent will present here
         components: {
             PrettyCheck,
             VueSelect,
         },
         props: {
-            data: Object,                                           // Data delegated back to us from parent
+            data: Object, // Data delegated back to us from parent
         },
         computed: {
-            ...computedFromDefaults(defaults, 'security'),          // Getters & setters for the delegated data
+            ...computedFromDefaults(defaults, 'security'), // Getters & setters for the delegated data
             hasWordPress() {
-                return this.$parent.$parent.$data.domains.some(d => d && d.php.wordPressRules.computed);
+                return this.$parent.$parent.$data.domains.some(
+                    (d) => d && d.php.wordPressRules.computed,
+                );
             },
             hasWordPressUnsafeEval() {
-                return this.$props.data.contentSecurityPolicy.computed
-                    .match(/(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/) !== null;
+                return (
+                    this.$props.data.contentSecurityPolicy.computed.match(
+                        /(default|script)-src[^;]+'self'[^;]+'unsafe-inline'[^;]+'unsafe-eval'[^;]*;/,
+                    ) !== null
+                );
             },
             hasWarnings() {
                 return this.hasWordPress && !this.hasWordPressUnsafeEval;
@@ -236,8 +263,7 @@ THE SOFTWARE.
                 handler(data) {
                     // This might cause recursion, but seems not to
                     if (data.enabled)
-                        if (!data.options.includes(data.computed))
-                            data.computed = data.default;
+                        if (!data.options.includes(data.computed)) data.computed = data.default;
                 },
                 deep: true,
             },

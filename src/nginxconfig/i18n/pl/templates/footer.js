@@ -27,7 +27,7 @@ THE SOFTWARE.
 export default {
     backToTop: 'Wróć na górę',
     thisToolIs: 'To narzędzie jest',
-    openSourceOnGitHub: 'open-source\'owane na GitHub',
+    openSourceOnGitHub: "open-source'owane na GitHub",
     underThe: 'na',
     mit: 'licencji MIT',
     license: '!',
