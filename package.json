@@ -2,8 +2,11 @@
   "name": "nginxconfig.io",
   "version": "1.0.0",
   "description": "NGINX config generator on steroids",
-  "private": true,
   "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "20.9.0"
+  },
   "main": "src/nginxconfig/mount.js",
   "type": "module",
   "scripts": {
