@@ -2,8 +2,11 @@
   "name": "nginxconfig.io",
   "version": "1.0.0",
   "description": "NGINX config generator on steroids",
-  "private": true,
   "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "20.9.0"
+  },
   "main": "src/nginxconfig/mount.js",
   "type": "module",
   "scripts": {
@@ -22,7 +25,7 @@
     "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
-    "test:i18n-packs": "node --es-module-specifier-resolution=node src/nginxconfig/i18n/verify.js",
+    "test:i18n-packs": "node --import=extensionless/register src/nginxconfig/i18n/verify.js",
     "test:prettier": "prettier 'src/**/*.{js,vue}' --check",
     "test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
     "prepare": "husky install"
@@ -77,6 +80,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-vue": "^9.16.1",
     "esm": "^3.2.25",
+    "extensionless": "^1.7.3",
     "husky": "^8.0.3",
     "jest": "^29.6.2",
     "jest-environment-jsdom": "^29.6.2",
@@ -95,7 +99,8 @@
   },
   "overrides": {
     "@vue/cli-service": {
-      "mini-css-extract-plugin": "^1.6.2"
+      "mini-css-extract-plugin": "^1.6.2",
+      "@achrinza/node-ipc": "^10.1.10"
     },
     "pretty-checkbox-vue": {
       "vue": "^3.0.0"
