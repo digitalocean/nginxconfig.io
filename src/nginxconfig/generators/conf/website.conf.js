@@ -71,12 +71,10 @@ const httpsListen = (domain, global, ipPortPairs) => {
     if (reusePortV4) ipPortPairs.add(ipPortV4);
 
     // HTTPS
-    config.push([
-        'listen',
-        `${ipPortV4} ssl${domain.https.http2.computed ? ' http2' : ''}${
-            reusePortV4 ? ' reuseport' : ''
-        }`,
-    ]);
+    config.push(['listen', `${ipPortV4} ssl${reusePortV4 ? ' reuseport' : ''}`]);
+
+    // HTTP/2
+    if (domain.https.http2.computed) config.push(['http2', 'on']);
 
     // HTTP/3
     if (domain.https.http3.computed) config.push(['listen', `${ipPortV4} http3`]);
@@ -89,12 +87,7 @@ const httpsListen = (domain, global, ipPortPairs) => {
         if (reusePortV6) ipPortPairs.add(ipPortV6);
 
         // HTTPS
-        config.push([
-            'listen',
-            `${ipPortV6} ssl${domain.https.http2.computed ? ' http2' : ''}${
-                reusePortV6 ? ' reuseport' : ''
-            }`,
-        ]);
+        config.push(['listen', `${ipPortV6} ssl${reusePortV6 ? ' reuseport' : ''}`]);
 
         // HTTP/3
         if (domain.https.http3.computed) config.push(['listen', `${ipPortV6} http3`]);
