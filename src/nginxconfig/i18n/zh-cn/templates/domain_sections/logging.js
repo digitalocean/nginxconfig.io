@@ -29,7 +29,7 @@ import common from '../../common';
 export default {
     byDomain: '在此站点',
     enableForThisDomain: `为此站点${common.enable}`,
-    arguments: '参数', 
+    arguments: '参数',
     level: '日志记录级别',
     forRedirects: '记录重定向',
 };
