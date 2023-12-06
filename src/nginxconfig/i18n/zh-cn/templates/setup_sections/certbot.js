@@ -30,7 +30,7 @@ const certbot = 'Certbot';
 
 export default {
     commentOutSslDirectivesInConfiguration: `注释掉配置中的${common.ssl}相关指令:`,
-    sslOffDeprecationWarning: `This command will add a temporary <code class="slim">ssl off</code> directive to ensure that ${common.ssl} directives are not active. This may cause ${common.nginx} to emit a warning, which is safe to ignore. The directive will be removed once ${certbot} is configured.`, // TODO: translate
+    sslOffDeprecationWarning: `此命令将添加一个临时的 <code class="slim">ssl off</code> 指令，以确保 ${common.ssl} 命令处于未启用状态。这可能会导致 ${common.nginx} 发出警告，但您可以忽略。一旦配置了 ${certbot}，该命令将被移除。`,
     reloadYourNginxServer: `重新加载你的${common.nginx}服务器:`,
     obtainSslCertificatesFromLetsEncrypt: `使用${certbot}从 ${common.letsEncrypt} 获得${common.ssl}证书:`,
     uncommentSslDirectivesInConfiguration: `在配置中取消注释${common.ssl}相关指令:`,

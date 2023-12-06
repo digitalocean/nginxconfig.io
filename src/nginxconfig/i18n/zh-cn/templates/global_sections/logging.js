@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -29,7 +29,7 @@ import common from '../../common';
 export default {
     enableFileNotFoundErrorLogging: `${common.enable}“文件未找到”错误日志：`,
     logformat: 'log_format',
-    level: 'logging level', // TODO: translate
+    level: '日志记录级别',
     enableCloudflare: '将Cloudflare请求头部添加到默认日志格式',
     cfRay: 'CF-Ray',
     cfConnectingIp: 'CF-Connecting-IP',
