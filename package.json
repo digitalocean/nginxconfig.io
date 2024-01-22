@@ -48,8 +48,8 @@
   "dependencies": {
     "clipboard": "^2.0.11",
     "clone": "^2.1.2",
-    "do-bulma": "github:do-community/do-bulma",
-    "do-vue": "github:do-community/do-vue",
+    "do-bulma": "github:do-community/do-bulma#MattIPv4/update-dependencies",
+    "do-vue": "github:do-community/do-vue#MattIPv4/update-dependencies",
     "escape-html": "^1.0.3",
     "files-diff": "0.0.6",
     "json-to-pretty-yaml": "^1.2.2",
