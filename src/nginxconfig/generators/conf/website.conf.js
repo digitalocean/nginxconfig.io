@@ -303,8 +303,8 @@ export default (domain, domains, global, ipPortPairs) => {
                 domain.routing.fallbackHtml.computed
                     ? 'html'
                     : domain.routing.fallbackPhp.computed
-                    ? 'php'
-                    : ''
+                      ? 'php'
+                      : ''
             } fallback`,
             '',
         ]);
@@ -315,8 +315,8 @@ export default (domain, domains, global, ipPortPairs) => {
                     domain.routing.fallbackHtml.computed
                         ? 'html'
                         : domain.routing.fallbackPhp.computed
-                        ? 'php?$query_string'
-                        : ''
+                          ? 'php?$query_string'
+                          : ''
                 }`,
             },
         ]);
