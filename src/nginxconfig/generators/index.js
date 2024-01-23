@@ -113,9 +113,8 @@ export default (domains, global) => {
         domains.map((domain, index) => [domain, index]).filter((d) => d[0] !== null),
         global,
     );
-    files[
-        'nginxconfig.txt'
-    ] = `${window.location.protocol}//${window.location.host}${window.location.pathname}${query}`;
+    files['nginxconfig.txt'] =
+        `${window.location.protocol}//${window.location.host}${window.location.pathname}${query}`;
 
     return files;
 };
