@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,32 +24,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const defaultPack = 'en';
+import common from '../../common';
 
-export { default as defaultPackData } from '../i18n/en';
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
 
-export const toSep = (pack, sep) =>
-    pack
-        .match(/^([a-z]+)([A-Z]*)$/)
-        .slice(1)
-        .map((x) => x.toLowerCase())
-        .filter((x) => !!x)
-        .join(sep);
-
-export const fromSep = (pack, sep) =>
-    pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();
-
-// Export a static array of all language packs
-export const availablePacks = Object.freeze([
-    'de',
-    'en',
-    'es',
-    'fr',
-    'ja',
-    'pl',
-    'ptBR',
-    'ru',
-    'zhCN',
-    'zhTW',
-    'fa',
-]);
+export default {
+    sslProfile: `${common.ssl} پروفایل`,
+    httpsMustBeEnabledOnOneSite: `${common.https} باید حداقل بر روی یک سایت فعال شود تا تنظیمات ${common.https} جهانی را پیکربندی کنید.`,
+    portReuse: 'استفاده مجدد پورت',
+    enableReuseOfPort: `${common.enable} استفاده مجدد از پورت برای ایجاد یک گوشه گوش دهنده برای هر کارگر`,
+    ocspDnsResolvers: 'راه‌حل‌های DNS OCSP',
+    cloudflareResolver: 'راه‌حل Cloudflare',
+    googlePublicDns: 'DNS عمومی Google',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `${common.letsEncrypt} Webroot`,
+    letsEncryptCertRoot: `${common.letsEncrypt} دایرکتوری گواهی`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} فقط`,
+    ipv6Only: `${ipv6} فقط`,
+    ipv4AndIpv6: `${ipv4} و ${ipv6}`,
+};

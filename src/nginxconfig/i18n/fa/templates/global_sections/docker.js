@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2020 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,32 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const defaultPack = 'en';
+import common from '../../common';
 
-export { default as defaultPackData } from '../i18n/en';
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
 
-export const toSep = (pack, sep) =>
-    pack
-        .match(/^([a-z]+)([A-Z]*)$/)
-        .slice(1)
-        .map((x) => x.toLowerCase())
-        .filter((x) => !!x)
-        .join(sep);
-
-export const fromSep = (pack, sep) =>
-    pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();
-
-// Export a static array of all language packs
-export const availablePacks = Object.freeze([
-    'de',
-    'en',
-    'es',
-    'fr',
-    'ja',
-    'pl',
-    'ptBR',
-    'ru',
-    'zhCN',
-    'zhTW',
-    'fa',
-]);
+export default {
+    docker: 'داکر',
+    dockerfile: 'فایل داکر',
+    dockerCompose: `${docker} ترکیب کنید`,
+    applyDockerTweaks: `اعمال تغییرات ${docker}`,
+    applyDockerTweaksForNginx: `اعمال تنظیمات پیکربندی برای اجرای ${common.nginx} با ${docker}`,
+    applyDockerTweaksExplainer: `به‌روزرسانی کاربر ${common.nginx} به <code class="slim">nginx</code> و pid به <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `شامل ${dockerfile} برای اجرای ${common.nginx} با ${docker}`,
+    includeDockerCompose: `شامل docker-compose برای اجرای ${common.nginx} با docker-compose`,
+};

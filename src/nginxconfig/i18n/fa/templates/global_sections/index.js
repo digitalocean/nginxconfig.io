@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2021 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,32 +24,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const defaultPack = 'en';
+import https from './https';
+import logging from './logging';
+import nginx from './nginx';
+import performance from './performance';
+import python from './python';
+import reverseProxy from './reverse_proxy';
+import security from './security';
+import tools from './tools';
+import docker from './docker';
 
-export { default as defaultPackData } from '../i18n/en';
-
-export const toSep = (pack, sep) =>
-    pack
-        .match(/^([a-z]+)([A-Z]*)$/)
-        .slice(1)
-        .map((x) => x.toLowerCase())
-        .filter((x) => !!x)
-        .join(sep);
-
-export const fromSep = (pack, sep) =>
-    pack.split(sep, 2)[0].toLowerCase() + (pack.split(sep, 2)[1] || '').toUpperCase();
-
-// Export a static array of all language packs
-export const availablePacks = Object.freeze([
-    'de',
-    'en',
-    'es',
-    'fr',
-    'ja',
-    'pl',
-    'ptBR',
-    'ru',
-    'zhCN',
-    'zhTW',
-    'fa',
-]);
+export default {
+    https,
+    logging,
+    nginx,
+    performance,
+    python,
+    reverseProxy,
+    security,
+    tools,
+    docker,
+};
