@@ -25,9 +25,9 @@ THE SOFTWARE.
 */
 
 export default {
-    back: 'Back',
-    next: 'Next',
-    enable: 'enable',
+    back: 'بازگشت',
+    next: 'بعدی',
+    enable: 'فعال کردن',
     php: 'PHP',
     ssl: 'SSL',
     nginx: 'NGINX',
@@ -40,9 +40,9 @@ export default {
     magento: 'Magento',
     joomla: 'Joomla',
     django: 'Django',
-    logging: 'Logging',
-    reverseProxy: 'Reverse proxy',
-    reverseProxyLower: 'reverse proxy',
-    restrict: 'Restrict',
-    path: 'Path',
+    logging: 'لاگ‌گیری',
+    reverseProxy: 'پروکسی معکوس',
+    reverseProxyLower: 'پروکسی معکوس',
+    restrict: 'محدود کردن',
+    path: 'مسیر',
 };
