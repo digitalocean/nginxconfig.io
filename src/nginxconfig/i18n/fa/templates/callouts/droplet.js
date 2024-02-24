@@ -25,15 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    lookingForAPlaceToDeploy: '👋 به دنبال مکانی برای استقرار پیکربندی جدیدتان هستید؟',
+    tryOutDigitalOceansDroplet: 'امتحان کنید Droplet LEMP DigitalOcean با NGINX',
 };

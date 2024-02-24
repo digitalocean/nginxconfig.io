@@ -25,15 +25,15 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    backToTop: 'بازگشت به بالا',
+    thisToolIs: 'این ابزار',
+    openSourceOnGitHub: 'منبع‌باز در GitHub',
+    underThe: 'زیر',
+    mit: 'MIT',
+    license: 'لایسنس!',
+    weWelcomeFeedbackAndContributions: 'ما بازخورد و مشارکت‌ها را می‌پذیریم.',
+    originallyCreatedBy: 'اصلی توسط',
+    balintSzekeres: 'Bálint Szekeres',
+    maintainedBy: 'نگه‌داری شده توسط',
+    digitalOcean: 'DigitalOcean',
 };

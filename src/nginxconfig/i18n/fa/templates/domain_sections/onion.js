@@ -24,16 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+const onion = 'Onion';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    onion: 'پیاز',
+    onionLocation: `${onion} مکان`,
+    provideAnOnionLocationToSetOnionLocationHeader:
+        'آدرس مکان پیاز را ارائه دهید تا هدر مکان پیاز را برای سایت خود تنظیم کنید.',
+    letsVisitorsKnownOnionServicesIsAvailable:
+        'این به بازدیدکنندگان اطلاع می‌دهد که نسخه سرویس‌های پیاز از سایت شما برای مرورگرهای Tor در دسترس است.',
+    learnMoreAboutOnionServices: 'بیشتر در مورد سرویس‌های پیاز بیاموزید',
+    onionLocationExpectedToEndWithOnion: 'آدرس‌های مکان پیاز به طور معمول با `.onion` ختم می‌شوند.',
 };

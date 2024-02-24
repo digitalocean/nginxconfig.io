@@ -24,16 +24,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    title: `${common.nginx}پیکربندی`,
+    description: `ساده‌ترین راه برای پیکربندی یک سرور ${common.nginx} کارآمد، امن و پایدار.`,
+    singleColumnMode: 'حالت ستون تکی',
+    splitColumnMode: 'حالت کناره به کناره',
+    perWebsiteConfig: 'پیکربندی برای هر وب‌سایت',
+    addSite: 'افزودن وب‌سایت',
+    globalConfig: 'پیکربندی جهانی',
+    setup: 'راه‌اندازی',
+    configFiles: 'پرونده‌های پیکربندی',
+    copied: 'کپی شد',
 };

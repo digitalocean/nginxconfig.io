@@ -24,16 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const docker = 'Docker';
+const dockerfile = 'Dockerfile';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    docker: 'داکر',
+    dockerfile: 'فایل داکر',
+    dockerCompose: `${docker} ترکیب کنید`,
+    applyDockerTweaks: `اعمال تغییرات ${docker}`,
+    applyDockerTweaksForNginx: `اعمال تنظیمات پیکربندی برای اجرای ${common.nginx} با ${docker}`,
+    applyDockerTweaksExplainer: `به‌روزرسانی کاربر ${common.nginx} به <code class="slim">nginx</code> و pid به <code class="slim">/var/run/nginx.pid</code>`,
+    includeDockerfile: `شامل ${dockerfile} برای اجرای ${common.nginx} با ${docker}`,
+    includeDockerCompose: `شامل docker-compose برای اجرای ${common.nginx} با docker-compose`,
 };

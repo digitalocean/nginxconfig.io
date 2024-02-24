@@ -24,16 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    downloadTheGeneratedConfig: '<b>دانلود</b> پیکربندی تولید شده:',
+    andUploadItToYourServers: 'و آن را به سرورهای خود <b>آپلود</b> کنید',
+    directory: 'دایرکتوری.',
+    or: 'یا، ',
+    copyBase64StringOfCompressedConfig: 'یک رشته base64 از پیکربندی فشرده را کپی کنید',
+    pasteItInYourServersCommandLineAndExecute:
+        ', آن را در خط فرمان سرور خود <b>پیست</b> کرده و اجرا کنید.',
+    navigateToYourNginxConfigurationDirectoryOnYourServer: `به <b>دایرکتوری پیکربندی ${common.nginx}</b> خود در سرورتان بروید:`,
+    createABackupOfYourCurrentNginxConfiguration: `<b>پشتیبانی</b> از پیکربندی ${common.nginx} فعلی خود بسازید:`,
+    extractTheNewCompressedConfigurationArchiveUsingTar:
+        '<b>فایل فشرده پیکربندی جدید را</b> با استفاده از tar <b>استخراج</b> کنید:',
+    download: 'دانلود',
 };

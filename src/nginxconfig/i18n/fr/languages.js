@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -35,4 +35,5 @@ export default {
     pl: 'Polonais',
     de: 'Allemand',
     ja: 'Japonais',
+    fa: 'Persan',
 };

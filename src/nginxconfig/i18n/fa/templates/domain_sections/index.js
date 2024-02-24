@@ -24,16 +24,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import https from './https';
+import logging from './logging';
+import php from './php';
+import presets from './presets';
+import python from './python';
+import reverseProxy from './reverse_proxy';
+import routing from './routing';
+import server from './server';
+import restrict from './restrict';
+import onion from './onion';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    https,
+    logging,
+    php,
+    presets,
+    python,
+    reverseProxy,
+    routing,
+    server,
+    restrict,
+    onion,
 };

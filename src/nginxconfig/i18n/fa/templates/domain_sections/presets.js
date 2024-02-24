@@ -25,15 +25,10 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    presets: 'پیش‌تنظیم‌ها',
+    itLooksLikeYouCustomisedTheConfig:
+        'به نظر می‌رسد که شما پیکربندی برای این دامنه را سفارشی کرده‌اید. انتخاب یک پیش‌تنظیم جدید ممکن است برخی از تنظیماتی که شما سفارشی کرده‌اید را بازنشانی یا تغییر دهد.',
+    frontend: 'رابط کاربری',
+    nodeJs: 'Node.js',
+    singlePageApplication: 'اپلیکیشن تک‌صفحه‌ای',
 };

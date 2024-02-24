@@ -24,16 +24,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
+const mozilla = 'Mozilla';
+const ipv4 = 'IPv4';
+const ipv6 = 'IPv6';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    sslProfile: `${common.ssl} پروفایل`,
+    httpsMustBeEnabledOnOneSite: `${common.https} باید حداقل بر روی یک سایت فعال شود تا تنظیمات ${common.https} جهانی را پیکربندی کنید.`,
+    portReuse: 'استفاده مجدد پورت',
+    enableReuseOfPort: `${common.enable} استفاده مجدد از پورت برای ایجاد یک گوشه گوش دهنده برای هر کارگر`,
+    ocspDnsResolvers: 'راه‌حل‌های DNS OCSP',
+    cloudflareResolver: 'راه‌حل Cloudflare',
+    googlePublicDns: 'DNS عمومی Google',
+    openDns: 'OpenDNS',
+    quad9: 'Quad9',
+    verisign: 'Verisign',
+    letsEncryptWebroot: `${common.letsEncrypt} Webroot`,
+    letsEncryptCertRoot: `${common.letsEncrypt} دایرکتوری گواهی`,
+    mozillaModern: `${mozilla} Modern`,
+    mozillaIntermediate: `${mozilla} Intermediate`,
+    mozillaOld: `${mozilla} Old`,
+    ipv4Only: `${ipv4} فقط`,
+    ipv6Only: `${ipv6} فقط`,
+    ipv4AndIpv6: `${ipv4} و ${ipv6}`,
 };

@@ -25,15 +25,6 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    downloadConfig: 'دانلود پیکربندی',
+    copyBase64: 'کپی Base64',
 };

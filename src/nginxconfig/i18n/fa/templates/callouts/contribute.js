@@ -25,15 +25,7 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    wantToContributeChanges:
+        '👋 می‌خواهید ویژگی‌های جدید را درخواست دهید، تغییراتی اعمال کنید، یا ابزار را به یک زبان جدید ترجمه کنید؟',
+    getInvolvedOnGitHub: 'شرکت کنید در GitHub',
 };

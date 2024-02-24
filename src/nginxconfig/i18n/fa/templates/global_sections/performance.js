@@ -24,16 +24,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    disableHtmlCaching: 'غیرفعال کردن حافظه‌پنهان HTML',
+    enableDisableHtmlCaching: 'غیرفعال کردن حافظه‌پنهان HTML',
+    gzipCompression: 'فشرده‌سازی Gzip',
+    enableGzipCompression: `${common.enable} فشرده‌سازی gzip`,
+    brotliCompression: 'فشرده‌سازی Brotli',
+    enableBrotliCompression: `${common.enable} فشرده‌سازی brotli`,
+    brotliIsANonStandardModule: 'Brotli یک ماژول استاندارد NGINX نیست، بررسی کنید ',
+    brotliGoogleNgxBrotliProject: 'پروژه Google ngx_brotli',
+    brotliForBuildingNginxWithBrotli: ' برای چگونگی ساخت NGINX با Brotli!',
+    expirationForAssets: 'انقضا برای دارایی‌ها',
+    expirationForMedia: 'انقضا برای رسانه‌ها',
+    expirationForSvgs: 'انقضا برای SVGها',
+    expirationForFonts: 'انقضا برای فونت‌ها',
+    performance: 'عملکرد',
 };

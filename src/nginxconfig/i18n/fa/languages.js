@@ -25,15 +25,15 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    en: 'انگلیسی',
+    es: 'اسپانیایی',
+    zhCN: 'چینی (ساده شده)',
+    zhTW: 'چینی (سنتی)',
+    ptBR: 'پرتغالی (برزیلی)',
+    fr: 'فرانسوی',
+    ru: 'روسی',
+    pl: 'لهستانی',
+    de: 'آلمانی',
+    ja: 'ژاپنی',
+    fa: 'فارسی',
 };

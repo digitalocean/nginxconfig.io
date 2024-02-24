@@ -24,16 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    reverseProxyIsDisabled: `${common.reverseProxy} غیرفعال است.`,
+    reverseProxyCannotBeEnabledWithPhp: `${common.reverseProxy} نمی‌تواند هنگامی که ${common.php} فعال است، فعال شود.`,
+    reverseProxyCannotBeEnabledWithPython: `${common.reverseProxy} نمی‌تواند هنگامی که ${common.python} فعال است، فعال شود.`,
+    enableReverseProxy: `${common.enable} ${common.reverseProxyLower}`,
+    proxyHostHeader: 'هدر میزبان پروکسی',
 };

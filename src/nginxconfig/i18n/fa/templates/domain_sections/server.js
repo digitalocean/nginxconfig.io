@@ -25,15 +25,13 @@ THE SOFTWARE.
 */
 
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    domain: 'دامنه',
+    documentRoot: 'ریشه سند',
+    oneOrMoreOtherDomainsAreAlsoNamed: 'یک یا چند دامنه دیگر همچنین نام‌گذاری شده‌اند',
+    thisWillCauseIssuesWithConfigGeneration: 'این باعث مشکلات در تولید پیکربندی می‌شود.',
+    wwwSubdomain: 'زیردامنه www',
+    cdnSubdomain: 'زیردامنه CDN',
+    redirectSubdomains: 'هدایت زیردامنه‌ها',
+    server: 'سرور',
+    listen: 'گوش کردن',
 };

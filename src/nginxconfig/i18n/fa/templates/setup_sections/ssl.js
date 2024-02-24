@@ -24,16 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    generateDiffieHellmanKeysByRunningThisCommandOnYourServer:
+        '<b>کلیدهای Diffie-Hellman</b> را با اجرای این دستور در سرور خود ایجاد کنید:',
+    createACommonAcmeChallengeDirectoryForLetsEncrypt: `یک دایرکتوری مشترک <b>ACME-challenge</b> (برای <b>${common.letsEncrypt}</b>) ایجاد کنید:`,
+    noAdditionalStepsAreNeededToSetUpSslForNginx: `برای پیکربندی ${common.nginx} شما نیازی به مراحل اضافی برای راه‌اندازی ${common.ssl} ندارید.`,
+    sslInit: `${common.ssl} init`,
 };

@@ -24,16 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import common from '../../common';
+
 export default {
-    en: 'Inglês',
-    es: 'Espanhol',
-    zhCN: 'Chinês (simplificado)',
-    zhTW: 'Chinês (tradicional)',
-    ptBR: 'Português (brasileiro)',
-    fr: 'Francês',
-    ru: 'Russa',
-    pl: 'Polonês',
-    de: 'Alemão',
-    ja: 'Japonês',
-    fa: 'Persa',
+    whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `هنگام استفاده از ${common.wordPress}، <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> اغلب برای اجازه به پنل مدیریت برای عملکرد صحیح، در سیاست امنیتی محتوا مورد نیاز است.`,
+    security: 'امنیت',
 };
