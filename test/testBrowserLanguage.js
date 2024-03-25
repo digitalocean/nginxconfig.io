@@ -136,7 +136,7 @@ describe('browserLanguage', () => {
     });
 
     describe('Different sources for user locale', () => {
-        test('language, languages and and Intl locale are `undefined`',() => {
+        test('language, languages and Intl locale are `undefined`',() => {
             MockLocales.setNavigatorLanguages(undefined);
             MockLocales.setNavigatorLanguage(undefined);
             MockLocales.setDateTimeLocale(undefined);
