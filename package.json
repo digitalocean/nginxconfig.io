@@ -84,7 +84,7 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.9",
     "node-fetch": "^3.3.2",
     "postcss": "^8.4.33",
     "prettier": "3.2.4",
