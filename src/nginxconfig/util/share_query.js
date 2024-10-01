@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 import qs from 'qs';
-import exportData from './export_data';
+import exportData from './export_data.js';
 
 export default (domains, global) => {
     const data = exportData(domains, global);

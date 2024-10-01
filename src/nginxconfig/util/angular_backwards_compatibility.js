@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import isObject from './is_object';
+import isObject from './is_object.js';
 
 const oldBool = (val) => (val.toString().trim() === '' ? true : val);
 

@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { info } from './log';
+import { info } from './log.js';
 
 export default ({ category, action, label, value, nonInteraction }) => {
     info('Analytics event:', { category, action, label, value, nonInteraction });

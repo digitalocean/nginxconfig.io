@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import phpPath from '../../util/php_path';
-import phpUpstream from '../../util/php_upstream';
+import phpPath from '../../util/php_path.js';
+import phpUpstream from '../../util/php_upstream.js';
 
 export default (global, domain) => {
     const config = {};

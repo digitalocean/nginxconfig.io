@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import isChanged from './is_changed';
+import isChanged from './is_changed.js';
 
 export default (defaults, cat, isInteraction = true) => {
     return Object.keys(defaults).reduce((prev, key) => {

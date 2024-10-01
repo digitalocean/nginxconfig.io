@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import app from './app';
-import setup from './setup';
-import footer from './footer';
+import app from './app.js';
+import setup from './setup.js';
+import footer from './footer.js';
 import domainSections from './domain_sections';
 import globalSections from './global_sections';
 import setupSections from './setup_sections';

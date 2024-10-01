@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+import common from '../../common.js';
 
 export default {
     whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `Bei der Verwendung von ${common.wordPress} ist es oft nötig, <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> in die Content Security Policy aufzunehmen, damit der Admin-Bereich korrekt funktioniert.`,

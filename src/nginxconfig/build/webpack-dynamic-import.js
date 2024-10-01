@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { info } from '../util/log';
+import { info } from '../util/log.js';
 
 const originalSrcDir = document.currentScript.src.split('/').slice(0, -2).join('/') + '/';
 window.__webpackDynamicImportURL = () => {

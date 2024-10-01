@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+import common from '../../common.js';
 
 export default {
     generateDiffieHellmanKeysByRunningThisCommandOnYourServer:

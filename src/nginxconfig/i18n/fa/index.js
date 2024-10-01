@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from './common';
-import languages from './languages';
+import common from './common.js';
+import languages from './languages.js';
 import templates from './templates';
 
 export default { common, languages, templates };

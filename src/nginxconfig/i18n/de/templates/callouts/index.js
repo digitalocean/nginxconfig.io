@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import droplet from './droplet';
-import contribute from './contribute';
+import droplet from './droplet.js';
+import contribute from './contribute.js';
 
 export default { droplet, contribute };

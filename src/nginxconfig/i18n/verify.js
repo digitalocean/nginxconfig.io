@@ -28,8 +28,8 @@ import { readdirSync, readFileSync } from 'fs';
 import { join, sep } from 'path';
 import { URL } from 'url';
 import chalk from 'chalk';
-import { defaultPack, availablePacks, toSep, fromSep } from '../util/language_packs';
-import snakeToCamel from '../util/snake_to_camel';
+import { defaultPack, availablePacks, toSep, fromSep } from '../util/language_packs.js';
+import snakeToCamel from '../util/snake_to_camel.js';
 
 // Recursively get all keys in a i18n pack object fragment
 const explore = (packFragment) => {

@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import isObject from '../util/is_object';
+import isObject from '../util/is_object.js';
 
 const isBlock = (item) => {
     // If an object, or kv entries, this is considered a block

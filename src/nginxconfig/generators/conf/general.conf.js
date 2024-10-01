@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { gzipTypes, extensions } from '../../util/types_extensions';
+import { gzipTypes, extensions } from '../../util/types_extensions.js';
 
 export default (domains, global) => {
     const config = {};

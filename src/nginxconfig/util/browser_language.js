@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { fromSep } from './language_packs';
+import { fromSep } from './language_packs.js';
 
 export default (availablePacks) => {
     if (typeof window === 'object' && typeof window.navigator === 'object') {

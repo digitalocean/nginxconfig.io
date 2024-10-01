@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import commonHsts from '../../util/common_hsts';
+import commonHsts from '../../util/common_hsts.js';
 
 export default (domains, global) => {
     const config = [];

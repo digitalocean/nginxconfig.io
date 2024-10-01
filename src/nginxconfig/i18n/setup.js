@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 import { createI18n } from 'vue-i18n';
-import { defaultPack, defaultPackData, toSep, availablePacks } from '../util/language_packs';
+import { defaultPack, defaultPackData, toSep, availablePacks } from '../util/language_packs.js';
 
 // Load in the full default pack
 const i18nPacks = {};
