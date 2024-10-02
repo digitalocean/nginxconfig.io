@@ -33,6 +33,14 @@ module.exports = {
         'vue/no-reserved-component-names': 0,
         'eol-last': ['error', 'always'],
         'prettier/prettier': 'error',
+        'import/extensions': [
+            'error',
+            'always',
+            {
+                js: 'never',
+                vue: 'never',
+            },
+        ],
     },
     globals: {
         describe: true,
