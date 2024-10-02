@@ -40,5 +40,5 @@ module.exports = {
         it: true,
         test: true,
     },
-    plugins: ['prettier'],
+    plugins: ['prettier', 'import'],
 };

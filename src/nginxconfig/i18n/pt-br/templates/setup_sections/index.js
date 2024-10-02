@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import certbot from './certbot';
-import download from './download';
-import goLive from './go_live';
-import ssl from './ssl';
+import certbot from './certbot.js';
+import download from './download.js';
+import goLive from './go_live.js';
+import ssl from './ssl.js';
 
 export default { certbot, download, goLive, ssl };

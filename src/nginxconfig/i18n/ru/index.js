@@ -26,6 +26,6 @@ THE SOFTWARE.
 
 import common from './common.js';
 import languages from './languages.js';
-import templates from './templates';
+import templates from './templates/index.js';
 
 export default { common, languages, templates };

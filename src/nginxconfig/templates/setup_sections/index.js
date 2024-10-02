@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import Download from './download';
-import SSL from './ssl';
-import Certbot from './certbot';
-import GoLive from './go_live';
+import Download from './download.vue';
+import SSL from './ssl.vue';
+import Certbot from './certbot.vue';
+import GoLive from './go_live.vue';
 
 export default [Download, SSL, Certbot, GoLive];

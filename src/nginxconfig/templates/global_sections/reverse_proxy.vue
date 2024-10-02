@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -172,9 +172,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import delegatedFromDefaults from '../../util/delegated_from_defaults';
-    import computedFromDefaults from '../../util/computed_from_defaults';
-    import PrettyRadio from '../inputs/radio';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults.js';
+    import computedFromDefaults from '../../util/computed_from_defaults.js';
+    import PrettyRadio from '../inputs/radio.vue';
 
     const defaults = {
         proxyConnectTimeout: {

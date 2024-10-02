@@ -1,107 +1,108 @@
 {
-  "name": "nginxconfig.io",
-  "version": "1.0.0",
-  "description": "NGINX config generator on steroids",
-  "license": "MIT",
-  "private": true,
-  "engines": {
-    "node": "20.9.0"
-  },
-  "main": "src/nginxconfig/mount.js",
-  "type": "module",
-  "scripts": {
-    "build": "npm run build:clean && npm run build:template && npm run build:prism && npm run build:static && npm run build:tool",
-    "build:clean": "do-vue clean",
-    "build:template": "do-vue template && node src/nginxconfig/build/template.js",
-    "build:prism": "node src/nginxconfig/build/prism.js",
-    "build:static": "copyfiles --up 2 src/static/{*,**/*} dist",
-    "build:tool": "vue-cli-service build src/nginxconfig/mount.js --no-clean",
-    "dev": "npm run build:template && npm run build:prism && npm run dev:tool",
-    "dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
-    "deploy:spaces:comment": "do-vue comment nginxconfig",
-    "test": "npm run test:prettier:fix && npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
-    "test:jest": "jest --env=jsdom /test/.*.js?$",
-    "test:fix": "npm run test:prettier:fix && npm run test:eslint:fix",
-    "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
-    "test:eslint:fix": "npm run test:eslint -- --fix",
-    "test:stylelint": "stylelint 'src/**/*.scss' --config node_modules/do-bulma/.stylelintrc.json",
-    "test:i18n-packs": "node --import=extensionless/register src/nginxconfig/i18n/verify.js",
-    "test:prettier": "prettier 'src/**/*.{js,vue}' --check",
-    "test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
-    "prepare": "husky install"
-  },
-  "jest": {
-    "testRegex": "/test/.*.js?$"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/digitalocean/nginxconfig.io.git"
-  },
-  "keywords": [
-    "nginx"
-  ],
-  "author": "DigitalOcean",
-  "bugs": {
-    "url": "https://github.com/digitalocean/nginxconfig.io/issues"
-  },
-  "homepage": "https://github.com/digitalocean/nginxconfig.io#readme",
-  "dependencies": {
-    "clipboard": "^2.0.11",
-    "clone": "^2.1.2",
-    "do-bulma": "github:do-community/do-bulma",
-    "do-vue": "github:do-community/do-vue",
-    "escape-html": "^1.0.3",
-    "files-diff": "0.0.6",
-    "json-to-pretty-yaml": "^1.2.2",
-    "memory-tar-create": "0.0.3",
-    "pretty-checkbox-vue": "^1.1.9",
-    "prismjs": "^1.29.0",
-    "qs": "^6.11.2",
-    "simple-js-sha2-256": "^1.0.7",
-    "vue": "^3.4.15",
-    "vue-i18n": "^9.9.0",
-    "vue-select": "^4.0.0-beta.6",
-    "webpack-require-from": "^1.8.6"
-  },
-  "devDependencies": {
-    "@babel/eslint-parser": "^7.23.3",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-transform-runtime": "^7.23.7",
-    "@babel/preset-env": "^7.23.8",
-    "@babel/runtime": "^7.23.8",
-    "@vue/cli-service": "^5.0.8",
-    "ajv": "^8.12.0",
-    "chalk": "^5.3.0",
-    "copyfiles": "^2.4.1",
-    "core-js": "^3.35.1",
-    "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-vue": "^9.20.1",
-    "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.2.10",
-    "node-fetch": "^3.3.2",
-    "postcss": "^8.4.33",
-    "prettier": "3.2.4",
-    "sass": "^1.70.0",
-    "sass-loader": "^14.0.0",
-    "stylelint": "^16.2.0",
-    "stylelint-config-standard-scss": "^13.0.0",
-    "stylelint-order": "^6.0.4",
-    "vue-template-compiler": "^2.7.16",
-    "webpack": "^5.94.0",
-    "webpack-bundle-analyzer": "^4.10.1"
-  },
-  "overrides": {
-    "@vue/cli-service": {
-      "mini-css-extract-plugin": "^1.6.2",
-      "@achrinza/node-ipc": "^10.1.10"
-    },
-    "pretty-checkbox-vue": {
-      "vue": "^3.0.0"
-    }
-  }
+	"name": "nginxconfig.io",
+	"version": "1.0.0",
+	"description": "NGINX config generator on steroids",
+	"license": "MIT",
+	"private": true,
+	"engines": {
+		"node": "20.9.0"
+	},
+	"main": "src/nginxconfig/mount.js",
+	"type": "module",
+	"scripts": {
+		"build": "npm run build:clean && npm run build:template && npm run build:prism && npm run build:static && npm run build:tool",
+		"build:clean": "do-vue clean",
+		"build:template": "do-vue template && node src/nginxconfig/build/template.js",
+		"build:prism": "node src/nginxconfig/build/prism.js",
+		"build:static": "copyfiles --up 2 src/static/{*,**/*} dist",
+		"build:tool": "vue-cli-service build src/nginxconfig/mount.js --no-clean",
+		"dev": "npm run build:template && npm run build:prism && npm run dev:tool",
+		"dev:tool": "vue-cli-service serve src/nginxconfig/mount.js",
+		"deploy:spaces:comment": "do-vue comment nginxconfig",
+		"test": "npm run test:prettier:fix && npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
+		"test:jest": "jest --env=jsdom /test/.*.js?$",
+		"test:fix": "npm run test:prettier:fix && npm run test:eslint:fix",
+		"test:eslint": "eslint src/**/*.{js,vue} --cache",
+		"test:eslint:fix": "npm run test:eslint -- --fix",
+		"test:stylelint": "stylelint 'src/**/*.{scss,css}' --config node_modules/do-bulma/.stylelintrc.json",
+		"test:i18n-packs": "node src/nginxconfig/i18n/verify.js",
+		"test:prettier": "prettier 'src/**/*.{js,vue}' --check",
+		"test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
+		"prepare": "husky install"
+	},
+	"jest": {
+		"testRegex": "/test/.*.js?$"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/digitalocean/nginxconfig.io.git"
+	},
+	"keywords": [
+		"nginx"
+	],
+	"author": "DigitalOcean",
+	"bugs": {
+		"url": "https://github.com/digitalocean/nginxconfig.io/issues"
+	},
+	"homepage": "https://github.com/digitalocean/nginxconfig.io#readme",
+	"dependencies": {
+		"clipboard": "^2.0.11",
+		"clone": "^2.1.2",
+		"do-bulma": "github:do-community/do-bulma",
+		"do-vue": "github:do-community/do-vue",
+		"escape-html": "^1.0.3",
+		"files-diff": "0.0.6",
+		"json-to-pretty-yaml": "^1.2.2",
+		"memory-tar-create": "0.0.3",
+		"pretty-checkbox-vue": "^1.1.9",
+		"prismjs": "^1.29.0",
+		"qs": "^6.11.2",
+		"simple-js-sha2-256": "^1.0.7",
+		"vue": "^3.4.15",
+		"vue-i18n": "^9.9.0",
+		"vue-select": "^4.0.0-beta.6",
+		"webpack-require-from": "^1.8.6"
+	},
+	"devDependencies": {
+		"@babel/eslint-parser": "^7.23.3",
+		"@babel/plugin-proposal-class-properties": "^7.18.6",
+		"@babel/plugin-transform-runtime": "^7.23.7",
+		"@babel/preset-env": "^7.23.8",
+		"@babel/runtime": "^7.23.8",
+		"@vue/cli-service": "^5.0.8",
+		"ajv": "^8.12.0",
+		"chalk": "^5.3.0",
+		"copyfiles": "^2.4.1",
+		"core-js": "^3.35.1",
+		"duplicate-package-checker-webpack-plugin": "^3.0.0",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-import": "^2.30.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-vue": "^9.20.1",
+		"husky": "^8.0.3",
+		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
+		"lint-staged": "^15.2.10",
+		"node-fetch": "^3.3.2",
+		"postcss": "^8.4.33",
+		"prettier": "3.2.4",
+		"sass": "^1.70.0",
+		"sass-loader": "^14.0.0",
+		"stylelint": "^16.2.0",
+		"stylelint-config-standard-scss": "^13.0.0",
+		"stylelint-order": "^6.0.4",
+		"vue-template-compiler": "^2.7.16",
+		"webpack": "^5.94.0",
+		"webpack-bundle-analyzer": "^4.10.1"
+	},
+	"overrides": {
+		"@vue/cli-service": {
+			"mini-css-extract-plugin": "^1.6.2",
+			"@achrinza/node-ipc": "^10.1.10"
+		},
+		"pretty-checkbox-vue": {
+			"vue": "^3.0.0"
+		}
+	}
 }

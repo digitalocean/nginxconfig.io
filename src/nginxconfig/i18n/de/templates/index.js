@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -27,9 +27,9 @@ THE SOFTWARE.
 import app from './app.js';
 import setup from './setup.js';
 import footer from './footer.js';
-import domainSections from './domain_sections';
-import globalSections from './global_sections';
-import setupSections from './setup_sections';
-import callouts from './callouts';
+import domainSections from './domain_sections/index.js';
+import globalSections from './global_sections/index.js';
+import setupSections from './setup_sections/index.js';
+import callouts from './callouts/index.js';
 
 export default { app, setup, footer, domainSections, globalSections, setupSections, callouts };

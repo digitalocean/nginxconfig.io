@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -42,12 +42,22 @@ export default {
         node: false, // Disable Node.js polyfills (Buffer etc.) -- This will be default in Webpack 5
         plugins: [
             // Fix dynamic imports from CDN (inject as first entry point before any imports can happen)
-            { apply: compiler => {
-                compiler.options.entry.app.import.unshift(
-                    fileURLToPath(new URL('src/nginxconfig/build/webpack-dynamic-import.js', import.meta.url)),
-                );
-            } },
-            new WebpackRequireFrom({ methodName: '__webpackDynamicImportURL', suppressErrors: true }),
+            {
+                apply: (compiler) => {
+                    compiler.options.entry.app.import.unshift(
+                        fileURLToPath(
+                            new URL(
+                                'src/nginxconfig/build/webpack-dynamic-import.js',
+                                import.meta.url,
+                            ),
+                        ),
+                    );
+                },
+            },
+            new WebpackRequireFrom({
+                methodName: '__webpackDynamicImportURL',
+                suppressErrors: true,
+            }),
             // Pass the env in for logging
             new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
             // Analyze the bundle
@@ -55,10 +65,11 @@ export default {
             new DuplicatePackageCheckerPlugin(),
         ],
     },
-    chainWebpack: config => {
+    chainWebpack: (config) => {
         // Inject resolve-url-loader into the SCSS loader rules (to allow relative fonts in do-bulma to work)
         for (const rule of ['vue-modules', 'vue', 'normal-modules', 'normal']) {
-            config.module.rule('scss')
+            config.module
+                .rule('scss')
                 .oneOf(rule)
                 .use('resolve-url-loader')
                 .loader('resolve-url-loader')
@@ -66,11 +77,11 @@ export default {
                 .end()
                 .use('sass-loader')
                 .loader('sass-loader')
-                .tap(options => ({ ...options, sourceMap: true }));
+                .tap((options) => ({ ...options, sourceMap: true }));
         }
 
         // Use a custom HTML template
-        config.plugin('html').tap(options => {
+        config.plugin('html').tap((options) => {
             options[0].template = fileURLToPath(new URL('build/index.html', import.meta.url));
             return options;
         });

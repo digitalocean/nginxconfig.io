@@ -1,5 +1,5 @@
 <!--
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -64,9 +64,9 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import delegatedFromDefaults from '../../util/delegated_from_defaults';
-    import computedFromDefaults from '../../util/computed_from_defaults';
-    import analytics from '../../util/analytics';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults.js';
+    import computedFromDefaults from '../../util/computed_from_defaults.js';
+    import analytics from '../../util/analytics.js';
 
     const defaults = {
         frontend: {

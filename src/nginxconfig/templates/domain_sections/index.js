@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,14 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import Server from './server';
-import HTTPS from './https';
-import PHP from './php';
-import Python from './python';
-import ReverseProxy from './reverse_proxy';
-import Routing from './routing';
-import Logging from './logging';
-import Restrict from './restrict';
-import Onion from './onion';
+import Server from './server.vue';
+import HTTPS from './https.vue';
+import PHP from './php.vue';
+import Python from './python.vue';
+import ReverseProxy from './reverse_proxy.vue';
+import Routing from './routing.vue';
+import Logging from './logging.vue';
+import Restrict from './restrict.vue';
+import Onion from './onion.vue';
 
 export default [Server, HTTPS, PHP, Python, ReverseProxy, Routing, Logging, Restrict, Onion];

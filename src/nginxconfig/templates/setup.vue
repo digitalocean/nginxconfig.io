@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -87,8 +87,8 @@ THE SOFTWARE.
 <script>
     import Tar from 'memory-tar-create';
     import ClipboardJS from 'clipboard';
-    import analytics from '../util/analytics';
-    import Sections from './setup_sections';
+    import analytics from '../util/analytics.js';
+    import Sections from './setup_sections/index.js';
 
     export default {
         name: 'Setup',

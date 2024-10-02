@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -306,12 +306,12 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import ExternalLink from 'do-vue/src/templates/external_link';
-    import delegatedFromDefaults from '../../util/delegated_from_defaults';
-    import computedFromDefaults from '../../util/computed_from_defaults';
-    import { serverDomainDefault } from '../../util/defaults';
-    import PrettyCheck from '../inputs/checkbox';
-    import PrettyRadio from '../inputs/radio';
+    import ExternalLink from 'do-vue/src/templates/external_link.vue';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults.js';
+    import computedFromDefaults from '../../util/computed_from_defaults.js';
+    import { serverDomainDefault } from '../../util/defaults.js';
+    import PrettyCheck from '../inputs/checkbox.vue';
+    import PrettyRadio from '../inputs/radio.vue';
 
     const defaults = {
         https: {

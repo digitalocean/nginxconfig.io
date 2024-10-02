@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -30,7 +30,7 @@ import 'vue-select/dist/vue-select.css';
 import { createApp } from 'vue';
 import './util/prism_bundle.js';
 import { getI18n } from './i18n/setup.js';
-import App from './templates/app';
+import App from './templates/app.vue';
 
 // Load the i18n languages and run the app
 getI18n().then((i18n) => {
