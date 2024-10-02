@@ -37,8 +37,8 @@ module.exports = {
             'error',
             'always',
             {
-                js: 'never',
-                vue: 'never',
+                js: 'always',
+                vue: 'always',
             },
         ],
     },
