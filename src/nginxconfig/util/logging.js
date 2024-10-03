@@ -24,12 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-export const accessLogPathDefault = '/var/log/nginx/access.log.js';
-export const accessLogParamsDefault = 'buffer=512k flush=1m.js';
+export const accessLogPathDefault = '/var/log/nginx/access.log';
+export const accessLogParamsDefault = 'buffer=512k flush=1m';
 
-export const errorLogPathDefault = '/var/log/nginx/error.log.js';
-export const errorLogPathDisabled = '/dev/null.js';
-export const errorLogLevelDefault = 'warn.js';
+export const errorLogPathDefault = '/var/log/nginx/error.log';
+export const errorLogPathDisabled = '/dev/null';
+export const errorLogLevelDefault = 'warn';
 export const errorLogLevelOptions = Object.freeze([
     'debug',
     'info',

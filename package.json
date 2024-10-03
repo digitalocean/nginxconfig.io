@@ -1,5 +1,5 @@
 {
-	"name": "nginxconfig.io",
+  "name": "nginxconfig.io",
 	"version": "1.0.0",
 	"description": "NGINX config generator on steroids",
 	"license": "MIT",
