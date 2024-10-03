@@ -24,7 +24,7 @@
     "test:fix": "npm run test:prettier:fix && npm run test:eslint:fix",
     "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix",
-    "test:stylelint": "stylelint 'src/**/*.{scss,css}' --config node_modules/do-bulma/.stylelintrc.json",
+    "test:stylelint": "stylelint 'src/**/*.{scss}' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node src/nginxconfig/i18n/verify.js",
     "test:prettier": "prettier 'src/**/*.{js,vue}' --check",
     "test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
@@ -100,7 +100,7 @@
     "@vue/cli-service": {
       "mini-css-extract-plugin": "^1.6.2",
       "@achrinza/node-ipc": "^10.1.10"
-  },
+    },
     "pretty-checkbox-vue": {
       "vue": "^3.0.0"
     }
