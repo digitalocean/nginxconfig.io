@@ -22,11 +22,11 @@
     "test": "npm run test:prettier:fix && npm run test:eslint && npm run test:stylelint && npm run test:i18n-packs && npm run test:jest",
     "test:jest": "jest --env=jsdom /test/.*.js?$",
     "test:fix": "npm run test:prettier:fix && npm run test:eslint:fix",
-    "test:eslint": "eslint src/**/*.{js,vue} --cache",
+    "test:eslint": "eslint 'src/**/*.{js,vue}' --cache",
     "test:eslint:fix": "npm run test:eslint -- --fix",
     "test:stylelint": "stylelint 'src/**/*.{scss,css}' --config node_modules/do-bulma/.stylelintrc.json",
     "test:i18n-packs": "node src/nginxconfig/i18n/verify.js",
-    "test:prettier": "prettier 'src/**/*.{js,vue}' --check",
+    "test:prettier": "prettier \"src/**/*.{js,vue}\" --check",
     "test:prettier:fix": "prettier --write 'src/**/*.{js,vue}'",
     "prepare": "husky install"
   },
@@ -98,11 +98,11 @@
   },
   "overrides": {
     "@vue/cli-service": {
-    "mini-css-extract-plugin": "^1.6.2",
-    "@achrinza/node-ipc": "^10.1.10"
+      "mini-css-extract-plugin": "^1.6.2",
+      "@achrinza/node-ipc": "^10.1.10"
   },
     "pretty-checkbox-vue": {
-    "vue": "^3.0.0"
+      "vue": "^3.0.0"
     }
   }
 }
