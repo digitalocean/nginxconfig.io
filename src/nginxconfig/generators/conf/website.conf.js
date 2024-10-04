@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,22 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate';
-import { extensions, gzipTypes } from '../../util/types_extensions';
-import { getDomainAccessLog, getDomainErrorLog } from '../../util/logging';
-import commonHsts from '../../util/common_hsts';
-import securityConf from './security.conf';
-import pythonConf from './python_uwsgi.conf';
-import proxyConf from './proxy.conf';
-import phpConf from './php_fastcgi.conf';
-import generalConf from './general.conf';
-import wordPressConf from './wordpress.conf';
-import drupalConf from './drupal.conf';
-import magentoConf from './magento.conf';
-import joomlaConf from './joomla.conf';
-import letsEncryptConf from './letsencrypt.conf';
-import phpPath from '../../util/php_path';
-import phpUpstream from '../../util/php_upstream';
+import { getSslCertificate, getSslCertificateKey } from '../../util/get_ssl_certificate.js';
+import { extensions, gzipTypes } from '../../util/types_extensions.js';
+import { getDomainAccessLog, getDomainErrorLog } from '../../util/logging.js';
+import commonHsts from '../../util/common_hsts.js';
+import securityConf from './security.conf.js';
+import pythonConf from './python_uwsgi.conf.js';
+import proxyConf from './proxy.conf.js';
+import phpConf from './php_fastcgi.conf.js';
+import generalConf from './general.conf.js';
+import wordPressConf from './wordpress.conf.js';
+import drupalConf from './drupal.conf.js';
+import magentoConf from './magento.conf.js';
+import joomlaConf from './joomla.conf.js';
+import letsEncryptConf from './letsencrypt.conf.js';
+import phpPath from '../../util/php_path.js';
+import phpUpstream from '../../util/php_upstream.js';
 
 const sslConfig = (domain, global) => {
     const config = [];

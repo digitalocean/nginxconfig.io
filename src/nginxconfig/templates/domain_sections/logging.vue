@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -198,8 +198,8 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import delegatedFromDefaults from '../../util/delegated_from_defaults';
-    import computedFromDefaults from '../../util/computed_from_defaults';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults.js';
+    import computedFromDefaults from '../../util/computed_from_defaults.js';
     import {
         accessLogPathDefault,
         accessLogParamsDefault,
@@ -208,9 +208,9 @@ THE SOFTWARE.
         errorLogLevelDefault,
         errorLogLevelOptions,
         errorLogLevelDisabled,
-    } from '../../util/logging';
-    import PrettyCheck from '../inputs/checkbox';
-    import PrettyRadio from '../inputs/radio';
+    } from '../../util/logging.js';
+    import PrettyCheck from '../inputs/checkbox.vue';
+    import PrettyRadio from '../inputs/radio.vue';
 
     const defaults = {
         accessLogEnabled: {

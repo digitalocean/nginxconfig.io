@@ -1,5 +1,5 @@
 <!--
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -168,28 +168,28 @@ THE SOFTWARE.
     import sha2_256 from 'simple-js-sha2-256';
     import escape from 'escape-html';
     import VueSelect from 'vue-select';
-    import Header from 'do-vue/src/templates/header';
+    import Header from 'do-vue/src/templates/header.vue';
     import diff from 'files-diff';
 
-    import isChanged from '../util/is_changed';
-    import importData from '../util/import_data';
-    import isObject from '../util/is_object';
-    import analytics from '../util/analytics';
-    import browserLanguage from '../util/browser_language';
-    import { defaultPack, availablePacks } from '../util/language_packs';
-    import { info, error } from '../util/log';
+    import isChanged from '../util/is_changed.js';
+    import importData from '../util/import_data.js';
+    import isObject from '../util/is_object.js';
+    import analytics from '../util/analytics.js';
+    import browserLanguage from '../util/browser_language.js';
+    import { defaultPack, availablePacks } from '../util/language_packs.js';
+    import { info, error } from '../util/log.js';
 
-    import { setLanguagePack } from '../i18n/setup';
-    import generators from '../generators';
+    import { setLanguagePack } from '../i18n/setup.js';
+    import generators from '../generators/index.js';
 
-    import Domain from './domain';
-    import Global from './global';
-    import DropletCallout from './callouts/droplet';
-    import ContributeCallout from './callouts/contribute';
-    import Setup from './setup';
-    import Footer from './footer';
+    import Domain from './domain.vue';
+    import Global from './global.vue';
+    import DropletCallout from './callouts/droplet.vue';
+    import ContributeCallout from './callouts/contribute.vue';
+    import Setup from './setup.vue';
+    import Footer from './footer.vue';
 
-    import NginxPrism from './prism/nginx';
+    import NginxPrism from './prism/nginx.vue';
 
     export default {
         name: 'App',
@@ -203,8 +203,8 @@ THE SOFTWARE.
             ContributeCallout,
             Setup,
             NginxPrism,
-            YamlPrism: defineAsyncComponent(() => import('./prism/yaml')),
-            DockerPrism: defineAsyncComponent(() => import('./prism/docker')),
+            YamlPrism: defineAsyncComponent(() => import('./prism/yaml.vue')),
+            DockerPrism: defineAsyncComponent(() => import('./prism/docker.vue')),
         },
         data() {
             return {

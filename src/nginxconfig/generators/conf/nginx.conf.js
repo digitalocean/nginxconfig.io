@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import { errorLogPathDisabled } from '../../util/logging';
-import sslProfiles from '../../util/ssl_profiles';
-import websiteConf from './website.conf';
+import { errorLogPathDisabled } from '../../util/logging.js';
+import sslProfiles from '../../util/ssl_profiles.js';
+import websiteConf from './website.conf.js';
 
 export default (domains, global) => {
     const config = {};

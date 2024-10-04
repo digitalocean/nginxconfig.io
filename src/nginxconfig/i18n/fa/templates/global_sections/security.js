@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+import common from '../../common.js';
 
 export default {
     whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `هنگام استفاده از ${common.wordPress}، <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code> اغلب برای اجازه به پنل مدیریت برای عملکرد صحیح، در سیاست امنیتی محتوا مورد نیاز است.`,

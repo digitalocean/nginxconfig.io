@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -26,10 +26,10 @@ THE SOFTWARE.
 
 import qs from 'qs';
 import clone from 'clone';
-import Domain from '../templates/domain';
-import isObject from './is_object';
-import angularBackwardsCompatibility from './angular_backwards_compatibility';
-import vueBackwardsCompatibility from './vue_backwards_compatibility';
+import Domain from '../templates/domain.vue';
+import isObject from './is_object.js';
+import angularBackwardsCompatibility from './angular_backwards_compatibility.js';
+import vueBackwardsCompatibility from './vue_backwards_compatibility.js';
 
 const applyCategories = (categories, target) => {
     // Work through each potential category

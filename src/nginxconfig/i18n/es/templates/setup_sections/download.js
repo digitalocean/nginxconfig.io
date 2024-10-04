@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+import common from '../../common.js';
 
 // Here is a HACK, because the real traslation is: "y subirla en la carpeta '/etc/nginx' de tu servidor. "
 // but the HTML order of the templates are wrong: "y subirla en el servidor '/etc/nginx' carpeta."

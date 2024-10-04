@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,15 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import https from './https';
-import logging from './logging';
-import nginx from './nginx';
-import performance from './performance';
-import python from './python';
-import reverseProxy from './reverse_proxy';
-import security from './security';
-import tools from './tools';
-import docker from './docker';
+import https from './https.js';
+import logging from './logging.js';
+import nginx from './nginx.js';
+import performance from './performance.js';
+import python from './python.js';
+import reverseProxy from './reverse_proxy.js';
+import security from './security.js';
+import tools from './tools.js';
+import docker from './docker.js';
 
 export default {
     https,

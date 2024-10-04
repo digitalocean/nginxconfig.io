@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import browserLanguage from '../src/nginxconfig/util/browser_language';
+import browserLanguage from '../src/nginxconfig/util/browser_language.js';
 
 class MockLocales {
     static languages = [];
@@ -83,23 +83,26 @@ class MockLocales {
     }
 }
 
-Object.defineProperty(window.navigator, 'languages', { get: () => {
-    return MockLocales.languages || [];
-}});
+Object.defineProperty(window.navigator, 'languages', {
+    get: () => {
+        return MockLocales.languages || [];
+    },
+});
 
-Object.defineProperty(window.navigator, 'language', { get: () => {
-    return MockLocales.language || null;
-}});
-
+Object.defineProperty(window.navigator, 'language', {
+    get: () => {
+        return MockLocales.language || null;
+    },
+});
 
 describe('browserLanguage', () => {
     test('Selects the first available exact match for language/region', () => {
         MockLocales.setDateTimeLocale(undefined);
 
-        MockLocales.setNavigatorLanguages(['zh-CN', 'zh','en-US','en']);
+        MockLocales.setNavigatorLanguages(['zh-CN', 'zh', 'en-US', 'en']);
         expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('zhCN');
 
-        MockLocales.setNavigatorLanguages(['zh-TW','zh','en-US','en']);
+        MockLocales.setNavigatorLanguages(['zh-TW', 'zh', 'en-US', 'en']);
         expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('zhTW');
 
         MockLocales.setNavigatorLanguages(['zh', 'en-US', 'en']);
@@ -108,7 +111,7 @@ describe('browserLanguage', () => {
         MockLocales.restoreDateTimeLocale();
     });
 
-    test('Selects the first available language match based on language/region',() => {
+    test('Selects the first available language match based on language/region', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'en-US']);
@@ -117,7 +120,7 @@ describe('browserLanguage', () => {
         MockLocales.restoreDateTimeLocale();
     });
 
-    test('Selects the first available language match based on language alone',() => {
+    test('Selects the first available language match based on language alone', () => {
         MockLocales.setDateTimeLocale(undefined);
 
         MockLocales.setNavigatorLanguages(['ja-JP', 'ja', 'zh']);
@@ -126,17 +129,17 @@ describe('browserLanguage', () => {
         MockLocales.restoreDateTimeLocale();
     });
 
-    test('Returns false when there is no available match',() => {
+    test('Returns false when there is no available match', () => {
         MockLocales.setDateTimeLocale(undefined);
 
-        MockLocales.setNavigatorLanguages(['ja-JP','ja']);
+        MockLocales.setNavigatorLanguages(['ja-JP', 'ja']);
         expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toBeFalsy();
 
         MockLocales.restoreDateTimeLocale();
     });
 
     describe('Different sources for user locale', () => {
-        test('language, languages and Intl locale are `undefined`',() => {
+        test('language, languages and Intl locale are `undefined`', () => {
             MockLocales.setNavigatorLanguages(undefined);
             MockLocales.setNavigatorLanguage(undefined);
             MockLocales.setDateTimeLocale(undefined);
@@ -144,7 +147,7 @@ describe('browserLanguage', () => {
             MockLocales.restoreDateTimeLocale();
         });
 
-        test('language is `en`, languages and Intl locale are `undefined`',() => {
+        test('language is `en`, languages and Intl locale are `undefined`', () => {
             MockLocales.setNavigatorLanguage('en');
             MockLocales.setNavigatorLanguages(undefined);
             MockLocales.setDateTimeLocale(undefined);
@@ -152,15 +155,15 @@ describe('browserLanguage', () => {
             MockLocales.restoreDateTimeLocale();
         });
 
-        test('language and Intl locale are `undefined`, languages is `en-US, en`',() => {
+        test('language and Intl locale are `undefined`, languages is `en-US, en`', () => {
             MockLocales.setNavigatorLanguage(undefined);
-            MockLocales.setNavigatorLanguages(['en-US','en']);
+            MockLocales.setNavigatorLanguages(['en-US', 'en']);
             MockLocales.setDateTimeLocale(undefined);
             expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');
             MockLocales.restoreDateTimeLocale();
         });
 
-        test('navigator is `undefined` and Intl locale is `en-US`',() => {
+        test('navigator is `undefined` and Intl locale is `en-US`', () => {
             MockLocales.setNavigator(undefined);
             MockLocales.setDateTimeLocale('en-US');
             expect(browserLanguage(['en', 'zhCN', 'zhTW'])).toEqual('en');

@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -81,10 +81,10 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import analytics from '../util/analytics';
-    import isChanged from '../util/is_changed';
-    import Presets from './domain_sections/presets';
-    import Sections from './domain_sections';
+    import analytics from '../util/analytics.js';
+    import isChanged from '../util/is_changed.js';
+    import Presets from './domain_sections/presets.vue';
+    import Sections from './domain_sections/index.js';
 
     const delegated = {
         hasUserInteraction: false,

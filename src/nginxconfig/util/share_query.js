@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 import qs from 'qs';
-import exportData from './export_data';
+import exportData from './export_data.js';
 
 export default (domains, global) => {
     const data = exportData(domains, global);

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from './common';
-import languages from './languages';
-import templates from './templates';
+import common from './common.js';
+import languages from './languages.js';
+import templates from './templates/index.js';
 
 export default { common, languages, templates };

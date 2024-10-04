@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import isChanged from './is_changed';
+import isChanged from './is_changed.js';
 
 export default (defaults, cat, isInteraction = true) => {
     return Object.keys(defaults).reduce((prev, key) => {

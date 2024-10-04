@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 export const defaultPack = 'en';
 
-export { default as defaultPackData } from '../i18n/en';
+export { default as defaultPackData } from '../i18n/en/index.js';
 
 export const toSep = (pack, sep) =>
     pack

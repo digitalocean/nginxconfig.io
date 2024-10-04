@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,16 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import isObject from './is_object';
-import deepMerge from './deep_merge';
+import isObject from './is_object.js';
+import deepMerge from './deep_merge.js';
 import {
     accessLogPathDefault,
     accessLogParamsDefault,
     errorLogPathDefault,
     errorLogPathDisabled,
     errorLogLevelDefault,
-} from './logging';
-import { serverDomainDefault } from './defaults';
+} from './logging.js';
+import { serverDomainDefault } from './defaults.js';
 
 // Migrate old logging settings to new ones
 const migrateLogging = (data) => {

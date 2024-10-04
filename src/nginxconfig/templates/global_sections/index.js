@@ -1,5 +1,5 @@
 /*
-Copyright 2021 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,14 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import HTTPS from './https';
-import Security from './security';
-import Python from './python';
-import ReverseProxy from './reverse_proxy';
-import Performance from './performance';
-import Logging from './logging';
-import NGINX from './nginx';
-import Docker from './docker';
-import Tools from './tools';
+import HTTPS from './https.vue';
+import Security from './security.vue';
+import Python from './python.vue';
+import ReverseProxy from './reverse_proxy.vue';
+import Performance from './performance.vue';
+import Logging from './logging.vue';
+import NGINX from './nginx.vue';
+import Docker from './docker.vue';
+import Tools from './tools.vue';
 
 export default [HTTPS, Security, Python, ReverseProxy, Performance, Logging, NGINX, Docker, Tools];

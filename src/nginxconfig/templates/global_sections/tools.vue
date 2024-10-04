@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -196,12 +196,12 @@ THE SOFTWARE.
 </template>
 
 <script>
-    import Modal from 'do-vue/src/templates/modal';
-    import delegatedFromDefaults from '../../util/delegated_from_defaults';
-    import computedFromDefaults from '../../util/computed_from_defaults';
-    import shareQuery from '../../util/share_query';
-    import analytics from '../../util/analytics';
-    import PrettyCheck from '../inputs/checkbox';
+    import Modal from 'do-vue/src/templates/modal.vue';
+    import delegatedFromDefaults from '../../util/delegated_from_defaults.js';
+    import computedFromDefaults from '../../util/computed_from_defaults.js';
+    import shareQuery from '../../util/share_query.js';
+    import analytics from '../../util/analytics.js';
+    import PrettyCheck from '../inputs/checkbox.vue';
 
     const defaults = {
         modularizedStructure: {

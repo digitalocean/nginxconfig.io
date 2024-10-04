@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import common from '../../common';
+import common from '../../common.js';
 
 export default {
     whenUsingWordPressUnsafeEvalIsOftenRequiredToAllowFunctionality: `使用 ${common.wordPress} 時，通常需在 CSP 中加入 <code class="slim">script-src 'self' 'unsafe-inline' 'unsafe-eval';</code>，以使管理面板正常運作。`,

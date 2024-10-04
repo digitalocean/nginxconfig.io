@@ -1,5 +1,5 @@
 <!--
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 This code is licensed under the MIT License.
 You may obtain a copy of the License at
@@ -47,5 +47,5 @@ THE SOFTWARE.
 </template>
 
 <script setup>
-    import PrettyRadio from 'do-vue/src/templates/pretty-checkbox-vue/pretty_radio';
+    import PrettyRadio from 'do-vue/src/templates/pretty-checkbox-vue/pretty_radio.vue';
 </script>
