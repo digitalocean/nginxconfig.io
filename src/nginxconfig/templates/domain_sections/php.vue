@@ -264,6 +264,9 @@ THE SOFTWARE.
         '/var/run/php/php8.0-fpm.sock': 'templates.domainSections.php.php80Socket',
         '/var/run/php/php8.1-fpm.sock': 'templates.domainSections.php.php81Socket',
         '/var/run/php/php8.2-fpm.sock': 'templates.domainSections.php.php82Socket',
+        '/var/run/php/php8.3-fpm.sock': 'templates.domainSections.php.php83Socket',
+        '/var/run/php/php8.4-fpm.sock': 'templates.domainSections.php.php84Socket',
+        '/var/run/php/php8.5-fpm.sock': 'templates.domainSections.php.php85Socket',
         '/var/run/php/php-fpm.sock': 'templates.domainSections.php.phpSocket',
         custom: 'templates.domainSections.php.custom',
     };

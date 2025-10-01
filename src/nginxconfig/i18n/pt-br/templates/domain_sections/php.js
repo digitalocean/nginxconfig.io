@@ -51,6 +51,9 @@ export default {
     php80Socket: 'Socket 8.0',
     php81Socket: 'Socket 8.1',
     php82Socket: 'Socket 8.2',
+    php83Socket: 'Socket 8.3',
+    php84Socket: 'Socket 8.4',
+    php85Socket: 'Socket 8.5',
     phpSocket: 'Socket PHP',
     custom: 'Custom', // TODO: translate
     disabled: 'Desabilitado',
