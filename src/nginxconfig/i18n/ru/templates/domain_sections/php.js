@@ -33,6 +33,7 @@ export default {
     enablePhp: `${common.enable} ${common.php}`,
     wordPressRules: `${common.wordPress} правила`,
     enableWordPressRules: `${common.enable} ${common.wordPress}-специфичные правила`,
+    allowWordPressXmlrpc: 'Разрешить доступ по XML-RPC',
     drupalRules: `${common.drupal} правила`,
     enableDrupalRules: `${common.enable} ${common.drupal}-специфичные правила`,
     magentoRules: `${common.magento} правила`,
