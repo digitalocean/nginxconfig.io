@@ -170,6 +170,20 @@ THE SOFTWARE.
                             </PrettyCheck>
                         </div>
                     </div>
+
+                    <div
+                        v-if="allowWordPressXmlrpcEnabled"
+                        :class="`control${allowWordPressXmlrpcChanged ? ' is-changed' : ''}`"
+                    >
+                        <div class="checkbox">
+                            <PrettyCheck
+                                v-model="allowWordPressXmlrpc"
+                                class="p-default p-curve p-fill p-icon"
+                            >
+                                {{ $t('templates.domainSections.php.allowWordPressXmlrpc') }}
+                            </PrettyCheck>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,6 +311,10 @@ THE SOFTWARE.
             default: false,
             enabled: true,
         },
+        allowWordPressXmlrpc: {
+            default: false,
+            enabled: false,
+        },
         drupalRules: {
             default: false,
             enabled: true,
@@ -363,6 +381,12 @@ THE SOFTWARE.
                         this.$props.data.wordPressRules.enabled = true;
                         this.$props.data.wordPressRules.computed =
                             this.$props.data.wordPressRules.value;
+                        this.$props.data.allowWordPressXmlrpc.enabled =
+                            this.$props.data.wordPressRules.value;
+                        this.$props.data.allowWordPressXmlrpc.computed = this.$props.data
+                            .wordPressRules.value
+                            ? this.$props.data.allowWordPressXmlrpc.value
+                            : false;
                         this.$props.data.drupalRules.enabled = true;
                         this.$props.data.drupalRules.computed = this.$props.data.drupalRules.value;
                         this.$props.data.magentoRules.enabled = true;
@@ -377,6 +401,8 @@ THE SOFTWARE.
                         this.$props.data.phpBackupServer.computed = '';
                         this.$props.data.wordPressRules.enabled = false;
                         this.$props.data.wordPressRules.computed = false;
+                        this.$props.data.allowWordPressXmlrpc.enabled = false;
+                        this.$props.data.allowWordPressXmlrpc.computed = false;
                         this.$props.data.drupalRules.enabled = false;
                         this.$props.data.drupalRules.computed = false;
                         this.$props.data.magentoRules.enabled = false;
@@ -384,6 +410,16 @@ THE SOFTWARE.
                         this.$props.data.joomlaRules.enabled = false;
                         this.$props.data.joomlaRules.computed = false;
                     }
+                },
+                deep: true,
+            },
+            '$props.data.wordPressRules': {
+                handler(data) {
+                    this.$props.data.allowWordPressXmlrpc.enabled = data.enabled && data.computed;
+                    this.$props.data.allowWordPressXmlrpc.computed =
+                        data.enabled && data.computed
+                            ? this.$props.data.allowWordPressXmlrpc.value
+                            : false;
                 },
                 deep: true,
             },

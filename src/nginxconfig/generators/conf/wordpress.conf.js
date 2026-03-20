@@ -29,6 +29,16 @@ import phpUpstream from '../../util/php_upstream.js';
 
 export default (global, domain) => {
     const config = {};
+    const denyGeneralPaths = [
+        'wp-links-opml\\.php',
+        'wp-config\\.php',
+        'wp-config-sample\\.php',
+        'readme\\.html',
+        'license\\.txt',
+    ];
+
+    if (domain.php.allowWordPressXmlrpc?.computed !== true)
+        denyGeneralPaths.unshift('xmlrpc\\.php');
 
     config['# WordPress: allow TinyMCE'] = '';
     config['location = /wp-includes/js/tinymce/wp-tinymce.php'] = {
@@ -55,9 +65,7 @@ export default (global, domain) => {
     };
 
     config['# WordPress: deny general stuff'] = '';
-    config[
-        'location ~* ^/(?:xmlrpc\\.php|wp-links-opml\\.php|wp-config\\.php|wp-config-sample\\.php|readme\\.html|license\\.txt)$'
-    ] = {
+    config[`location ~* ^/(?:${denyGeneralPaths.join('|')})$`] = {
         deny: 'all',
     };
 
