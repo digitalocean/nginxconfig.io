@@ -187,7 +187,7 @@ THE SOFTWARE.
 
     const defaults = {
         referrerPolicy: {
-            default: 'no-referrer-when-downgrade',
+            default: 'strict-origin-when-cross-origin',
             options: [
                 'no-referrer',
                 'no-referrer-when-downgrade',
